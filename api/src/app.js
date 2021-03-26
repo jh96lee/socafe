@@ -1,11 +1,22 @@
 const express = require("express");
 const cors = require("cors");
-const userRouter = require("./routes/usersRoute");
+const dotenv = require("dotenv");
+const userRouter = require("./routes/userRoute");
+const postRouter = require("./routes/postRoute");
 
 module.exports = () => {
 	const app = express();
 
+	if (process.env.NODE_ENV !== "production") {
+		// TODO: automatically load the .env file in the root and initialize the values
+		dotenv.config();
+	}
+
+	// REVIEW: this allows us to access the body of request
+	app.use(express.json());
+
 	app.use(userRouter);
+	app.use(postRouter);
 
 	// TODO: this is for that annoying cors error
 	app.use(cors({ origin: "*" }));
