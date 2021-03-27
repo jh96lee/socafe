@@ -1,6 +1,7 @@
 const isEmail = require("validator/lib/isEmail");
 const bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken");
+
 const { checkEmailInUse, checkUsernameInUse } = require("../repos/userRepo");
 
 const validateEmail = (req, res, next) => {
@@ -65,12 +66,15 @@ const authenticateToken = (req, res, next) => {
 
 	const clientSideToken = bearerTokenArray[1];
 
+	// TODO: we can use the decoded payload to make some queries
 	jwt.verify(clientSideToken, process.env.JWT_SECRET, (err, decoded) => {
 		if (err) {
 			res.send({
 				message: "Access Denied",
 			});
 		} else {
+			req.body.decoded = decoded;
+
 			next();
 		}
 	});
