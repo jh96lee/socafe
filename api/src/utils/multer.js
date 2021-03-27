@@ -1,0 +1,19 @@
+const multer = require("multer");
+const DatauriParser = require("datauri/parser");
+const path = require("path");
+
+const storage = multer.memoryStorage();
+
+// TODO: single("image") specifies to field name that multer should go to when it's looking for a file
+const multerUploads = multer({ storage }).single("image");
+
+const parser = new DatauriParser();
+
+// REVIEW: the file is coming as a buffer because we're pushing it to memory before we can
+// REVIEW: upload it to Cloudinary
+// FIX: Cloudinary's uploader either expects a file path or a string but we're receiving a buffer
+const parseImage = (req) => {
+	return parser.format(path.extname(req.file.originalname), req.file.buffer);
+};
+
+module.exports = { multerUploads, parseImage };

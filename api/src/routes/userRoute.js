@@ -78,8 +78,10 @@ userRouter.post("/user/login", async (req, res) => {
 userRouter.put("/user/update", authenticateToken, async (req, res) => {
 	const updatedUserArray = [];
 
+	// REVIEW: fetch user id through decoded JWT payload
 	const user_id = req.body.decoded.id;
 
+	// TODO: fetch the soon to be updated columns name using Object.keys but exclude decoded from the array
 	const columnsToModifyArray = Object.keys(req.body).filter((key) => {
 		return key !== "decoded";
 	});
@@ -98,11 +100,9 @@ userRouter.put("/user/update", authenticateToken, async (req, res) => {
 userRouter.delete("/user/delete", authenticateToken, async (req, res) => {
 	const user_id = req.body.decoded.id;
 
-	UserRepo.deleteUser(user_id);
+	const deletedUser = await UserRepo.deleteUser(user_id);
 
-	res.send({
-		message: "User deleted",
-	});
+	res.send(deletedUser);
 });
 
 module.exports = userRouter;
