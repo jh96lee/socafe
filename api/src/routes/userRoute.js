@@ -1,7 +1,5 @@
 const express = require("express");
-const jwt = require("jsonwebtoken");
 const bcrypt = require("bcryptjs");
-
 const UserRepo = require("../repos/userRepo");
 const {
 	validateEmail,
