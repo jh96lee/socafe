@@ -56,6 +56,7 @@ class PostRepo {
 		const { rows } = await pool.queryToDatabase(
 			`
 			SELECT 
+			posts.id,
 			post_contents.content_type AS type,
 			post_contents.content AS content
 			FROM posts
@@ -95,6 +96,16 @@ class PostRepo {
 		);
 
 		return rows[0];
+	}
+
+	static async deletePost(post_id) {
+		await pool.queryToDatabase(
+			`
+			DELETE FROM posts
+			WHERE id=$1
+			`,
+			[post_id]
+		);
 	}
 
 	static async deleteCategoryPostRelation(post_id) {

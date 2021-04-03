@@ -4,6 +4,9 @@ const dotenv = require("dotenv");
 const userRouter = require("./routes/userRoute");
 const postRouter = require("./routes/postRoute");
 const fileRouter = require("./routes/fileRoute");
+const commentRouter = require("./routes/commentRoute");
+const likeRouter = require("./routes/likeRoute");
+const followRouter = require("./routes/followRoute");
 
 module.exports = () => {
 	const app = express();
@@ -19,6 +22,9 @@ module.exports = () => {
 	app.use(userRouter);
 	app.use(postRouter);
 	app.use(fileRouter);
+	app.use(commentRouter);
+	app.use(likeRouter);
+	app.use(followRouter);
 
 	// TODO: this is for that annoying cors error
 	app.use(cors({ origin: "*" }));

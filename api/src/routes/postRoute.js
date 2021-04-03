@@ -1,6 +1,7 @@
 const express = require("express");
 const PostRepo = require("../repos/postRepo");
 const { authenticateToken } = require("../middlewares/userMiddleware");
+const pool = require("../pool");
 
 const postRouter = express.Router();
 
@@ -26,7 +27,8 @@ postRouter.post("/upload/post", authenticateToken, async (req, res) => {
 		PostRepo.insertCategoryAndPostRelation(category_id, post_id);
 	}
 
-	res.send({ message: "Post uploaded successfully!" });
+	// TODO: send the id of the post, for redirection to the post url with the params being the post id
+	res.send({ message: "Post uploaded successfully!", post_id });
 });
 
 // TODO: Gotta add in Like aggregation as well
@@ -41,10 +43,25 @@ postRouter.get("/post/:postId", async (req, res) => {
 	// REVIEW: multiple objects/rows are needed for this data
 	const postCategories = await PostRepo.fetchPostCategories(post_id);
 
+	const { rows } = await pool.queryToDatabase(
+		`
+		SELECT
+		COUNT(*) AS likes
+		FROM posts
+		JOIN likes
+		ON posts.id=likes.post_id
+		WHERE likes.post_id=$1;
+		`,
+		[post_id]
+	);
+
+	const total_likes = parseInt(rows[0].likes);
+
 	res.send({
 		...basicPostData,
 		contents: postContents,
 		categories: postCategories,
+		likes: total_likes,
 	});
 });
 
@@ -59,6 +76,7 @@ postRouter.put("/post/update/:postId", authenticateToken, async (req, res) => {
 	const basicPostData = await PostRepo.fetchBasicPostData(post_id);
 	const userIdOfPost = basicPostData.user_id;
 
+	// TODO: gotta make sure that the owner of the post and id of the user sent from the token matches
 	if (user_id !== userIdOfPost) {
 		res.send({
 			message: "Unauthorized Request",
@@ -85,9 +103,35 @@ postRouter.put("/post/update/:postId", authenticateToken, async (req, res) => {
 	}
 });
 
+postRouter.delete(
+	"/post/delete/:postId",
+	authenticateToken,
+	async (req, res) => {
+		const post_id = req.params.postId;
+
+		const { decoded } = req.body;
+
+		const token_user_id = decoded.id;
+
+		const { user_id } = await PostRepo.fetchBasicPostData(post_id);
+
+		if (token_user_id !== user_id) {
+			res.send({
+				message: "Unauthorized Request",
+			});
+		} else {
+			await PostRepo.deletePost(post_id);
+
+			res.send({
+				message: "Post deleted successfully",
+			});
+		}
+	}
+);
+
+// TODO: update post views by incrementing the post_view value
 postRouter.put("/post/views/:postId", async (req, res) => {
 	const post_id = req.params.postId;
-	console.log(post_id);
 
 	await PostRepo.incrementPostViewsOfPost(post_id);
 
