@@ -7,6 +7,7 @@ const fileRouter = require("./routes/fileRoute");
 const commentRouter = require("./routes/commentRoute");
 const likeRouter = require("./routes/likeRoute");
 const followRouter = require("./routes/followRoute");
+const storyRouter = require("./routes/storyRoute");
 
 module.exports = () => {
 	const app = express();
@@ -25,6 +26,7 @@ module.exports = () => {
 	app.use(commentRouter);
 	app.use(likeRouter);
 	app.use(followRouter);
+	app.use(storyRouter);
 
 	// TODO: this is for that annoying cors error
 	app.use(cors({ origin: "*" }));
