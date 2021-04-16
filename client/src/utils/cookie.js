@@ -3,16 +3,28 @@ export const setCookie = (key, value) => {
 	document.cookie = key + "=" + value + ";";
 };
 
+export const fetchToken = () => {
+	const cookie = document.cookie;
+
+	const token = cookie.split("=")[1];
+
+	return token;
+};
+
 export const fetchPayloadAndDecode = () => {
 	// REVIEW: will get something like token=blahblahblahtoken
 	const cookie = document.cookie;
 
-	// REVIEw: JWT token
-	const token = cookie.split("=")[1];
+	if (cookie) {
+		// REVIEW: JWT token
+		const token = cookie.split("=")[1];
 
-	const jwtTokenPayload = token.split(".")[1];
+		const jwtTokenPayload = token.split(".")[1];
 
-	const userInfo = window.atob(jwtTokenPayload);
+		const userInfo = window.atob(jwtTokenPayload);
 
-	return userInfo;
+		return userInfo;
+	} else {
+		return null;
+	}
 };

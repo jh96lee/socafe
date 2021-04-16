@@ -1,7 +1,7 @@
 import * as React from "react";
 import styled from "styled-components";
 
-const SearchbarStyle = styled.input.attrs(() => ({
+const SearchbarStyle = styled.input.attrs((props) => ({
 	type: "text",
 	placeholder: "Search",
 }))`
