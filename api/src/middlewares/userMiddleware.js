@@ -2,7 +2,7 @@ const isEmail = require("validator/lib/isEmail");
 const bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken");
 
-const { checkEmailInUse, checkUsernameInUse } = require("../repos/userRepo");
+const UserRepo = require("../repos/userRepo");
 
 const validateEmail = (req, res, next) => {
 	const userDataObject = req.body;
@@ -14,7 +14,7 @@ const validateEmail = (req, res, next) => {
 	if (validationResult) {
 		next();
 	} else {
-		res.send({ message: "Invalid Email" });
+		res.send({ message: { email: "Invalid Email" } });
 	}
 };
 
@@ -23,10 +23,12 @@ const isEmailInUse = async (req, res, next) => {
 
 	const { email } = userDataObject;
 
-	const user = await checkEmailInUse(email);
+	const user = await UserRepo.checkEmailInUse(email);
 
 	if (user) {
-		res.send({ message: "This email address is already being used" });
+		res.send({
+			message: { email: "This email address is already being used" },
+		});
 	} else {
 		next();
 	}
@@ -37,10 +39,10 @@ const isUsernameInUse = async (req, res, next) => {
 
 	const { username } = userDataObject;
 
-	const user = await checkUsernameInUse(username);
+	const user = await UserRepo.checkUsernameInUse(username);
 
 	if (user) {
-		res.send({ message: "This username is already being used" });
+		res.send({ message: { username: "This username is already being used" } });
 	} else {
 		next();
 	}
@@ -70,7 +72,7 @@ const authenticateToken = (req, res, next) => {
 	jwt.verify(clientSideToken, process.env.JWT_SECRET, (err, decoded) => {
 		if (err) {
 			res.send({
-				message: "Access Denied",
+				message: { error: "Access Denied" },
 			});
 		} else {
 			req.body.decoded = decoded;

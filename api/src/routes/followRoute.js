@@ -15,9 +15,9 @@ followRouter.post(
 		try {
 			await pool.queryToDatabase(
 				`
-            INSERT INTO followers(leader_id, follower_id)
-            VALUES($1, $2);
-            `,
+				INSERT INTO followers(leader_id, follower_id)
+				VALUES($1, $2);
+				`,
 				[leader_user_id, follower_user_id]
 			);
 

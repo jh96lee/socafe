@@ -23,23 +23,27 @@ userRouter.post(
 	async (req, res) => {
 		const userDataObject = req.body;
 
-		if (!userDataObject.avatar_url || userDataObject.avatar_url === "") {
-			userDataObject.avatar_url =
-				"https://res.cloudinary.com/fullstackprojectcloud/image/upload/v1616322423/default_profile_image_ud6jux.png";
-		}
+		userDataObject.avatar_url =
+			"https://res.cloudinary.com/fullstackprojectcloud/image/upload/v1618789746/Default_Profile_Image_lmnpdi.png";
 
-		const user = await UserRepo.registerUser(userDataObject);
+		try {
+			const user = await UserRepo.registerUser(userDataObject);
 
-		if (user) {
-			generateAndSendToken(res, {
-				id: user.id,
-				first_name: user.first_name,
-				last_name: user.last_name,
-				avatar_url: user.avatar_url,
-				username: user.username,
-			});
-		} else {
-			res.send({ message: "There has been an error" });
+			console.log(user);
+
+			if (user) {
+				generateAndSendToken(res, {
+					id: user.id,
+					full_name: user.full_name,
+					username: user.username,
+					avatar_url: user.avatar_url,
+				});
+			} else {
+				res.send({ message: { error: "First" } });
+			}
+		} catch (error) {
+			console.log(error);
+			res.send({ message: { error: "Catch Errorr" } });
 		}
 	}
 );
@@ -47,29 +51,32 @@ userRouter.post(
 userRouter.post("/user/login", async (req, res) => {
 	const { email, password } = req.body;
 
-	const user = await UserRepo.checkEmailInUse(email);
+	try {
+		const user = await UserRepo.checkEmailInUse(email);
 
-	if (user) {
-		bcrypt.compare(password, user.password, (err, result) => {
-			// TODO: if the result is true, then send token and user data
-			if (result) {
-				generateAndSendToken(res, {
-					id: user.id,
-					first_name: user.first_name,
-					last_name: user.last_name,
-					avatar_url: user.avatar_url,
-					username: user.username,
-				});
-			} else {
-				res.send({
-					message: "Invalid Credentials",
-				});
-			}
-		});
-	} else {
-		res.send({
-			message: "Invalid Credentials",
-		});
+		if (user) {
+			bcrypt.compare(password, user.password, (err, result) => {
+				// TODO: if the result is true, then send token and user data
+				if (result) {
+					generateAndSendToken(res, {
+						id: user.id,
+						full_name: user.full_name,
+						avatar_url: user.avatar_url,
+						username: user.username,
+					});
+				} else {
+					res.send({
+						message: { error: "Invalid Credentials" },
+					});
+				}
+			});
+		} else {
+			res.send({
+				message: { error: "Invalid Credentials" },
+			});
+		}
+	} catch (error) {
+		res.send({ message: { error: "There has been an error" } });
 	}
 });
 
@@ -84,23 +91,35 @@ userRouter.put("/user/update", authenticateToken, async (req, res) => {
 		return key !== "decoded";
 	});
 
-	for (let key of columnsToModifyArray) {
-		const updatedUser = await UserRepo.updateUser(key, req.body[key], user_id);
+	try {
+		for (let column of columnsToModifyArray) {
+			const updatedUser = await UserRepo.updateUser(
+				column,
+				req.body[column],
+				user_id
+			);
 
-		updatedUserArray.push(updatedUser);
+			updatedUserArray.push(updatedUser);
+		}
+
+		const mostRecentUpdatedUser = updatedUserArray[updatedUserArray.length - 1];
+
+		res.send(mostRecentUpdatedUser);
+	} catch (error) {
+		res.send({ message: { error: "There has been an error" } });
 	}
-
-	const mostRecentUpdatedUser = updatedUserArray[updatedUserArray.length - 1];
-
-	res.send(mostRecentUpdatedUser);
 });
 
 userRouter.delete("/user/delete", authenticateToken, async (req, res) => {
 	const user_id = req.body.decoded.id;
 
-	const deletedUser = await UserRepo.deleteUser(user_id);
+	try {
+		await UserRepo.deleteUser(user_id);
 
-	res.send(deletedUser);
+		res.end();
+	} catch (error) {
+		res.send({ message: { error: "There has been an error" } });
+	}
 });
 
 module.exports = userRouter;
