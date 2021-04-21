@@ -1,18 +1,19 @@
 import * as React from "react";
+import { useDispatch, useSelector } from "react-redux";
 import axios from "axios";
 
 import { Loader } from "../../shared";
 import PostCategory from "./PostCategory";
 
-import {
-	CategoriesOfInterestFormStyle,
-	CategoriesOfInterestFormContentStyle,
-	CategoriesOfInterestButtonStyle,
-} from "../../../styles";
+import { registerFormNextStep } from "../../../redux/user/userRegisterFormAction";
+
+import CategoriesOfInterestStyle from "../styles/CategoriesOfInterestStyle";
+import CategoriesOfInterestWrapperStyle from "../styles/CategoriesOfInterestWrapperStyle";
+import CategoriesOfInterestButtonStyle from "../styles/CategoriesOfInterestButtonStyle";
 
 import { fetchToken } from "../../../utils/cookie";
 
-const CategoriesOfInterestForm = ({ setCurrentIndexStage }) => {
+const CategoriesOfInterest = () => {
 	const [selectedCategoriesArray, setSelectedCategoriesArray] = React.useState(
 		[]
 	);
@@ -20,6 +21,8 @@ const CategoriesOfInterestForm = ({ setCurrentIndexStage }) => {
 	const [isPostCategoriesLoaded, setIsPostCategoriesLoaded] = React.useState(
 		false
 	);
+
+	const dispatch = useDispatch();
 
 	const fetchPostCategories = async () => {
 		const { data } = await axios({
@@ -39,7 +42,7 @@ const CategoriesOfInterestForm = ({ setCurrentIndexStage }) => {
 	const handlePostCategoriesOnClick = async (e) => {
 		e.preventDefault();
 
-		const { data } = await axios({
+		await axios({
 			method: "POST",
 			headers: {
 				Authorization: `Bearer ${fetchToken()}`,
@@ -50,14 +53,12 @@ const CategoriesOfInterestForm = ({ setCurrentIndexStage }) => {
 			},
 		});
 
-		setCurrentIndexStage(2);
+		dispatch(registerFormNextStep(2));
 	};
 
 	return (
-		<CategoriesOfInterestFormStyle>
-			<h3>Categories of Interest (maximum 5)</h3>
-
-			<CategoriesOfInterestFormContentStyle>
+		<CategoriesOfInterestStyle>
+			<CategoriesOfInterestWrapperStyle>
 				{isPostCategoriesLoaded ? (
 					postCategories.map((postCategoryObject, idx) => {
 						return (
@@ -72,13 +73,13 @@ const CategoriesOfInterestForm = ({ setCurrentIndexStage }) => {
 				) : (
 					<Loader />
 				)}
-			</CategoriesOfInterestFormContentStyle>
+			</CategoriesOfInterestWrapperStyle>
 
 			<CategoriesOfInterestButtonStyle onClick={handlePostCategoriesOnClick}>
 				Continue
 			</CategoriesOfInterestButtonStyle>
-		</CategoriesOfInterestFormStyle>
+		</CategoriesOfInterestStyle>
 	);
 };
 
-export default CategoriesOfInterestForm;
+export default CategoriesOfInterest;

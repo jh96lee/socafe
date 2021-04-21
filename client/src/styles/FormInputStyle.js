@@ -6,9 +6,9 @@ const FormInputStyle = styled.input.attrs(({ inputType, inputLabel }) => ({
 }))`
 	color: var(--txt-1);
 	background-color: var(--input-bg-1);
-	border: 0.18rem solid var(--border-1);
+	border: none;
 	border-radius: 0.5rem;
-	padding: 1rem;
+	padding: 1.3rem;
 	outline: none;
 `;
 

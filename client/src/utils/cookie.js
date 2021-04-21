@@ -3,6 +3,7 @@ export const setCookie = (key, value) => {
 	document.cookie = key + "=" + value + ";";
 };
 
+// REVIEW: needed so that we can send the token to access private routes
 export const fetchToken = () => {
 	const cookie = document.cookie;
 
@@ -23,7 +24,7 @@ export const fetchPayloadAndDecode = () => {
 
 		const userInfo = window.atob(jwtTokenPayload);
 
-		return userInfo;
+		return JSON.parse(userInfo);
 	} else {
 		return null;
 	}

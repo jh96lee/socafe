@@ -1,6 +1,6 @@
 import styled from "styled-components";
 
-export const FormStyle = styled.form`
+const FormStyle = styled.form`
 	display: flex;
 	flex-direction: column;
 	margin: 0 auto;
@@ -22,31 +22,4 @@ export const FormStyle = styled.form`
 	}
 `;
 
-export const RegisterFormStyle = styled(FormStyle)`
-	margin-top: 2rem;
-	width: 40rem;
-
-	& a {
-		color: var(--txt-1);
-	}
-`;
-
-export const CategoriesOfInterestFormStyle = styled(FormStyle)`
-	margin-top: 2rem;
-	width: 60%;
-
-	& p {
-		font-size: 1.4rem;
-		color: red;
-	}
-`;
-
-export const RegisterCompletedFormStyle = styled(FormStyle)`
-	margin-top: 2rem;
-	width: 60%;
-
-	& svg {
-		width: 8rem;
-		height: 8rem;
-	}
-`;
+export default FormStyle;

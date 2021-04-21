@@ -5,14 +5,14 @@ import { IoCheckmark } from "react-icons/io5";
 import { BsPlusCircle } from "react-icons/bs";
 
 const PostCategoryStyle = styled.div`
-	background-color: var(--bg-2);
+	background-color: #ffffff;
 	border-radius: 0.5rem;
 	margin-bottom: 1.5rem;
 	cursor: pointer;
 
 	& img {
-		width: 23rem;
-		height: 14rem;
+		width: 20rem;
+		height: 13rem;
 		object-fit: cover;
 		border-top-left-radius: 0.5rem;
 		border-top-right-radius: 0.5rem;
@@ -24,8 +24,7 @@ const PostCategoryStyle = styled.div`
 		padding: 0.6rem 1rem 1rem 1rem;
 	}
 
-	& h5 {
-		font-size: 1.45rem;
+	& h6 {
 		color: var(--txt-1);
 		letter-spacing: -0.7px;
 	}
@@ -89,7 +88,7 @@ const PostCategory = ({
 			<img src={postCategoryObject.category_url} />
 
 			<div>
-				<h5>{postCategoryObject.title}</h5>
+				<h6>{postCategoryObject.title}</h6>
 
 				{isPostCategorySelected ? (
 					<IoCheckmark id="check-mark" />

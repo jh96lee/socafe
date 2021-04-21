@@ -4,8 +4,28 @@ import { createGlobalStyle } from "styled-components";
 // REVIEW: value, we can apply different colors
 const GlobalStyles = createGlobalStyle`
     :root {
-        --bg-1: ${(props) => (props.theme.isDarkMode ? "#0e141b" : "#fdfdfd")};
-        --bg-2: ${(props) => (props.theme.isDarkMode ? "#15202b" : "#fff4e5")};
+        --primary-background-color: ${(props) =>
+					props.theme.isDarkMode ? "#101010" : "#f8f8ff"};
+        --secondary-background-color: ${(props) =>
+					props.theme.isDarkMode ? "" : "#fff"};
+
+        --primary-button-background-color: ${(props) =>
+					props.theme.isDarkMode ? "" : "#ff4a5a"};
+
+        --primary-border-color: ${(props) =>
+					props.theme.isDarkMode ? "" : "#dfe1e6"};
+
+        --primary-icon-color: ${(props) =>
+					props.theme.isDarkMode ? "" : "#000"};    
+        --secondary-icon-color: ${(props) =>
+					props.theme.isDarkMode ? "#7b7b7b" : "#7b7b7b"};    
+
+        --primary-active-background-color: ${(props) =>
+					props.theme.isDarkMode ? "" : "#edf0ff"};
+        --primary-active-color: ${(props) =>
+					props.theme.isDarkMode ? "" : "#5874dc"};
+        
+        --bg-2: ${(props) => (props.theme.isDarkMode ? "#0c0c0c" : "#fff4e5")};
         --bg-err: ${(props) =>
 					props.theme.isDarkMode ? "#6f1e1e75" : "#ff5b5b4d"};
         --bg-success: ${(props) =>
@@ -21,26 +41,6 @@ const GlobalStyles = createGlobalStyle`
 					props.theme.isDarkMode ? "#d4223aba" : "#d22828"};
         --btn-bg-disabled: ${(props) =>
 					props.theme.isDarkMode ? "#ff00222e" : "#dd3e469c"};
-
-        --input-bg-1: ${(props) =>
-					props.theme.isDarkMode ? "#161d27" : "#ffffff"};
-        --input-bg-2: ${(props) =>
-					props.theme.isDarkMode ? "#18232f" : "#f2f2f2"};
-
-        --border-1: ${(props) =>
-					props.theme.isDarkMode ? "#0a0a0a" : "#dfe1e6"};
-
-        --yellow-1: #ffc107;
-
-        --blue-1: #2f79ff;
-
-        --cyan-1: #35e6ea;
-        --cyan-transparent: #35e6ea38;
-
-        --red-1: #f50505;
-        --red-transparent: #ff868675;
-
-        --purple-1: #5100d4;
     }
 
     *,
@@ -49,13 +49,34 @@ const GlobalStyles = createGlobalStyle`
         margin: 0;
         padding: 0;
         box-sizing: border-box;
-        font-family: "Manrope", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
+        font-family: "Poppins", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
             Oxygen, Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
     }
 
     html {
         font-size: 62.5%;
-        background-color: var(--bg-1);
+        background-color: var(--primary-background-color);
+    }
+
+    h5 {
+        font-size: 1.42rem;
+        font-weight: 500;
+    }
+
+    h6 {
+        font-size: 1.35rem;
+        font-weight: 500;
+    }
+
+    svg {
+        display: block;
+        fill: var(--svg-1);
+        color: var(--svg-1);
+    }
+
+    svg:hover {
+        fill: pink;
+        color: pink;
     }
 `;
 

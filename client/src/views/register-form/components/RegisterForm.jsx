@@ -1,100 +1,37 @@
 import * as React from "react";
 import { Link } from "react-router-dom";
-import { useDispatch } from "react-redux";
-import axios from "axios";
+import { useDispatch, useSelector } from "react-redux";
 
-import { setUser } from "../../../redux/user/userAction";
+import { sendUserDataAndSetUserMessage } from "../../../redux/user/userRegisterAction";
 
 import { FormInput } from "../../shared";
 
-import {
-	RegisterFormStyle,
-	RegisterAndLoginFormContentStyle,
-	RegisterAndLoginFormButtonStyle,
-} from "../../../styles";
+import RegisterFormStyle from "../styles/RegisterFormStyle";
+import RegisterFormInputsWrapper from "../styles/RegisterFormInputsWrapper";
+import RegisterFormButtonStyle from "../styles/RegisterFormButtonStyle";
 
-import { setCookie } from "../../../utils/cookie";
-
-const RegisterForm = ({ setCurrentIndexStage }) => {
-	const [fullName, setFullName] = React.useState("");
-	const [email, setEmail] = React.useState("");
-	const [username, setUsername] = React.useState("");
-	const [password, setPassword] = React.useState("");
-	const [errorMessage, setErrorMessage] = React.useState(null);
-	const [successMessage, setSuccessMessage] = React.useState({});
+const RegisterForm = () => {
+	const { fullName, email, username, password, message } = useSelector(
+		(state) => state.userRegisterReducer
+	);
 
 	const dispatch = useDispatch();
 
 	const handleOnClick = async (e) => {
 		e.preventDefault();
 
-		const errorMessageObject = {};
-
-		const formInputsObject = {
-			fullName,
-			email,
-			username,
-			password,
-		};
-
-		const formKeys = Object.keys(formInputsObject);
-
-		const formValues = Object.values(formInputsObject);
-
-		// REVIEW: construct errorMessageObject
-		formValues.forEach((inputValue, idx) => {
-			if (!inputValue) {
-				errorMessageObject[formKeys[idx]] = "Please fill out the form";
-			}
-		});
-
-		// REVIEW: if a key/property exists in errorMessageObject, that means a field is empty, therefore need to render the error message
-		if (Object.keys(errorMessageObject).length !== 0) {
-			setErrorMessage(errorMessageObject);
-		} else {
-			const { data } = await axios({
-				method: "POST",
-				url: "http://localhost:8080/user/register",
-				data: {
-					full_name: fullName,
-					email,
-					username,
-					password,
-				},
-			});
-
-			// REVIEW: the message object will have one of the 4 input names if there is an error, if not it will have a success key
-			const { message, token } = data;
-
-			if (!message.success) {
-				setErrorMessage(message);
-			} else {
-				// REVIEW: set cookie first
-				setCookie("token", token);
-
-				//REVIEW: then decode the cookie's payload and set that object to the user state
-				dispatch(setUser());
-
-				// REVIEW: the key of this object can be success, email, password, username and etc
-				setSuccessMessage(message);
-
-				setCurrentIndexStage(1);
-			}
-		}
+		dispatch(sendUserDataAndSetUserMessage());
 	};
 
 	return (
 		<RegisterFormStyle>
-			<h3>Register</h3>
-
-			<RegisterAndLoginFormContentStyle>
+			<RegisterFormInputsWrapper>
 				<FormInput
-					inputId="full-name"
+					inputId="fullName"
 					inputName="full_name"
 					inputLabel="Full Name"
 					inputType="text"
-					setInputState={setFullName}
-					errorMessage={!errorMessage ? "" : errorMessage.fullName}
+					errorMessage={message.fullName}
 				/>
 
 				<FormInput
@@ -102,9 +39,7 @@ const RegisterForm = ({ setCurrentIndexStage }) => {
 					inputName="email"
 					inputLabel="Email"
 					inputType="email"
-					inputState={email}
-					setInputState={setEmail}
-					errorMessage={!errorMessage ? "" : errorMessage.email}
+					errorMessage={message.email}
 				/>
 
 				<FormInput
@@ -112,9 +47,7 @@ const RegisterForm = ({ setCurrentIndexStage }) => {
 					inputName="username"
 					inputLabel="Username"
 					inputType="text"
-					inputState={username}
-					setInputState={setUsername}
-					errorMessage={!errorMessage ? "" : errorMessage.username}
+					errorMessage={message.username}
 				/>
 
 				<FormInput
@@ -122,19 +55,17 @@ const RegisterForm = ({ setCurrentIndexStage }) => {
 					inputName="password"
 					inputLabel="Password"
 					inputType="password"
-					inputState={password}
-					setInputState={setPassword}
-					errorMessage={!errorMessage ? "" : errorMessage.password}
+					errorMessage={message.password}
 				/>
-			</RegisterAndLoginFormContentStyle>
+			</RegisterFormInputsWrapper>
 
-			<RegisterAndLoginFormButtonStyle
+			<RegisterFormButtonStyle
 				onClick={handleOnClick}
-				success={successMessage.success}
+				success={message.success}
 				disabled={!fullName || !email || !password || !username ? true : false}
 			>
-				{successMessage.success ? successMessage.success : "Continue"}
-			</RegisterAndLoginFormButtonStyle>
+				{message.success ? message.success : "Continue"}
+			</RegisterFormButtonStyle>
 
 			<Link to="/user/login">Already have an account? Log in</Link>
 		</RegisterFormStyle>

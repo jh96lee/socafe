@@ -6,7 +6,7 @@ const FormInputLabelWrapper = styled.div`
 
 	& label {
 		color: var(--txt-1);
-		font-size: 1.37rem;
+		font-size: 1.47rem;
 		font-weight: 500;
 		letter-spacing: -0.4px;
 		margin-bottom: 0.4rem;

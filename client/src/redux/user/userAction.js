@@ -1,4 +1,3 @@
-import axios from "axios";
 import { fetchPayloadAndDecode } from "../../utils/cookie";
 
 export const setUser = () => {
