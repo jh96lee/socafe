@@ -1,19 +1,9 @@
 import React from "react";
 import { useHistory } from "react-router-dom";
-import styled from "styled-components";
 import { ReactComponent as SocafeDark } from "../../../assets/socafe-dark.svg";
 import { ReactComponent as SocafeLight } from "../../../assets/socafe-light.svg";
 
-const LogoStyle = styled.div`
-	padding-left: 2rem;
-
-	& svg {
-		display: block;
-		width: 8.5rem;
-		height: 6.5rem;
-		cursor: pointer;
-	}
-`;
+import LogoStyle from "../styles/LogoStyle";
 
 const Logo = ({ isDarkMode }) => {
 	const history = useHistory();

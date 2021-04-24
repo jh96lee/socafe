@@ -1,5 +1,5 @@
 const initialState = {
-	currentRegisterStepIndex: 1,
+	currentRegisterStepIndex: 0,
 };
 
 const userRegisterFormReducer = (state = initialState, action) => {

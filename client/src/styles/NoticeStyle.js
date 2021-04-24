@@ -10,7 +10,6 @@ const NoticeStyle = styled.div`
 	h1 {
 		font-size: 2.5rem;
 		color: white;
-		letter-spacing: -0.8px;
 	}
 
 	svg {

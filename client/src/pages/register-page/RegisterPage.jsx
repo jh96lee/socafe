@@ -17,41 +17,36 @@ const RegisterPage = () => {
 		(state) => state.userRegisterFormReducer
 	);
 
-	const registerStepForms = {
-		0: <RegisterForm />,
-		1: <CategoriesOfInterest />,
-		2: (
-			<Notice
-				redirectURL="/"
-				svgColor="green"
-				message="Account Created!"
-				noticeSVG={<CgCheckO />}
-			/>
-		),
+	const registerForm = {
+		0: {
+			view: <RegisterForm />,
+			step: { icon: <IoPersonAddOutline />, message: "User Info" },
+		},
+		1: {
+			view: <CategoriesOfInterest />,
+			step: { icon: <AiOutlineSmile />, message: "Pick Categories" },
+		},
+		2: {
+			view: (
+				<Notice
+					redirectURL="/"
+					svgColor="green"
+					message="Account Created!"
+					noticeSVG={<CgCheckO />}
+				/>
+			),
+			step: { icon: <IoSaveOutline />, message: "Done!" },
+		},
 	};
-
-	const registerSteps = [
-		{ icon: <IoPersonAddOutline />, message: "User Info" },
-		{ icon: <AiOutlineSmile />, message: "Pick Categories" },
-		{ icon: <IoSaveOutline />, message: "Done!" },
-	];
 
 	return (
 		<RegisterPageContentStyle>
-			{/* <RegisterStepsWrapperStyle>
-				{registerSteps.map(({ icon, message }, idx) => {
-					return (
-						<RegisterFormStep
-							key={`register-step__${idx}`}
-							icon={icon}
-							message={message}
-							idx={idx}
-						/>
-					);
-				})}
-			</RegisterStepsWrapperStyle> */}
+			<RegisterFormStep
+				icon={registerForm[currentRegisterStepIndex].step.icon}
+				message={registerForm[currentRegisterStepIndex].step.message}
+			/>
 
-			{registerStepForms[currentRegisterStepIndex]}
+			{registerForm[currentRegisterStepIndex].view}
 		</RegisterPageContentStyle>
 	);
 };

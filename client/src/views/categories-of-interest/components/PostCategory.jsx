@@ -5,33 +5,34 @@ import { IoCheckmark } from "react-icons/io5";
 import { BsPlusCircle } from "react-icons/bs";
 
 const PostCategoryStyle = styled.div`
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
 	background-color: #ffffff;
-	border-radius: 0.5rem;
-	margin-bottom: 1.5rem;
 	cursor: pointer;
+	border: 1px solid var(--primary-border-color);
+	border-radius: 3rem;
+	width: fit-content;
+	padding: 1rem;
 
 	& img {
-		width: 20rem;
-		height: 13rem;
+		width: 5rem;
+		height: 5rem;
+		border-radius: 50%;
 		object-fit: cover;
-		border-top-left-radius: 0.5rem;
-		border-top-right-radius: 0.5rem;
 	}
 
-	& div {
-		display: flex;
-		justify-content: space-between;
-		padding: 0.6rem 1rem 1rem 1rem;
-	}
-
-	& h6 {
+	& p {
 		color: var(--txt-1);
+		font-size: 1.5rem;
+		font-weight: 500;
 		letter-spacing: -0.7px;
+		margin: 0 1.5rem;
 	}
 
 	& svg {
-		width: 2rem;
-		height: 2rem;
+		width: 2.5rem;
+		height: 2.5rem;
 		cursor: pointer;
 	}
 
@@ -40,7 +41,7 @@ const PostCategoryStyle = styled.div`
 	}
 
 	& #plus-circle {
-		color: white;
+		color: var(--primary-icon-color);
 	}
 `;
 
@@ -87,15 +88,13 @@ const PostCategory = ({
 		<PostCategoryStyle onClick={handlePostCategoryOnClick}>
 			<img src={postCategoryObject.category_url} />
 
-			<div>
-				<h6>{postCategoryObject.title}</h6>
+			<p>{postCategoryObject.title}</p>
 
-				{isPostCategorySelected ? (
-					<IoCheckmark id="check-mark" />
-				) : (
-					<BsPlusCircle id="plus-circle" />
-				)}
-			</div>
+			{isPostCategorySelected ? (
+				<IoCheckmark id="check-mark" />
+			) : (
+				<BsPlusCircle id="plus-circle" />
+			)}
 		</PostCategoryStyle>
 	);
 };

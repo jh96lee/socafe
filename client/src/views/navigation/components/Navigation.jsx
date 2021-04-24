@@ -2,14 +2,12 @@ import * as React from "react";
 import { NavLink } from "react-router-dom";
 import styled from "styled-components";
 
-import Logo from "./Logo";
-
 import { AiOutlineCompass } from "react-icons/ai";
 import { VscGraph, VscBell } from "react-icons/vsc";
 import { IoBagOutline } from "react-icons/io5";
 import { IoMdHeartEmpty } from "react-icons/io";
 import { RiHomeLine } from "react-icons/ri";
-import { IoPaperPlaneOutline } from "react-icons/io5";
+import { IoPaperPlaneOutline, IoCartOutline } from "react-icons/io5";
 
 const NavigationStyle = styled.div`
 	position: sticky;
@@ -40,18 +38,17 @@ const NavigationLinksWrapperStyle = styled.nav`
 		align-items: center;
 		text-decoration: none;
 		color: var(--txt-1);
-		font-size: 1.37rem;
-		letter-spacing: -0.6px;
-		gap: 0.8rem;
+		font-size: 1.47rem;
+		gap: 1rem;
 		padding: 1rem;
-		margin-bottom: 0.2rem;
+		margin-bottom: 0.8rem;
 	}
 
 	& a svg {
 		color: var(--primary-icon-color);
 		fill: var(--primary-icon-color);
-		width: 2.52rem;
-		height: 2.52rem;
+		width: 2.72rem;
+		height: 2.72rem;
 	}
 
 	& .active {
@@ -70,8 +67,6 @@ const NavigationLinksWrapperStyle = styled.nav`
 const Navigation = () => {
 	return (
 		<NavigationStyle>
-			<Logo />
-
 			<NavigationLinksWrapperStyle id="navigation-links-wrapper">
 				<NavLink exact to="/">
 					<RiHomeLine />
@@ -91,6 +86,11 @@ const Navigation = () => {
 				<NavLink exact to="/stat/:userId">
 					<VscGraph />
 					Stats
+				</NavLink>
+
+				<NavLink exact to="/stat/:userId">
+					<IoCartOutline />
+					Cart
 				</NavLink>
 			</NavigationLinksWrapperStyle>
 
