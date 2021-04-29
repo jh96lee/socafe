@@ -1,8 +1,8 @@
 import styled from "styled-components";
 
 const FormInputStyle = styled.input.attrs(({ type, placeholder }) => ({
-	type: type,
-	placeholder: `${placeholder}`,
+	type,
+	placeholder,
 }))`
 	color: var(--primary-text-color);
 	background-color: var(--primary-input-background-color);
@@ -10,6 +10,12 @@ const FormInputStyle = styled.input.attrs(({ type, placeholder }) => ({
 	border: 1px solid var(--primary-border-color);
 	padding: 1rem;
 	outline: none;
+
+	&::placeholder {
+		color: #797979;
+		font-size: 1.37rem;
+		letter-spacing: -0.6px;
+	}
 `;
 
 export default FormInputStyle;

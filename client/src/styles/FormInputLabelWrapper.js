@@ -5,10 +5,10 @@ const FormInputLabelWrapper = styled.div`
 	flex-direction: column;
 
 	& label {
-		color: var(--txt-1);
-		font-size: 1.47rem;
+		color: var(--primary-text-color);
+		font-size: 1.37rem;
 		font-weight: 500;
-		letter-spacing: -0.4px;
+		letter-spacing: -0.7px;
 		margin-bottom: 0.4rem;
 	}
 

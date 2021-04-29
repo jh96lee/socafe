@@ -8,8 +8,9 @@ import { FormInputLabelWrapper, FormInputStyle } from "../../styles";
 const FormInput = ({
 	inputId,
 	inputName,
-	inputType,
+	type,
 	inputLabel,
+	placeholder,
 	errorMessage,
 }) => {
 	const userInfoState = useSelector((state) => state.userRegisterReducer);
@@ -34,9 +35,10 @@ const FormInput = ({
 			<FormInputStyle
 				id={inputId}
 				name={inputName}
-				inputType={inputType}
+				type={type}
 				inputLabel={inputLabel}
 				onChange={handleInputOnChange}
+				placeholder={placeholder}
 			/>
 			{errorMessage && <p>{errorMessage}</p>}
 		</FormInputLabelWrapper>

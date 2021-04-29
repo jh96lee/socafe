@@ -1,6 +1,6 @@
 import styled from "styled-components";
 
-export const HeaderStyle = styled.nav`
+export const HeaderStyle = styled.header`
 	position: relative;
 	display: flex;
 	justify-content: space-between;
@@ -10,8 +10,9 @@ export const HeaderStyle = styled.nav`
 	box-shadow: 0px 1px 3px 0px var(--primary-box-shadow-color);
 	padding: 0 2rem;
 
-	& > svg:first-child {
-		display: none;
+	@media (max-width: 615px) {
+		display: grid;
+		grid-template-columns: 1fr auto auto;
 	}
 `;
 
@@ -19,11 +20,8 @@ export const HeaderIconsWrapperStyle = styled.div`
 	display: flex;
 	align-items: center;
 
-	& svg:not(:first-child) {
-		color: var(--primary-icon-color);
-		width: 2.52rem;
-		height: 2.52rem;
-		margin: 0.3rem;
+	& > *:not(:first-child) {
+		margin-left: 0.5rem;
 	}
 
 	& #search-icon-element {

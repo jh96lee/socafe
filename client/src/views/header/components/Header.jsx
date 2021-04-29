@@ -1,60 +1,50 @@
 import * as React from "react";
+import { Link } from "react-router-dom";
 
 import Searchbar from "./Searchbar";
 import Logo from "./Logo";
-
-import useShowAndHideElementOnClick from "../../../hooks/useShowAndHideElementOnClick";
+import { Toggle } from "../../shared";
+import { DropdownMenu, IconElement } from "../../shared";
 
 import { HeaderStyle, HeaderIconsWrapperStyle } from "../styles/HeaderStyle";
-import { IconElementStyle } from "../../../styles";
+import { DropdownStyle } from "../../../styles";
 
-import { BiSun, BiMoon, BiSearch } from "react-icons/bi";
-import { BsPerson } from "react-icons/bs";
-import { GiHamburgerMenu } from "react-icons/gi";
+import { ReactComponent as User } from "../../../assets/user.svg";
+import { ReactComponent as Sun } from "../../../assets/sun.svg";
+import { ReactComponent as Moon } from "../../../assets/moon.svg";
 
 const Header = ({ isDarkMode, setIsDarkMode }) => {
-	const [
-		isResponsiveSearchbarOpen,
-		setIsResponsiveSearchbarOpen,
-	] = React.useState(false);
-
-	const handleThemeOnClick = () => {
-		setIsDarkMode((prevState) => !prevState);
-	};
-
-	useShowAndHideElementOnClick(
-		"search-icon-element",
-		"search-bar-div",
-		setIsResponsiveSearchbarOpen,
-		false
-	);
-
 	return (
 		<HeaderStyle>
-			<GiHamburgerMenu />
-
 			<Logo isDarkMode={isDarkMode} />
 
-			<div id="search-bar-div">
-				<Searchbar isResponsiveSearchbarOpen={isResponsiveSearchbarOpen} />
-			</div>
-			{/* <Searchbar
-				id="search-bar-div"
-				isResponsiveSearchbarOpen={isResponsiveSearchbarOpen}
-			/> */}
+			<Searchbar />
 
 			<HeaderIconsWrapperStyle>
-				<IconElementStyle id="search-icon-element">
-					<BiSearch />
-				</IconElementStyle>
+				<DropdownStyle id="user-dropdown-trigger">
+					<IconElement iconRole="presentation" iconSize="2.3rem">
+						<User />
+					</IconElement>
 
-				<BsPerson />
+					<DropdownMenu
+						triggerID="user-dropdown-trigger"
+						dataArray={[
+							<Link to="/user/login">Login</Link>,
+							<Link to="/user/register">Register</Link>,
+						]}
+						customDropdownId="user-dropdown"
+						menuPosition="right"
+					/>
+				</DropdownStyle>
 
-				{isDarkMode ? (
-					<BiMoon onClick={handleThemeOnClick} />
-				) : (
-					<BiSun onClick={handleThemeOnClick} />
-				)}
+				<Toggle
+					toggleWidth="5rem"
+					toggleHeight="3.2rem"
+					toggleType="theme"
+					switchIcon={isDarkMode ? <Moon /> : <Sun />}
+					isToggleTrue={isDarkMode}
+					setIsToggleTrue={setIsDarkMode}
+				/>
 			</HeaderIconsWrapperStyle>
 		</HeaderStyle>
 	);

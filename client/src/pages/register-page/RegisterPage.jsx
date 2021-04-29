@@ -40,14 +40,17 @@ const RegisterPage = () => {
 	};
 
 	return (
-		<RegisterPageContentStyle>
-			<RegisterFormStep
-				icon={registerForm[currentRegisterStepIndex].step.icon}
-				message={registerForm[currentRegisterStepIndex].step.message}
-			/>
+		<button>
+			<CgCheckO />
+		</button>
+		// <RegisterPageContentStyle>
+		// 	<RegisterFormStep
+		// 		icon={registerForm[currentRegisterStepIndex].step.icon}
+		// 		message={registerForm[currentRegisterStepIndex].step.message}
+		// 	/>
 
-			{registerForm[currentRegisterStepIndex].view}
-		</RegisterPageContentStyle>
+		// 	{registerForm[currentRegisterStepIndex].view}
+		// </RegisterPageContentStyle>
 	);
 };
 

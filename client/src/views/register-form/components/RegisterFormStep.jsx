@@ -2,30 +2,28 @@ import * as React from "react";
 import styled from "styled-components";
 import { useSelector } from "react-redux";
 
+import { IconElementStyle } from "../../../styles";
+
 const RegisterStepStyle = styled.div`
 	display: flex;
 	align-items: center;
 `;
 
-const RegisterStepIconWrapperStyle = styled.div`
-	border-radius: 0.5rem;
-	background-color: blue;
+const RegisterStepIconStyle = styled(IconElementStyle)`
+	background-color: cornflowerblue;
 	padding: 1rem;
 
 	& svg {
-		display: block;
-		color: black;
-		width: 2.5rem;
-		height: 2.5rem;
+		width: 2rem;
+		height: 2rem;
 	}
 `;
 
 const RegisterStepDetailsWrapperStyle = styled.div`
 	margin-left: 1rem;
 
-	& h2 {
+	& p {
 		color: var(--primary-text-color);
-		font-weight: 500;
 	}
 
 	& h3 {
@@ -41,11 +39,11 @@ const RegisterFormStep = ({ icon, message }) => {
 
 	return (
 		<RegisterStepStyle id="register-step">
-			<RegisterStepIconWrapperStyle>{icon}</RegisterStepIconWrapperStyle>
+			<RegisterStepIconStyle>{icon}</RegisterStepIconStyle>
 
 			<RegisterStepDetailsWrapperStyle>
-				<h3>Step {currentRegisterStepIndex + 1}/3</h3>
-				<h2>{message}</h2>
+				<p>Step {currentRegisterStepIndex + 1}/3</p>
+				<h3>{message}</h3>
 			</RegisterStepDetailsWrapperStyle>
 		</RegisterStepStyle>
 	);

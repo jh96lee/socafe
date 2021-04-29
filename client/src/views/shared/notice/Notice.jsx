@@ -1,7 +1,7 @@
 import * as React from "react";
 import { useHistory } from "react-router-dom";
 
-import { NoticeStyle } from "../../styles";
+import { NoticeStyle } from "../../../styles";
 
 const Notice = ({ redirectURL, svgColor, message, noticeSVG }) => {
 	const history = useHistory();

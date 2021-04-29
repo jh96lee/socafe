@@ -12,15 +12,13 @@ export const setUserInfo = (userInfo) => {
 	};
 };
 
-export const sendUserDataAndSetUserMessage = () => async (
-	dispatch,
-	getState
-) => {
+export const registerUser = () => async (dispatch, getState) => {
 	const userDataObject = {};
 	const clientSideUserErrorObject = {};
 
 	const userRegisterState = getState().userRegisterReducer;
 
+	// REVIEW: this is to remove the message key from the intial state
 	const userRegisterDataKeysArray = Object.keys(userRegisterState).filter(
 		(key) => {
 			return key !== "message";
@@ -28,11 +26,12 @@ export const sendUserDataAndSetUserMessage = () => async (
 	);
 
 	userRegisterDataKeysArray.forEach((key) => {
-		if (!userRegisterState[key]) {
+		const userDataValue = userRegisterState[key];
+
+		if (!userDataValue) {
 			clientSideUserErrorObject[key] = "Please fill the field";
 		} else {
-			// REVIEW: this is for constructing the user data object to send along with the POST request
-			// TODO: gotta make sure we send fullName as full_name to fit the users table column
+			// REVIEW: this is for changing fullName to full_name when sending data to the server
 			const objectKey = key === "fullName" ? "full_name" : key;
 
 			userDataObject[objectKey] = userRegisterState[key];
@@ -63,10 +62,12 @@ export const sendUserDataAndSetUserMessage = () => async (
 			payload: data.message,
 		});
 
-		setCookie("token", data.token);
+		if (data.message.success) {
+			setCookie("token", data.token);
 
-		dispatch(setUser());
+			dispatch(setUser());
 
-		dispatch(registerFormNextStep(1));
+			dispatch(registerFormNextStep(1));
+		}
 	}
 };

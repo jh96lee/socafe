@@ -13,18 +13,20 @@ export const fetchToken = () => {
 };
 
 export const fetchPayloadAndDecode = () => {
-	// REVIEW: will get something like token=blahblahblahtoken
 	const cookie = document.cookie;
 
 	if (cookie) {
-		// REVIEW: JWT token
-		const token = cookie.split("=")[1];
+		if (cookie === "undefined") {
+			return null;
+		} else {
+			const token = document.cookie.split("=")[1];
 
-		const jwtTokenPayload = token.split(".")[1];
+			const jwtTokenPayload = token.split(".")[1];
 
-		const userInfo = window.atob(jwtTokenPayload);
+			const userData = window.atob(jwtTokenPayload);
 
-		return JSON.parse(userInfo);
+			return JSON.parse(userData);
+		}
 	} else {
 		return null;
 	}

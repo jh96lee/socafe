@@ -8,7 +8,7 @@ const GlobalStyles = createGlobalStyle`
 					props.theme.isDarkMode ? "#f5f5f5" : "#000"};
 
         --primary-background-color: ${(props) =>
-					props.theme.isDarkMode ? "#161616" : "#fff"};
+					props.theme.isDarkMode ? "#202124" : "#fff"};
         --secondary-background-color: ${(props) =>
 					props.theme.isDarkMode ? "" : "#fff"};
 
@@ -19,20 +19,34 @@ const GlobalStyles = createGlobalStyle`
 					props.theme.isDarkMode ? "#000" : "#dfe1e6"};
 
         --primary-icon-color: ${(props) =>
-					props.theme.isDarkMode ? "#f5f5f5" : "#000"};    
+					props.theme.isDarkMode ? "#a4a4a4" : "#64748b"};    
+        --secondary-icon-color: ${(props) =>
+					props.theme.isDarkMode ? "#fff" : "#000"};    
 
         --primary-active-background-color: ${(props) =>
 					props.theme.isDarkMode ? "" : "#edf0ff"};
         --primary-active-color: ${(props) =>
-					props.theme.isDarkMode ? "" : "#5874dc"};
-
-        --primary-hover-color: ${(props) => (props.theme.isDarkMode ? "" : "")};
+					props.theme.isDarkMode ? "#fff" : "#000"};
 
         --primary-box-shadow-color: ${(props) =>
 					props.theme.isDarkMode ? "#000" : "#d2d2d2"};
 
         --primary-clickable-background-color: ${(props) =>
 					props.theme.isDarkMode ? "#ff3157c4" : "#ff385c"};
+
+        --primary-hover-clickable-background-color: ${(props) =>
+					props.theme.isDarkMode ? "#c30042" : "#ee0151"};
+        --secondary-hover-clickable-background-color: ${(props) =>
+					props.theme.isDarkMode ? "#fff" : "#fff"};
+        --secondary-hover-clickable-background-color: ${(props) =>
+					props.theme.isDarkMode ? "#5a5a5a6b" : "#cacaca69"};
+
+        --primary-toggle-background-color: ${(props) =>
+					props.theme.isDarkMode ? "#000" : "#fff"};
+        --primary-theme-toggle-background-color: ${(props) =>
+					props.theme.isDarkMode ? "#253842" : "#96ddfc"};
+        --secondary-theme-toggle-background-color: ${(props) =>
+					props.theme.isDarkMode ? "#7fa2b2" : "#04b1ff"};
         
         --bg-2: ${(props) => (props.theme.isDarkMode ? "#0c0c0c" : "#fff4e5")};
         --bg-err: ${(props) =>
@@ -96,14 +110,20 @@ const GlobalStyles = createGlobalStyle`
         letter-spacing: -0.6px;
     }
 
+    a:hover {
+        text-decoration: underline;
+    }
+
+    p {
+        font-size: 1.4rem;
+        letter-spacing: -0.7px;
+    }
+
     svg {
         display: block;
     }
 
-    h6:hover, a:hover, svg:hover {
-        text-decoration: underline;
-        cursor: pointer;
-    }
+    
 `;
 
 export default GlobalStyles;

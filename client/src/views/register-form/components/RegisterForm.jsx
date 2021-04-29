@@ -2,7 +2,7 @@ import * as React from "react";
 import { Link } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 
-import { sendUserDataAndSetUserMessage } from "../../../redux/user/userRegisterAction";
+import { registerUser } from "../../../redux/user/userRegisterAction";
 
 import { FormInput } from "../../shared";
 
@@ -20,7 +20,7 @@ const RegisterForm = () => {
 	const handleOnClick = async (e) => {
 		e.preventDefault();
 
-		dispatch(sendUserDataAndSetUserMessage());
+		dispatch(registerUser());
 	};
 
 	return (
@@ -30,7 +30,8 @@ const RegisterForm = () => {
 					inputId="fullName"
 					inputName="full_name"
 					inputLabel="Full Name"
-					inputType="text"
+					type="text"
+					placeholder="Enter full name"
 					errorMessage={message.fullName}
 				/>
 
@@ -38,7 +39,8 @@ const RegisterForm = () => {
 					inputId="email"
 					inputName="email"
 					inputLabel="Email"
-					inputType="email"
+					type="email"
+					placeholder="Enter email"
 					errorMessage={message.email}
 				/>
 
@@ -46,7 +48,8 @@ const RegisterForm = () => {
 					inputId="username"
 					inputName="username"
 					inputLabel="Username"
-					inputType="text"
+					type="text"
+					placeholder="Enter username"
 					errorMessage={message.username}
 				/>
 
@@ -54,7 +57,8 @@ const RegisterForm = () => {
 					inputId="password"
 					inputName="password"
 					inputLabel="Password"
-					inputType="password"
+					type="password"
+					placeholder="Enter password"
 					errorMessage={message.password}
 				/>
 			</RegisterFormInputsWrapper>
