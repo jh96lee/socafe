@@ -30,12 +30,12 @@ const IconElementStyle = styled.div`
 				: "var(--secondary-hover-clickable-background-color)"};
 	}
 
-	@media (max-width: 615px) {
+	@media (max-width: ${(props) => props.iconBreakingPoint}) {
 		& svg {
-			width: ${(props) =>
-				props.iconLevel === "primary" ? "1.6rem" : "2.1rem"};
-			height: ${(props) =>
-				props.iconLevel === "primary" ? "1.6rem" : "2.1rem"};
+			width: ${(props) => props.iconResponsiveSize};
+			height: ${(props) => props.iconResponsiveSize};
+			/* width: 1rem;
+			height: 1rem; */
 		}
 	}
 `;

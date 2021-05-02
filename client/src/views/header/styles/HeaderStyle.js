@@ -2,35 +2,45 @@ import styled from "styled-components";
 
 export const HeaderStyle = styled.header`
 	position: relative;
-	display: flex;
-	justify-content: space-between;
-	align-items: center;
 	grid-column: 1 / 3;
 	grid-row: 1 / 2;
 	box-shadow: 0px 1px 3px 0px var(--primary-box-shadow-color);
 	padding: 0 2rem;
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	z-index: 50;
 
-	@media (max-width: 615px) {
+	@media (max-width: 600px) {
 		display: grid;
-		grid-template-columns: 1fr auto auto;
+		grid-template-columns: 1fr min-content min-content;
+		padding: 0 0.7rem;
 	}
 `;
 
-export const HeaderIconsWrapperStyle = styled.div`
+export const HeaderStart = styled.div`
 	display: flex;
 	align-items: center;
 
-	& > *:not(:first-child) {
-		margin-left: 0.5rem;
-	}
-
-	& #search-icon-element {
+	/* REVIEW: amongst the direct children, hide the first child which is the burger menu div */
+	& > *:first-child {
 		display: none;
 	}
 
-	@media (max-width: 615px) {
-		& #search-icon-element {
+	/* REVIEW: this displays the burger icon */
+	@media (max-width: 600px) {
+		& > *:first-child {
 			display: block;
+			margin-right: 0.1rem;
 		}
+	}
+`;
+
+export const HeaderEnd = styled.div`
+	display: flex;
+	align-items: center;
+
+	& > * {
+		margin-left: 0.2rem;
 	}
 `;

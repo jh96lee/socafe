@@ -1,9 +1,11 @@
 import styled from "styled-components";
 
-const FormInputStyle = styled.input.attrs(({ type, placeholder }) => ({
-	type,
-	placeholder,
-}))`
+const FormInputStyle = styled.input.attrs(
+	({ inputType, inputPlaceholder }) => ({
+		type: inputType,
+		placeholder: inputPlaceholder,
+	})
+)`
 	color: var(--primary-text-color);
 	background-color: var(--primary-input-background-color);
 	font-size: 1.37rem;

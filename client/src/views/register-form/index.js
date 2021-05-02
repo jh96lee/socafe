@@ -1,2 +1,2 @@
 export { default as RegisterForm } from "./components/RegisterForm";
-export { default as RegisterFormStep } from "./components/RegisterFormStep";
+export { default as RegisterStep } from "./components/RegisterStep";

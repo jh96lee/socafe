@@ -12,15 +12,16 @@ export const fetchToken = () => {
 	return token;
 };
 
-export const fetchPayloadAndDecode = () => {
+export const decodePayloadFromCookie = () => {
 	const cookie = document.cookie;
 
 	if (cookie) {
-		if (cookie === "undefined") {
+		// REVIEW: token could either be undefined or a legitimate token
+		const token = document.cookie.split("=")[1];
+
+		if (token === "undefined") {
 			return null;
 		} else {
-			const token = document.cookie.split("=")[1];
-
 			const jwtTokenPayload = token.split(".")[1];
 
 			const userData = window.atob(jwtTokenPayload);
@@ -30,4 +31,12 @@ export const fetchPayloadAndDecode = () => {
 	} else {
 		return null;
 	}
+};
+
+export const decodePayload = (token) => {
+	const jwtTokenPayload = token.split(".")[1];
+
+	const userData = window.atob(jwtTokenPayload);
+
+	return JSON.parse(userData);
 };

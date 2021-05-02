@@ -1,41 +1,45 @@
 import * as React from "react";
-import { Link } from "react-router-dom";
 
 import Searchbar from "./Searchbar";
 import Logo from "./Logo";
-import { Toggle } from "../../shared";
-import { DropdownMenu, IconElement } from "../../shared";
+import Avatar from "./Avatar";
+import { Toggle, IconElement } from "../../shared";
 
-import { HeaderStyle, HeaderIconsWrapperStyle } from "../styles/HeaderStyle";
-import { DropdownStyle } from "../../../styles";
+import { HeaderStyle, HeaderStart, HeaderEnd } from "../styles/HeaderStyle";
 
-import { ReactComponent as User } from "../../../assets/user.svg";
 import { ReactComponent as Sun } from "../../../assets/sun.svg";
 import { ReactComponent as Moon } from "../../../assets/moon.svg";
+import { ReactComponent as BurgerMenu } from "../../../assets/hamburger.svg";
 
-const Header = ({ isDarkMode, setIsDarkMode }) => {
+const Header = ({
+	isDarkMode,
+	setIsDarkMode,
+	setIsResponsiveNavigationOpen,
+}) => {
+	const handleOnClick = () => {
+		setIsResponsiveNavigationOpen((prevState) => !prevState);
+	};
+
 	return (
 		<HeaderStyle>
-			<Logo isDarkMode={isDarkMode} />
+			<HeaderStart>
+				<IconElement
+					iconSize="2.3rem"
+					iconRole="button"
+					iconBreakingPoint="600px"
+					iconResponsiveSize="2rem"
+					onClickEventHandler={handleOnClick}
+				>
+					<BurgerMenu />
+				</IconElement>
+
+				<Logo isDarkMode={isDarkMode} />
+			</HeaderStart>
 
 			<Searchbar />
 
-			<HeaderIconsWrapperStyle>
-				<DropdownStyle id="user-dropdown-trigger">
-					<IconElement iconRole="presentation" iconSize="2.3rem">
-						<User />
-					</IconElement>
-
-					<DropdownMenu
-						triggerID="user-dropdown-trigger"
-						dataArray={[
-							<Link to="/user/login">Login</Link>,
-							<Link to="/user/register">Register</Link>,
-						]}
-						customDropdownId="user-dropdown"
-						menuPosition="right"
-					/>
-				</DropdownStyle>
+			<HeaderEnd>
+				<Avatar />
 
 				<Toggle
 					toggleWidth="5rem"
@@ -45,7 +49,7 @@ const Header = ({ isDarkMode, setIsDarkMode }) => {
 					isToggleTrue={isDarkMode}
 					setIsToggleTrue={setIsDarkMode}
 				/>
-			</HeaderIconsWrapperStyle>
+			</HeaderEnd>
 		</HeaderStyle>
 	);
 };

@@ -1,19 +1,71 @@
 import * as React from "react";
-import { Link } from "react-router-dom";
-import { useDispatch, useSelector } from "react-redux";
-
-import { registerUser } from "../../../redux/user/userRegisterAction";
+import axios from "axios";
+import { useSelector, useDispatch } from "react-redux";
 
 import { FormInput } from "../../shared";
 
-import RegisterFormStyle from "../styles/RegisterFormStyle";
-import RegisterFormInputsWrapper from "../styles/RegisterFormInputsWrapper";
-import RegisterFormButtonStyle from "../styles/RegisterFormButtonStyle";
+import {
+	enterUserInfo,
+	registerUser,
+} from "../../../redux/register/registerAction";
+
+import styled from "styled-components";
+
+const RegisterFormStyle = styled.form`
+	& fieldset {
+		display: flex;
+		flex-direction: column;
+		border: none;
+		border-radius: 0.5rem;
+	}
+
+	& fieldset > *:not(:last-child) {
+		margin-bottom: 2.2rem;
+	}
+`;
+
+const ButtonStyle = styled.button`
+	font-size: 1.38rem;
+	letter-spacing: -0.6px;
+	padding: 1rem;
+	border: none;
+	border-radius: 0.5rem;
+	outline: none;
+	color: ${(props) =>
+		props.success
+			? "var(--success-text-color)"
+			: props.error
+			? "var(--error-text-color)"
+			: "#fff"};
+	background-color: ${(props) =>
+		props.success
+			? "var(--success-background-color)"
+			: props.error
+			? "var(--error-background-color)"
+			: "var(--primary-button-background-color)"};
+
+	&:hover {
+		cursor: pointer;
+	}
+
+	&:disabled {
+		color: #656565;
+		background-color: var(--disabled-button-background-color);
+		cursor: not-allowed;
+	}
+`;
 
 const RegisterForm = () => {
-	const { fullName, email, username, password, message } = useSelector(
-		(state) => state.userRegisterReducer
-	);
+	// REVIEW: data like basic user info and current form step and message sent from the server
+	const userRegisterRelatedData = useSelector((state) => state.registerReducer);
+
+	const {
+		fullName,
+		email,
+		username,
+		password,
+		result,
+	} = userRegisterRelatedData;
 
 	const dispatch = useDispatch();
 
@@ -23,55 +75,69 @@ const RegisterForm = () => {
 		dispatch(registerUser());
 	};
 
+	const handleOnChange = (e) => {
+		const userInfoObject = userRegisterRelatedData;
+
+		userInfoObject[e.target.name] = e.target.value;
+
+		dispatch(enterUserInfo(userInfoObject));
+	};
+
 	return (
 		<RegisterFormStyle>
-			<RegisterFormInputsWrapper>
+			<fieldset>
 				<FormInput
-					inputId="fullName"
-					inputName="full_name"
-					inputLabel="Full Name"
-					type="text"
-					placeholder="Enter full name"
-					errorMessage={message.fullName}
+					inputID={"full-name"}
+					inputLabel={"Full Name(required)"}
+					inputName={"fullName"}
+					inputType={"text"}
+					inputPlaceholder={"Enter your full name"}
+					onChangeEventHandler={handleOnChange}
+					isLabelHidden={false}
 				/>
 
 				<FormInput
-					inputId="email"
-					inputName="email"
-					inputLabel="Email"
-					type="email"
-					placeholder="Enter email"
-					errorMessage={message.email}
+					inputID={"email"}
+					inputLabel={"Email(required)"}
+					inputName={"email"}
+					inputType={"email"}
+					inputPlaceholder={"Enter your email"}
+					inputErrorMessage={result.error ? result.error.email : null}
+					onChangeEventHandler={handleOnChange}
+					isLabelHidden={false}
 				/>
 
 				<FormInput
-					inputId="username"
-					inputName="username"
-					inputLabel="Username"
-					type="text"
-					placeholder="Enter username"
-					errorMessage={message.username}
+					inputID={"username"}
+					inputLabel={"Username(required)"}
+					inputName={"username"}
+					inputType={"text"}
+					inputPlaceholder={"Enter your username"}
+					inputErrorMessage={result.error ? result.error.username : null}
+					onChangeEventHandler={handleOnChange}
+					isLabelHidden={false}
 				/>
 
 				<FormInput
-					inputId="password"
-					inputName="password"
-					inputLabel="Password"
-					type="password"
-					placeholder="Enter password"
-					errorMessage={message.password}
+					inputID={"password"}
+					inputLabel={"Password(required)"}
+					inputName={"password"}
+					inputType={"password"}
+					inputPlaceholder={"Enter your password"}
+					onChangeEventHandler={handleOnChange}
+					isLabelHidden={false}
 				/>
-			</RegisterFormInputsWrapper>
 
-			<RegisterFormButtonStyle
-				onClick={handleOnClick}
-				success={message.success}
-				disabled={!fullName || !email || !password || !username ? true : false}
-			>
-				{message.success ? message.success : "Continue"}
-			</RegisterFormButtonStyle>
-
-			<Link to="/user/login">Already have an account? Log in</Link>
+				<ButtonStyle
+					type="submit"
+					disabled={!fullName || !email || !username || !password}
+					onClick={handleOnClick}
+					success={result && result.success}
+					error={result && result.error}
+				>
+					Continue
+				</ButtonStyle>
+			</fieldset>
 		</RegisterFormStyle>
 	);
 };

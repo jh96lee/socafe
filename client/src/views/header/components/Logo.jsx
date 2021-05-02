@@ -13,7 +13,7 @@ const Logo = ({ isDarkMode }) => {
 	};
 
 	return (
-		<LogoStyle onClick={handleLogoOnClick}>
+		<LogoStyle onClick={handleLogoOnClick} id="logo">
 			{isDarkMode ? <SocafeDark /> : <SocafeLight />}
 		</LogoStyle>
 	);

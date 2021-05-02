@@ -1,10 +1,6 @@
-import { fetchPayloadAndDecode } from "../../utils/cookie";
+import { decodePayloadFromCookie } from "../../utils/cookie";
 
-const decodedUserData = fetchPayloadAndDecode();
-
-const initialState = {
-	user: decodedUserData,
-};
+const initialState = { user: decodePayloadFromCookie() };
 
 const userReducer = (state = initialState, action) => {
 	switch (action.type) {

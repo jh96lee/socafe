@@ -1,56 +1,56 @@
 import * as React from "react";
 import { useSelector } from "react-redux";
 
-import { RegisterForm, RegisterFormStep } from "../../views/register-form";
-import { CategoriesOfInterest } from "../../views/categories-of-interest";
-import { Notice } from "../../views/shared";
+import { RegisterForm, RegisterStep } from "../../views/register-form";
+import { ReactComponent as Category } from "../../assets/category.svg";
+import { PageStyle } from "../../styles";
 
-import RegisterPageContentStyle from "./RegisterPageContentStyle";
-import RegisterStepsWrapperStyle from "../../views/register-form/styles/RegisterStepsWrapperStyle";
+import styled from "styled-components";
 
-import { CgCheckO } from "react-icons/cg";
-import { AiOutlineSmile } from "react-icons/ai";
-import { IoPersonAddOutline, IoSaveOutline } from "react-icons/io5";
+const RegisterPageStyle = styled(PageStyle)`
+	display: flex;
+	flex-direction: column;
+	gap: 2rem;
+	margin: 3rem auto;
+`;
+
+const RegisterElementsWrapper = styled.div`
+	width: 35rem;
+	margin: 0 auto;
+
+	& > * {
+		margin-bottom: 2rem;
+	}
+
+	@media (max-width: 600px) {
+		width: 90%;
+	}
+`;
 
 const RegisterPage = () => {
-	const { currentRegisterStepIndex } = useSelector(
-		(state) => state.userRegisterFormReducer
+	const { currentFormStepIndex } = useSelector(
+		(state) => state.registerReducer
 	);
 
-	const registerForm = {
+	const registerPageSteps = {
 		0: {
-			view: <RegisterForm />,
-			step: { icon: <IoPersonAddOutline />, message: "User Info" },
-		},
-		1: {
-			view: <CategoriesOfInterest />,
-			step: { icon: <AiOutlineSmile />, message: "Pick Categories" },
-		},
-		2: {
-			view: (
-				<Notice
-					redirectURL="/"
-					svgColor="green"
-					message="Account Created!"
-					noticeSVG={<CgCheckO />}
-				/>
-			),
-			step: { icon: <IoSaveOutline />, message: "Done!" },
+			form: <RegisterForm />,
+			stepCTA: "Create an account",
+			stepIcon: <Category />,
 		},
 	};
 
 	return (
-		<button>
-			<CgCheckO />
-		</button>
-		// <RegisterPageContentStyle>
-		// 	<RegisterFormStep
-		// 		icon={registerForm[currentRegisterStepIndex].step.icon}
-		// 		message={registerForm[currentRegisterStepIndex].step.message}
-		// 	/>
+		<RegisterPageStyle>
+			<RegisterElementsWrapper>
+				<RegisterStep
+					stepCTA={registerPageSteps[currentFormStepIndex].stepCTA}
+					stepIcon={registerPageSteps[currentFormStepIndex].stepIcon}
+				/>
 
-		// 	{registerForm[currentRegisterStepIndex].view}
-		// </RegisterPageContentStyle>
+				{registerPageSteps[currentFormStepIndex].form}
+			</RegisterElementsWrapper>
+		</RegisterPageStyle>
 	);
 };
 

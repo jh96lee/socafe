@@ -42,7 +42,7 @@ const useShowAndHideElementOnClick = (
 		return () => {
 			document.removeEventListener("click", listener);
 		};
-	}, []);
+	}, [triggerID]);
 };
 
 export default useShowAndHideElementOnClick;

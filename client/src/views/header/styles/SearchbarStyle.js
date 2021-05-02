@@ -1,17 +1,18 @@
 import styled from "styled-components";
 
-import { FormInputStyle, DropdownStyle } from "../../../styles";
+import { DropdownStyle } from "../../../styles";
+import FormInputStyle from "../../shared/form-input/FormInputStyle";
 
 export const SearchbarDropdownStyle = styled(DropdownStyle)`
 	position: unset;
 
 	/* REVIEW: hiding icon element */
-	& > :first-child {
+	& > *:first-child {
 		display: none;
 	}
 
-	@media (max-width: 615px) {
-		& > :first-child {
+	@media (max-width: 600px) {
+		& > *:first-child {
 			display: block;
 		}
 	}
@@ -23,9 +24,8 @@ export const SearchbarStyle = styled.div`
 	display: flex;
 	align-items: center;
 	padding: 0.8rem 0;
-	border: 1px solid var(--primary-border-color);
 	border-radius: 1rem;
-	box-shadow: var(--primary-box-shadow-color) 0px 1px 4px -1px;
+	box-shadow: 0px 0px 0px 1.8px var(--primary-box-shadow-color);
 	z-index: 10;
 
 	& > :not(:last-child) {
@@ -43,7 +43,7 @@ export const SearchbarStyle = styled.div`
 		min-height: 3rem;
 	}
 
-	@media (max-width: 615px) {
+	@media (max-width: 600px) {
 		position: absolute;
 		z-index: 50;
 		display: ${(props) => (props.isResponsiveSearchbarOpen ? "grid" : "none")};
@@ -77,6 +77,7 @@ export const SearchTypeStyle = styled.div`
 `;
 
 export const SearchbarInputStyle = styled(FormInputStyle)`
+	background-color: transparent;
 	border: none;
 	width: 100%;
 	padding: 0 0.5rem;

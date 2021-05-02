@@ -6,14 +6,28 @@ const GlobalStyles = createGlobalStyle`
     :root {
         --primary-text-color: ${(props) =>
 					props.theme.isDarkMode ? "#f5f5f5" : "#000"};
+        --error-text-color: ${(props) =>
+					props.theme.isDarkMode ? "#ff6262" : "#b52525"};
+        --success-text-color: ${(props) =>
+					props.theme.isDarkMode ? "#002d02" : "#005404"};
 
         --primary-background-color: ${(props) =>
-					props.theme.isDarkMode ? "#202124" : "#fff"};
+					props.theme.isDarkMode ? "#18191d" : "#fff"};
         --secondary-background-color: ${(props) =>
 					props.theme.isDarkMode ? "" : "#fff"};
+        --error-background-color: ${(props) =>
+					props.theme.isDarkMode ? "#6f1e1e75" : "#ff5b5b4d"};
+        --success-background-color: ${(props) =>
+					props.theme.isDarkMode ? "#87fd8c9e" : "#0ed60ea8"};
 
         --primary-input-background-color: ${(props) =>
-					props.theme.isDarkMode ? "" : "#fff"};
+					props.theme.isDarkMode ? "#202229" : "#f5f5f5"};
+        
+        --primary-button-background-color: ${(props) =>
+					props.theme.isDarkMode ? "#9a5f4b" : "#a67461"};
+
+        --disabled-button-background-color: ${(props) =>
+					props.theme.isDarkMode ? "#48484854" : "#48484821"};
 
         --primary-border-color: ${(props) =>
 					props.theme.isDarkMode ? "#000" : "#dfe1e6"};
@@ -29,15 +43,15 @@ const GlobalStyles = createGlobalStyle`
 					props.theme.isDarkMode ? "#fff" : "#000"};
 
         --primary-box-shadow-color: ${(props) =>
-					props.theme.isDarkMode ? "#000" : "#d2d2d2"};
+					props.theme.isDarkMode ? "#000" : "#dfe1e6"};
+        --secondary-box-shadow-color: ${(props) =>
+					props.theme.isDarkMode ? "#cdeef6" : "#000"};
 
         --primary-clickable-background-color: ${(props) =>
 					props.theme.isDarkMode ? "#ff3157c4" : "#ff385c"};
 
         --primary-hover-clickable-background-color: ${(props) =>
 					props.theme.isDarkMode ? "#c30042" : "#ee0151"};
-        --secondary-hover-clickable-background-color: ${(props) =>
-					props.theme.isDarkMode ? "#fff" : "#fff"};
         --secondary-hover-clickable-background-color: ${(props) =>
 					props.theme.isDarkMode ? "#5a5a5a6b" : "#cacaca69"};
 
@@ -48,21 +62,6 @@ const GlobalStyles = createGlobalStyle`
         --secondary-theme-toggle-background-color: ${(props) =>
 					props.theme.isDarkMode ? "#7fa2b2" : "#04b1ff"};
         
-        --bg-2: ${(props) => (props.theme.isDarkMode ? "#0c0c0c" : "#fff4e5")};
-        --bg-err: ${(props) =>
-					props.theme.isDarkMode ? "#6f1e1e75" : "#ff5b5b4d"};
-        --bg-success: ${(props) =>
-					props.theme.isDarkMode ? "#87fd8c9e" : "#12b31299"};
-        
-        --txt-err: ${(props) =>
-					props.theme.isDarkMode ? "#ff6262" : "#b52525"};
-        --txt-success: ${(props) =>
-					props.theme.isDarkMode ? "#002d02" : "#004603"};
-
-        --btn-bg-1: ${(props) =>
-					props.theme.isDarkMode ? "#d4223aba" : "#d22828"};
-        --btn-bg-disabled: ${(props) =>
-					props.theme.isDarkMode ? "#ff00222e" : "#dd3e469c"};
     }
 
     *,
@@ -91,11 +90,13 @@ const GlobalStyles = createGlobalStyle`
 
     h3 {
         font-size: 1.9rem;
-        letter-spacing: -1.3px;
+        font-weight: 600;
+        letter-spacing: -0.9px;
     }
 
     h4 {
         font-size: 1.6rem;
+        letter-spacing: -1.2px;
     }
 
     h5 {

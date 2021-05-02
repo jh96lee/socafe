@@ -3,8 +3,8 @@ import { BrowserRouter, Switch, Route } from "react-router-dom";
 import { ThemeProvider } from "styled-components";
 import styled from "styled-components";
 
-import { RegisterPage } from "./pages";
 import { Header, Navigation } from "./views/navigation";
+import { RegisterPage } from "./pages";
 
 import GlobalStyle from "./styles/GlobalStyle";
 
@@ -16,6 +16,10 @@ const GlobalPageStyle = styled.main`
 
 function App() {
 	const [isDarkMode, setIsDarkMode] = React.useState(true);
+	const [
+		isResponsiveNavigationOpen,
+		setIsResponsiveNavigationOpen,
+	] = React.useState(false);
 
 	const themeStyleObjectCreator = (isDarkMode) => ({ isDarkMode });
 
@@ -25,16 +29,18 @@ function App() {
 
 			<BrowserRouter>
 				<GlobalPageStyle>
-					<Header isDarkMode={isDarkMode} setIsDarkMode={setIsDarkMode} />
+					<Header
+						isDarkMode={isDarkMode}
+						setIsDarkMode={setIsDarkMode}
+						setIsResponsiveNavigationOpen={setIsResponsiveNavigationOpen}
+					/>
 
-					<Navigation />
+					<Navigation isResponsiveNavigationOpen={isResponsiveNavigationOpen} />
 
 					<Switch>
 						<Route exact path="/user/register">
-							{/* <RegisterPage /> */}
+							<RegisterPage />
 						</Route>
-
-						<Route exact path="/user/login"></Route>
 					</Switch>
 				</GlobalPageStyle>
 			</BrowserRouter>

@@ -8,6 +8,9 @@ const IconElement = ({
 	iconColor,
 	iconLevel,
 	iconRole,
+	iconBreakingPoint,
+	iconResponsiveSize,
+	onClickEventHandler,
 }) => {
 	return (
 		<IconElementStyle
@@ -16,6 +19,9 @@ const IconElement = ({
 			role={iconRole}
 			tabIndex="0"
 			iconLevel={iconLevel}
+			iconBreakingPoint={iconBreakingPoint}
+			iconResponsiveSize={iconResponsiveSize}
+			onClick={onClickEventHandler}
 		>
 			{children}
 		</IconElementStyle>

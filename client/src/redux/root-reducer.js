@@ -1,12 +1,7 @@
 import { combineReducers } from "redux";
+import registerReducer from "./register/registerReducer";
 import userReducer from "./user/userReducer";
-import userRegisterReducer from "./user/userRegisterReducer";
-import userRegisterFormReducer from "./user/userRegisterFormReducer";
 
-const rootReducer = combineReducers({
-	userReducer,
-	userRegisterReducer,
-	userRegisterFormReducer,
-});
+const rootReducer = combineReducers({ registerReducer, userReducer });
 
 export default rootReducer;

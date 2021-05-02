@@ -12,7 +12,6 @@ import {
 } from "../styles/SearchbarStyle";
 import { DropdownStyle } from "../../../styles";
 
-import { ReactComponent as UpArrow } from "../../../assets/up.svg";
 import { ReactComponent as DownArrow } from "../../../assets/down.svg";
 import { ReactComponent as Search } from "../../../assets/search.svg";
 
@@ -22,11 +21,6 @@ const Searchbar = () => {
 		isResponsiveSearchbarOpen,
 		setIsResponsiveSearchbarOpen,
 	] = React.useState(false);
-	const [
-		isSearchTypeDropdownOpen,
-		setIsSearchTypeDropdownOpen,
-	] = React.useState(false);
-	const [isSearchDropdownOpen, setIsSearchDropdownOpen] = React.useState(false);
 
 	useShowAndHideElementOnClick(
 		"responsive-searchbar-trigger",
@@ -37,7 +31,12 @@ const Searchbar = () => {
 
 	return (
 		<SearchbarDropdownStyle id="responsive-searchbar-trigger">
-			<IconElement iconRole="presentation" iconSize="2.3rem">
+			<IconElement
+				iconRole="presentation"
+				iconSize="2.3rem"
+				iconBreakingPoint="600px"
+				iconResponsiveSize="2rem"
+			>
 				<Search />
 			</IconElement>
 
@@ -48,7 +47,8 @@ const Searchbar = () => {
 				<DropdownStyle id="search-type-dropdown-trigger">
 					<SearchTypeStyle>
 						{searchType}
-						{isSearchTypeDropdownOpen ? <UpArrow /> : <DownArrow />}
+
+						<DownArrow />
 					</SearchTypeStyle>
 
 					<DropdownMenu
@@ -61,7 +61,7 @@ const Searchbar = () => {
 				</DropdownStyle>
 
 				<DropdownStyle id="searchbar-dropdown-trigger">
-					<SearchbarInputStyle type="text" placeholder="Search" />
+					<SearchbarInputStyle inputTyle="text" inputPlaceholder="Search" />
 
 					<DropdownMenu
 						triggerID="searchbar-dropdown-trigger"

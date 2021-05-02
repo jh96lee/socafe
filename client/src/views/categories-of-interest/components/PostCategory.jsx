@@ -1,9 +1,6 @@
 import * as React from "react";
 import styled from "styled-components";
 
-import { IoCheckmark } from "react-icons/io5";
-import { BsPlusCircle } from "react-icons/bs";
-
 const PostCategoryStyle = styled.div`
 	display: flex;
 	justify-content: space-between;
@@ -86,7 +83,7 @@ const PostCategory = ({
 
 	return (
 		<PostCategoryStyle onClick={handlePostCategoryOnClick}>
-			<img src={postCategoryObject.category_url} />
+			{/* <img src={postCategoryObject.category_url} />
 
 			<p>{postCategoryObject.title}</p>
 
@@ -94,7 +91,7 @@ const PostCategory = ({
 				<IoCheckmark id="check-mark" />
 			) : (
 				<BsPlusCircle id="plus-circle" />
-			)}
+			)} */}
 		</PostCategoryStyle>
 	);
 };
