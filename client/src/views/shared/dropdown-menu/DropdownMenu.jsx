@@ -8,8 +8,11 @@ const DropdownMenu = ({
 	triggerID,
 	dataArray,
 	customDropdownId,
-	menuPosition,
 	menuTop,
+	menuRight,
+	menuBottom,
+	menuLeft,
+	menuWidth,
 }) => {
 	const [isOpen, setIsOpen] = React.useState(false);
 
@@ -18,8 +21,11 @@ const DropdownMenu = ({
 	return isOpen && dataArray.length > 0 ? (
 		<DropdownMenuStyle
 			id="dropdown"
-			menuPosition={menuPosition}
 			menuTop={menuTop}
+			menuRight={menuRight}
+			menuBottom={menuBottom}
+			menuLeft={menuLeft}
+			menuWidth={menuWidth}
 		>
 			{dataArray.map((element, idx) => {
 				return (

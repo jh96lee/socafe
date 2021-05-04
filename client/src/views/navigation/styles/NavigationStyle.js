@@ -7,7 +7,7 @@ export const NavigationStyle = styled.nav`
 	align-items: center;
 	background-color: var(--primary-background-color);
 	min-height: calc(100vh - 79.69px);
-	box-shadow: 1px 4px 3px 0px var(--primary-box-shadow-color);
+	box-shadow: 0px 3px 0px 1px var(--primary-box-shadow-color);
 	grid-column: 1 / 2;
 	grid-row: 2 / 3;
 

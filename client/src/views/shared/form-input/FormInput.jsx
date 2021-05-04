@@ -13,7 +13,8 @@ const FormInputStyle = styled.div`
 	}
 
 	& label {
-		display: ${(props) => (props.isLabelHidden ? "none" : "inline-block")};
+		display: ${(props) =>
+			props.inputUsage === "search" ? "none" : "inline-block"};
 		font-size: 1.37rem;
 		font-weight: 500;
 		margin-bottom: 0.5rem;
@@ -25,10 +26,19 @@ const FormInputStyle = styled.div`
 		outline: none;
 		border: none;
 		border-radius: 0.5rem;
-		padding: 1.2rem 1rem;
-		background-color: var(--primary-input-background-color);
+		padding: ${(props) =>
+			props.inputPadding ? props.inputPadding : "1.4rem 1.5rem"};
+		background-color: ${(props) =>
+			props.inputUsage === "search"
+				? "transparent"
+				: "var(--primary-input-background-color)"};
 	}
 
+	& input::placeholder {
+		font-size: 1.43rem;
+	}
+
+	/* REVIEW: for error message */
 	& p {
 		font-size: 1.33rem;
 		color: var(--error-text-color);
@@ -52,11 +62,15 @@ const FormInput = ({
 	inputPlaceholder,
 	inputErrorMessage,
 	inputWidth,
+	inputPadding,
 	onChangeEventHandler,
-	isLabelHidden,
 }) => {
 	return (
-		<FormInputStyle isLabelHidden={isLabelHidden} inputWidth={inputWidth}>
+		<FormInputStyle
+			inputUsage={inputUsage}
+			inputWidth={inputWidth}
+			inputPadding={inputPadding}
+		>
 			<label htmlFor={inputID}>{inputLabel}</label>
 			<input
 				id={inputID}

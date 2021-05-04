@@ -4,12 +4,15 @@ const IconElementStyle = styled.div`
 	position: relative;
 	display: flex;
 	align-items: center;
-	padding: 0.8rem;
+	padding: ${(props) =>
+		props.iconUsage === "search" || props.iconUsage === "contentinfo"
+			? "0.8rem"
+			: "0"};
 	outline: none;
 	border: none;
 	border-radius: 50%;
 	background-color: ${(props) =>
-		props.iconLevel === "primary"
+		props.iconUsage === "search"
 			? "var(--primary-clickable-background-color)"
 			: "transparent"};
 
@@ -23,19 +26,29 @@ const IconElementStyle = styled.div`
 	}
 
 	&:hover {
-		cursor: pointer;
+		cursor: ${(props) =>
+			props.iconUsage === "search" ||
+			props.iconUsage === "button" ||
+			props.iconUsage === "contentinfo"
+				? "pointer"
+				: "auto"};
 		background-color: ${(props) =>
-			props.iconLevel === "primary"
+			props.iconUsage === "search"
 				? "var(--primary-hover-clickable-background-color)"
-				: "var(--secondary-hover-clickable-background-color)"};
+				: props.iconUsage === "contentinfo"
+				? "var(--secondary-hover-clickable-background-color)"
+				: "none"};
+	}
+
+	&:hover > svg {
+		color: ${(props) => props.iconUsage === "button" && "#fff"};
+		fill: ${(props) => props.iconUsage === "button" && "#fff"};
 	}
 
 	@media (max-width: ${(props) => props.iconBreakingPoint}) {
 		& svg {
 			width: ${(props) => props.iconResponsiveSize};
 			height: ${(props) => props.iconResponsiveSize};
-			/* width: 1rem;
-			height: 1rem; */
 		}
 	}
 `;

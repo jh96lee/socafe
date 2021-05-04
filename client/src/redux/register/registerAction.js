@@ -51,6 +51,6 @@ export const registerUser = () => async (dispatch, getState) => {
 
 		dispatch(setRegisterResult(data));
 
-		// dispatch(formNextStep());
+		dispatch(formNextStep());
 	}
 };

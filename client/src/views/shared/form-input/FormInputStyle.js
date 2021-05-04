@@ -15,7 +15,7 @@ const FormInputStyle = styled.input.attrs(
 
 	&::placeholder {
 		color: #797979;
-		font-size: 1.37rem;
+		font-size: 1.43rem;
 		letter-spacing: -0.6px;
 	}
 `;

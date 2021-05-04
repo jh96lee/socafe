@@ -1,97 +1,81 @@
 import * as React from "react";
-import styled from "styled-components";
 
-const PostCategoryStyle = styled.div`
-	display: flex;
-	justify-content: space-between;
-	align-items: center;
-	background-color: #ffffff;
-	cursor: pointer;
-	border: 1px solid var(--primary-border-color);
-	border-radius: 3rem;
-	width: fit-content;
-	padding: 1rem;
+import {
+	PostCategoryStyle,
+	PostCategoryWrapperStyle,
+} from "../styles/PostCategoryStyle";
 
-	& img {
-		width: 5rem;
-		height: 5rem;
-		border-radius: 50%;
-		object-fit: cover;
-	}
-
-	& p {
-		color: var(--txt-1);
-		font-size: 1.5rem;
-		font-weight: 500;
-		letter-spacing: -0.7px;
-		margin: 0 1.5rem;
-	}
-
-	& svg {
-		width: 2.5rem;
-		height: 2.5rem;
-		cursor: pointer;
-	}
-
-	& #check-mark {
-		color: #0eff00;
-	}
-
-	& #plus-circle {
-		color: var(--primary-icon-color);
-	}
-`;
+import { ReactComponent as Plus } from "../../../assets/plus.svg";
+import { ReactComponent as Check } from "../../../assets/check-mark.svg";
 
 const PostCategory = ({
-	postCategoryObject,
 	selectedCategoriesArray,
 	setSelectedCategoriesArray,
+	category,
 }) => {
-	const [isPostCategorySelected, setIsPostCategorySelected] = React.useState(
-		false
-	);
+	const [isSelected, setIsSelected] = React.useState(false);
 
-	const handlePostCategoryOnClick = (e) => {
-		if (selectedCategoriesArray.length < 5) {
-			setIsPostCategorySelected((prevState) => !prevState);
-		}
-
-		if (selectedCategoriesArray.length >= 5 && isPostCategorySelected) {
-			setIsPostCategorySelected((prevState) => !prevState);
-		}
+	const handleOnClick = () => {
+		setIsSelected((prevState) => !prevState);
 	};
 
 	React.useEffect(() => {
-		if (isPostCategorySelected) {
-			const categoriesArray = [...selectedCategoriesArray];
+		if (selectedCategoriesArray.length < 5 && isSelected) {
+			const updatedSelectedCategoriesArray = [...selectedCategoriesArray];
 
-			categoriesArray.push(postCategoryObject);
+			updatedSelectedCategoriesArray.push(category);
 
-			setSelectedCategoriesArray(categoriesArray);
-		} else {
-			const categoriesArray = [...selectedCategoriesArray];
+			setSelectedCategoriesArray(updatedSelectedCategoriesArray);
+		} else if (selectedCategoriesArray.length >= 5 && isSelected) {
+			const updatedSelectedCategoriesArray = [];
 
-			const idOfCategoryToRemove = postCategoryObject.id;
+			selectedCategoriesArray.forEach((element, idx) => {
+				if (idx === 0) {
+					return;
+				} else {
+					updatedSelectedCategoriesArray.push(element);
+				}
+			});
 
-			const updatedCategoriesArray = categoriesArray.filter(
-				(category) => category.id !== idOfCategoryToRemove
+			updatedSelectedCategoriesArray.push(category);
+
+			setSelectedCategoriesArray(updatedSelectedCategoriesArray);
+		} else if (!isSelected) {
+			const updatedSelectedCategoriesArray = selectedCategoriesArray.filter(
+				(element) => {
+					return element.id !== category.id;
+				}
 			);
 
-			setSelectedCategoriesArray(updatedCategoriesArray);
+			setSelectedCategoriesArray(updatedSelectedCategoriesArray);
 		}
-	}, [isPostCategorySelected]);
+	}, [isSelected]);
+
+	React.useEffect(() => {
+		if (selectedCategoriesArray.length >= 5) {
+			const selectedCategoriesIDArray = selectedCategoriesArray.map(
+				(element) => element.id
+			);
+
+			const isIncluded = selectedCategoriesIDArray.includes(category.id);
+
+			if (!isIncluded && isSelected) {
+				setIsSelected(false);
+			} else {
+				return;
+			}
+		}
+	}, [selectedCategoriesArray]);
 
 	return (
-		<PostCategoryStyle onClick={handlePostCategoryOnClick}>
-			{/* <img src={postCategoryObject.category_url} />
+		<PostCategoryStyle onClick={handleOnClick}>
+			<img src={category.category_url} />
 
-			<p>{postCategoryObject.title}</p>
+			<PostCategoryWrapperStyle isSelected={isSelected}>
+				<h5>{category.title}</h5>
 
-			{isPostCategorySelected ? (
-				<IoCheckmark id="check-mark" />
-			) : (
-				<BsPlusCircle id="plus-circle" />
-			)} */}
+				{isSelected ? <Check id="check" /> : <Plus id="plus" />}
+			</PostCategoryWrapperStyle>
 		</PostCategoryStyle>
 	);
 };

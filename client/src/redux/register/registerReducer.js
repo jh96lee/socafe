@@ -1,5 +1,5 @@
 const initialState = {
-	currentFormStepIndex: 0,
+	currentFormStepIndex: 1,
 	fullName: "",
 	email: "",
 	username: "",

@@ -25,7 +25,7 @@ const Header = ({
 			<HeaderStart>
 				<IconElement
 					iconSize="2.3rem"
-					iconRole="button"
+					iconUsage="button"
 					iconBreakingPoint="600px"
 					iconResponsiveSize="2rem"
 					onClickEventHandler={handleOnClick}

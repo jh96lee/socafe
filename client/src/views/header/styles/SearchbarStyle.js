@@ -23,35 +23,26 @@ export const SearchbarStyle = styled.div`
 	background-color: var(--primary-background-color);
 	display: flex;
 	align-items: center;
-	padding: 0.8rem 0;
+	justify-content: space-evenly;
+	width: 32rem;
+	padding: 0.3rem 0;
 	border-radius: 1rem;
-	box-shadow: 0px 0px 0px 1.8px var(--primary-box-shadow-color);
+	box-shadow: 0px 0px 0px 1px var(--primary-box-shadow-color);
 	z-index: 10;
 
-	& > :not(:last-child) {
-		border-right: 1px solid var(--primary-border-color);
-		padding: 0 1.2rem;
-	}
-
-	& > :last-child {
-		padding: 0.6rem;
-		margin: 0 1.2rem;
-	}
-
-	/* REVIEW: all direct children will have a minimum height of 3rem */
-	& > * {
-		min-height: 3rem;
+	& > *:last-child {
+		margin: 0 1rem;
 	}
 
 	@media (max-width: 600px) {
 		position: absolute;
 		z-index: 50;
 		display: ${(props) => (props.isResponsiveSearchbarOpen ? "grid" : "none")};
-		grid-template-columns: auto 1fr auto;
-		top: 100%;
+		grid-template-columns: auto 1px 1fr 1px auto;
+		top: 103%;
 		left: 50%;
 		transform: translateX(-50%);
-		width: 99%;
+		width: 98%;
 		border-radius: 0.5rem;
 	}
 `;
@@ -60,7 +51,7 @@ export const SearchTypeStyle = styled.div`
 	display: flex;
 	align-items: center;
 	color: var(--primary-text-color);
-	font-size: 1.37rem;
+	font-size: 1.47rem;
 	margin: auto 0;
 
 	& svg {

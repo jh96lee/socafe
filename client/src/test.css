@@ -1,0 +1,45 @@
+.page {
+	min-width: 100%;
+	min-height: 100%;
+}
+
+.test {
+	display: flex;
+	align-items: center;
+	margin: 3rem;
+	color: var(--primary-text-color);
+	width: 40rem;
+	justify-content: space-evenly;
+	padding: 1rem 0;
+	background-color: blueviolet;
+}
+
+.filter {
+	font-size: 1.5rem;
+}
+
+.test > input {
+	border: none;
+	border-radius: 0.5rem;
+	padding: 1.2rem 1.5rem;
+	outline: none;
+}
+
+.test > input::placeholder {
+	font-size: 1.43rem;
+}
+
+.border {
+	border-left: 2px solid #fff;
+	height: 4.2rem;
+}
+
+.test > button {
+	padding: 1.2rem;
+}
+
+.test > button > svg {
+	/* padding: 1.2rem; */
+	width: 1.5rem;
+	height: 1.5rem;
+}

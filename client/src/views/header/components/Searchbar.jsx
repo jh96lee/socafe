@@ -2,7 +2,7 @@ import * as React from "react";
 
 import useShowAndHideElementOnClick from "../../../hooks/useShowAndHideElementOnClick";
 
-import { IconElement, DropdownMenu } from "../../shared";
+import { IconElement, DropdownMenu, FormInput } from "../../shared";
 
 import {
 	SearchbarDropdownStyle,
@@ -10,10 +10,22 @@ import {
 	SearchbarInputStyle,
 	SearchTypeStyle,
 } from "../styles/SearchbarStyle";
-import { DropdownStyle } from "../../../styles";
+import { DropdownStyle, BorderStyle } from "../../../styles";
 
 import { ReactComponent as DownArrow } from "../../../assets/down.svg";
 import { ReactComponent as Search } from "../../../assets/search.svg";
+
+import styled from "styled-components";
+
+const SearchTypeDropdownStyle = styled(DropdownStyle)`
+	position: unset;
+	padding: 1rem;
+`;
+
+const SearchbarInputDropdownStyle = styled(DropdownStyle)`
+	position: unset;
+	border-radius: 0.5rem;
+`;
 
 const Searchbar = () => {
 	const [searchType, setSearchType] = React.useState("Filter");
@@ -29,10 +41,14 @@ const Searchbar = () => {
 		false
 	);
 
+	const handleOnClick = (e) => {
+		setSearchType(e.target.textContent);
+	};
+
 	return (
 		<SearchbarDropdownStyle id="responsive-searchbar-trigger">
 			<IconElement
-				iconRole="presentation"
+				iconUsage="button"
 				iconSize="2.3rem"
 				iconBreakingPoint="600px"
 				iconResponsiveSize="2rem"
@@ -44,7 +60,7 @@ const Searchbar = () => {
 				id="searchbar"
 				isResponsiveSearchbarOpen={isResponsiveSearchbarOpen}
 			>
-				<DropdownStyle id="search-type-dropdown-trigger">
+				<SearchTypeDropdownStyle id="search-type-dropdown-trigger">
 					<SearchTypeStyle>
 						{searchType}
 
@@ -53,30 +69,49 @@ const Searchbar = () => {
 
 					<DropdownMenu
 						triggerID="search-type-dropdown-trigger"
-						dataArray={[<p>Users</p>, <p>Products</p>]}
+						dataArray={[
+							<p onClick={handleOnClick}>Users</p>,
+							<p onClick={handleOnClick}>Products</p>,
+						]}
 						customDropdownId="search-type"
-						menuTop="140%"
-						menuPosition="left"
+						menuTop="110%"
+						menuLeft="0"
 					/>
-				</DropdownStyle>
+				</SearchTypeDropdownStyle>
 
-				<DropdownStyle id="searchbar-dropdown-trigger">
-					<SearchbarInputStyle inputTyle="text" inputPlaceholder="Search" />
+				<BorderStyle borderHeight="3rem"></BorderStyle>
+
+				<SearchbarInputDropdownStyle id="searchbar-dropdown-trigger">
+					<FormInput
+						inputID="search"
+						inputPlaceholder="Search"
+						inputUsage="search"
+						inputLabel="Search"
+						inputType="text"
+						inputPadding="1rem"
+					/>
 
 					<DropdownMenu
 						triggerID="searchbar-dropdown-trigger"
-						dataArray={[<h1>Search for something</h1>]}
+						dataArray={[
+							<h4 style={{ color: "#fff", fontWeight: "500" }}>
+								Search for something
+							</h4>,
+						]}
 						customDropdownId="searchbar"
-						menuTop="140%"
-						menuPosition="left"
+						menuTop="110%"
+						menuLeft="0"
+						menuWidth="100%"
 					/>
-				</DropdownStyle>
+				</SearchbarInputDropdownStyle>
+
+				<BorderStyle borderHeight="3rem"></BorderStyle>
 
 				<IconElement
-					iconSize="1.6rem"
+					iconSize="1.4rem"
 					iconColor="#fff"
 					iconLevel="primary"
-					iconRole="button"
+					iconUsage="search"
 				>
 					<Search />
 				</IconElement>

@@ -4,7 +4,7 @@ export const HeaderStyle = styled.header`
 	position: relative;
 	grid-column: 1 / 3;
 	grid-row: 1 / 2;
-	box-shadow: 0px 1px 3px 0px var(--primary-box-shadow-color);
+	box-shadow: 0px 0px 0px 1px var(--primary-box-shadow-color);
 	padding: 0 2rem;
 	display: flex;
 	align-items: center;
@@ -14,7 +14,7 @@ export const HeaderStyle = styled.header`
 	@media (max-width: 600px) {
 		display: grid;
 		grid-template-columns: 1fr min-content min-content;
-		padding: 0 0.7rem;
+		padding: 0 1rem;
 	}
 `;
 
@@ -31,7 +31,7 @@ export const HeaderStart = styled.div`
 	@media (max-width: 600px) {
 		& > *:first-child {
 			display: block;
-			margin-right: 0.1rem;
+			margin-right: 0.7rem;
 		}
 	}
 `;
@@ -41,6 +41,6 @@ export const HeaderEnd = styled.div`
 	align-items: center;
 
 	& > * {
-		margin-left: 0.2rem;
+		margin-left: 1.4rem;
 	}
 `;

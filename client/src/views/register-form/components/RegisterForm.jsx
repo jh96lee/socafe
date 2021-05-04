@@ -1,59 +1,17 @@
 import * as React from "react";
-import axios from "axios";
 import { useSelector, useDispatch } from "react-redux";
 
 import { FormInput } from "../../shared";
 
 import {
+	RegisterFormStyle,
+	RegisterFormButtonStyle,
+} from "../styles/RegisterFormStyle";
+
+import {
 	enterUserInfo,
 	registerUser,
 } from "../../../redux/register/registerAction";
-
-import styled from "styled-components";
-
-const RegisterFormStyle = styled.form`
-	& fieldset {
-		display: flex;
-		flex-direction: column;
-		border: none;
-		border-radius: 0.5rem;
-	}
-
-	& fieldset > *:not(:last-child) {
-		margin-bottom: 2.2rem;
-	}
-`;
-
-const ButtonStyle = styled.button`
-	font-size: 1.38rem;
-	letter-spacing: -0.6px;
-	padding: 1rem;
-	border: none;
-	border-radius: 0.5rem;
-	outline: none;
-	color: ${(props) =>
-		props.success
-			? "var(--success-text-color)"
-			: props.error
-			? "var(--error-text-color)"
-			: "#fff"};
-	background-color: ${(props) =>
-		props.success
-			? "var(--success-background-color)"
-			: props.error
-			? "var(--error-background-color)"
-			: "var(--primary-button-background-color)"};
-
-	&:hover {
-		cursor: pointer;
-	}
-
-	&:disabled {
-		color: #656565;
-		background-color: var(--disabled-button-background-color);
-		cursor: not-allowed;
-	}
-`;
 
 const RegisterForm = () => {
 	// REVIEW: data like basic user info and current form step and message sent from the server
@@ -128,7 +86,7 @@ const RegisterForm = () => {
 					isLabelHidden={false}
 				/>
 
-				<ButtonStyle
+				<RegisterFormButtonStyle
 					type="submit"
 					disabled={!fullName || !email || !username || !password}
 					onClick={handleOnClick}
@@ -136,7 +94,7 @@ const RegisterForm = () => {
 					error={result && result.error}
 				>
 					Continue
-				</ButtonStyle>
+				</RegisterFormButtonStyle>
 			</fieldset>
 		</RegisterFormStyle>
 	);

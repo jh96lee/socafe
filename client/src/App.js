@@ -8,9 +8,11 @@ import { RegisterPage } from "./pages";
 
 import GlobalStyle from "./styles/GlobalStyle";
 
+import Test from "./Test";
+
 const GlobalPageStyle = styled.main`
 	display: grid;
-	grid-template-columns: 7rem auto;
+	grid-template-columns: 8rem auto;
 	grid-template-rows: 7.5rem auto;
 `;
 
@@ -38,6 +40,8 @@ function App() {
 					<Navigation isResponsiveNavigationOpen={isResponsiveNavigationOpen} />
 
 					<Switch>
+						<Route exact path="/"></Route>
+
 						<Route exact path="/user/register">
 							<RegisterPage />
 						</Route>

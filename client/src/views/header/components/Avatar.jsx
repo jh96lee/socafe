@@ -34,7 +34,7 @@ const Avatar = () => {
 				</AvatarStyle>
 			) : (
 				<IconElement
-					iconRole="presentation"
+					iconUsage="button"
 					iconSize="2.3rem"
 					iconBreakingPoint="600px"
 					iconResponsiveSize="2rem"
@@ -47,7 +47,8 @@ const Avatar = () => {
 				triggerID="user-dropdown-trigger"
 				dataArray={userDropdownDataArray}
 				customDropdownId="user-dropdown"
-				menuPosition="right"
+				menuTop="140%"
+				menuRight="0"
 			/>
 		</DropdownStyle>
 	);

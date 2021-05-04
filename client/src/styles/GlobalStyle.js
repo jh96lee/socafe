@@ -1,5 +1,7 @@
 import { createGlobalStyle } from "styled-components";
 
+// #27282d
+
 // REVIEW: we created a Global style and within it, it can access props like isDarkMode and depending on that
 // REVIEW: value, we can apply different colors
 const GlobalStyles = createGlobalStyle`
@@ -12,7 +14,7 @@ const GlobalStyles = createGlobalStyle`
 					props.theme.isDarkMode ? "#002d02" : "#005404"};
 
         --primary-background-color: ${(props) =>
-					props.theme.isDarkMode ? "#18191d" : "#fff"};
+					props.theme.isDarkMode ? "#18191d" : "#f5f5f5"};
         --secondary-background-color: ${(props) =>
 					props.theme.isDarkMode ? "" : "#fff"};
         --error-background-color: ${(props) =>
@@ -21,10 +23,7 @@ const GlobalStyles = createGlobalStyle`
 					props.theme.isDarkMode ? "#87fd8c9e" : "#0ed60ea8"};
 
         --primary-input-background-color: ${(props) =>
-					props.theme.isDarkMode ? "#202229" : "#f5f5f5"};
-        
-        --primary-button-background-color: ${(props) =>
-					props.theme.isDarkMode ? "#9a5f4b" : "#a67461"};
+					props.theme.isDarkMode ? "#202229" : "#e6e6e6"};
 
         --disabled-button-background-color: ${(props) =>
 					props.theme.isDarkMode ? "#48484854" : "#48484821"};
@@ -43,12 +42,12 @@ const GlobalStyles = createGlobalStyle`
 					props.theme.isDarkMode ? "#fff" : "#000"};
 
         --primary-box-shadow-color: ${(props) =>
-					props.theme.isDarkMode ? "#000" : "#dfe1e6"};
+					props.theme.isDarkMode ? "#2d363d" : "#c7c9cf"};
         --secondary-box-shadow-color: ${(props) =>
 					props.theme.isDarkMode ? "#cdeef6" : "#000"};
 
         --primary-clickable-background-color: ${(props) =>
-					props.theme.isDarkMode ? "#ff3157c4" : "#ff385c"};
+					props.theme.isDarkMode ? "#ec2348c4" : "#f20d37"};
 
         --primary-hover-clickable-background-color: ${(props) =>
 					props.theme.isDarkMode ? "#c30042" : "#ee0151"};
@@ -61,6 +60,8 @@ const GlobalStyles = createGlobalStyle`
 					props.theme.isDarkMode ? "#253842" : "#96ddfc"};
         --secondary-theme-toggle-background-color: ${(props) =>
 					props.theme.isDarkMode ? "#7fa2b2" : "#04b1ff"};
+
+        --green: ${(props) => (props.theme.isDarkMode ? "#00d509" : "#00a400")};
         
     }
 
@@ -85,6 +86,7 @@ const GlobalStyles = createGlobalStyle`
 
     h2 {
         font-size: 2.4rem;
+        font-weight: 600;
         letter-spacing: -1.3px;
     }
 
@@ -95,12 +97,15 @@ const GlobalStyles = createGlobalStyle`
     }
 
     h4 {
-        font-size: 1.6rem;
+        font-size: 1.64rem;
+        font-weight: 500;
         letter-spacing: -1.2px;
     }
 
     h5 {
-        font-size: 1.4rem;
+        font-size: 1.47rem;
+        letter-spacing: -0.9px;
+        font-weight: 500;
     }
 
     h6 {

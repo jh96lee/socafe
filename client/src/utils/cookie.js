@@ -7,9 +7,13 @@ export const setCookie = (key, value) => {
 export const fetchToken = () => {
 	const cookie = document.cookie;
 
-	const token = cookie.split("=")[1];
+	if (cookie) {
+		const token = cookie.split("=")[1];
 
-	return token;
+		return token;
+	} else {
+		return null;
+	}
 };
 
 export const decodePayloadFromCookie = () => {

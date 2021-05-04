@@ -18,56 +18,56 @@ const Navigation = ({ isResponsiveNavigationOpen }) => {
 	return (
 		<NavigationStyle isResponsiveNavigationOpen={isResponsiveNavigationOpen}>
 			<NavLink exact to="/">
-				<IconElement iconSize="2.3rem" iconRole="link">
+				<IconElement iconSize="2.3rem" iconUsage="contentinfo">
 					<Home />
 				</IconElement>
 				<span>Home</span>
 			</NavLink>
 
 			<NavLink exact to="/likes/:userId">
-				<IconElement iconSize="2.3rem" iconRole="link">
+				<IconElement iconSize="2.3rem" iconUsage="contentinfo">
 					<Heart />
 				</IconElement>
 				<span>Likes</span>
 			</NavLink>
 
 			<NavLink exact to="/notification">
-				<IconElement iconSize="2.3rem" iconRole="link">
+				<IconElement iconSize="2.3rem" iconUsage="contentinfo">
 					<Notificaiton />
 				</IconElement>
 				<span>Notification</span>
 			</NavLink>
 
 			<NavLink exact to="/stat/:userId">
-				<IconElement iconSize="2.3rem" iconRole="link">
+				<IconElement iconSize="2.3rem" iconUsage="contentinfo">
 					<Stats />
 				</IconElement>
 				<span>Stats</span>
 			</NavLink>
 
 			<NavLink exact to="/cart/:userId">
-				<IconElement iconSize="2.3rem" iconRole="link">
+				<IconElement iconSize="2.3rem" iconUsage="contentinfo">
 					<Cart />
 				</IconElement>
 				<span>Cart</span>
 			</NavLink>
 
 			<NavLink exact to="/explore">
-				<IconElement iconSize="2.3rem" iconRole="link">
+				<IconElement iconSize="2.3rem" iconUsage="contentinfo">
 					<Compass />
 				</IconElement>
 				<span>Explore</span>
 			</NavLink>
 
 			<NavLink exact to="/marketplace">
-				<IconElement iconSize="2.3rem" iconRole="link">
+				<IconElement iconSize="2.3rem" iconUsage="contentinfo">
 					<Marketplace />
 				</IconElement>
 				<span>Marketplace</span>
 			</NavLink>
 
 			<NavLink exact to="/feedback">
-				<IconElement iconSize="2.3rem" iconRole="link">
+				<IconElement iconSize="2.3rem" iconUsage="contentinfo">
 					<Feedback />
 				</IconElement>
 				<span>Feedback</span>
