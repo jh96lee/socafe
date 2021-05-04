@@ -1,50 +1,83 @@
 const isEmail = require("validator/lib/isEmail");
 const bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken");
+const pool = require("../pool");
 
-const UserRepo = require("../repos/userRepo");
-
+// REVIEW: validating if the user sent a valid email
 const validateEmail = (req, res, next) => {
-	const userDataObject = req.body;
-
-	const email = userDataObject.email;
+	const { email } = req.body;
 
 	const validationResult = isEmail(email);
 
 	if (validationResult) {
 		next();
 	} else {
-		res.send({ message: { email: "Invalid Email" } });
+		res.send({ error: { email: "Invalid Email" } });
 	}
 };
 
+// REVIEW: checking if the email is already in use
 const isEmailInUse = async (req, res, next) => {
-	const userDataObject = req.body;
+	const { email } = req.body;
 
-	const { email } = userDataObject;
+	try {
+		const { rows } = await pool.queryToDatabase(
+			`
+			SELECT id
+			FROM users
+			WHERE email=$1
+			`,
+			[email]
+		);
 
-	const user = await UserRepo.checkEmailInUse(email);
+		const userID = rows[0];
 
-	if (user) {
+		if (userID) {
+			res.send({
+				error: { email: "This email address is already being used" },
+			});
+		} else {
+			next();
+		}
+	} catch (error) {
 		res.send({
-			message: { email: "This email address is already being used" },
+			error: {
+				error: "There has been an while checking if the email already exists",
+			},
 		});
-	} else {
-		next();
 	}
 };
 
+// REVIEW: check if the username is already being used
 const isUsernameInUse = async (req, res, next) => {
-	const userDataObject = req.body;
+	const { username } = req.body;
 
-	const { username } = userDataObject;
+	try {
+		const { rows } = await pool.queryToDatabase(
+			`
+			SELECT id
+			FROM users
+			WHERE username=$1
+			`,
+			[username]
+		);
 
-	const user = await UserRepo.checkUsernameInUse(username);
+		const userID = rows[0];
 
-	if (user) {
-		res.send({ message: { username: "This username is already being used" } });
-	} else {
-		next();
+		if (userID) {
+			res.send({
+				error: { username: "This username is already being used" },
+			});
+		} else {
+			next();
+		}
+	} catch (error) {
+		res.send({
+			error: {
+				error:
+					"There has been an while checking if the username already exists",
+			},
+		});
 	}
 };
 
@@ -72,7 +105,7 @@ const authenticateToken = (req, res, next) => {
 	jwt.verify(clientSideToken, process.env.JWT_SECRET, (err, decoded) => {
 		if (err) {
 			res.send({
-				message: { error: "Access Denied" },
+				error: { error: "Access denied" },
 			});
 		} else {
 			req.body.decoded = decoded;

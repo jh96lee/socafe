@@ -16,7 +16,7 @@ categoryRouter.get("/post_categories", async (req, res) => {
 		res.send(rows);
 	} catch (error) {
 		res.send({
-			message: "There has been an error",
+			message: "There has been an error while fetching post categories",
 		});
 	}
 });
@@ -39,17 +39,26 @@ categoryRouter.post(
 				return categoryObject.id;
 			});
 
-			for (categoryID of categoryIDsArray) {
-				await pool.queryToDatabase(
-					`
-				INSERT INTO categories_of_interest(user_id, post_category_id)
-				VALUES ($1, $2);
-				`,
-					[user_id, categoryID]
-				);
-			}
+			try {
+				for (categoryID of categoryIDsArray) {
+					await pool.queryToDatabase(
+						`
+					INSERT INTO categories_of_interest(user_id, post_category_id)
+					VALUES ($1, $2);
+					`,
+						[user_id, categoryID]
+					);
+				}
 
-			res.end();
+				res.send({ success: { success: "Success" } });
+			} catch (error) {
+				res.send({
+					error: {
+						error:
+							"There has been an error while processing your categories of interest",
+					},
+				});
+			}
 		}
 	}
 );

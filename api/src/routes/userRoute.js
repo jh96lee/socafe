@@ -1,5 +1,6 @@
 const express = require("express");
 const bcrypt = require("bcryptjs");
+const pool = require("../pool");
 const UserRepo = require("../repos/userRepo");
 const {
 	validateEmail,
@@ -21,15 +22,22 @@ userRouter.post(
 	isUsernameInUse,
 	hashPassword,
 	async (req, res) => {
-		const userDataObject = req.body;
+		const { full_name, email, username, password } = req.body;
 
-		userDataObject.avatar_url =
-			"https://res.cloudinary.com/fullstackprojectcloud/image/upload/v1618789746/Default_Profile_Image_lmnpdi.png";
+		const avatarURL =
+			"https://res.cloudinary.com/fullstackprojectcloud/image/upload/v1619825703/Default_Profile_Image_jske9r.png";
 
 		try {
-			const user = await UserRepo.registerUser(userDataObject);
+			const { rows } = await pool.queryToDatabase(
+				`
+				INSERT INTO users(full_name, email, username, password, avatar_url)
+				VALUES($1, $2, $3, $4, $5)
+				RETURNING id, full_name, username, avatar_url;
+				`,
+				[full_name, email, username, password, avatarURL]
+			);
 
-			console.log(user);
+			const user = rows[0];
 
 			if (user) {
 				generateAndSendToken(res, {
@@ -39,11 +47,19 @@ userRouter.post(
 					avatar_url: user.avatar_url,
 				});
 			} else {
-				res.send({ message: { error: "First" } });
+				res.send({
+					error: {
+						error:
+							"There has been an error with inserting data into the database",
+					},
+				});
 			}
 		} catch (error) {
-			console.log(error);
-			res.send({ message: { error: "Catch Errorr" } });
+			res.send({
+				error: {
+					error: "There has been an error during your registration process",
+				},
+			});
 		}
 	}
 );

@@ -59,8 +59,6 @@ commentRouter.delete(
 
 		const { user_id } = await CommentRepo.fetchBasicCommentData(comment_id);
 
-		console.log(token_user_id, user_id);
-
 		if (token_user_id !== user_id) {
 			res.send({ message: "Unauthorized request" });
 		} else {
