@@ -1,6 +1,6 @@
 import axios from "axios";
 
-import { formNextStep } from "../register/registerAction";
+import { registerNextStep } from "../register/registerAction";
 
 import { fetchToken } from "../../utils/cookie";
 
@@ -51,11 +51,11 @@ export const postCategoriesOfInterest = (selectedCategoriesArray) => async (
 		type: "END_POSTING_CATEGORIES_OF_INTEREST",
 	});
 
-	const { error } = data;
+	const { success, error } = data;
 
 	if (error) {
 		return;
-	} else {
-		dispatch(formNextStep());
+	} else if (success) {
+		dispatch(registerNextStep());
 	}
 };

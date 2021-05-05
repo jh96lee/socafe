@@ -1,14 +1,13 @@
 import * as React from "react";
-import { BrowserRouter, Switch, Route } from "react-router-dom";
+import { BrowserRouter, Switch, Route, Redirect } from "react-router-dom";
+import { useSelector } from "react-redux";
 import { ThemeProvider } from "styled-components";
 import styled from "styled-components";
 
 import { Header, Navigation } from "./views/navigation";
-import { RegisterPage } from "./pages";
+import { RegisterPage, CategoryOfInterestPage, HomePage } from "./pages";
 
 import GlobalStyle from "./styles/GlobalStyle";
-
-import Test from "./Test";
 
 const GlobalPageStyle = styled.main`
 	display: grid;
@@ -25,6 +24,8 @@ function App() {
 
 	const themeStyleObjectCreator = (isDarkMode) => ({ isDarkMode });
 
+	const { user } = useSelector((state) => state.userReducer);
+
 	return (
 		<ThemeProvider theme={themeStyleObjectCreator(isDarkMode)}>
 			<GlobalStyle />
@@ -40,10 +41,16 @@ function App() {
 					<Navigation isResponsiveNavigationOpen={isResponsiveNavigationOpen} />
 
 					<Switch>
-						<Route exact path="/"></Route>
+						<Route exact path="/">
+							<HomePage />
+						</Route>
 
-						<Route exact path="/user/register">
-							<RegisterPage />
+						<Route exact path="/register">
+							{user ? <Redirect to="/" /> : <RegisterPage />}
+						</Route>
+
+						<Route exact path="/category-of-interest">
+							<CategoryOfInterestPage />
 						</Route>
 					</Switch>
 				</GlobalPageStyle>

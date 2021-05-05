@@ -1,8 +1,6 @@
 import axios from "axios";
 
-import { setUser } from "../user/userAction";
-
-import { setCookie, decodePayload } from "../../utils/cookie";
+import { setCookie } from "../../utils/cookie";
 
 export const enterUserInfo = (userInfoObject) => ({
 	type: "ENTER_USER_INFO",
@@ -14,8 +12,8 @@ export const setRegisterResult = (result) => ({
 	payload: result,
 });
 
-export const formNextStep = () => ({
-	type: "FORM_NEXT_STEP",
+export const registerNextStep = () => ({
+	type: "REGISTER_NEXT_STEP",
 });
 
 export const registerUser = () => async (dispatch, getState) => {
@@ -28,9 +26,9 @@ export const registerUser = () => async (dispatch, getState) => {
 		url: "http://localhost:8080/user/register",
 		data: {
 			full_name: fullName,
-			email: email,
-			username: username,
-			password: password,
+			email,
+			username,
+			password,
 		},
 	});
 
@@ -43,14 +41,10 @@ export const registerUser = () => async (dispatch, getState) => {
 
 		setCookie("token", token);
 
-		const decodedUserDataObject = decodePayload(token);
-
-		dispatch(setUser(decodedUserDataObject));
-
 		delete data.token;
 
 		dispatch(setRegisterResult(data));
 
-		dispatch(formNextStep());
+		dispatch(registerNextStep());
 	}
 };

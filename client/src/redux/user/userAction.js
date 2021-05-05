@@ -1,4 +1,6 @@
-export const setUser = (userInfoObject) => ({
+import { decodePayloadFromCookie } from "../../utils/cookie";
+
+export const setUser = () => ({
 	type: "SET_USER",
-	payload: userInfoObject,
+	payload: decodePayloadFromCookie(),
 });

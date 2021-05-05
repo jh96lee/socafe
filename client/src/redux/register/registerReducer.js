@@ -1,5 +1,5 @@
 const initialState = {
-	currentFormStepIndex: 1,
+	currentRegisterStepIndex: 0,
 	fullName: "",
 	email: "",
 	username: "",
@@ -20,8 +20,11 @@ const registerReducer = (state = initialState, action) => {
 				...state,
 				result: action.payload,
 			};
-		case "FORM_NEXT_STEP":
-			return { ...state, currentFormStepIndex: state.currentFormStepIndex + 1 };
+		case "REGISTER_NEXT_STEP":
+			return {
+				...state,
+				currentRegisterStepIndex: state.currentRegisterStepIndex + 1,
+			};
 		default:
 			return state;
 	}

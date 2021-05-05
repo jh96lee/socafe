@@ -9,19 +9,25 @@ export const RegisterPageStyle = styled(PageStyle)`
 
 export const RegisterElementsWrapper = styled.div`
 	width: ${(props) =>
-		props.registerStep === 0
+		props.currentRegisterStepIndex === 0
 			? "40rem"
-			: props.registerStep === 1
+			: props.currentRegisterStepIndex === 1
 			? "85%"
-			: "45rem"};
+			: "100%"};
 	margin: 3.5rem 0;
+
+	& h2 {
+		font-size: 2.6rem;
+		color: var(--primary-text-color);
+		margin-bottom: 2.2rem;
+	}
 
 	@media (max-width: 600px) {
 		width: ${(props) =>
-			props.registerStep === 0
+			props.currentRegisterStepIndex === 0
 				? "90%"
-				: props.registerStep === 1
-				? "80%"
-				: "75%"};
+				: props.currentRegisterStepIndex === 1
+				? "85%"
+				: "100%"};
 	}
 `;

@@ -23,8 +23,6 @@ const CategoriesOfInterest = () => {
 	const {
 		isCategoriesLoaded,
 		categories,
-		categoriesOfInterest,
-		isCategoriesOfInterestPosted,
 		categoriesOfInterestResult,
 	} = useSelector((state) => state.postCategoryReducer);
 
@@ -64,7 +62,7 @@ const CategoriesOfInterest = () => {
 							categoriesOfInterestResult && categoriesOfInterestResult.error
 						}
 					>
-						Continue
+						Submit
 					</CategoriesOfInterestButtonStyle>
 				</React.Fragment>
 			) : (

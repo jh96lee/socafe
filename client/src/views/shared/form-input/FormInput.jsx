@@ -15,9 +15,9 @@ const FormInputStyle = styled.div`
 	& label {
 		display: ${(props) =>
 			props.inputUsage === "search" ? "none" : "inline-block"};
-		font-size: 1.37rem;
+		font-size: 1.47rem;
 		font-weight: 500;
-		margin-bottom: 0.5rem;
+		margin-bottom: 1rem;
 	}
 
 	& input {
@@ -25,6 +25,10 @@ const FormInputStyle = styled.div`
 		width: 100%;
 		outline: none;
 		border: none;
+		box-shadow: ${(props) =>
+			props.inputUsage === "search"
+				? "none"
+				: "0 0 0 1.6px var(--secondary-box-shadow-color)"};
 		border-radius: 0.5rem;
 		padding: ${(props) =>
 			props.inputPadding ? props.inputPadding : "1.4rem 1.5rem"};
@@ -36,6 +40,10 @@ const FormInputStyle = styled.div`
 
 	& input::placeholder {
 		font-size: 1.43rem;
+		color: ${(props) =>
+			props.inputUsage === "search"
+				? "var(--secondary-placeholder-color)"
+				: "var(--primary-placeholder-color)"};
 	}
 
 	/* REVIEW: for error message */
@@ -49,7 +57,7 @@ const FormInputStyle = styled.div`
 	}
 
 	& input:focus {
-		box-shadow: 0 0 0 1.4px var(--secondary-box-shadow-color);
+		box-shadow: 0 0 0 2px var(--focus-box-shadow-color);
 	}
 `;
 

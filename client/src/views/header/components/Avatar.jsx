@@ -18,10 +18,7 @@ const Avatar = () => {
 				<Link to="/settings/:userID">Settings</Link>,
 				<p>Logout</p>,
 		  ]
-		: [
-				<Link to="/user/login">Login</Link>,
-				<Link to="/user/register">Register</Link>,
-		  ];
+		: [<Link to="/login">Login</Link>, <Link to="/register">Register</Link>];
 
 	return (
 		<DropdownStyle id="user-dropdown-trigger">

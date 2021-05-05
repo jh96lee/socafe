@@ -1,22 +1,15 @@
 import * as React from "react";
-import { useHistory } from "react-router-dom";
 
 import { NoticeStyle, NoticeButtonStyle } from "./NoticeStyle";
 
-const Notice = ({ noticeCTA, noticeIcon }) => {
-	const history = useHistory();
-
-	const handleOnClick = () => {
-		history.push("/");
-	};
-
+const Notice = ({ noticeEvent, noticeIcon, noticeCTA }) => {
 	React.useEffect(() => {
-		let redirectToHome = setTimeout(() => {
-			history.push("/");
+		let noticeTimeout = setTimeout(() => {
+			noticeEvent();
 		}, 3000);
 
 		return () => {
-			clearTimeout(redirectToHome);
+			clearTimeout(noticeTimeout);
 		};
 	}, []);
 
@@ -24,9 +17,9 @@ const Notice = ({ noticeCTA, noticeIcon }) => {
 		<NoticeStyle>
 			{noticeIcon}
 
-			<h3>{noticeCTA}</h3>
+			<h1>{noticeCTA}</h1>
 
-			<NoticeButtonStyle onClick={handleOnClick}>Go Home</NoticeButtonStyle>
+			<NoticeButtonStyle onClick={noticeEvent}>Go back home</NoticeButtonStyle>
 		</NoticeStyle>
 	);
 };

@@ -51,7 +51,6 @@ const RegisterForm = () => {
 					inputType={"text"}
 					inputPlaceholder={"Enter your full name"}
 					onChangeEventHandler={handleOnChange}
-					isLabelHidden={false}
 				/>
 
 				<FormInput
@@ -62,7 +61,6 @@ const RegisterForm = () => {
 					inputPlaceholder={"Enter your email"}
 					inputErrorMessage={result.error ? result.error.email : null}
 					onChangeEventHandler={handleOnChange}
-					isLabelHidden={false}
 				/>
 
 				<FormInput
@@ -73,7 +71,6 @@ const RegisterForm = () => {
 					inputPlaceholder={"Enter your username"}
 					inputErrorMessage={result.error ? result.error.username : null}
 					onChangeEventHandler={handleOnChange}
-					isLabelHidden={false}
 				/>
 
 				<FormInput
@@ -83,7 +80,6 @@ const RegisterForm = () => {
 					inputType={"password"}
 					inputPlaceholder={"Enter your password"}
 					onChangeEventHandler={handleOnChange}
-					isLabelHidden={false}
 				/>
 
 				<RegisterFormButtonStyle

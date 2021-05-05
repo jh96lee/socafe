@@ -8,18 +8,19 @@ export const NoticeStyle = styled.div`
 	align-items: center;
 	color: var(--primary-text-color);
 
-	& > *:not(:last-child) {
-		margin-bottom: 3rem;
+	& svg {
+		margin-top: 2rem;
+		width: 35rem;
+		height: 35rem;
 	}
 
-	& > svg {
-		width: 25rem;
-		height: 25rem;
+	& > *:not(:last-child) {
+		margin-bottom: 3rem;
 	}
 `;
 
 export const NoticeButtonStyle = styled(ButtonStyle)`
-	color: #fff;
+	width: 30rem;
 	background-color: var(--primary-clickable-background-color);
-	width: 25rem;
+	color: #fff;
 `;

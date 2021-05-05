@@ -1,7 +1,7 @@
 import * as React from "react";
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
 
-import { RegisterForm, RegisterStep } from "../../views/register-form";
+import { RegisterForm } from "../../views/register-form";
 import { CategoriesOfInterest } from "../../views/categories-of-interest";
 import { Notice } from "../../views/shared";
 
@@ -12,40 +12,51 @@ import {
 
 import { ReactComponent as Complete } from "../../assets/complete.svg";
 
+import { setUser } from "../../redux/user/userAction";
+
 const RegisterPage = () => {
-	const { currentFormStepIndex } = useSelector(
+	const dispatch = useDispatch();
+
+	const { currentRegisterStepIndex } = useSelector(
 		(state) => state.registerReducer
 	);
 
-	const registerPageSteps = {
+	// REVIEW: don't need to push user to home because when user state is set, then it will redirect to Homepage component
+	const handleNoticeEvent = () => {
+		dispatch(setUser());
+	};
+
+	const registerElements = {
 		0: {
 			form: <RegisterForm />,
-			stepCTA: "Create an account",
+			formCTA: "Create an account",
 		},
 		1: {
 			form: <CategoriesOfInterest />,
-			stepCTA: "Choose Categories of your interest ",
+			formCTA: "Choose Categories to follow",
 		},
 		2: {
 			form: (
 				<Notice
-					noticeCTA="Account successfully created!"
+					noticeCTA="Account Created!"
+					noticeEvent={handleNoticeEvent}
 					noticeIcon={<Complete />}
 				/>
 			),
-			stepCTA: "Final Step",
+			formCTA: null,
 		},
 	};
 
 	return (
 		<RegisterPageStyle>
-			<RegisterElementsWrapper registerStep={currentFormStepIndex}>
-				<RegisterStep
-					stepCTA={registerPageSteps[currentFormStepIndex].stepCTA}
-					stepIcon={registerPageSteps[currentFormStepIndex].stepIcon}
-				/>
+			<RegisterElementsWrapper
+				currentRegisterStepIndex={currentRegisterStepIndex}
+			>
+				{registerElements[currentRegisterStepIndex].formCTA ? (
+					<h2>{registerElements[currentRegisterStepIndex].formCTA}</h2>
+				) : null}
 
-				{registerPageSteps[currentFormStepIndex].form}
+				{registerElements[currentRegisterStepIndex].form}
 			</RegisterElementsWrapper>
 		</RegisterPageStyle>
 	);

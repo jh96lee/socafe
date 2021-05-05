@@ -1,7 +1,7 @@
 import styled from "styled-components";
 
 const BorderStyle = styled.div`
-	border-left: 1px solid var(--primary-box-shadow-color);
+	box-shadow: 0px 0 0px 0.8px var(--primary-box-shadow-color);
 	height: ${(props) => props.borderHeight};
 `;
 
