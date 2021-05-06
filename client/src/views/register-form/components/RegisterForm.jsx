@@ -1,15 +1,13 @@
 import * as React from "react";
+import { Link } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 
 import { FormInput } from "../../shared";
 
-import {
-	RegisterFormStyle,
-	RegisterFormButtonStyle,
-} from "../styles/RegisterFormStyle";
+import { UserFormStyle, UserFormButtonStyle } from "../../../styles";
 
 import {
-	enterUserInfo,
+	enterRegisterUserInfo,
 	registerUser,
 } from "../../../redux/register/registerAction";
 
@@ -38,11 +36,11 @@ const RegisterForm = () => {
 
 		userInfoObject[e.target.name] = e.target.value;
 
-		dispatch(enterUserInfo(userInfoObject));
+		dispatch(enterRegisterUserInfo(userInfoObject));
 	};
 
 	return (
-		<RegisterFormStyle>
+		<UserFormStyle>
 			<fieldset>
 				<FormInput
 					inputID={"full-name"}
@@ -82,7 +80,7 @@ const RegisterForm = () => {
 					onChangeEventHandler={handleOnChange}
 				/>
 
-				<RegisterFormButtonStyle
+				<UserFormButtonStyle
 					type="submit"
 					disabled={!fullName || !email || !username || !password}
 					onClick={handleOnClick}
@@ -90,9 +88,11 @@ const RegisterForm = () => {
 					error={result && result.error}
 				>
 					Continue
-				</RegisterFormButtonStyle>
+				</UserFormButtonStyle>
+
+				<Link to="/login">Already have an account? Login</Link>
 			</fieldset>
-		</RegisterFormStyle>
+		</UserFormStyle>
 	);
 };
 

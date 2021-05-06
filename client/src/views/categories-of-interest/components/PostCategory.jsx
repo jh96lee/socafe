@@ -5,8 +5,7 @@ import {
 	PostCategoryWrapperStyle,
 } from "../styles/PostCategoryStyle";
 
-import { ReactComponent as Plus } from "../../../assets/plus.svg";
-import { ReactComponent as Check } from "../../../assets/check-mark.svg";
+import { Checkmark, Plus } from "../../../assets";
 
 const PostCategory = ({
 	selectedCategoriesArray,
@@ -74,7 +73,7 @@ const PostCategory = ({
 			<PostCategoryWrapperStyle isSelected={isSelected}>
 				<h5>{category.title}</h5>
 
-				{isSelected ? <Check id="check" /> : <Plus id="plus" />}
+				{isSelected ? <Checkmark id="check" /> : <Plus id="plus" />}
 			</PostCategoryWrapperStyle>
 		</PostCategoryStyle>
 	);

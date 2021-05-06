@@ -1,23 +1,8 @@
 import styled from "styled-components";
 
-import { ButtonStyle } from "../../../styles";
+import { ButtonStyle } from "../../styles";
 
-export const RegisterFormStyle = styled.form`
-	width: 100%;
-
-	& fieldset {
-		display: flex;
-		flex-direction: column;
-		border: none;
-		border-radius: 0.5rem;
-	}
-
-	& fieldset > *:not(:last-child) {
-		margin-bottom: 2.2rem;
-	}
-`;
-
-export const RegisterFormButtonStyle = styled(ButtonStyle)`
+const UserFormButtonStyle = styled(ButtonStyle)`
 	color: ${(props) =>
 		props.success
 			? "var(--success-text-color)"
@@ -37,3 +22,5 @@ export const RegisterFormButtonStyle = styled(ButtonStyle)`
 		cursor: not-allowed;
 	}
 `;
+
+export default UserFormButtonStyle;

@@ -5,12 +5,10 @@ import { RegisterForm } from "../../views/register-form";
 import { CategoriesOfInterest } from "../../views/categories-of-interest";
 import { Notice } from "../../views/shared";
 
-import {
-	RegisterPageStyle,
-	RegisterElementsWrapper,
-} from "./RegisterPageStyle";
+import { RegisterElementsWrapper } from "./RegisterPageStyle";
+import { UserFormPageStyle } from "../../styles";
 
-import { ReactComponent as Complete } from "../../assets/complete.svg";
+import { Complete } from "../../assets";
 
 import { setUser } from "../../redux/user/userAction";
 
@@ -48,7 +46,7 @@ const RegisterPage = () => {
 	};
 
 	return (
-		<RegisterPageStyle>
+		<UserFormPageStyle>
 			<RegisterElementsWrapper
 				currentRegisterStepIndex={currentRegisterStepIndex}
 			>
@@ -58,7 +56,7 @@ const RegisterPage = () => {
 
 				{registerElements[currentRegisterStepIndex].form}
 			</RegisterElementsWrapper>
-		</RegisterPageStyle>
+		</UserFormPageStyle>
 	);
 };
 

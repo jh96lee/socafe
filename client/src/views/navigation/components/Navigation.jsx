@@ -5,14 +5,16 @@ import { IconElement } from "../../shared";
 
 import { NavigationStyle } from "../styles/NavigationStyle";
 
-import { ReactComponent as Home } from "../../../assets/home.svg";
-import { ReactComponent as Heart } from "../../../assets/heart.svg";
-import { ReactComponent as Explore } from "../../../assets/explore.svg";
-import { ReactComponent as Cart } from "../../../assets/cart.svg";
-import { ReactComponent as Marketplace } from "../../../assets/marketplace.svg";
-import { ReactComponent as Notificaiton } from "../../../assets/notification.svg";
-import { ReactComponent as Stats } from "../../../assets/stats.svg";
-import { ReactComponent as Feedback } from "../../../assets/feedback.svg";
+import {
+	Home,
+	Heart,
+	Explore,
+	Cart,
+	Marketplace,
+	Notification,
+	Stats,
+	Feedback,
+} from "../../../assets";
 
 const Navigation = ({ isResponsiveNavigationOpen }) => {
 	const iconSize = "2.3rem";
@@ -35,7 +37,7 @@ const Navigation = ({ isResponsiveNavigationOpen }) => {
 
 			<NavLink exact to="/notification">
 				<IconElement iconSize={iconSize} iconUsage="contentinfo">
-					<Notificaiton />
+					<Notification />
 				</IconElement>
 				<span>Notification</span>
 			</NavLink>

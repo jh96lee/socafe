@@ -3,3 +3,7 @@ export { default as DropdownStyle } from "./dropdown/DropdownStyle";
 export { default as PageStyle } from "./page/PageStyle";
 export { default as ButtonStyle } from "./button/ButtonStyle";
 export { default as BorderStyle } from "./border/BorderStyle";
+export { default as UserFormPageStyle } from "./user-form/UserFormPageStyle";
+export { default as UserFormPageElementsWrapperStyle } from "./user-form/UserFormPageElementsWrapperStyle";
+export { default as UserFormStyle } from "./user-form/UserFormStyle";
+export { default as UserFormButtonStyle } from "./user-form/UserFormButtonStyle";

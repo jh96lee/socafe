@@ -10,7 +10,7 @@ const initialState = {
 const registerReducer = (state = initialState, action) => {
 	switch (action.type) {
 		// REVIEW: return a whole new user info object
-		case "ENTER_USER_INFO":
+		case "ENTER_REGISTER_USER_INFO":
 			return {
 				...action.payload,
 				result: state.result,

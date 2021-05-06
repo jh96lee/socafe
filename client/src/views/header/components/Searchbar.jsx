@@ -12,8 +12,7 @@ import {
 } from "../styles/SearchbarStyle";
 import { DropdownStyle, BorderStyle } from "../../../styles";
 
-import { ReactComponent as DownArrow } from "../../../assets/down.svg";
-import { ReactComponent as Search } from "../../../assets/search.svg";
+import { Down, Search } from "../../../assets";
 
 import styled from "styled-components";
 
@@ -64,7 +63,7 @@ const Searchbar = () => {
 					<SearchTypeStyle>
 						{searchType}
 
-						<DownArrow />
+						<Down />
 					</SearchTypeStyle>
 
 					<DropdownMenu

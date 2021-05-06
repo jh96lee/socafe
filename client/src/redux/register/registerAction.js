@@ -2,8 +2,8 @@ import axios from "axios";
 
 import { setCookie } from "../../utils/cookie";
 
-export const enterUserInfo = (userInfoObject) => ({
-	type: "ENTER_USER_INFO",
+export const enterRegisterUserInfo = (userInfoObject) => ({
+	type: "ENTER_REGISTER_USER_INFO",
 	payload: userInfoObject,
 });
 

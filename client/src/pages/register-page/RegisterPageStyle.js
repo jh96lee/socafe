@@ -1,13 +1,8 @@
 import styled from "styled-components";
 
-import { PageStyle } from "../../styles";
+import { UserFormPageElementsWrapperStyle } from "../../styles";
 
-export const RegisterPageStyle = styled(PageStyle)`
-	display: flex;
-	justify-content: center;
-`;
-
-export const RegisterElementsWrapper = styled.div`
+export const RegisterElementsWrapper = styled(UserFormPageElementsWrapperStyle)`
 	width: ${(props) =>
 		props.currentRegisterStepIndex === 0
 			? "40rem"
@@ -15,12 +10,6 @@ export const RegisterElementsWrapper = styled.div`
 			? "85%"
 			: "100%"};
 	margin: 3.5rem 0;
-
-	& h2 {
-		font-size: 2.6rem;
-		color: var(--primary-text-color);
-		margin-bottom: 2.2rem;
-	}
 
 	@media (max-width: 600px) {
 		width: ${(props) =>

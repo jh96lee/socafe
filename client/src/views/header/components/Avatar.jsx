@@ -7,7 +7,7 @@ import { DropdownMenu, IconElement } from "../../shared";
 import { DropdownStyle } from "../../../styles";
 import AvatarStyle from "../styles/AvatarStyle";
 
-import { ReactComponent as User } from "../../../assets/user.svg";
+import { User } from "../../../assets";
 
 const Avatar = () => {
 	const { user } = useSelector((state) => state.userReducer);

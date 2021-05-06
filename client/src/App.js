@@ -5,7 +5,12 @@ import { ThemeProvider } from "styled-components";
 import styled from "styled-components";
 
 import { Header, Navigation } from "./views/navigation";
-import { RegisterPage, CategoryOfInterestPage, HomePage } from "./pages";
+import {
+	RegisterPage,
+	LoginPage,
+	CategoryOfInterestPage,
+	HomePage,
+} from "./pages";
 
 import GlobalStyle from "./styles/GlobalStyle";
 
@@ -47,6 +52,10 @@ function App() {
 
 						<Route exact path="/register">
 							{user ? <Redirect to="/" /> : <RegisterPage />}
+						</Route>
+
+						<Route exact path="/login">
+							{user ? <Redirect to="/" /> : <LoginPage />}
 						</Route>
 
 						<Route exact path="/category-of-interest">

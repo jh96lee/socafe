@@ -7,9 +7,7 @@ import { Toggle, IconElement } from "../../shared";
 
 import { HeaderStyle, HeaderStart, HeaderEnd } from "../styles/HeaderStyle";
 
-import { ReactComponent as Sun } from "../../../assets/sun.svg";
-import { ReactComponent as Moon } from "../../../assets/moon.svg";
-import { ReactComponent as BurgerMenu } from "../../../assets/hamburger.svg";
+import { Sun, Moon, Hamburger } from "../../../assets";
 
 const Header = ({
 	isDarkMode,
@@ -30,7 +28,7 @@ const Header = ({
 					iconResponsiveSize="2rem"
 					onClickEventHandler={handleOnClick}
 				>
-					<BurgerMenu />
+					<Hamburger />
 				</IconElement>
 
 				<Logo isDarkMode={isDarkMode} />
