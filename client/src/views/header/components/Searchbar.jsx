@@ -2,17 +2,21 @@ import * as React from "react";
 
 import useShowAndHideElementOnClick from "../../../hooks/useShowAndHideElementOnClick";
 
-import { IconElement, DropdownMenu, FormInput } from "../../shared";
+import {
+	IconElement,
+	DropdownMenu,
+	DropdownElement,
+	FormInput,
+} from "../../shared";
 
 import {
 	SearchbarDropdownStyle,
 	SearchbarStyle,
-	SearchbarInputStyle,
 	SearchTypeStyle,
 } from "../styles/SearchbarStyle";
 import { DropdownStyle, BorderStyle } from "../../../styles";
 
-import { Down, Search } from "../../../assets";
+import { Down, Search, Users, Product } from "../../../assets";
 
 import styled from "styled-components";
 
@@ -69,8 +73,16 @@ const Searchbar = () => {
 					<DropdownMenu
 						triggerID="search-type-dropdown-trigger"
 						dataArray={[
-							<p onClick={handleOnClick}>Users</p>,
-							<p onClick={handleOnClick}>Products</p>,
+							<DropdownElement
+								dropdownElementEvent={handleOnClick}
+								dropdownElementLabel="Users"
+								dropdownElementIcon={<Users />}
+							/>,
+							<DropdownElement
+								dropdownElementEvent={handleOnClick}
+								dropdownElementLabel="Products"
+								dropdownElementIcon={<Product />}
+							/>,
 						]}
 						customDropdownId="search-type"
 						menuTop="110%"

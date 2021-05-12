@@ -10,6 +10,7 @@ import {
 	LoginPage,
 	CategoryOfInterestPage,
 	HomePage,
+	AddPostPage,
 } from "./pages";
 
 import GlobalStyle from "./styles/GlobalStyle";
@@ -48,6 +49,10 @@ function App() {
 					<Switch>
 						<Route exact path="/">
 							<HomePage />
+						</Route>
+
+						<Route exact path="/add-post">
+							<AddPostPage />
 						</Route>
 
 						<Route exact path="/register">

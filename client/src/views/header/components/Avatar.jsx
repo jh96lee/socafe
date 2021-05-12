@@ -1,24 +1,46 @@
 import * as React from "react";
 import { useSelector } from "react-redux";
-import { Link } from "react-router-dom";
+import { useHistory } from "react-router-dom";
 
-import { DropdownMenu, IconElement } from "../../shared";
+import { DropdownMenu, DropdownElement, IconElement } from "../../shared";
 
 import { DropdownStyle } from "../../../styles";
 import AvatarStyle from "../styles/AvatarStyle";
 
-import { User } from "../../../assets";
+import { User, Register, Login, Logout } from "../../../assets";
 
 const Avatar = () => {
 	const { user } = useSelector((state) => state.userReducer);
 
+	const history = useHistory();
+
 	const userDropdownDataArray = user
 		? [
-				<Link to="/profile/:userID">Profile</Link>,
-				<Link to="/settings/:userID">Settings</Link>,
-				<p>Logout</p>,
+				<DropdownElement
+					dropdownElementEvent={() => {
+						history.push(`/profile/${user.id}`);
+					}}
+					dropdownElementLabel="Profile"
+					dropdownElementIcon={<User />}
+				/>,
 		  ]
-		: [<Link to="/login">Login</Link>, <Link to="/register">Register</Link>];
+		: [
+				<DropdownElement
+					dropdownElementEvent={() => {
+						history.push("/login");
+					}}
+					dropdownElementLabel="Login"
+					dropdownElementIcon={<Login />}
+				/>,
+				,
+				<DropdownElement
+					dropdownElementEvent={() => {
+						history.push("/register");
+					}}
+					dropdownElementLabel="Register"
+					dropdownElementIcon={<Register />}
+				/>,
+		  ];
 
 	return (
 		<DropdownStyle id="user-dropdown-trigger">

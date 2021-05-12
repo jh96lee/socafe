@@ -54,6 +54,7 @@ export const SearchTypeStyle = styled.div`
 	font-size: 1.47rem;
 	margin: auto 0;
 
+	/* REVIEW: this is for the down arrow icon */
 	& svg {
 		fill: var(--secondary-icon-color);
 		width: 0.8rem;

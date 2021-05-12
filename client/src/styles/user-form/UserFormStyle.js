@@ -16,9 +16,10 @@ const UserFormStyle = styled.form`
 
 	& a {
 		font-size: 1.38rem;
-		font-weight: 300;
+		letter-spacing: -0.6px;
+		font-weight: 400;
 		text-decoration: none;
-		color: #94c2f3;
+		color: ${(props) => (props.theme.isDarkMode ? "#94c2f3" : "#417bb9")};
 		margin-top: -1.3rem;
 	}
 `;

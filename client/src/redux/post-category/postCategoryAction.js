@@ -11,7 +11,7 @@ export const fetchPostCategories = () => async (dispatch) => {
 
 	const { data } = await axios({
 		method: "GET",
-		url: "http://localhost:8080/post_categories",
+		url: "http://localhost:8080/post-categories",
 	});
 
 	dispatch({
@@ -35,7 +35,7 @@ export const postCategoriesOfInterest = (selectedCategoriesArray) => async (
 
 	const { data } = await axios({
 		method: "POST",
-		url: "http://localhost:8080/post_categories/interest",
+		url: "http://localhost:8080/post-categories/interest",
 		headers: { Authorization: `Bearer ${token}` },
 		data: {
 			categories: selectedCategoriesArray,

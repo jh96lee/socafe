@@ -6,8 +6,8 @@ import DropdownMenuStyle from "./DropdownMenuStyle";
 
 const DropdownMenu = ({
 	triggerID,
+	children,
 	dataArray,
-	customDropdownId,
 	menuTop,
 	menuRight,
 	menuBottom,
@@ -18,7 +18,7 @@ const DropdownMenu = ({
 
 	useShowAndHideElementOnClick(triggerID, "dropdown", setIsOpen, true);
 
-	return isOpen && dataArray.length > 0 ? (
+	return isOpen ? (
 		<DropdownMenuStyle
 			id="dropdown"
 			menuTop={menuTop}
@@ -27,13 +27,11 @@ const DropdownMenu = ({
 			menuLeft={menuLeft}
 			menuWidth={menuWidth}
 		>
-			{dataArray.map((element, idx) => {
-				return (
-					<React.Fragment key={`${customDropdownId}__${idx}`}>
-						{element}
-					</React.Fragment>
-				);
-			})}
+			{dataArray.length > 0 ? (
+				children
+			) : (
+				<p id="dropdown-menu__no-result-message">No search result</p>
+			)}
 		</DropdownMenuStyle>
 	) : null;
 };

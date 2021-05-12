@@ -24,6 +24,10 @@ export const NavigationStyle = styled.nav`
 		color: var(--primary-icon-color);
 	}
 
+	/* & .active > div {
+		background-color: crimson;
+	} */
+
 	& .active svg {
 		fill: ${(props) => (props.theme.isDarkMode ? "#fff" : "#000")};
 	}

@@ -41,8 +41,10 @@ const IconElementStyle = styled.div`
 	}
 
 	&:hover > svg {
-		color: ${(props) => props.iconUsage === "button" && "#fff"};
-		fill: ${(props) => props.iconUsage === "button" && "#fff"};
+		color: ${(props) =>
+			props.iconUsage === "button" && "var(--primary-hover-icon-color)"};
+		fill: ${(props) =>
+			props.iconUsage === "button" && "var(--primary-hover-icon-color)"};
 	}
 
 	@media (max-width: ${(props) => props.iconBreakingPoint}) {

@@ -15,9 +15,9 @@ const LoaderStyle = styled.div`
 	height: 5rem;
 	margin: auto;
 	border: 0.7rem solid
-		${(props) => (props.theme.isDarkMode ? "#7955486e" : "#af786569")};
+		${(props) => (props.theme.isDarkMode ? "#83c0f11f" : "#af786569")};
 	border-top: 0.7rem solid
-		${(props) => (props.theme.isDarkMode ? "#ffc3ad" : "#a5705d")};
+		${(props) => (props.theme.isDarkMode ? "#6dd0ff" : "#a5705d")};
 	border-radius: 50%;
 	animation: ${spinningLoader} ease-out 2s infinite;
 	/* REVIEW: this allows smooth transition to the next phase of animation */

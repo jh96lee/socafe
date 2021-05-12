@@ -10,7 +10,10 @@ const useShowAndHideElementOnClick = (
 ) => {
 	React.useEffect(() => {
 		const listener = document.addEventListener("click", (e) => {
-			const clickedElementPathID = e.path.map((element) => element.id);
+			// REVIEW: firefox
+			const path = (e.composedPath && e.composedPath()) || e.path;
+
+			const clickedElementPathID = path.map((element) => element.id);
 
 			// REVIEW: if the path of the clicked element has the trigger element's ID but does not have the id of the element
 			// REVIEW: that means the trigger element has been clicked

@@ -68,6 +68,8 @@ const GlobalStyles = createGlobalStyle`
 					props.theme.isDarkMode ? "#c30042" : "#ee0151"};
         --secondary-hover-clickable-background-color: ${(props) =>
 					props.theme.isDarkMode ? "#5a5a5a6b" : "#cacaca69"};
+        --primary-hover-icon-color: ${(props) =>
+					props.theme.isDarkMode ? "#fff" : "#000"};
 
         --primary-toggle-background-color: ${(props) =>
 					props.theme.isDarkMode ? "#000" : "#fff"};
