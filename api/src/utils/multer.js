@@ -4,7 +4,7 @@ const path = require("path");
 
 const storage = multer.memoryStorage();
 
-// TODO: single("image") specifies to field name that multer should go to when it's looking for a file
+// TODO: single("image") specifies the field name that multer should go to when it's looking for a file
 const multerUploads = multer({ storage }).single("image");
 
 const parser = new DatauriParser();

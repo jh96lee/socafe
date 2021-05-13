@@ -64,35 +64,50 @@ userRouter.post(
 	}
 );
 
-userRouter.post("/user/login", async (req, res) => {
+userRouter.post("/user/login", validateEmail, async (req, res) => {
 	const { email, password } = req.body;
 
 	try {
-		const user = await UserRepo.checkEmailInUse(email);
+		const { rows } = await pool.queryToDatabase(
+			`
+			SELECT id, full_name, username, avatar_url, password 
+			FROM users
+			WHERE email=$1;
+			`,
+			[email]
+		);
+
+		const user = rows[0];
 
 		if (user) {
+			// REVIEW: the result variable is either true or false
 			bcrypt.compare(password, user.password, (err, result) => {
-				// TODO: if the result is true, then send token and user data
-				if (result) {
+				if (err) {
+					res.send({
+						error: {
+							error: "There has been an error while verifying your credentials",
+						},
+					});
+				} else if (result) {
 					generateAndSendToken(res, {
 						id: user.id,
 						full_name: user.full_name,
-						avatar_url: user.avatar_url,
 						username: user.username,
+						avatar_url: user.avatar_url,
 					});
-				} else {
-					res.send({
-						message: { error: "Invalid Credentials" },
-					});
+				} else if (!result) {
+					res.send({ error: { error: "Invalid Credentials" } });
 				}
 			});
-		} else {
-			res.send({
-				message: { error: "Invalid Credentials" },
-			});
+		} else if (!user) {
+			res.send({ error: { error: "Invalid Credentials" } });
 		}
 	} catch (error) {
-		res.send({ message: { error: "There has been an error" } });
+		res.send({
+			message: {
+				error: "There has been an error while verifying your credentials",
+			},
+		});
 	}
 });
 

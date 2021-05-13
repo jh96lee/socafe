@@ -4,7 +4,7 @@ const pool = require("../pool");
 
 const categoryRouter = express.Router();
 
-categoryRouter.get("/post_categories", async (req, res) => {
+categoryRouter.get("/post-categories", async (req, res) => {
 	try {
 		const { rows } = await pool.queryToDatabase(
 			`
@@ -24,7 +24,7 @@ categoryRouter.get("/post_categories", async (req, res) => {
 // REVIEW: when a user registers or goes to his or her profile and update their top of interests section
 // REVIEW: they will need to be authenticated and send an array of topics that they're interested in
 categoryRouter.post(
-	"/post_categories/interest",
+	"/post-categories/interest",
 	authenticateToken,
 	async (req, res) => {
 		const { categories, decoded } = req.body;
@@ -62,5 +62,32 @@ categoryRouter.post(
 		}
 	}
 );
+
+categoryRouter.post("/search/post-categories", async (req, res) => {
+	const { searchInput } = req.body;
+
+	const sqlLikeArray = [
+		`${searchInput}%`,
+		`%${searchInput}`,
+		`%${searchInput}%`,
+	];
+
+	const { rows } = await pool.queryToDatabase(
+		`
+		SELECT 
+		* FROM 
+		post_categories 
+		WHERE 
+		LOWER(title) LIKE $1
+		OR
+		LOWER(title) LIKE $2
+		OR
+		LOWER(title) LIKE $3;
+		`,
+		[...sqlLikeArray]
+	);
+
+	res.send(rows);
+});
 
 module.exports = categoryRouter;

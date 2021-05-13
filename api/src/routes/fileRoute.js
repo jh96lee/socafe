@@ -3,30 +3,55 @@ const { multerUploads, parseImage } = require("../utils/multer");
 const {
 	cloudinaryConfigMiddleware,
 	uploader,
-} = require("../middlewares/cloudinaryConfigMiddleware");
-
-const { authenticateToken } = require("../middlewares/userMiddleware");
+} = require("../middlewares/cloudinaryMiddleware");
 
 const fileRouter = express.Router();
 
 // TODO: middleware provides the appropriate credentials and multerUploads will check for an "image" field and upload it to memory
 fileRouter.post(
-	"/upload/file",
-	authenticateToken,
+	"/upload/image",
 	cloudinaryConfigMiddleware,
 	multerUploads,
 	async (req, res) => {
 		if (req.file) {
 			const file = parseImage(req).content;
 
-			const imageObject = await uploader.upload(file);
+			try {
+				const imageObject = await uploader.upload(file);
 
-			res.send({ url: imageObject.url });
+				res.send({
+					id: imageObject.public_id,
+					url: imageObject.url,
+				});
+			} catch (error) {
+				res.send({
+					error:
+						"There has been an error while uploading your image to the cloud",
+				});
+			}
 		} else {
 			res.send({
-				message: "There has been an error",
+				error: "The server wasn't able to receive your file",
 			});
 		}
+	}
+);
+
+fileRouter.post(
+	"/delete/image",
+	cloudinaryConfigMiddleware,
+	async (req, res) => {
+		await uploader.destroy(req.body.id, (result, error) => {
+			if (result) {
+				res.send({
+					success: "Your image has been deleted successfully",
+				});
+			} else if (error) {
+				res.send({
+					error: "There has been an error while deleting the image",
+				});
+			}
+		});
 	}
 );
 
