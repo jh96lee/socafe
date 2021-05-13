@@ -25,8 +25,6 @@ const Caption = () => {
 		const reactQuillInnerHTMLArray = reactQuillChildNodesArray.map((node) => {
 			return node.innerHTML;
 		});
-
-		console.log(reactQuillInnerHTMLArray);
 	};
 
 	return (

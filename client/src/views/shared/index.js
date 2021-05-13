@@ -9,3 +9,5 @@ export { default as Toggle } from "./toggle/Toggle";
 export { default as FormInput } from "./form-input/FormInput";
 
 export { default as Notice } from "./notice/Notice";
+
+export { default as UploadImage } from "./upload-images/components/UploadImages";

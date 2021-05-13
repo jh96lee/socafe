@@ -52,3 +52,49 @@ export const uploadImageAndSetArray =
 			);
 		}
 	};
+
+// REVIEW: id of the image to be deleted needs to be provided and the array needs to be modified needs to be provided as well
+export const deleteImageAndFilterArray =
+	(contentType, imageID) => async (dispatch) => {
+		dispatch({ type: "START_DELETING_IMAGE" });
+
+		try {
+			const { data } = await axios({
+				method: "POST",
+				url: "http://localhost:8080/delete/image",
+				data: {
+					id: imageID,
+				},
+			});
+
+			const { error, success } = data;
+
+			if (success) {
+				const actionType =
+					contentType === "post"
+						? "FILTER_UPLOADED_POST_IMAGES_ARRAY"
+						: "FILTER_UPLOADED_PRODUCT_IMAGES_ARRAY";
+
+				dispatch({
+					type: actionType,
+					payload: imageID,
+				});
+
+				dispatch(setUploadImageMessage(data));
+
+				dispatch({ type: "END_DELETING_IMAGE" });
+			} else if (error) {
+				dispatch({ type: "END_DELETING_IMAGE" });
+
+				dispatch(setUploadImageMessage(data));
+			}
+		} catch (error) {
+			dispatch({ type: "END_DELETING_IMAGE" });
+
+			dispatch(
+				setUploadImageMessage({
+					error: "There has been an error while deleting the selected image",
+				})
+			);
+		}
+	};

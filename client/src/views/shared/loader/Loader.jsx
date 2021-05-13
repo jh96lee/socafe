@@ -1,9 +1,13 @@
 import * as React from "react";
 
-import LoaderStyle from "./LoaderStyle";
+import { LoaderWrapperStyle, LoaderStyle } from "./LoaderStyle";
 
 const Loader = () => {
-	return <LoaderStyle />;
+	return (
+		<LoaderWrapperStyle>
+			<LoaderStyle />
+		</LoaderWrapperStyle>
+	);
 };
 
 export default Loader;

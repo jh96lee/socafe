@@ -21,6 +21,16 @@ const uploadImageReducer = (state = initialState, action) => {
 				...state,
 				uploadImageMessage: action.payload,
 			};
+		case "START_DELETING_IMAGE":
+			return {
+				...state,
+				isImageDeleting: true,
+			};
+		case "END_DELETING_IMAGE":
+			return {
+				...state,
+				isImageDeleting: false,
+			};
 		default:
 			return state;
 	}

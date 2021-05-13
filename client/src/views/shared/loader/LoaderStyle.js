@@ -10,7 +10,15 @@ const spinningLoader = keyframes`
     }
 `;
 
-const LoaderStyle = styled.div`
+export const LoaderWrapperStyle = styled.div`
+	display: inline-block;
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	transform: translate(-50%, -50%) !important;
+`;
+
+export const LoaderStyle = styled.div`
 	width: 5rem;
 	height: 5rem;
 	margin: auto;

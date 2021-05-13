@@ -1,51 +1,89 @@
 import * as React from "react";
+import { useSelector } from "react-redux";
 
-import { Loader } from "../../views/shared";
-import {
-	UploadImage,
-	SelectCategories,
-	Caption,
-} from "../../views/add-post-form";
+import { SelectCategories, Caption } from "../../views/add-post-form";
+import { UploadImage } from "../../views/shared";
 
 import styled from "styled-components";
 
-const AddPostPageStyle = styled.div`
-	display: flex;
-	justify-content: center;
-	width: 100%;
-	/* grid-column: 1 / 3; */
+const AddContentPageStyle = styled.div`
+	display: grid;
+	grid-template-columns: 36rem auto;
 `;
 
-const AddPostFormStyle = styled.div`
-	margin-top: 3.5rem;
-	width: 96rem;
-	/* width: 100%; */
+const AddContentFormStyle = styled.div`
+	width: 100%;
+	padding: 1.5rem 1.2rem;
+	border-right: 1px solid #000;
 
 	& > * {
 		margin-bottom: 3rem;
 	}
 `;
 
-const Message = styled.p`
-	color: ${(props) => (props.success ? "#8cff90" : "#fd8097")};
-	padding: 1.2rem 1.5rem;
-	background-color: ${(props) => (props.success ? "#4caf503b" : "#ff000033")};
+const AddContentStyle = styled.div`
+	display: flex;
+	flex-direction: column;
+	gap: 1rem;
+
+	& > h3 {
+		font-size: 2rem;
+		color: var(--primary-text-color);
+	}
+`;
+
+const MessageStyle = styled.p`
+	font-size: 1.3rem;
+	color: ${(props) =>
+		props.success
+			? props.theme.isDarkMode
+				? "#8cff90"
+				: "#0e6d12"
+			: props.theme.isDarkMode
+			? "#fd8097"
+			: "#a70202"};
+	padding: 1rem 1.2rem;
+	background-color: ${(props) =>
+		props.success
+			? props.theme.isDarkMode
+				? "#4caf503b"
+				: "#0ed60e47"
+			: props.theme.isDarkMode
+			? "#ff000033"
+			: "#ff5b5b4d"};
 	grid-column: 1 / 3;
 	border-radius: 0.5rem;
 	width: fit-content;
 `;
 
 const AddPostPage = () => {
+	const { uploadImageMessage } = useSelector(
+		(state) => state.uploadImageReducer
+	);
+
 	return (
-		<AddPostPageStyle>
-			<AddPostFormStyle>
-				<UploadImage />
+		<AddContentPageStyle>
+			<AddContentFormStyle>
+				<AddContentStyle>
+					<h3>Upload Photos</h3>
+
+					{uploadImageMessage ? (
+						<MessageStyle
+							error={uploadImageMessage.error}
+							success={uploadImageMessage.success}
+						>
+							{uploadImageMessage.error || uploadImageMessage.success}
+						</MessageStyle>
+					) : null}
+
+					<UploadImage />
+				</AddContentStyle>
 
 				<SelectCategories />
 
 				<Caption />
-			</AddPostFormStyle>
-		</AddPostPageStyle>
+			</AddContentFormStyle>
+		</AddContentPageStyle>
 	);
 };
 

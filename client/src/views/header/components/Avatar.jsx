@@ -25,21 +25,20 @@ const Avatar = () => {
 				/>,
 		  ]
 		: [
-				<DropdownElement
-					dropdownElementEvent={() => {
+				{
+					event: () => {
 						history.push("/login");
-					}}
-					dropdownElementLabel="Login"
-					dropdownElementIcon={<Login />}
-				/>,
-				,
-				<DropdownElement
-					dropdownElementEvent={() => {
+					},
+					label: "Login",
+					icon: <Login />,
+				},
+				{
+					event: () => {
 						history.push("/register");
-					}}
-					dropdownElementLabel="Register"
-					dropdownElementIcon={<Register />}
-				/>,
+					},
+					label: "Register",
+					icon: <Register />,
+				},
 		  ];
 
 	return (
@@ -68,7 +67,18 @@ const Avatar = () => {
 				customDropdownId="user-dropdown"
 				menuTop="140%"
 				menuRight="0"
-			/>
+			>
+				{userDropdownDataArray.map((data, idx) => {
+					return (
+						<DropdownElement
+							key={`avatar-dropdown-element__${idx}`}
+							dropdownElementEvent={data.event}
+							dropdownElementLabel={data.label}
+							dropdownElementIcon={data.icon}
+						/>
+					);
+				})}
+			</DropdownMenu>
 		</DropdownStyle>
 	);
 };
