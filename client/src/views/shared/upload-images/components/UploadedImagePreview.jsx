@@ -1,9 +1,7 @@
 import * as React from "react";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 
 import { deleteImageAndFilterArray } from "../../../../redux/upload-image/uploadImageAction";
-
-import { Loader } from "../../../shared";
 
 import {
 	UploadedImagePreviewStyle,

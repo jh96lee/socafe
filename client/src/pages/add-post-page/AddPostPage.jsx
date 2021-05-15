@@ -1,8 +1,8 @@
 import * as React from "react";
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
 
-import { SelectCategories, Caption } from "../../views/add-post-form";
-import { UploadImage } from "../../views/shared";
+import { Caption } from "../../views/add-post-form";
+import { UploadImage, SearchAndSelect } from "../../views/shared";
 
 import styled from "styled-components";
 
@@ -14,7 +14,7 @@ const AddContentPageStyle = styled.div`
 const AddContentFormStyle = styled.div`
 	width: 100%;
 	padding: 1.5rem 1.2rem;
-	border-right: 1px solid #000;
+	border-right: 1px solid var(--primary-box-shadow-color);
 
 	& > * {
 		margin-bottom: 3rem;
@@ -57,8 +57,10 @@ const MessageStyle = styled.p`
 `;
 
 const AddPostPage = () => {
-	const { uploadImageMessage } = useSelector(
-		(state) => state.uploadImageReducer
+	const dispatch = useDispatch();
+
+	const { selectedPostCategoriesArray, taggedPostUsersArray } = useSelector(
+		(state) => state.addPostReducer
 	);
 
 	return (
@@ -67,19 +69,19 @@ const AddPostPage = () => {
 				<AddContentStyle>
 					<h3>Upload Photos</h3>
 
-					{uploadImageMessage ? (
-						<MessageStyle
-							error={uploadImageMessage.error}
-							success={uploadImageMessage.success}
-						>
-							{uploadImageMessage.error || uploadImageMessage.success}
-						</MessageStyle>
-					) : null}
-
 					<UploadImage />
 				</AddContentStyle>
 
-				<SelectCategories />
+				<AddContentStyle>
+					<h3>Select Categories</h3>
+
+					<SearchAndSelect
+						searchAndSelectType={"post-categories"}
+						selectedValuesArray={selectedPostCategoriesArray}
+						searchAPIEndpoint={"/search/post-categories"}
+						searchResultType="SELECT_POST_CATEGORY"
+					/>
+				</AddContentStyle>
 
 				<Caption />
 			</AddContentFormStyle>

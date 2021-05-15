@@ -7,6 +7,7 @@ const initialState = {
 
 const addPostReducer = (state = initialState, action) => {
 	switch (action.type) {
+		// TODO: change the naming convention
 		case "SET_UPLOADED_POST_IMAGES_ARRAY":
 			return {
 				...state,
@@ -24,6 +25,33 @@ const addPostReducer = (state = initialState, action) => {
 						return image.id !== action.payload;
 					}
 				),
+			};
+		case "ADD_POST_CATEGORIES":
+			return {
+				...state,
+				selectedPostCategoriesArray: [
+					...state.selectedPostCategoriesArray,
+					action.payload,
+				],
+			};
+		case "REMOVE_POST_CATEGORIES":
+			return {
+				...state,
+				selectedPostCategoriesArray: state.selectedPostCategoriesArray.filter(
+					(category) => {
+						return category.id !== action.payload;
+					}
+				),
+			};
+		case "TAG_USER_ON_POST":
+			return {
+				...state,
+				taggedPostUsersArray: action.payload,
+			};
+		case "REMOVE_USER_ON_POST":
+			return {
+				...state,
+				taggedPostUsersArray: action.payload,
 			};
 		default:
 			return state;

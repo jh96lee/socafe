@@ -11,3 +11,9 @@ export { default as FormInput } from "./form-input/FormInput";
 export { default as Notice } from "./notice/Notice";
 
 export { default as UploadImage } from "./upload-images/components/UploadImages";
+
+export { default as SearchAndSelect } from "./search-and-select/components/SearchAndSelect";
+
+export { default as SearchInput } from "./search-input/SearchInput";
+
+export { default as SearchResult } from "./search-result/SearchResult";

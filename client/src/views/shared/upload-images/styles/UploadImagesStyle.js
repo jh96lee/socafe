@@ -4,8 +4,8 @@ export const UploadImagesStyle = styled.div`
 	position: relative;
 	min-width: 100%;
 	max-width: 100%;
-	background-color: ${(props) =>
-		props.theme.isDarkMode ? "#1d1f25" : "#f3f9ff"};
+	box-shadow: 0 0 0 1.6px var(--secondary-box-shadow-color);
+	background-color: var(--primary-input-background-color);
 	border-radius: 0.5rem;
 	padding: 1rem;
 	display: grid;
