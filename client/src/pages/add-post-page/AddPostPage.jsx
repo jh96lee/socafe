@@ -1,8 +1,7 @@
 import * as React from "react";
 import { useSelector, useDispatch } from "react-redux";
 
-import { Caption } from "../../views/add-post-form";
-import { UploadImage, SearchAndSelect } from "../../views/shared";
+import { UploadImage, SearchAndSelect, Caption } from "../../views/shared";
 
 import styled from "styled-components";
 
@@ -80,10 +79,27 @@ const AddPostPage = () => {
 						selectedValuesArray={selectedPostCategoriesArray}
 						searchAPIEndpoint={"/search/post-categories"}
 						searchResultType="SELECT_POST_CATEGORY"
+						searchInputPlaceholder={"Search post categories"}
 					/>
 				</AddContentStyle>
 
-				<Caption />
+				<AddContentStyle>
+					<h3>Tag Users</h3>
+
+					<SearchAndSelect
+						searchAndSelectType={"users"}
+						selectedValuesArray={taggedPostUsersArray}
+						searchAPIEndpoint={"/search/users"}
+						searchResultType="SELECT_POST_USER"
+						searchInputPlaceholder={"Search for users"}
+					/>
+				</AddContentStyle>
+
+				<AddContentStyle>
+					<h3>Caption</h3>
+
+					<Caption captionType={"caption"} />
+				</AddContentStyle>
 			</AddContentFormStyle>
 		</AddContentPageStyle>
 	);

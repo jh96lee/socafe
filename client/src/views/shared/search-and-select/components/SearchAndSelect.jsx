@@ -12,6 +12,7 @@ const SearchAndSelect = ({
 	selectedValuesArray,
 	searchAPIEndpoint,
 	searchResultType,
+	searchInputPlaceholder,
 }) => {
 	const [searchResultArray, setSearchResultArray] = React.useState([]);
 
@@ -35,6 +36,7 @@ const SearchAndSelect = ({
 				<SearchInput
 					setSearchResultArray={setSearchResultArray}
 					searchAPIEndpoint={searchAPIEndpoint}
+					searchInputPlaceholder={searchInputPlaceholder}
 				/>
 			</SearchAndSelectStyle>
 

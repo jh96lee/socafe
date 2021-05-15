@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from "react-redux";
 
 import {
 	setUploadImageMessage,
-	uploadImageAndSetArray,
+	uploadImageAndAddImage,
 } from "../../../../redux/upload-image/uploadImageAction";
 
 import {
@@ -46,7 +46,7 @@ const UploadImageButton = () => {
 			} else {
 				if (file.type === "image/png" || file.type === "image/jpeg") {
 					// REVIEW: upload image and add uploaded image to corresponding array
-					dispatch(uploadImageAndSetArray("post", file));
+					dispatch(uploadImageAndAddImage("post", file));
 				} else {
 					// REVIEW: render error message
 					dispatch(

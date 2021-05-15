@@ -1,7 +1,7 @@
 import styled from "styled-components";
 
 import { DropdownStyle } from "../../../styles";
-import FormInputStyle from "../../shared/form-input/FormInputStyle";
+import { FormInputStyle } from "../../shared/form-input/FormInputStyle";
 
 export const SearchbarDropdownStyle = styled(DropdownStyle)`
 	position: unset;
@@ -51,7 +51,8 @@ export const SearchTypeStyle = styled.div`
 	display: flex;
 	align-items: center;
 	color: var(--primary-text-color);
-	font-size: 1.47rem;
+	font-size: 1.43rem;
+	letter-spacing: -0.5px;
 	margin: auto 0;
 
 	/* REVIEW: this is for the down arrow icon */

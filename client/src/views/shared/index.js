@@ -17,3 +17,5 @@ export { default as SearchAndSelect } from "./search-and-select/components/Searc
 export { default as SearchInput } from "./search-input/SearchInput";
 
 export { default as SearchResult } from "./search-result/SearchResult";
+
+export { default as Caption } from "./caption/Caption";

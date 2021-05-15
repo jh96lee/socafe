@@ -16,13 +16,13 @@ const Avatar = () => {
 
 	const userDropdownDataArray = user
 		? [
-				<DropdownElement
-					dropdownElementEvent={() => {
-						history.push(`/profile/${user.id}`);
-					}}
-					dropdownElementLabel="Profile"
-					dropdownElementIcon={<User />}
-				/>,
+				{
+					event: () => {
+						history.push("/profile/:userID");
+					},
+					label: "Profile",
+					icon: <User />,
+				},
 		  ]
 		: [
 				{

@@ -1,7 +1,7 @@
 import * as React from "react";
 import { useDispatch } from "react-redux";
 
-import { deleteImageAndFilterArray } from "../../../../redux/upload-image/uploadImageAction";
+import { deleteImageAndRemoveImage } from "../../../../redux/upload-image/uploadImageAction";
 
 import {
 	UploadedImagePreviewStyle,
@@ -17,7 +17,7 @@ const UploadedImagePreview = ({ image }) => {
 
 	const handleRemoveIconOnClick = () => {
 		dispatch(
-			deleteImageAndFilterArray("post", uploadedImagePreviewRef.current.id)
+			deleteImageAndRemoveImage("post", uploadedImagePreviewRef.current.id)
 		);
 	};
 

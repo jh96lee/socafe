@@ -34,7 +34,10 @@ const SearchResult = ({
 			<img src={searchResult.category_url || searchResult.avatar_url} />
 
 			<SearchResultMetadataStyle>
-				<p>{searchResult.username || searchResult.title}</p>
+				<p>
+					{searchResult.username && "@"}
+					{searchResult.username || searchResult.title}
+				</p>
 
 				<span>{searchResult.full_name}</span>
 			</SearchResultMetadataStyle>

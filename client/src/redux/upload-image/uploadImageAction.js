@@ -5,7 +5,7 @@ export const setUploadImageMessage = (messageObject) => ({
 	payload: messageObject,
 });
 
-export const uploadImageAndSetArray =
+export const uploadImageAndAddImage =
 	(contentType, file) => async (dispatch) => {
 		dispatch(setUploadImageMessage(null));
 
@@ -31,9 +31,7 @@ export const uploadImageAndSetArray =
 
 			if (url) {
 				const actionType =
-					contentType === "post"
-						? "SET_UPLOADED_POST_IMAGES_ARRAY"
-						: "SET_UPLOADED_PRODUCT_IMAGES_ARRAY";
+					contentType === "post" ? "ADD_POST_IMAGE" : "ADD_PRODUCT_IMAGE";
 
 				dispatch({
 					type: actionType,
@@ -54,7 +52,7 @@ export const uploadImageAndSetArray =
 	};
 
 // REVIEW: id of the image to be deleted needs to be provided and the array needs to be modified needs to be provided as well
-export const deleteImageAndFilterArray =
+export const deleteImageAndRemoveImage =
 	(contentType, imageID) => async (dispatch) => {
 		dispatch({ type: "START_DELETING_IMAGE" });
 
@@ -71,9 +69,7 @@ export const deleteImageAndFilterArray =
 
 			if (success) {
 				const actionType =
-					contentType === "post"
-						? "FILTER_UPLOADED_POST_IMAGES_ARRAY"
-						: "FILTER_UPLOADED_PRODUCT_IMAGES_ARRAY";
+					contentType === "post" ? "REMOVE_POST_IMAGE" : "REMOVE_PRODUCT_IMAGE";
 
 				dispatch({
 					type: actionType,

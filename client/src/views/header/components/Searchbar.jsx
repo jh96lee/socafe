@@ -32,10 +32,8 @@ const SearchbarInputDropdownStyle = styled(DropdownStyle)`
 
 const Searchbar = () => {
 	const [searchType, setSearchType] = React.useState("Filter");
-	const [
-		isResponsiveSearchbarOpen,
-		setIsResponsiveSearchbarOpen,
-	] = React.useState(false);
+	const [isResponsiveSearchbarOpen, setIsResponsiveSearchbarOpen] =
+		React.useState(false);
 
 	useShowAndHideElementOnClick(
 		"responsive-searchbar-trigger",
@@ -47,6 +45,19 @@ const Searchbar = () => {
 	const handleOnClick = (e) => {
 		setSearchType(e.target.textContent);
 	};
+
+	const searchTypeDataArray = [
+		{
+			event: handleOnClick,
+			label: "Users",
+			icon: <Users />,
+		},
+		{
+			event: handleOnClick,
+			label: "Products",
+			icon: <Product />,
+		},
+	];
 
 	return (
 		<SearchbarDropdownStyle id="responsive-searchbar-trigger">
@@ -72,22 +83,22 @@ const Searchbar = () => {
 
 					<DropdownMenu
 						triggerID="search-type-dropdown-trigger"
-						dataArray={[
-							<DropdownElement
-								dropdownElementEvent={handleOnClick}
-								dropdownElementLabel="Users"
-								dropdownElementIcon={<Users />}
-							/>,
-							<DropdownElement
-								dropdownElementEvent={handleOnClick}
-								dropdownElementLabel="Products"
-								dropdownElementIcon={<Product />}
-							/>,
-						]}
+						dataArray={searchTypeDataArray}
 						customDropdownId="search-type"
 						menuTop="110%"
 						menuLeft="0"
-					/>
+					>
+						{searchTypeDataArray.map((data, idx) => {
+							return (
+								<DropdownElement
+									key={`avatar-dropdown-element__${idx}`}
+									dropdownElementEvent={data.event}
+									dropdownElementLabel={data.label}
+									dropdownElementIcon={data.icon}
+								/>
+							);
+						})}
+					</DropdownMenu>
 				</SearchTypeDropdownStyle>
 
 				<BorderStyle borderHeight="3rem"></BorderStyle>

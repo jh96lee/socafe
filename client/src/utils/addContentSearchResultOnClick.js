@@ -1,4 +1,7 @@
-import { addPostCategories } from "../redux/add-post/addPostAction";
+import {
+	addPostCategories,
+	tagUserOnPost,
+} from "../redux/add-post/addPostAction";
 
 // REVIEW: either fire off the appropriate action and add in post category, product category or user
 export const addContentSearchResultOnClick = (
@@ -16,7 +19,11 @@ export const addContentSearchResultOnClick = (
 			console.log("NO DUPS");
 		} else {
 			const addSearchResultAction =
-				searchResultType === "SELECT_POST_CATEGORY" ? addPostCategories : "";
+				searchResultType === "SELECT_POST_CATEGORY"
+					? addPostCategories
+					: searchResultType === "SELECT_POST_USER"
+					? tagUserOnPost
+					: "";
 
 			dispatch(addSearchResultAction(selectedResult));
 		}

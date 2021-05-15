@@ -3,7 +3,11 @@ import axios from "axios";
 
 import { SearchInputStyle } from "./SearchInputStyle";
 
-const SearchInput = ({ setSearchResultArray, searchAPIEndpoint }) => {
+const SearchInput = ({
+	setSearchResultArray,
+	searchAPIEndpoint,
+	searchInputPlaceholder,
+}) => {
 	const handleOnChange = async (e) => {
 		const { data } = await axios({
 			method: "POST",
@@ -16,7 +20,12 @@ const SearchInput = ({ setSearchResultArray, searchAPIEndpoint }) => {
 		setSearchResultArray(data);
 	};
 
-	return <SearchInputStyle onChange={handleOnChange} />;
+	return (
+		<SearchInputStyle
+			onChange={handleOnChange}
+			placeholder={searchInputPlaceholder}
+		/>
+	);
 };
 
 export default SearchInput;

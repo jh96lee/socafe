@@ -8,7 +8,7 @@ const initialState = {
 const addPostReducer = (state = initialState, action) => {
 	switch (action.type) {
 		// TODO: change the naming convention
-		case "SET_UPLOADED_POST_IMAGES_ARRAY":
+		case "ADD_POST_IMAGE":
 			return {
 				...state,
 				uploadedPostImagesArray: [
@@ -16,7 +16,7 @@ const addPostReducer = (state = initialState, action) => {
 					action.payload,
 				],
 			};
-		case "FILTER_UPLOADED_POST_IMAGES_ARRAY":
+		case "REMOVE_POST_IMAGE":
 			return {
 				...state,
 				// TODO: later make this a utility function
@@ -46,12 +46,19 @@ const addPostReducer = (state = initialState, action) => {
 		case "TAG_USER_ON_POST":
 			return {
 				...state,
-				taggedPostUsersArray: action.payload,
+				taggedPostUsersArray: [...state.taggedPostUsersArray, action.payload],
 			};
 		case "REMOVE_USER_ON_POST":
 			return {
 				...state,
-				taggedPostUsersArray: action.payload,
+				taggedPostUsersArray: state.taggedPostUsersArray.filter((user) => {
+					return user.id !== action.payload;
+				}),
+			};
+		case "ADD_POST_CAPTION":
+			return {
+				...state,
+				postCaptionNodesArray: action.payload,
 			};
 		default:
 			return state;
