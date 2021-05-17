@@ -153,4 +153,31 @@ userRouter.delete("/user/delete", authenticateToken, async (req, res) => {
 	}
 });
 
+userRouter.post("/search/users", async (req, res) => {
+	const { searchInput } = req.body;
+
+	const sqlLikeArray = [
+		`${searchInput}%`,
+		`%${searchInput}`,
+		`%${searchInput}%`,
+	];
+
+	const { rows } = await pool.queryToDatabase(
+		`
+		SELECT 
+		id, full_name, username, avatar_url FROM 
+		users 
+		WHERE 
+		LOWER(username) LIKE $1
+		OR
+		LOWER(username) LIKE $2
+		OR
+		LOWER(username) LIKE $3;
+		`,
+		[...sqlLikeArray]
+	);
+
+	res.send(rows);
+});
+
 module.exports = userRouter;

@@ -22,6 +22,8 @@ fileRouter.post(
 				res.send({
 					id: imageObject.public_id,
 					url: imageObject.url,
+					width: imageObject.width,
+					height: imageObject.height,
 				});
 			} catch (error) {
 				res.send({
