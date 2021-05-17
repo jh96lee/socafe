@@ -1,7 +1,9 @@
 import * as React from "react";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 
 import { deleteImageAndRemoveImage } from "../../../../redux/upload-image/uploadImageAction";
+
+import { Loader } from "../../index";
 
 import {
 	UploadedImagePreviewStyle,
@@ -13,16 +15,12 @@ import { Remove } from "../../../../assets";
 const UploadedImagePreview = ({ image }) => {
 	const dispatch = useDispatch();
 
-	const uploadedImagePreviewRef = React.useRef();
-
 	const handleRemoveIconOnClick = () => {
-		dispatch(
-			deleteImageAndRemoveImage("post", uploadedImagePreviewRef.current.id)
-		);
+		dispatch(deleteImageAndRemoveImage("post", image.id));
 	};
 
 	return (
-		<UploadedImagePreviewStyle ref={uploadedImagePreviewRef} id={image.id}>
+		<UploadedImagePreviewStyle>
 			<UploadedImageIconDivStyle onClick={handleRemoveIconOnClick}>
 				<Remove />
 			</UploadedImageIconDivStyle>

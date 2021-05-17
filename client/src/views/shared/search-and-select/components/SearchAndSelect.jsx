@@ -8,13 +8,16 @@ import { SearchAndSelectStyle } from "../styles/SearchAndSelectStyle";
 import { SearchAndSelectedStyle } from "../styles/SearchAndSelectedStyle";
 
 const SearchAndSelect = ({
-	searchAndSelectType,
+	searchAndSelectTypes,
+	searchResultTypes,
 	selectedValuesArray,
 	searchAPIEndpoint,
-	searchResultType,
 	searchInputPlaceholder,
 }) => {
 	const [searchResultArray, setSearchResultArray] = React.useState([]);
+
+	const { searchAndSelectType, searchAndSelectedActionType } =
+		searchAndSelectTypes;
 
 	return (
 		<DropdownStyle
@@ -27,7 +30,7 @@ const SearchAndSelect = ({
 							<SearchAndSelectedValue
 								key={`search-and-selected-${searchAndSelectType}-value__${idx}`}
 								selectedValue={value}
-								searchResultType={searchResultType}
+								searchAndSelectedActionType={searchAndSelectedActionType}
 							/>
 						);
 					})}
@@ -53,7 +56,7 @@ const SearchAndSelect = ({
 						<SearchResult
 							key={`search-${searchAndSelectType}-result__${idx}`}
 							searchResult={result}
-							searchResultType={searchResultType}
+							searchResultTypes={searchResultTypes}
 							selectedValuesArray={selectedValuesArray}
 						/>
 					);

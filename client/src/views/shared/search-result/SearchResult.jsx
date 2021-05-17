@@ -8,20 +8,25 @@ import {
 	SearchResultMetadataStyle,
 } from "./SearchResultStyle";
 
+// REVIEW: this component either redirects to a different url or adds the result to corresponding array via redux action
 const SearchResult = ({
 	searchResult,
-	searchResultType,
+	searchResultTypes,
 	selectedValuesArray,
 }) => {
 	const dispatch = useDispatch();
 
+	const { searchResultType, searchResultActionType } = searchResultTypes;
+
+	console.log(searchResultActionType);
+
 	const handleOnClick = () => {
-		if (searchResultType) {
+		if (searchResultType === "search-and-select") {
 			// REVIEW: this function receives searchResultType and fires off different actions which then updates the corresponding state array
 			return addContentSearchResultOnClick(
 				dispatch,
 				searchResult,
-				searchResultType,
+				searchResultActionType,
 				selectedValuesArray
 			);
 		} else {

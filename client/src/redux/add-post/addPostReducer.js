@@ -26,7 +26,7 @@ const addPostReducer = (state = initialState, action) => {
 					}
 				),
 			};
-		case "ADD_POST_CATEGORIES":
+		case "ADD_POST_CATEGORY":
 			return {
 				...state,
 				selectedPostCategoriesArray: [
@@ -34,7 +34,7 @@ const addPostReducer = (state = initialState, action) => {
 					action.payload,
 				],
 			};
-		case "REMOVE_POST_CATEGORIES":
+		case "REMOVE_POST_CATEGORY":
 			return {
 				...state,
 				selectedPostCategoriesArray: state.selectedPostCategoriesArray.filter(
@@ -43,7 +43,7 @@ const addPostReducer = (state = initialState, action) => {
 					}
 				),
 			};
-		case "TAG_USER_ON_POST":
+		case "ADD_USER_ON_POST":
 			return {
 				...state,
 				taggedPostUsersArray: [...state.taggedPostUsersArray, action.payload],

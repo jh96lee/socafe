@@ -19,3 +19,5 @@ export { default as SearchInput } from "./search-input/SearchInput";
 export { default as SearchResult } from "./search-result/SearchResult";
 
 export { default as Caption } from "./caption/Caption";
+
+export { default as Skeleton } from "./skeleton/Skeleton";

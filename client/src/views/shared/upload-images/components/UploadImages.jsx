@@ -3,6 +3,7 @@ import { useSelector } from "react-redux";
 
 import UploadImageButton from "./UploadImageButton";
 import UploadedImagePreview from "./UploadedImagePreview";
+import { Loader } from "../../index";
 
 import { UploadImagesStyle } from "../styles/UploadImagesStyle";
 
@@ -14,6 +15,10 @@ const UploadImages = () => {
 		(state) => state.addPostReducer
 	);
 
+	const { isImageUploading, isImageDeleting } = useSelector(
+		(state) => state.uploadImageReducer
+	);
+
 	// TODO: later change the naming of this variable
 	const imagesArray =
 		contentType === "post"
@@ -22,9 +27,13 @@ const UploadImages = () => {
 
 	return (
 		<UploadImagesStyle>
-			{imagesArray.map((image) => {
-				return <UploadedImagePreview key={image.id} image={image} />;
-			})}
+			{isImageDeleting || isImageUploading ? (
+				<Loader />
+			) : (
+				imagesArray.map((image) => {
+					return <UploadedImagePreview key={image.id} image={image} />;
+				})
+			)}
 
 			<UploadImageButton />
 		</UploadImagesStyle>

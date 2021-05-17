@@ -4,23 +4,26 @@ import { useDispatch } from "react-redux";
 import { SearchAndSelectedValueStyle } from "../styles/SearchAndSelectedValueStyle";
 
 import {
-	removePostCategories,
+	removePostCategory,
 	removeUserOnPost,
 } from "../../../../redux/add-post/addPostAction";
 
 import { Remove } from "../../../../assets";
 
 // REVIEW: all this component does is remove selected value from a specific array by firing off the corresponding action
-const SearchAndSelectedValue = ({ selectedValue, searchResultType }) => {
+const SearchAndSelectedValue = ({
+	selectedValue,
+	searchAndSelectedActionType,
+}) => {
 	const dispatch = useDispatch();
 
 	const selectedValueID = selectedValue.id;
 
 	const handleOnClick = () => {
 		const removeSelectedValueAction =
-			searchResultType === "SELECT_POST_CATEGORY"
-				? removePostCategories
-				: searchResultType === "SELECT_POST_USER"
+			searchAndSelectedActionType === "REMOVE_POST_CATEGORY"
+				? removePostCategory
+				: searchAndSelectedActionType === "REMOVE_USER_ON_POST"
 				? removeUserOnPost
 				: "";
 

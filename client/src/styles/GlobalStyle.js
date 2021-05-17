@@ -61,11 +61,11 @@ const GlobalStyles = createGlobalStyle`
         
         /* TODO: clickable */
         --primary-clickable-background-color: ${(props) =>
-					props.theme.isDarkMode ? "#ec2348c4" : "#f20d37"};
+					props.theme.isDarkMode ? "#ec2348c4" : "#ed143ded"};
 
         /* TODO: hover */
         --primary-hover-clickable-background-color: ${(props) =>
-					props.theme.isDarkMode ? "#c30042" : "#ee0151"};
+					props.theme.isDarkMode ? "#c30042" : "#d4054a"};
         --secondary-hover-clickable-background-color: ${(props) =>
 					props.theme.isDarkMode ? "#5a5a5a6b" : "#cacaca69"};
         --primary-hover-icon-color: ${(props) =>

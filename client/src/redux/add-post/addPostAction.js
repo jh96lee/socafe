@@ -1,15 +1,15 @@
-export const addPostCategories = (category) => ({
-	type: "ADD_POST_CATEGORIES",
+export const addPostCategory = (category) => ({
+	type: "ADD_POST_CATEGORY",
 	payload: category,
 });
 
-export const removePostCategories = (categoryID) => ({
-	type: "REMOVE_POST_CATEGORIES",
+export const removePostCategory = (categoryID) => ({
+	type: "REMOVE_POST_CATEGORY",
 	payload: categoryID,
 });
 
-export const tagUserOnPost = (user) => ({
-	type: "TAG_USER_ON_POST",
+export const addUserOnPost = (user) => ({
+	type: "ADD_USER_ON_POST",
 	payload: user,
 });
 

@@ -11,11 +11,7 @@ const spinningLoader = keyframes`
 `;
 
 export const LoaderWrapperStyle = styled.div`
-	display: inline-block;
-	position: absolute;
-	top: 50%;
-	left: 50%;
-	transform: translate(-50%, -50%) !important;
+	display: flex;
 `;
 
 export const LoaderStyle = styled.div`

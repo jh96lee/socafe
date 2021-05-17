@@ -4,6 +4,8 @@ import { ReactComponent as Plus } from "./form/plus.svg";
 
 import { ReactComponent as Up } from "./general/up.svg";
 import { ReactComponent as Down } from "./general/down.svg";
+import { ReactComponent as Right } from "./general/right.svg";
+import { ReactComponent as Left } from "./general/left.svg";
 import { ReactComponent as Sun } from "./general/sun.svg";
 import { ReactComponent as Moon } from "./general/moon.svg";
 import { ReactComponent as Remove } from "./general/remove.svg";
@@ -40,6 +42,8 @@ export {
 	Plus,
 	Up,
 	Down,
+	Right,
+	Left,
 	Sun,
 	Moon,
 	Remove,
