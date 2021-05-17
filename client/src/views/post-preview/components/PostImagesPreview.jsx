@@ -2,6 +2,7 @@ import React from "react";
 import { useSelector } from "react-redux";
 
 import { Skeleton } from "../../shared/index";
+import PostTaggedUser from "./PostTaggedUser";
 
 import {
 	PostImagesPreviewStyle,
@@ -83,6 +84,8 @@ const PostImagesPreview = () => {
 			) : (
 				<Skeleton skeletonWidth="100%" skeletonHeight="100%" />
 			)}
+
+			<PostTaggedUser />
 		</PostImagesPreviewStyle>
 	);
 };

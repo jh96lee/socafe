@@ -21,6 +21,7 @@ import { ReactComponent as Home } from "./navigation/home.svg";
 import { ReactComponent as Comment } from "./post/comment.svg";
 import { ReactComponent as Heart } from "./post/heart.svg";
 import { ReactComponent as Image } from "./post/image.svg";
+import { ReactComponent as MultipleUsers } from "./post/multiple-users.svg";
 
 import { ReactComponent as Cart } from "./product/cart.svg";
 import { ReactComponent as Marketplace } from "./product/marketplace.svg";
@@ -55,6 +56,7 @@ export {
 	Home,
 	Comment,
 	Heart,
+	MultipleUsers,
 	Image,
 	Cart,
 	Marketplace,
