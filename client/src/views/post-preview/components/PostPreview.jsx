@@ -25,13 +25,6 @@ const PostPreviewDetailsStyle = styled.div`
 `;
 
 const PostPreview = () => {
-	const {
-		uploadedPostImagesArray,
-		selectedPostCategoriesArray,
-		taggedPostUsersArray,
-		postCaptionNodesArray,
-	} = useSelector((state) => state.addPostReducer);
-
 	return (
 		<PostPreviewStyle>
 			<PostImagesPreview />

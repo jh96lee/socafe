@@ -13,15 +13,9 @@ import {
 
 const RegisterForm = () => {
 	// REVIEW: data like basic user info and current form step and message sent from the server
-	const userRegisterRelatedData = useSelector((state) => state.registerReducer);
+	const userRegisterObject = useSelector((state) => state.registerReducer);
 
-	const {
-		fullName,
-		email,
-		username,
-		password,
-		result,
-	} = userRegisterRelatedData;
+	const { fullName, email, username, password, result } = userRegisterObject;
 
 	const dispatch = useDispatch();
 
@@ -32,7 +26,7 @@ const RegisterForm = () => {
 	};
 
 	const handleOnChange = (e) => {
-		const userInfoObject = userRegisterRelatedData;
+		const userInfoObject = userRegisterObject;
 
 		userInfoObject[e.target.name] = e.target.value;
 

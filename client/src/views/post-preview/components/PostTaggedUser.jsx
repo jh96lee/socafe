@@ -11,6 +11,7 @@ import styled from "styled-components";
 
 const PostTaggedUserDropdownStyle = styled(DropdownStyle)`
 	position: absolute;
+	z-index: 10;
 	left: 7px;
 	bottom: 7px;
 `;

@@ -9,29 +9,24 @@ const GlobalStyles = createGlobalStyle`
         /* TODO: text */
         --primary-text-color: ${(props) =>
 					props.theme.isDarkMode ? "#f5f5f5" : "#000"};
+        --secondary-text-color: ${(props) =>
+					props.theme.isDarkMode ? "#bcbebf" : "#6f8b98"};
         --error-text-color: ${(props) =>
-					props.theme.isDarkMode ? "#ff6262" : "#b52525"};
+					props.theme.isDarkMode ? "#fd8097" : "#a70202"};
         --success-text-color: ${(props) =>
-					props.theme.isDarkMode ? "#002d02" : "#005404"};
+					props.theme.isDarkMode ? "#8cff90" : "#0e6d12"};
 
         /* TODO: background */
         --primary-background-color: ${(props) =>
 					props.theme.isDarkMode ? "#18191d" : "#fff"};
         --secondary-background-color: ${(props) =>
-					props.theme.isDarkMode ? "" : "#fff"};
+					props.theme.isDarkMode ? "#1d1f25" : "#f9fafb"};
         --error-background-color: ${(props) =>
-					props.theme.isDarkMode ? "#6f1e1e75" : "#ff5b5b4d"};
+					props.theme.isDarkMode ? "#ff000033" : "#ff5b5b4d"};
         --success-background-color: ${(props) =>
-					props.theme.isDarkMode ? "#87fd8c9e" : "#0ed60ea8"};
+					props.theme.isDarkMode ? "#4caf503b" : "#0ed60e47"};
 
          /* TODO: input */
-        --primary-input-background-color: ${(props) =>
-					props.theme.isDarkMode ? "#1d1f25" : "#f9fafb"};
-        --primary-placeholder-color: ${(props) =>
-					props.theme.isDarkMode ? "#bcbebf" : "#87a2af"};
-        --secondary-placeholder-color: ${(props) =>
-					props.theme.isDarkMode ? "#f5f5f5" : "#0e0e0e"};
-
         --disabled-button-background-color: ${(props) =>
 					props.theme.isDarkMode ? "#48484854" : "#48484821"};
 
@@ -51,12 +46,10 @@ const GlobalStyles = createGlobalStyle`
         --primary-active-color: ${(props) =>
 					props.theme.isDarkMode ? "#fff" : "#000"};
 
-        /* TODO: box-shadow */
-        --primary-box-shadow-color: ${(props) =>
-					props.theme.isDarkMode ? "#000" : "#d3d9e0"};
-        --secondary-box-shadow-color: ${(props) =>
+        /* TODO: border and box shadow colors */
+        --primary-separator-color: ${(props) =>
 					props.theme.isDarkMode ? "#0e0e0e" : "#deeaef"};
-        --focus-box-shadow-color: ${(props) =>
+        --focus-separator-color: ${(props) =>
 					props.theme.isDarkMode ? "#6c8a98" : "#90b8cb"};
         
         /* TODO: clickable */

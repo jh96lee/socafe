@@ -12,7 +12,9 @@ export const FormInputStyle = styled.div`
 
 	& label {
 		display: ${(props) =>
-			props.inputUsage === "search" ? "none" : "inline-block"};
+			props.inputUsage === "search" || props.inputUsage === "search-and-select"
+				? "none"
+				: "block"};
 		font-size: 1.47rem;
 		font-weight: 500;
 		margin-bottom: 1rem;
@@ -24,37 +26,27 @@ export const FormInputStyle = styled.div`
 		outline: none;
 		border: none;
 		box-shadow: ${(props) =>
-			props.inputUsage === "search"
+			props.inputUsage === "search" || props.inputUsage === "search-and-select"
 				? "none"
-				: "0 0 0 1.6px var(--secondary-box-shadow-color)"};
+				: "0 0 0 1.6px var(--primary-separator-color)"};
 		border-radius: 0.5rem;
 		padding: ${(props) =>
 			props.inputPadding ? props.inputPadding : "1.4rem 1.5rem"};
 		background-color: ${(props) =>
-			props.inputUsage === "search"
+			props.inputUsage === "search" || props.inputUsage === "search-and-select"
 				? "transparent"
-				: "var(--primary-input-background-color)"};
+				: "var(--secondary-background-color)"};
 	}
 
 	& input::placeholder {
 		font-size: 1.43rem;
 		color: ${(props) =>
 			props.inputUsage === "search"
-				? "var(--secondary-placeholder-color)"
-				: "var(--primary-placeholder-color)"};
-	}
-
-	/* REVIEW: for error message */
-	& p {
-		font-size: 1.33rem;
-		color: var(--error-text-color);
-		background-color: var(--error-background-color);
-		padding: 1rem;
-		border-radius: 0.5rem;
-		margin-top: 0.5rem;
+				? "var(--primary-text-color)"
+				: "var(--secondary-text-color)"};
 	}
 
 	& input:focus {
-		box-shadow: 0 0 0 2px var(--focus-box-shadow-color);
+		box-shadow: 0 0 0 1.6px var(--focus-separator-color);
 	}
 `;

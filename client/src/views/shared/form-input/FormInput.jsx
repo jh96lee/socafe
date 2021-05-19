@@ -9,7 +9,6 @@ const FormInput = ({
 	inputName,
 	inputType,
 	inputPlaceholder,
-	inputErrorMessage,
 	inputWidth,
 	inputPadding,
 	onChangeEventHandler,
@@ -28,9 +27,6 @@ const FormInput = ({
 				placeholder={inputPlaceholder}
 				onChange={onChangeEventHandler}
 			/>
-			{inputUsage === "search" || !inputErrorMessage ? null : (
-				<p>{inputErrorMessage}</p>
-			)}
 		</FormInputStyle>
 	);
 };

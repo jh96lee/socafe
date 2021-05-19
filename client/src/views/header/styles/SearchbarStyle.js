@@ -27,7 +27,7 @@ export const SearchbarStyle = styled.div`
 	width: 32rem;
 	padding: 0.3rem 0;
 	border-radius: 2rem;
-	box-shadow: 0px 0px 1.5px 1.5px var(--primary-box-shadow-color);
+	box-shadow: 0px 0px 1.5px 1.5px var(--primary-separator-color);
 	z-index: 10;
 
 	& > *:last-child {

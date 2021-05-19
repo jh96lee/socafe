@@ -8,7 +8,7 @@ export const AddContentPageStyle = styled.div`
 export const AddContentFormStyle = styled.div`
 	width: 100%;
 	padding: 1.5rem 1.2rem;
-	box-shadow: 0px 3px 0px 1.6px var(--primary-box-shadow-color);
+	box-shadow: 0px 3px 0px 1.6px var(--primary-separator-color);
 
 	& > * {
 		margin-bottom: 3rem;

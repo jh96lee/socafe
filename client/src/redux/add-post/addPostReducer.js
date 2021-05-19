@@ -3,11 +3,12 @@ const initialState = {
 	selectedPostCategoriesArray: [],
 	taggedPostUsersArray: [],
 	postCaptionNodesArray: [],
+	// REVIEW: this property's value will be an object
+	addPostMessage: null,
 };
 
 const addPostReducer = (state = initialState, action) => {
 	switch (action.type) {
-		// TODO: change the naming convention
 		case "ADD_POST_IMAGE":
 			return {
 				...state,
@@ -59,6 +60,11 @@ const addPostReducer = (state = initialState, action) => {
 			return {
 				...state,
 				postCaptionNodesArray: action.payload,
+			};
+		case "SET_ADD_POST_MESSAGE":
+			return {
+				...state,
+				addPostMessage: action.payload,
 			};
 		default:
 			return state;

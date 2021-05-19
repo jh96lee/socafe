@@ -26,7 +26,9 @@ const LoginForm = () => {
 		dispatch(enterLoginUserInfo(userInfoObject));
 	};
 
-	const handleOnClick = () => {
+	const handleOnClick = (e) => {
+		e.preventDefault();
+
 		dispatch(loginUser());
 	};
 

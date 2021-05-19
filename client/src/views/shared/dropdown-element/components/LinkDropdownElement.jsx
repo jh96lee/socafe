@@ -2,7 +2,7 @@ import * as React from "react";
 
 import styled from "styled-components";
 
-const DropdownElementStyle = styled.div`
+const LinkDropdownElementStyle = styled.div`
 	display: flex;
 	align-items: center;
 	color: var(--primary-text-color);
@@ -19,7 +19,7 @@ const DropdownElementStyle = styled.div`
 	}
 `;
 
-const DropdownElementIconStyle = styled.div`
+const LinkDropdownElementIconStyle = styled.div`
 	padding: 0.8rem;
 	background-color: ${(props) =>
 		props.theme.isDarkMode ? "#607d8b2e" : "#2562802b"};
@@ -33,18 +33,14 @@ const DropdownElementIconStyle = styled.div`
 	}
 `;
 
-const DropdownElement = ({
-	dropdownElementIcon,
-	dropdownElementLabel,
-	dropdownElementEvent,
-}) => {
+const LinkDropdownElement = ({ icon, label, onClickEventHandler }) => {
 	return (
-		<DropdownElementStyle onClick={dropdownElementEvent}>
-			<DropdownElementIconStyle>{dropdownElementIcon}</DropdownElementIconStyle>
+		<LinkDropdownElementStyle onClick={onClickEventHandler}>
+			<LinkDropdownElementIconStyle>{icon}</LinkDropdownElementIconStyle>
 
-			<span>{dropdownElementLabel}</span>
-		</DropdownElementStyle>
+			<span>{label}</span>
+		</LinkDropdownElementStyle>
 	);
 };
 
-export default DropdownElement;
+export default LinkDropdownElement;

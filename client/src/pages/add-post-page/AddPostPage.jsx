@@ -5,6 +5,11 @@ import { UploadImage, SearchAndSelect, Caption } from "../../views/shared";
 import { PostPreview } from "../../views/post-preview";
 
 import {
+	removePostCategory,
+	removeUserOnPost,
+} from "../../redux/add-post/addPostAction";
+
+import {
 	AddContentPageStyle,
 	AddContentFormStyle,
 	AddContentStyle,
@@ -27,38 +32,42 @@ const AddPostPage = () => {
 				<AddContentStyle>
 					<h3>Select Categories</h3>
 
+					{/* REVIEW: SearchAndSelected component is specific to SearchAndSelect component */}
+					{/* REVIEW: Therefore, SearchAndSelected component has only 1 role to do and that is removing the selected item from the corresponding array */}
 					<SearchAndSelect
-						searchAndSelectTypes={{
-							searchAndSelectType: "post-category",
-							searchAndSelectedActionType: "REMOVE_POST_CATEGORY",
-						}}
-						searchResultTypes={{
-							searchResultType: "search-and-select",
-							searchResultActionType: "ADD_POST_CATEGORY",
-						}}
-						selectedValuesArray={selectedPostCategoriesArray}
+						searchAndSelectType="post-category"
+						searchAndSelectedArray={selectedPostCategoriesArray}
+						searchAndSelectedAction={removePostCategory}
 						searchAPIEndpoint={"/search/post-categories"}
-						searchInputPlaceholder={"Search post categories"}
+						searchInputPlaceholder={"Search for post categories"}
+						// REVIEW: this tells which DropdownElement to render
+						dropdownElementComponentType="category"
+						// REVIEW: tells which selected array to use when running the content adding validation logic
+						dropdownElementContentType="post-category"
+						// REVIEW: this tells which onClickEventHandler needs to be provided
+						dropdownElementClickEventType="search-and-select"
+						// REVIEW: this tells the action type it needs to trigger when adding/tagging a user while creating a post
+						dropdownElementAddContentActionType="ADD_POST_CATEGORY"
+						dropdownElementAddContentMessageActionType="SET_ADD_POST_MESSAGE"
 					/>
 				</AddContentStyle>
 
-				<AddContentStyle>
+				{/* <AddContentStyle>
 					<h3>Tag Users</h3>
 
 					<SearchAndSelect
-						searchAndSelectTypes={{
-							searchAndSelectType: "post-user",
-							searchAndSelectedActionType: "REMOVE_USER_ON_POST",
-						}}
-						searchResultTypes={{
-							searchResultType: "search-and-select",
-							searchResultActionType: "ADD_USER_ON_POST",
-						}}
-						selectedValuesArray={taggedPostUsersArray}
+						searchAndSelectType="post-user"
+						searchAndSelectedArray={taggedPostUsersArray}
+						searchAndSelectedAction={removeUserOnPost}
 						searchAPIEndpoint={"/search/users"}
 						searchInputPlaceholder={"Search for users"}
+						dropdownElementComponentType="user"
+						dropdownElementContentType="post-user"
+						dropdownElementClickEventType="search-and-select"
+						dropdownElementAddContentActionType="ADD_USER_ON_POST"
+						dropdownElementAddContentMessageActionType="SET_ADD_POST_MESSAGE"
 					/>
-				</AddContentStyle>
+				</AddContentStyle> */}
 
 				<AddContentStyle>
 					<h3>Caption</h3>
@@ -73,29 +82,3 @@ const AddPostPage = () => {
 };
 
 export default AddPostPage;
-
-// import styled from "styled-components";
-
-// const MessageStyle = styled.p`
-// 	font-size: 1.3rem;
-// 	color: ${(props) =>
-// 		props.success
-// 			? props.theme.isDarkMode
-// 				? "#8cff90"
-// 				: "#0e6d12"
-// 			: props.theme.isDarkMode
-// 			? "#fd8097"
-// 			: "#a70202"};
-// 	padding: 1rem 1.2rem;
-// 	background-color: ${(props) =>
-// 		props.success
-// 			? props.theme.isDarkMode
-// 				? "#4caf503b"
-// 				: "#0ed60e47"
-// 			: props.theme.isDarkMode
-// 			? "#ff000033"
-// 			: "#ff5b5b4d"};
-// 	grid-column: 1 / 3;
-// 	border-radius: 0.5rem;
-// 	width: fit-content;
-// `;

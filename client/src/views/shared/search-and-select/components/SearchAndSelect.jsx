@@ -1,45 +1,59 @@
 import * as React from "react";
 
-import { DropdownMenu, SearchInput, SearchResult } from "../../index";
-import SearchAndSelectedValue from "./SearchAndSelectedValue";
+import { DropdownMenu, DropdownElement, FormInput } from "../../index";
+import SearchAndSelected from "./SearchAndSelected";
 
 import { DropdownStyle } from "../../../../styles";
 import { SearchAndSelectStyle } from "../styles/SearchAndSelectStyle";
-import { SearchAndSelectedStyle } from "../styles/SearchAndSelectedStyle";
+import { SearchAndSelectedWrapperStyle } from "../styles/SearchAndSelectedWrapperStyle";
+
+import { searchRequest } from "../../../../utils/searchRequest";
 
 const SearchAndSelect = ({
-	searchAndSelectTypes,
-	searchResultTypes,
-	selectedValuesArray,
+	searchAndSelectType,
+	searchAndSelectedArray,
+	searchAndSelectedAction,
 	searchAPIEndpoint,
 	searchInputPlaceholder,
+	dropdownElementComponentType,
+	dropdownElementContentType,
+	dropdownElementClickEventType,
+	dropdownElementAddContentActionType,
+	dropdownElementAddContentMessageActionType,
 }) => {
 	const [searchResultArray, setSearchResultArray] = React.useState([]);
-
-	const { searchAndSelectType, searchAndSelectedActionType } =
-		searchAndSelectTypes;
 
 	return (
 		<DropdownStyle
 			id={`search-and-select-${searchAndSelectType}-dropdown-trigger`}
 		>
 			<SearchAndSelectStyle>
-				<SearchAndSelectedStyle>
-					{selectedValuesArray.map((value, idx) => {
+				<SearchAndSelectedWrapperStyle>
+					{searchAndSelectedArray.map((value, idx) => {
 						return (
-							<SearchAndSelectedValue
+							<SearchAndSelected
 								key={`search-and-selected-${searchAndSelectType}-value__${idx}`}
 								selectedValue={value}
-								searchAndSelectedActionType={searchAndSelectedActionType}
+								searchAndSelectedAction={searchAndSelectedAction}
 							/>
 						);
 					})}
-				</SearchAndSelectedStyle>
+				</SearchAndSelectedWrapperStyle>
 
-				<SearchInput
-					setSearchResultArray={setSearchResultArray}
-					searchAPIEndpoint={searchAPIEndpoint}
-					searchInputPlaceholder={searchInputPlaceholder}
+				<FormInput
+					inputUsage="search-and-select"
+					inputID={`search-and-select-${searchAndSelectType}`}
+					inputName="search-and-select-post-categories"
+					inputType="text"
+					inputLabel={`search and select `}
+					inputPlaceholder={searchInputPlaceholder}
+					onChangeEventHandler={(e) =>
+						searchRequest(
+							e.target.value,
+							searchAPIEndpoint,
+							setSearchResultArray
+						)
+					}
 				/>
 			</SearchAndSelectStyle>
 
@@ -53,11 +67,18 @@ const SearchAndSelect = ({
 			>
 				{searchResultArray.map((result, idx) => {
 					return (
-						<SearchResult
+						<DropdownElement
 							key={`search-${searchAndSelectType}-result__${idx}`}
-							searchResult={result}
-							searchResultTypes={searchResultTypes}
-							selectedValuesArray={selectedValuesArray}
+							dropdownElementComponentType={dropdownElementComponentType}
+							dropdownElementContentType={dropdownElementContentType}
+							dropdownElementClickEventType={dropdownElementClickEventType}
+							content={result}
+							dropdownElementAddContentActionType={
+								dropdownElementAddContentActionType
+							}
+							dropdownElementAddContentMessageActionType={
+								dropdownElementAddContentMessageActionType
+							}
 						/>
 					);
 				})}

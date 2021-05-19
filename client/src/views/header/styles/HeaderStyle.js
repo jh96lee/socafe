@@ -4,7 +4,7 @@ export const HeaderStyle = styled.header`
 	position: relative;
 	grid-column: 1 / 3;
 	grid-row: 1 / 2;
-	box-shadow: 0px 0px 0px 1.6px var(--primary-box-shadow-color);
+	box-shadow: 0px 0px 0px 1.6px var(--primary-separator-color);
 	padding: 0 2rem;
 	display: flex;
 	align-items: center;

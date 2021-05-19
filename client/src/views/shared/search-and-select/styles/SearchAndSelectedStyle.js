@@ -1,19 +1,24 @@
 import styled from "styled-components";
 
 export const SearchAndSelectedStyle = styled.div`
-	display: flex;
-	flex-wrap: wrap;
-	gap: 1rem;
-	padding: 1.5rem;
 	position: relative;
-	border: none;
-	border-radius: 0.5rem;
-	outline: none;
-	background-color: transparent;
-	font-size: 1.4rem;
-	color: var(--primary-text-color);
+	display: flex;
+	gap: 1.2rem;
+	align-items: center;
+	padding: 0.7rem 1.4rem;
+	background-color: ${(props) =>
+		props.theme.isDarkMode ? "#4f606961" : "#6096b12b"};
+	border-radius: 2rem;
 
-	&:empty {
-		display: none;
+	& > svg {
+		fill: var(--primary-text-color);
+		width: 1rem;
+		height: 1rem;
+	}
+
+	&:hover {
+		cursor: pointer;
+		background-color: ${(props) =>
+			props.theme.isDarkMode ? "#607d8b29" : "#3c61732b"};
 	}
 `;

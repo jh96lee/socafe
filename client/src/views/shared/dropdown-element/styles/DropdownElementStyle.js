@@ -1,6 +1,6 @@
 import styled from "styled-components";
 
-export const SearchResultStyle = styled.div`
+export const DropdownElementStyle = styled.div`
 	display: flex;
 	align-items: center;
 	padding: 0.5rem;
@@ -21,7 +21,7 @@ export const SearchResultStyle = styled.div`
 	}
 `;
 
-export const SearchResultMetadataStyle = styled.div`
+export const DropdownElementMetadataStyle = styled.div`
 	display: flex;
 	flex-direction: column;
 

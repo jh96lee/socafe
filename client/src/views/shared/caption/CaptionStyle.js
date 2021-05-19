@@ -7,8 +7,8 @@ export const CaptionStyle = styled.div`
 	& .ql-container {
 		min-height: 15rem;
 		border-radius: 0.5rem;
-		box-shadow: 0 0 0 1.6px var(--secondary-box-shadow-color);
-		background-color: var(--primary-input-background-color);
+		box-shadow: 0 0 0 1.6px var(--primary-separator-color);
+		background-color: var(--secondary-background-color);
 	}
 
 	& .ql-toolbar {
