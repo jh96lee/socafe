@@ -1,6 +1,7 @@
 import styled from "styled-components";
+import { PageStyle } from "../../styles";
 
-export const AddContentPageStyle = styled.div`
+export const AddContentPageStyle = styled(PageStyle)`
 	display: grid;
 	grid-template-columns: 36rem auto;
 `;

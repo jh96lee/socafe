@@ -1,45 +1,34 @@
 import * as React from "react";
-import { useDispatch } from "react-redux";
 
 import UserDropdownElement from "./UserDropdownElement";
 import CategoryDropdownElement from "./CategoryDropdownElement";
-
-import { addContentOnClick } from "../../../../redux/add-content/addContentAction";
+import LinkDropdownElement from "./LinkDropdownElement";
 
 const DropdownElement = ({
+	// REVIEW: individual elements to render on DropdownMenu
+	dropdownElementContent,
+	// REVIEW: type of DropdownElement component to render
 	dropdownElementComponentType,
-	dropdownElementContentType,
-	dropdownElementClickEventType,
-	dropdownElementAddContentActionType,
-	dropdownElementAddContentMessageActionType,
-	content,
+	// REVIEW: onClick event
+	dropdownElementOnClickEventHandler,
 }) => {
-	const dispatch = useDispatch();
-
-	const handleOnClick = () => {
-		if (dropdownElementClickEventType === "search-and-select") {
-			dispatch(
-				addContentOnClick(
-					dropdownElementContentType,
-					content,
-					dropdownElementAddContentActionType,
-					dropdownElementAddContentMessageActionType
-				)
-			);
-		}
-	};
-
 	const dropdownElementObject = {
 		user: (
 			<UserDropdownElement
-				content={content}
-				onClickEventHandler={handleOnClick}
+				dropdownElementContent={dropdownElementContent}
+				dropdownElementOnClickEventHandler={dropdownElementOnClickEventHandler}
 			/>
 		),
 		category: (
 			<CategoryDropdownElement
-				content={content}
-				onClickEventHandler={handleOnClick}
+				dropdownElementContent={dropdownElementContent}
+				dropdownElementOnClickEventHandler={dropdownElementOnClickEventHandler}
+			/>
+		),
+		link: (
+			<LinkDropdownElement
+				dropdownElementContent={dropdownElementContent}
+				dropdownElementOnClickEventHandler={dropdownElementOnClickEventHandler}
 			/>
 		),
 	};

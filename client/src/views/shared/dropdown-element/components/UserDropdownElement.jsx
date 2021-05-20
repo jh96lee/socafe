@@ -5,15 +5,18 @@ import {
 	DropdownElementMetadataStyle,
 } from "../styles/DropdownElementStyle";
 
-const UserDropdownElement = ({ content, onClickEventHandler }) => {
+const UserDropdownElement = ({
+	dropdownElementContent,
+	dropdownElementOnClickEventHandler,
+}) => {
 	return (
-		<DropdownElementStyle onClick={onClickEventHandler}>
-			<img src={content.avatar_url} />
+		<DropdownElementStyle onClick={dropdownElementOnClickEventHandler}>
+			<img src={dropdownElementContent.avatar_url} />
 
 			<DropdownElementMetadataStyle>
-				<p>@{content.username}</p>
+				<p>@{dropdownElementContent.username}</p>
 
-				<span>{content.full_name}</span>
+				<span>{dropdownElementContent.full_name}</span>
 			</DropdownElementMetadataStyle>
 		</DropdownElementStyle>
 	);

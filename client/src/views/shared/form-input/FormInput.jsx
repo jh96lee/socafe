@@ -11,7 +11,7 @@ const FormInput = ({
 	inputPlaceholder,
 	inputWidth,
 	inputPadding,
-	onChangeEventHandler,
+	inputOnChangeEventHandler,
 }) => {
 	return (
 		<FormInputStyle
@@ -25,7 +25,7 @@ const FormInput = ({
 				name={inputName}
 				type={inputType}
 				placeholder={inputPlaceholder}
-				onChange={onChangeEventHandler}
+				onChange={inputOnChangeEventHandler}
 			/>
 		</FormInputStyle>
 	);

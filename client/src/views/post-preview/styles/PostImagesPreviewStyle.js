@@ -53,14 +53,15 @@ export const PostImagesPreviewIconStyle = styled.div`
 	z-index: 5;
 	top: 50%;
 	transform: translateY(-50%);
-	padding: 1rem;
+	padding: 1.3rem;
 	border-radius: 50%;
-	background-color: #0e1010;
+	background-color: #f5f5f5;
+	box-shadow: 0 0 0 1px #b9c8cf;
 
 	& svg {
-		fill: #f5f5f5;
-		width: 1.5rem;
-		height: 1.5rem;
+		fill: #000;
+		width: 1.8rem;
+		height: 1.8rem;
 	}
 
 	&:hover {

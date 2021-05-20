@@ -33,12 +33,17 @@ const LinkDropdownElementIconStyle = styled.div`
 	}
 `;
 
-const LinkDropdownElement = ({ icon, label, onClickEventHandler }) => {
+const LinkDropdownElement = ({
+	dropdownElementContent,
+	dropdownElementOnClickEventHandler,
+}) => {
 	return (
-		<LinkDropdownElementStyle onClick={onClickEventHandler}>
-			<LinkDropdownElementIconStyle>{icon}</LinkDropdownElementIconStyle>
+		<LinkDropdownElementStyle onClick={dropdownElementOnClickEventHandler}>
+			<LinkDropdownElementIconStyle>
+				{dropdownElementContent.icon}
+			</LinkDropdownElementIconStyle>
 
-			<span>{label}</span>
+			<span>{dropdownElementContent.label}</span>
 		</LinkDropdownElementStyle>
 	);
 };

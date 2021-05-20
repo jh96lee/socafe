@@ -7,21 +7,16 @@ import { Loader } from "../../index";
 
 import { UploadImagesStyle } from "../styles/UploadImagesStyle";
 
-const UploadImages = () => {
-	// TODO: later remove this, has to be a prop
-	const contentType = "post";
-
+const UploadImages = ({ uploadedImageType }) => {
 	const { uploadedPostImagesArray } = useSelector(
 		(state) => state.addPostReducer
 	);
-
 	const { isImageUploading, isImageDeleting } = useSelector(
 		(state) => state.uploadImageReducer
 	);
 
-	// TODO: later change the naming of this variable
 	const imagesArray =
-		contentType === "post"
+		uploadedImageType === "post-image"
 			? uploadedPostImagesArray
 			: "uploadedProductImagesArray";
 
@@ -31,11 +26,17 @@ const UploadImages = () => {
 				<Loader />
 			) : (
 				imagesArray.map((image) => {
-					return <UploadedImagePreview key={image.id} image={image} />;
+					return (
+						<UploadedImagePreview
+							key={image.id}
+							uploadedImage={image}
+							uploadedImageType={uploadedImageType}
+						/>
+					);
 				})
 			)}
 
-			<UploadImageButton />
+			<UploadImageButton uploadedImageType={uploadedImageType} />
 		</UploadImagesStyle>
 	);
 };

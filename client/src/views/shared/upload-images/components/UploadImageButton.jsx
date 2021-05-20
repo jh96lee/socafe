@@ -13,11 +13,8 @@ import {
 
 import { Image } from "../../../../assets";
 
-const UploadImageButton = () => {
+const UploadImageButton = ({ uploadedImageType }) => {
 	const dispatch = useDispatch();
-
-	// TODO: later remove this, has to be a prop
-	const contentType = "post";
 
 	const { uploadedPostImagesArray } = useSelector(
 		(state) => state.addPostReducer
@@ -25,7 +22,7 @@ const UploadImageButton = () => {
 
 	// TODO: later change the naming of this variable
 	const imagesArray =
-		contentType === "post"
+		uploadedImageType === "post-image"
 			? uploadedPostImagesArray
 			: "uploadedProductImagesArray";
 
@@ -46,7 +43,7 @@ const UploadImageButton = () => {
 			} else {
 				if (file.type === "image/png" || file.type === "image/jpeg") {
 					// REVIEW: upload image and add uploaded image to corresponding array
-					dispatch(uploadImageAndAddImage("post", file));
+					dispatch(uploadImageAndAddImage(uploadedImageType, file));
 				} else {
 					// REVIEW: render error message
 					dispatch(

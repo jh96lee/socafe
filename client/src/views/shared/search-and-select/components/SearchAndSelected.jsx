@@ -5,13 +5,15 @@ import { SearchAndSelectedStyle } from "../styles/SearchAndSelectedStyle";
 
 import { Remove } from "../../../../assets";
 
-// REVIEW: all this component does is remove selected value from a specific array by firing off the corresponding action
+// REVIEW: this component is specific to SearchAndSelect component
+// REVIEW: this component has only 1 job and that is filtering the selected element/value off of the corresponding array
 const SearchAndSelected = ({ selectedValue, searchAndSelectedAction }) => {
 	const dispatch = useDispatch();
 
 	const selectedValueID = selectedValue.id;
 
 	const handleOnClick = () => {
+		// REVIEW: this is all it needs to do
 		dispatch(searchAndSelectedAction(selectedValueID));
 	};
 

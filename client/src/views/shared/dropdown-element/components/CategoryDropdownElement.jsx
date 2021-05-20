@@ -5,13 +5,16 @@ import {
 	DropdownElementMetadataStyle,
 } from "../styles/DropdownElementStyle";
 
-const CategoryDropdownElement = ({ content, onClickEventHandler }) => {
+const CategoryDropdownElement = ({
+	dropdownElementContent,
+	dropdownElementOnClickEventHandler,
+}) => {
 	return (
-		<DropdownElementStyle onClick={onClickEventHandler}>
-			<img src={content.category_url} />
+		<DropdownElementStyle onClick={dropdownElementOnClickEventHandler}>
+			<img src={dropdownElementContent.category_url} />
 
 			<DropdownElementMetadataStyle>
-				<p>{content.title}</p>
+				<p>{dropdownElementContent.title}</p>
 			</DropdownElementMetadataStyle>
 		</DropdownElementStyle>
 	);
