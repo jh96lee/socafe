@@ -3,20 +3,10 @@ import { useSelector } from "react-redux";
 
 import { Skeleton } from "../../shared";
 
-import styled from "styled-components";
-
-const PostCategoriesPreviewStyle = styled.div`
-	display: flex;
-	align-items: center;
-	gap: 1.5rem;
-`;
-
-const PostCategoryPreviewStyle = styled.p`
-	color: var(--primary-text-color);
-	background-color: #6096b12b;
-	padding: 0.7rem 1.4rem;
-	border-radius: 2rem;
-`;
+import {
+	PostCategoriesPreviewStyle,
+	PostCategoryPreviewStyle,
+} from "../styles/PostCategoriesPreviewStyle";
 
 const PostCategoriesPreview = () => {
 	const { selectedPostCategoriesArray } = useSelector(

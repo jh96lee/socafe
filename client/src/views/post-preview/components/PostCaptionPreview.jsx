@@ -3,13 +3,7 @@ import { useSelector } from "react-redux";
 
 import { Skeleton } from "../../shared";
 
-import styled from "styled-components";
-
-const PostCaptionPreviewStyle = styled.div`
-	& p {
-		color: var(--primary-text-color);
-	}
-`;
+import { PostCaptionPreviewStyle } from "../styles/PostCaptionPreviewStyle";
 
 const PostCaptionPreview = () => {
 	const { postCaptionNodesArray } = useSelector(

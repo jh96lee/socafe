@@ -14,8 +14,6 @@ export { default as UploadImage } from "./upload-images/components/UploadImages"
 
 export { default as SearchAndSelect } from "./search-and-select/components/SearchAndSelect";
 
-export { default as SearchInput } from "./search-input/SearchInput";
-
 export { default as Caption } from "./caption/Caption";
 
 export { default as Skeleton } from "./skeleton/Skeleton";

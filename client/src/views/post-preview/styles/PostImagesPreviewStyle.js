@@ -4,10 +4,13 @@ export const PostImagesPreviewStyle = styled.div`
 	position: relative;
 	display: flex;
 	align-items: center;
+	max-width: 65rem;
+	height: 60rem;
 	border-radius: 1rem;
 
 	& > #overlay {
 		position: absolute;
+		border-radius: 1rem;
 		z-index: 2;
 		width: 100%;
 		height: 100%;
@@ -21,6 +24,15 @@ export const PostImagesPreviewStyle = styled.div`
 
 	& #post-images-preview-icon-right {
 		right: 1rem;
+	}
+
+	/* REVIEW: this is to resize the height of the image container and skeleton */
+	@media (max-width: 1200px) {
+		height: 55rem;
+	}
+
+	@media (max-width: 1000px) {
+		height: 45rem;
 	}
 `;
 
