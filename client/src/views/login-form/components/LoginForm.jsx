@@ -2,9 +2,7 @@ import * as React from "react";
 import { Link } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 
-import { FormInput } from "../../shared";
-
-import { UserFormStyle, UserFormButtonStyle } from "../../../styles";
+import { FormInput, Message } from "../../shared";
 
 import {
 	enterLoginUserInfo,
@@ -32,55 +30,48 @@ const LoginForm = () => {
 		dispatch(loginUser());
 	};
 
-	const generalErrorMessage = () => {
-		if (result.error) {
-			if (!result.error.error) {
-				return null;
-			} else {
-				return result.error.error;
-			}
-		} else {
-			return null;
-		}
-	};
-
 	return (
-		<UserFormStyle>
-			<fieldset>
-				{generalErrorMessage() ? <p>{generalErrorMessage()}</p> : null}
+		<h1>LOGIN</h1>
+		// <UserFormStyle>
+		// 	<fieldset>
+		// 		{/* <Message errorMessage={result && result.error.general} /> */}
 
-				<FormInput
-					inputID={"email"}
-					inputLabel={"Email"}
-					inputName={"email"}
-					inputType={"email"}
-					inputPlaceholder={"Enter your email"}
-					inputErrorMessage={result.error ? result.error.email : null}
-					onChangeEventHandler={handleOnChange}
-				/>
+		// 		<FormInput
+		// 			inputUsage="form"
+		// 			inputID="login-form__email"
+		// 			inputLabel="Email"
+		// 			inputName="email"
+		// 			inputType="text"
+		// 			inputPlaceholder="Enter your email"
+		// 			inputWidth="100%"
+		// 			inputOnChangeEventHandler={handleOnChange}
+		// 		/>
+		// 		<Message errorMessage={result && result.error.email} />
 
-				<FormInput
-					inputID={"password"}
-					inputLabel={"Password"}
-					inputName={"password"}
-					inputType={"password"}
-					inputPlaceholder={"Enter your password"}
-					onChangeEventHandler={handleOnChange}
-				/>
+		// 		<FormInput
+		// 			inputUsage="form"
+		// 			inputID="login-form__password"
+		// 			inputLabel="Password"
+		// 			inputName="password"
+		// 			inputType="text"
+		// 			inputPlaceholder="Enter your password"
+		// 			inputWidth="100%"
+		// 			inputOnChangeEventHandler={handleOnChange}
+		// 		/>
 
-				<UserFormButtonStyle
-					type="submit"
-					disabled={!email || !password}
-					onClick={handleOnClick}
-					success={result && result.success}
-					error={result && result.error}
-				>
-					Login
-				</UserFormButtonStyle>
+		// 		<UserFormButtonStyle
+		// 			type="submit"
+		// 			disabled={!email || !password}
+		// 			onClick={handleOnClick}
+		// 			success={result && result.success}
+		// 			error={result && result.error}
+		// 		>
+		// 			Login
+		// 		</UserFormButtonStyle>
 
-				<Link to="/register">New to Socafe? Create Account</Link>
-			</fieldset>
-		</UserFormStyle>
+		// 		<Link to="/register">New to Socafe? Create Account</Link>
+		// 	</fieldset>
+		// </UserFormStyle>
 	);
 };
 

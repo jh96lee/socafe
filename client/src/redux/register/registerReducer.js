@@ -1,29 +1,37 @@
 const initialState = {
-	currentRegisterStepIndex: 0,
+	registerStepIndex: 0,
 	fullName: "",
 	email: "",
 	username: "",
 	password: "",
-	result: {},
+	successMessage: null,
+	errorMessage: null,
 };
 
 const registerReducer = (state = initialState, action) => {
 	switch (action.type) {
 		// REVIEW: return a whole new user info object
-		case "ENTER_REGISTER_USER_INFO":
+		case "SET_REGISTER_USER_INFO":
 			return {
+				// TODO: spread out the user info object
 				...action.payload,
 				result: state.result,
 			};
-		case "SET_REGISTER_RESULT":
+		case "SET_SUCCESS_MESSAGE":
 			return {
 				...state,
-				result: action.payload,
+				successMessage: action.payload,
 			};
-		case "REGISTER_NEXT_STEP":
+		case "SET_ERROR_MESSAGE":
 			return {
 				...state,
-				currentRegisterStepIndex: state.currentRegisterStepIndex + 1,
+				// REVIEW: needs to be 1 level object
+				errorMessage: action.payload,
+			};
+		case "SET_REGISTER_STEP":
+			return {
+				...state,
+				registerStepIndex: state.registerStepIndex + 1,
 			};
 		default:
 			return state;

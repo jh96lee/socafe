@@ -1,6 +1,9 @@
 import * as React from "react";
+import { useHistory } from "react-router-dom";
 
 import useShowAndHideElementOnClick from "../../../hooks/useShowAndHideElementOnClick";
+
+import { searchRequest } from "../../../utils/searchRequest";
 
 import {
 	IconElement,
@@ -32,8 +35,11 @@ const SearchbarInputDropdownStyle = styled(DropdownStyle)`
 
 const Searchbar = () => {
 	const [searchType, setSearchType] = React.useState("Filter");
+	const [searchResultArray, setSearchResultArray] = React.useState([]);
 	const [isResponsiveSearchbarOpen, setIsResponsiveSearchbarOpen] =
 		React.useState(false);
+
+	const history = useHistory();
 
 	useShowAndHideElementOnClick(
 		"responsive-searchbar-trigger",
@@ -46,14 +52,21 @@ const Searchbar = () => {
 		setSearchType(e.target.textContent);
 	};
 
+	const handleOnChange = (e) => {
+		const searchAPIEndpoint =
+			searchType === "Users" ? "/search/users" : "/search/products";
+
+		searchRequest(e.target.value, searchAPIEndpoint, setSearchResultArray);
+	};
+
 	const searchTypeDataArray = [
 		{
-			event: handleOnClick,
+			onClickEvent: handleOnClick,
 			label: "Users",
 			icon: <Users />,
 		},
 		{
-			event: handleOnClick,
+			onClickEvent: handleOnClick,
 			label: "Products",
 			icon: <Product />,
 		},
@@ -88,13 +101,16 @@ const Searchbar = () => {
 						menuTop="110%"
 						menuLeft="0"
 					>
-						{searchTypeDataArray.map((data, idx) => {
+						{searchTypeDataArray.map((element, idx) => {
 							return (
 								<DropdownElement
-									key={`avatar-dropdown-element__${idx}`}
-									dropdownElementEvent={data.event}
-									dropdownElementLabel={data.label}
-									dropdownElementIcon={data.icon}
+									key={`search-type-dropdown-element__${idx}`}
+									dropdownElementContent={{
+										icon: element.icon,
+										label: element.label,
+									}}
+									dropdownElementComponentType="link"
+									dropdownElementOnClickEventHandler={element.onClickEvent}
 								/>
 							);
 						})}
@@ -105,26 +121,44 @@ const Searchbar = () => {
 
 				<SearchbarInputDropdownStyle id="searchbar-dropdown-trigger">
 					<FormInput
-						inputID="search"
-						inputPlaceholder="Search"
 						inputUsage="search"
-						inputLabel="Search"
+						inputID="search"
+						inputName="search"
 						inputType="text"
+						inputLabel="Search"
+						inputPlaceholder="Search"
+						inputOnChangeEventHandler={handleOnChange}
 						inputPadding="1rem"
 					/>
 
+					{/* FIX: fix this later */}
 					<DropdownMenu
 						triggerID="searchbar-dropdown-trigger"
-						dataArray={[
-							<h4 style={{ color: "#fff", fontWeight: "500" }}>
-								Search for something
-							</h4>,
-						]}
+						dataArray={searchResultArray}
 						customDropdownId="searchbar"
 						menuTop="110%"
 						menuLeft="0"
 						menuWidth="100%"
-					/>
+					>
+						{searchResultArray.map((result, idx) => {
+							return (
+								<DropdownElement
+									key={`search-result__${idx}`}
+									dropdownElementContent={result}
+									dropdownElementComponentType={
+										searchType === "Users" ? "user" : "product"
+									}
+									dropdownElementOnClickEventHandler={() => {
+										history.push(
+											`/${searchType === "Users" ? "user" : "product"}/${
+												result.id
+											}`
+										);
+									}}
+								/>
+							);
+						})}
+					</DropdownMenu>
 				</SearchbarInputDropdownStyle>
 
 				<BorderStyle borderHeight="3rem"></BorderStyle>

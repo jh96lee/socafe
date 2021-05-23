@@ -23,10 +23,8 @@ const GlobalPageStyle = styled.main`
 
 function App() {
 	const [isDarkMode, setIsDarkMode] = React.useState(true);
-	const [
-		isResponsiveNavigationOpen,
-		setIsResponsiveNavigationOpen,
-	] = React.useState(false);
+	const [isResponsiveNavigationOpen, setIsResponsiveNavigationOpen] =
+		React.useState(false);
 
 	const themeStyleObjectCreator = (isDarkMode) => ({ isDarkMode });
 
@@ -52,7 +50,7 @@ function App() {
 						</Route>
 
 						<Route exact path="/add-post">
-							<AddPostPage />
+							{user ? <AddPostPage /> : <Redirect to="/login" />}
 						</Route>
 
 						<Route exact path="/register">

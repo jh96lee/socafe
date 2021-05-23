@@ -1,5 +1,5 @@
 import * as React from "react";
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
 
 import UploadImageButton from "./UploadImageButton";
 import UploadedImagePreview from "./UploadedImagePreview";
@@ -7,7 +7,11 @@ import { Loader } from "../../index";
 
 import { UploadImagesStyle } from "../styles/UploadImagesStyle";
 
+import { setUploadImageMessage } from "../../../../redux/upload-image/uploadImageAction";
+
 const UploadImages = ({ uploadedImageType }) => {
+	const dispatch = useDispatch();
+
 	const { uploadedPostImagesArray } = useSelector(
 		(state) => state.addPostReducer
 	);
@@ -19,6 +23,13 @@ const UploadImages = ({ uploadedImageType }) => {
 		uploadedImageType === "post-image"
 			? uploadedPostImagesArray
 			: "uploadedProductImagesArray";
+
+	React.useEffect(() => {
+		return () => {
+			// REVIEW: to reset uploadImageMessage state when component unmounts
+			dispatch(setUploadImageMessage(null));
+		};
+	}, []);
 
 	return (
 		<UploadImagesStyle>

@@ -27,12 +27,16 @@ export const PostImagesPreviewStyle = styled.div`
 	}
 
 	/* REVIEW: this is to resize the height of the image container and skeleton */
-	@media (max-width: 1200px) {
+	@media (max-width: 1350px) {
 		height: 55rem;
 	}
 
 	@media (max-width: 1000px) {
-		height: 45rem;
+		height: 40rem;
+	}
+
+	@media (max-width: 750px) {
+		height: 30rem;
 	}
 `;
 

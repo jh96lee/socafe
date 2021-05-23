@@ -2,10 +2,12 @@ import styled from "styled-components";
 
 export const NavigationStyle = styled.nav`
 	position: sticky;
+	top: 0;
 	display: flex;
 	flex-direction: column;
 	align-items: center;
 	background-color: var(--primary-background-color);
+	/* height: fit-content; */
 	min-height: calc(100vh - 79.69px);
 	box-shadow: 0px 3px 0px 1.6px var(--primary-separator-color);
 	grid-column: 1 / 2;

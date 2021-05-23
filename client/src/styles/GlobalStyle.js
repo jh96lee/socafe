@@ -15,6 +15,8 @@ const GlobalStyles = createGlobalStyle`
 					props.theme.isDarkMode ? "#fd8097" : "#a70202"};
         --success-text-color: ${(props) =>
 					props.theme.isDarkMode ? "#8cff90" : "#0e6d12"};
+        --disabled-text-color: ${(props) =>
+					props.theme.isDarkMode ? "#ffffff66" : "#ffffffb3"};
 
         /* TODO: background */
         --primary-background-color: ${(props) =>
@@ -55,6 +57,8 @@ const GlobalStyles = createGlobalStyle`
         /* TODO: clickable */
         --primary-clickable-background-color: ${(props) =>
 					props.theme.isDarkMode ? "#ec2348c4" : "#ed143ded"};
+        --disabled-clickable-background-color: ${(props) =>
+					props.theme.isDarkMode ? "#ec23482b" : "#ec234866"};
 
         /* TODO: hover */
         --primary-hover-clickable-background-color: ${(props) =>

@@ -1,7 +1,7 @@
 const initialState = {
 	email: "",
 	password: "",
-	result: {},
+	result: null,
 };
 
 const loginReducer = (state = initialState, action) => {

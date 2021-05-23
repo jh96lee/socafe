@@ -1,8 +1,10 @@
 import * as React from "react";
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
 import { useHistory } from "react-router-dom";
 
 import { DropdownMenu, DropdownElement, IconElement } from "../../shared";
+
+import { removeUser } from "../../../redux/user/userAction";
 
 import { DropdownStyle } from "../../../styles";
 import AvatarStyle from "../styles/AvatarStyle";
@@ -10,6 +12,8 @@ import AvatarStyle from "../styles/AvatarStyle";
 import { User, Register, Login, Logout } from "../../../assets";
 
 const Avatar = () => {
+	const dispatch = useDispatch();
+
 	const { user } = useSelector((state) => state.userReducer);
 
 	const history = useHistory();
@@ -17,23 +21,30 @@ const Avatar = () => {
 	const userDropdownDataArray = user
 		? [
 				{
-					event: () => {
+					onClickEvent: () => {
 						history.push("/profile/:userID");
 					},
 					label: "Profile",
 					icon: <User />,
 				},
+				{
+					onClickEvent: () => {
+						dispatch(removeUser());
+					},
+					label: "Logout",
+					icon: <Logout />,
+				},
 		  ]
 		: [
 				{
-					event: () => {
+					onClickEvent: () => {
 						history.push("/login");
 					},
 					label: "Login",
 					icon: <Login />,
 				},
 				{
-					event: () => {
+					onClickEvent: () => {
 						history.push("/register");
 					},
 					label: "Register",
@@ -45,10 +56,7 @@ const Avatar = () => {
 		<DropdownStyle id="user-dropdown-trigger">
 			{user ? (
 				<AvatarStyle>
-					<img
-						src="https://res.cloudinary.com/fullstackprojectcloud/image/upload/v1619825703/Default_Profile_Image_jske9r.png"
-						alt="Profile image"
-					/>
+					<img src={user.avatar_url} alt="Profile image" />
 				</AvatarStyle>
 			) : (
 				<IconElement
@@ -68,13 +76,16 @@ const Avatar = () => {
 				menuTop="140%"
 				menuRight="0"
 			>
-				{userDropdownDataArray.map((data, idx) => {
+				{userDropdownDataArray.map((element, idx) => {
 					return (
 						<DropdownElement
 							key={`avatar-dropdown-element__${idx}`}
-							dropdownElementEvent={data.event}
-							dropdownElementLabel={data.label}
-							dropdownElementIcon={data.icon}
+							dropdownElementContent={{
+								icon: element.icon,
+								label: element.label,
+							}}
+							dropdownElementComponentType="link"
+							dropdownElementOnClickEventHandler={element.onClickEvent}
 						/>
 					);
 				})}

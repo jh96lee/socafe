@@ -1,12 +1,18 @@
 import * as React from "react";
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
 
-import { UploadImage, SearchAndSelect, Caption } from "../../views/shared";
+import {
+	UploadImage,
+	SearchAndSelect,
+	Caption,
+	Message,
+} from "../../views/shared";
 import { PostPreview } from "../../views/post-preview";
 
 import {
 	removePostCategory,
 	removeUserOnPost,
+	submitPost,
 } from "../../redux/add-post/addPostAction";
 
 import {
@@ -14,11 +20,28 @@ import {
 	AddContentFormStyle,
 	AddContentStyle,
 } from "./AddPostPageStyle";
+import { ButtonStyle } from "../../styles";
+
+import styled from "styled-components";
+
+const AddPostPageButtonStyle = styled(ButtonStyle)`
+	background-color: #4f83d1;
+	width: 100%;
+	color: #fff;
+`;
 
 const AddPostPage = () => {
-	const { selectedPostCategoriesArray, taggedPostUsersArray } = useSelector(
-		(state) => state.addPostReducer
+	const dispatch = useDispatch();
+
+	const { uploadImageMessage } = useSelector(
+		(state) => state.uploadImageReducer
 	);
+	const {
+		uploadedPostImagesArray,
+		selectedPostCategoriesArray,
+		taggedPostUsersArray,
+		addPostMessage,
+	} = useSelector((state) => state.addPostReducer);
 
 	return (
 		<AddContentPageStyle>
@@ -26,11 +49,20 @@ const AddPostPage = () => {
 				<AddContentStyle>
 					<h3>Upload Photos</h3>
 
+					<Message
+						successMessage={uploadImageMessage && uploadImageMessage.success}
+						errorMessage={uploadImageMessage && uploadImageMessage.error}
+					/>
+
 					<UploadImage uploadedImageType="post-image" />
 				</AddContentStyle>
 
 				<AddContentStyle>
 					<h3>Select Categories</h3>
+
+					<Message
+						errorMessage={addPostMessage && addPostMessage.postCategory}
+					/>
 
 					<SearchAndSelect
 						// REVIEW: use this prop to determine which dropdown element to render and for dropdownMenu component uniqueness
@@ -49,6 +81,8 @@ const AddPostPage = () => {
 				<AddContentStyle>
 					<h3>Tag Users</h3>
 
+					<Message errorMessage={addPostMessage && addPostMessage.postUser} />
+
 					<SearchAndSelect
 						searchAndSelectType="post-user"
 						searchAndSelectedArray={taggedPostUsersArray}
@@ -63,6 +97,16 @@ const AddPostPage = () => {
 
 					<Caption captionType={"caption"} />
 				</AddContentStyle>
+
+				<AddPostPageButtonStyle
+					onClick={() => {
+						dispatch(
+							submitPost(uploadedPostImagesArray, selectedPostCategoriesArray)
+						);
+					}}
+				>
+					Submit
+				</AddPostPageButtonStyle>
 			</AddContentFormStyle>
 
 			<PostPreview />

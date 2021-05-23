@@ -2,91 +2,146 @@ import * as React from "react";
 import { Link } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 
-import { FormInput } from "../../shared";
+import { FormInput, Message } from "../../shared";
 
-import { UserFormStyle, UserFormButtonStyle } from "../../../styles";
+import { ButtonStyle } from "../../../styles";
 
 import {
-	enterRegisterUserInfo,
+	setRegisterUserInfo,
 	registerUser,
 } from "../../../redux/register/registerAction";
 
+import styled from "styled-components";
+
+const FormStyle = styled.form`
+	width: 100%;
+
+	& > button {
+		margin-top: 2.5rem;
+		margin-bottom: 0.7rem;
+	}
+
+	& a {
+		display: block;
+		font-size: 1.38rem;
+		letter-spacing: -0.6px;
+		font-weight: 400;
+		text-decoration: none;
+		color: ${(props) => (props.theme.isDarkMode ? "#94c2f3" : "#417bb9")};
+	}
+`;
+
+const FormFieldsetStyle = styled.fieldset`
+	display: flex;
+	flex-direction: column;
+	border: none;
+
+	& > *:not(:last-child) {
+		margin-bottom: 2.5rem;
+	}
+`;
+
+const FormInputAndMessageStyle = styled.div`
+	& > p {
+		margin-top: 0.5rem;
+	}
+`;
+
 const RegisterForm = () => {
 	// REVIEW: data like basic user info and current form step and message sent from the server
-	const userRegisterObject = useSelector((state) => state.registerReducer);
+	const userRegisterInfoObject = useSelector((state) => state.registerReducer);
 
-	const { fullName, email, username, password, result } = userRegisterObject;
+	const { fullName, email, username, password, errorMessage, successMessage } =
+		userRegisterInfoObject;
 
 	const dispatch = useDispatch();
 
 	const handleOnClick = async (e) => {
 		e.preventDefault();
 
-		dispatch(registerUser());
+		dispatch(registerUser(userRegisterInfoObject));
 	};
 
+	// TODO: utility function this
 	const handleOnChange = (e) => {
-		const userInfoObject = userRegisterObject;
+		const replicaObject = userRegisterInfoObject;
 
-		userInfoObject[e.target.name] = e.target.value;
+		replicaObject[e.target.name] = e.target.value;
 
-		dispatch(enterRegisterUserInfo(userInfoObject));
+		dispatch(setRegisterUserInfo(replicaObject));
 	};
 
 	return (
-		<UserFormStyle>
-			<fieldset>
-				<FormInput
-					inputID={"full-name"}
-					inputLabel={"Full Name(required)"}
-					inputName={"fullName"}
-					inputType={"text"}
-					inputPlaceholder={"Enter your full name"}
-					onChangeEventHandler={handleOnChange}
-				/>
+		<FormStyle>
+			<FormFieldsetStyle>
+				<FormInputAndMessageStyle>
+					<FormInput
+						inputUsage="form"
+						inputID="register-form__full-name"
+						inputLabel="Full Name(required)"
+						inputName="fullName"
+						inputType="text"
+						inputPlaceholder="Enter your full name"
+						inputWidth="100%"
+						inputOnChangeEventHandler={handleOnChange}
+					/>
+				</FormInputAndMessageStyle>
 
-				<FormInput
-					inputID={"email"}
-					inputLabel={"Email(required)"}
-					inputName={"email"}
-					inputType={"email"}
-					inputPlaceholder={"Enter your email"}
-					inputErrorMessage={result.error ? result.error.email : null}
-					onChangeEventHandler={handleOnChange}
-				/>
+				<FormInputAndMessageStyle>
+					<FormInput
+						inputUsage="form"
+						inputID="register-form__email"
+						inputLabel="Email(required)"
+						inputName="email"
+						inputType="email"
+						inputPlaceholder="Enter your email"
+						inputWidth="100%"
+						inputOnChangeEventHandler={handleOnChange}
+					/>
+					<Message errorMessage={errorMessage && errorMessage.email} />
+				</FormInputAndMessageStyle>
 
-				<FormInput
-					inputID={"username"}
-					inputLabel={"Username(required)"}
-					inputName={"username"}
-					inputType={"text"}
-					inputPlaceholder={"Enter your username"}
-					inputErrorMessage={result.error ? result.error.username : null}
-					onChangeEventHandler={handleOnChange}
-				/>
+				<FormInputAndMessageStyle>
+					<FormInput
+						inputUsage="form"
+						inputID="register-form__username"
+						inputLabel="Username(required)"
+						inputName="username"
+						inputType="text"
+						inputPlaceholder="Enter your username"
+						inputWidth="100%"
+						inputOnChangeEventHandler={handleOnChange}
+					/>
+					<Message errorMessage={errorMessage && errorMessage.username} />
+				</FormInputAndMessageStyle>
 
-				<FormInput
-					inputID={"password"}
-					inputLabel={"Password(required)"}
-					inputName={"password"}
-					inputType={"password"}
-					inputPlaceholder={"Enter your password"}
-					onChangeEventHandler={handleOnChange}
-				/>
+				<FormInputAndMessageStyle>
+					<FormInput
+						inputUsage="form"
+						inputID="register-form__password"
+						inputLabel="Password(required)"
+						inputName="password"
+						inputType="password"
+						inputPlaceholder="Enter your password"
+						inputWidth="100%"
+						inputOnChangeEventHandler={handleOnChange}
+					/>
+				</FormInputAndMessageStyle>
+			</FormFieldsetStyle>
 
-				<UserFormButtonStyle
-					type="submit"
-					disabled={!fullName || !email || !username || !password}
-					onClick={handleOnClick}
-					success={result && result.success}
-					error={result && result.error}
-				>
-					Continue
-				</UserFormButtonStyle>
+			<ButtonStyle
+				disabled={!fullName || !email || !username || !password}
+				width="100%"
+				isDisabled={!fullName || !email || !username || !password}
+				success={successMessage ? successMessage : null}
+				error={errorMessage ? errorMessage : null}
+				onClick={handleOnClick}
+			>
+				{successMessage ? successMessage : "Continue"}
+			</ButtonStyle>
 
-				<Link to="/login">Already have an account? Login</Link>
-			</fieldset>
-		</UserFormStyle>
+			<Link to="/login">Already have an account? Login</Link>
+		</FormStyle>
 	);
 };
 

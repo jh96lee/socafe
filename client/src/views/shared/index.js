@@ -17,3 +17,5 @@ export { default as SearchAndSelect } from "./search-and-select/components/Searc
 export { default as Caption } from "./caption/Caption";
 
 export { default as Skeleton } from "./skeleton/Skeleton";
+
+export { default as Message } from "./message/Message";

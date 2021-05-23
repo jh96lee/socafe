@@ -2,10 +2,14 @@ import * as React from "react";
 
 import { MessageStyle } from "./MessageStyle";
 
-const Message = ({ successMessage, errorMessage }) => {
-	return message ? (
-		<MessageStyle success={successMessage} error={errorMessage}>
-			{message}
+const Message = ({ successMessage, errorMessage, messageWidth }) => {
+	return successMessage || errorMessage ? (
+		<MessageStyle
+			success={successMessage}
+			error={errorMessage}
+			messageWidth={messageWidth}
+		>
+			{successMessage || errorMessage}
 		</MessageStyle>
 	) : null;
 };

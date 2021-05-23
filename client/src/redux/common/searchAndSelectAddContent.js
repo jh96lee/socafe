@@ -4,6 +4,8 @@ import { camelCaseString } from "../../utils/camelCaseString";
 export const searchAndSelectAddContent =
 	(searchAndSelectType, searchAndSelectedContent, searchAndSelectedArray) =>
 	(dispatch) => {
+		const messageObject = {};
+
 		const camelCasedContentType = camelCaseString(searchAndSelectType);
 
 		const actionTypeObject = {
@@ -27,12 +29,13 @@ export const searchAndSelectAddContent =
 			});
 
 			if (existingContent) {
+				messageObject[camelCasedContentType] =
+					"Duplicate selections are not allowed";
+
 				dispatch({
 					type: messageActionType,
 					// REVIEW: payload needs to be an object with post-category being postCategory
-					payload: {
-						camelCasedContentType: "Duplicate selections are not allowed",
-					},
+					payload: messageObject,
 				});
 			} else {
 				dispatch({
@@ -41,9 +44,11 @@ export const searchAndSelectAddContent =
 				});
 			}
 		} else {
+			messageObject[camelCasedContentType] = "You have exceeded the limit";
+
 			dispatch({
 				type: messageActionType,
-				payload: { camelCasedContentType: "You have exceeded the limit" },
+				payload: messageObject,
 			});
 		}
 	};

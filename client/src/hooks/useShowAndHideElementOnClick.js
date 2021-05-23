@@ -1,10 +1,8 @@
 import * as React from "react";
 
-// REVIEW: if the element is a dropdown, when a user clicks an element within the dropdown, we want to
-// REVIEW: trigger whatever the element inside the dropdown does and close the dropdown
 const useShowAndHideElementOnClick = (
-	triggerID,
-	elementID,
+	dropdownTriggerID,
+	dropdownMenuID,
 	setIsOpen,
 	isDropdown
 ) => {
@@ -15,29 +13,39 @@ const useShowAndHideElementOnClick = (
 
 			const clickedElementPathID = path.map((element) => element.id);
 
-			// REVIEW: if the path of the clicked element has the trigger element's ID but does not have the id of the element
-			// REVIEW: that means the trigger element has been clicked
 			if (
-				clickedElementPathID.includes(triggerID) &&
-				!clickedElementPathID.includes(elementID)
+				// REVIEW: if user clicked on presentational/trigger element, then within the path array, the dropdownTriggerID
+				// REVIEW: which is located at the outermost div, will be included
+				// REVIEW: On the other hand, dropdownMenuID will not exist. In this case, we want to do the following
+				clickedElementPathID.includes(dropdownTriggerID) &&
+				!clickedElementPathID.includes(dropdownMenuID)
 			) {
 				setIsOpen((prevState) => !prevState);
-			} else if (e.target.id === elementID) {
+			} else if (
 				// REVIEW: if clicked directly on the dropdown element or any element that shows and hides, then do nothing
+				e.target.id === dropdownMenuID
+			) {
 				return;
-			} else if (clickedElementPathID.includes(elementID)) {
+			} else if (
 				// REVIEW: if a user clicked on the inner of the element of a dropdown, then we want to close the dropdown
-				if (isDropdown) {
+				clickedElementPathID.includes(dropdownMenuID)
+			) {
+				if (
+					// REVIEW: if it is a dropdown, then when the DropdownElement has been clicked, we want to trigger the onClickEvent
+					// REVIEW: handler of the DropdownElement and close the DropdownMenu
+					isDropdown
+				) {
 					setIsOpen(false);
 				} else {
-					// REVIEW: if a user clicks the inner of a search element, then we want to do nothing
+					// REVIEW: if it's not a dropdown, say a responsive searchbar, then we don't want the Searchbar to close when the user
+					// REVIEW: clicks on the input or other part of the Searchbar
 					return;
 				}
 			} else if (
-				!clickedElementPathID.includes(triggerID) &&
-				!clickedElementPathID.includes(elementID)
+				// REVIEW: if user clicked outside of the DropdownMenu, close it
+				!clickedElementPathID.includes(dropdownTriggerID) &&
+				!clickedElementPathID.includes(dropdownMenuID)
 			) {
-				// REVIEW: if neither the trigger element ID nor the element ID exists within the array, that means the outside of the element has been clicked
 				setIsOpen(false);
 			}
 		});
@@ -45,7 +53,7 @@ const useShowAndHideElementOnClick = (
 		return () => {
 			document.removeEventListener("click", listener);
 		};
-	}, [triggerID]);
+	}, [dropdownTriggerID]);
 };
 
 export default useShowAndHideElementOnClick;

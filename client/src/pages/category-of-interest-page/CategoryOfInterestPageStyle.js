@@ -14,7 +14,7 @@ export const CategoriesOfInterestElementsWrapperStyle = styled.div`
 	& h2 {
 		font-size: 2.6rem;
 		color: var(--primary-text-color);
-		margin-bottom: 2.2rem;
+		margin-bottom: 2.5rem;
 	}
 
 	@media (max-width: 600px) {

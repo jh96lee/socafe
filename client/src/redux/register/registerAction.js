@@ -2,49 +2,62 @@ import axios from "axios";
 
 import { setCookie } from "../../utils/cookie";
 
-export const enterRegisterUserInfo = (userInfoObject) => ({
-	type: "ENTER_REGISTER_USER_INFO",
+export const setRegisterUserInfo = (userInfoObject) => ({
+	type: "SET_REGISTER_USER_INFO",
 	payload: userInfoObject,
 });
 
-export const setRegisterResult = (result) => ({
-	type: "SET_REGISTER_RESULT",
-	payload: result,
+export const setSuccessMessage = (successMessage) => ({
+	type: "SET_SUCCESS_MESSAGE",
+	payload: successMessage,
 });
 
-export const registerNextStep = () => ({
-	type: "REGISTER_NEXT_STEP",
+export const setErrorMessage = (errorMessage) => ({
+	type: "SET_ERROR_MESSAGE",
+	payload: errorMessage,
 });
 
-export const registerUser = () => async (dispatch, getState) => {
-	const enteredUserInfo = getState().registerReducer;
+export const setRegisterStep = () => (dispatch) => {
+	let timeout;
 
-	const { email, fullName, password, username } = enteredUserInfo;
+	const promise = new Promise((resolve, reject) => {
+		timeout = setTimeout(() => {
+			dispatch({ type: "SET_REGISTER_STEP" });
+
+			resolve("resolve");
+		}, 1500);
+	});
+
+	promise.then((value) => {
+		clearTimeout(timeout);
+	});
+};
+
+export const registerUser = (userRegisterInfoObject) => async (dispatch) => {
+	const { email, fullName, password, username } = userRegisterInfoObject;
 
 	const { data } = await axios({
 		method: "POST",
 		url: "http://localhost:8080/user/register",
 		data: {
-			full_name: fullName,
+			fullName,
 			email,
 			username,
 			password,
 		},
 	});
 
-	const { error, success } = data;
+	const { error, success, token } = data;
 
 	if (error) {
-		dispatch(setRegisterResult(data));
+		dispatch(setErrorMessage(error));
 	} else if (success) {
-		const { token } = data;
-
 		setCookie("token", token);
 
 		delete data.token;
 
-		dispatch(setRegisterResult(data));
+		dispatch(setSuccessMessage(success));
 
-		dispatch(registerNextStep());
+		dispatch(setRegisterStep());
 	}
 };

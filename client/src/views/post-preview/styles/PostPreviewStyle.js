@@ -8,12 +8,12 @@ export const PostPreviewStyle = styled.div`
 	max-width: 100rem;
 	margin: 3.5rem auto;
 
-	@media (max-width: 1200px) {
+	@media (max-width: 1250px) {
 		grid-template-columns: 1fr;
 	}
 
 	/* REVIEW: PostPreview component will be hidden when width hits 900px */
-	@media (max-width: 900px) {
+	@media (max-width: 700px) {
 		display: none;
 	}
 `;
