@@ -1,6 +1,6 @@
 const express = require("express");
 const CommentRepo = require("../repos/commentRepo");
-const { authenticateToken } = require("../middlewares/userMiddleware");
+const authenticateToken = require("../middlewares/user/authenticateToken");
 
 const pool = require("../pool");
 
@@ -75,9 +75,8 @@ commentRouter.get("/comment/parent/:postId", async (req, res) => {
 
 	const postParentCommentsArray = [];
 
-	const parentCommentsArray = await CommentRepo.fetchUserDataAndParentCommentData(
-		post_id
-	);
+	const parentCommentsArray =
+		await CommentRepo.fetchUserDataAndParentCommentData(post_id);
 
 	for (userData of parentCommentsArray) {
 		const { comment_id } = userData;

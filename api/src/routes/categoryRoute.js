@@ -1,5 +1,5 @@
 const express = require("express");
-const { authenticateToken } = require("../middlewares/userMiddleware");
+const authenticateToken = require("../middlewares/user/authenticateToken");
 const pool = require("../pool");
 
 const categoryRouter = express.Router();
@@ -72,22 +72,28 @@ categoryRouter.post("/search/post-categories", async (req, res) => {
 		`%${searchInput}%`,
 	];
 
-	const { rows } = await pool.queryToDatabase(
-		`
-		SELECT 
-		* FROM 
-		post_categories 
-		WHERE 
-		LOWER(title) LIKE $1
-		OR
-		LOWER(title) LIKE $2
-		OR
-		LOWER(title) LIKE $3;
-		`,
-		[...sqlLikeArray]
-	);
+	try {
+		const { rows } = await pool.queryToDatabase(
+			`
+			SELECT
+			* FROM
+			post_categories
+			WHERE
+			LOWER(title) LIKE $1
+			OR
+			LOWER(title) LIKE $2
+			OR
+			LOWER(title) LIKE $3;
+			`,
+			[...sqlLikeArray]
+		);
 
-	res.send(rows);
+		res.send(rows);
+	} catch (error) {
+		res.send({
+			error: "There has been an error while searching for post categories",
+		});
+	}
 });
 
 module.exports = categoryRouter;

@@ -2,14 +2,14 @@ const express = require("express");
 const bcrypt = require("bcryptjs");
 const pool = require("../pool");
 const UserRepo = require("../repos/userRepo");
-const {
-	validateEmail,
-	isEmailInUse,
-	isUsernameInUse,
-	hashPassword,
-	authenticateToken,
-} = require("../middlewares/userMiddleware");
-const { generateAndSendToken } = require("../utils/generateAndSendToken");
+const validateEmail = require("../middlewares/user/validateEmail");
+const isEmailInUse = require("../middlewares/user/isEmailInUse");
+const isUsernameInUse = require("../middlewares/user/isUsernameInUse");
+const hashPassword = require("../middlewares/user/hashPassword");
+const authenticateToken = require("../middlewares/user/authenticateToken");
+const checkError = require("../middlewares/common/checkError");
+
+const generateAndSendToken = require("../utils/generateAndSendToken");
 
 const userRouter = express.Router();
 
@@ -20,12 +20,13 @@ userRouter.post(
 	validateEmail,
 	isEmailInUse,
 	isUsernameInUse,
+	checkError,
 	hashPassword,
 	async (req, res) => {
-		const { full_name, email, username, password } = req.body;
+		const { fullName, email, username, password } = req.body;
 
 		const avatarURL =
-			"https://res.cloudinary.com/fullstackprojectcloud/image/upload/v1619825703/Default_Profile_Image_jske9r.png";
+			"https://res.cloudinary.com/fullstackprojectcloud/image/upload/v1621721875/profile_qw7jxa.png";
 
 		try {
 			const { rows } = await pool.queryToDatabase(
@@ -34,7 +35,7 @@ userRouter.post(
 				VALUES($1, $2, $3, $4, $5)
 				RETURNING id, full_name, username, avatar_url;
 				`,
-				[full_name, email, username, password, avatarURL]
+				[fullName, email, username, password, avatarURL]
 			);
 
 			const user = rows[0];
@@ -49,15 +50,15 @@ userRouter.post(
 			} else {
 				res.send({
 					error: {
-						error:
-							"There has been an error with inserting data into the database",
+						general:
+							"There has been an error while inserting data into the database",
 					},
 				});
 			}
 		} catch (error) {
 			res.send({
 				error: {
-					error: "There has been an error during your registration process",
+					general: "There has been an error while processing your registration",
 				},
 			});
 		}
@@ -85,7 +86,8 @@ userRouter.post("/user/login", validateEmail, async (req, res) => {
 				if (err) {
 					res.send({
 						error: {
-							error: "There has been an error while verifying your credentials",
+							general:
+								"There has been an error while verifying your credentials",
 						},
 					});
 				} else if (result) {
@@ -96,16 +98,16 @@ userRouter.post("/user/login", validateEmail, async (req, res) => {
 						avatar_url: user.avatar_url,
 					});
 				} else if (!result) {
-					res.send({ error: { error: "Invalid Credentials" } });
+					res.send({ error: { general: "Invalid Credentials" } });
 				}
 			});
 		} else if (!user) {
-			res.send({ error: { error: "Invalid Credentials" } });
+			res.send({ error: { general: "Invalid Credentials" } });
 		}
 	} catch (error) {
 		res.send({
 			message: {
-				error: "There has been an error while verifying your credentials",
+				general: "There has been an error while verifying your credentials",
 			},
 		});
 	}
@@ -162,22 +164,26 @@ userRouter.post("/search/users", async (req, res) => {
 		`%${searchInput}%`,
 	];
 
-	const { rows } = await pool.queryToDatabase(
-		`
-		SELECT 
-		id, full_name, username, avatar_url FROM 
-		users 
-		WHERE 
-		LOWER(username) LIKE $1
-		OR
-		LOWER(username) LIKE $2
-		OR
-		LOWER(username) LIKE $3;
-		`,
-		[...sqlLikeArray]
-	);
+	try {
+		const { rows } = await pool.queryToDatabase(
+			`
+			SELECT 
+			id, full_name, username, avatar_url FROM 
+			users 
+			WHERE 
+			LOWER(username) LIKE $1
+			OR
+			LOWER(username) LIKE $2
+			OR
+			LOWER(username) LIKE $3;
+			`,
+			[...sqlLikeArray]
+		);
 
-	res.send(rows);
+		res.send(rows);
+	} catch (error) {
+		res.send({ error: "There has been an error while searching for users" });
+	}
 });
 
 module.exports = userRouter;

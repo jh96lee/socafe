@@ -4,12 +4,12 @@ const generateAndSendToken = (res, payloadObject) => {
 	jwt.sign(payloadObject, process.env.JWT_SECRET, (err, token) => {
 		if (err) {
 			res.send({
-				error: { error: "There has been an while generating your token" },
+				general: "There has been an while generating your token",
 			});
 		} else {
-			res.send({ token, success: { success: "Success" } });
+			res.send({ token, success: "Success" });
 		}
 	});
 };
 
-module.exports = { generateAndSendToken };
+module.exports = generateAndSendToken;

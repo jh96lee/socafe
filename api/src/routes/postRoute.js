@@ -1,6 +1,6 @@
 const express = require("express");
 const PostRepo = require("../repos/postRepo");
-const { authenticateToken } = require("../middlewares/userMiddleware");
+const authenticateToken = require("../middlewares/user/authenticateToken");
 const pool = require("../pool");
 
 const postRouter = express.Router();

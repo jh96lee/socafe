@@ -1,5 +1,5 @@
 const express = require("express");
-const { authenticateToken } = require("../middlewares/userMiddleware");
+const authenticateToken = require("../middlewares/user/authenticateToken");
 const pool = require("../pool");
 
 const reactionRouter = express.Router();
