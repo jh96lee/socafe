@@ -2,16 +2,18 @@ import * as React from "react";
 
 import { LoginForm } from "../../views/login-form";
 
+import { FormPageStyle } from "../../styles";
+import { LoginPageElementWrapperStyle } from "./LoginPageStyle";
+
 const LoginPage = () => {
 	return (
-		<h1>LO</h1>
-		// <UserFormPageStyle>
-		// 	<UserFormPageElementsWrapperStyle>
-		// 		<h2>Login</h2>
+		<FormPageStyle>
+			<LoginPageElementWrapperStyle>
+				<h2>Login</h2>
 
-		// 		<LoginForm />
-		// 	</UserFormPageElementsWrapperStyle>
-		// </UserFormPageStyle>
+				<LoginForm />
+			</LoginPageElementWrapperStyle>
+		</FormPageStyle>
 	);
 };
 

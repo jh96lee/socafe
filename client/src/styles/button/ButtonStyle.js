@@ -28,7 +28,7 @@ const ButtonStyle = styled.button`
 				? "var(--success-background-color)"
 				: props.error
 				? "var(--error-background-color)"
-				: "var(--primary-clickable-background-color)"};
+				: "var(--primary-hover-clickable-background-color)"};
 		cursor: pointer;
 	}
 

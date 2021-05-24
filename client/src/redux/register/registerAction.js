@@ -7,13 +7,13 @@ export const setRegisterUserInfo = (userInfoObject) => ({
 	payload: userInfoObject,
 });
 
-export const setSuccessMessage = (successMessage) => ({
-	type: "SET_SUCCESS_MESSAGE",
+export const setRegisterSuccessMessage = (successMessage) => ({
+	type: "SET_REGISTER_SUCCESS_MESSAGE",
 	payload: successMessage,
 });
 
-export const setErrorMessage = (errorMessage) => ({
-	type: "SET_ERROR_MESSAGE",
+export const setRegisterErrorMessage = (errorMessage) => ({
+	type: "SET_REGISTER_ERROR_MESSAGE",
 	payload: errorMessage,
 });
 
@@ -50,13 +50,13 @@ export const registerUser = (userRegisterInfoObject) => async (dispatch) => {
 	const { error, success, token } = data;
 
 	if (error) {
-		dispatch(setErrorMessage(error));
+		dispatch(setRegisterErrorMessage(error));
 	} else if (success) {
 		setCookie("token", token);
 
 		delete data.token;
 
-		dispatch(setSuccessMessage(success));
+		dispatch(setRegisterSuccessMessage(success));
 
 		dispatch(setRegisterStep());
 	}

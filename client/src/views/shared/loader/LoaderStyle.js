@@ -12,12 +12,12 @@ const spinningLoader = keyframes`
 
 export const LoaderWrapperStyle = styled.div`
 	display: flex;
+	margin: auto;
 `;
 
 export const LoaderStyle = styled.div`
 	width: 5rem;
 	height: 5rem;
-	margin: auto;
 	border: 0.7rem solid
 		${(props) => (props.theme.isDarkMode ? "#83c0f11f" : "#af786569")};
 	border-top: 0.7rem solid

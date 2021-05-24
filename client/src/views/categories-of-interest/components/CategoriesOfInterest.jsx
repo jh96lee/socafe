@@ -7,29 +7,27 @@ import PostCategory from "./PostCategory";
 import {
 	CategoriesOfInterestStyle,
 	CategoriesOfInterestElementsWrapperStyle,
-	CategoriesOfInterestButtonStyle,
 } from "../styles/CategoryOfInterestStyle";
+import { ButtonStyle } from "../../../styles";
 
 import {
 	fetchPostCategories,
-	postCategoriesOfInterest,
+	// postCategoriesOfInterest,
 } from "../../../redux/post-category/postCategoryAction";
 
 const CategoriesOfInterest = () => {
-	const [selectedCategoriesArray, setSelectedCategoriesArray] = React.useState(
-		[]
-	);
+	// TODO: depending on the url, it's either an empty array or category of interest array that was fetched via API
+	const [selectedPostCategoriesArray, setSelectedPostCategoriesArray] =
+		React.useState([]);
 
-	const {
-		isCategoriesLoaded,
-		categories,
-		categoriesOfInterestResult,
-	} = useSelector((state) => state.postCategoryReducer);
+	const { isPostCategoriesLoading, postCategoriesArray } = useSelector(
+		(state) => state.postCategoryReducer
+	);
 
 	const dispatch = useDispatch();
 
 	const handleOnClick = () => {
-		dispatch(postCategoriesOfInterest(selectedCategoriesArray));
+		// dispatch(postCategoriesOfInterest(selectedCategoriesArray));
 	};
 
 	React.useEffect(() => {
@@ -38,35 +36,38 @@ const CategoriesOfInterest = () => {
 
 	return (
 		<CategoriesOfInterestStyle>
-			{isCategoriesLoaded ? (
+			{isPostCategoriesLoading ? (
+				<Loader />
+			) : (
 				<React.Fragment>
 					<CategoriesOfInterestElementsWrapperStyle>
-						{categories.map((category, idx) => {
+						{postCategoriesArray.map((category, idx) => {
 							return (
 								<PostCategory
 									key={`post-category__${idx}`}
-									selectedCategoriesArray={selectedCategoriesArray}
-									setSelectedCategoriesArray={setSelectedCategoriesArray}
-									category={category}
+									selectedPostCategoriesArray={selectedPostCategoriesArray}
+									setSelectedPostCategoriesArray={
+										setSelectedPostCategoriesArray
+									}
+									postCategory={category}
 								/>
 							);
 						})}
 					</CategoriesOfInterestElementsWrapperStyle>
 
-					<CategoriesOfInterestButtonStyle
+					<ButtonStyle
 						onClick={handleOnClick}
-						success={
-							categoriesOfInterestResult && categoriesOfInterestResult.success
-						}
-						error={
-							categoriesOfInterestResult && categoriesOfInterestResult.error
-						}
+						// success={
+						// 	categoriesOfInterestResult && categoriesOfInterestResult.success
+						// }
+						// error={
+						// 	categoriesOfInterestResult && categoriesOfInterestResult.error
+						// }
+						width="24rem"
 					>
 						Submit
-					</CategoriesOfInterestButtonStyle>
+					</ButtonStyle>
 				</React.Fragment>
-			) : (
-				<Loader />
 			)}
 		</CategoriesOfInterestStyle>
 	);

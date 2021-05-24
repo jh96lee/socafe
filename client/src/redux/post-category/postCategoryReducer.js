@@ -1,10 +1,6 @@
 const initalState = {
-	isCategoriesLoaded: false,
-	categories: [],
-	isCategoriesOfInterestLoaded: false,
-	categoriesOfInterest: [],
-	isCategoriesOfInterestPosted: false,
-	categoriesOfInterestResult: null,
+	isPostCategoriesLoading: false,
+	postCategoriesArray: [],
 };
 
 const postCategoryReducer = (state = initalState, action) => {
@@ -12,32 +8,17 @@ const postCategoryReducer = (state = initalState, action) => {
 		case "START_FETCHING_POST_CATEGORIES":
 			return {
 				...state,
-				isCategoriesLoaded: false,
+				isPostCategoriesLoading: true,
 			};
-		case "FETCHING_POST_CATEGORIES":
+		case "FETCHED_POST_CATEGORIES":
 			return {
 				...state,
-				categories: action.payload,
+				postCategoriesArray: action.payload,
 			};
 		case "END_FETCHING_POST_CATEGORIES":
 			return {
 				...state,
-				isCategoriesLoaded: true,
-			};
-		case "START_POSTING_CATEGORIES_OF_INTEREST":
-			return {
-				...state,
-				isCategoriesOfInterestPosted: false,
-			};
-		case "POSTING_CATEGORIES_OF_INTEREST":
-			return {
-				...state,
-				categoriesOfInterestResult: action.payload,
-			};
-		case "END_POSTING_CATEGORIES_OF_INTEREST":
-			return {
-				...state,
-				isCategoriesOfInterestPosted: true,
+				isPostCategoriesLoading: false,
 			};
 		default:
 			return state;

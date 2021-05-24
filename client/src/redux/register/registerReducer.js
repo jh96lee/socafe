@@ -1,5 +1,5 @@
 const initialState = {
-	registerStepIndex: 0,
+	registerStepIndex: 1,
 	fullName: "",
 	email: "",
 	username: "",
@@ -13,16 +13,18 @@ const registerReducer = (state = initialState, action) => {
 		// REVIEW: return a whole new user info object
 		case "SET_REGISTER_USER_INFO":
 			return {
+				...state,
 				// TODO: spread out the user info object
 				...action.payload,
-				result: state.result,
 			};
-		case "SET_SUCCESS_MESSAGE":
+		case "SET_REGISTER_SUCCESS_MESSAGE":
 			return {
 				...state,
+				// REVIEW: when successful registration happens, we want to reset the errorMessage state to null
+				errorMessage: null,
 				successMessage: action.payload,
 			};
-		case "SET_ERROR_MESSAGE":
+		case "SET_REGISTER_ERROR_MESSAGE":
 			return {
 				...state,
 				// REVIEW: needs to be 1 level object

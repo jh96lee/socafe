@@ -10,7 +10,7 @@ const GlobalStyles = createGlobalStyle`
         --primary-text-color: ${(props) =>
 					props.theme.isDarkMode ? "#f5f5f5" : "#000"};
         --secondary-text-color: ${(props) =>
-					props.theme.isDarkMode ? "#bcbebf" : "#6f8b98"};
+					props.theme.isDarkMode ? "#bcbebf" : "#546a75"};
         --error-text-color: ${(props) =>
 					props.theme.isDarkMode ? "#fd8097" : "#a70202"};
         --success-text-color: ${(props) =>
@@ -22,7 +22,7 @@ const GlobalStyles = createGlobalStyle`
         --primary-background-color: ${(props) =>
 					props.theme.isDarkMode ? "#18191d" : "#fff"};
         --secondary-background-color: ${(props) =>
-					props.theme.isDarkMode ? "#1d1f25" : "#f9fafb"};
+					props.theme.isDarkMode ? "#202229" : "#f9fafb"};
         --error-background-color: ${(props) =>
 					props.theme.isDarkMode ? "#ff000033" : "#ff5b5b4d"};
         --success-background-color: ${(props) =>
@@ -50,7 +50,7 @@ const GlobalStyles = createGlobalStyle`
 
         /* TODO: border and box shadow colors */
         --primary-separator-color: ${(props) =>
-					props.theme.isDarkMode ? "#0e0e0e" : "#deeaef"};
+					props.theme.isDarkMode ? "#0a0a0a" : "#d3dfe4"};
         --focus-separator-color: ${(props) =>
 					props.theme.isDarkMode ? "#6c8a98" : "#90b8cb"};
         

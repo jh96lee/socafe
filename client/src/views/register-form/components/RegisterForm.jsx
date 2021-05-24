@@ -4,48 +4,19 @@ import { useSelector, useDispatch } from "react-redux";
 
 import { FormInput, Message } from "../../shared";
 
-import { ButtonStyle } from "../../../styles";
+import {
+	ButtonStyle,
+	FormStyle,
+	FormFieldsetStyle,
+	FormInputAndMessageStyle,
+} from "../../../styles";
 
 import {
 	setRegisterUserInfo,
 	registerUser,
 } from "../../../redux/register/registerAction";
 
-import styled from "styled-components";
-
-const FormStyle = styled.form`
-	width: 100%;
-
-	& > button {
-		margin-top: 2.5rem;
-		margin-bottom: 0.7rem;
-	}
-
-	& a {
-		display: block;
-		font-size: 1.38rem;
-		letter-spacing: -0.6px;
-		font-weight: 400;
-		text-decoration: none;
-		color: ${(props) => (props.theme.isDarkMode ? "#94c2f3" : "#417bb9")};
-	}
-`;
-
-const FormFieldsetStyle = styled.fieldset`
-	display: flex;
-	flex-direction: column;
-	border: none;
-
-	& > *:not(:last-child) {
-		margin-bottom: 2.5rem;
-	}
-`;
-
-const FormInputAndMessageStyle = styled.div`
-	& > p {
-		margin-top: 0.5rem;
-	}
-`;
+import { handleFormInputOnChange } from "../../../utils/form/handleFormInputOnChange";
 
 const RegisterForm = () => {
 	// REVIEW: data like basic user info and current form step and message sent from the server
@@ -64,11 +35,12 @@ const RegisterForm = () => {
 
 	// TODO: utility function this
 	const handleOnChange = (e) => {
-		const replicaObject = userRegisterInfoObject;
-
-		replicaObject[e.target.name] = e.target.value;
-
-		dispatch(setRegisterUserInfo(replicaObject));
+		handleFormInputOnChange(
+			e,
+			userRegisterInfoObject,
+			dispatch,
+			setRegisterUserInfo
+		);
 	};
 
 	return (

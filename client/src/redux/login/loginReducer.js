@@ -1,20 +1,27 @@
 const initialState = {
 	email: "",
 	password: "",
-	result: null,
+	successMessage: null,
+	errorMessage: null,
 };
 
 const loginReducer = (state = initialState, action) => {
 	switch (action.type) {
-		case "ENTER_LOGIN_USER_INFO":
-			return {
-				...action.payload,
-				result: state.result,
-			};
-		case "SET_LOGIN_RESULT":
+		case "SET_LOGIN_USER_INFO":
 			return {
 				...state,
-				result: action.payload,
+				...action.payload,
+			};
+		case "SET_LOGIN_SUCCESS_MESSAGE":
+			return {
+				...state,
+				errorMessage: null,
+				successMessage: action.payload,
+			};
+		case "SET_LOGIN_ERROR_MESSAGE":
+			return {
+				...state,
+				errorMessage: action.payload,
 			};
 		default:
 			return state;

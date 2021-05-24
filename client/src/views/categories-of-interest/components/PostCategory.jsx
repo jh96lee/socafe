@@ -1,80 +1,73 @@
 import * as React from "react";
 
-import {
-	PostCategoryStyle,
-	PostCategoryWrapperStyle,
-} from "../styles/PostCategoryStyle";
+import { PostCategoryStyle } from "../styles/PostCategoryStyle";
 
 import { Checkmark, Plus } from "../../../assets";
 
 const PostCategory = ({
-	selectedCategoriesArray,
-	setSelectedCategoriesArray,
-	category,
+	selectedPostCategoriesArray,
+	setSelectedPostCategoriesArray,
+	postCategory,
 }) => {
 	const [isSelected, setIsSelected] = React.useState(false);
+
+	// TODO: depending on the url, we want isSelected its value evaluated differently
+	// const selectedPostCategoriesIDArray = selectedPostCategoriesArray.map(
+	// 	(category) => category.id
+	// );
+
+	// const [isSelected, setIsSelected] = React.useState(
+	// 	postCategoriesIDArray.includes(postCategory.id)
+	// );
 
 	const handleOnClick = () => {
 		setIsSelected((prevState) => !prevState);
 	};
 
+	// REVIEW: this useEffect triggers every time user changes the isSelected value
 	React.useEffect(() => {
-		if (selectedCategoriesArray.length < 5 && isSelected) {
-			const updatedSelectedCategoriesArray = [...selectedCategoriesArray];
+		if (isSelected) {
+			const setStateArray = [...selectedPostCategoriesArray];
 
-			updatedSelectedCategoriesArray.push(category);
+			setStateArray.push(postCategory);
 
-			setSelectedCategoriesArray(updatedSelectedCategoriesArray);
-		} else if (selectedCategoriesArray.length >= 5 && isSelected) {
-			const updatedSelectedCategoriesArray = [];
-
-			selectedCategoriesArray.forEach((element, idx) => {
-				if (idx === 0) {
-					return;
-				} else {
-					updatedSelectedCategoriesArray.push(element);
-				}
-			});
-
-			updatedSelectedCategoriesArray.push(category);
-
-			setSelectedCategoriesArray(updatedSelectedCategoriesArray);
+			setSelectedPostCategoriesArray(setStateArray);
 		} else if (!isSelected) {
-			const updatedSelectedCategoriesArray = selectedCategoriesArray.filter(
-				(element) => {
-					return element.id !== category.id;
+			const setStateArray = [...selectedPostCategoriesArray].filter(
+				(category) => {
+					return category.id !== postCategory.id;
 				}
 			);
 
-			setSelectedCategoriesArray(updatedSelectedCategoriesArray);
+			setSelectedPostCategoriesArray(setStateArray);
 		}
 	}, [isSelected]);
 
+	// REVIEW: triggers when selectedPostCategoriesArray changes
+	// REVIEW: when the array length exceeds 5 temporarily, it will look for the id of the first element of the array
+	// REVIEW: then change its isSelected value to false, which then triggers the above useEffect and filters it off the selectedPostCategoriesArray
 	React.useEffect(() => {
-		if (selectedCategoriesArray.length >= 5) {
-			const selectedCategoriesIDArray = selectedCategoriesArray.map(
-				(element) => element.id
-			);
+		if (selectedPostCategoriesArray.length > 5 && isSelected) {
+			const setStateArray = [...selectedPostCategoriesArray];
 
-			const isIncluded = selectedCategoriesIDArray.includes(category.id);
+			const firstPostCategoryID = setStateArray[0].id;
 
-			if (!isIncluded && isSelected) {
+			if (postCategory.id === firstPostCategoryID) {
 				setIsSelected(false);
-			} else {
-				return;
 			}
 		}
-	}, [selectedCategoriesArray]);
+	}, [selectedPostCategoriesArray]);
 
 	return (
-		<PostCategoryStyle onClick={handleOnClick}>
-			<img src={category.category_url} />
+		<PostCategoryStyle onClick={handleOnClick} isSelected={isSelected}>
+			{/* TODO: erase later */}
+			{console.log(selectedPostCategoriesArray)}
 
-			<PostCategoryWrapperStyle isSelected={isSelected}>
-				<h5>{category.title}</h5>
+			<img src={postCategory.category_url} />
 
-				{isSelected ? <Checkmark id="check" /> : <Plus id="plus" />}
-			</PostCategoryWrapperStyle>
+			<h5>{postCategory.title}</h5>
+
+			{isSelected ? <Checkmark id="check" /> : <Plus id="plus" />}
 		</PostCategoryStyle>
 	);
 };
