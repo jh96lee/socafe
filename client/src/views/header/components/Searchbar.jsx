@@ -3,7 +3,7 @@ import { useHistory } from "react-router-dom";
 
 import useShowAndHideElementOnClick from "../../../hooks/useShowAndHideElementOnClick";
 
-import { searchRequest } from "../../../utils/searchRequest";
+import { handleSearchInputOnChange } from "../../../utils/form/handleSearchInputOnChange";
 
 import {
 	IconElement,
@@ -56,7 +56,11 @@ const Searchbar = () => {
 		const searchAPIEndpoint =
 			searchType === "Users" ? "/search/users" : "/search/products";
 
-		searchRequest(e.target.value, searchAPIEndpoint, setSearchResultArray);
+		handleSearchInputOnChange(
+			e.target.value,
+			searchAPIEndpoint,
+			setSearchResultArray
+		);
 	};
 
 	const searchTypeDataArray = [

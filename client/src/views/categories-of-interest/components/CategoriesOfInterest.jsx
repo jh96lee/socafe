@@ -10,10 +10,8 @@ import {
 } from "../styles/CategoryOfInterestStyle";
 import { ButtonStyle } from "../../../styles";
 
-import {
-	fetchPostCategories,
-	// postCategoriesOfInterest,
-} from "../../../redux/post-category/postCategoryAction";
+import { fetchPostCategories } from "../../../redux/post-category/postCategoryAction";
+import { postCategoryOfInterest } from "../../../redux/category-of-interest/categoryOfInterestAction";
 
 const CategoriesOfInterest = () => {
 	// TODO: depending on the url, it's either an empty array or category of interest array that was fetched via API
@@ -23,11 +21,13 @@ const CategoriesOfInterest = () => {
 	const { isPostCategoriesLoading, postCategoriesArray } = useSelector(
 		(state) => state.postCategoryReducer
 	);
+	const { isCategoryOfInterestPosting, errorMessage, successMessage } =
+		useSelector((state) => state.categoryOfInterestReducer);
 
 	const dispatch = useDispatch();
 
 	const handleOnClick = () => {
-		// dispatch(postCategoriesOfInterest(selectedCategoriesArray));
+		dispatch(postCategoryOfInterest(selectedPostCategoriesArray));
 	};
 
 	React.useEffect(() => {
@@ -57,15 +57,11 @@ const CategoriesOfInterest = () => {
 
 					<ButtonStyle
 						onClick={handleOnClick}
-						// success={
-						// 	categoriesOfInterestResult && categoriesOfInterestResult.success
-						// }
-						// error={
-						// 	categoriesOfInterestResult && categoriesOfInterestResult.error
-						// }
+						success={successMessage}
+						error={errorMessage}
 						width="24rem"
 					>
-						Submit
+						{successMessage ? successMessage : "Continue"}
 					</ButtonStyle>
 				</React.Fragment>
 			)}

@@ -4,7 +4,7 @@ import { useHistory } from "react-router-dom";
 
 import { DropdownMenu, DropdownElement, IconElement } from "../../shared";
 
-import { removeUser } from "../../../redux/user/userAction";
+import { logoutUser } from "../../../redux/login/loginAction";
 
 import { DropdownStyle } from "../../../styles";
 import AvatarStyle from "../styles/AvatarStyle";
@@ -29,7 +29,7 @@ const Avatar = () => {
 				},
 				{
 					onClickEvent: () => {
-						dispatch(removeUser());
+						dispatch(logoutUser());
 					},
 					label: "Logout",
 					icon: <Logout />,

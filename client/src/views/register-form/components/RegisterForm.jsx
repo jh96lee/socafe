@@ -105,8 +105,8 @@ const RegisterForm = () => {
 				disabled={!fullName || !email || !username || !password}
 				width="100%"
 				isDisabled={!fullName || !email || !username || !password}
-				success={successMessage ? successMessage : null}
-				error={errorMessage ? errorMessage : null}
+				success={successMessage}
+				error={errorMessage}
 				onClick={handleOnClick}
 			>
 				{successMessage ? successMessage : "Continue"}

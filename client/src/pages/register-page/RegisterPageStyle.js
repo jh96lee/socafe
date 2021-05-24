@@ -6,8 +6,10 @@ export const RegisterPageElementsWrapperStyle = styled.div`
 			? "40rem"
 			: props.registerStepIndex === 1
 			? "75%"
-			: "100%"};
-	margin-top: 3.5rem;
+			: "37rem"};
+	margin-top: ${(props) => (props.registerStepIndex !== 2 ? "3.5rem" : "0rem")};
+	display: ${(props) => props.registerStepIndex === 2 && "flex"};
+	align-items: ${(props) => props.registerStepIndex === 2 && "center"};
 
 	& > h2 {
 		color: var(--primary-text-color);
@@ -20,6 +22,6 @@ export const RegisterPageElementsWrapperStyle = styled.div`
 				? "90%"
 				: props.registerStepIndex === 1
 				? "85%"
-				: "80%"};
+				: "27.5rem"};
 	}
 `;

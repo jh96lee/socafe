@@ -1,24 +1,31 @@
 import * as React from "react";
 
 import { ButtonStyle } from "../../../styles";
-import { NoticeStyle } from "./NoticeStyle";
+import { NoticeStyle, NoticeIconStyle } from "./NoticeStyle";
 
-const Notice = ({ noticeEvent, noticeIcon, noticeCTA }) => {
-	// React.useEffect(() => {
-	// 	let noticeTimeout = setTimeout(() => {
-	// 		noticeEvent();
-	// 	}, 3000);
+const Notice = ({
+	noticeEvent,
+	noticeIcon,
+	noticeMainMessage,
+	noticeSubMessage,
+}) => {
+	React.useEffect(() => {
+		let noticeTimeout = setTimeout(() => {
+			noticeEvent();
+		}, 3000);
 
-	// 	return () => {
-	// 		clearTimeout(noticeTimeout);
-	// 	};
-	// }, []);
+		return () => {
+			clearTimeout(noticeTimeout);
+		};
+	}, []);
 
 	return (
 		<NoticeStyle>
-			{noticeIcon}
+			<NoticeIconStyle>{noticeIcon}</NoticeIconStyle>
 
-			<h2>{noticeCTA}</h2>
+			<h2>{noticeMainMessage}</h2>
+
+			{noticeSubMessage}
 
 			<ButtonStyle onClick={noticeEvent} width="24rem">
 				Go back home

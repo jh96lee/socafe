@@ -1,6 +1,6 @@
 import axios from "axios";
 
-export const searchRequest = async (
+export const handleSearchInputOnChange = async (
 	searchInput,
 	apiEndpoint,
 	setSearchResultArray

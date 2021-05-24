@@ -10,7 +10,7 @@ import { SearchAndSelectedWrapperStyle } from "../styles/SearchAndSelectedWrappe
 
 import { searchAndSelectAddContent } from "../../../../redux/common/searchAndSelectAddContent";
 
-import { searchRequest } from "../../../../utils/searchRequest";
+import { handleSearchInputOnChange } from "../../../../utils/form/handleSearchInputOnChange";
 
 const SearchAndSelect = ({
 	// REVIEW: for DropdownMenu uniqueness
@@ -67,7 +67,7 @@ const SearchAndSelect = ({
 					inputLabel={`search and select `}
 					inputPlaceholder={searchInputPlaceholder}
 					inputOnChangeEventHandler={(e) =>
-						searchRequest(
+						handleSearchInputOnChange(
 							e.target.value,
 							searchAPIEndpoint,
 							setSearchResultArray

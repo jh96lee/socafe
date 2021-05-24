@@ -1,5 +1,5 @@
 const initialState = {
-	registerStepIndex: 1,
+	registerStepIndex: 0,
 	fullName: "",
 	email: "",
 	username: "",
@@ -34,6 +34,11 @@ const registerReducer = (state = initialState, action) => {
 			return {
 				...state,
 				registerStepIndex: state.registerStepIndex + 1,
+			};
+		case "RESET_REGISTER_STEP":
+			return {
+				...state,
+				registerStepIndex: 0,
 			};
 		default:
 			return state;

@@ -3,6 +3,7 @@ import { useSelector, useDispatch } from "react-redux";
 import { useHistory } from "react-router-dom";
 
 import { setUser } from "../../redux/user/userAction";
+import { resetRegisterStep } from "../../redux/register/registerAction";
 
 import { RegisterForm } from "../../views/register-form";
 import { CategoriesOfInterest } from "../../views/categories-of-interest";
@@ -11,7 +12,7 @@ import { Notice } from "../../views/shared";
 import { FormPageStyle } from "../../styles";
 import { RegisterPageElementsWrapperStyle } from "./RegisterPageStyle";
 
-import { Complete } from "../../assets";
+import { Bolt } from "../../assets";
 
 const RegisterPage = () => {
 	const dispatch = useDispatch();
@@ -25,6 +26,8 @@ const RegisterPage = () => {
 		dispatch(setUser());
 
 		history.push("/");
+
+		dispatch(resetRegisterStep());
 	};
 
 	const registerElements = {
@@ -39,9 +42,15 @@ const RegisterPage = () => {
 		2: {
 			form: (
 				<Notice
-					noticeCTA="Account Created!"
+					noticeMainMessage="Success!"
+					noticeSubMessage={
+						<p>
+							Congratulations, your account has been successfully created. You
+							can now log in and explore various posts and products.
+						</p>
+					}
 					noticeEvent={handleNoticeEvent}
-					noticeIcon={<Complete />}
+					noticeIcon={<Bolt />}
 				/>
 			),
 			formCTA: null,

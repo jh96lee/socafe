@@ -1,6 +1,7 @@
 import axios from "axios";
 
 import { setCookie } from "../../utils/cookie";
+import { setCoupleSeconds } from "../../utils/setCoupleSeconds";
 
 export const setRegisterUserInfo = (userInfoObject) => ({
 	type: "SET_REGISTER_USER_INFO",
@@ -18,20 +19,14 @@ export const setRegisterErrorMessage = (errorMessage) => ({
 });
 
 export const setRegisterStep = () => (dispatch) => {
-	let timeout;
-
-	const promise = new Promise((resolve, reject) => {
-		timeout = setTimeout(() => {
-			dispatch({ type: "SET_REGISTER_STEP" });
-
-			resolve("resolve");
-		}, 1500);
-	});
-
-	promise.then((value) => {
-		clearTimeout(timeout);
-	});
+	setCoupleSeconds(() => {
+		dispatch({ type: "SET_REGISTER_STEP" });
+	}, 1500);
 };
+
+export const resetRegisterStep = () => ({
+	type: "RESET_REGISTER_STEP",
+});
 
 export const registerUser = (userRegisterInfoObject) => async (dispatch) => {
 	const { email, fullName, password, username } = userRegisterInfoObject;

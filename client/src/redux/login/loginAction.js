@@ -2,7 +2,7 @@ import axios from "axios";
 
 import { setUser } from "../user/userAction";
 
-import { setCookie, decodePayload } from "../../utils/cookie";
+import { setCookie } from "../../utils/cookie";
 
 export const setLoginUserInfo = (userInfoObject) => ({
 	type: "SET_LOGIN_USER_INFO",
@@ -36,14 +36,21 @@ export const loginUser = (userLoginInfoObject) => async (dispatch) => {
 	if (error) {
 		dispatch(setLoginErrorMessage(error));
 	} else if (success) {
+		// REVIEW: set cookie here
 		setCookie("token", token);
-
-		const decodedUserInfoObject = decodePayload(token);
 
 		delete data.token;
 
 		dispatch(setLoginSuccessMessage(success));
 
-		dispatch(setUser(decodedUserInfoObject));
+		// REVIEW: used the cookie that has just been set and decode it and go on from there
+		dispatch(setUser());
 	}
+};
+
+export const logoutUser = () => (dispatch) => {
+	// REVIEW: set cookie to undefined and setUser action below will get the job done
+	document.cookie = "token=undefined";
+
+	dispatch(setUser());
 };

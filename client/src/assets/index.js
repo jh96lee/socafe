@@ -9,6 +9,7 @@ import { ReactComponent as Left } from "./general/left.svg";
 import { ReactComponent as Sun } from "./general/sun.svg";
 import { ReactComponent as Moon } from "./general/moon.svg";
 import { ReactComponent as Remove } from "./general/remove.svg";
+import { ReactComponent as Bolt } from "./general/bolt.svg";
 
 import { ReactComponent as SocafeDark } from "./logo/socafe-dark.svg";
 import { ReactComponent as SocafeLight } from "./logo/socafe-light.svg";
@@ -48,6 +49,7 @@ export {
 	Sun,
 	Moon,
 	Remove,
+	Bolt,
 	SocafeDark,
 	SocafeLight,
 	Explore,

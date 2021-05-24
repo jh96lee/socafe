@@ -60,9 +60,6 @@ const PostCategory = ({
 
 	return (
 		<PostCategoryStyle onClick={handleOnClick} isSelected={isSelected}>
-			{/* TODO: erase later */}
-			{console.log(selectedPostCategoriesArray)}
-
 			<img src={postCategory.category_url} />
 
 			<h5>{postCategory.title}</h5>
