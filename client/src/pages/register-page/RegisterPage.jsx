@@ -3,11 +3,12 @@ import { useSelector, useDispatch } from "react-redux";
 import { useHistory } from "react-router-dom";
 
 import { setUser } from "../../redux/user/userAction";
-import { resetRegisterStep } from "../../redux/register/registerAction";
+import { resetRegisterForm } from "../../redux/register/registerAction";
+import { resetCategoryOfInterest } from "../../redux/category-of-interest/categoryOfInterestAction";
 
 import { RegisterForm } from "../../views/register-form";
 import { CategoriesOfInterest } from "../../views/categories-of-interest";
-import { Notice } from "../../views/shared";
+import { Notice, Loader } from "../../views/shared";
 
 import { FormPageStyle } from "../../styles";
 import { RegisterPageElementsWrapperStyle } from "./RegisterPageStyle";
@@ -20,6 +21,7 @@ const RegisterPage = () => {
 	const history = useHistory();
 
 	const { registerStepIndex } = useSelector((state) => state.registerReducer);
+	const { isUserRegistering } = useSelector((state) => state.registerReducer);
 
 	// REVIEW: don't need to push user to home because when user state is set, then it will redirect to Homepage component
 	const handleNoticeEvent = () => {
@@ -27,8 +29,16 @@ const RegisterPage = () => {
 
 		history.push("/");
 
-		dispatch(resetRegisterStep());
+		dispatch(resetRegisterForm());
 	};
+
+	React.useEffect(() => {
+		return () => {
+			dispatch(resetRegisterForm());
+
+			dispatch(resetCategoryOfInterest());
+		};
+	}, []);
 
 	const registerElements = {
 		0: {
@@ -59,6 +69,8 @@ const RegisterPage = () => {
 
 	return (
 		<FormPageStyle>
+			{isUserRegistering && <Loader />}
+
 			<RegisterPageElementsWrapperStyle registerStepIndex={registerStepIndex}>
 				{registerElements[registerStepIndex].formCTA ? (
 					<h2>{registerElements[registerStepIndex].formCTA}</h2>

@@ -1,5 +1,5 @@
 import * as React from "react";
-import { BrowserRouter, Switch, Route, Redirect } from "react-router-dom";
+import { BrowserRouter, Switch, Route, Redirect, Link } from "react-router-dom";
 import { useSelector } from "react-redux";
 import { ThemeProvider } from "styled-components";
 import styled from "styled-components";
@@ -12,6 +12,7 @@ import {
 	HomePage,
 	AddPostPage,
 } from "./pages";
+import { AddPostIcon } from "./views/shared";
 
 import GlobalStyle from "./styles/GlobalStyle";
 
@@ -43,6 +44,8 @@ function App() {
 					/>
 
 					<Navigation isResponsiveNavigationOpen={isResponsiveNavigationOpen} />
+
+					{user && <AddPostIcon />}
 
 					<Switch>
 						<Route exact path="/">

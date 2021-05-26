@@ -18,8 +18,6 @@ export const postCategoryOfInterest =
 	(selectedPostCategoriesArray) => async (dispatch) => {
 		const token = fetchToken();
 
-		console.log(token);
-
 		dispatch({
 			type: "START_POSTING_CATEGORY_OF_INTEREST",
 		});
@@ -49,3 +47,7 @@ export const postCategoryOfInterest =
 			dispatch(setCategoryOfInterestErrorMessage(error));
 		}
 	};
+
+export const resetCategoryOfInterest = () => ({
+	type: "RESET_CATEGORY_OF_INTEREST",
+});

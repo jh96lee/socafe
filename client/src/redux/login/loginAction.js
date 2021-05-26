@@ -19,6 +19,17 @@ export const setLoginErrorMessage = (errorMessage) => ({
 	payload: errorMessage,
 });
 
+export const resetLoginForm = () => ({
+	type: "RESET_LOGIN_FORM",
+});
+
+export const logoutUser = () => (dispatch) => {
+	// REVIEW: set cookie to undefined and setUser action below will get the job done
+	document.cookie = "token=undefined";
+
+	dispatch(setUser());
+};
+
 export const loginUser = (userLoginInfoObject) => async (dispatch) => {
 	const { email, password } = userLoginInfoObject;
 
@@ -46,11 +57,4 @@ export const loginUser = (userLoginInfoObject) => async (dispatch) => {
 		// REVIEW: used the cookie that has just been set and decode it and go on from there
 		dispatch(setUser());
 	}
-};
-
-export const logoutUser = () => (dispatch) => {
-	// REVIEW: set cookie to undefined and setUser action below will get the job done
-	document.cookie = "token=undefined";
-
-	dispatch(setUser());
 };

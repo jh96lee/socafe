@@ -2,8 +2,8 @@ import * as React from "react";
 import { useDispatch, useSelector } from "react-redux";
 
 import {
-	setUploadImageMessage,
-	uploadImageAndAddImage,
+	uploadImage,
+	setUploadImageErrorMessage,
 } from "../../../../redux/upload-image/uploadImageAction";
 
 import {
@@ -36,18 +36,18 @@ const UploadImageButton = ({ uploadedImageType }) => {
 			if (imagesArray.length >= 5) {
 				// REVIEW: render error message
 				dispatch(
-					setUploadImageMessage({
-						error: "You can upload up to 5 images per post",
+					setUploadImageErrorMessage({
+						image: "You can upload up to 5 images per post",
 					})
 				);
 			} else {
 				if (file.type === "image/png" || file.type === "image/jpeg") {
 					// REVIEW: upload image and add uploaded image to corresponding array
-					dispatch(uploadImageAndAddImage(uploadedImageType, file));
+					dispatch(uploadImage(uploadedImageType, file));
 				} else {
 					// REVIEW: render error message
 					dispatch(
-						setUploadImageMessage({ error: "Unsupported image format" })
+						setUploadImageErrorMessage({ image: "Unsupported image format" })
 					);
 				}
 			}

@@ -5,19 +5,22 @@ import UploadImageButton from "./UploadImageButton";
 import UploadedImagePreview from "./UploadedImagePreview";
 import { Loader } from "../../index";
 
-import { UploadImagesStyle } from "../styles/UploadImagesStyle";
+import { UploadImageStyle } from "../styles/UploadImageStyle";
 
 import { setUploadImageMessage } from "../../../../redux/upload-image/uploadImageAction";
 
 const UploadImages = ({ uploadedImageType }) => {
+	const [isSubmitted, setIsSubmitted] = React.useState(false);
+
 	const dispatch = useDispatch();
 
 	const { uploadedPostImagesArray } = useSelector(
 		(state) => state.addPostReducer
 	);
-	const { isImageUploading, isImageDeleting } = useSelector(
-		(state) => state.uploadImageReducer
-	);
+
+	const handleOnClick = () => {
+		setIsSubmitted((prevState) => !prevState);
+	};
 
 	const imagesArray =
 		uploadedImageType === "post-image"
@@ -26,29 +29,25 @@ const UploadImages = ({ uploadedImageType }) => {
 
 	React.useEffect(() => {
 		return () => {
-			// REVIEW: to reset uploadImageMessage state when component unmounts
-			dispatch(setUploadImageMessage(null));
+			// TODO: fix
+			// dispatch(setUploadImageMessage(null));
 		};
 	}, []);
 
 	return (
-		<UploadImagesStyle>
-			{isImageDeleting || isImageUploading ? (
-				<Loader />
-			) : (
-				imagesArray.map((image) => {
-					return (
-						<UploadedImagePreview
-							key={image.id}
-							uploadedImage={image}
-							uploadedImageType={uploadedImageType}
-						/>
-					);
-				})
-			)}
+		<UploadImageStyle>
+			{imagesArray.map((image) => {
+				return (
+					<UploadedImagePreview
+						key={image.id}
+						uploadedImage={image}
+						uploadedImageType={uploadedImageType}
+					/>
+				);
+			})}
 
 			<UploadImageButton uploadedImageType={uploadedImageType} />
-		</UploadImagesStyle>
+		</UploadImageStyle>
 	);
 };
 

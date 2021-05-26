@@ -2,10 +2,13 @@ import * as React from "react";
 
 import { LoaderWrapperStyle, LoaderStyle } from "./LoaderStyle";
 
-const Loader = () => {
+const Loader = ({ loaderSize, loaderBorderSize }) => {
 	return (
 		<LoaderWrapperStyle>
-			<LoaderStyle />
+			<LoaderStyle
+				loaderSize={loaderSize}
+				loaderBorderSize={loaderBorderSize}
+			/>
 		</LoaderWrapperStyle>
 	);
 };

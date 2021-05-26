@@ -1,4 +1,4 @@
-import { setUploadImageMessage } from "../upload-image/uploadImageAction";
+import { setUploadImageErrorMessage } from "../upload-image/uploadImageAction";
 
 export const addPostCategory = (category) => ({
 	type: "ADD_POST_CATEGORY",
@@ -36,13 +36,13 @@ export const submitPost =
 			// TODO: submit post and interact with the server
 		} else if (uploadedImagesArray.length === 0) {
 			dispatch(
-				setUploadImageMessage({
+				setUploadImageErrorMessage({
 					error: "At least 1 image must be added to the post",
 				})
 			);
 		} else if (postCategoriesArray.length === 0) {
 			dispatch(
-				setAddPostMessage({
+				setUploadImageErrorMessage({
 					postCategory: "At least 1 category must be selected",
 				})
 			);

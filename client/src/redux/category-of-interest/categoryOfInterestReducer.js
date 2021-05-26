@@ -29,6 +29,8 @@ const categoryOfInterestReducer = (state = initialState, action) => {
 				...state,
 				successMessage: action.payload,
 			};
+		case "RESET_CATEGORY_OF_INTEREST":
+			return initialState;
 		default:
 			return state;
 	}

@@ -6,6 +6,7 @@ import {
 	SearchAndSelect,
 	Caption,
 	Message,
+	Loader,
 } from "../../views/shared";
 import { PostPreview } from "../../views/post-preview";
 
@@ -33,7 +34,7 @@ const AddPostPageButtonStyle = styled(ButtonStyle)`
 const AddPostPage = () => {
 	const dispatch = useDispatch();
 
-	const { uploadImageMessage } = useSelector(
+	const { uploadImageMessage, isImageUploading, isImageDeleting } = useSelector(
 		(state) => state.uploadImageReducer
 	);
 	const {
@@ -45,6 +46,8 @@ const AddPostPage = () => {
 
 	return (
 		<AddContentPageStyle>
+			{isImageDeleting || !isImageUploading ? <Loader /> : null}
+
 			<AddContentFormStyle>
 				<AddContentStyle>
 					<h3>Upload Photos</h3>

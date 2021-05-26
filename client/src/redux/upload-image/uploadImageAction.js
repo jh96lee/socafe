@@ -1,60 +1,66 @@
 import axios from "axios";
 
-export const setUploadImageMessage = (messageObject) => ({
+export const setUploadImageErrorMessage = (errorMessage) => ({
 	type: "SET_UPLOAD_IMAGE_MESSAGE",
-	payload: messageObject,
+	payload: errorMessage,
 });
 
-export const uploadImageAndAddImage =
-	(uploadedImageType, file) => async (dispatch) => {
-		dispatch(setUploadImageMessage(null));
+const setUploadImageSuccessMessage = (successMessage) => ({
+	type: "SET_UPLOAD_IMAGE_SUCCESS_MESSAGE",
+	payload: successMessage,
+});
 
-		try {
-			dispatch({ type: "START_UPLOADING_IMAGE" });
+export const uploadImage = (uploadedImageType, file) => async (dispatch) => {
+	dispatch({ type: "START_UPLOADING_IMAGE" });
 
-			const formData = new FormData();
+	try {
+		const formData = new FormData();
 
-			formData.append("image", file);
+		formData.append("image", file);
 
-			// REVIEW: data contains the public_id and url of the image
-			const { data } = await axios.post(
-				"http://localhost:8080/upload/image",
-				formData,
-				{
-					headers: {
-						"Content-Type": "multipart/form-data",
-					},
-				}
-			);
-
-			const { url } = data;
-
-			if (url) {
-				const actionType =
-					uploadedImageType === "post-image"
-						? "ADD_POST_IMAGE"
-						: "ADD_PRODUCT_IMAGE";
-
-				dispatch({
-					type: actionType,
-					payload: data,
-				});
-
-				dispatch({ type: "END_UPLOADING_IMAGE" });
+		// REVIEW: data contains the public_id and url of the image
+		const { data } = await axios.post(
+			"http://localhost:8080/upload/image",
+			formData,
+			{
+				headers: {
+					"Content-Type": "multipart/form-data",
+				},
 			}
-		} catch (error) {
-			dispatch({ type: "END_UPLOADING_IMAGE" });
+		);
 
-			dispatch(
-				setUploadImageMessage({
-					error: "There has been an error while uploading your image/s",
-				})
-			);
+		const { error, success } = data;
+
+		if (success) {
+			const actionType =
+				uploadedImageType === "post-image"
+					? "ADD_POST_IMAGE"
+					: "ADD_PRODUCT_IMAGE";
+
+			dispatch({
+				type: actionType,
+				payload: data,
+			});
+
+			dispatch(setUploadImageSuccessMessage(success));
+
+			dispatch({ type: "END_UPLOADING_IMAGE" });
+		} else if (error) {
+			dispatch(setUploadImageErrorMessage(error));
 		}
-	};
+	} catch (error) {
+		dispatch({ type: "END_UPLOADING_IMAGE" });
+
+		dispatch(
+			setUploadImageErrorMessage({
+				error: "There has been an error while uploading your image/s",
+			})
+		);
+	}
+};
 
 // REVIEW: id of the image to be deleted needs to be provided and the array needs to be modified needs to be provided as well
-export const deleteImageAndRemoveImage =
+export const deleteImage =
 	(uploadedImageType, uploadedImageID) => async (dispatch) => {
 		dispatch({ type: "START_DELETING_IMAGE" });
 
@@ -80,19 +86,19 @@ export const deleteImageAndRemoveImage =
 					payload: uploadedImageID,
 				});
 
-				dispatch(setUploadImageMessage(data));
+				dispatch(setUploadImageErrorMessage(success));
 
 				dispatch({ type: "END_DELETING_IMAGE" });
 			} else if (error) {
 				dispatch({ type: "END_DELETING_IMAGE" });
 
-				dispatch(setUploadImageMessage(data));
+				dispatch(setUploadImageErrorMessage(error));
 			}
 		} catch (error) {
 			dispatch({ type: "END_DELETING_IMAGE" });
 
 			dispatch(
-				setUploadImageMessage({
+				setUploadImageErrorMessage({
 					error: "There has been an error while deleting the selected image",
 				})
 			);

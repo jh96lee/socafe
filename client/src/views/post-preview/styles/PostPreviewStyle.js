@@ -6,7 +6,7 @@ export const PostPreviewStyle = styled.div`
 	gap: 2rem;
 	width: 90%;
 	max-width: 100rem;
-	margin: 3.5rem auto;
+	margin: 5rem auto;
 
 	@media (max-width: 1250px) {
 		grid-template-columns: 1fr;

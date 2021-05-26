@@ -1,6 +1,6 @@
 import styled from "styled-components";
 
-export const UploadImagesStyle = styled.div`
+export const UploadImageStyle = styled.div`
 	position: relative;
 	min-width: 100%;
 	max-width: 100%;

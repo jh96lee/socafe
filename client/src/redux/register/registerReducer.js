@@ -1,4 +1,5 @@
 const initialState = {
+	isUserRegistering: false,
 	registerStepIndex: 0,
 	fullName: "",
 	email: "",
@@ -10,6 +11,16 @@ const initialState = {
 
 const registerReducer = (state = initialState, action) => {
 	switch (action.type) {
+		case "START_USER_REGISTER":
+			return {
+				...state,
+				isUserRegistering: true,
+			};
+		case "END_USER_REGISTER":
+			return {
+				...state,
+				isUserRegistering: false,
+			};
 		// REVIEW: return a whole new user info object
 		case "SET_REGISTER_USER_INFO":
 			return {
@@ -35,11 +46,8 @@ const registerReducer = (state = initialState, action) => {
 				...state,
 				registerStepIndex: state.registerStepIndex + 1,
 			};
-		case "RESET_REGISTER_STEP":
-			return {
-				...state,
-				registerStepIndex: 0,
-			};
+		case "RESET_REGISTER_FORM":
+			return initialState;
 		default:
 			return state;
 	}

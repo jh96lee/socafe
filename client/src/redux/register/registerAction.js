@@ -24,35 +24,59 @@ export const setRegisterStep = () => (dispatch) => {
 	}, 1500);
 };
 
-export const resetRegisterStep = () => ({
-	type: "RESET_REGISTER_STEP",
+export const resetRegisterForm = () => ({
+	type: "RESET_REGISTER_FORM",
 });
 
 export const registerUser = (userRegisterInfoObject) => async (dispatch) => {
+	dispatch({ type: "START_USER_REGISTER" });
+
 	const { email, fullName, password, username } = userRegisterInfoObject;
 
-	const { data } = await axios({
-		method: "POST",
-		url: "http://localhost:8080/user/register",
-		data: {
-			fullName,
-			email,
-			username,
-			password,
-		},
-	});
+	try {
+		const { data } = await axios({
+			method: "POST",
+			url: "http://localhost:8080/user/register",
+			data: {
+				fullName,
+				email,
+				username,
+				password,
+			},
+		});
 
-	const { error, success, token } = data;
+		if (data) {
+			dispatch({ type: "END_USER_REGISTER" });
 
-	if (error) {
-		dispatch(setRegisterErrorMessage(error));
-	} else if (success) {
-		setCookie("token", token);
+			const { error, success, token } = data;
 
-		delete data.token;
+			if (error) {
+				dispatch(setRegisterErrorMessage(error));
+			} else if (success) {
+				setCookie("token", token);
 
-		dispatch(setRegisterSuccessMessage(success));
+				delete data.token;
 
-		dispatch(setRegisterStep());
+				dispatch(setRegisterSuccessMessage(success));
+
+				dispatch(setRegisterStep());
+			}
+		} else {
+			dispatch({ type: "END_USER_REGISTER" });
+
+			dispatch(
+				setRegisterErrorMessage({
+					general: "There has been an error while fetching for data",
+				})
+			);
+		}
+	} catch (error) {
+		dispatch({ type: "END_USER_REGISTER" });
+
+		dispatch(
+			setRegisterErrorMessage({
+				general: "There has been an error during your registration process",
+			})
+		);
 	}
 };

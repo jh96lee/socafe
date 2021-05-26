@@ -23,6 +23,8 @@ const loginReducer = (state = initialState, action) => {
 				...state,
 				errorMessage: action.payload,
 			};
+		case "RESET_LOGIN_FORM":
+			return initialState;
 		default:
 			return state;
 	}
