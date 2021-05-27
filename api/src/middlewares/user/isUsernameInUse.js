@@ -17,7 +17,7 @@ const isUsernameInUse = async (req, res, next) => {
 		const userID = rows[0];
 
 		if (userID) {
-			req.body.error.username = "This username is already being used";
+			res.locals.username = "This username is already being used";
 
 			next();
 		} else {

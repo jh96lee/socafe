@@ -24,16 +24,19 @@ fileRouter.post(
 					url: imageObject.url,
 					width: imageObject.width,
 					height: imageObject.height,
+					success: "Image uploaded successfully",
 				});
 			} catch (error) {
 				res.send({
-					error:
-						"There has been an error while uploading your image to the cloud",
+					error: {
+						image:
+							"There has been an error while uploading your image to the cloud",
+					},
 				});
 			}
 		} else {
 			res.send({
-				error: "The server wasn't able to receive your file",
+				error: { image: "The server wasn't able to receive your file" },
 			});
 		}
 	}
@@ -50,7 +53,7 @@ fileRouter.post(
 				});
 			} else if (error) {
 				res.send({
-					error: "There has been an error while deleting the image",
+					error: { image: "There has been an error while deleting the image" },
 				});
 			}
 		});

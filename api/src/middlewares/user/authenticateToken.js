@@ -14,7 +14,7 @@ const authenticateToken = (req, res, next) => {
 	jwt.verify(clientSideToken, process.env.JWT_SECRET, (err, decoded) => {
 		if (err) {
 			res.send({
-				error: { error: "Access denied" },
+				error: { general: "Access denied" },
 			});
 		} else {
 			req.body.decoded = decoded;

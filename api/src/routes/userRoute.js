@@ -26,7 +26,7 @@ userRouter.post(
 		const { fullName, email, username, password } = req.body;
 
 		const avatarURL =
-			"https://res.cloudinary.com/fullstackprojectcloud/image/upload/v1621721875/profile_qw7jxa.png";
+			"https://res.cloudinary.com/fullstackprojectcloud/image/upload/v1621981182/default_svra7n.png";
 
 		try {
 			const { rows } = await pool.queryToDatabase(
@@ -86,8 +86,7 @@ userRouter.post("/user/login", validateEmail, async (req, res) => {
 				if (err) {
 					res.send({
 						error: {
-							general:
-								"There has been an error while verifying your credentials",
+							general: "There has been an error while validating your password",
 						},
 					});
 				} else if (result) {
@@ -98,16 +97,16 @@ userRouter.post("/user/login", validateEmail, async (req, res) => {
 						avatar_url: user.avatar_url,
 					});
 				} else if (!result) {
-					res.send({ error: { general: "Invalid Credentials" } });
+					res.send({ error: { general: "Invalid email and/or password" } });
 				}
 			});
 		} else if (!user) {
-			res.send({ error: { general: "Invalid Credentials" } });
+			res.send({ error: { general: "Invalid email and/or password" } });
 		}
 	} catch (error) {
 		res.send({
 			message: {
-				general: "There has been an error while verifying your credentials",
+				general: "There has been an error while processing your login",
 			},
 		});
 	}

@@ -4,7 +4,7 @@ const pool = require("../pool");
 
 const categoryRouter = express.Router();
 
-categoryRouter.get("/post-categories", async (req, res) => {
+categoryRouter.get("/category/post", async (req, res) => {
 	try {
 		const { rows } = await pool.queryToDatabase(
 			`
@@ -24,37 +24,36 @@ categoryRouter.get("/post-categories", async (req, res) => {
 // REVIEW: when a user registers or goes to his or her profile and update their top of interests section
 // REVIEW: they will need to be authenticated and send an array of topics that they're interested in
 categoryRouter.post(
-	"/post-categories/interest",
+	"/category/post/interest",
 	authenticateToken,
 	async (req, res) => {
-		const { categories, decoded } = req.body;
+		const { selectedCategories, decoded } = req.body;
 
-		const user_id = decoded.id;
-		const categoriesArray = categories;
+		const userID = decoded.id;
 
-		if (categoriesArray.length === 0) {
+		if (selectedCategories.length === 0) {
 			res.end();
 		} else {
-			const categoryIDsArray = categoriesArray.map((categoryObject) => {
-				return categoryObject.id;
+			const categoryIDsArray = selectedCategories.map((category) => {
+				return category.id;
 			});
 
 			try {
 				for (categoryID of categoryIDsArray) {
 					await pool.queryToDatabase(
 						`
-					INSERT INTO categories_of_interest(user_id, post_category_id)
-					VALUES ($1, $2);
-					`,
-						[user_id, categoryID]
+						INSERT INTO categories_of_interest(user_id, post_category_id)
+						VALUES ($1, $2);
+						`,
+						[userID, categoryID]
 					);
 				}
 
-				res.send({ success: { success: "Success" } });
+				res.send({ success: "Success" });
 			} catch (error) {
 				res.send({
 					error: {
-						error:
+						general:
 							"There has been an error while processing your categories of interest",
 					},
 				});
@@ -91,7 +90,9 @@ categoryRouter.post("/search/post-categories", async (req, res) => {
 		res.send(rows);
 	} catch (error) {
 		res.send({
-			error: "There has been an error while searching for post categories",
+			error: {
+				general: "There has been an error while searching for post categories",
+			},
 		});
 	}
 });
