@@ -3,8 +3,8 @@ const initialState = {
 	selectedPostCategoriesArray: [],
 	taggedPostUsersArray: [],
 	postCaptionNodesArray: [],
-	// REVIEW: this property's value will be an object
-	addPostMessage: null,
+	addPostErrorMessage: null,
+	successMessage: null,
 };
 
 const addPostReducer = (state = initialState, action) => {
@@ -12,6 +12,7 @@ const addPostReducer = (state = initialState, action) => {
 		case "ADD_POST_IMAGE":
 			return {
 				...state,
+				addPostErrorMessage: null,
 				uploadedPostImagesArray: [
 					...state.uploadedPostImagesArray,
 					action.payload,
@@ -20,6 +21,7 @@ const addPostReducer = (state = initialState, action) => {
 		case "REMOVE_POST_IMAGE":
 			return {
 				...state,
+				addPostErrorMessage: null,
 				// TODO: later make this a utility function
 				uploadedPostImagesArray: state.uploadedPostImagesArray.filter(
 					(image) => {
@@ -30,6 +32,7 @@ const addPostReducer = (state = initialState, action) => {
 		case "ADD_POST_CATEGORY":
 			return {
 				...state,
+				addPostErrorMessage: null,
 				selectedPostCategoriesArray: [
 					...state.selectedPostCategoriesArray,
 					action.payload,
@@ -38,6 +41,7 @@ const addPostReducer = (state = initialState, action) => {
 		case "REMOVE_POST_CATEGORY":
 			return {
 				...state,
+				addPostErrorMessage: null,
 				selectedPostCategoriesArray: state.selectedPostCategoriesArray.filter(
 					(category) => {
 						return category.id !== action.payload;
@@ -47,11 +51,13 @@ const addPostReducer = (state = initialState, action) => {
 		case "ADD_USER_ON_POST":
 			return {
 				...state,
+				addPostErrorMessage: null,
 				taggedPostUsersArray: [...state.taggedPostUsersArray, action.payload],
 			};
 		case "REMOVE_USER_ON_POST":
 			return {
 				...state,
+				addPostErrorMessage: null,
 				taggedPostUsersArray: state.taggedPostUsersArray.filter((user) => {
 					return user.id !== action.payload;
 				}),
@@ -61,10 +67,10 @@ const addPostReducer = (state = initialState, action) => {
 				...state,
 				postCaptionNodesArray: action.payload,
 			};
-		case "SET_ADD_POST_MESSAGE":
+		case "SET_ADD_POST_ERROR_MESSAGE":
 			return {
 				...state,
-				addPostMessage: action.payload,
+				addPostErrorMessage: action.payload,
 			};
 		default:
 			return state;

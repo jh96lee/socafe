@@ -3,6 +3,7 @@ import styled, { keyframes } from "styled-components";
 export const SkeletonStyle = styled.div`
 	width: ${(props) => props.skeletonWidth};
 	height: ${(props) => props.skeletonHeight};
+	min-height: ${(props) => props.skeletonHeight};
 	/* background-image: ${(props) =>
 		props.theme.isDarkMode
 			? "linear-gradient(135deg,#080808 20%,#121317 70%)"

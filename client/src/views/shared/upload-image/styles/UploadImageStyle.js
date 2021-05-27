@@ -9,7 +9,12 @@ export const UploadImageStyle = styled.div`
 	border-radius: 0.5rem;
 	padding: 1rem;
 	display: grid;
-	grid-template-columns: repeat(auto-fit, minmax(100px, 1fr));
+	grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
 	grid-auto-rows: 11rem;
 	gap: 1rem;
+
+	@media (max-width: 800px) {
+		grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+		grid-auto-rows: 15rem;
+	}
 `;

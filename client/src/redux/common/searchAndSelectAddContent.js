@@ -11,11 +11,11 @@ export const searchAndSelectAddContent =
 		const actionTypeObject = {
 			postUser: {
 				addActionType: "ADD_USER_ON_POST",
-				messageActionType: "SET_ADD_POST_MESSAGE",
+				messageActionType: "SET_ADD_POST_ERROR_MESSAGE",
 			},
 			postCategory: {
 				addActionType: "ADD_POST_CATEGORY",
-				messageActionType: "SET_ADD_POST_MESSAGE",
+				messageActionType: "SET_ADD_POST_ERROR_MESSAGE",
 			},
 			// add in commentUser and productCategory later
 		};

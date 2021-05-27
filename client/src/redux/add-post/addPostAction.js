@@ -25,9 +25,9 @@ export const addPostCaption = (childNodesArray) => ({
 	payload: childNodesArray,
 });
 
-export const setAddPostMessage = (messageObject) => ({
-	type: "SET_ADD_POST_MESSAGE",
-	payload: messageObject,
+export const setAddPostErrorMessage = (errorMessage) => ({
+	type: "SET_ADD_POST_ERROR_MESSAGE",
+	payload: errorMessage,
 });
 
 export const submitPost =

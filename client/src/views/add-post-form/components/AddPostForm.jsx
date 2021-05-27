@@ -27,7 +27,7 @@ const AddPostForm = () => {
 		uploadedPostImagesArray,
 		selectedPostCategoriesArray,
 		taggedPostUsersArray,
-		addPostMessage,
+		addPostErrorMessage,
 	} = useSelector((state) => state.addPostReducer);
 
 	return (
@@ -48,7 +48,9 @@ const AddPostForm = () => {
 					<h3>Select Categories</h3>
 
 					<Message
-						errorMessage={addPostMessage && addPostMessage.postCategory}
+						errorMessage={
+							addPostErrorMessage && addPostErrorMessage.postCategory
+						}
 					/>
 
 					<SearchAndSelect
@@ -68,7 +70,9 @@ const AddPostForm = () => {
 				<AddContentStyle>
 					<h3>Tag Users</h3>
 
-					<Message errorMessage={addPostMessage && addPostMessage.postUser} />
+					<Message
+						errorMessage={addPostErrorMessage && addPostErrorMessage.postUser}
+					/>
 
 					<SearchAndSelect
 						searchAndSelectType="post-user"

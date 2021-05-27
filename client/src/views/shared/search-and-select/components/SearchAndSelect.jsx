@@ -30,17 +30,6 @@ const SearchAndSelect = ({
 
 	const dispatch = useDispatch();
 
-	// REVIEw: use searchAndSelectType to figure out which DropdownElement component needs to get rendered
-	const searchAndSelectDropdownElementComponentType = (searchAndSelectType) => {
-		const searchAndSelectTypeSplittedArray = searchAndSelectType.split("-");
-
-		if (searchAndSelectTypeSplittedArray.includes("user")) {
-			return "user";
-		} else if (searchAndSelectTypeSplittedArray.includes("category")) {
-			return "category";
-		}
-	};
-
 	return (
 		<DropdownStyle
 			id={`search-and-select-${searchAndSelectType}-dropdown-trigger`}
@@ -80,7 +69,7 @@ const SearchAndSelect = ({
 				triggerID={`search-and-select-${searchAndSelectType}-dropdown-trigger`}
 				customDropdownId={`select-${searchAndSelectType}`}
 				dataArray={searchResultArray}
-				menuTop="110%"
+				menuTop="calc(100% + 6px)"
 				menuLeft="0"
 				menuWidth="100%"
 			>
