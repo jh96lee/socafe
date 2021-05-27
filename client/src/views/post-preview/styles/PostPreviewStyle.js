@@ -3,10 +3,15 @@ import styled from "styled-components";
 export const PostPreviewStyle = styled.div`
 	display: grid;
 	grid-template-columns: 65% auto;
-	gap: 2rem;
+	grid-auto-rows: 55rem;
+	gap: 1rem;
 	width: 90%;
-	max-width: 100rem;
-	margin: 5rem auto;
+	max-width: 90rem;
+	height: fit-content;
+	margin: 6rem auto 0 auto;
+	padding: 1rem;
+	background: black;
+	border-radius: 1rem;
 
 	@media (max-width: 1250px) {
 		grid-template-columns: 1fr;

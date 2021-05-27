@@ -5,9 +5,6 @@ export const UploadImageButtonStyle = styled.div`
 	border-radius: 0.5rem;
 	background-color: var(--primary-clickable-background-color);
 
-	/* background-color: ${(props) =>
-		props.theme.isDarkMode ? "#4f606961" : "#6096b12b"}; */
-
 	& input {
 		position: relative;
 		z-index: 50;
@@ -31,7 +28,7 @@ export const UploadImageButtonCTAStyle = styled.div`
 	display: flex;
 	flex-direction: column;
 	align-items: center;
-	gap: 1rem;
+	gap: 1.2rem;
 	transform: translate(-50%, -50%);
 	z-index: 1;
 
@@ -39,12 +36,10 @@ export const UploadImageButtonCTAStyle = styled.div`
 		width: 2.5rem;
 		height: 2.5rem;
 		fill: #fff;
-		/* fill: ${(props) => (props.theme.isDarkMode ? "#fff" : "#4f5b6d")}; */
 	}
 
 	& p {
-		font-size: 1.3rem;
+		font-size: 1.27rem;
 		color: #fff;
-		/* color: ${(props) => (props.theme.isDarkMode ? "#fff" : "#4f5b6d")}; */
 	}
 `;

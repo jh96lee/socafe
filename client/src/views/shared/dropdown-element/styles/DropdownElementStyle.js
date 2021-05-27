@@ -26,13 +26,7 @@ export const DropdownElementMetadataStyle = styled.div`
 	flex-direction: column;
 
 	& > p {
-		font-size: 1.4rem;
 		color: var(--primary-text-color);
 		margin-bottom: 0.2rem;
-	}
-
-	& > span {
-		font-size: 1.3rem;
-		color: ${(props) => (props.theme.isDarkMode ? "grey" : "grey")};
 	}
 `;

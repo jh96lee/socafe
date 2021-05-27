@@ -15,7 +15,7 @@ const LinkDropdownElement = ({
 				{dropdownElementContent.icon}
 			</LinkDropdownElementIconStyle>
 
-			<span>{dropdownElementContent.label}</span>
+			<p>{dropdownElementContent.label}</p>
 		</LinkDropdownElementStyle>
 	);
 };

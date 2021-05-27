@@ -4,8 +4,6 @@ export const LinkDropdownElementStyle = styled.div`
 	display: flex;
 	align-items: center;
 	color: var(--primary-text-color);
-	font-size: 1.5rem;
-	letter-spacing: -0.6px;
 	padding: 0.7rem;
 	min-width: 18rem;
 

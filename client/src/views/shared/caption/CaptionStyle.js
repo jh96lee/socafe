@@ -2,10 +2,10 @@ import styled from "styled-components";
 
 export const CaptionStyle = styled.div`
 	color: var(--primary-text-color) !important;
-	font-weight: 300;
+	font-weight: 400;
 
 	& .ql-container {
-		min-height: 15rem;
+		min-height: 14rem;
 		border-radius: 0.5rem;
 		box-shadow: 0 0 0 1.6px var(--primary-separator-color);
 		background-color: var(--secondary-background-color);

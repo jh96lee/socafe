@@ -1,7 +1,7 @@
 import styled from "styled-components";
 
 const ButtonStyle = styled.button`
-	font-size: 1.45rem;
+	font-size: 1.4rem;
 	font-weight: 500;
 	letter-spacing: -0.6px;
 	width: ${(props) => (props.width ? props.width : "100%")};

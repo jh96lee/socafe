@@ -1,9 +1,11 @@
 import styled from "styled-components";
 
 export const HeaderStyle = styled.header`
-	position: relative;
+	position: sticky;
+	top: 0;
 	grid-column: 1 / 3;
 	grid-row: 1 / 2;
+	background-color: var(--primary-background-color);
 	box-shadow: 0px 0px 0px 1.6px var(--primary-separator-color);
 	padding: 0 2rem;
 	display: flex;

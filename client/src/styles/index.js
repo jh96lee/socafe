@@ -7,3 +7,8 @@ export { default as FormPageStyle } from "./form/FormPageStyle";
 export { default as FormStyle } from "./form/FormStyle";
 export { default as FormFieldsetStyle } from "./form/FormFieldsetStyle";
 export { default as FormInputAndMessageStyle } from "./form/FormInputAndMessageStyle";
+export { default as AddContentPageStyle } from "./add-content-form/AddContentPageStyle";
+export { default as AddContentFormStyle } from "./add-content-form/AddContentFormStyle";
+export { default as AddContentStyle } from "./add-content-form/AddContentStyle";
+export { default as AddContentsWrapperStyle } from "./add-content-form/AddContentsWrapperStyle";
+export { default as AddContentButtonWrapperStyle } from "./add-content-form/AddContentButtonWrapperStyle";

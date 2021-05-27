@@ -18,8 +18,8 @@ import GlobalStyle from "./styles/GlobalStyle";
 
 const GlobalPageStyle = styled.main`
 	display: grid;
-	grid-template-columns: 8rem auto;
-	grid-template-rows: 8rem auto;
+	grid-template-columns: 7.8rem auto;
+	grid-template-rows: 7.8rem auto;
 `;
 
 function App() {

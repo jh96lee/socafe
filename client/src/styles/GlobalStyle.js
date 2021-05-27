@@ -96,19 +96,19 @@ const GlobalStyles = createGlobalStyle`
     }
 
     h1 {
-        font-size: 3.2rem;
+        font-size: 2.7rem;
         font-weight: 600;
         letter-spacing: -1.3px;
     }
 
     h2 {
-        font-size: 2.4rem;
+        font-size: 2.2rem;
         font-weight: 600;
         letter-spacing: -1.3px;
     }
 
     h3 {
-        font-size: 1.9rem;
+        font-size: 1.82rem;
         font-weight: 600;
         letter-spacing: -0.9px;
     }
@@ -120,7 +120,7 @@ const GlobalStyles = createGlobalStyle`
     }
 
     h5 {
-        font-size: 1.47rem;
+        font-size: 1.43rem;
         letter-spacing: -0.9px;
         font-weight: 500;
     }
@@ -130,6 +130,9 @@ const GlobalStyles = createGlobalStyle`
     }
 
     a {
+        font-size: 1.37rem;
+        font-weight: 400;
+		text-decoration: none;
         letter-spacing: -0.6px;
     }
 
@@ -139,7 +142,15 @@ const GlobalStyles = createGlobalStyle`
 
     p {
         font-size: 1.4rem;
+        font-weight: 400;
         letter-spacing: -0.7px;
+    }
+
+    span {
+        font-size: 1.3rem;
+        font-weight: 300;
+        letter-spacing: -0.6px;
+        color: ${(props) => (props.theme.isDarkMode ? "#868585" : "#6f6f6f")};
     }
 
     svg {

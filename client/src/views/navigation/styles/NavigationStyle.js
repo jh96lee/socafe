@@ -2,33 +2,36 @@ import styled from "styled-components";
 
 export const NavigationStyle = styled.nav`
 	position: sticky;
-	top: 0;
+	top: 85px;
 	display: flex;
 	flex-direction: column;
+	justify-content: center;
 	align-items: center;
 	background-color: var(--primary-background-color);
 	height: fit-content;
-	min-height: calc(100vh - 79.69px);
 	grid-column: 1 / 2;
 	grid-row: 2 / 3;
-	margin-top: 1rem;
 
 	& a {
 		display: flex;
 		align-items: center;
-		margin: 1.3rem 0;
+		margin: 1.6rem 0;
 		text-decoration: none;
 	}
 
 	& a span {
 		display: none;
-		font-size: 1.47rem;
+		font-size: 1.43rem;
 		color: var(--primary-icon-color);
 	}
 
 	/* & .active > div {
 		background-color: crimson;
 	} */
+
+	& > *:first-child {
+		margin-top: 2.5rem;
+	}
 
 	& .active svg {
 		fill: ${(props) => (props.theme.isDarkMode ? "#fff" : "#000")};

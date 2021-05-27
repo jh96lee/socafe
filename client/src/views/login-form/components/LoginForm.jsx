@@ -57,7 +57,7 @@ const LoginForm = () => {
 						inputID="login-form__password"
 						inputLabel="Password"
 						inputName="password"
-						inputType="text"
+						inputType="password"
 						inputPlaceholder="Enter your password"
 						inputWidth="100%"
 						inputOnChangeEventHandler={handleOnChange}

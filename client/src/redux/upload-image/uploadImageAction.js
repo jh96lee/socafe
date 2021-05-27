@@ -86,7 +86,7 @@ export const deleteImage =
 					payload: uploadedImageID,
 				});
 
-				dispatch(setUploadImageErrorMessage(success));
+				dispatch(setUploadImageSuccessMessage(success));
 
 				dispatch({ type: "END_DELETING_IMAGE" });
 			} else if (error) {

@@ -25,7 +25,7 @@ export const SearchbarStyle = styled.div`
 	align-items: center;
 	justify-content: space-evenly;
 	width: 32rem;
-	padding: 0.3rem 0;
+	padding: 0.45rem;
 	border-radius: 2.5rem;
 	border: 1px solid var(--primary-separator-color);
 	box-shadow: 0px 0.6px 2px 0.2px var(--primary-separator-color);
@@ -52,7 +52,7 @@ export const SearchTypeStyle = styled.div`
 	display: flex;
 	align-items: center;
 	color: var(--primary-text-color);
-	font-size: 1.43rem;
+	font-size: 1.4rem;
 	letter-spacing: -0.5px;
 	margin: auto 0;
 
@@ -68,11 +68,4 @@ export const SearchTypeStyle = styled.div`
 		cursor: pointer;
 		text-decoration: underline;
 	}
-`;
-
-export const SearchbarInputStyle = styled(FormInputStyle)`
-	background-color: transparent;
-	border: none;
-	width: 100%;
-	padding: 0 0.5rem;
 `;

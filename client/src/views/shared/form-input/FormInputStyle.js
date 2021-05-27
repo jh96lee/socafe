@@ -15,13 +15,13 @@ export const FormInputStyle = styled.div`
 			props.inputUsage === "search" || props.inputUsage === "search-and-select"
 				? "none"
 				: "block"};
-		font-size: 1.47rem;
+		font-size: 1.43rem;
 		font-weight: 500;
 		margin-bottom: 1rem;
 	}
 
 	& input {
-		font-size: 1.43rem;
+		font-size: 1.4rem;
 		width: 100%;
 		outline: none;
 		border: none;
@@ -31,7 +31,7 @@ export const FormInputStyle = styled.div`
 				: "0 0 0 1.6px var(--primary-separator-color)"};
 		border-radius: 0.5rem;
 		padding: ${(props) =>
-			props.inputPadding ? props.inputPadding : "1.4rem 1.5rem"};
+			props.inputPadding ? props.inputPadding : "1.3rem 1.45rem"};
 		background-color: ${(props) =>
 			props.inputUsage === "search" || props.inputUsage === "search-and-select"
 				? "transparent"
@@ -39,7 +39,7 @@ export const FormInputStyle = styled.div`
 	}
 
 	& input::placeholder {
-		font-size: 1.43rem;
+		font-size: 1.36rem;
 		color: ${(props) =>
 			props.inputUsage === "search"
 				? "var(--primary-text-color)"

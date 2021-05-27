@@ -10,8 +10,8 @@ export const PostCategoryStyle = styled.div`
 	box-shadow: 0 0 0 1.6px var(--primary-separator-color);
 
 	& img {
-		width: 5.5rem;
-		height: 5.5rem;
+		width: 5.1rem;
+		height: 5.1rem;
 		object-fit: cover;
 		border-radius: 50%;
 	}

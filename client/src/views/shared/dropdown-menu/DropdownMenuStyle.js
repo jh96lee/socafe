@@ -22,7 +22,6 @@ const DropdownMenuStyle = styled.div`
 	}
 
 	& #dropdown-menu__no-result-message {
-		font-size: 1.43rem;
 		padding: 1rem;
 		color: var(--primary-text-color);
 	}
