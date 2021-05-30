@@ -1,8 +1,15 @@
 import axios from "axios";
 
 import { setUploadImageErrorMessage } from "../upload-image/uploadImageAction";
+import { resetUploadImage } from "../upload-image/uploadImageAction";
 
 import { fetchToken } from "../../utils/cookie";
+import { setCoupleSeconds } from "../../utils/setCoupleSeconds";
+
+const setPostID = (postID) => ({
+	type: "SET_POST_ID",
+	payload: postID,
+});
 
 export const addPostCategory = (category) => ({
 	type: "ADD_POST_CATEGORY",
@@ -32,6 +39,15 @@ export const addPostCaption = (childNodesArray) => ({
 export const setAddPostErrorMessage = (errorMessage) => ({
 	type: "SET_ADD_POST_ERROR_MESSAGE",
 	payload: errorMessage,
+});
+
+const setAddPostSuccessMessage = (successMessage) => ({
+	type: "SET_ADD_POST_SUCCESS_MESSAGE",
+	payload: successMessage,
+});
+
+const resetAddPostForm = () => ({
+	type: "RESET_ADD_POST_FORM",
 });
 
 export const submitPost =
@@ -64,7 +80,19 @@ export const submitPost =
 
 			const { postID, success, error } = data;
 
-			console.log(postID, success);
+			if (error) {
+				dispatch(setAddPostErrorMessage(error));
+			} else if (success) {
+				dispatch(setAddPostSuccessMessage(success));
+
+				setCoupleSeconds(() => {
+					dispatch(setPostID(postID));
+
+					dispatch(resetAddPostForm());
+
+					dispatch(resetUploadImage());
+				}, 1000);
+			}
 		} else if (uploadedPostImagesArray.length === 0) {
 			dispatch(
 				setUploadImageErrorMessage({

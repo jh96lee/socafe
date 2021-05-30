@@ -1,4 +1,5 @@
 const initialState = {
+	postID: null,
 	uploadedPostImagesArray: [],
 	selectedPostCategoriesArray: [],
 	taggedPostUsersArray: [],
@@ -9,6 +10,11 @@ const initialState = {
 
 const addPostReducer = (state = initialState, action) => {
 	switch (action.type) {
+		case "SET_POST_ID":
+			return {
+				...state,
+				postID: action.payload,
+			};
 		case "ADD_POST_IMAGE":
 			return {
 				...state,
@@ -79,6 +85,8 @@ const addPostReducer = (state = initialState, action) => {
 				addPostSuccessMessage: null,
 				addPostErrorMessage: action.payload,
 			};
+		case "RESET_ADD_POST_FORM":
+			return initialState;
 		default:
 			return state;
 	}

@@ -10,6 +10,10 @@ const setUploadImageSuccessMessage = (successMessage) => ({
 	payload: successMessage,
 });
 
+export const resetUploadImage = () => ({
+	type: "RESET_UPLOAD_IMAGE",
+});
+
 export const uploadImage = (uploadedImageType, file) => async (dispatch) => {
 	dispatch({ type: "START_UPLOADING_IMAGE" });
 

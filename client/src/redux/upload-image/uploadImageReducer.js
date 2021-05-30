@@ -43,6 +43,8 @@ const uploadImageReducer = (state = initialState, action) => {
 				...state,
 				isImageDeleting: false,
 			};
+		case "RESET_UPLOAD_IMAGE":
+			return initialState;
 		default:
 			return state;
 	}

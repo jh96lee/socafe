@@ -1,5 +1,6 @@
 import * as React from "react";
 import { useSelector, useDispatch } from "react-redux";
+import { useHistory } from "react-router";
 
 import {
 	removePostCategory,
@@ -20,16 +21,26 @@ import { ButtonStyle } from "../../../styles";
 const AddPostForm = () => {
 	const dispatch = useDispatch();
 
+	const history = useHistory();
+
 	const { uploadImageErrorMessage, uploadImageSuccessMessage } = useSelector(
 		(state) => state.uploadImageReducer
 	);
 	const {
+		postID,
 		uploadedPostImagesArray,
 		selectedPostCategoriesArray,
 		taggedPostUsersArray,
 		postCaptionNodesArray,
 		addPostErrorMessage,
+		addPostSuccessMessage,
 	} = useSelector((state) => state.addPostReducer);
+
+	React.useEffect(() => {
+		if (postID) {
+			history.push(`/post/${postID}`);
+		}
+	}, [postID]);
 
 	return (
 		<AddContentFormStyle>
@@ -101,6 +112,7 @@ const AddPostForm = () => {
 						uploadedPostImagesArray.length === 0 ||
 						selectedPostCategoriesArray.length === 0
 					}
+					success={addPostSuccessMessage}
 					onClick={() => {
 						dispatch(
 							submitPost(
@@ -112,7 +124,7 @@ const AddPostForm = () => {
 						);
 					}}
 				>
-					Submit
+					{addPostSuccessMessage ? addPostSuccessMessage : "Submit"}
 				</ButtonStyle>
 			</AddContentButtonWrapperStyle>
 		</AddContentFormStyle>
