@@ -10,7 +10,6 @@ export const SearchAndSelectedWrapperStyle = styled.div`
 	border-radius: 0.5rem;
 	outline: none;
 	background-color: transparent;
-	color: var(--primary-text-color);
 
 	&:empty {
 		display: none;

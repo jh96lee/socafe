@@ -17,10 +17,8 @@ const ToggleStyle = styled.div`
 		justify-content: center;
 		align-items: center;
 		top: 50%;
-		right: ${(props) =>
-			props.isToggleTrue
-				? "0.3rem"
-				: `calc(${props.toggleWidth} - (${props.toggleHeight} - 0.6rem) - 0.3rem)`};
+		left: ${(props) => props.toggleState === false && "0.3rem"};
+		right: ${(props) => props.toggleState === true && "0.3rem"};
 		transform: translate(0, -50%);
 		width: ${(props) => `calc(${props.toggleHeight} - 0.6rem)`};
 		height: ${(props) => `calc(${props.toggleHeight} - 0.6rem)`};

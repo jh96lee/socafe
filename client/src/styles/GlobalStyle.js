@@ -23,10 +23,20 @@ const GlobalStyles = createGlobalStyle`
 					props.theme.isDarkMode ? "#18191d" : "#fff"};
         --secondary-background-color: ${(props) =>
 					props.theme.isDarkMode ? "#202229" : "#f9fafb"};
+        --tertiary-background-color: ${(props) =>
+					props.theme.isDarkMode ? "#21232b" : "#6096b12b"};
+        --quaternary-background-color: ${(props) =>
+					props.theme.isDarkMode ? "#4f606961" : "#6096b12b"};
         --error-background-color: ${(props) =>
 					props.theme.isDarkMode ? "#ff000033" : "#ff5b5b4d"};
         --success-background-color: ${(props) =>
 					props.theme.isDarkMode ? "#4caf503b" : "#0ed60e47"};
+        --primary-toggle-background-color: ${(props) =>
+					props.theme.isDarkMode ? "#000" : "#fff"};
+        --primary-theme-toggle-background-color: ${(props) =>
+					props.theme.isDarkMode ? "#253842" : "#96ddfc"};
+        --secondary-theme-toggle-background-color: ${(props) =>
+					props.theme.isDarkMode ? "#7fa2b2" : "#04b1ff"};
 
          /* TODO: input */
         --disabled-button-background-color: ${(props) =>
@@ -67,13 +77,6 @@ const GlobalStyles = createGlobalStyle`
 					props.theme.isDarkMode ? "#5a5a5a6b" : "#cacaca69"};
         --primary-hover-icon-color: ${(props) =>
 					props.theme.isDarkMode ? "#fff" : "#000"};
-
-        --primary-toggle-background-color: ${(props) =>
-					props.theme.isDarkMode ? "#000" : "#fff"};
-        --primary-theme-toggle-background-color: ${(props) =>
-					props.theme.isDarkMode ? "#253842" : "#96ddfc"};
-        --secondary-theme-toggle-background-color: ${(props) =>
-					props.theme.isDarkMode ? "#7fa2b2" : "#04b1ff"};
 
         /* TODO: colors */
         --green: ${(props) => (props.theme.isDarkMode ? "#00d509" : "#00a400")};
@@ -120,7 +123,7 @@ const GlobalStyles = createGlobalStyle`
     }
 
     h5 {
-        font-size: 1.43rem;
+        font-size: 1.5rem;
         letter-spacing: -0.9px;
         font-weight: 500;
     }

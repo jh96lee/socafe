@@ -2,24 +2,23 @@ import styled from "styled-components";
 
 export const PostPreviewStyle = styled.div`
 	display: grid;
-	grid-template-columns: 65% auto;
+	grid-template-columns: 63% auto;
 	grid-auto-rows: 55rem;
 	gap: 1rem;
 	width: 95rem;
 	height: fit-content;
 	margin: 6rem auto 3rem auto;
 	padding: 2rem;
-	background: #121212;
+	background: ${(props) => (props.theme.isDarkMode ? "#121212" : "#fdfdfd")};
 	box-shadow: 0 0 2px 1.8px var(--primary-separator-color);
 	border-radius: 1rem;
 
 	@media (max-width: 1450px) {
-		grid-template-columns: auto 30rem;
-		grid-auto-rows: auto;
-		width: 90%;
+		width: 95%;
+		grid-auto-rows: 50rem;
 	}
 
-	@media (max-width: 1300px) {
+	@media (max-width: 1250px) {
 		grid-template-columns: 1fr;
 		width: 50rem;
 		grid-auto-rows: 40rem auto;

@@ -1,16 +1,10 @@
-import styled, { keyframes } from "styled-components";
+import styled from "styled-components";
 
 export const SkeletonStyle = styled.div`
 	width: ${(props) => props.skeletonWidth};
 	height: ${(props) => props.skeletonHeight};
 	min-height: ${(props) => props.skeletonHeight};
-	/* background-image: ${(props) =>
-		props.theme.isDarkMode
-			? "linear-gradient(135deg,#080808 20%,#121317 70%)"
-			: "linear-gradient(135deg, #d5e3e9 20%, #e4ebee 70%)"}; */
-	animation-timing-function: linear;
-	/* background-image: linear-gradient(135deg, #d5e3e9, #ebf2f5, #f4f9fb, #ebf0f3); */
-	background-image: linear-gradient(135deg, #202229, #202229, #202229, #202229);
+	background-color: var(--tertiary-background-color);
 	border-radius: ${(props) =>
 		props.skeletonBorderRadius ? props.skeletonBorderRadius : "1rem"};
 `;

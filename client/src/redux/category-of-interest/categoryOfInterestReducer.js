@@ -3,8 +3,8 @@ const initialState = {
 	// TODO: fetch for user's category of interest
 	isCategoryOfInterestLoading: false,
 	categoryOfInterestArray: [],
-	errorMessage: null,
-	successMessage: null,
+	categoryOfInterestErrorMessage: null,
+	categoryOfInterestSuccessMessage: null,
 };
 
 const categoryOfInterestReducer = (state = initialState, action) => {
@@ -12,6 +12,8 @@ const categoryOfInterestReducer = (state = initialState, action) => {
 		case "START_POSTING_CATEGORY_OF_INTEREST":
 			return {
 				...state,
+				categoryOfInterestErrorMessage: null,
+				categoryOfInterestSuccessMessage: null,
 				isCategoryOfInterestPosting: true,
 			};
 		case "END_POSTING_CATEGORY_OF_INTEREST":
@@ -22,12 +24,14 @@ const categoryOfInterestReducer = (state = initialState, action) => {
 		case "SET_CATEGORY_OF_INTEREST_ERROR_MESSAGE":
 			return {
 				...state,
-				errorMessage: action.payload,
+				categoryOfInterestSuccessMessage: null,
+				categoryOfInterestErrorMessage: action.payload,
 			};
 		case "SET_CATEGORY_OF_INTEREST_SUCCESS_MESSAGE":
 			return {
 				...state,
-				successMessage: action.payload,
+				categoryOfInterestErrorMessage: null,
+				categoryOfInterestSuccessMessage: action.payload,
 			};
 		case "RESET_CATEGORY_OF_INTEREST":
 			return initialState;

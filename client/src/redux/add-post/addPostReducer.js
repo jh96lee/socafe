@@ -4,7 +4,7 @@ const initialState = {
 	taggedPostUsersArray: [],
 	postCaptionNodesArray: [],
 	addPostErrorMessage: null,
-	successMessage: null,
+	addPostSuccessMessage: null,
 };
 
 const addPostReducer = (state = initialState, action) => {
@@ -67,9 +67,16 @@ const addPostReducer = (state = initialState, action) => {
 				...state,
 				postCaptionNodesArray: action.payload,
 			};
+		case "SET_ADD_POST_SUCCESS_MESSAGE":
+			return {
+				...state,
+				addPostErrorMessage: null,
+				addPostSuccessMessage: action.payload,
+			};
 		case "SET_ADD_POST_ERROR_MESSAGE":
 			return {
 				...state,
+				addPostSuccessMessage: null,
 				addPostErrorMessage: action.payload,
 			};
 		default:

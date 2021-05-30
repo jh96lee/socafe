@@ -5,12 +5,7 @@ import useShowAndHideElementOnClick from "../../../hooks/useShowAndHideElementOn
 
 import { handleSearchInputOnChange } from "../../../utils/form/handleSearchInputOnChange";
 
-import {
-	IconElement,
-	DropdownMenu,
-	DropdownElement,
-	FormInput,
-} from "../../shared";
+import { IconElement, DropdownMenu, FormInput } from "../../shared";
 
 import {
 	SearchbarDropdownStyle,
@@ -63,18 +58,35 @@ const Searchbar = () => {
 		);
 	};
 
-	const searchTypeDataArray = [
+	const searchTypeDropdownElementArray = [
 		{
-			onClickEvent: handleOnClick,
-			label: "Users",
-			icon: <Users />,
+			content: {
+				label: "Users",
+				icon: <Users />,
+			},
+			type: "link",
+			onClickEventHandler: handleOnClick,
 		},
 		{
-			onClickEvent: handleOnClick,
-			label: "Products",
-			icon: <Product />,
+			content: { label: "Products", icon: <Product /> },
+			type: "link",
+			onClickEventHandler: handleOnClick,
 		},
 	];
+
+	const searchResultDropdownElementArray = () => {
+		return searchResultArray.map((result) => {
+			return {
+				content: result,
+				type: searchType === "Users" ? "user" : "product",
+				onClickEventHandler: () => {
+					history.push(
+						`/${searchType === "Users" ? "user" : "product"}/${result.id}`
+					);
+				},
+			};
+		});
+	};
 
 	return (
 		<SearchbarDropdownStyle id="responsive-searchbar-trigger">
@@ -100,25 +112,11 @@ const Searchbar = () => {
 
 					<DropdownMenu
 						triggerID="search-type-dropdown-trigger"
-						dataArray={searchTypeDataArray}
-						customDropdownId="search-type"
-						menuTop="110%"
+						dropdownElementArray={searchTypeDropdownElementArray}
+						dropdownElementKey="search-type"
+						menuTop="calc(100% + 10px)"
 						menuLeft="0"
-					>
-						{searchTypeDataArray.map((element, idx) => {
-							return (
-								<DropdownElement
-									key={`search-type-dropdown-element__${idx}`}
-									dropdownElementContent={{
-										icon: element.icon,
-										label: element.label,
-									}}
-									dropdownElementComponentType="link"
-									dropdownElementOnClickEventHandler={element.onClickEvent}
-								/>
-							);
-						})}
-					</DropdownMenu>
+					/>
 				</SearchTypeDropdownStyle>
 
 				<BorderStyle borderHeight="3rem"></BorderStyle>
@@ -135,34 +133,14 @@ const Searchbar = () => {
 						inputPadding="1rem"
 					/>
 
-					{/* FIX: fix this later */}
 					<DropdownMenu
 						triggerID="searchbar-dropdown-trigger"
-						dataArray={searchResultArray}
-						customDropdownId="searchbar"
-						menuTop="110%"
+						dropdownElementArray={searchResultDropdownElementArray()}
+						dropdownElementKey="searchbar"
+						menuTop="calc(100% + 10px)"
 						menuLeft="0"
 						menuWidth="100%"
-					>
-						{searchResultArray.map((result, idx) => {
-							return (
-								<DropdownElement
-									key={`search-result__${idx}`}
-									dropdownElementContent={result}
-									dropdownElementComponentType={
-										searchType === "Users" ? "user" : "product"
-									}
-									dropdownElementOnClickEventHandler={() => {
-										history.push(
-											`/${searchType === "Users" ? "user" : "product"}/${
-												result.id
-											}`
-										);
-									}}
-								/>
-							);
-						})}
-					</DropdownMenu>
+					/>
 				</SearchbarInputDropdownStyle>
 
 				<BorderStyle borderHeight="3rem"></BorderStyle>

@@ -1,7 +1,7 @@
 import axios from "axios";
 
 export const setUploadImageErrorMessage = (errorMessage) => ({
-	type: "SET_UPLOAD_IMAGE_MESSAGE",
+	type: "SET_UPLOAD_IMAGE_ERROR_MESSAGE",
 	payload: errorMessage,
 });
 

@@ -1,4 +1,8 @@
+import axios from "axios";
+
 import { setUploadImageErrorMessage } from "../upload-image/uploadImageAction";
+
+import { fetchToken } from "../../utils/cookie";
 
 export const addPostCategory = (category) => ({
 	type: "ADD_POST_CATEGORY",
@@ -31,16 +35,43 @@ export const setAddPostErrorMessage = (errorMessage) => ({
 });
 
 export const submitPost =
-	(uploadedImagesArray, postCategoriesArray) => (dispatch) => {
-		if (uploadedImagesArray.length > 0 && postCategoriesArray.length > 0) {
-			// TODO: submit post and interact with the server
-		} else if (uploadedImagesArray.length === 0) {
+	(
+		uploadedPostImagesArray,
+		selectedPostCategoriesArray,
+		taggedPostUsersArray,
+		postCaptionNodesArray
+	) =>
+	async (dispatch) => {
+		if (
+			uploadedPostImagesArray.length > 0 &&
+			selectedPostCategoriesArray.length > 0
+		) {
+			const token = fetchToken();
+
+			const { data } = await axios({
+				method: "POST",
+				url: "http://localhost:8080/upload/post",
+				headers: {
+					Authorization: `Bearer ${token}`,
+				},
+				data: {
+					imagesArray: uploadedPostImagesArray,
+					categoriesArray: selectedPostCategoriesArray,
+					taggedUsersArray: taggedPostUsersArray,
+					nodesArray: postCaptionNodesArray,
+				},
+			});
+
+			const { postID, success, error } = data;
+
+			console.log(postID, success);
+		} else if (uploadedPostImagesArray.length === 0) {
 			dispatch(
 				setUploadImageErrorMessage({
 					error: "At least 1 image must be added to the post",
 				})
 			);
-		} else if (postCategoriesArray.length === 0) {
+		} else if (selectedPostCategoriesArray.length === 0) {
 			dispatch(
 				setUploadImageErrorMessage({
 					postCategory: "At least 1 category must be selected",

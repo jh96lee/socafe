@@ -69,8 +69,6 @@ const RegisterPage = () => {
 
 	return (
 		<FormPageStyle>
-			{isUserRegistering && <Loader />}
-
 			<RegisterPageElementsWrapperStyle registerStepIndex={registerStepIndex}>
 				{registerElements[registerStepIndex].formCTA ? (
 					<h2>{registerElements[registerStepIndex].formCTA}</h2>

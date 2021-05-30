@@ -2,7 +2,7 @@ import * as React from "react";
 import { Link } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 
-import { FormInput, Message } from "../../shared";
+import { FormInput, Message, Loader } from "../../shared";
 
 import {
 	ButtonStyle,
@@ -22,8 +22,15 @@ const RegisterForm = () => {
 	// REVIEW: data like basic user info and current form step and message sent from the server
 	const userRegisterInfoObject = useSelector((state) => state.registerReducer);
 
-	const { fullName, email, username, password, errorMessage, successMessage } =
-		userRegisterInfoObject;
+	const {
+		isUserRegistering,
+		fullName,
+		email,
+		username,
+		password,
+		registerErrorMessage,
+		registerSuccessMessage,
+	} = userRegisterInfoObject;
 
 	const dispatch = useDispatch();
 
@@ -70,7 +77,9 @@ const RegisterForm = () => {
 						inputWidth="100%"
 						inputOnChangeEventHandler={handleOnChange}
 					/>
-					<Message errorMessage={errorMessage && errorMessage.email} />
+					<Message
+						errorMessage={registerErrorMessage && registerErrorMessage.email}
+					/>
 				</FormInputAndMessageStyle>
 
 				<FormInputAndMessageStyle>
@@ -84,7 +93,9 @@ const RegisterForm = () => {
 						inputWidth="100%"
 						inputOnChangeEventHandler={handleOnChange}
 					/>
-					<Message errorMessage={errorMessage && errorMessage.username} />
+					<Message
+						errorMessage={registerErrorMessage && registerErrorMessage.username}
+					/>
 				</FormInputAndMessageStyle>
 
 				<FormInputAndMessageStyle>
@@ -105,11 +116,17 @@ const RegisterForm = () => {
 				disabled={!fullName || !email || !username || !password}
 				width="100%"
 				isDisabled={!fullName || !email || !username || !password}
-				success={successMessage}
-				error={errorMessage}
+				success={registerSuccessMessage}
+				error={registerErrorMessage}
 				onClick={handleOnClick}
 			>
-				{successMessage ? successMessage : "Continue"}
+				{isUserRegistering ? (
+					<Loader loaderSize="2rem" loaderBorderSize="0.3rem" />
+				) : registerSuccessMessage ? (
+					registerSuccessMessage
+				) : (
+					"Continue"
+				)}
 			</ButtonStyle>
 
 			<Link to="/login">Already have an account? Login</Link>

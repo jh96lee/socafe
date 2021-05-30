@@ -31,7 +31,7 @@ const PostCategoriesPreview = () => {
 					);
 				} else {
 					return (
-						<PostCategoryPreviewStyle>
+						<PostCategoryPreviewStyle key={`post-category-preview__${idx}`}>
 							{category.title}
 						</PostCategoryPreviewStyle>
 					);

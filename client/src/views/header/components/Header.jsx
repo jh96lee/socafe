@@ -40,12 +40,14 @@ const Header = ({
 				<Avatar />
 
 				<Toggle
+					toggleState={isDarkMode}
 					toggleWidth="5rem"
-					toggleHeight="3.2rem"
+					toggleHeight="3rem"
+					toggleOnClickEventHandler={() => {
+						setIsDarkMode((prevState) => !prevState);
+					}}
 					toggleType="theme"
-					switchIcon={isDarkMode ? <Moon /> : <Sun />}
-					isToggleTrue={isDarkMode}
-					setIsToggleTrue={setIsDarkMode}
+					toggleIcons={{ on: <Moon />, off: <Sun /> }}
 				/>
 			</HeaderEnd>
 		</HeaderStyle>

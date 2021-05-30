@@ -1,8 +1,8 @@
 const initialState = {
 	email: "",
 	password: "",
-	successMessage: null,
-	errorMessage: null,
+	loginSuccessMessage: null,
+	loginErrorMessage: null,
 };
 
 const loginReducer = (state = initialState, action) => {
@@ -15,13 +15,14 @@ const loginReducer = (state = initialState, action) => {
 		case "SET_LOGIN_SUCCESS_MESSAGE":
 			return {
 				...state,
-				errorMessage: null,
-				successMessage: action.payload,
+				loginErrorMessage: null,
+				loginSuccessMessage: action.payload,
 			};
 		case "SET_LOGIN_ERROR_MESSAGE":
 			return {
 				...state,
-				errorMessage: action.payload,
+				loginSuccessMessage: null,
+				loginErrorMessage: action.payload,
 			};
 		case "RESET_LOGIN_FORM":
 			return initialState;

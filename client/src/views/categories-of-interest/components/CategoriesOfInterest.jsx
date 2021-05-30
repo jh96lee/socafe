@@ -21,8 +21,11 @@ const CategoriesOfInterest = () => {
 	const { isPostCategoriesLoading, postCategoriesArray } = useSelector(
 		(state) => state.postCategoryReducer
 	);
-	const { isCategoryOfInterestPosting, errorMessage, successMessage } =
-		useSelector((state) => state.categoryOfInterestReducer);
+	const {
+		isCategoryOfInterestPosting,
+		categoryOfInterestErrorMessage,
+		categoryOfInterestSuccessMessage,
+	} = useSelector((state) => state.categoryOfInterestReducer);
 
 	const dispatch = useDispatch();
 
@@ -57,11 +60,13 @@ const CategoriesOfInterest = () => {
 
 					<ButtonStyle
 						onClick={handleOnClick}
-						success={successMessage}
-						error={errorMessage}
+						success={categoryOfInterestSuccessMessage}
+						error={categoryOfInterestErrorMessage}
 						width="24rem"
 					>
-						{successMessage ? successMessage : "Continue"}
+						{categoryOfInterestSuccessMessage
+							? categoryOfInterestSuccessMessage
+							: "Continue"}
 					</ButtonStyle>
 				</React.Fragment>
 			)}

@@ -2,7 +2,7 @@ import * as React from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { useHistory } from "react-router-dom";
 
-import { DropdownMenu, DropdownElement, IconElement } from "../../shared";
+import { DropdownMenu, IconElement } from "../../shared";
 
 import { logoutUser } from "../../../redux/login/loginAction";
 
@@ -18,37 +18,49 @@ const Avatar = () => {
 
 	const history = useHistory();
 
-	const userDropdownDataArray = user
+	const userDropdownElementArray = user
 		? [
 				{
-					onClickEvent: () => {
+					content: {
+						label: "Profile",
+						icon: <User />,
+					},
+					type: "link",
+					onClickEventHandler: () => {
 						history.push("/profile/:userID");
 					},
-					label: "Profile",
-					icon: <User />,
 				},
 				{
-					onClickEvent: () => {
+					content: {
+						label: "Logout",
+						icon: <Logout />,
+					},
+					type: "link",
+					onClickEventHandler: () => {
 						dispatch(logoutUser());
 					},
-					label: "Logout",
-					icon: <Logout />,
 				},
 		  ]
 		: [
 				{
-					onClickEvent: () => {
+					content: {
+						label: "Login",
+						icon: <Login />,
+					},
+					type: "link",
+					onClickEventHandler: () => {
 						history.push("/login");
 					},
-					label: "Login",
-					icon: <Login />,
 				},
 				{
-					onClickEvent: () => {
+					content: {
+						label: "Register",
+						icon: <Register />,
+					},
+					type: "link",
+					onClickEventHandler: () => {
 						history.push("/register");
 					},
-					label: "Register",
-					icon: <Register />,
 				},
 		  ];
 
@@ -71,25 +83,11 @@ const Avatar = () => {
 
 			<DropdownMenu
 				triggerID="user-dropdown-trigger"
-				dataArray={userDropdownDataArray}
-				customDropdownId="user-dropdown"
-				menuTop="140%"
+				dropdownElementArray={userDropdownElementArray}
+				dropdownElementKey="user-dropdown"
+				menuTop="calc(100% + 10px)"
 				menuRight="0"
-			>
-				{userDropdownDataArray.map((element, idx) => {
-					return (
-						<DropdownElement
-							key={`avatar-dropdown-element__${idx}`}
-							dropdownElementContent={{
-								icon: element.icon,
-								label: element.label,
-							}}
-							dropdownElementComponentType="link"
-							dropdownElementOnClickEventHandler={element.onClickEvent}
-						/>
-					);
-				})}
-			</DropdownMenu>
+			/>
 		</DropdownStyle>
 	);
 };

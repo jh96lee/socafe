@@ -1,13 +1,15 @@
 import React from "react";
 
+import { DropdownElement } from "../index";
+
 import useShowAndHideElementOnClick from "../../../hooks/useShowAndHideElementOnClick";
 
 import DropdownMenuStyle from "./DropdownMenuStyle";
 
 const DropdownMenu = ({
 	triggerID,
-	children,
-	dataArray,
+	dropdownElementKey,
+	dropdownElementArray,
 	menuTop,
 	menuRight,
 	menuBottom,
@@ -16,19 +18,30 @@ const DropdownMenu = ({
 }) => {
 	const [isOpen, setIsOpen] = React.useState(false);
 
-	useShowAndHideElementOnClick(triggerID, "dropdown", setIsOpen, true);
+	useShowAndHideElementOnClick(triggerID, "dropdown-menu", setIsOpen, true);
 
 	return isOpen ? (
 		<DropdownMenuStyle
-			id="dropdown"
+			id="dropdown-menu"
 			menuTop={menuTop}
 			menuRight={menuRight}
 			menuBottom={menuBottom}
 			menuLeft={menuLeft}
 			menuWidth={menuWidth}
 		>
-			{dataArray.length > 0 ? (
-				children
+			{dropdownElementArray.length > 0 ? (
+				dropdownElementArray.map(
+					({ content, type, onClickEventHandler }, idx) => {
+						return (
+							<DropdownElement
+								key={`${dropdownElementKey}__${idx}`}
+								dropdownElementContent={content}
+								dropdownElementComponentType={type}
+								dropdownElementOnClickEventHandler={onClickEventHandler}
+							/>
+						);
+					}
+				)
 			) : (
 				<p id="dropdown-menu__no-result-message">No search result</p>
 			)}

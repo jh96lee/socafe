@@ -1,28 +1,20 @@
 import styled, { keyframes } from "styled-components";
 
 const spinningLoader = keyframes`
-    0% {
+    from {
         transform: rotate(0deg);
     }
-
-    100% {
+	
+    to {
         transform: rotate(360deg);
     }
 `;
 
 export const LoaderWrapperStyle = styled.div`
-	position: absolute;
-	z-index: 50;
-	top: 5rem;
-	left: 50%;
-	transform: translateY(-50%);
 	display: flex;
 	justify-content: center;
 	margin: auto;
-	background-color: ${(props) => (props.theme.isDarkMode ? "#282a33" : "#fff")};
-	padding: 1rem;
 	border-radius: 50%;
-	box-shadow: 0 0.6px 2px 1.5px var(--primary-separator-color);
 `;
 
 export const LoaderStyle = styled.div`

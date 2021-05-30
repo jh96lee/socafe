@@ -5,8 +5,8 @@ const initialState = {
 	email: "",
 	username: "",
 	password: "",
-	successMessage: null,
-	errorMessage: null,
+	registerSuccessMessage: null,
+	registerErrorMessage: null,
 };
 
 const registerReducer = (state = initialState, action) => {
@@ -14,6 +14,8 @@ const registerReducer = (state = initialState, action) => {
 		case "START_USER_REGISTER":
 			return {
 				...state,
+				registerSuccessMessage: null,
+				registerErrorMessage: null,
 				isUserRegistering: true,
 			};
 		case "END_USER_REGISTER":
@@ -32,14 +34,15 @@ const registerReducer = (state = initialState, action) => {
 			return {
 				...state,
 				// REVIEW: when successful registration happens, we want to reset the errorMessage state to null
-				errorMessage: null,
-				successMessage: action.payload,
+				registerErrorMessage: null,
+				registerSuccessMessage: action.payload,
 			};
 		case "SET_REGISTER_ERROR_MESSAGE":
 			return {
 				...state,
+				registerSuccessMessage: null,
 				// REVIEW: needs to be 1 level object
-				errorMessage: action.payload,
+				registerErrorMessage: action.payload,
 			};
 		case "SET_REGISTER_STEP":
 			return {

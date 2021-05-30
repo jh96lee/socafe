@@ -6,8 +6,8 @@ export const SearchAndSelectedStyle = styled.div`
 	gap: 1.2rem;
 	align-items: center;
 	padding: 0.7rem 1.4rem;
-	background-color: ${(props) =>
-		props.theme.isDarkMode ? "#4f606961" : "#6096b12b"};
+	color: var(--primary-text-color);
+	background-color: var(--quaternary-background-color);
 	border-radius: 2rem;
 
 	& > svg {

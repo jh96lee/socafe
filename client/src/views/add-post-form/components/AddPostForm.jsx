@@ -20,13 +20,14 @@ import { ButtonStyle } from "../../../styles";
 const AddPostForm = () => {
 	const dispatch = useDispatch();
 
-	const { errorMessage, successMessage } = useSelector(
+	const { uploadImageErrorMessage, uploadImageSuccessMessage } = useSelector(
 		(state) => state.uploadImageReducer
 	);
 	const {
 		uploadedPostImagesArray,
 		selectedPostCategoriesArray,
 		taggedPostUsersArray,
+		postCaptionNodesArray,
 		addPostErrorMessage,
 	} = useSelector((state) => state.addPostReducer);
 
@@ -37,8 +38,12 @@ const AddPostForm = () => {
 					<h3>Upload Photos</h3>
 
 					<Message
-						successMessage={successMessage && successMessage}
-						errorMessage={errorMessage && errorMessage.image}
+						successMessage={
+							uploadImageSuccessMessage && uploadImageSuccessMessage
+						}
+						errorMessage={
+							uploadImageErrorMessage && uploadImageErrorMessage.image
+						}
 					/>
 
 					<UploadImage uploadedImageType="post-image" />
@@ -92,10 +97,18 @@ const AddPostForm = () => {
 
 			<AddContentButtonWrapperStyle>
 				<ButtonStyle
-					disabled={uploadedPostImagesArray.length === 0}
+					disabled={
+						uploadedPostImagesArray.length === 0 ||
+						selectedPostCategoriesArray.length === 0
+					}
 					onClick={() => {
 						dispatch(
-							submitPost(uploadedPostImagesArray, selectedPostCategoriesArray)
+							submitPost(
+								uploadedPostImagesArray,
+								selectedPostCategoriesArray,
+								taggedPostUsersArray,
+								postCaptionNodesArray
+							)
 						);
 					}}
 				>

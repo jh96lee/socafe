@@ -20,7 +20,8 @@ const LoginForm = () => {
 
 	const userLoginInfoObject = useSelector((state) => state.loginReducer);
 
-	const { email, password, successMessage, errorMessage } = userLoginInfoObject;
+	const { email, password, loginSuccessMessage, loginErrorMessage } =
+		userLoginInfoObject;
 
 	const handleOnChange = (e) => {
 		handleFormInputOnChange(e, userLoginInfoObject, dispatch, setLoginUserInfo);
@@ -47,8 +48,12 @@ const LoginForm = () => {
 						inputOnChangeEventHandler={handleOnChange}
 					/>
 
-					<Message errorMessage={errorMessage && errorMessage.email} />
-					<Message errorMessage={errorMessage && errorMessage.general} />
+					<Message
+						errorMessage={loginErrorMessage && loginErrorMessage.email}
+					/>
+					<Message
+						errorMessage={loginErrorMessage && loginErrorMessage.general}
+					/>
 				</FormInputAndMessageStyle>
 
 				<FormInputAndMessageStyle>
@@ -63,7 +68,9 @@ const LoginForm = () => {
 						inputOnChangeEventHandler={handleOnChange}
 					/>
 
-					<Message errorMessage={errorMessage && errorMessage.general} />
+					<Message
+						errorMessage={loginErrorMessage && loginErrorMessage.general}
+					/>
 				</FormInputAndMessageStyle>
 			</FormFieldsetStyle>
 
@@ -71,8 +78,8 @@ const LoginForm = () => {
 				type="submit"
 				disabled={!email || !password}
 				onClick={handleOnClick}
-				success={successMessage}
-				error={errorMessage}
+				success={loginSuccessMessage}
+				error={loginErrorMessage}
 			>
 				Login
 			</ButtonStyle>

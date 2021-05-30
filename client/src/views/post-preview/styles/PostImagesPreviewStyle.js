@@ -8,10 +8,12 @@ export const PostImagesPreviewStyle = styled.div`
 
 	& > #overlay {
 		position: absolute;
+		top: 0;
+		left: 0;
 		border-radius: 1rem;
 		z-index: 2;
-		width: 100%;
-		height: 100%;
+		width: 100.1%;
+		height: 100.1%;
 		background-color: #0e0e0e94;
 		backdrop-filter: blur(5px);
 	}

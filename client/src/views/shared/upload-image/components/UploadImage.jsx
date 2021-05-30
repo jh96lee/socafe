@@ -17,6 +17,9 @@ const UploadImages = ({ uploadedImageType }) => {
 	const { uploadedPostImagesArray } = useSelector(
 		(state) => state.addPostReducer
 	);
+	const { isImageUploading, isImageDeleting } = useSelector(
+		(state) => state.uploadImageReducer
+	);
 
 	const handleOnClick = () => {
 		setIsSubmitted((prevState) => !prevState);
@@ -36,15 +39,20 @@ const UploadImages = ({ uploadedImageType }) => {
 
 	return (
 		<UploadImageStyle>
-			{imagesArray.map((image) => {
-				return (
-					<UploadedImagePreview
-						key={image.id}
-						uploadedImage={image}
-						uploadedImageType={uploadedImageType}
-					/>
-				);
-			})}
+			{isImageDeleting || isImageUploading ? (
+				<Loader />
+			) : (
+				imagesArray.map((image) => {
+					return (
+						// REVIEW: this is the individual image that was uploaded
+						<UploadedImagePreview
+							key={image.id}
+							uploadedImage={image}
+							uploadedImageType={uploadedImageType}
+						/>
+					);
+				})
+			)}
 
 			<UploadImageButton uploadedImageType={uploadedImageType} />
 		</UploadImageStyle>

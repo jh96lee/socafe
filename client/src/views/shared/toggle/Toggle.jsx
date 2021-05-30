@@ -3,22 +3,24 @@ import * as React from "react";
 import ToggleStyle from "./ToggleStyle";
 
 const Toggle = ({
-	isToggleTrue,
-	setIsToggleTrue,
+	toggleState,
 	toggleWidth,
 	toggleHeight,
+	toggleOnClickEventHandler,
+	// REVIEW: this could be theme toggle or just or ordinary toggle
 	toggleType,
-	switchIcon,
+	// REVIEW: this is an object
+	toggleIcons,
 }) => {
 	return (
 		<ToggleStyle
-			isToggleTrue={isToggleTrue}
-			onClick={() => setIsToggleTrue((prevState) => !prevState)}
+			toggleState={toggleState}
 			toggleWidth={toggleWidth}
 			toggleHeight={toggleHeight}
 			toggleType={toggleType}
+			onClick={toggleOnClickEventHandler}
 		>
-			<span>{switchIcon}</span>
+			<span>{toggleState ? toggleIcons.on : toggleIcons.off}</span>
 		</ToggleStyle>
 	);
 };

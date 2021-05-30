@@ -1,7 +1,7 @@
 import * as React from "react";
 import { useDispatch } from "react-redux";
 
-import { DropdownMenu, DropdownElement, FormInput } from "../../index";
+import { DropdownMenu, FormInput } from "../../index";
 import SearchAndSelected from "./SearchAndSelected";
 
 import { DropdownStyle } from "../../../../styles";
@@ -29,6 +29,31 @@ const SearchAndSelect = ({
 	const [searchResultArray, setSearchResultArray] = React.useState([]);
 
 	const dispatch = useDispatch();
+
+	const searchResultDropdownElementArray = () => {
+		return searchResultArray.map((result) => {
+			return {
+				content: result,
+				type:
+					searchAndSelectType === "post-user" ||
+					searchAndSelectType === "comment-user"
+						? "user"
+						: "category",
+				onClickEventHandler: () => {
+					dispatch(
+						searchAndSelectAddContent(
+							// REVIEW: provide SearchAndSelect's type
+							searchAndSelectType,
+							// REVIEW: individual element's data
+							result,
+							// REVIEW: array that will be used for data validation
+							searchAndSelectedArray
+						)
+					);
+				},
+			};
+		});
+	};
 
 	return (
 		<DropdownStyle
@@ -67,40 +92,12 @@ const SearchAndSelect = ({
 
 			<DropdownMenu
 				triggerID={`search-and-select-${searchAndSelectType}-dropdown-trigger`}
-				customDropdownId={`select-${searchAndSelectType}`}
-				dataArray={searchResultArray}
+				dropdownElementKey={`select-${searchAndSelectType}`}
+				dropdownElementArray={searchResultDropdownElementArray()}
 				menuTop="calc(100% + 6px)"
 				menuLeft="0"
 				menuWidth="100%"
-			>
-				{searchResultArray.map((result, idx) => {
-					return (
-						<DropdownElement
-							key={`search-${searchAndSelectType}-result__${idx}`}
-							dropdownElementContent={result}
-							dropdownElementComponentType={
-								searchAndSelectType === "post-user" ||
-								searchAndSelectType === "comment-user"
-									? "user"
-									: "category"
-							}
-							// REVIEW: SearchAndSelect component's dropdown's individual element's job is only to add in content to the corresponding array
-							dropdownElementOnClickEventHandler={() => {
-								dispatch(
-									searchAndSelectAddContent(
-										// REVIEW: provide SearchAndSelect's type
-										searchAndSelectType,
-										// REVIEW: individual element's data
-										result,
-										// REVIEW: array that will be used for data validation
-										searchAndSelectedArray
-									)
-								);
-							}}
-						/>
-					);
-				})}
-			</DropdownMenu>
+			/>
 		</DropdownStyle>
 	);
 };

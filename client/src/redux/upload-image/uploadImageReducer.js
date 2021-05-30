@@ -1,8 +1,8 @@
 const initialState = {
 	isImageUploading: false,
 	isImageDeleting: null,
-	errorMessage: null,
-	successMessage: null,
+	uploadImageErrorMessage: null,
+	uploadImageSuccessMessage: null,
 };
 
 const uploadImageReducer = (state = initialState, action) => {
@@ -10,8 +10,8 @@ const uploadImageReducer = (state = initialState, action) => {
 		case "START_UPLOADING_IMAGE":
 			return {
 				...state,
-				errorMessage: null,
-				successMessage: null,
+				uploadImageErrorMessage: null,
+				uploadImageSuccessMessage: null,
 				isImageUploading: true,
 			};
 		case "END_UPLOADING_IMAGE":
@@ -22,18 +22,20 @@ const uploadImageReducer = (state = initialState, action) => {
 		case "SET_UPLOAD_IMAGE_ERROR_MESSAGE":
 			return {
 				...state,
-				errorMessage: action.payload,
+				uploadImageSuccessMessage: null,
+				uploadImageErrorMessage: action.payload,
 			};
 		case "SET_UPLOAD_IMAGE_SUCCESS_MESSAGE":
 			return {
 				...state,
-				successMessage: action.payload,
+				uploadImageErrorMessage: null,
+				uploadImageSuccessMessage: action.payload,
 			};
 		case "START_DELETING_IMAGE":
 			return {
 				...state,
-				errorMessage: null,
-				successMessage: null,
+				uploadImageErrorMessage: null,
+				uploadImageSuccessMessage: null,
 				isImageDeleting: true,
 			};
 		case "END_DELETING_IMAGE":
