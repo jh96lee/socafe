@@ -17,7 +17,7 @@ const authenticateToken = (req, res, next) => {
 				error: { general: "Access denied" },
 			});
 		} else {
-			req.body.decoded = decoded;
+			res.locals.userID = decoded.id;
 
 			next();
 		}
