@@ -16,7 +16,9 @@ categoryRouter.get("/category/post", async (req, res) => {
 		res.send(rows);
 	} catch (error) {
 		res.send({
-			message: "There has been an error while fetching post categories",
+			error: {
+				general: "There has been an error while fetching post categories",
+			},
 		});
 	}
 });
@@ -32,7 +34,7 @@ categoryRouter.post(
 		const userID = decoded.id;
 
 		if (selectedCategories.length === 0) {
-			res.end();
+			res.send({ success: "Success" });
 		} else {
 			const categoryIDsArray = selectedCategories.map((category) => {
 				return category.id;

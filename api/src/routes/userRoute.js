@@ -112,48 +112,6 @@ userRouter.post("/user/login", validateEmail, async (req, res) => {
 	}
 });
 
-userRouter.put("/user/update", authenticateToken, async (req, res) => {
-	const updatedUserArray = [];
-
-	// REVIEW: fetch user id through decoded JWT payload
-	const user_id = req.body.decoded.id;
-
-	// TODO: fetch the soon to be updated columns name using Object.keys but exclude decoded from the array
-	const columnsToModifyArray = Object.keys(req.body).filter((key) => {
-		return key !== "decoded";
-	});
-
-	try {
-		for (let column of columnsToModifyArray) {
-			const updatedUser = await UserRepo.updateUser(
-				column,
-				req.body[column],
-				user_id
-			);
-
-			updatedUserArray.push(updatedUser);
-		}
-
-		const mostRecentUpdatedUser = updatedUserArray[updatedUserArray.length - 1];
-
-		res.send(mostRecentUpdatedUser);
-	} catch (error) {
-		res.send({ message: { error: "There has been an error" } });
-	}
-});
-
-userRouter.delete("/user/delete", authenticateToken, async (req, res) => {
-	const user_id = req.body.decoded.id;
-
-	try {
-		await UserRepo.deleteUser(user_id);
-
-		res.end();
-	} catch (error) {
-		res.send({ message: { error: "There has been an error" } });
-	}
-});
-
 userRouter.post("/search/users", async (req, res) => {
 	const { searchInput } = req.body;
 
@@ -181,7 +139,11 @@ userRouter.post("/search/users", async (req, res) => {
 
 		res.send(rows);
 	} catch (error) {
-		res.send({ error: "There has been an error while searching for users" });
+		res.send({
+			error: {
+				searchUser: "There has been an error while searching for users",
+			},
+		});
 	}
 });
 
