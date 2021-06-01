@@ -12,6 +12,7 @@ import {
 	HomePage,
 	AddPostPage,
 } from "./pages";
+import { Post } from "./views/post";
 import { AddPostIcon } from "./views/shared";
 
 import GlobalStyle from "./styles/GlobalStyle";
@@ -42,6 +43,9 @@ function App() {
 						setIsDarkMode={setIsDarkMode}
 						setIsResponsiveNavigationOpen={setIsResponsiveNavigationOpen}
 					/>
+
+					{/* REVIEW: delete this later */}
+					<Post />
 
 					<Navigation isResponsiveNavigationOpen={isResponsiveNavigationOpen} />
 

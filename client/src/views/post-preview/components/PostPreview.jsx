@@ -1,30 +1,57 @@
 import * as React from "react";
-
-import PostUploader from "./PostUploader";
-import PostImagesPreview from "./PostImagesPreview";
-import PostNumbersMetaData from "./PostNumbersMetaData";
-import PostCategoriesPreview from "./PostCategoriesPreview";
-import PostCaptionPreview from "./PostCaptionPreview";
-import { Skeleton } from "../../shared";
+import { useSelector } from "react-redux";
 
 import {
-	PostPreviewStyle,
-	PostPreviewDetailsStyle,
-} from "../styles/PostPreviewStyle";
+	PostImages,
+	PostSelectedCategories,
+	PostUser,
+	PostNumericMetadata,
+	PostContents,
+	PostTaggedUsers,
+} from "../../shared/post-data";
+import { Skeleton } from "../../shared";
+
+import { PostStyle, PostMetadataStyle } from "../../../styles";
 
 const PostPreview = () => {
+	const {
+		uploadedPostImagesArray,
+		selectedPostCategoriesArray,
+		taggedPostUsersArray,
+		postCaptionNodesArray,
+	} = useSelector((state) => state.addPostReducer);
+	const { user } = useSelector((state) => state.userReducer);
+
 	return (
-		<PostPreviewStyle>
-			<PostImagesPreview />
+		<PostStyle>
+			<PostImages
+				postImagesArray={uploadedPostImagesArray}
+				conditionalPostImagesRenderingVariable={
+					uploadedPostImagesArray.length > 0
+				}
+			/>
 
-			<PostPreviewDetailsStyle>
-				<PostCategoriesPreview />
+			<PostMetadataStyle>
+				<PostSelectedCategories
+					selectedPostCategoriesArray={selectedPostCategoriesArray}
+					conditionalPostSelectedCategoriesVariable={
+						selectedPostCategoriesArray.length > 0
+					}
+				/>
 
-				<PostUploader />
+				<PostUser postUser={user} conditionalPostUserVariable={user} />
 
-				<PostNumbersMetaData />
+				<PostNumericMetadata conditionalPostNumericMetadataVariable={null} />
 
-				<PostCaptionPreview />
+				<PostContents
+					postContentsArray={postCaptionNodesArray}
+					conditionalPostContentsVariable={postCaptionNodesArray.length > 0}
+				/>
+
+				<PostTaggedUsers
+					postTaggedUsersArray={taggedPostUsersArray}
+					conditionalPostTaggedUsersVariable={taggedPostUsersArray.length > 0}
+				/>
 
 				<Skeleton skeletonHeight="3rem" skeletonWidth="100%" />
 				<Skeleton skeletonHeight="3rem" skeletonWidth="100%" />
@@ -35,8 +62,8 @@ const PostPreview = () => {
 					skeletonWidth="100%"
 					skeletonBorderRadius="3rem"
 				/>
-			</PostPreviewDetailsStyle>
-		</PostPreviewStyle>
+			</PostMetadataStyle>
+		</PostStyle>
 	);
 };
 

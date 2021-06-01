@@ -1,15 +1,15 @@
 import styled from "styled-components";
 
-import { DropdownStyle } from "../../../styles";
+import { DropdownStyle } from "../../../../styles";
 
-export const PostTaggedUserDropdownStyle = styled(DropdownStyle)`
+export const PostTaggedUsersDropdownStyle = styled(DropdownStyle)`
 	position: absolute;
 	z-index: 10;
-	left: 7px;
-	bottom: 7px;
+	left: 3.5rem;
+	bottom: 3.5rem;
 `;
 
-export const PostTaggedUserIconStyle = styled.div`
+export const PostTaggedUsersIconElementStyle = styled.div`
 	padding: 0.9rem;
 	border-radius: 50%;
 	background-color: ${(props) =>

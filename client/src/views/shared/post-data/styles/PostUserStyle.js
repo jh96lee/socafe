@@ -1,24 +1,25 @@
 import styled from "styled-components";
 
-export const PostUploaderStyle = styled.div`
+export const PostUserStyle = styled.div`
 	display: flex;
 	align-items: center;
+	gap: 0.7rem;
 
 	& img {
 		width: 4rem;
 		height: 4rem;
 		object-fit: cover;
 		border-radius: 50%;
-		margin-right: 1rem;
 	}
+`;
 
-	& > div {
-		display: flex;
-		flex-direction: column;
-		justify-content: space-between;
-	}
+export const PostUserMetadataStyle = styled.div`
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+	height: 100%;
 
-	& > div p {
+	& > p {
 		color: var(--primary-text-color);
 	}
 `;

@@ -129,7 +129,9 @@ const GlobalStyles = createGlobalStyle`
     }
 
     h6 {
-        font-size: 1.3rem;
+        font-size: 1.37rem;
+        letter-spacing: -0.9px;
+        font-weight: 500;
     }
 
     a {

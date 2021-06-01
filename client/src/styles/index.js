@@ -12,3 +12,5 @@ export { default as AddContentFormStyle } from "./add-content/AddContentFormStyl
 export { default as AddContentStyle } from "./add-content/AddContentStyle";
 export { default as AddContentsWrapperStyle } from "./add-content/AddContentsWrapperStyle";
 export { default as AddContentButtonWrapperStyle } from "./add-content/AddContentButtonWrapperStyle";
+export { default as PostStyle } from "./post/PostStyle";
+export { default as PostMetadataStyle } from "./post/PostMetadataStyle";

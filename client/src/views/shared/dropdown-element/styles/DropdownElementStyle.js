@@ -10,7 +10,7 @@ export const DropdownElementStyle = styled.div`
 		width: 4rem;
 		height: 4rem;
 		object-fit: cover;
-		margin-right: 1.5rem;
+		margin-right: 1rem;
 		border-radius: 0.5rem;
 	}
 
