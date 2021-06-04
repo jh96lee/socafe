@@ -6,12 +6,18 @@ import { DropdownMenu, IconElement } from "../../shared";
 
 import { logoutUser } from "../../../redux/login/loginAction";
 
-import { DropdownStyle } from "../../../styles";
-import AvatarStyle from "../styles/AvatarStyle";
+import { useDropdown } from "../../../hooks/useDropdown";
+
+import { AvatarStyle, AvatarimageStyle } from "../styles/AvatarStyle";
 
 import { User, Register, Login, Logout } from "../../../assets";
 
 const Avatar = () => {
+	const { isDropdownMenuOpen } = useDropdown(
+		"avatar-dropdown-trigger",
+		"avatar-dropdown-menu"
+	);
+
 	const dispatch = useDispatch();
 
 	const { user } = useSelector((state) => state.userReducer);
@@ -65,30 +71,33 @@ const Avatar = () => {
 		  ];
 
 	return (
-		<DropdownStyle id="user-dropdown-trigger">
+		<AvatarStyle id="avatar-dropdown-trigger">
 			{user ? (
-				<AvatarStyle>
-					<img src={user.avatar_url} alt="Profile image" />
-				</AvatarStyle>
+				<AvatarimageStyle src={user.avatar_url} alt="Profile image" />
 			) : (
 				<IconElement
-					iconUsage="button"
-					iconSize="2.3rem"
-					iconBreakingPoint="600px"
-					iconResponsiveSize="2rem"
+					iconRole="button"
+					iconElementStyleObject={{
+						elementHoverBackgroundColor:
+							"var(--secondary-hover-clickable-background-color)",
+					}}
 				>
 					<User />
 				</IconElement>
 			)}
 
-			<DropdownMenu
-				triggerID="user-dropdown-trigger"
-				dropdownElementArray={userDropdownElementArray}
-				dropdownElementKey="user-dropdown"
-				menuTop="calc(100% + 10px)"
-				menuRight="0"
-			/>
-		</DropdownStyle>
+			{isDropdownMenuOpen && (
+				<DropdownMenu
+					dropdownMenuID="avatar-dropdown-menu"
+					dropdownElementKey="avatar-dropdown-element"
+					dropdownElementArray={userDropdownElementArray}
+					dropdownMenuStyleObject={{
+						menuTop: "calc(100% + 10px)",
+						menuRight: "0",
+					}}
+				/>
+			)}
+		</AvatarStyle>
 	);
 };
 

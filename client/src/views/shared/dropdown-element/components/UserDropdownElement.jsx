@@ -10,7 +10,10 @@ const UserDropdownElement = ({
 	dropdownElementOnClickEventHandler,
 }) => {
 	return (
-		<DropdownElementStyle onClick={dropdownElementOnClickEventHandler}>
+		<DropdownElementStyle
+			onClick={dropdownElementOnClickEventHandler}
+			data-value={dropdownElementContent.username}
+		>
 			<img src={dropdownElementContent.avatar_url} />
 
 			<DropdownElementMetadataStyle>

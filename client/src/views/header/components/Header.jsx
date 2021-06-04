@@ -1,8 +1,8 @@
 import * as React from "react";
 
-import Searchbar from "./Searchbar";
 import Logo from "./Logo";
 import Avatar from "./Avatar";
+import { Searchbar } from "../../searchbar";
 import { Toggle, IconElement } from "../../shared";
 
 import { HeaderStyle, HeaderStart, HeaderEnd } from "../styles/HeaderStyle";

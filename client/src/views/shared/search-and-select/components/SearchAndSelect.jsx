@@ -70,19 +70,23 @@ const SearchAndSelect = ({
 
 				<FormInput
 					// FIX: inputUsage is used for styling purposes
-					inputUsage="search-and-select"
-					inputID={`search-and-select-${searchAndSelectType}`}
-					inputName={`search-and-select-${searchAndSelectType}-input`}
-					inputType="text"
-					inputLabel={`search and select `}
-					inputPlaceholder={searchAndSelectPlaceholder}
-					inputOnChangeEventHandler={(e) =>
+					id={`search-and-select-${searchAndSelectType}`}
+					name={`search-and-select-${searchAndSelectType}-input`}
+					type="text"
+					label={`search and select `}
+					placeholder={searchAndSelectPlaceholder}
+					onChange={(e) =>
 						handleSearchInputOnChange(
 							e,
 							searchAndSelectAPIEndpoint,
 							setSearchResultArray
 						)
 					}
+					formInputStyleObject={{
+						labelDisplay: "none",
+						inputBackgroundColor: "transparent",
+						inputBoxShadow: "none",
+					}}
 				/>
 			</SearchAndSelectStyle>
 

@@ -4,23 +4,16 @@ import IconElementStyle from "./IconElementStyle";
 
 const IconElement = ({
 	children,
-	iconSize,
-	iconColor,
-	iconUsage,
-	iconBreakingPoint,
-	iconResponsiveSize,
-	onClickEventHandler,
+	iconRole,
+	onClick,
+	iconElementStyleObject,
 }) => {
 	return (
 		<IconElementStyle
-			iconColor={iconColor}
-			iconSize={iconSize}
-			iconUsage={iconUsage}
-			role={iconUsage}
+			role={iconRole}
 			tabIndex="0"
-			iconBreakingPoint={iconBreakingPoint}
-			iconResponsiveSize={iconResponsiveSize}
-			onClick={onClickEventHandler}
+			onClick={onClick}
+			{...iconElementStyleObject}
 		>
 			{children}
 		</IconElementStyle>

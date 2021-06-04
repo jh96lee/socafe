@@ -10,7 +10,10 @@ const CategoryDropdownElement = ({
 	dropdownElementOnClickEventHandler,
 }) => {
 	return (
-		<DropdownElementStyle onClick={dropdownElementOnClickEventHandler}>
+		<DropdownElementStyle
+			onClick={dropdownElementOnClickEventHandler}
+			data-value={dropdownElementContent.title}
+		>
 			<img src={dropdownElementContent.category_url} />
 
 			<DropdownElementMetadataStyle>

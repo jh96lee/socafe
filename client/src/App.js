@@ -44,9 +44,6 @@ function App() {
 						setIsResponsiveNavigationOpen={setIsResponsiveNavigationOpen}
 					/>
 
-					{/* REVIEW: delete this later */}
-					{/* <Post /> */}
-
 					<Navigation isResponsiveNavigationOpen={isResponsiveNavigationOpen} />
 
 					{user && <AddPostIcon />}

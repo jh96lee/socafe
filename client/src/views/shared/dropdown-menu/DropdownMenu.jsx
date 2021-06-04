@@ -2,33 +2,16 @@ import React from "react";
 
 import { DropdownElement } from "../index";
 
-import useShowAndHideElementOnClick from "../../../hooks/useShowAndHideElementOnClick";
-
 import DropdownMenuStyle from "./DropdownMenuStyle";
 
 const DropdownMenu = ({
-	triggerID,
+	dropdownMenuID,
 	dropdownElementKey,
 	dropdownElementArray,
-	menuTop,
-	menuRight,
-	menuBottom,
-	menuLeft,
-	menuWidth,
+	dropdownMenuStyleObject,
 }) => {
-	const [isOpen, setIsOpen] = React.useState(false);
-
-	useShowAndHideElementOnClick(triggerID, "dropdown-menu", setIsOpen, true);
-
-	return isOpen ? (
-		<DropdownMenuStyle
-			id="dropdown-menu"
-			menuTop={menuTop}
-			menuRight={menuRight}
-			menuBottom={menuBottom}
-			menuLeft={menuLeft}
-			menuWidth={menuWidth}
-		>
+	return (
+		<DropdownMenuStyle id={dropdownMenuID} {...dropdownMenuStyleObject}>
 			{dropdownElementArray.length > 0 ? (
 				dropdownElementArray.map(
 					({ content, type, onClickEventHandler }, idx) => {
@@ -46,7 +29,7 @@ const DropdownMenu = ({
 				<p id="dropdown-menu__no-result-message">No search result</p>
 			)}
 		</DropdownMenuStyle>
-	) : null;
+	);
 };
 
 export default DropdownMenu;

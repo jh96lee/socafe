@@ -10,7 +10,10 @@ const LinkDropdownElement = ({
 	dropdownElementOnClickEventHandler,
 }) => {
 	return (
-		<LinkDropdownElementStyle onClick={dropdownElementOnClickEventHandler}>
+		<LinkDropdownElementStyle
+			onClick={dropdownElementOnClickEventHandler}
+			data-value={dropdownElementContent.label}
+		>
 			<LinkDropdownElementIconStyle>
 				{dropdownElementContent.icon}
 			</LinkDropdownElementIconStyle>

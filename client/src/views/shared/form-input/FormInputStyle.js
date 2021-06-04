@@ -37,7 +37,7 @@ export const FormInputStyle = styled.div`
 	}
 
 	& input::placeholder {
-		font-size: 1.36rem;
+		font-size: 1.37rem;
 		color: ${(props) =>
 			props.inputPlaceholderColor
 				? props.inputPlaceholderColor
