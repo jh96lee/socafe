@@ -6,6 +6,7 @@ import loginReducer from "./login/loginReducer";
 import addPostReducer from "./add-post/addPostReducer";
 import uploadImageReducer from "./upload-image/uploadImageReducer";
 import categoryOfInterestReducer from "./category-of-interest/categoryOfInterestReducer";
+import commentReducer from "./comment/commentReducer";
 
 const rootReducer = combineReducers({
 	registerReducer,
@@ -15,6 +16,7 @@ const rootReducer = combineReducers({
 	addPostReducer,
 	uploadImageReducer,
 	categoryOfInterestReducer,
+	commentReducer,
 });
 
 export default rootReducer;

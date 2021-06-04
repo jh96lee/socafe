@@ -2,11 +2,7 @@ import * as React from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { useHistory } from "react-router";
 
-import {
-	removePostCategory,
-	removeUserOnPost,
-	submitPost,
-} from "../../../redux/add-post/addPostAction";
+import { submitPost } from "../../../redux/add-post/addPostAction";
 
 import { SearchAndSelect, Message, UploadImage, Caption } from "../../shared";
 
@@ -70,16 +66,15 @@ const AddPostForm = () => {
 					/>
 
 					<SearchAndSelect
-						// REVIEW: use this prop to determine which dropdown element to render and for dropdownMenu component uniqueness
+						// REVIEW: provide dropdown trigger ID
+						// REVIEW: figure out action type when DropdownElement get clicked
 						searchAndSelectType="post-category"
+						// REVIEW: if the role is to search, then the search api endpoint needs to be provided
+						searchAndSelectAPIEndpoint="/search/post-categories"
 						// REVIEW: array that contains selected values and will be used for data validation
 						searchAndSelectedArray={selectedPostCategoriesArray}
-						// REVIEW: action that will be fired when SearchAndSelected component's remove icon is clicked
-						searchAndSelectedAction={removePostCategory}
-						// REVIEW: api endpoint to trigger search feature and provide the onChange event handler to FormInput component
-						searchAPIEndpoint={"/search/post-categories"}
 						// REVIEW: placeholder
-						searchInputPlaceholder={"Search for post categories"}
+						searchAndSelectPlaceholder="Search for post categories"
 					/>
 				</AddContentStyle>
 
@@ -92,10 +87,9 @@ const AddPostForm = () => {
 
 					<SearchAndSelect
 						searchAndSelectType="post-user"
+						searchAndSelectAPIEndpoint="/search/users"
 						searchAndSelectedArray={taggedPostUsersArray}
-						searchAndSelectedAction={removeUserOnPost}
-						searchAPIEndpoint={"/search/users"}
-						searchInputPlaceholder={"Search for users "}
+						searchAndSelectPlaceholder="Search for users "
 					/>
 				</AddContentStyle>
 

@@ -2,29 +2,26 @@ import * as React from "react";
 import { useDispatch } from "react-redux";
 
 import { DropdownMenu, FormInput } from "../../index";
-import SearchAndSelected from "./SearchAndSelected";
+import SelectedElement from "./SelectedElement";
 
 import { DropdownStyle } from "../../../../styles";
 import { SearchAndSelectStyle } from "../styles/SearchAndSelectStyle";
-import { SearchAndSelectedWrapperStyle } from "../styles/SearchAndSelectedWrapperStyle";
+import { SelectedElementsWrapperStyle } from "../styles/SelectedElementsWrapperStyle";
 
-import { searchAndSelectAddContent } from "../../../../redux/common/searchAndSelectAddContent";
+import { addContent } from "../../../../redux/common/addContent";
 
 import { handleSearchInputOnChange } from "../../../../utils/form/handleSearchInputOnChange";
 
 const SearchAndSelect = ({
-	// REVIEW: for DropdownMenu uniqueness
-	// REVIEW: to identify the type of component DropdownElement needs to render
-	// REVIEW: to figure out the actionTypes that needs to be triggered when DropdownElement's onClick gets triggered
+	// REVIEW: provide dropdown trigger ID
+	// REVIEW: figure out action type when DropdownElement gets clicked
 	searchAndSelectType,
+	// REVIEW: if role is to search, api endpoint MUST be provided
+	searchAndSelectAPIEndpoint,
 	// REVIEW: array that will be used for data validation when either content gets added or removed
 	searchAndSelectedArray,
-	// REVIEW: action that will get triggered when SearchAndSelectED component gets clicked
-	searchAndSelectedAction,
-	// REVIEW: API endpoint for search feature
-	searchAPIEndpoint,
 	// REVIEW: placeholder for FormInput
-	searchInputPlaceholder,
+	searchAndSelectPlaceholder,
 }) => {
 	const [searchResultArray, setSearchResultArray] = React.useState([]);
 
@@ -35,18 +32,17 @@ const SearchAndSelect = ({
 			return {
 				content: result,
 				type:
-					searchAndSelectType === "post-user" ||
-					searchAndSelectType === "comment-user"
+					searchAndSelectType === "post-user" || "comment-user"
 						? "user"
 						: "category",
 				onClickEventHandler: () => {
 					dispatch(
-						searchAndSelectAddContent(
-							// REVIEW: provide SearchAndSelect's type
+						addContent(
+							// REVIEW: provide the type (post-category, post-user, product-category)
 							searchAndSelectType,
-							// REVIEW: individual element's data
+							// REVIEW: clicked dropdown element
 							result,
-							// REVIEW: array that will be used for data validation
+							// REVIEW: array used for data validation
 							searchAndSelectedArray
 						)
 					);
@@ -60,30 +56,30 @@ const SearchAndSelect = ({
 			id={`search-and-select-${searchAndSelectType}-dropdown-trigger`}
 		>
 			<SearchAndSelectStyle>
-				<SearchAndSelectedWrapperStyle>
-					{searchAndSelectedArray.map((value, idx) => {
+				<SelectedElementsWrapperStyle>
+					{searchAndSelectedArray.map((content, idx) => {
 						return (
-							<SearchAndSelected
-								key={`search-and-selected-${searchAndSelectType}-value__${idx}`}
-								selectedValue={value}
-								searchAndSelectedAction={searchAndSelectedAction}
+							<SelectedElement
+								key={`search-and-select-${searchAndSelectType}__${idx}`}
+								selectedContent={content}
+								searchAndSelectType={searchAndSelectType}
 							/>
 						);
 					})}
-				</SearchAndSelectedWrapperStyle>
+				</SelectedElementsWrapperStyle>
 
 				<FormInput
-					// REVIEW: inputUsage is used for styling purposes
+					// FIX: inputUsage is used for styling purposes
 					inputUsage="search-and-select"
 					inputID={`search-and-select-${searchAndSelectType}`}
-					inputName="search-and-select-post-categories"
+					inputName={`search-and-select-${searchAndSelectType}-input`}
 					inputType="text"
 					inputLabel={`search and select `}
-					inputPlaceholder={searchInputPlaceholder}
+					inputPlaceholder={searchAndSelectPlaceholder}
 					inputOnChangeEventHandler={(e) =>
 						handleSearchInputOnChange(
-							e.target.value,
-							searchAPIEndpoint,
+							e,
+							searchAndSelectAPIEndpoint,
 							setSearchResultArray
 						)
 					}
@@ -92,7 +88,7 @@ const SearchAndSelect = ({
 
 			<DropdownMenu
 				triggerID={`search-and-select-${searchAndSelectType}-dropdown-trigger`}
-				dropdownElementKey={`select-${searchAndSelectType}`}
+				dropdownElementKey={`search-and-select-${searchAndSelectType}`}
 				dropdownElementArray={searchResultDropdownElementArray()}
 				menuTop="calc(100% + 6px)"
 				menuLeft="0"

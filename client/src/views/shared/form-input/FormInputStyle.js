@@ -3,6 +3,7 @@ import styled from "styled-components";
 export const FormInputStyle = styled.div`
 	display: flex;
 	flex-direction: column;
+	width: ${(props) => (props.inputWidth ? props.inputWidth : "100%")};
 
 	& label,
 	input {
@@ -11,10 +12,7 @@ export const FormInputStyle = styled.div`
 	}
 
 	& label {
-		display: ${(props) =>
-			props.inputUsage === "search" || props.inputUsage === "search-and-select"
-				? "none"
-				: "block"};
+		display: ${(props) => (props.labelDisplay ? props.labelDisplay : "block")};
 		font-size: 1.43rem;
 		font-weight: 500;
 		margin-bottom: 1rem;
@@ -26,23 +24,23 @@ export const FormInputStyle = styled.div`
 		outline: none;
 		border: none;
 		box-shadow: ${(props) =>
-			props.inputUsage === "search" || props.inputUsage === "search-and-select"
-				? "none"
+			props.inputBoxShadow
+				? props.inputBoxShadow
 				: "0 0 0 1.6px var(--primary-separator-color)"};
 		border-radius: 0.5rem;
 		padding: ${(props) =>
 			props.inputPadding ? props.inputPadding : "1.3rem 1.45rem"};
 		background-color: ${(props) =>
-			props.inputUsage === "search" || props.inputUsage === "search-and-select"
-				? "transparent"
+			props.inputBackgroundColor
+				? props.inputBackgroundColor
 				: "var(--secondary-background-color)"};
 	}
 
 	& input::placeholder {
 		font-size: 1.36rem;
 		color: ${(props) =>
-			props.inputUsage === "search"
-				? "var(--primary-text-color)"
+			props.inputPlaceholderColor
+				? props.inputPlaceholderColor
 				: "var(--secondary-text-color)"};
 	}
 

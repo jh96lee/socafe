@@ -16,11 +16,11 @@ import {
 	registerUser,
 } from "../../../redux/register/registerAction";
 
-import { handleFormInputOnChange } from "../../../utils/form/handleFormInputOnChange";
+import { handleLoginAndRegisterFormInputOnChange } from "../../../utils/form/handleLoginAndRegisterFormInputOnChange";
 
 const RegisterForm = () => {
 	// REVIEW: data like basic user info and current form step and message sent from the server
-	const userRegisterInfoObject = useSelector((state) => state.registerReducer);
+	const userRegisterState = useSelector((state) => state.registerReducer);
 
 	const {
 		isUserRegistering,
@@ -30,21 +30,21 @@ const RegisterForm = () => {
 		password,
 		registerErrorMessage,
 		registerSuccessMessage,
-	} = userRegisterInfoObject;
+	} = userRegisterState;
 
 	const dispatch = useDispatch();
 
 	const handleOnClick = async (e) => {
 		e.preventDefault();
 
-		dispatch(registerUser(userRegisterInfoObject));
+		dispatch(registerUser(userRegisterState));
 	};
 
 	// TODO: utility function this
 	const handleOnChange = (e) => {
-		handleFormInputOnChange(
+		handleLoginAndRegisterFormInputOnChange(
 			e,
-			userRegisterInfoObject,
+			userRegisterState,
 			dispatch,
 			setRegisterUserInfo
 		);
@@ -55,27 +55,23 @@ const RegisterForm = () => {
 			<FormFieldsetStyle>
 				<FormInputAndMessageStyle>
 					<FormInput
-						inputUsage="form"
-						inputID="register-form__full-name"
-						inputLabel="Full Name(required)"
-						inputName="fullName"
-						inputType="text"
-						inputPlaceholder="Enter your full name"
-						inputWidth="100%"
-						inputOnChangeEventHandler={handleOnChange}
+						id="register-form__full-name"
+						label="Full Name(required)"
+						name="fullName"
+						type="text"
+						placeholder="Enter your full name"
+						onChange={handleOnChange}
 					/>
 				</FormInputAndMessageStyle>
 
 				<FormInputAndMessageStyle>
 					<FormInput
-						inputUsage="form"
-						inputID="register-form__email"
-						inputLabel="Email(required)"
-						inputName="email"
-						inputType="email"
-						inputPlaceholder="Enter your email"
-						inputWidth="100%"
-						inputOnChangeEventHandler={handleOnChange}
+						id="register-form__email"
+						label="Email(required)"
+						name="email"
+						type="email"
+						placeholder="Enter your email"
+						onChange={handleOnChange}
 					/>
 					<Message
 						errorMessage={registerErrorMessage && registerErrorMessage.email}
@@ -84,14 +80,12 @@ const RegisterForm = () => {
 
 				<FormInputAndMessageStyle>
 					<FormInput
-						inputUsage="form"
-						inputID="register-form__username"
-						inputLabel="Username(required)"
-						inputName="username"
-						inputType="text"
-						inputPlaceholder="Enter your username"
-						inputWidth="100%"
-						inputOnChangeEventHandler={handleOnChange}
+						id="register-form__username"
+						label="Username(required)"
+						name="username"
+						type="text"
+						placeholder="Enter your username"
+						onChange={handleOnChange}
 					/>
 					<Message
 						errorMessage={registerErrorMessage && registerErrorMessage.username}
@@ -100,14 +94,12 @@ const RegisterForm = () => {
 
 				<FormInputAndMessageStyle>
 					<FormInput
-						inputUsage="form"
-						inputID="register-form__password"
-						inputLabel="Password(required)"
-						inputName="password"
-						inputType="password"
-						inputPlaceholder="Enter your password"
-						inputWidth="100%"
-						inputOnChangeEventHandler={handleOnChange}
+						id="register-form__password"
+						label="Password(required)"
+						name="password"
+						type="password"
+						placeholder="Enter your password"
+						onChange={handleOnChange}
 					/>
 				</FormInputAndMessageStyle>
 			</FormFieldsetStyle>

@@ -1,7 +1,7 @@
 import axios from "axios";
 
 export const handleSearchInputOnChange = async (
-	searchInput,
+	event,
 	apiEndpoint,
 	setSearchResultArray
 ) => {
@@ -9,7 +9,7 @@ export const handleSearchInputOnChange = async (
 		method: "POST",
 		url: `http://localhost:8080${apiEndpoint}`,
 		data: {
-			searchInput: searchInput ? searchInput : null,
+			searchInput: event.target.value ? event.target.value : null,
 		},
 	});
 

@@ -3,8 +3,6 @@ import { useHistory } from "react-router-dom";
 
 import useShowAndHideElementOnClick from "../../../hooks/useShowAndHideElementOnClick";
 
-import { handleSearchInputOnChange } from "../../../utils/form/handleSearchInputOnChange";
-
 import { IconElement, DropdownMenu, FormInput } from "../../shared";
 
 import {
@@ -15,6 +13,8 @@ import {
 import { DropdownStyle, BorderStyle } from "../../../styles";
 
 import { Down, Search, Users, Product } from "../../../assets";
+
+import { handleSearchInputOnChange } from "../../../utils/form/handleSearchInputOnChange";
 
 import styled from "styled-components";
 
@@ -51,11 +51,7 @@ const Searchbar = () => {
 		const searchAPIEndpoint =
 			searchType === "Users" ? "/search/users" : "/search/products";
 
-		handleSearchInputOnChange(
-			e.target.value,
-			searchAPIEndpoint,
-			setSearchResultArray
-		);
+		handleSearchInputOnChange(e, searchAPIEndpoint, setSearchResultArray);
 	};
 
 	const searchTypeDropdownElementArray = [
@@ -123,14 +119,18 @@ const Searchbar = () => {
 
 				<SearchbarInputDropdownStyle id="searchbar-dropdown-trigger">
 					<FormInput
-						inputUsage="search"
-						inputID="search"
-						inputName="search"
-						inputType="text"
-						inputLabel="Search"
-						inputPlaceholder="Search"
-						inputOnChangeEventHandler={handleOnChange}
-						inputPadding="1rem"
+						id="search"
+						name="search"
+						type="text"
+						label="Search"
+						placeholder="Search"
+						onChange={handleOnChange}
+						formInputStyleObject={{
+							labelDisplay: "none",
+							inputBackgroundColor: "transparent",
+							inputBoxShadow: "none",
+							inputPlaceholderColor: "var(--primary-text-color)",
+						}}
 					/>
 
 					<DropdownMenu

@@ -18,7 +18,7 @@ import {
 } from "../../../assets";
 
 const Navigation = ({ isResponsiveNavigationOpen }) => {
-	const iconSize = "2.15rem";
+	const iconSize = "2.25rem";
 
 	const { user } = useSelector((state) => state.userReducer);
 

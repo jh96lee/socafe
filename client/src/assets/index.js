@@ -10,6 +10,7 @@ import { ReactComponent as Sun } from "./general/sun.svg";
 import { ReactComponent as Moon } from "./general/moon.svg";
 import { ReactComponent as Remove } from "./general/remove.svg";
 import { ReactComponent as Bolt } from "./general/bolt.svg";
+import { ReactComponent as Submit } from "./general/submit.svg";
 
 import { ReactComponent as SocafeDark } from "./logo/socafe-dark.svg";
 import { ReactComponent as SocafeLight } from "./logo/socafe-light.svg";
@@ -51,6 +52,7 @@ export {
 	Moon,
 	Remove,
 	Bolt,
+	Submit,
 	SocafeDark,
 	SocafeLight,
 	Explore,

@@ -45,7 +45,7 @@ function App() {
 					/>
 
 					{/* REVIEW: delete this later */}
-					<Post />
+					{/* <Post /> */}
 
 					<Navigation isResponsiveNavigationOpen={isResponsiveNavigationOpen} />
 

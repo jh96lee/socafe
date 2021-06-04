@@ -30,8 +30,8 @@ export const logoutUser = () => (dispatch) => {
 	dispatch(setUser());
 };
 
-export const loginUser = (userLoginInfoObject) => async (dispatch) => {
-	const { email, password } = userLoginInfoObject;
+export const loginUser = (userLoginState) => async (dispatch) => {
+	const { email, password } = userLoginState;
 
 	const { data } = await axios({
 		method: "POST",

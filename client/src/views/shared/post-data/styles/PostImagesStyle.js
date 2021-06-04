@@ -22,17 +22,17 @@ const PostImagesStyle = styled.div`
 		top: 50%;
 		left: 50%;
 		transform: translate(-50%, -50%);
-		max-width: 100%;
-		max-height: 100%;
+		max-width: 100.3%;
+		max-height: 100.3%;
 	}
 
 	& [data-is-image-tall="true"] {
 		width: auto;
-		height: 100%;
+		height: 100.3%;
 	}
 
 	& [data-is-image-tall="false"] {
-		width: 100%;
+		width: 100.3%;
 		height: auto;
 	}
 

@@ -9,11 +9,28 @@ import {
 	PostContents,
 	PostTaggedUsers,
 } from "../../shared/post-data";
+import PostComment from "./PostComment";
 
-import { PostStyle, PostMetadataStyle } from "../../../styles";
+import { PostStyle } from "../../../styles";
+
+import styled from "styled-components";
+
+const PostMetadataStyle = styled.div`
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+`;
+
+const PostMetadataWrapperStyle = styled.div`
+	display: flex;
+	flex-direction: column;
+	padding: 0 1rem;
+	gap: 1.5rem;
+	overflow: scroll;
+`;
 
 const Post = () => {
-	const postID = 13;
+	const postID = 14;
 
 	const [post, setPost] = React.useState({});
 	const [isPostLoaded, setIsPostLoaded] = React.useState(false);
@@ -38,32 +55,36 @@ const Post = () => {
 				conditionalPostImagesRenderingVariable={isPostLoaded}
 			/>
 
+			<PostTaggedUsers
+				postTaggedUsersArray={post.taggedUsers}
+				conditionalPostTaggedUsersVariable={isPostLoaded}
+			/>
+
 			<PostMetadataStyle>
-				<PostSelectedCategories
-					selectedPostCategoriesArray={post.categories}
-					conditionalPostSelectedCategoriesVariable={isPostLoaded}
-				/>
+				<PostMetadataWrapperStyle>
+					<PostSelectedCategories
+						selectedPostCategoriesArray={post.categories}
+						conditionalPostSelectedCategoriesVariable={isPostLoaded}
+					/>
 
-				<PostUser
-					postUser={post.user}
-					conditionalPostUserVariable={isPostLoaded}
-				/>
+					<PostUser
+						postUser={post.user}
+						conditionalPostUserVariable={isPostLoaded}
+					/>
 
-				<PostNumericMetadata
-					postTotalLikes={post.totalLikes}
-					postTotalComments={post.totalComments}
-					conditionalPostNumericMetadataVariable={isPostLoaded}
-				/>
+					<PostNumericMetadata
+						postTotalLikes={post.totalLikes}
+						postTotalComments={post.totalComments}
+						conditionalPostNumericMetadataVariable={isPostLoaded}
+					/>
 
-				<PostContents
-					postContentsArray={post.contents}
-					conditionalPostContentsVariable={isPostLoaded}
-				/>
+					<PostContents
+						postContentsArray={post.contents}
+						conditionalPostContentsVariable={isPostLoaded}
+					/>
+				</PostMetadataWrapperStyle>
 
-				<PostTaggedUsers
-					postTaggedUsersArray={post.taggedUsers}
-					conditionalPostTaggedUsersVariable={isPostLoaded}
-				/>
+				<PostComment />
 			</PostMetadataStyle>
 		</PostStyle>
 	);

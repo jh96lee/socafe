@@ -13,24 +13,29 @@ import {
 
 import { setLoginUserInfo, loginUser } from "../../../redux/login/loginAction";
 
-import { handleFormInputOnChange } from "../../../utils/form/handleFormInputOnChange";
+import { handleLoginAndRegisterFormInputOnChange } from "../../../utils/form/handleLoginAndRegisterFormInputOnChange";
 
 const LoginForm = () => {
 	const dispatch = useDispatch();
 
-	const userLoginInfoObject = useSelector((state) => state.loginReducer);
+	const userLoginState = useSelector((state) => state.loginReducer);
 
 	const { email, password, loginSuccessMessage, loginErrorMessage } =
-		userLoginInfoObject;
+		userLoginState;
 
 	const handleOnChange = (e) => {
-		handleFormInputOnChange(e, userLoginInfoObject, dispatch, setLoginUserInfo);
+		handleLoginAndRegisterFormInputOnChange(
+			e,
+			userLoginState,
+			dispatch,
+			setLoginUserInfo
+		);
 	};
 
 	const handleOnClick = (e) => {
 		e.preventDefault();
 
-		dispatch(loginUser(userLoginInfoObject));
+		dispatch(loginUser(userLoginState));
 	};
 
 	return (
@@ -38,14 +43,12 @@ const LoginForm = () => {
 			<FormFieldsetStyle>
 				<FormInputAndMessageStyle>
 					<FormInput
-						inputUsage="form"
-						inputID="login-form__email"
-						inputLabel="Email"
-						inputName="email"
-						inputType="text"
-						inputPlaceholder="Enter your email"
-						inputWidth="100%"
-						inputOnChangeEventHandler={handleOnChange}
+						id="login-form__email"
+						label="Email"
+						name="email"
+						type="text"
+						placeholder="Enter your email"
+						onChange={handleOnChange}
 					/>
 
 					<Message
@@ -58,14 +61,12 @@ const LoginForm = () => {
 
 				<FormInputAndMessageStyle>
 					<FormInput
-						inputUsage="form"
-						inputID="login-form__password"
-						inputLabel="Password"
-						inputName="password"
-						inputType="password"
-						inputPlaceholder="Enter your password"
-						inputWidth="100%"
-						inputOnChangeEventHandler={handleOnChange}
+						id="login-form__password"
+						label="Password"
+						name="password"
+						type="password"
+						placeholder="Enter your password"
+						onChange={handleOnChange}
 					/>
 
 					<Message
