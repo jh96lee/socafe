@@ -2,7 +2,7 @@ import * as React from "react";
 import { Link } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 
-import { FormInput, Message, Button } from "../../shared";
+import { FormInput, Message, Button, Loader } from "../../shared";
 
 import {
 	FormStyle,
@@ -19,8 +19,13 @@ const LoginForm = () => {
 
 	const userLoginState = useSelector((state) => state.loginReducer);
 
-	const { email, password, loginSuccessMessage, loginErrorMessage } =
-		userLoginState;
+	const {
+		email,
+		password,
+		loginSuccessMessage,
+		loginErrorMessage,
+		isUserLoggingIn,
+	} = userLoginState;
 
 	const handleOnChange = (e) => {
 		handleLoginAndRegisterFormInputOnChange(
@@ -80,7 +85,13 @@ const LoginForm = () => {
 				success={loginSuccessMessage}
 				error={loginErrorMessage}
 			>
-				Login
+				{isUserLoggingIn ? (
+					<Loader loaderSize="2rem" loaderBorderSize="0.3rem" />
+				) : loginSuccessMessage ? (
+					loginSuccessMessage
+				) : (
+					"Login"
+				)}
 			</Button>
 
 			<Link to="/register">New to Socafe? Create Account</Link>

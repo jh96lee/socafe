@@ -1,4 +1,5 @@
 const initialState = {
+	isUserLoggingIn: false,
 	email: "",
 	password: "",
 	loginSuccessMessage: null,
@@ -7,6 +8,17 @@ const initialState = {
 
 const loginReducer = (state = initialState, action) => {
 	switch (action.type) {
+		case "START_USER_LOGIN":
+			return {
+				loginErrorMessage: null,
+				isUserLoggingIn: true,
+				...state,
+			};
+		case "END_USER_LOGIN":
+			return {
+				isUserLoggingIn: false,
+				...state,
+			};
 		case "SET_LOGIN_USER_INFO":
 			return {
 				...state,

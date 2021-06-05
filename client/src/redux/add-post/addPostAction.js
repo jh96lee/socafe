@@ -6,7 +6,15 @@ import { resetUploadImage } from "../upload-image/uploadImageAction";
 import { fetchToken } from "../../utils/cookie";
 import { setCoupleSeconds } from "../../utils/setCoupleSeconds";
 
-const setPostID = (postID) => ({
+export const startUploadingPost = () => ({
+	type: "START_UPLOADING_POST",
+});
+
+export const endUploadingPost = () => ({
+	type: "END_UPLOADING_POST",
+});
+
+export const setPostID = (postID) => ({
 	type: "SET_POST_ID",
 	payload: postID,
 });
@@ -50,7 +58,7 @@ const resetAddPostForm = () => ({
 	type: "RESET_ADD_POST_FORM",
 });
 
-export const submitPost =
+export const uploadPost =
 	(
 		uploadedPostImagesArray,
 		selectedPostCategoriesArray,
@@ -62,6 +70,8 @@ export const submitPost =
 			uploadedPostImagesArray.length > 0 &&
 			selectedPostCategoriesArray.length > 0
 		) {
+			dispatch(startUploadingPost());
+
 			const token = fetchToken();
 
 			const { data } = await axios({
@@ -81,15 +91,23 @@ export const submitPost =
 			const { postID, success, error } = data;
 
 			if (error) {
+				// REVIEW: end the process
+				dispatch(endUploadingPost());
+
 				dispatch(setAddPostErrorMessage(error));
 			} else if (success) {
+				// REVIEW: end the process
+				dispatch(endUploadingPost());
+
 				dispatch(setAddPostSuccessMessage(success));
 
 				setCoupleSeconds(() => {
 					dispatch(setPostID(postID));
 
+					// REVIEW: reset
 					dispatch(resetAddPostForm());
 
+					// REVIEW: reset
 					dispatch(resetUploadImage());
 				}, 1000);
 			}

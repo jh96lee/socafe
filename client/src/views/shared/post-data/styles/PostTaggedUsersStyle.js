@@ -1,8 +1,6 @@
 import styled from "styled-components";
 
-import { DropdownStyle } from "../../../../styles";
-
-export const PostTaggedUsersDropdownStyle = styled(DropdownStyle)`
+export const PostTaggedUsersStyle = styled.div`
 	position: absolute;
 	z-index: 10;
 	left: 3.5rem;

@@ -3,8 +3,11 @@ import axios from "axios";
 export const handleSearchInputOnChange = async (
 	e,
 	apiEndpoint,
-	setSearchResultArray
+	setSearchResultArray,
+	setIsDropdownMenuOpen
 ) => {
+	setIsDropdownMenuOpen(true);
+
 	const { data } = await axios({
 		method: "POST",
 		url: `http://localhost:8080${apiEndpoint}`,
@@ -13,6 +16,5 @@ export const handleSearchInputOnChange = async (
 		},
 	});
 
-	console.log(data);
 	setSearchResultArray(data);
 };

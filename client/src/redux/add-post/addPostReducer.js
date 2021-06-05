@@ -1,4 +1,5 @@
 const initialState = {
+	isPostUploading: false,
 	postID: null,
 	uploadedPostImagesArray: [],
 	selectedPostCategoriesArray: [],
@@ -10,6 +11,17 @@ const initialState = {
 
 const addPostReducer = (state = initialState, action) => {
 	switch (action.type) {
+		case "START_UPLOADING_POST":
+			return {
+				...state,
+				addPostErrorMessage: null,
+				isPostUploading: true,
+			};
+		case "END_UPLOADING_POST":
+			return {
+				...state,
+				isPostUploading: false,
+			};
 		case "SET_POST_ID":
 			return {
 				...state,

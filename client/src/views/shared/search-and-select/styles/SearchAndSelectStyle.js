@@ -1,6 +1,7 @@
 import styled from "styled-components";
 
 export const SearchAndSelectStyle = styled.div`
+	position: relative;
 	display: flex;
 	flex-direction: column;
 	border-radius: 0.5rem;

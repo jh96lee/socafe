@@ -3,6 +3,14 @@ import axios from "axios";
 import { setCookie } from "../../utils/cookie";
 import { setCoupleSeconds } from "../../utils/setCoupleSeconds";
 
+export const startUserRegister = () => ({
+	type: "START_USER_REGISTER",
+});
+
+export const endUserRegister = () => ({
+	type: "END_USER_REGISTER",
+});
+
 export const setRegisterUserInfo = (userInfoObject) => ({
 	type: "SET_REGISTER_USER_INFO",
 	payload: userInfoObject,
@@ -29,7 +37,7 @@ export const resetRegisterForm = () => ({
 });
 
 export const registerUser = (userRegisterInfoObject) => async (dispatch) => {
-	dispatch({ type: "START_USER_REGISTER" });
+	dispatch(startUserRegister());
 
 	const { email, fullName, password, username } = userRegisterInfoObject;
 
@@ -46,7 +54,7 @@ export const registerUser = (userRegisterInfoObject) => async (dispatch) => {
 		});
 
 		if (data) {
-			dispatch({ type: "END_USER_REGISTER" });
+			dispatch(endUserRegister());
 
 			const { error, success, token } = data;
 

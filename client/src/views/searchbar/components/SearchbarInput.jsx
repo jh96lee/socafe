@@ -19,15 +19,6 @@ const SearchbarInput = ({ searchType }) => {
 
 	const history = useHistory();
 
-	const handleOnChange = (e) => {
-		setIsDropdownMenuOpen(true);
-
-		const apiEndpoint =
-			searchType === "Users" ? "/search/users" : "/search/products";
-
-		handleSearchInputOnChange(e, apiEndpoint, setSearchResultArray);
-	};
-
 	const searchResultArrayCreator = () => {
 		return searchResultArray.map((result) => {
 			return {
@@ -50,7 +41,17 @@ const SearchbarInput = ({ searchType }) => {
 				type="text"
 				label="Search"
 				placeholder="Search"
-				onChange={handleOnChange}
+				onChange={(e) => {
+					const apiEndpoint =
+						searchType === "Users" ? "/search/users" : "/search/products";
+
+					handleSearchInputOnChange(
+						e,
+						apiEndpoint,
+						setSearchResultArray,
+						setIsDropdownMenuOpen
+					);
+				}}
 				formInputStyleObject={{
 					labelDisplay: "none",
 					inputBackgroundColor: "transparent",

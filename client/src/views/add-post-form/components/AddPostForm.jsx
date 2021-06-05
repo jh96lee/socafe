@@ -2,7 +2,7 @@ import * as React from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { useHistory } from "react-router";
 
-import { submitPost } from "../../../redux/add-post/addPostAction";
+import { uploadPost } from "../../../redux/add-post/addPostAction";
 
 import {
 	SearchAndSelect,
@@ -10,7 +10,16 @@ import {
 	UploadImage,
 	Caption,
 	Button,
+	Loader,
 } from "../../shared";
+
+import {
+	addPostCategory,
+	addUserOnPost,
+	removePostCategory,
+	removeUserOnPost,
+	setAddPostErrorMessage,
+} from "../../../redux/add-post/addPostAction";
 
 import {
 	AddContentFormStyle,
@@ -28,6 +37,7 @@ const AddPostForm = () => {
 		(state) => state.uploadImageReducer
 	);
 	const {
+		isPostUploading,
 		postID,
 		uploadedPostImagesArray,
 		selectedPostCategoriesArray,
@@ -74,12 +84,13 @@ const AddPostForm = () => {
 						// REVIEW: provide dropdown trigger ID
 						// REVIEW: figure out action type when DropdownElement get clicked
 						searchAndSelectType="post-category"
-						// REVIEW: if the role is to search, then the search api endpoint needs to be provided
 						searchAndSelectAPIEndpoint="/search/post-categories"
 						// REVIEW: array that contains selected values and will be used for data validation
 						searchAndSelectedArray={selectedPostCategoriesArray}
-						// REVIEW: placeholder
 						searchAndSelectPlaceholder="Search for post categories"
+						addContentActionCreator={addPostCategory}
+						removeContentActionCreator={removePostCategory}
+						setErrorMessageActionCreator={setAddPostErrorMessage}
 					/>
 				</AddContentStyle>
 
@@ -94,7 +105,10 @@ const AddPostForm = () => {
 						searchAndSelectType="post-user"
 						searchAndSelectAPIEndpoint="/search/users"
 						searchAndSelectedArray={taggedPostUsersArray}
-						searchAndSelectPlaceholder="Search for users "
+						searchAndSelectPlaceholder="Search for users"
+						addContentActionCreator={addUserOnPost}
+						removeContentActionCreator={removeUserOnPost}
+						setErrorMessageActionCreator={setAddPostErrorMessage}
 					/>
 				</AddContentStyle>
 
@@ -114,7 +128,7 @@ const AddPostForm = () => {
 					success={addPostSuccessMessage}
 					onClick={() => {
 						dispatch(
-							submitPost(
+							uploadPost(
 								uploadedPostImagesArray,
 								selectedPostCategoriesArray,
 								taggedPostUsersArray,
@@ -123,7 +137,13 @@ const AddPostForm = () => {
 						);
 					}}
 				>
-					{addPostSuccessMessage ? addPostSuccessMessage : "Submit"}
+					{isPostUploading ? (
+						<Loader loaderSize="2rem" loaderBorderSize="0.3rem" />
+					) : addPostSuccessMessage ? (
+						addPostSuccessMessage
+					) : (
+						"Submit"
+					)}
 				</Button>
 			</AddContentButtonWrapperStyle>
 		</AddContentFormStyle>
