@@ -1,7 +1,6 @@
 const express = require("express");
 const bcrypt = require("bcryptjs");
 const pool = require("../pool");
-const UserRepo = require("../repos/userRepo");
 const validateEmail = require("../middlewares/user/validateEmail");
 const isEmailInUse = require("../middlewares/user/isEmailInUse");
 const isUsernameInUse = require("../middlewares/user/isUsernameInUse");
@@ -105,7 +104,7 @@ userRouter.post("/user/login", validateEmail, async (req, res) => {
 		}
 	} catch (error) {
 		res.send({
-			message: {
+			error: {
 				general: "There has been an error while processing your login",
 			},
 		});

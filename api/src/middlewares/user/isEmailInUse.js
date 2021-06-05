@@ -17,9 +17,7 @@ const isEmailInUse = async (req, res, next) => {
 		const userID = rows[0];
 
 		if (userID) {
-			// REVIEW: create an error property within req.body with the value being an object
-			// REVIEW: then in the next middleware, we use dot notation to add in properties to req.body.error
-			// FIX: use res.locals instead of appending properties to req.body
+			// REVIEW: use res.locals instead of appending properties to req.body and moving onto the next middleware
 			res.locals.email = "This email is already being used";
 
 			next();

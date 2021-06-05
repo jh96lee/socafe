@@ -29,9 +29,9 @@ categoryRouter.post(
 	"/category/post/interest",
 	authenticateToken,
 	async (req, res) => {
-		const { selectedCategories, decoded } = req.body;
+		const { selectedCategories } = req.body;
 
-		const userID = decoded.id;
+		const { userID } = res.locals;
 
 		if (selectedCategories.length === 0) {
 			res.send({ success: "Success" });
