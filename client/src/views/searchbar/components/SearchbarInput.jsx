@@ -28,7 +28,7 @@ const SearchbarInput = ({ searchType }) => {
 		handleSearchInputOnChange(e, apiEndpoint, setSearchResultArray);
 	};
 
-	const searchResultArrayCreator = React.useCallback(() => {
+	const searchResultArrayCreator = () => {
 		return searchResultArray.map((result) => {
 			return {
 				content: result,
@@ -40,7 +40,7 @@ const SearchbarInput = ({ searchType }) => {
 				},
 			};
 		});
-	}, []);
+	};
 
 	return (
 		<SearchbarInputStyle id="searchbar-input-dropdown-trigger">
@@ -54,9 +54,9 @@ const SearchbarInput = ({ searchType }) => {
 				formInputStyleObject={{
 					labelDisplay: "none",
 					inputBackgroundColor: "transparent",
-					inputPadding: "1.3rem 0.7rem",
+					inputPadding: "1.3rem 1rem",
 					inputBoxShadow: "none",
-					inputPlaceholderColor: "var(--primary-text-color)",
+					inputPlaceholderColor: "var(--txt-1)",
 				}}
 			/>
 

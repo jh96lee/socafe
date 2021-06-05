@@ -6,7 +6,7 @@ export const AddPostIconStyle = styled.div`
 	right: 2rem;
 	z-index: 50;
 	background-color: #fff;
-	box-shadow: 0 0 2px 1.6px var(--primary-separator-color);
+	box-shadow: 0 0 2px 1.6px var(--separator-1);
 	padding: 1rem;
 	border-radius: 50%;
 	background: #ff416c;

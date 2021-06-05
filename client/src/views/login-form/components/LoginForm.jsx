@@ -2,10 +2,9 @@ import * as React from "react";
 import { Link } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 
-import { FormInput, Message } from "../../shared";
+import { FormInput, Message, Button } from "../../shared";
 
 import {
-	ButtonStyle,
 	FormStyle,
 	FormFieldsetStyle,
 	FormInputAndMessageStyle,
@@ -75,15 +74,14 @@ const LoginForm = () => {
 				</FormInputAndMessageStyle>
 			</FormFieldsetStyle>
 
-			<ButtonStyle
-				type="submit"
+			<Button
 				disabled={!email || !password}
 				onClick={handleOnClick}
 				success={loginSuccessMessage}
 				error={loginErrorMessage}
 			>
 				Login
-			</ButtonStyle>
+			</Button>
 
 			<Link to="/register">New to Socafe? Create Account</Link>
 		</FormStyle>

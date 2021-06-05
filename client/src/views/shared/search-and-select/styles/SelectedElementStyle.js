@@ -6,12 +6,12 @@ export const SelectedElementStyle = styled.div`
 	gap: 1.2rem;
 	align-items: center;
 	padding: 0.7rem 1.4rem;
-	color: var(--primary-text-color);
-	background-color: var(--quaternary-background-color);
+	color: var(--txt-1);
+	background-color: var(--bg-4);
 	border-radius: 2rem;
 
 	& > svg {
-		fill: var(--primary-text-color);
+		fill: var(--icon-2);
 		width: 1rem;
 		height: 1rem;
 	}

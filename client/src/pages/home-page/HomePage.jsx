@@ -19,7 +19,7 @@ const CommentStyle = styled.div`
 const CommentTopStyle = styled.div`
 	display: flex;
 	align-items: flex-start;
-	color: var(--primary-text-color);
+	color: var(--txt-1);
 	gap: 1.5rem;
 	padding: 1.2rem;
 

@@ -3,7 +3,7 @@ import styled from "styled-components";
 export const UploadImageButtonStyle = styled.div`
 	position: relative;
 	border-radius: 0.5rem;
-	background-color: var(--primary-clickable-background-color);
+	background-color: var(--bg-clickable-1);
 
 	& input {
 		position: relative;
@@ -16,7 +16,7 @@ export const UploadImageButtonStyle = styled.div`
 
 	&:hover {
 		cursor: pointer;
-		background-color: var(--primary-hover-clickable-background-color);
+		background-color: var(--bg-clickable-hover-1);
 	}
 `;
 

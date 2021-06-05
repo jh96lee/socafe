@@ -10,6 +10,11 @@ export const AvatarimageStyle = styled.img`
 	height: 3.3rem;
 	border-radius: 50%;
 	cursor: pointer;
+
+	@media (max-width: 350px) {
+		width: 3rem;
+		height: 3rem;
+	}
 `;
 
 export default AvatarStyle;

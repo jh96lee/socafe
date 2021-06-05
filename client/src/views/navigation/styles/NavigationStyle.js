@@ -7,7 +7,7 @@ export const NavigationStyle = styled.nav`
 	flex-direction: column;
 	justify-content: center;
 	align-items: center;
-	background-color: var(--primary-background-color);
+	background-color: var(--bg-1);
 	height: fit-content;
 	grid-column: 1 / 2;
 	grid-row: 2 / 3;
@@ -22,26 +22,23 @@ export const NavigationStyle = styled.nav`
 	& a span {
 		display: none;
 		font-size: 1.43rem;
-		color: var(--primary-icon-color);
+		color: var(--icon-1);
 	}
 
-	/* & .active > div {
-		background-color: crimson;
-	} */
-
-	& > *:first-child {
-		margin-top: 2.5rem;
+	& .active > div {
+		background-color: var(--bg-4);
 	}
 
 	& .active svg {
-		fill: ${(props) => (props.theme.isDarkMode ? "#fff" : "#000")};
+		fill: var(--icon-3);
 	}
 
 	& .active span {
-		color: ${(props) => (props.theme.isDarkMode ? "#fff" : "#000")};
+		font-weight: 400;
+		color: var(--txt-1);
 	}
 
-	@media (max-width: 600px) {
+	@media (max-width: 700px) {
 		position: absolute;
 		top: 82px;
 		display: ${(props) => (props.isResponsiveNavigationOpen ? "flex" : "none")};

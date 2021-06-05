@@ -2,14 +2,12 @@ import styled from "styled-components";
 
 const ToggleStyle = styled.div`
 	position: relative;
-	width: ${(props) => props.toggleWidth};
-	height: ${(props) => props.toggleHeight};
+	width: ${(props) => props.width};
+	height: ${(props) => props.height};
 	border-radius: 2rem;
 	cursor: pointer;
 	background-color: ${(props) =>
-		props.toggleType === "theme"
-			? "var(--primary-theme-toggle-background-color)"
-			: "var(--primary-toggle-background-color"};
+		props.type === "theme" ? "var(--bg-toggle-theme-1)" : "var(--bg-toggle-1)"};
 
 	& span {
 		position: absolute;
@@ -17,21 +15,36 @@ const ToggleStyle = styled.div`
 		justify-content: center;
 		align-items: center;
 		top: 50%;
-		left: ${(props) => props.toggleState === false && "0.3rem"};
-		right: ${(props) => props.toggleState === true && "0.3rem"};
+		left: ${(props) => props.state === false && "0.3rem"};
+		right: ${(props) => props.state === true && "0.3rem"};
 		transform: translate(0, -50%);
-		width: ${(props) => `calc(${props.toggleHeight} - 0.6rem)`};
-		height: ${(props) => `calc(${props.toggleHeight} - 0.6rem)`};
+		width: ${(props) => `calc(${props.height} - 0.6rem)`};
+		height: ${(props) => `calc(${props.height} - 0.6rem)`};
 		background-color: ${(props) =>
-			props.toggleType === "theme"
-				? "var(--secondary-theme-toggle-background-color)"
-				: "var(--primary-toggle-background-color"};
+			props.type === "theme"
+				? "var(--bg-toggle-theme-2)"
+				: "var(--bg-toggle-1"};
 		border-radius: 50%;
 	}
 
 	& span > svg {
-		width: ${(props) => `calc(${props.toggleHeight} - 1rem)`};
-		height: ${(props) => `calc(${props.toggleHeight} - 1rem)`};
+		width: ${(props) => `calc(${props.height} - 1rem)`};
+		height: ${(props) => `calc(${props.height} - 1rem)`};
+	}
+
+	@media (max-width: 350px) {
+		width: ${(props) => props.responsiveWidth};
+		height: ${(props) => props.responsiveHeight};
+
+		& span {
+			width: ${(props) => `calc(${props.responsiveHeight} - 0.6rem)`};
+			height: ${(props) => `calc(${props.responsiveHeight} - 0.6rem)`};
+		}
+
+		& span > svg {
+			width: ${(props) => `calc(${props.responsiveHeight} - 1rem)`};
+			height: ${(props) => `calc(${props.responsiveHeight} - 1rem)`};
+		}
 	}
 `;
 

@@ -8,8 +8,8 @@ const DropdownMenuStyle = styled.div`
 	left: ${(props) => props.menuLeft};
 	z-index: 100;
 	width: ${(props) => props.menuWidth || "fit-content"};
-	box-shadow: 0 0 0 1.6px var(--primary-separator-color);
-	background-color: var(--primary-background-color);
+	box-shadow: 0 0 0 1.6px var(--separator-1);
+	background-color: var(--bg-1);
 	padding: 0.7rem;
 	border-radius: 0.5rem;
 	display: flex;
@@ -23,7 +23,7 @@ const DropdownMenuStyle = styled.div`
 
 	& #dropdown-menu__no-result-message {
 		padding: 1rem;
-		color: var(--primary-text-color);
+		color: var(--txt-1);
 	}
 `;
 

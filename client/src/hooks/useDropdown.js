@@ -1,6 +1,6 @@
 import * as React from "react";
 
-export const useDropdown = (triggerID, dropdownMenuID) => {
+export const useDropdown = (triggerID, dropdownMenuID, isDropdown = true) => {
 	const [isDropdownMenuOpen, setIsDropdownMenuOpen] = React.useState(false);
 
 	React.useEffect(() => {
@@ -26,7 +26,11 @@ export const useDropdown = (triggerID, dropdownMenuID) => {
 				// REVIEW: therefore, trigger the onClick of DropdownElement and close the menu
 				clickedElementPathID.includes(dropdownMenuID)
 			) {
-				setIsDropdownMenuOpen(false);
+				if (isDropdown) {
+					setIsDropdownMenuOpen(false);
+				} else {
+					return;
+				}
 			} else if (
 				// REVIEW: this indicates that outside of the Dropdown has been clicked
 				!clickedElementPathID.includes(triggerID) &&

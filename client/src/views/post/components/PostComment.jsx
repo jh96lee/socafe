@@ -30,7 +30,7 @@ const PostCommentIconElementStyle = styled.div`
 	& > svg {
 		width: 2.5rem;
 		height: 2.5rem;
-		fill: var(--primary-text-color);
+		fill: var(--secondary-icon-color);
 	}
 
 	&:hover {
@@ -58,7 +58,7 @@ const PostCommentSubmitIconElementStyle = styled.div`
 	& > svg {
 		width: 2.5rem;
 		height: 2.5rem;
-		fill: var(--primary-text-color);
+		fill: var(--secondary-icon-color);
 	}
 `;
 

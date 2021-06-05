@@ -4,7 +4,13 @@ import { useHistory } from "react-router";
 
 import { submitPost } from "../../../redux/add-post/addPostAction";
 
-import { SearchAndSelect, Message, UploadImage, Caption } from "../../shared";
+import {
+	SearchAndSelect,
+	Message,
+	UploadImage,
+	Caption,
+	Button,
+} from "../../shared";
 
 import {
 	AddContentFormStyle,
@@ -12,7 +18,6 @@ import {
 	AddContentsWrapperStyle,
 	AddContentButtonWrapperStyle,
 } from "../../../styles";
-import { ButtonStyle } from "../../../styles";
 
 const AddPostForm = () => {
 	const dispatch = useDispatch();
@@ -101,7 +106,7 @@ const AddPostForm = () => {
 			</AddContentsWrapperStyle>
 
 			<AddContentButtonWrapperStyle>
-				<ButtonStyle
+				<Button
 					disabled={
 						uploadedPostImagesArray.length === 0 ||
 						selectedPostCategoriesArray.length === 0
@@ -119,7 +124,7 @@ const AddPostForm = () => {
 					}}
 				>
 					{addPostSuccessMessage ? addPostSuccessMessage : "Submit"}
-				</ButtonStyle>
+				</Button>
 			</AddContentButtonWrapperStyle>
 		</AddContentFormStyle>
 	);

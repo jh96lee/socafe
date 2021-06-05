@@ -10,30 +10,30 @@ const ButtonStyle = styled.button`
 	border-radius: 0.5rem;
 	outline: none;
 	color: ${(props) =>
-		props.buttonColor
-			? props.buttonColor
-			: props.success
+		props.success
 			? "var(--txt-success)"
 			: props.error
 			? "var(--txt-error)"
+			: props.buttonColor
+			? props.buttonColor
 			: "#fff"};
 	background-color: ${(props) =>
-		props.buttonBackgroundColor
-			? props.buttonBackgroundColor
-			: props.success
+		props.success
 			? "var(--bg-success)"
 			: props.error
 			? "var(--bg-error)"
+			: props.buttonBackgroundColor
+			? props.buttonBackgroundColor
 			: "var(--bg-clickable-1)"};
 
 	&:hover {
 		background-color: ${(props) =>
-			props.buttonHoverBackgroundColor
-				? props.buttonHoverBackgroundColor
-				: props.success
+			props.success
 				? "var(--bg-success)"
 				: props.error
 				? "var(--bg-error)"
+				: props.buttonHoverBackgroundColor
+				? props.buttonHoverBackgroundColor
 				: "var(--bg-clickable-hover-1)"};
 		cursor: pointer;
 	}

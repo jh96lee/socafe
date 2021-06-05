@@ -8,13 +8,13 @@ export const SearchbarTypeStyle = styled.div`
 
 	& > p {
 		font-size: 1.37rem;
-		color: var(--primary-text-color);
+		color: var(--txt-1);
 	}
 
 	& > svg {
 		width: 1rem;
 		height: 1rem;
-		fill: var(--primary-text-color);
+		fill: var(--icon-2);
 	}
 
 	&:hover {

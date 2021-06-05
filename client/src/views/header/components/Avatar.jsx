@@ -24,64 +24,60 @@ const Avatar = () => {
 
 	const history = useHistory();
 
-	const userDropdownElementArray = user
-		? [
-				{
-					content: {
-						label: "Profile",
-						icon: <User />,
+	const userDropdownElementArray = React.useMemo(() => {
+		return user
+			? [
+					{
+						content: {
+							label: "Profile",
+							icon: <User />,
+						},
+						type: "link",
+						onClickEventHandler: () => {
+							history.push("/profile/:userID");
+						},
 					},
-					type: "link",
-					onClickEventHandler: () => {
-						history.push("/profile/:userID");
+					{
+						content: {
+							label: "Logout",
+							icon: <Logout />,
+						},
+						type: "link",
+						onClickEventHandler: () => {
+							dispatch(logoutUser());
+						},
 					},
-				},
-				{
-					content: {
-						label: "Logout",
-						icon: <Logout />,
+			  ]
+			: [
+					{
+						content: {
+							label: "Login",
+							icon: <Login />,
+						},
+						type: "link",
+						onClickEventHandler: () => {
+							history.push("/login");
+						},
 					},
-					type: "link",
-					onClickEventHandler: () => {
-						dispatch(logoutUser());
+					{
+						content: {
+							label: "Register",
+							icon: <Register />,
+						},
+						type: "link",
+						onClickEventHandler: () => {
+							history.push("/register");
+						},
 					},
-				},
-		  ]
-		: [
-				{
-					content: {
-						label: "Login",
-						icon: <Login />,
-					},
-					type: "link",
-					onClickEventHandler: () => {
-						history.push("/login");
-					},
-				},
-				{
-					content: {
-						label: "Register",
-						icon: <Register />,
-					},
-					type: "link",
-					onClickEventHandler: () => {
-						history.push("/register");
-					},
-				},
-		  ];
+			  ];
+	}, []);
 
 	return (
 		<AvatarStyle id="avatar-dropdown-trigger">
 			{user ? (
 				<AvatarimageStyle src={user.avatar_url} alt="Profile image" />
 			) : (
-				<IconElement
-					iconRole="button"
-					iconElementStyleObject={{
-						elementHoverBackgroundColor:
-							"var(--secondary-hover-clickable-background-color)",
-					}}
-				>
+				<IconElement iconRole="button">
 					<User />
 				</IconElement>
 			)}

@@ -1,14 +1,13 @@
 import * as React from "react";
 import { useDispatch, useSelector } from "react-redux";
 
-import { Loader } from "../../shared";
+import { Loader, Button } from "../../shared";
 import PostCategory from "./PostCategory";
 
 import {
 	CategoriesOfInterestStyle,
 	CategoriesOfInterestElementsWrapperStyle,
 } from "../styles/CategoryOfInterestStyle";
-import { ButtonStyle } from "../../../styles";
 
 import { fetchPostCategories } from "../../../redux/post-category/postCategoryAction";
 import { postCategoryOfInterest } from "../../../redux/category-of-interest/categoryOfInterestAction";
@@ -58,16 +57,16 @@ const CategoriesOfInterest = () => {
 						})}
 					</CategoriesOfInterestElementsWrapperStyle>
 
-					<ButtonStyle
+					<Button
 						onClick={handleOnClick}
 						success={categoryOfInterestSuccessMessage}
 						error={categoryOfInterestErrorMessage}
-						width="24rem"
+						buttonStyleObject={{ buttonWidth: "24rem" }}
 					>
 						{categoryOfInterestSuccessMessage
 							? categoryOfInterestSuccessMessage
 							: "Continue"}
-					</ButtonStyle>
+					</Button>
 				</React.Fragment>
 			)}
 		</CategoriesOfInterestStyle>

@@ -6,8 +6,8 @@ export const PostCategoryStyle = styled.div`
 	width: fit-content;
 	padding: 0.85rem;
 	border-radius: 5rem;
-	background-color: var(--secondary-background-color);
-	box-shadow: 0 0 0 1.6px var(--primary-separator-color);
+	background-color: var(--bg-2);
+	box-shadow: 0 0 0 1.6px var(--separator-1);
 
 	& img {
 		width: 5.1rem;
@@ -17,7 +17,7 @@ export const PostCategoryStyle = styled.div`
 	}
 
 	& > h5 {
-		color: var(--primary-text-color);
+		color: var(--txt-1);
 		margin: 0 1.6rem;
 	}
 
@@ -25,8 +25,7 @@ export const PostCategoryStyle = styled.div`
 	& svg {
 		width: 2.7rem;
 		height: 2.7rem;
-		fill: ${(props) =>
-			props.isSelected ? "var(--green)" : "var(--secondary-icon-color)"};
+		fill: ${(props) => (props.isSelected ? "var(--green-1)" : "var(--icon-2)")};
 		cursor: pointer;
 	}
 `;

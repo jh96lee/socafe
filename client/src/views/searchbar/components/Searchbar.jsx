@@ -3,24 +3,47 @@ import * as React from "react";
 import SearchbarType from "./SearchbarType";
 import SearchbarInput from "./SearchbarInput";
 import SearchbarButton from "./SearchbarButton";
+import { IconElement } from "../../shared";
 
-import { SearchbarStyle } from "../styles/SearchbarStyle";
+import { useDropdown } from "../../../hooks/useDropdown";
+
+import {
+	SearchbarStyle,
+	SearchbarWrapperStyle,
+} from "../styles/SearchbarStyle";
 import { BorderStyle } from "../../../styles";
 
+import { Search } from "../../../assets";
+
 const Searchbar = () => {
+	const { isDropdownMenuOpen } = useDropdown(
+		"responsive-searchbar-dropdown-trigger",
+		"responsive-searchbar-dropdown",
+		false
+	);
+
 	const [searchType, setSearchType] = React.useState("Filter");
 
 	return (
-		<SearchbarStyle>
-			<SearchbarType searchType={searchType} setSearchType={setSearchType} />
+		<SearchbarStyle id="responsive-searchbar-dropdown-trigger">
+			<IconElement iconRole="button">
+				<Search />
+			</IconElement>
 
-			<BorderStyle borderHeight="3.5rem" />
+			<SearchbarWrapperStyle
+				id="responsive-searchbar-dropdown"
+				isDropdownMenuOpen={isDropdownMenuOpen}
+			>
+				<SearchbarType searchType={searchType} setSearchType={setSearchType} />
 
-			<SearchbarInput searchType={searchType} />
+				<BorderStyle borderHeight="3.5rem" />
 
-			<BorderStyle borderHeight="3.5rem" />
+				<SearchbarInput searchType={searchType} />
 
-			<SearchbarButton />
+				<BorderStyle borderHeight="3.5rem" />
+
+				<SearchbarButton />
+			</SearchbarWrapperStyle>
 		</SearchbarStyle>
 	);
 };

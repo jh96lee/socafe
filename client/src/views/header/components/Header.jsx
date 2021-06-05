@@ -21,13 +21,7 @@ const Header = ({
 	return (
 		<HeaderStyle>
 			<HeaderStart>
-				<IconElement
-					iconSize="2.3rem"
-					iconUsage="button"
-					iconBreakingPoint="600px"
-					iconResponsiveSize="2rem"
-					onClickEventHandler={handleOnClick}
-				>
+				<IconElement iconRole="button" onClick={handleOnClick}>
 					<Hamburger />
 				</IconElement>
 
@@ -40,14 +34,16 @@ const Header = ({
 				<Avatar />
 
 				<Toggle
-					toggleState={isDarkMode}
-					toggleWidth="5rem"
-					toggleHeight="3rem"
-					toggleOnClickEventHandler={() => {
+					state={isDarkMode}
+					width="5rem"
+					responsiveWidth="4rem"
+					height="3rem"
+					responsiveHeight="2.5rem"
+					onClick={() => {
 						setIsDarkMode((prevState) => !prevState);
 					}}
-					toggleType="theme"
-					toggleIcons={{ on: <Moon />, off: <Sun /> }}
+					type="theme"
+					icons={{ on: <Moon />, off: <Sun /> }}
 				/>
 			</HeaderEnd>
 		</HeaderStyle>

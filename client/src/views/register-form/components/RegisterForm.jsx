@@ -2,10 +2,9 @@ import * as React from "react";
 import { Link } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 
-import { FormInput, Message, Loader } from "../../shared";
+import { FormInput, Message, Loader, Button } from "../../shared";
 
 import {
-	ButtonStyle,
 	FormStyle,
 	FormFieldsetStyle,
 	FormInputAndMessageStyle,
@@ -104,13 +103,12 @@ const RegisterForm = () => {
 				</FormInputAndMessageStyle>
 			</FormFieldsetStyle>
 
-			<ButtonStyle
+			<Button
 				disabled={!fullName || !email || !username || !password}
-				width="100%"
-				isDisabled={!fullName || !email || !username || !password}
 				success={registerSuccessMessage}
 				error={registerErrorMessage}
 				onClick={handleOnClick}
+				buttonStyleObject={{ buttonWidth: "100%" }}
 			>
 				{isUserRegistering ? (
 					<Loader loaderSize="2rem" loaderBorderSize="0.3rem" />
@@ -119,7 +117,7 @@ const RegisterForm = () => {
 				) : (
 					"Continue"
 				)}
-			</ButtonStyle>
+			</Button>
 
 			<Link to="/login">Already have an account? Login</Link>
 		</FormStyle>

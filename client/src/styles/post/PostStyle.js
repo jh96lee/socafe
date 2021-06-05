@@ -11,7 +11,7 @@ const PostStyle = styled.article`
 	margin: 6rem auto 3rem auto;
 	padding: 2rem;
 	background: ${(props) => (props.theme.isDarkMode ? "#121212" : "#fdfdfd")};
-	box-shadow: 0 0 2px 1.8px var(--primary-separator-color);
+	box-shadow: 0 0 2px 1.8px var(--separator-1);
 	border-radius: 1rem;
 `;
 

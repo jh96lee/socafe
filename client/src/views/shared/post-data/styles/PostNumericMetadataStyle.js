@@ -14,10 +14,10 @@ export const PostNumericTotalsMetadataStyle = styled.div`
 	& > svg {
 		width: 2.4rem;
 		height: 2.4rem;
-		fill: var(--primary-text-color);
+		fill: var(--icon-2);
 	}
 
 	& > h5 {
-		color: var(--primary-text-color);
+		color: var(--txt-1);
 	}
 `;

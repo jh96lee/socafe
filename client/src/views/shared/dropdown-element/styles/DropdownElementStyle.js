@@ -26,7 +26,7 @@ export const DropdownElementMetadataStyle = styled.div`
 	flex-direction: column;
 
 	& > p {
-		color: var(--primary-text-color);
+		color: var(--txt-1);
 		margin-bottom: 0.2rem;
 	}
 `;

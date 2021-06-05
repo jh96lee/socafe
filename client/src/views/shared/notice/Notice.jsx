@@ -1,6 +1,7 @@
 import * as React from "react";
 
-import { ButtonStyle } from "../../../styles";
+import { Button } from "../index";
+
 import { NoticeStyle, NoticeIconStyle } from "./NoticeStyle";
 
 const Notice = ({
@@ -27,9 +28,12 @@ const Notice = ({
 
 			{noticeSubMessage}
 
-			<ButtonStyle onClick={noticeEvent} width="24rem">
+			<Button
+				onClick={noticeEvent}
+				buttonStyleObject={{ buttonWidth: "24rem" }}
+			>
 				Go back home
-			</ButtonStyle>
+			</Button>
 		</NoticeStyle>
 	);
 };

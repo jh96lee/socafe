@@ -31,11 +31,11 @@ const SearchbarButton = () => {
 				iconRole="presentation"
 				iconElementStyleObject={{
 					iconSize: "1.5rem",
+					iconResponsiveSize: "1.5rem",
 					iconColor: "#fff",
 					iconHoverColor: {},
-					elementBackgroundColor: "var(--primary-clickable-background-color)",
-					elementHoverBackgroundColor:
-						"var(--primary-hover-clickable-background-color)",
+					elementBackgroundColor: "var(--bg-clickable-1)",
+					elementHoverBackgroundColor: "var(--bg-clickable-hover-1)",
 				}}
 			>
 				<Search />
@@ -47,7 +47,7 @@ const SearchbarButton = () => {
 					dropdownElementKey="searchbar-button-dropdown-element"
 					dropdownElementArray={searchbarButtonDropdownElementArray}
 					dropdownMenuStyleObject={{
-						menuTop: "calc(100% + 10px)",
+						menuTop: "calc(100% + 7px)",
 						menuRight: "0",
 					}}
 				/>

@@ -69,7 +69,6 @@ const SearchAndSelect = ({
 				</SelectedElementsWrapperStyle>
 
 				<FormInput
-					// FIX: inputUsage is used for styling purposes
 					id={`search-and-select-${searchAndSelectType}`}
 					name={`search-and-select-${searchAndSelectType}-input`}
 					type="text"

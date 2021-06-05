@@ -20,6 +20,6 @@ export const PostUserMetadataStyle = styled.div`
 	height: 100%;
 
 	& > p {
-		color: var(--primary-text-color);
+		color: var(--txt-1);
 	}
 `;
