@@ -10,6 +10,10 @@ export const SelectedElementStyle = styled.div`
 	background-color: var(--bg-4);
 	border-radius: 2rem;
 
+	& > p {
+		font-size: ${(props) => props.selectedElementFontSize};
+	}
+
 	& > svg {
 		fill: var(--icon-2);
 		width: 1rem;

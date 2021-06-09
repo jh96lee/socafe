@@ -3,20 +3,19 @@ import styled from "styled-components";
 export const PostTaggedUsersStyle = styled.div`
 	position: absolute;
 	z-index: 10;
-	left: 3.5rem;
-	bottom: 3.5rem;
+	left: 1rem;
+	bottom: 1rem;
 `;
 
 export const PostTaggedUsersIconElementStyle = styled.div`
 	padding: 0.9rem;
 	border-radius: 50%;
-	background-color: ${(props) =>
-		props.theme.isDarkMode ? "#d0f0ff40" : "#fff"};
+	background-color: #5a5a5a26;
 	cursor: pointer;
 
 	& > svg {
 		width: 2.5rem;
 		height: 2.5rem;
-		fill: ${(props) => (props.theme.isDarkMode ? "#fff" : "#64748b")};
+		fill: #fff;
 	}
 `;

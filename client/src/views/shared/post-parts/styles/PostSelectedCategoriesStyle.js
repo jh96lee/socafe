@@ -7,9 +7,9 @@ export const PostSelectedCategoriesStyle = styled.div`
 `;
 
 export const PostSelectedCategoryStyle = styled.p`
-	font-size: 1.37rem;
+	font-size: 1.3rem;
 	color: var(--txt-1);
 	background-color: var(--bg-3);
-	padding: 0.7rem 1.4rem;
+	padding: 0.6rem 1.2rem;
 	border-radius: 2rem;
 `;

@@ -3,34 +3,17 @@ import axios from "axios";
 
 import {
 	PostImages,
-	PostSelectedCategories,
-	PostUser,
 	PostNumericMetadata,
+	PostSelectedCategories,
 	PostContents,
-	PostTaggedUsers,
-} from "../../shared/post-data";
-import PostComment from "./PostComment";
+	PostComment,
+} from "../../shared/post-parts";
 
-import { PostStyle } from "../../../styles";
-
-import styled from "styled-components";
-
-const PostMetadataStyle = styled.div`
-	display: flex;
-	flex-direction: column;
-	justify-content: space-between;
-`;
-
-const PostMetadataWrapperStyle = styled.div`
-	display: flex;
-	flex-direction: column;
-	padding: 0 1rem;
-	gap: 1.5rem;
-	overflow: scroll;
-`;
+import { PostStyle } from "../styles/PostStyle";
+import { PostMetadataStyle } from "../styles/PostMetadataStyle";
 
 const Post = () => {
-	const postID = 14;
+	const postID = 12;
 
 	const [post, setPost] = React.useState({});
 	const [isPostLoaded, setIsPostLoaded] = React.useState(false);
@@ -52,40 +35,31 @@ const Post = () => {
 		<PostStyle>
 			<PostImages
 				postImagesArray={post.images}
-				conditionalPostImagesRenderingVariable={isPostLoaded}
-			/>
-
-			<PostTaggedUsers
+				conditionalPostImagesVariable={isPostLoaded}
 				postTaggedUsersArray={post.taggedUsers}
 				conditionalPostTaggedUsersVariable={isPostLoaded}
 			/>
 
+			<PostNumericMetadata
+				postUser={post.user}
+				postTotalLikes={post.totalLikes}
+				postTotalComments={post.totalComments}
+				conditionalRenderVariable={isPostLoaded}
+			/>
+
 			<PostMetadataStyle>
-				<PostMetadataWrapperStyle>
-					<PostSelectedCategories
-						selectedPostCategoriesArray={post.categories}
-						conditionalPostSelectedCategoriesVariable={isPostLoaded}
-					/>
+				<PostSelectedCategories
+					selectedPostCategoriesArray={post.categories}
+					conditionalPostSelectedCategoriesVariable={isPostLoaded}
+				/>
 
-					<PostUser
-						postUser={post.user}
-						conditionalPostUserVariable={isPostLoaded}
-					/>
-
-					<PostNumericMetadata
-						postTotalLikes={post.totalLikes}
-						postTotalComments={post.totalComments}
-						conditionalPostNumericMetadataVariable={isPostLoaded}
-					/>
-
-					<PostContents
-						postContentsArray={post.contents}
-						conditionalPostContentsVariable={isPostLoaded}
-					/>
-				</PostMetadataWrapperStyle>
-
-				<PostComment />
+				<PostContents
+					postContentsArray={post.contents}
+					conditionalPostContentsVariable={isPostLoaded}
+				/>
 			</PostMetadataStyle>
+
+			<PostComment />
 		</PostStyle>
 	);
 };

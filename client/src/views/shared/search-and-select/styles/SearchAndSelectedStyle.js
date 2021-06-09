@@ -4,7 +4,7 @@ export const SearchAndSelectedStyle = styled.div`
 	display: flex;
 	flex-wrap: wrap;
 	gap: 1rem;
-	padding: 1.5rem;
+	padding: ${(props) => props.searchAndSelectedPadding || "1.5rem"};
 	position: relative;
 	border: none;
 	border-radius: 0.5rem;
@@ -15,3 +15,5 @@ export const SearchAndSelectedStyle = styled.div`
 		display: none;
 	}
 `;
+
+// ${props => props. ? "" : ""};

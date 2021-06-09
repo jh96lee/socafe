@@ -1,8 +1,8 @@
 import styled from "styled-components";
 
 const ButtonStyle = styled.button`
-	font-size: 1.4rem;
-	font-weight: 500;
+	font-size: ${(props) => props.buttonFontSize || "1.4rem"};
+	font-weight: ${(props) => props.buttonFontWeight || "500"};
 	letter-spacing: -0.6px;
 	width: ${(props) => props.buttonWidth || "100%"};
 	padding: ${(props) => props.buttonPadding || "1.3rem"};

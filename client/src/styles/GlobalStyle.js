@@ -51,6 +51,8 @@ const GlobalStyles = createGlobalStyle`
         /* TODO: border and box shadow colors */
         --separator-1: ${(props) =>
 					props.theme.isDarkMode ? "#0a0a0a" : "#d3dfe4"};
+        --separator-2: ${(props) =>
+					props.theme.isDarkMode ? "#000" : "#757575"};
         --separator-focus-1: ${(props) =>
 					props.theme.isDarkMode ? "#6c8a98" : "#90b8cb"};
         
@@ -66,6 +68,10 @@ const GlobalStyles = createGlobalStyle`
         /* TODO: colors */
         --green-1: ${(props) =>
 					props.theme.isDarkMode ? "#01c301" : "#00a400"};
+        --blue-1: ${(props) =>
+					props.theme.isDarkMode ? "#74d4ff" : "#00a400"};
+        --blue-2: ${(props) =>
+					props.theme.isDarkMode ? "#6dd1ff52" : "#00a400"};
 
         /* TODO: toggle */
         --bg-toggle-1: ${(props) => (props.theme.isDarkMode ? "#000" : "#fff")};

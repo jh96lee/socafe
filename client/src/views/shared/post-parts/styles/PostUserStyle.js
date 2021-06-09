@@ -6,8 +6,8 @@ export const PostUserStyle = styled.div`
 	gap: 0.7rem;
 
 	& img {
-		width: 4rem;
-		height: 4rem;
+		width: 3.7rem;
+		height: 3.7rem;
 		object-fit: cover;
 		border-radius: 50%;
 	}
@@ -20,6 +20,11 @@ export const PostUserMetadataStyle = styled.div`
 	height: 100%;
 
 	& > p {
+		font-size: 1.35rem;
 		color: var(--txt-1);
+	}
+
+	& > span {
+		font-size: 1.27rem;
 	}
 `;

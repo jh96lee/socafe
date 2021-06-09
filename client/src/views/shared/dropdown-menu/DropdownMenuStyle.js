@@ -11,7 +11,7 @@ const DropdownMenuStyle = styled.div`
 	box-shadow: 0 0 0 1.6px var(--separator-1);
 	background-color: var(--bg-1);
 	padding: 0.7rem;
-	border-radius: 0.5rem;
+	border-radius: 1rem;
 	display: flex;
 	flex-direction: column;
 	max-height: 30rem;

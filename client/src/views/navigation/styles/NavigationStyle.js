@@ -30,7 +30,7 @@ export const NavigationStyle = styled.nav`
 	}
 
 	& .active svg {
-		fill: var(--icon-3);
+		fill: var(--icon-1);
 	}
 
 	& .active span {

@@ -1,7 +1,13 @@
 import styled from "styled-components";
 
 const IconElementStyle = styled.div`
-	position: relative;
+	position: ${(props) => props.elementPosition || "relative"};
+	top: ${(props) => props.elementTop};
+	right: ${(props) => props.elementRight};
+	bottom: ${(props) => props.elementBottom};
+	left: ${(props) => props.elementLeft};
+	z-index: ${(props) => props.elementZIndex};
+	transform: ${(props) => props.elementTransform};
 	display: flex;
 	align-items: center;
 	padding: ${(props) => props.elementPadding || "0.8rem"};
@@ -9,6 +15,7 @@ const IconElementStyle = styled.div`
 	border: none;
 	border-radius: 50%;
 	background-color: ${(props) => props.elementBackgroundColor || "transparent"};
+	box-shadow: ${(props) => props.elementBoxShadow};
 
 	& svg {
 		color: ${(props) => props.iconColor || "var(--icon-1)"};

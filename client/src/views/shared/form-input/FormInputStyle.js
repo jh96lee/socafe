@@ -3,7 +3,8 @@ import styled from "styled-components";
 export const FormInputStyle = styled.div`
 	display: flex;
 	flex-direction: column;
-	width: ${(props) => (props.inputWidth ? props.inputWidth : "100%")};
+	width: ${(props) => props.inputWidth || "100%"};
+	height: ${(props) => props.inputHeight || "100%"};
 
 	& label,
 	input {
@@ -21,6 +22,7 @@ export const FormInputStyle = styled.div`
 	& input {
 		font-size: 1.4rem;
 		width: 100%;
+		height: 100%;
 		outline: none;
 		border: none;
 		box-shadow: ${(props) =>
@@ -35,7 +37,7 @@ export const FormInputStyle = styled.div`
 	}
 
 	& input::placeholder {
-		font-size: 1.37rem;
+		font-size: ${(props) => props.inputPlaceholderFontSize || "1.37rem"};
 		color: ${(props) =>
 			props.inputPlaceholderColor
 				? props.inputPlaceholderColor

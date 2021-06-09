@@ -8,9 +8,10 @@ const SearchAndSelected = ({
 	searchAndSelectType,
 	searchAndSelectedArray,
 	removeContentActionCreator,
+	searchAndSelectedStyleObject,
 }) => {
 	return (
-		<SearchAndSelectedStyle>
+		<SearchAndSelectedStyle {...searchAndSelectedStyleObject}>
 			{searchAndSelectedArray.map((content, idx) => {
 				return (
 					<SelectedElement

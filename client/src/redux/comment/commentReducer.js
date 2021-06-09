@@ -15,6 +15,7 @@ const commentReducer = (state = initialState, action) => {
 		case "ADD_USER_ON_COMMENT":
 			return {
 				...state,
+				commentErrorMessage: null,
 				taggedCommentUsersArray: [
 					...state.taggedCommentUsersArray,
 					action.payload,

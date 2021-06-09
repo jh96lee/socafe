@@ -6,7 +6,11 @@ import { SelectedElementStyle } from "../styles/SelectedElementStyle";
 import { Remove } from "../../../../assets";
 
 // REVIEW: this component has only 1 job and that is filtering the selected element/value off of the corresponding array
-const SelectedElement = ({ selectedContent, removeContentActionCreator }) => {
+const SelectedElement = ({
+	selectedContent,
+	removeContentActionCreator,
+	selectedElementSTyleObject,
+}) => {
 	const dispatch = useDispatch();
 
 	const handleOnClick = () => {
@@ -15,7 +19,7 @@ const SelectedElement = ({ selectedContent, removeContentActionCreator }) => {
 	};
 
 	return (
-		<SelectedElementStyle>
+		<SelectedElementStyle {...selectedElementSTyleObject}>
 			<p>{selectedContent.title || selectedContent.username}</p>
 
 			<Remove onClick={handleOnClick} />

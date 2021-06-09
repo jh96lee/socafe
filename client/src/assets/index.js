@@ -26,6 +26,10 @@ import { ReactComponent as Heart } from "./post/heart.svg";
 import { ReactComponent as Image } from "./post/image.svg";
 import { ReactComponent as MultipleUsers } from "./post/multiple-users.svg";
 import { ReactComponent as PlusPost } from "./post/plus.svg";
+import { ReactComponent as BookmarkFill } from "./post/bookmark-fill.svg";
+import { ReactComponent as BookmarkEmpty } from "./post/bookmark-empty.svg";
+import { ReactComponent as TagUser } from "./post/tag-user.svg";
+import { ReactComponent as Tag } from "./post/tag.svg";
 
 import { ReactComponent as Cart } from "./product/cart.svg";
 import { ReactComponent as Marketplace } from "./product/marketplace.svg";
@@ -65,6 +69,9 @@ export {
 	Heart,
 	MultipleUsers,
 	PlusPost,
+	BookmarkFill,
+	BookmarkEmpty,
+	TagUser,
 	Image,
 	Cart,
 	Marketplace,
@@ -78,4 +85,5 @@ export {
 	Register,
 	Login,
 	Logout,
+	Tag,
 };

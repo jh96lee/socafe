@@ -1,15 +1,15 @@
 import * as React from "react";
 import { useSelector } from "react-redux";
 
-import {
-	PostImages,
-	PostSelectedCategories,
-	PostUser,
-	PostNumericMetadata,
-	PostContents,
-	PostTaggedUsers,
-} from "../../shared/post-data";
-import { Skeleton } from "../../shared";
+// import {
+// 	PostImages,
+// 	PostSelectedCategories,
+// 	PostUser,
+// 	// PostNumericMetadata,
+// 	PostContents,
+// 	PostTaggedUsers,
+// } from "../../shared/post-data";
+// import { Skeleton } from "../../shared";
 
 import { PostStyle, PostMetadataStyle } from "../../../styles";
 
@@ -24,14 +24,14 @@ const PostPreview = () => {
 
 	return (
 		<PostStyle>
-			<PostImages
+			{/* <PostImages
 				postImagesArray={uploadedPostImagesArray}
 				conditionalPostImagesRenderingVariable={
 					uploadedPostImagesArray.length > 0
 				}
-			/>
+			/> */}
 
-			<PostMetadataStyle>
+			{/* <PostMetadataStyle>
 				<PostSelectedCategories
 					selectedPostCategoriesArray={selectedPostCategoriesArray}
 					conditionalPostSelectedCategoriesVariable={
@@ -39,11 +39,11 @@ const PostPreview = () => {
 					}
 				/>
 
-				<PostUser postUser={user} conditionalPostUserVariable={user} />
+				<PostUser postUser={user} conditionalPostUserVariable={user} /> */}
 
-				<PostNumericMetadata conditionalPostNumericMetadataVariable={null} />
+			{/* <PostNumericMetadata conditionalPostNumericMetadataVariable={null} /> */}
 
-				<PostContents
+			{/* <PostContents
 					postContentsArray={postCaptionNodesArray}
 					conditionalPostContentsVariable={postCaptionNodesArray.length > 0}
 				/>
@@ -61,8 +61,8 @@ const PostPreview = () => {
 					skeletonHeight="4.2rem"
 					skeletonWidth="100%"
 					skeletonBorderRadius="3rem"
-				/>
-			</PostMetadataStyle>
+				/> */}
+			{/* </PostMetadataStyle> */}
 		</PostStyle>
 	);
 };
