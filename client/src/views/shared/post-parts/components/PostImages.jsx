@@ -18,9 +18,7 @@ import { Right, Left } from "../../../../assets";
 // REVIEW: this could either be for post or post-preview
 const PostImages = ({
 	postImagesArray,
-	conditionalPostImagesVariable,
-	postTaggedUsersArray,
-	conditionalPostTaggedUsersVariable,
+	conditionalPostImagesRenderingVariable,
 }) => {
 	const [currentImageIndex, setCurrentImageIndex] = React.useState(0);
 
@@ -39,7 +37,7 @@ const PostImages = ({
 		}
 	};
 
-	return conditionalPostImagesVariable ? (
+	return conditionalPostImagesRenderingVariable ? (
 		<PostImagesStyle>
 			<PostMainImageStyle
 				src={postImagesArray[currentImageIndex].url}
@@ -100,11 +98,6 @@ const PostImages = ({
 					)}
 				</React.Fragment>
 			)}
-
-			<PostTaggedUsers
-				postTaggedUsersArray={postTaggedUsersArray}
-				conditionalPostTaggedUsersVariable={conditionalPostTaggedUsersVariable}
-			/>
 		</PostImagesStyle>
 	) : (
 		<Skeleton skeletonWidth="100%" skeletonHeight="100%" />

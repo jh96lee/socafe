@@ -1,11 +1,13 @@
 import styled from "styled-components";
 
 export const PostStyle = styled.article`
+	position: relative;
 	display: grid;
 	grid-template-columns: 53rem auto;
 	grid-auto-rows: 50rem auto;
-	gap: 1.5rem;
+	gap: 1.2rem;
 	width: 100rem;
+	height: fit-content;
 	margin: 4rem auto;
 	padding: 1.5rem;
 	background: var(--bg-1);

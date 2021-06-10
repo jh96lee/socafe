@@ -22,7 +22,6 @@ import { ReactComponent as Hamburger } from "./navigation/hamburger.svg";
 import { ReactComponent as Home } from "./navigation/home.svg";
 
 import { ReactComponent as Comment } from "./post/comment.svg";
-import { ReactComponent as Heart } from "./post/heart.svg";
 import { ReactComponent as Image } from "./post/image.svg";
 import { ReactComponent as MultipleUsers } from "./post/multiple-users.svg";
 import { ReactComponent as PlusPost } from "./post/plus.svg";
@@ -30,6 +29,8 @@ import { ReactComponent as BookmarkFill } from "./post/bookmark-fill.svg";
 import { ReactComponent as BookmarkEmpty } from "./post/bookmark-empty.svg";
 import { ReactComponent as TagUser } from "./post/tag-user.svg";
 import { ReactComponent as Tag } from "./post/tag.svg";
+import { ReactComponent as HeartEmpty } from "./post/heart-empty.svg";
+import { ReactComponent as HeartFill } from "./post/heart-fill.svg";
 
 import { ReactComponent as Cart } from "./product/cart.svg";
 import { ReactComponent as Marketplace } from "./product/marketplace.svg";
@@ -66,7 +67,6 @@ export {
 	Hamburger,
 	Home,
 	Comment,
-	Heart,
 	MultipleUsers,
 	PlusPost,
 	BookmarkFill,
@@ -86,4 +86,6 @@ export {
 	Login,
 	Logout,
 	Tag,
+	HeartEmpty,
+	HeartFill,
 };

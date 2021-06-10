@@ -2,25 +2,13 @@ import * as React from "react";
 import { useSelector, useDispatch } from "react-redux";
 import styled from "styled-components";
 
-import { FormInput, IconElement, Message } from "../..";
-import SearchAndSelected from "../../search-and-select/components/SearchAndSelected";
-import UserDropdownElement from "../../dropdown-element/components/UserDropdownElement";
+import { FormInput, IconElement } from "../../index";
 
-import {
-	setCommentContent,
-	addUserOnComment,
-	removeUserOnComment,
-	setCommentErrorMessage,
-} from "../../../../redux/comment/commentAction";
-import { addContent } from "../../../../redux/common/addContent";
-
-import { useDropdown } from "../../../../hooks/useDropdown";
-
-import { handleSearchInputOnChange } from "../../../../utils/form/handleSearchInputOnChange";
+import { setCommentContent } from "../../../../redux/comment/commentAction";
 
 import { BorderStyle } from "../../../../styles";
 
-import { User, Submit, Remove, Tag } from "../../../../assets";
+import { Submit, Tag } from "../../../../assets";
 
 const PostCommentStyle = styled.div`
 	display: flex;
@@ -33,60 +21,25 @@ const PostCommentStyle = styled.div`
 	width: 90%;
 	margin: auto;
 	box-shadow: 0 0 0 1.6px var(--separator-1);
-`;
 
-const PostCommentPopupStyle = styled.div`
-	position: absolute;
-	top: 50%;
-	left: 50%;
-	transform: translate(-50%, -50%);
-	z-index: 10;
-	display: flex;
-	flex-direction: column;
-	gap: 1.2rem;
-	background-color: var(--bg-1);
-	box-shadow: 0 6px 20px 5px var(--separator-2);
-	border: 1px solid var(--separator-1);
-	min-height: 10rem;
-	max-height: 35rem;
-	width: 45%;
-	padding: 1.5rem;
-	border-radius: 1rem;
-	overflow: scroll;
-
-	& > svg {
-		fill: var(--txt-1);
+	& #post-comment-tagged-users-number {
 		position: absolute;
-		top: 1rem;
-		right: 1rem;
-		width: 1.3rem;
-		height: 1.3rem;
-	}
-
-	& > h2 {
-		color: var(--txt-1);
-	}
-`;
-
-const PostCommentResultStyle = styled.div`
-	&:empty {
-		display: none;
+		right: 0px;
+		bottom: 0px;
+		font-size: 1rem;
+		color: #fff;
+		background-color: #f02849;
+		padding: 0.2rem 0.6rem;
+		border-radius: 1rem;
 	}
 `;
 
 const PostComment = () => {
-	const [searchResultArray, setSearchResultArray] = React.useState([]);
-
-	const { isDropdownMenuOpen, setIsDropdownMenuOpen } = useDropdown(
-		"post-comment-popup-trigger",
-		"post-comment-popup-menu",
-		false
-	);
-
-	const { commentContent, taggedCommentUsersArray, commentErrorMessage } =
-		useSelector((state) => state.commentReducer);
-
 	const dispatch = useDispatch();
+
+	const { taggedCommentUsersArray } = useSelector(
+		(state) => state.commentReducer
+	);
 
 	return (
 		<PostCommentStyle>
@@ -96,6 +49,12 @@ const PostComment = () => {
 				iconElementStyleObject={{ iconSize: "2rem" }}
 			>
 				<Tag />
+
+				{taggedCommentUsersArray.length > 0 && (
+					<span id="post-comment-tagged-users-number">
+						{taggedCommentUsersArray.length}
+					</span>
+				)}
 			</IconElement>
 
 			<BorderStyle borderHeight="3rem" />
@@ -133,66 +92,3 @@ const PostComment = () => {
 };
 
 export default PostComment;
-
-// {isDropdownMenuOpen && (
-// 	<PostCommentPopupStyle id="post-comment-popup-menu">
-// 		<Remove />
-
-// 		<h2>Tag Users</h2>
-
-// 		<Message
-// 			errorMessage={
-// 				commentErrorMessage && commentErrorMessage.commentUser
-// 			}
-// 		/>
-
-// 		<SearchAndSelected
-// 			searchAndSelectType="comment-user"
-// 			searchAndSelectedArray={taggedCommentUsersArray}
-// 			removeContentActionCreator={removeUserOnComment}
-// 			searchAndSelectedStyleObject={{
-// 				searchAndSelectedPadding: "0.5rem 0",
-// 			}}
-// 		/>
-
-// 		<FormInput
-// 			id="comment__search-user"
-// 			label="search-user"
-// 			name="search-user"
-// 			type="text"
-// 			placeholder="Search for users"
-// 			onChange={(e) => {
-// 				handleSearchInputOnChange(
-// 					e,
-// 					"/search/users",
-// 					setSearchResultArray,
-// 					setIsDropdownMenuOpen
-// 				);
-// 			}}
-// 			formInputStyleObject={{
-// 				labelDisplay: "none",
-// 			}}
-// 		/>
-
-// 		<PostCommentResultStyle>
-// 			{searchResultArray.map((result) => {
-// 				return (
-// 					<UserDropdownElement
-// 						dropdownElementContent={result}
-// 						dropdownElementOnClickEventHandler={() => {
-// 							dispatch(
-// 								addContent(
-// 									"comment-user",
-// 									result,
-// 									taggedCommentUsersArray,
-// 									addUserOnComment,
-// 									setCommentErrorMessage
-// 								)
-// 							);
-// 						}}
-// 					/>
-// 				);
-// 			})}
-// 		</PostCommentResultStyle>
-// 	</PostCommentPopupStyle>
-// )}

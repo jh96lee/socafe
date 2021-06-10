@@ -13,3 +13,4 @@ export { default as AddContentsWrapperStyle } from "./add-content/AddContentsWra
 export { default as AddContentButtonWrapperStyle } from "./add-content/AddContentButtonWrapperStyle";
 export { default as PostStyle } from "./post/PostStyle";
 export { default as PostMetadataStyle } from "./post/PostMetadataStyle";
+export { default as PostMainDataStyle } from "./post/PostMainDataStyle";

@@ -7,4 +7,5 @@ export const SkeletonStyle = styled.div`
 	background-color: var(--bg-3);
 	border-radius: ${(props) =>
 		props.skeletonBorderRadius ? props.skeletonBorderRadius : "1rem"};
+	margin: ${(props) => props.skeletonMargin};
 `;

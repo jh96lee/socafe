@@ -6,11 +6,11 @@ import { PostContentsStyle } from "../styles/PostContentsStyle";
 
 const PostContents = ({
 	postContentsArray,
-	conditionalPostContentsVariable,
+	conditionalPostContentsRenderingVariable,
 }) => {
 	return (
 		<PostContentsStyle>
-			{!conditionalPostContentsVariable ||
+			{!conditionalPostContentsRenderingVariable ||
 			postContentsArray.length === 0 ||
 			postContentsArray[0].content === "<br>" ? (
 				<Skeleton skeletonHeight="20rem" skeletonWidth="100%" />

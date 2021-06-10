@@ -52,7 +52,7 @@ const GlobalStyles = createGlobalStyle`
         --separator-1: ${(props) =>
 					props.theme.isDarkMode ? "#0a0a0a" : "#d3dfe4"};
         --separator-2: ${(props) =>
-					props.theme.isDarkMode ? "#000" : "#757575"};
+					props.theme.isDarkMode ? "#000" : "#a2a2a282"};
         --separator-focus-1: ${(props) =>
 					props.theme.isDarkMode ? "#6c8a98" : "#90b8cb"};
         

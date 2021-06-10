@@ -8,7 +8,6 @@ import { NavigationStyle } from "../styles/NavigationStyle";
 
 import {
 	Home,
-	Heart,
 	Explore,
 	Marketplace,
 	Notification,
@@ -29,18 +28,6 @@ const Navigation = ({ isResponsiveNavigationOpen }) => {
 				</IconElement>
 				<span>Home</span>
 			</NavLink>
-
-			{user && (
-				<NavLink exact to="/likes/:userId">
-					<IconElement
-						iconRole={iconRole}
-						iconElementStyleObject={{ iconSize }}
-					>
-						<Heart />
-					</IconElement>
-					<span>Likes</span>
-				</NavLink>
-			)}
 
 			{user && (
 				<NavLink exact to="/notification">

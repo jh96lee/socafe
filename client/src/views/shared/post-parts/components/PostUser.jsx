@@ -4,10 +4,10 @@ import { Skeleton } from "../../index";
 
 import { PostUserStyle, PostUserMetadataStyle } from "../styles/PostUserStyle";
 
-const PostUser = ({ postUser, conditionalRenderVariable }) => {
+const PostUser = ({ postUser, conditionalPostUserRenderingVariable }) => {
 	return (
 		<PostUserStyle>
-			{conditionalRenderVariable ? (
+			{conditionalPostUserRenderingVariable ? (
 				<img src={postUser.avatar_url} />
 			) : (
 				<Skeleton
@@ -17,8 +17,10 @@ const PostUser = ({ postUser, conditionalRenderVariable }) => {
 				/>
 			)}
 
-			<PostUserMetadataStyle>
-				{conditionalRenderVariable ? (
+			<PostUserMetadataStyle
+				isDataLoaded={conditionalPostUserRenderingVariable}
+			>
+				{conditionalPostUserRenderingVariable ? (
 					<p>@{postUser.username}</p>
 				) : (
 					<Skeleton
@@ -28,12 +30,12 @@ const PostUser = ({ postUser, conditionalRenderVariable }) => {
 					/>
 				)}
 
-				{conditionalRenderVariable ? (
+				{conditionalPostUserRenderingVariable ? (
 					<span>{postUser.full_name}</span>
 				) : (
 					<Skeleton
 						skeletonWidth="8rem"
-						skeletonHeight="1.7rem"
+						skeletonHeight="1.5rem"
 						skeletonBorderRadius="1rem"
 					/>
 				)}

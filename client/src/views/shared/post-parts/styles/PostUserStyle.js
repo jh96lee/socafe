@@ -16,6 +16,7 @@ export const PostUserStyle = styled.div`
 export const PostUserMetadataStyle = styled.div`
 	display: flex;
 	flex-direction: column;
+	gap: ${(props) => !props.isDataLoaded && "0.3rem"};
 	justify-content: space-between;
 	height: 100%;
 

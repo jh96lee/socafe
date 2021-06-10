@@ -5,7 +5,7 @@ export const PostMetadataStyle = styled.div`
 	grid-row: 1 / 2;
 	display: flex;
 	flex-direction: column;
-	gap: 1rem;
-	padding: 0 1rem;
+	gap: 1.5rem;
+	padding: 0 1.5rem;
 	overflow: scroll;
 `;

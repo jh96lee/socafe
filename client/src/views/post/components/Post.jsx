@@ -3,17 +3,22 @@ import axios from "axios";
 
 import {
 	PostImages,
+	PostTaggedUsers,
 	PostNumericMetadata,
 	PostSelectedCategories,
 	PostContents,
 	PostComment,
 } from "../../shared/post-parts";
+import PostCommentPopup from "../../shared/post-parts/components/PostCommentPopup";
 
-import { PostStyle } from "../styles/PostStyle";
-import { PostMetadataStyle } from "../styles/PostMetadataStyle";
+import {
+	PostStyle,
+	PostMetadataStyle,
+	PostMainDataStyle,
+} from "../../../styles";
 
 const Post = () => {
-	const postID = 12;
+	const postID = 14;
 
 	const [post, setPost] = React.useState({});
 	const [isPostLoaded, setIsPostLoaded] = React.useState(false);
@@ -33,33 +38,42 @@ const Post = () => {
 
 	return (
 		<PostStyle>
-			<PostImages
-				postImagesArray={post.images}
-				conditionalPostImagesVariable={isPostLoaded}
-				postTaggedUsersArray={post.taggedUsers}
-				conditionalPostTaggedUsersVariable={isPostLoaded}
-			/>
+			<PostMainDataStyle>
+				<PostImages
+					postImagesArray={post.images}
+					conditionalPostImagesRenderingVariable={isPostLoaded}
+				/>
+
+				<PostTaggedUsers
+					postTaggedUsersArray={post.taggedUsers}
+					conditionalPostTaggedUsersRenderingVariable={isPostLoaded}
+				/>
+			</PostMainDataStyle>
 
 			<PostNumericMetadata
 				postUser={post.user}
 				postTotalLikes={post.totalLikes}
 				postTotalComments={post.totalComments}
-				conditionalRenderVariable={isPostLoaded}
+				conditionalPostUserRenderingVariable={isPostLoaded}
+				conditionalPostTotalLikesRenderingVariable={isPostLoaded}
+				conditionalPostTotalCommentsRenderingVariable={isPostLoaded}
 			/>
 
 			<PostMetadataStyle>
 				<PostSelectedCategories
 					selectedPostCategoriesArray={post.categories}
-					conditionalPostSelectedCategoriesVariable={isPostLoaded}
+					conditionalPostSelectedCategoriesRenderingVariable={isPostLoaded}
 				/>
 
 				<PostContents
 					postContentsArray={post.contents}
-					conditionalPostContentsVariable={isPostLoaded}
+					conditionalPostContentsRenderingVariable={isPostLoaded}
 				/>
 			</PostMetadataStyle>
 
 			<PostComment />
+
+			<PostCommentPopup />
 		</PostStyle>
 	);
 };

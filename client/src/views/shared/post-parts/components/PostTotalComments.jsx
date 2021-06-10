@@ -8,7 +8,7 @@ import { Comment } from "../../../../assets";
 
 const PostTotalComments = ({
 	postTotalComments,
-	conditionalRenderVariable,
+	conditionalPostTotalCommentsRenderingVariable,
 }) => {
 	return (
 		<PostTotalNumbersStyle>
@@ -25,7 +25,7 @@ const PostTotalComments = ({
 				<Comment />
 			</IconElement>
 
-			{conditionalRenderVariable ? (
+			{conditionalPostTotalCommentsRenderingVariable ? (
 				<p>{postTotalComments} Comments</p>
 			) : (
 				<Skeleton skeletonHeight="2.6rem" skeletonWidth="7rem" />

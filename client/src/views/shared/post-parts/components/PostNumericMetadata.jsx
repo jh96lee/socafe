@@ -14,24 +14,32 @@ const PostNumericMetadata = ({
 	postUser,
 	postTotalLikes,
 	postTotalComments,
-	conditionalRenderVariable,
+	conditionalPostUserRenderingVariable,
+	conditionalPostTotalLikesRenderingVariable,
+	conditionalPostTotalCommentsRenderingVariable,
 }) => {
 	return (
 		<PostNumericMetadataStyle>
 			<PostUser
 				postUser={postUser}
-				conditionalRenderVariable={conditionalRenderVariable}
+				conditionalPostUserRenderingVariable={
+					conditionalPostUserRenderingVariable
+				}
 			/>
 
 			<PostTotalsDataStyle>
 				<PostTotalLikes
 					postTotalLikes={postTotalLikes}
-					conditionalRenderVariable={conditionalRenderVariable}
+					conditionalPostTotalLikesRenderingVariable={
+						conditionalPostTotalLikesRenderingVariable
+					}
 				/>
 
 				<PostTotalComments
 					postTotalComments={postTotalComments}
-					conditionalRenderVariable={conditionalRenderVariable}
+					conditionalPostTotalCommentsRenderingVariable={
+						conditionalPostTotalCommentsRenderingVariable
+					}
 				/>
 
 				<PostBookmark />
