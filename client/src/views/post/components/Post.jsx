@@ -1,6 +1,7 @@
 import * as React from "react";
 import axios from "axios";
 
+import { IconElement, Loader } from "../../shared";
 import {
 	PostImages,
 	PostTaggedUsers,
@@ -16,14 +17,15 @@ import {
 	PostMetadataStyle,
 	PostMainDataStyle,
 } from "../../../styles";
+import { PostOverlayStyle } from "../styles/PostOverlayStyle";
 
-const Post = () => {
-	const postID = 14;
+import { Remove } from "../../../assets";
 
+const Post = ({ postID, handlePostOnClick }) => {
 	const [post, setPost] = React.useState({});
 	const [isPostLoaded, setIsPostLoaded] = React.useState(false);
 
-	React.useEffect(async () => {
+	const fetchPost = async () => {
 		const { data } = await axios({
 			method: "GET",
 			url: `http://localhost:8080/post/${postID}`,
@@ -34,47 +36,74 @@ const Post = () => {
 
 			setIsPostLoaded(true);
 		}
-	}, [postID]);
+	};
+
+	React.useEffect(() => {
+		fetchPost();
+	}, []);
 
 	return (
-		<PostStyle>
-			<PostMainDataStyle>
-				<PostImages
-					postImagesArray={post.images}
-					conditionalPostImagesRenderingVariable={isPostLoaded}
-				/>
+		<PostOverlayStyle>
+			{isPostLoaded ? (
+				<PostStyle>
+					<PostMainDataStyle>
+						<PostImages
+							postImagesArray={post.images}
+							conditionalPostImagesRenderingVariable={isPostLoaded}
+						/>
 
-				<PostTaggedUsers
-					postTaggedUsersArray={post.taggedUsers}
-					conditionalPostTaggedUsersRenderingVariable={isPostLoaded}
-				/>
-			</PostMainDataStyle>
+						<PostTaggedUsers
+							postTaggedUsersArray={post.taggedUsers}
+							conditionalPostTaggedUsersRenderingVariable={isPostLoaded}
+						/>
+					</PostMainDataStyle>
 
-			<PostNumericMetadata
-				postUser={post.user}
-				postTotalLikes={post.totalLikes}
-				postTotalComments={post.totalComments}
-				conditionalPostUserRenderingVariable={isPostLoaded}
-				conditionalPostTotalLikesRenderingVariable={isPostLoaded}
-				conditionalPostTotalCommentsRenderingVariable={isPostLoaded}
-			/>
+					<PostNumericMetadata
+						postUser={post.user}
+						postTotalLikes={post.totalLikes}
+						postTotalComments={post.totalComments}
+						conditionalPostUserRenderingVariable={isPostLoaded}
+						conditionalPostTotalLikesRenderingVariable={isPostLoaded}
+						conditionalPostTotalCommentsRenderingVariable={isPostLoaded}
+					/>
 
-			<PostMetadataStyle>
-				<PostSelectedCategories
-					selectedPostCategoriesArray={post.categories}
-					conditionalPostSelectedCategoriesRenderingVariable={isPostLoaded}
-				/>
+					<PostMetadataStyle>
+						<PostSelectedCategories
+							selectedPostCategoriesArray={post.categories}
+							conditionalPostSelectedCategoriesRenderingVariable={isPostLoaded}
+						/>
 
-				<PostContents
-					postContentsArray={post.contents}
-					conditionalPostContentsRenderingVariable={isPostLoaded}
-				/>
-			</PostMetadataStyle>
+						<PostContents
+							postContentsArray={post.contents}
+							conditionalPostContentsRenderingVariable={isPostLoaded}
+						/>
+					</PostMetadataStyle>
 
-			<PostComment />
+					<PostComment />
 
-			<PostCommentPopup />
-		</PostStyle>
+					<PostCommentPopup />
+				</PostStyle>
+			) : (
+				<Loader />
+			)}
+
+			<IconElement
+				iconRole="button"
+				onClick={handlePostOnClick}
+				iconElementStyleObject={{
+					elementPosition: "absolute",
+					elementTop: "1.2rem",
+					elementRight: "1.2rem",
+					elementZIndex: "5",
+					iconSize: "1.8rem",
+					elementPadding: "1.3rem",
+					iconColor: "var(--icon-2)",
+					iconHoverColor: "#b9c8cf",
+				}}
+			>
+				<Remove />
+			</IconElement>
+		</PostOverlayStyle>
 	);
 };
 

@@ -26,7 +26,7 @@ const PostTotalLikes = ({
 					elementHoverBackgroundColor: "none",
 					iconColor: "#ff0000",
 					iconHoverColor: "#d80000",
-					iconSize: "2.2rem",
+					iconSize: "2.1rem",
 				}}
 			>
 				{isLiked ? <HeartFill /> : <HeartEmpty />}

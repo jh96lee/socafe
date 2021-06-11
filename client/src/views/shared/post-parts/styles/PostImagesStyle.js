@@ -6,7 +6,7 @@ export const PostImagesStyle = styled.div`
 	position: relative;
 	width: 100%;
 	height: 100%;
-	border-radius: 1rem;
+	border-radius: 2rem;
 	overflow: hidden;
 
 	& > img {

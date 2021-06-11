@@ -23,3 +23,5 @@ export { default as Skeleton } from "./skeleton/Skeleton";
 export { default as Message } from "./message/Message";
 
 export { default as AddPostIcon } from "./add-post-icon/AddPostIcon";
+
+export { default as User } from "./user/User";

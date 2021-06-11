@@ -8,14 +8,10 @@ import {
 	PostContents,
 	PostTaggedUsers,
 	PostComments,
-} from "../../shared/post-parts";
-import { Skeleton } from "../../shared";
+} from "../shared/post-parts";
+import { Skeleton } from "../shared";
 
-import {
-	PostStyle,
-	PostMetadataStyle,
-	PostMainDataStyle,
-} from "../../../styles";
+import { PostStyle, PostMetadataStyle, PostMainDataStyle } from "../../styles";
 
 const PostPreview = () => {
 	const {
@@ -35,6 +31,7 @@ const PostPreview = () => {
 						uploadedPostImagesArray.length > 0
 					}
 				/>
+
 				<PostTaggedUsers
 					postTaggedUsersArray={taggedPostUsersArray}
 					conditionalPostTaggedUsersRenderingVariable={

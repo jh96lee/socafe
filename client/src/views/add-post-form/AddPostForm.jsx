@@ -2,7 +2,7 @@ import * as React from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { useHistory } from "react-router";
 
-import { uploadPost } from "../../../redux/add-post/addPostAction";
+import { uploadPost } from "../../redux/add-post/addPostAction";
 
 import {
 	SearchAndSelect,
@@ -11,7 +11,7 @@ import {
 	Caption,
 	Button,
 	Loader,
-} from "../../shared";
+} from "../shared";
 
 import {
 	addPostCategory,
@@ -19,14 +19,14 @@ import {
 	removePostCategory,
 	removeUserOnPost,
 	setAddPostErrorMessage,
-} from "../../../redux/add-post/addPostAction";
+} from "../../redux/add-post/addPostAction";
 
 import {
 	AddContentFormStyle,
 	AddContentStyle,
 	AddContentsWrapperStyle,
 	AddContentButtonWrapperStyle,
-} from "../../../styles";
+} from "../../styles";
 
 const AddPostForm = () => {
 	const dispatch = useDispatch();

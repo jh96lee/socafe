@@ -12,6 +12,7 @@ import { ReactComponent as Remove } from "./general/remove.svg";
 import { ReactComponent as Bolt } from "./general/bolt.svg";
 import { ReactComponent as Submit } from "./general/submit.svg";
 import { ReactComponent as Smile } from "./general/smile.svg";
+import { ReactComponent as Settings } from "./general/settings.svg";
 
 import { ReactComponent as SocafeDark } from "./logo/socafe-dark.svg";
 import { ReactComponent as SocafeLight } from "./logo/socafe-light.svg";
@@ -38,7 +39,6 @@ import { ReactComponent as Product } from "./product/product.svg";
 
 import { ReactComponent as Notification } from "./user/notification.svg";
 import { ReactComponent as Search } from "./user/search.svg";
-import { ReactComponent as Setting } from "./user/setting.svg";
 import { ReactComponent as Stats } from "./user/stats.svg";
 import { ReactComponent as User } from "./user/user.svg";
 import { ReactComponent as Users } from "./user/users.svg";
@@ -78,7 +78,6 @@ export {
 	Product,
 	Notification,
 	Search,
-	Setting,
 	Stats,
 	User,
 	Users,
@@ -88,4 +87,5 @@ export {
 	Tag,
 	HeartEmpty,
 	HeartFill,
+	Settings,
 };

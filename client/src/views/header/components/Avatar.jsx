@@ -70,7 +70,7 @@ const Avatar = () => {
 						},
 					},
 			  ];
-	}, []);
+	}, [user]);
 
 	return (
 		<AvatarStyle id="avatar-dropdown-trigger">

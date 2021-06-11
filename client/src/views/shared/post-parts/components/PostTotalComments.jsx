@@ -19,7 +19,7 @@ const PostTotalComments = ({
 					elementHoverBackgroundColor: "none",
 					iconColor: "var(--icon-2)",
 					iconHoverColor: "#var(--icon-2)",
-					iconSize: "2.2rem",
+					iconSize: "2.1rem",
 				}}
 			>
 				<Comment />

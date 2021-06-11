@@ -10,11 +10,7 @@ const PostContents = ({
 }) => {
 	return (
 		<PostContentsStyle>
-			{!conditionalPostContentsRenderingVariable ||
-			postContentsArray.length === 0 ||
-			postContentsArray[0].content === "<br>" ? (
-				<Skeleton skeletonHeight="20rem" skeletonWidth="100%" />
-			) : (
+			{conditionalPostContentsRenderingVariable ? (
 				postContentsArray.map(({ type, content }, idx) => {
 					if (content === "<br>") {
 						return (
@@ -26,6 +22,8 @@ const PostContents = ({
 						return <p key={`${type}__${idx}`}>{content}</p>;
 					}
 				})
+			) : (
+				<Skeleton skeletonHeight="20rem" skeletonWidth="100%" />
 			)}
 		</PostContentsStyle>
 	);

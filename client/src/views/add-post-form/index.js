@@ -1,1 +1,1 @@
-export { default as AddPostForm } from "./components/AddPostForm";
+export { default as AddPostForm } from "./AddPostForm";

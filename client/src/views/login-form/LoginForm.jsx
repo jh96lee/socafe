@@ -2,17 +2,17 @@ import * as React from "react";
 import { Link } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 
-import { FormInput, Message, Button, Loader } from "../../shared";
+import { FormInput, Message, Button, Loader } from "../shared";
 
 import {
 	FormStyle,
 	FormFieldsetStyle,
 	FormInputAndMessageStyle,
-} from "../../../styles";
+} from "../../styles";
 
-import { setLoginUserInfo, loginUser } from "../../../redux/login/loginAction";
+import { setLoginUserInfo, loginUser } from "../../redux/login/loginAction";
 
-import { handleLoginAndRegisterFormInputOnChange } from "../../../utils/form/handleLoginAndRegisterFormInputOnChange";
+import { handleLoginAndRegisterFormInputOnChange } from "../../utils/form/handleLoginAndRegisterFormInputOnChange";
 
 const LoginForm = () => {
 	const dispatch = useDispatch();

@@ -81,7 +81,6 @@ const PostComment = () => {
 			<BorderStyle borderHeight="3rem" />
 
 			<IconElement
-				iconID="post-comment-popup-trigger"
 				iconRole="button"
 				iconElementStyleObject={{ iconSize: "2rem" }}
 			>

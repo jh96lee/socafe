@@ -3,7 +3,7 @@ import * as React from "react";
 import PostTotalLikes from "./PostTotalLikes";
 import PostTotalComments from "./PostTotalComments";
 import PostBookmark from "./PostBookmark";
-import PostUser from "./PostUser";
+import { User } from "../../index";
 
 import {
 	PostNumericMetadataStyle,
@@ -20,11 +20,16 @@ const PostNumericMetadata = ({
 }) => {
 	return (
 		<PostNumericMetadataStyle>
-			<PostUser
-				postUser={postUser}
-				conditionalPostUserRenderingVariable={
-					conditionalPostUserRenderingVariable
-				}
+			<User
+				userID={postUser.id || postUser.user_id}
+				avatarURL={postUser.avatar_url}
+				username={postUser.username}
+				fullName={postUser.full_name}
+				avatarSize="3.7rem"
+				usernameFontSize="1.37rem"
+				fullNameFontSize="1.27rem"
+				onClick={null}
+				conditionalRenderingVariable={conditionalPostUserRenderingVariable}
 			/>
 
 			<PostTotalsDataStyle>

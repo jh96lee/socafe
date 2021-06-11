@@ -153,7 +153,7 @@ const GlobalStyles = createGlobalStyle`
         font-size: 1.3rem;
         font-weight: 300;
         letter-spacing: -0.6px;
-        color: ${(props) => (props.theme.isDarkMode ? "#868585" : "#6f6f6f")};
+        color: ${(props) => (props.theme.isDarkMode ? "#888888" : "#6f6f6f")};
     }
 
     svg {

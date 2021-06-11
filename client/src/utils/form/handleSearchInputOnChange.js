@@ -12,7 +12,7 @@ export const handleSearchInputOnChange = async (
 		method: "POST",
 		url: `http://localhost:8080${apiEndpoint}`,
 		data: {
-			searchInput: e.target.value ? e.target.value : null,
+			searchInput: e.target.value ? e.target.value.toLowerCase() : null,
 		},
 	});
 

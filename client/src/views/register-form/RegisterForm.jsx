@@ -2,20 +2,20 @@ import * as React from "react";
 import { Link } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 
-import { FormInput, Message, Loader, Button } from "../../shared";
+import { FormInput, Message, Loader, Button } from "../shared";
 
 import {
 	FormStyle,
 	FormFieldsetStyle,
 	FormInputAndMessageStyle,
-} from "../../../styles";
+} from "../../styles";
 
 import {
 	setRegisterUserInfo,
 	registerUser,
-} from "../../../redux/register/registerAction";
+} from "../../redux/register/registerAction";
 
-import { handleLoginAndRegisterFormInputOnChange } from "../../../utils/form/handleLoginAndRegisterFormInputOnChange";
+import { handleLoginAndRegisterFormInputOnChange } from "../../utils/form/handleLoginAndRegisterFormInputOnChange";
 
 const RegisterForm = () => {
 	// REVIEW: data like basic user info and current form step and message sent from the server
