@@ -114,11 +114,7 @@ userRouter.post("/user/login", validateEmail, async (req, res) => {
 userRouter.post("/search/users", async (req, res) => {
 	const { searchInput } = req.body;
 
-	const sqlLikeArray = [
-		`${searchInput}%`,
-		`%${searchInput}`,
-		`%${searchInput}%`,
-	];
+	const like = `%${searchInput}%`;
 
 	try {
 		const { rows } = await pool.queryToDatabase(
@@ -128,12 +124,8 @@ userRouter.post("/search/users", async (req, res) => {
 			users 
 			WHERE 
 			LOWER(username) LIKE $1
-			OR
-			LOWER(username) LIKE $2
-			OR
-			LOWER(username) LIKE $3;
 			`,
-			[...sqlLikeArray]
+			[like]
 		);
 
 		res.send(rows);

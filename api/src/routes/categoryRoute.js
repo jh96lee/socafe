@@ -67,11 +67,7 @@ categoryRouter.post(
 categoryRouter.post("/search/post-categories", async (req, res) => {
 	const { searchInput } = req.body;
 
-	const sqlLikeArray = [
-		`${searchInput}%`,
-		`%${searchInput}`,
-		`%${searchInput}%`,
-	];
+	const like = `%${searchInput}%`;
 
 	try {
 		const { rows } = await pool.queryToDatabase(
@@ -81,12 +77,8 @@ categoryRouter.post("/search/post-categories", async (req, res) => {
 			post_categories
 			WHERE
 			LOWER(title) LIKE $1
-			OR
-			LOWER(title) LIKE $2
-			OR
-			LOWER(title) LIKE $3;
 			`,
-			[...sqlLikeArray]
+			[like]
 		);
 
 		res.send(rows);
