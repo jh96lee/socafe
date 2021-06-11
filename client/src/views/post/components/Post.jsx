@@ -5,17 +5,22 @@ import { IconElement, Loader } from "../../shared";
 import {
 	PostImages,
 	PostTaggedUsers,
-	PostNumericMetadata,
 	PostSelectedCategories,
 	PostContents,
 	PostComment,
+	PostTotalLikes,
+	PostTotalComments,
+	PostBookmark,
 } from "../../shared/post-parts";
+import { User } from "../../shared";
 import PostCommentPopup from "../../shared/post-parts/components/PostCommentPopup";
 
 import {
 	PostStyle,
-	PostMetadataStyle,
 	PostMainDataStyle,
+	PostHorizontalMetadataStyle,
+	PostVerticalMetadataStyle,
+	PostInteractionsStyle,
 } from "../../../styles";
 import { PostOverlayStyle } from "../styles/PostOverlayStyle";
 
@@ -24,6 +29,8 @@ import { Remove } from "../../../assets";
 const Post = ({ postID, handlePostOnClick }) => {
 	const [post, setPost] = React.useState({});
 	const [isPostLoaded, setIsPostLoaded] = React.useState(false);
+
+	console.log(post);
 
 	const fetchPost = async () => {
 		const { data } = await axios({
@@ -58,16 +65,35 @@ const Post = ({ postID, handlePostOnClick }) => {
 						/>
 					</PostMainDataStyle>
 
-					<PostNumericMetadata
-						postUser={post.user}
-						postTotalLikes={post.totalLikes}
-						postTotalComments={post.totalComments}
-						conditionalPostUserRenderingVariable={isPostLoaded}
-						conditionalPostTotalLikesRenderingVariable={isPostLoaded}
-						conditionalPostTotalCommentsRenderingVariable={isPostLoaded}
-					/>
+					<PostHorizontalMetadataStyle>
+						<User
+							userID={post.user.user_id}
+							avatarURL={post.user.avatar_url}
+							username={post.user.username}
+							fullName={post.user.full_name}
+							avatarSize="3.7rem"
+							usernameFontSize="1.37rem"
+							fullNameFontSize="1.27rem"
+							onClick={null}
+							conditionalRenderingVariable={isPostLoaded}
+						/>
 
-					<PostMetadataStyle>
+						<PostInteractionsStyle>
+							<PostTotalLikes
+								postTotalLikes={post.totalLikes}
+								conditionalPostTotalLikesRenderingVariable={isPostLoaded}
+							/>
+
+							<PostTotalComments
+								postTotalComments={post.totalComments}
+								conditionalPostTotalCommentsRenderingVariable={isPostLoaded}
+							/>
+
+							<PostBookmark />
+						</PostInteractionsStyle>
+					</PostHorizontalMetadataStyle>
+
+					<PostVerticalMetadataStyle>
 						<PostSelectedCategories
 							selectedPostCategoriesArray={post.categories}
 							conditionalPostSelectedCategoriesRenderingVariable={isPostLoaded}
@@ -77,7 +103,7 @@ const Post = ({ postID, handlePostOnClick }) => {
 							postContentsArray={post.contents}
 							conditionalPostContentsRenderingVariable={isPostLoaded}
 						/>
-					</PostMetadataStyle>
+					</PostVerticalMetadataStyle>
 
 					<PostComment />
 

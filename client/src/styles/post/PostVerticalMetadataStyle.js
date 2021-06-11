@@ -1,6 +1,6 @@
 import styled from "styled-components";
 
-const PostMetadataStyle = styled.div`
+const PostVerticalMetadataStyle = styled.div`
 	grid-column: 2 / 3;
 	grid-row: 1 / 2;
 	display: flex;
@@ -10,4 +10,4 @@ const PostMetadataStyle = styled.div`
 	overflow: scroll;
 `;
 
-export default PostMetadataStyle;
+export default PostVerticalMetadataStyle;

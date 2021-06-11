@@ -4,14 +4,22 @@ import { useSelector } from "react-redux";
 import {
 	PostImages,
 	PostSelectedCategories,
-	PostNumericMetadata,
 	PostContents,
 	PostTaggedUsers,
 	PostComments,
+	PostTotalLikes,
+	PostTotalComments,
+	PostBookmark,
 } from "../shared/post-parts";
-import { Skeleton } from "../shared";
+import { Skeleton, User } from "../shared";
 
-import { PostStyle, PostMetadataStyle, PostMainDataStyle } from "../../styles";
+import {
+	PostStyle,
+	PostMainDataStyle,
+	PostHorizontalMetadataStyle,
+	PostVerticalMetadataStyle,
+	PostInteractionsStyle,
+} from "../../styles";
 
 const PostPreview = () => {
 	const {
@@ -40,14 +48,31 @@ const PostPreview = () => {
 				/>
 			</PostMainDataStyle>
 
-			<PostNumericMetadata
-				postUser={user}
-				conditionalPostUserRenderingVariable={user}
-				conditionalPostTotalLikesRenderingVariable={null}
-				conditionalPostTotalCommentsRenderingVariable={null}
-			/>
+			<PostHorizontalMetadataStyle>
+				<User
+					userID={user.id}
+					avatarURL={user.avatar_url}
+					username={user.username}
+					fullName={user.full_name}
+					avatarSize="3.7rem"
+					usernameFontSize="1.37rem"
+					fullNameFontSize="1.27rem"
+					onClick={null}
+					conditionalRenderingVariable={user}
+				/>
 
-			<PostMetadataStyle>
+				<PostInteractionsStyle>
+					<PostTotalLikes conditionalPostTotalLikesRenderingVariable={null} />
+
+					<PostTotalComments
+						conditionalPostTotalCommentsRenderingVariable={null}
+					/>
+
+					<PostBookmark />
+				</PostInteractionsStyle>
+			</PostHorizontalMetadataStyle>
+
+			<PostVerticalMetadataStyle>
 				<PostSelectedCategories
 					selectedPostCategoriesArray={selectedPostCategoriesArray}
 					conditionalPostSelectedCategoriesRenderingVariable={
@@ -63,7 +88,7 @@ const PostPreview = () => {
 				/>
 
 				<PostComments />
-			</PostMetadataStyle>
+			</PostVerticalMetadataStyle>
 
 			<Skeleton
 				skeletonHeight="4.2rem"

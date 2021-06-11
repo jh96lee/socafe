@@ -3,22 +3,15 @@ import styled from "styled-components";
 import axios from "axios";
 
 import HomePost from "./HomePost";
+import { Loader } from "../../shared";
 
-const HomeFeedStyle = styled.div`
-	display: grid;
-	grid-template-columns: repeat(4, 1fr);
-	/* grid-auto-rows: minmax(18rem, 18rem); */
-	gap: 2rem;
-	margin: 4rem auto;
-	justify-items: center;
-	width: 75%;
-`;
+import { HomeFeedStyle } from "../styles/HomeFeedStyle";
 
 const HomeFeed = () => {
 	const [posts, setPosts] = React.useState([]);
 	const [isPostsLoading, setIsPostsLoading] = React.useState(false);
 
-	React.useEffect(async () => {
+	const fetchPosts = async () => {
 		setIsPostsLoading(true);
 
 		const { data } = await axios({
@@ -31,13 +24,21 @@ const HomeFeed = () => {
 
 			setIsPostsLoading(false);
 		}
+	};
+
+	React.useEffect(() => {
+		fetchPosts();
 	}, []);
 
 	return (
 		<HomeFeedStyle>
-			{posts.map((post, idx) => {
-				return <HomePost key={`home-feed-post__${idx}`} post={post} />;
-			})}
+			{isPostsLoading ? (
+				<Loader />
+			) : (
+				posts.map((post, idx) => {
+					return <HomePost key={`home-feed-post__${idx}`} post={post} />;
+				})
+			)}
 		</HomeFeedStyle>
 	);
 };

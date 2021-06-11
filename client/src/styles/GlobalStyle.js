@@ -25,6 +25,7 @@ const GlobalStyles = createGlobalStyle`
 					props.theme.isDarkMode ? "#4f606961" : "#6096b12b"};
         --bg-5: ${(props) =>
 					props.theme.isDarkMode ? "#45616f87" : "#a2e0ff6b"};
+        --bg-post: ${(props) => (props.theme.isDarkMode ? "#161719" : "#fff")};
         --bg-error: ${(props) =>
 					props.theme.isDarkMode ? "#ff000033" : "#ff5b5b4d"};
         --bg-success: ${(props) =>

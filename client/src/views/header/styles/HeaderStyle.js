@@ -6,7 +6,7 @@ export const HeaderStyle = styled.header`
 	grid-column: 1 / 3;
 	grid-row: 1 / 2;
 	background-color: var(--bg-1);
-	box-shadow: 0px 0px 0px 1.6px var(--separator-1);
+	box-shadow: 0px 0px 5px 2.5px var(--separator-1);
 	padding: 0 2rem;
 	display: flex;
 	align-items: center;

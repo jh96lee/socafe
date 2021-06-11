@@ -15,7 +15,7 @@ const PostCommentStyle = styled.div`
 	justify-content: space-between;
 	align-items: center;
 	gap: 0.7rem;
-	padding: 0 1rem;
+	padding: 0.3rem 1rem;
 	border-radius: 2rem;
 	height: 90%;
 	width: 90%;

@@ -12,5 +12,7 @@ export { default as AddContentStyle } from "./add-content/AddContentStyle";
 export { default as AddContentsWrapperStyle } from "./add-content/AddContentsWrapperStyle";
 export { default as AddContentButtonWrapperStyle } from "./add-content/AddContentButtonWrapperStyle";
 export { default as PostStyle } from "./post/PostStyle";
-export { default as PostMetadataStyle } from "./post/PostMetadataStyle";
 export { default as PostMainDataStyle } from "./post/PostMainDataStyle";
+export { default as PostHorizontalMetadataStyle } from "./post/PostHorizontalMetadataStyle";
+export { default as PostVerticalMetadataStyle } from "./post/PostVerticalMetadataStyle";
+export { default as PostInteractionsStyle } from "./post/PostInteractionsStyle";

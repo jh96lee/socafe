@@ -1,6 +1,6 @@
 import styled from "styled-components";
 
-export const PostNumericMetadataStyle = styled.div`
+const PostHorizontalMetadataStyle = styled.div`
 	grid-column: 1 / 2;
 	grid-row: 2 / 3;
 	display: flex;
@@ -11,8 +11,4 @@ export const PostNumericMetadataStyle = styled.div`
 	border-radius: 1.5rem;
 `;
 
-export const PostTotalsDataStyle = styled.div`
-	display: flex;
-	align-items: center;
-	gap: 1.4rem;
-`;
+export default PostHorizontalMetadataStyle;
