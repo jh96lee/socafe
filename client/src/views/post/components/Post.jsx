@@ -1,4 +1,5 @@
 import * as React from "react";
+import { useSelector } from "react-redux";
 import axios from "axios";
 
 import { IconElement, Loader } from "../../shared";
@@ -26,16 +27,21 @@ import { PostOverlayStyle } from "../styles/PostOverlayStyle";
 
 import { Remove } from "../../../assets";
 
-const Post = ({ postID, handlePostOnClick }) => {
+// REVIEW: within the array of posts are objects and each object has a post_id property and that value is passed to
+// REVIEW: Post component as a Prop
+const Post = ({ postID, handlePostOnClick, isLiked, totalLikes, onClick }) => {
 	const [post, setPost] = React.useState({});
 	const [isPostLoaded, setIsPostLoaded] = React.useState(false);
 
-	console.log(post);
+	const { user } = useSelector((state) => state.userReducer);
+
+	// REVIEW: send 0 because there are no users with the ID of 0
+	const userID = user ? user.id : 0;
 
 	const fetchPost = async () => {
 		const { data } = await axios({
 			method: "GET",
-			url: `http://localhost:8080/post/${postID}`,
+			url: `http://localhost:8080/post/${postID}?userID=${userID}`,
 		});
 
 		if (data) {
@@ -79,9 +85,12 @@ const Post = ({ postID, handlePostOnClick }) => {
 						/>
 
 						<PostInteractionsStyle>
+							{/* REVIEW: prop drill likes related data */}
 							<PostTotalLikes
-								postTotalLikes={post.totalLikes}
 								conditionalPostTotalLikesRenderingVariable={isPostLoaded}
+								isLiked={isLiked}
+								totalLikes={totalLikes}
+								onClick={onClick}
 							/>
 
 							<PostTotalComments
@@ -118,13 +127,16 @@ const Post = ({ postID, handlePostOnClick }) => {
 				onClick={handlePostOnClick}
 				iconElementStyleObject={{
 					elementPosition: "absolute",
-					elementTop: "1.2rem",
-					elementRight: "1.2rem",
+					elementTop: "1rem",
+					elementRight: "1rem",
 					elementZIndex: "5",
 					iconSize: "1.8rem",
 					elementPadding: "1.3rem",
-					iconColor: "var(--icon-2)",
-					iconHoverColor: "#b9c8cf",
+					elementBackgroundColor: "#000000db",
+					elementBoxShadow: "none",
+					elementHoverBackgroundColor: "#000",
+					iconColor: "#fff",
+					iconHoverColor: "#f5f5f5",
 				}}
 			>
 				<Remove />

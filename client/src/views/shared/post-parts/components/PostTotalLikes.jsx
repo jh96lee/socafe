@@ -2,25 +2,21 @@ import * as React from "react";
 
 import { IconElement, Skeleton } from "../../index";
 
-import { HeartFill, HeartEmpty } from "../../../../assets";
-
 import { PostTotalNumbersStyle } from "../styles/PostTotalNumbersStyle";
 
+import { HeartFill, HeartEmpty } from "../../../../assets";
+
 const PostTotalLikes = ({
-	postTotalLikes,
+	isLiked,
+	totalLikes,
+	onClick,
 	conditionalPostTotalLikesRenderingVariable,
 }) => {
-	const [isLiked, setIsLiked] = React.useState(false);
-
-	const handleOnClick = () => {
-		setIsLiked((prevState) => !prevState);
-	};
-
 	return (
 		<PostTotalNumbersStyle>
 			<IconElement
 				iconRole="button"
-				onClick={handleOnClick}
+				onClick={onClick}
 				iconElementStyleObject={{
 					elementPadding: "0rem",
 					elementHoverBackgroundColor: "none",
@@ -33,7 +29,7 @@ const PostTotalLikes = ({
 			</IconElement>
 
 			{conditionalPostTotalLikesRenderingVariable ? (
-				<p>{postTotalLikes} Likes</p>
+				<p>{totalLikes} Likes</p>
 			) : (
 				<Skeleton skeletonHeight="2.6rem" skeletonWidth="7rem" />
 			)}

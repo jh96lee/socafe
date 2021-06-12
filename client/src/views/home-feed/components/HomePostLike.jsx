@@ -6,18 +6,12 @@ import { HomePostTotalDataStyle } from "../styles/HomePostTotalDataStyle";
 
 import { HeartFill, HeartEmpty } from "../../../assets";
 
-const HomePostLike = ({ totalLikes }) => {
-	const [isLiked, setIsLiked] = React.useState(false);
-
-	const handleOnClick = () => {
-		setIsLiked((prevState) => !prevState);
-	};
-
+const HomePostLike = ({ isLiked, totalLikes, onClick }) => {
 	return (
 		<HomePostTotalDataStyle>
 			<IconElement
 				iconRole="button"
-				onClick={handleOnClick}
+				onClick={onClick}
 				iconElementStyleObject={{
 					elementPadding: "0rem",
 					elementHoverBackgroundColor: "none",

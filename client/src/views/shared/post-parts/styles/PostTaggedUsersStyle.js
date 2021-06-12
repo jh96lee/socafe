@@ -10,7 +10,7 @@ export const PostTaggedUsersStyle = styled.div`
 export const PostTaggedUsersIconElementStyle = styled.div`
 	padding: 0.9rem;
 	border-radius: 50%;
-	background-color: #5a5a5a26;
+	background-color: #000000db;
 	cursor: pointer;
 
 	& > svg {
