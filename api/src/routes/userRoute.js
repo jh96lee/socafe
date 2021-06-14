@@ -1,6 +1,7 @@
 const express = require("express");
-const bcrypt = require("bcryptjs");
+
 const pool = require("../pool");
+
 const validateEmail = require("../middlewares/user/validateEmail");
 const isEmailInUse = require("../middlewares/user/isEmailInUse");
 const isUsernameInUse = require("../middlewares/user/isUsernameInUse");
@@ -8,7 +9,9 @@ const hashPassword = require("../middlewares/user/hashPassword");
 const authenticateToken = require("../middlewares/user/authenticateToken");
 const checkError = require("../middlewares/common/checkError");
 
-const generateAndSendToken = require("../utils/generateAndSendToken");
+const userRegister = require("../controllers/user/userRegister");
+const userLogin = require("../controllers/user/userLogin");
+const searchUser = require("../controllers/user/searchUser");
 
 const userRouter = express.Router();
 
@@ -21,121 +24,139 @@ userRouter.post(
 	isUsernameInUse,
 	checkError,
 	hashPassword,
-	async (req, res) => {
-		const { fullName, email, username, password } = req.body;
-
-		const avatarURL =
-			"https://res.cloudinary.com/fullstackprojectcloud/image/upload/v1621981182/default_svra7n.png";
-
-		try {
-			const { rows } = await pool.queryToDatabase(
-				`
-				INSERT INTO users(full_name, email, username, password, avatar_url)
-				VALUES($1, $2, $3, $4, $5)
-				RETURNING id, full_name, username, avatar_url;
-				`,
-				[fullName, email, username, password, avatarURL]
-			);
-
-			const user = rows[0];
-
-			if (user) {
-				generateAndSendToken(res, {
-					id: user.id,
-					full_name: user.full_name,
-					username: user.username,
-					avatar_url: user.avatar_url,
-				});
-			} else {
-				res.send({
-					error: {
-						general:
-							"There has been an error while inserting data into the database",
-					},
-				});
-			}
-		} catch (error) {
-			res.send({
-				error: {
-					general: "There has been an error while processing your registration",
-				},
-			});
-		}
-	}
+	userRegister
 );
 
-userRouter.post("/user/login", validateEmail, async (req, res) => {
-	const { email, password } = req.body;
+userRouter.post("/user/login", validateEmail, userLogin);
 
-	try {
-		const { rows } = await pool.queryToDatabase(
-			`
-			SELECT id, full_name, username, avatar_url, password 
-			FROM users
-			WHERE email=$1;
-			`,
-			[email]
-		);
+userRouter.post("/search/users", searchUser);
 
-		const user = rows[0];
+userRouter.get("/profile/user/:userID", async (req, res) => {
+	const userID = parseInt(req.params.userID);
 
-		if (user) {
-			// REVIEW: the result variable is either true or false
-			bcrypt.compare(password, user.password, (err, result) => {
-				if (err) {
-					res.send({
-						error: {
-							general: "There has been an error while validating your password",
-						},
-					});
-				} else if (result) {
-					generateAndSendToken(res, {
-						id: user.id,
-						full_name: user.full_name,
-						username: user.username,
-						avatar_url: user.avatar_url,
-					});
-				} else if (!result) {
-					res.send({ error: { general: "Invalid email and/or password" } });
-				}
-			});
-		} else if (!user) {
-			res.send({ error: { general: "Invalid email and/or password" } });
-		}
-	} catch (error) {
-		res.send({
-			error: {
-				general: "There has been an error while processing your login",
-			},
-		});
-	}
+	const userData = await pool.queryToDatabase(
+		`
+		SELECT
+		username, 
+		full_name,
+		avatar_url,
+		bio
+		FROM users
+		WHERE id=$1;
+		`,
+		[userID]
+	);
+
+	const totalFollowers = await pool.queryToDatabase(
+		`
+		SELECT 
+		COUNT(*)::INT
+		FROM following
+		WHERE leader_id=$1;
+		`,
+		[userID]
+	);
+
+	const totalFollowing = await pool.queryToDatabase(
+		`
+		SELECT 
+		COUNT(*)::INT
+		FROM following
+		WHERE follower_id=$1;
+		`,
+		[userID]
+	);
+
+	const totalPosts = await pool.queryToDatabase(
+		`
+		SELECT
+		COUNT(*)::INT
+		FROM posts
+		WHERE posts.user_id=$1;
+		`,
+		[userID]
+	);
+
+	res.send({
+		user: userData.rows[0],
+		totalFollowers: totalFollowers.rows[0].count,
+		totalFollowing: totalFollowing.rows[0].count,
+		totalPosts: totalPosts.rows[0].count,
+	});
 });
 
-userRouter.post("/search/users", async (req, res) => {
-	const { searchInput } = req.body;
+userRouter.get("/profile/content/:userID", async (req, res) => {
+	const userPostsDataArray = [];
 
-	const like = `%${searchInput}%`;
+	const userID = parseInt(req.params.userID);
 
-	try {
-		const { rows } = await pool.queryToDatabase(
+	const postIDsData = await pool.queryToDatabase(
+		`
+		SELECT
+		posts.id AS id
+		FROM posts
+		JOIN users
+		ON posts.user_id = users.id
+		WHERE users.id = $1;
+		`,
+		[userID]
+	);
+
+	const postIDsArray = postIDsData.rows.map((element) => element.id);
+
+	for (let postID of postIDsArray) {
+		const imageData = await pool.queryToDatabase(
 			`
-			SELECT 
-			id, full_name, username, avatar_url FROM 
-			users 
-			WHERE 
-			LOWER(username) LIKE $1
+			SELECT
+			pi.image_url AS image_url
+			FROM posts
+			JOIN (
+				SELECT
+				posts.id AS post_id,
+				post_images.image_url AS image_url
+				FROM posts
+				JOIN post_images
+				ON posts.id=post_images.post_id
+				WHERE posts.id=$1
+				LIMIT 1
+			) AS pi
+			ON posts.id = pi.post_id
+			WHERE posts.id=$1;
 			`,
-			[like]
+			[postID]
 		);
 
-		res.send(rows);
-	} catch (error) {
-		res.send({
-			error: {
-				searchUser: "There has been an error while searching for users",
-			},
+		const totalLikesData = await pool.queryToDatabase(
+			`
+			SELECT 
+			COUNT(*)::INT
+			FROM post_likes
+			WHERE post_id=$1;
+			`,
+			[postID]
+		);
+
+		const totalCommentsData = await pool.queryToDatabase(
+			`
+			SELECT 
+			COUNT(*)::INT
+			FROM comments 
+			WHERE post_id=$1;
+			`,
+			[postID]
+		);
+
+		userPostsDataArray.push({
+			user_id: userID,
+			post_id: postID,
+			// REVIEW: fetching 1 image, so I decided to spread it out
+			...imageData.rows[0],
+			totalLikes: totalLikesData.rows[0].count,
+			totalComments: totalCommentsData.rows[0].count,
 		});
 	}
+
+	res.send(userPostsDataArray);
 });
 
 module.exports = userRouter;

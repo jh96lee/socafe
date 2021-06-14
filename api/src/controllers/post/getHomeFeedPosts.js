@@ -1,7 +1,7 @@
 const pool = require("../../pool");
 
 const getHomeFeedPosts = async (req, res) => {
-	const { userID } = res.locals;
+	const userID = req.query.userID;
 
 	// REVIEW: fetch the IDs' of posts that needs to be fetched
 	const { rows } = await pool.queryToDatabase(
