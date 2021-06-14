@@ -25,3 +25,5 @@ export { default as Message } from "./message/Message";
 export { default as AddPostIcon } from "./add-post-icon/AddPostIcon";
 
 export { default as User } from "./user/User";
+
+export { default as Likes } from "./likes/Likes";

@@ -1,4 +1,6 @@
 import * as React from "react";
+// FIX
+import { useParams, useHistory } from "react-router";
 import { useSelector } from "react-redux";
 import axios from "axios";
 
@@ -9,11 +11,10 @@ import {
 	PostSelectedCategories,
 	PostContents,
 	PostComment,
-	PostTotalLikes,
 	PostTotalComments,
 	PostBookmark,
 } from "../../shared/post-parts";
-import { User } from "../../shared";
+import { User, Likes } from "../../shared";
 import PostCommentPopup from "../../shared/post-parts/components/PostCommentPopup";
 
 import {
@@ -29,19 +30,24 @@ import { Remove } from "../../../assets";
 
 // REVIEW: within the array of posts are objects and each object has a post_id property and that value is passed to
 // REVIEW: Post component as a Prop
-const Post = ({ postID, handlePostOnClick, isLiked, totalLikes, onClick }) => {
+const Post = () => {
 	const [post, setPost] = React.useState({});
 	const [isPostLoaded, setIsPostLoaded] = React.useState(false);
 
+	const { postID } = useParams();
+	const history = useHistory();
+
 	const { user } = useSelector((state) => state.userReducer);
 
-	// REVIEW: send 0 because there are no users with the ID of 0
-	const userID = user ? user.id : 0;
+	const handlePostOnClick = () => {
+		history.goBack();
+	};
 
 	const fetchPost = async () => {
 		const { data } = await axios({
 			method: "GET",
-			url: `http://localhost:8080/post/${postID}?userID=${userID}`,
+			// REVIEW: if a user does not exist, then send 0 as the userID
+			url: `http://localhost:8080/post/${postID}?userID=${user ? user.id : 0}`,
 		});
 
 		if (data) {
@@ -85,12 +91,13 @@ const Post = ({ postID, handlePostOnClick, isLiked, totalLikes, onClick }) => {
 						/>
 
 						<PostInteractionsStyle>
-							{/* REVIEW: prop drill likes related data */}
-							<PostTotalLikes
-								conditionalPostTotalLikesRenderingVariable={isPostLoaded}
-								isLiked={isLiked}
-								totalLikes={totalLikes}
-								onClick={onClick}
+							{/* FIX */}
+							<Likes
+								postLikesData={{
+									post_id: postID,
+									isLiked: post.isLiked,
+									totalLikes: post.totalLikes,
+								}}
 							/>
 
 							<PostTotalComments

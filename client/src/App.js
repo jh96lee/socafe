@@ -11,8 +11,10 @@ import {
 	CategoryOfInterestPage,
 	HomePage,
 	AddPostPage,
+	ProfilePage,
 } from "./pages";
 import { AddPostIcon } from "./views/shared";
+import { Post } from "./views/post";
 
 import GlobalStyle from "./styles/GlobalStyle";
 
@@ -54,6 +56,15 @@ function App() {
 
 						<Route exact path="/add-post">
 							{user ? <AddPostPage /> : <Redirect to="/login" />}
+						</Route>
+
+						<Route exact path="/user/:userID">
+							<ProfilePage />
+						</Route>
+
+						{/* TODO */}
+						<Route exact path="/post/:postID">
+							<Post />
 						</Route>
 
 						<Route exact path="/register">

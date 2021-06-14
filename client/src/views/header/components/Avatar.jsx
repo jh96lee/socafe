@@ -34,7 +34,7 @@ const Avatar = () => {
 						},
 						type: "link",
 						onClickEventHandler: () => {
-							history.push("/profile/:userID");
+							history.push(`/user/${user.id}`);
 						},
 					},
 					{

@@ -1,31 +1,52 @@
 import * as React from "react";
+// FIX
+import { useHistory } from "react-router";
+import { useSelector } from "react-redux";
+import axios from "axios";
 
-import { User } from "../../shared";
-import { Post } from "../../post";
+import { User, Likes, Loader } from "../../shared";
 import HomePostImages from "./HomePostImages";
 import HomePostContent from "./HomePostContent";
 import HomePostBookmark from "./HomePostBookmark";
-import HomePostLike from "./HomePostLike";
 import HomePostComment from "./HomePostComment";
-
-import { useLikeAndUnlikePostHook } from "../../../hooks/useLikeAndUnlikePostHook";
 
 import { HomePostStyle } from "../styles/HomePostStyle";
 import { HomePostHeaderStyle } from "../styles/HomePostHeaderStyle";
 import { HomePostFooterStyle } from "../styles/HomePostFooterStyle";
 
 const HomePost = ({ post }) => {
-	const [isOpen, setIsOpen] = React.useState(false);
+	const [postLikesData, setPostLikesData] = React.useState(null);
+	const [isPostLikesDataLoaded, setIsPostLikesDataLoadedt] =
+		React.useState(false);
 
-	const { post_id, user, isLiked, images, content, totalLikes, totalComments } =
-		post;
+	// TODO
+	const { user: userReduxState } = useSelector((state) => state.userReducer);
 
-	// REVIEW: lift the states
-	const { isLikedState, totalLikesState, handleIsLikedOnClick } =
-		useLikeAndUnlikePostHook(isLiked, totalLikes, post_id);
+	const { post_id, user, images, content, totalComments } = post;
+
+	const fetchPostLikes = async () => {
+		console.log("Fetching post likes data");
+
+		const { data } = await axios({
+			method: "GET",
+			url: `http://localhost:8080/likes/${post_id}?userID=${
+				userReduxState ? userReduxState.id : 0
+			}`,
+		});
+
+		setPostLikesData(data);
+
+		setIsPostLikesDataLoadedt(true);
+	};
+
+	React.useEffect(() => {
+		fetchPostLikes();
+	}, []);
+
+	const history = useHistory();
 
 	const handlePostOnClick = () => {
-		setIsOpen((prevState) => !prevState);
+		history.push(`/post/${post_id}`);
 	};
 
 	return (
@@ -54,26 +75,15 @@ const HomePost = ({ post }) => {
 			<HomePostImages postImagesArray={images} onClick={handlePostOnClick} />
 
 			<HomePostFooterStyle>
-				{/* REVIEW: prop drill likes related data */}
-				<HomePostLike
-					isLiked={isLikedState}
-					totalLikes={totalLikesState}
-					onClick={handleIsLikedOnClick}
-				/>
+				{/* FIX */}
+				{isPostLikesDataLoaded ? (
+					<Likes postLikesData={postLikesData} />
+				) : (
+					<Loader />
+				)}
 
 				<HomePostComment totalComments={totalComments} />
 			</HomePostFooterStyle>
-
-			{isOpen && (
-				// REVIEW: prop drill likes related data
-				<Post
-					postID={post_id}
-					handlePostOnClick={handlePostOnClick}
-					isLiked={isLikedState}
-					totalLikes={totalLikesState}
-					onClick={handleIsLikedOnClick}
-				/>
-			)}
 		</HomePostStyle>
 	);
 };

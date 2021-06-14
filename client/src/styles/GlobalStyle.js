@@ -112,7 +112,7 @@ const GlobalStyles = createGlobalStyle`
     h3 {
         font-size: 1.82rem;
         font-weight: 600;
-        letter-spacing: -0.9px;
+        letter-spacing: -1.2px;
     }
 
     h4 {

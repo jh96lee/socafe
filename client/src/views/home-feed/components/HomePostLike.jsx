@@ -2,16 +2,21 @@ import * as React from "react";
 
 import { IconElement } from "../../shared";
 
+import { useLikeAndUnlikePostHook } from "../../../hooks/useLikeAndUnlikePostHook";
+
 import { HomePostTotalDataStyle } from "../styles/HomePostTotalDataStyle";
 
 import { HeartFill, HeartEmpty } from "../../../assets";
 
-const HomePostLike = ({ isLiked, totalLikes, onClick }) => {
+const HomePostLike = ({ postID, isLiked, totalLikes }) => {
+	const { isLikedState, totalLikesState, handleIsLikedOnClick } =
+		useLikeAndUnlikePostHook(isLiked, totalLikes, postID);
+
 	return (
 		<HomePostTotalDataStyle>
 			<IconElement
 				iconRole="button"
-				onClick={onClick}
+				onClick={handleIsLikedOnClick}
 				iconElementStyleObject={{
 					elementPadding: "0rem",
 					elementHoverBackgroundColor: "none",
@@ -20,10 +25,10 @@ const HomePostLike = ({ isLiked, totalLikes, onClick }) => {
 					iconSize: "2.2rem",
 				}}
 			>
-				{isLiked ? <HeartFill /> : <HeartEmpty />}
+				{isLikedState ? <HeartFill /> : <HeartEmpty />}
 			</IconElement>
 
-			<p>{totalLikes}</p>
+			<p>{totalLikesState}</p>
 		</HomePostTotalDataStyle>
 	);
 };

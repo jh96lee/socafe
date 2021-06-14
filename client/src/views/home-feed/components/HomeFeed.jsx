@@ -1,47 +1,37 @@
 import * as React from "react";
-import axios from "axios";
+import { useDispatch, useSelector } from "react-redux";
 
 import HomePost from "./HomePost";
 import { Loader } from "../../shared";
 
-import { fetchToken } from "../../../utils/cookie";
+import { fetchHomeFeedPosts } from "../../../redux/home-feed/homeFeedAction";
 
 import { HomeFeedStyle } from "../styles/HomeFeedStyle";
 
 const HomeFeed = () => {
-	const [posts, setPosts] = React.useState([]);
-	const [isPostsLoaded, setIsPostsLoaded] = React.useState(false);
+	const { isHomeFeedPostsLoading, homePosts } = useSelector(
+		(state) => state.homeFeedReducer
+	);
+	const { user } = useSelector((state) => state.userReducer);
 
-	const token = fetchToken();
+	const userID = user ? user.id : 0;
 
-	const fetchPosts = async () => {
-		const { data } = await axios({
-			method: "GET",
-			url: "http://localhost:8080/posts/home",
-			headers: {
-				Authorization: `Bearer ${token}`,
-			},
-		});
-
-		if (data) {
-			setPosts(data);
-
-			setIsPostsLoaded(true);
-		}
-	};
+	const dispatch = useDispatch();
 
 	React.useEffect(() => {
-		fetchPosts();
+		if (homePosts.length === 0) {
+			dispatch(fetchHomeFeedPosts(userID));
+		}
 	}, []);
 
 	return (
 		<HomeFeedStyle>
-			{isPostsLoaded ? (
-				posts.map((post, idx) => {
+			{isHomeFeedPostsLoading ? (
+				<Loader />
+			) : (
+				homePosts.map((post, idx) => {
 					return <HomePost key={`home-feed-post__${idx}`} post={post} />;
 				})
-			) : (
-				<Loader />
 			)}
 		</HomeFeedStyle>
 	);

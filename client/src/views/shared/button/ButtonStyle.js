@@ -6,6 +6,7 @@ const ButtonStyle = styled.button`
 	letter-spacing: -0.6px;
 	width: ${(props) => props.buttonWidth || "100%"};
 	padding: ${(props) => props.buttonPadding || "1.3rem"};
+	box-shadow: ${(props) => props.buttonBoxShadow};
 	border: none;
 	border-radius: 0.5rem;
 	outline: none;
