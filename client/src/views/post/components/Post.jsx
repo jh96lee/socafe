@@ -91,14 +91,7 @@ const Post = () => {
 						/>
 
 						<PostInteractionsStyle>
-							{/* FIX */}
-							<Likes
-								postLikesData={{
-									post_id: postID,
-									isLiked: post.isLiked,
-									totalLikes: post.totalLikes,
-								}}
-							/>
+							<Likes postID={postID} />
 
 							<PostTotalComments
 								postTotalComments={post.totalComments}

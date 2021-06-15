@@ -53,7 +53,7 @@ export const useLikeAndUnlikePostHook = (
 		}
 
 		initialComponentMount.current = false;
-	}, [isLikedState]);
+	}, [isLikedState, likePost, unlikePost]);
 
 	return {
 		isLikedState,

@@ -1,9 +1,9 @@
 import * as React from "react";
 import styled from "styled-components";
 
-import { IconElement } from "../index";
+import { IconElement, Skeleton } from "../index";
 
-import { useLikeAndUnlikePostHook } from "../../../hooks/useLikeAndUnlikePostHook";
+import { useLikeAndUnlikePost } from "../../../hooks/useLikeAndUnlikePost";
 
 import { HeartEmpty, HeartFill } from "../../../assets";
 
@@ -14,34 +14,36 @@ const LikesStyle = styled.div`
 	color: var(--txt-1);
 `;
 
-const Likes = ({ postLikesData }) => {
-	const { isLikedState, totalLikesState, handleIsLikedOnClick } =
-		useLikeAndUnlikePostHook(
-			postLikesData.isLiked,
-			postLikesData.totalLikes,
-			postLikesData.post_id
-		);
+const Likes = ({ postID }) => {
+	const {
+		isPostLiked,
+		totalPostLikes,
+		isPostLikesDataLoaded,
+		handleLikeOnClick,
+	} = useLikeAndUnlikePost(postID);
 
 	return (
-		postLikesData && (
-			<LikesStyle>
-				<IconElement
-					iconRole="button"
-					onClick={handleIsLikedOnClick}
-					iconElementStyleObject={{
-						elementPadding: "0rem",
-						elementHoverBackgroundColor: "none",
-						iconColor: "#ff0000",
-						iconHoverColor: "#d80000",
-						iconSize: "2.1rem",
-					}}
-				>
-					{isLikedState ? <HeartFill /> : <HeartEmpty />}
-				</IconElement>
+		<LikesStyle>
+			<IconElement
+				iconRole="button"
+				onClick={handleLikeOnClick}
+				iconElementStyleObject={{
+					elementPadding: "0rem",
+					elementHoverBackgroundColor: "none",
+					iconColor: "#ff0000",
+					iconHoverColor: "#d80000",
+					iconSize: "2.1rem",
+				}}
+			>
+				{isPostLiked ? <HeartFill /> : <HeartEmpty />}
+			</IconElement>
 
-				<p>{totalLikesState} Likes</p>
-			</LikesStyle>
-		)
+			{isPostLikesDataLoaded ? (
+				<p>{totalPostLikes}</p>
+			) : (
+				<Skeleton skeletonWidth="3rem" skeletonHeight="2rem" />
+			)}
+		</LikesStyle>
 	);
 };
 
