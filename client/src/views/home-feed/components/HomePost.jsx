@@ -28,9 +28,9 @@ const HomePost = ({ post }) => {
 					avatarURL={user.avatar_url}
 					username={user.username}
 					fullName={user.full_name}
-					avatarSize="3.5rem"
-					usernameFontSize="1.3rem"
-					fullNameFontSize="1.2rem"
+					avatarSize="3.8rem"
+					usernameFontSize="1.4rem"
+					fullNameFontSize="1.3rem"
 					onClick={() => {
 						// REVIEW: move to story
 					}}
@@ -46,7 +46,7 @@ const HomePost = ({ post }) => {
 			<HomePostImages postImagesArray={images} onClick={handlePostOnClick} />
 
 			<HomePostFooterStyle>
-				<Likes postID={post_id} />
+				<Likes postID={post_id} iconSize="2.4rem" numberFontSize="1.4rem" />
 
 				<HomePostComment totalComments={totalComments} />
 			</HomePostFooterStyle>

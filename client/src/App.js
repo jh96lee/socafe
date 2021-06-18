@@ -1,5 +1,5 @@
 import * as React from "react";
-import { BrowserRouter, Switch, Route, Redirect, Link } from "react-router-dom";
+import { BrowserRouter, Switch, Route, Redirect } from "react-router-dom";
 import { useSelector } from "react-redux";
 import { ThemeProvider } from "styled-components";
 import styled from "styled-components";
@@ -11,7 +11,7 @@ import {
 	CategoryOfInterestPage,
 	HomePage,
 	AddPostPage,
-	ProfilePage,
+	UserProfilePage,
 } from "./pages";
 import { AddPostIcon } from "./views/shared";
 import { Post } from "./views/post";
@@ -59,7 +59,7 @@ function App() {
 						</Route>
 
 						<Route exact path="/user/:userID">
-							<ProfilePage />
+							<UserProfilePage />
 						</Route>
 
 						{/* TODO */}

@@ -3,7 +3,7 @@ import styled from "styled-components";
 
 const HomePostContentStyle = styled.p`
 	color: var(--txt-1);
-	font-size: 1.3rem;
+	font-size: 1.33rem;
 	font-weight: 300;
 	letter-spacing: -0.4px;
 	line-height: 2.2rem;

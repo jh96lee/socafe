@@ -21,7 +21,7 @@ const User = ({
 	const history = useHistory();
 
 	const handleUsernameOnClick = () => {
-		history.push(`/profile/${userID}`);
+		history.push(`/user/${userID}`);
 	};
 
 	return (

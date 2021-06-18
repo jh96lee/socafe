@@ -25,7 +25,7 @@ const IconElementStyle = styled.div`
 	}
 
 	&:hover {
-		cursor: pointer;
+		cursor: ${(props) => props.elementCursor || "pointer"};
 		background-color: ${(props) =>
 			props.elementHoverBackgroundColor || "var(--bg-hover-1)"};
 	}

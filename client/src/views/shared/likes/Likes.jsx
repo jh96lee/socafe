@@ -1,5 +1,5 @@
 import * as React from "react";
-import styled from "styled-components";
+import { useSelector } from "react-redux";
 
 import { IconElement, Skeleton } from "../index";
 
@@ -7,14 +7,9 @@ import { useLikeAndUnlikePost } from "../../../hooks/useLikeAndUnlikePost";
 
 import { HeartEmpty, HeartFill } from "../../../assets";
 
-const LikesStyle = styled.div`
-	display: flex;
-	align-items: center;
-	gap: 0.7rem;
-	color: var(--txt-1);
-`;
+import { LikesStyle } from "./LikesStyle";
 
-const Likes = ({ postID }) => {
+const Likes = ({ postID, iconSize = "2.1rem", numberFontSize }) => {
 	const {
 		isPostLiked,
 		totalPostLikes,
@@ -22,17 +17,20 @@ const Likes = ({ postID }) => {
 		handleLikeOnClick,
 	} = useLikeAndUnlikePost(postID);
 
+	const { user } = useSelector((state) => state.userReducer);
+
 	return (
-		<LikesStyle>
+		<LikesStyle numberFontSize={numberFontSize}>
 			<IconElement
 				iconRole="button"
-				onClick={handleLikeOnClick}
+				onClick={user ? handleLikeOnClick : null}
 				iconElementStyleObject={{
 					elementPadding: "0rem",
 					elementHoverBackgroundColor: "none",
+					elementCursor: user ? "pointer" : "not-allowed",
 					iconColor: "#ff0000",
 					iconHoverColor: "#d80000",
-					iconSize: "2.1rem",
+					iconSize,
 				}}
 			>
 				{isPostLiked ? <HeartFill /> : <HeartEmpty />}

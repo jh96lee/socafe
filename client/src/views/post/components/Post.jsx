@@ -1,6 +1,6 @@
 import * as React from "react";
 // FIX
-import { useParams, useHistory } from "react-router";
+import { useParams, useHistory, useLocation } from "react-router";
 import { useSelector } from "react-redux";
 import axios from "axios";
 
