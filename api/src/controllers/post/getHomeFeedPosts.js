@@ -1,16 +1,31 @@
 const pool = require("../../pool");
 
 const getHomeFeedPosts = async (req, res) => {
-	const userID = req.query.userID;
+	const userID = parseInt(req.query.userID);
+	const page = parseInt(req.query.page);
+	const pageSize = parseInt(req.query.pageSize);
+
+	const greaterThanIndex = page * pageSize - pageSize;
+	const lessThanIndex = page * pageSize + 1;
 
 	// REVIEW: fetch the IDs' of posts that needs to be fetched
 	const { rows } = await pool.queryToDatabase(
 		`
 		SELECT
-		id
-		FROM posts
-		ORDER BY created_at;
-		`
+		o.post_id AS id
+		FROM (
+			SELECT
+			posts.id AS post_id,
+			ROW_NUMBER() OVER (ORDER BY posts.created_at) AS index
+			FROM following
+			JOIN posts
+			ON following.leader_id = posts.user_id
+			WHERE follower_id=$1
+			ORDER BY posts.updated_at
+		) AS o
+		WHERE index > $2 AND index < $3
+		`,
+		[userID, greaterThanIndex, lessThanIndex]
 	);
 
 	const postIDsArray = rows.map((row) => parseInt(row.id));
