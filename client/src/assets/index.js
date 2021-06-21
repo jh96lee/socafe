@@ -46,6 +46,7 @@ import { ReactComponent as Users } from "./user/users.svg";
 import { ReactComponent as Register } from "./user/register.svg";
 import { ReactComponent as Login } from "./user/login.svg";
 import { ReactComponent as Logout } from "./user/logout.svg";
+import { ReactComponent as Sad } from "./user/sad.svg";
 
 export {
 	Complete,
@@ -90,4 +91,5 @@ export {
 	HeartFill,
 	More,
 	Posts,
+	Sad,
 };

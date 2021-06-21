@@ -1,11 +1,16 @@
 import styled from "styled-components";
 
 const ButtonStyle = styled.button`
+	position: ${(props) => props.buttonPosition};
 	font-size: ${(props) => props.buttonFontSize || "1.4rem"};
 	font-weight: ${(props) => props.buttonFontWeight || "500"};
 	letter-spacing: -0.6px;
 	width: ${(props) => props.buttonWidth || "100%"};
+	height: ${(props) => props.buttonHeight || "100%"};
+	min-width: ${(props) => props.buttonMinWidth};
+	min-height: ${(props) => props.buttonMinHeight};
 	padding: ${(props) => props.buttonPadding || "1.3rem"};
+	margin: ${(props) => props.buttonMargin};
 	box-shadow: ${(props) => props.buttonBoxShadow};
 	border: none;
 	border-radius: 0.5rem;

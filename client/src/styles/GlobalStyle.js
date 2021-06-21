@@ -73,6 +73,8 @@ const GlobalStyles = createGlobalStyle`
 					props.theme.isDarkMode ? "#74d4ff" : "#00a400"};
         --blue-2: ${(props) =>
 					props.theme.isDarkMode ? "#6dd1ff52" : "#00a400"};
+        --blue-3: ${(props) =>
+					props.theme.isDarkMode ? "#8cb5ff" : "#216ef9"};
 
         /* TODO: toggle */
         --bg-toggle-1: ${(props) => (props.theme.isDarkMode ? "#000" : "#fff")};

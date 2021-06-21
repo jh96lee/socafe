@@ -9,7 +9,12 @@ import { HeartEmpty, HeartFill } from "../../../assets";
 
 import { LikesStyle } from "./LikesStyle";
 
-const Likes = ({ postID, iconSize = "2.1rem", numberFontSize }) => {
+const Likes = ({
+	postID,
+	iconSize = "2.1rem",
+	numberFontSize,
+	displayLabel = false,
+}) => {
 	const {
 		isPostLiked,
 		totalPostLikes,
@@ -37,7 +42,9 @@ const Likes = ({ postID, iconSize = "2.1rem", numberFontSize }) => {
 			</IconElement>
 
 			{isPostLikesDataLoaded ? (
-				<p>{totalPostLikes}</p>
+				<p>
+					{totalPostLikes} {displayLabel && "Likes"}
+				</p>
 			) : (
 				<Skeleton skeletonWidth="3rem" skeletonHeight="2rem" />
 			)}

@@ -3,36 +3,34 @@ import styled from "styled-components";
 
 const UserProfileTabStyle = styled.div`
 	display: flex;
-	align-items: center;
-	gap: 1.3rem;
-	padding: 1rem;
-	width: 100%;
 	justify-content: center;
-	border-radius: 1rem;
+	align-items: center;
+	gap: 1rem;
+	width: 100%;
+	padding-bottom: 1.5rem;
+	box-shadow: 0 1.6px 0 0
+		${(props) => (props.isActive ? "var(--txt-1)" : "#71717154")};
+	/* border-bottom: ${(props) => props.isActive && " 4px solid #000"}; */
+	/* box-shadow: ${(props) => props.isActive && "0 2px 0 0 var(--blue-3)"}; */
 
 	& > svg {
+		fill: ${(props) => (props.isActive ? "var(--txt-1)" : "var(--icon-1)")};
 		width: 2.5rem;
 		height: 2.5rem;
-		fill: ${(props) => (props.activeTab ? "var(--icon-2)" : "var(--icon-1)")};
 	}
 
 	& > span {
+		color: ${(props) => props.isActive && "var(--txt-1)"};
 		font-size: 1.43rem;
 		font-weight: 400;
-		color: ${(props) => props.activeTab && "var(--txt-1)"};
 	}
 
 	&:hover {
 		cursor: pointer;
 	}
 
-	&:hover span {
-		color: var(--txt-1);
-	}
-
-	&:hover svg {
-		color: var(--icon-2);
-		fill: var(--icon-2);
+	&:hover > span {
+		text-decoration: underline;
 	}
 `;
 
@@ -44,7 +42,8 @@ const UserProfileTab = ({
 }) => {
 	return (
 		<UserProfileTabStyle
-			activeTab={idx === currentProfileIndex}
+			isActive={idx === currentProfileIndex}
+			activeTabIndex={currentProfileIndex}
 			onClick={() => {
 				handleTabsOnClick(idx);
 			}}

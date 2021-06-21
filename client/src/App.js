@@ -62,7 +62,7 @@ function App() {
 							<UserProfilePage />
 						</Route>
 
-						{/* TODO */}
+						{/* FIX */}
 						<Route exact path="/post/:postID">
 							<Post />
 						</Route>

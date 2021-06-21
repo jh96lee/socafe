@@ -6,8 +6,17 @@ export const startFetchingHomeFeedPost = () => ({
 	type: "START_FETCHING_HOME_FEED_POSTS",
 });
 
+export const startFetchingExtraHomeFeedPost = () => ({
+	type: "START_FETCHING_EXTRA_HOME_FEED_POSTS",
+});
+
 export const fetchedHomeFeedPosts = (posts) => ({
 	type: "FETCHED_HOME_FEED_POSTS",
+	payload: posts,
+});
+
+export const fetchedExtraHomeFeedPosts = (posts) => ({
+	type: "FETCHED_EXTRA_HOME_FEED_POSTS",
 	payload: posts,
 });
 
@@ -15,20 +24,41 @@ export const endFetchingHomeFeedPost = () => ({
 	type: "END_FETCHING_HOME_FEED_POSTS",
 });
 
-export const fetchHomeFeedPosts = (userID) => async (dispatch) => {
-	dispatch(startFetchingHomeFeedPost());
+export const endFetchingExtraHomeFeedPost = () => ({
+	type: "END_FETCHING_EXTRA_HOME_FEED_POSTS",
+});
 
-	const token = fetchToken();
+export const incrementHomeFeedCurrentPage = () => ({
+	type: "INCREMENT_HOME_FEED_CURRENT_PAGE",
+});
 
-	const { data } = await axios({
-		method: "GET",
-		url: `http://localhost:8080/posts/home?userID=${userID ? userID : 0}`,
-		headers: {
-			Authorization: `Bearer ${token}`,
-		},
-	});
+// REVIEW: contentType can either be "initial" or "extra"
+export const fetchHomeFeedPosts =
+	(userID, contentType) => async (dispatch, getState) => {
+		contentType === "initial"
+			? dispatch(startFetchingHomeFeedPost())
+			: dispatch(startFetchingExtraHomeFeedPost());
 
-	dispatch(fetchedHomeFeedPosts(data));
+		contentType === "extra" && dispatch(incrementHomeFeedCurrentPage());
 
-	dispatch(endFetchingHomeFeedPost());
-};
+		const { homeFeedCurrentPage, homeFeedPageSize } =
+			getState().homeFeedReducer;
+
+		const token = fetchToken();
+
+		const { data } = await axios({
+			method: "GET",
+			url: `http://localhost:8080/posts/home?userID=${userID}&page=${homeFeedCurrentPage}&pageSize=${homeFeedPageSize}`,
+			headers: {
+				Authorization: `Bearer ${token}`,
+			},
+		});
+
+		contentType === "initial"
+			? dispatch(fetchedHomeFeedPosts(data))
+			: dispatch(fetchedExtraHomeFeedPosts(data));
+
+		contentType === "initial"
+			? dispatch(endFetchingHomeFeedPost())
+			: dispatch(endFetchingExtraHomeFeedPost());
+	};

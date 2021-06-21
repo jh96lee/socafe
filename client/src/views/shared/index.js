@@ -27,3 +27,5 @@ export { default as AddPostIcon } from "./add-post-icon/AddPostIcon";
 export { default as User } from "./user/User";
 
 export { default as Likes } from "./likes/Likes";
+
+export { default as Avatar } from "./avatar/Avatar";

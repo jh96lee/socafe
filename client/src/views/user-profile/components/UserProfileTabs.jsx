@@ -5,9 +5,9 @@ import { UserProfileTab } from "../index";
 
 const UserProfileTabsStyle = styled.div`
 	display: flex;
-	justify-content: space-evenly;
-	width: 100%;
-	gap: 1rem;
+	justify-content: space-between;
+	width: 95%;
+	margin: auto;
 `;
 
 const UserProfileTabs = ({

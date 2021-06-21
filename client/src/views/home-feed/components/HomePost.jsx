@@ -6,18 +6,22 @@ import HomePostImages from "./HomePostImages";
 import HomePostContent from "./HomePostContent";
 import HomePostBookmark from "./HomePostBookmark";
 import HomePostComment from "./HomePostComment";
+import { Post } from "../../post";
 
 import { HomePostStyle } from "../styles/HomePostStyle";
 import { HomePostHeaderStyle } from "../styles/HomePostHeaderStyle";
 import { HomePostFooterStyle } from "../styles/HomePostFooterStyle";
 
 const HomePost = ({ post }) => {
+	// const [isPostOpen, setIsPostOpen] = React.useState(false);
+
 	const { post_id, user, images, content, totalComments } = post;
 
 	const history = useHistory();
 
 	const handlePostOnClick = () => {
 		history.push(`/post/${post_id}`);
+		// setIsPostOpen((prevState) => !prevState);
 	};
 
 	return (
@@ -50,6 +54,10 @@ const HomePost = ({ post }) => {
 
 				<HomePostComment totalComments={totalComments} />
 			</HomePostFooterStyle>
+
+			{/* {isPostOpen && (
+				<Post postID={post_id} handlePostOnClick={handlePostOnClick} />
+			)} */}
 		</HomePostStyle>
 	);
 };

@@ -18,8 +18,8 @@ const UserProfilePageStyle = styled.div`
 	max-width: fit-content;
 	margin: 4rem auto;
 
-	& > *:first-child {
-		margin-bottom: 5rem;
+	& > *:nth-child(1) {
+		margin-bottom: 4rem;
 	}
 
 	& > *:nth-child(2) {
@@ -65,7 +65,7 @@ const UserProfilePage = () => {
 
 	return (
 		<UserProfilePageStyle>
-			<UserProfileData userID={userID} />
+			<UserProfileData />
 
 			<UserProfileTabs
 				userProfileTabs={userProfileTabs}
