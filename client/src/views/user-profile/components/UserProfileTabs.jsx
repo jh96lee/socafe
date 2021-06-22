@@ -1,14 +1,8 @@
 import React from "react";
-import styled from "styled-components";
 
 import { UserProfileTab } from "../index";
 
-const UserProfileTabsStyle = styled.div`
-	display: flex;
-	justify-content: space-between;
-	width: 95%;
-	margin: auto;
-`;
+import { UserProfileTabsStyle } from "../styles/UserProfileTabsStyle";
 
 const UserProfileTabs = ({
 	userProfileTabs,

@@ -13,6 +13,7 @@ import { ReactComponent as Bolt } from "./general/bolt.svg";
 import { ReactComponent as Submit } from "./general/submit.svg";
 import { ReactComponent as Smile } from "./general/smile.svg";
 import { ReactComponent as More } from "./general/more.svg";
+import { ReactComponent as Edit } from "./general/edit.svg";
 
 import { ReactComponent as SocafeDark } from "./logo/socafe-dark.svg";
 import { ReactComponent as SocafeLight } from "./logo/socafe-light.svg";
@@ -47,6 +48,8 @@ import { ReactComponent as Register } from "./user/register.svg";
 import { ReactComponent as Login } from "./user/login.svg";
 import { ReactComponent as Logout } from "./user/logout.svg";
 import { ReactComponent as Sad } from "./user/sad.svg";
+import { ReactComponent as Follow } from "./user/follow.svg";
+import { ReactComponent as Following } from "./user/following.svg";
 
 export {
 	Complete,
@@ -92,4 +95,7 @@ export {
 	More,
 	Posts,
 	Sad,
+	Edit,
+	Follow,
+	Following,
 };

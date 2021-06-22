@@ -1,29 +1,26 @@
 import * as React from "react";
+import { useParams } from "react-router-dom";
 import axios from "axios";
-import styled from "styled-components";
 
 import { Loader } from "../../shared";
 import { UserProfilePost } from "../index";
 
-const UserProfilePostsStyle = styled.div`
-	position: relative;
-	display: grid;
-	grid-template-columns: repeat(4, 20rem);
-	grid-auto-rows: 19rem;
-	gap: 1rem;
-	min-width: 100%;
-	min-height: 15rem;
-`;
+import { UserProfilePostsStyle } from "../styles/UserProfilePostsStyle";
 
-const UserProfilePosts = ({ userID }) => {
+const UserProfilePosts = () => {
 	const [userProfilePosts, setUserProfilePosts] = React.useState([]);
 	const [isUserProfilePostsLoaded, setIsUserProfilePostsLoaded] =
 		React.useState(false);
 
+	// REVIEW: profile owner
+	const leaderID = useParams().userID;
+
 	const fetchUserPosts = async () => {
+		setIsUserProfilePostsLoaded(false);
+
 		const { data } = await axios({
 			method: "GET",
-			url: `http://localhost:8080/profile/posts/${userID}`,
+			url: `http://localhost:8080/profile/posts/${leaderID}`,
 		});
 
 		setUserProfilePosts(data);
@@ -33,7 +30,7 @@ const UserProfilePosts = ({ userID }) => {
 
 	React.useEffect(() => {
 		fetchUserPosts();
-	}, []);
+	}, [leaderID]);
 
 	return (
 		<UserProfilePostsStyle>
