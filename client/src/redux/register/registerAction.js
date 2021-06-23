@@ -1,6 +1,6 @@
 import axios from "axios";
 
-import { setCookie } from "../../utils/cookie";
+import { setCookie } from "../../utils/cookie/setCookie";
 import { setCoupleSeconds } from "../../utils/setCoupleSeconds";
 
 export const startUserRegister = () => ({

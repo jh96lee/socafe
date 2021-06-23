@@ -1,4 +1,4 @@
-import { decodePayloadFromCookie } from "../../utils/cookie";
+import { decodePayloadFromCookie } from "../../utils/cookie/decodePayloadFromCookie";
 
 export const setUser = () => ({
 	type: "SET_USER",

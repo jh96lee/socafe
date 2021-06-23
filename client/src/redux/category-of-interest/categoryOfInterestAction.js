@@ -2,7 +2,7 @@ import axios from "axios";
 
 import { setRegisterStep } from "../register/registerAction";
 
-import { fetchToken } from "../../utils/cookie";
+import { fetchToken } from "../../utils/cookie/fetchToken";
 
 const setCategoryOfInterestErrorMessage = (errorMessage) => ({
 	type: "SET_CATEGORY_OF_INTEREST_ERROR_MESSAGE",

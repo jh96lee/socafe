@@ -13,31 +13,30 @@ import { Down, Edit } from "../../../assets";
 
 const UserProfileButtons = () => {
 	const { userProfile } = useSelector((state) => state.userProfileReducer);
-
 	const { user } = useSelector((state) => state.userReducer);
 
 	const leaderID = parseInt(useParams().userID);
-	const visitorID = user ? user.id : 0;
+	const visitorID = user ? parseInt(user.id) : 0;
 
 	const history = useHistory();
 
 	return (
-		<UserProfileButtonsStyle profileOwnerVisited={user.id === leaderID}>
+		<UserProfileButtonsStyle profileOwnerVisited={visitorID === leaderID}>
 			<UserProfileFollowButton
 				leaderID={leaderID}
 				visitorID={visitorID}
 				isUserFollowing={userProfile.isFollowing}
-				profileOwnerVisited={user.id === leaderID}
+				profileOwnerVisited={visitorID === leaderID}
 			/>
 
 			<UserProfileButtonStyle>
 				<Down />
 			</UserProfileButtonStyle>
 
-			{user.id === leaderID && (
+			{visitorID === leaderID && (
 				<UserProfileButtonStyle
 					onClick={() => {
-						history.push(`/profile/${user.id}`);
+						history.push(`/profile/edit/${user.id}`);
 					}}
 				>
 					<Edit />

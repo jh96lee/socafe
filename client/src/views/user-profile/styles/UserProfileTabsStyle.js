@@ -4,5 +4,5 @@ export const UserProfileTabsStyle = styled.div`
 	display: flex;
 	justify-content: space-between;
 	width: 95%;
-	margin: auto;
+	margin: 4rem auto 2rem auto;
 `;

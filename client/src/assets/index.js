@@ -50,6 +50,9 @@ import { ReactComponent as Logout } from "./user/logout.svg";
 import { ReactComponent as Sad } from "./user/sad.svg";
 import { ReactComponent as Follow } from "./user/follow.svg";
 import { ReactComponent as Following } from "./user/following.svg";
+import { ReactComponent as Account } from "./user/account.svg";
+import { ReactComponent as Password } from "./user/password.svg";
+import { ReactComponent as Story } from "./user/story.svg";
 
 export {
 	Complete,
@@ -84,12 +87,14 @@ export {
 	Notification,
 	Search,
 	Stats,
+	Story,
 	User,
 	Users,
 	Register,
 	Login,
 	Logout,
 	Tag,
+	Password,
 	HeartEmpty,
 	HeartFill,
 	More,
@@ -98,4 +103,5 @@ export {
 	Edit,
 	Follow,
 	Following,
+	Account,
 };

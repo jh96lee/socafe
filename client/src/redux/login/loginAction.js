@@ -2,7 +2,7 @@ import axios from "axios";
 
 import { setUser } from "../user/userAction";
 
-import { setCookie } from "../../utils/cookie";
+import { setCookie } from "../../utils/cookie/setCookie";
 import { setCoupleSeconds } from "../../utils/setCoupleSeconds";
 
 export const startUserLogin = () => ({
@@ -34,7 +34,7 @@ export const resetLoginForm = () => ({
 
 export const logoutUser = () => (dispatch) => {
 	// REVIEW: set cookie to undefined and setUser action below will get the job done
-	document.cookie = "token=undefined";
+	document.cookie = "token=undefined;path=/";
 
 	dispatch(setUser());
 };

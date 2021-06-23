@@ -1,4 +1,4 @@
-import { decodePayloadFromCookie } from "../../utils/cookie";
+import { decodePayloadFromCookie } from "../../utils/cookie/decodePayloadFromCookie";
 
 const initialState = { user: decodePayloadFromCookie() };
 

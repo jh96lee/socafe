@@ -2,7 +2,7 @@ import * as React from "react";
 import { useSelector } from "react-redux";
 import axios from "axios";
 
-import { fetchToken } from "../utils/cookie";
+import { fetchToken } from "../utils/cookie/fetchToken";
 
 export const useLikeAndUnlikePost = (postID) => {
 	const [isPostLiked, setIsPostLiked] = React.useState(null);

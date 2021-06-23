@@ -12,6 +12,7 @@ import {
 	HomePage,
 	AddPostPage,
 	UserProfilePage,
+	PrivateProfilePage,
 } from "./pages";
 import { AddPostIcon } from "./views/shared";
 import { Post } from "./views/post";
@@ -77,6 +78,10 @@ function App() {
 
 						<Route exact path="/category-of-interest">
 							<CategoryOfInterestPage />
+						</Route>
+
+						<Route path="/profile">
+							<PrivateProfilePage />
 						</Route>
 					</Switch>
 				</GlobalPageStyle>

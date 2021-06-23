@@ -9,7 +9,7 @@ import {
 	decrementTotalFollowing,
 } from "../../../redux/user-profile/userProfileAction";
 
-import { fetchToken } from "../../../utils/cookie";
+import { fetchToken } from "../../../utils/cookie/fetchToken";
 
 import { UserProfileFollowButtonStyle } from "../styles/UserProfileFollowButtonStyle";
 
@@ -97,7 +97,8 @@ const UserProfileFollowButton = ({
 	return (
 		<UserProfileFollowButtonStyle
 			isFollowing={isFollowing}
-			onClick={handleFollowButtonOnClick}
+			disabled={visitorID ? false : true}
+			onClick={visitorID ? handleFollowButtonOnClick : null}
 		>
 			{isFollowing ? (
 				<React.Fragment>

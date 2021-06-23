@@ -3,7 +3,7 @@ import axios from "axios";
 import { setUploadImageErrorMessage } from "../upload-image/uploadImageAction";
 import { resetUploadImage } from "../upload-image/uploadImageAction";
 
-import { fetchToken } from "../../utils/cookie";
+import { fetchToken } from "../../utils/cookie/fetchToken";
 import { setCoupleSeconds } from "../../utils/setCoupleSeconds";
 
 export const startUploadingPost = () => ({

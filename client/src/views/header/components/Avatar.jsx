@@ -10,7 +10,17 @@ import { useDropdown } from "../../../hooks/useDropdown";
 
 import { AvatarStyle, AvatarimageStyle } from "../styles/AvatarStyle";
 
-import { User, Register, Login, Logout } from "../../../assets";
+import {
+	Account,
+	User,
+	Register,
+	Login,
+	Logout,
+	Edit,
+	Password,
+	Notification,
+	Stats,
+} from "../../../assets";
 
 const Avatar = () => {
 	const { isDropdownMenuOpen } = useDropdown(
@@ -30,11 +40,41 @@ const Avatar = () => {
 					{
 						content: {
 							label: "Profile",
-							icon: <User />,
+							icon: <Account />,
 						},
 						type: "link",
 						onClickEventHandler: () => {
 							history.push(`/profile/${user.id}`);
+						},
+					},
+					{
+						content: {
+							label: "Edit Profile",
+							icon: <Edit />,
+						},
+						type: "link",
+						onClickEventHandler: () => {
+							history.push(`/profile/edit/${user.id}`);
+						},
+					},
+					{
+						content: {
+							label: "Notifications",
+							icon: <Notification />,
+						},
+						type: "link",
+						onClickEventHandler: () => {
+							history.push(`/notification/${user.id}`);
+						},
+					},
+					{
+						content: {
+							label: "Stats",
+							icon: <Stats />,
+						},
+						type: "link",
+						onClickEventHandler: () => {
+							history.push(`/stats/${user.id}`);
 						},
 					},
 					{

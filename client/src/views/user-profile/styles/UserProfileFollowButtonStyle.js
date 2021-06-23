@@ -29,4 +29,9 @@ export const UserProfileFollowButtonStyle = styled.button`
 			props.isFollowing ? "#0066e4c9" : "#007eff2e"};
 		cursor: pointer;
 	}
+
+	&:disabled:hover {
+		cursor: not-allowed;
+		background-color: transparent;
+	}
 `;

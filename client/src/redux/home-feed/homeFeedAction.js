@@ -1,6 +1,6 @@
 import axios from "axios";
 
-import { fetchToken } from "../../utils/cookie";
+import { fetchToken } from "../../utils/cookie/fetchToken";
 
 export const startFetchingHomeFeedPost = () => ({
 	type: "START_FETCHING_HOME_FEED_POSTS",
