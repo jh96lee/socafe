@@ -1,27 +1,31 @@
 import * as React from "react";
-import { useHistory } from "react-router";
+import { useHistory, useLocation, Link } from "react-router-dom";
 
-import { User, Likes } from "../../shared";
+import { User, PostLikes } from "../../shared";
 import HomePostImages from "./HomePostImages";
 import HomePostContent from "./HomePostContent";
 import HomePostBookmark from "./HomePostBookmark";
 import HomePostComment from "./HomePostComment";
-import { Post } from "../../post";
 
 import { HomePostStyle } from "../styles/HomePostStyle";
 import { HomePostHeaderStyle } from "../styles/HomePostHeaderStyle";
 import { HomePostFooterStyle } from "../styles/HomePostFooterStyle";
 
 const HomePost = ({ post }) => {
-	// const [isPostOpen, setIsPostOpen] = React.useState(false);
+	const { post_id, user, images, content, totalComments, totalLikes, isLiked } =
+		post;
 
-	const { post_id, user, images, content, totalComments } = post;
-
+	const homePostLocation = useLocation();
 	const history = useHistory();
 
+	// REVIEW: the location of this component will be used by all Components within the Switch Component
 	const handlePostOnClick = () => {
-		history.push(`/post/${post_id}`);
-		// setIsPostOpen((prevState) => !prevState);
+		history.push({
+			pathname: `/post/${post_id}`,
+			state: {
+				overlaidComponentLocation: homePostLocation,
+			},
+		});
 	};
 
 	return (
@@ -36,7 +40,7 @@ const HomePost = ({ post }) => {
 					usernameFontSize="1.4rem"
 					fullNameFontSize="1.3rem"
 					onClick={() => {
-						// REVIEW: move to story
+						// FIX: move to story
 					}}
 					conditionalRenderingVariable={true}
 				/>
@@ -44,20 +48,19 @@ const HomePost = ({ post }) => {
 				<HomePostBookmark />
 			</HomePostHeaderStyle>
 
-			{/* REVIEW: Post Content */}
 			<HomePostContent contentObject={content} />
 
 			<HomePostImages postImagesArray={images} onClick={handlePostOnClick} />
 
 			<HomePostFooterStyle>
-				<Likes postID={post_id} iconSize="2.4rem" numberFontSize="1.4rem" />
+				<PostLikes
+					postID={post_id}
+					totalLikesData={totalLikes}
+					isLikedData={isLiked}
+				/>
 
 				<HomePostComment totalComments={totalComments} />
 			</HomePostFooterStyle>
-
-			{/* {isPostOpen && (
-				<Post postID={post_id} handlePostOnClick={handlePostOnClick} />
-			)} */}
 		</HomePostStyle>
 	);
 };

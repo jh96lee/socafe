@@ -9,6 +9,7 @@ import categoryOfInterestReducer from "./category-of-interest/categoryOfInterest
 import commentReducer from "./comment/commentReducer";
 import homeFeedReducer from "./home-feed/homeFeedReducer";
 import userProfileReducer from "./user-profile/userProfileReducer";
+import postModalReducer from "./post-modal/postModalReducer";
 
 const rootReducer = combineReducers({
 	registerReducer,
@@ -21,6 +22,7 @@ const rootReducer = combineReducers({
 	commentReducer,
 	homeFeedReducer,
 	userProfileReducer,
+	postModalReducer,
 });
 
 export default rootReducer;

@@ -1,10 +1,16 @@
 import * as React from "react";
 import ReactDom from "react-dom";
-import { useParams, useHistory } from "react-router";
-import { useSelector } from "react-redux";
-import axios from "axios";
+import { useParams, useHistory, useLocation } from "react-router-dom";
+import { useSelector, useDispatch } from "react-redux";
 
-import { IconElement, Loader } from "../../shared";
+import {
+	IconElement,
+	Loader,
+	User,
+	Likes,
+	PostModalLikes,
+	PostLikes,
+} from "../../shared";
 import {
 	PostImages,
 	PostTaggedUsers,
@@ -14,8 +20,13 @@ import {
 	PostTotalComments,
 	PostBookmark,
 } from "../../shared/post-parts";
-import { User, Likes } from "../../shared";
 import PostCommentPopup from "../../shared/post-parts/components/PostCommentPopup";
+
+import {
+	fetchPostModal,
+	likeOrUnlikePostModal,
+	resetPostModal,
+} from "../../../redux/post-modal/postModalAction";
 
 import {
 	PostStyle,
@@ -30,73 +41,72 @@ import { Remove } from "../../../assets";
 
 // REVIEW: within the array of posts are objects and each object has a post_id property and that value is passed to
 // REVIEW: Post component as a Prop
-// { postID, handlePostOnClick }
 const Post = () => {
-	const [post, setPost] = React.useState({});
-	const [isPostLoaded, setIsPostLoaded] = React.useState(false);
+	const dispatch = useDispatch();
 
 	const { postID } = useParams();
 	const history = useHistory();
+	const postLocation = useLocation();
+	// REVIEW: this is the deciding factor
+	const isPostModal = postLocation.state ? true : false;
 
+	const { postModal, isPostModalLoaded } = useSelector(
+		(state) => state.postModalReducer
+	);
 	const { user } = useSelector((state) => state.userReducer);
+	const userID = user ? user.id : 0;
 
 	const handlePostOnClick = () => {
 		history.goBack();
 	};
 
-	const fetchPost = async () => {
-		const { data } = await axios({
-			method: "GET",
-			// REVIEW: if a user does not exist, then send 0 as the userID
-			url: `http://localhost:8080/post/${postID}?userID=${user ? user.id : 0}`,
-		});
-
-		if (data) {
-			setPost(data);
-
-			setIsPostLoaded(true);
-		}
-	};
-
 	React.useEffect(() => {
-		fetchPost();
+		dispatch(fetchPostModal(postID, userID));
+
+		return () => {
+			dispatch(resetPostModal());
+		};
 	}, []);
 
 	return ReactDom.createPortal(
 		<PostOverlayStyle>
-			{isPostLoaded ? (
+			{isPostModalLoaded ? (
 				<PostStyle>
 					<PostMainDataStyle>
 						<PostImages
-							postImagesArray={post.images}
-							conditionalPostImagesRenderingVariable={isPostLoaded}
+							postImagesArray={postModal.images}
+							conditionalPostImagesRenderingVariable={isPostModalLoaded}
 						/>
 
 						<PostTaggedUsers
-							postTaggedUsersArray={post.taggedUsers}
-							conditionalPostTaggedUsersRenderingVariable={isPostLoaded}
+							postTaggedUsersArray={postModal.taggedUsers}
+							conditionalPostTaggedUsersRenderingVariable={isPostModalLoaded}
 						/>
 					</PostMainDataStyle>
 
 					<PostHorizontalMetadataStyle>
 						<User
-							userID={post.user.user_id}
-							avatarURL={post.user.avatar_url}
-							username={post.user.username}
-							fullName={post.user.full_name}
+							userID={postModal.user.user_id}
+							avatarURL={postModal.user.avatar_url}
+							username={postModal.user.username}
+							fullName={postModal.user.full_name}
 							avatarSize="3.7rem"
 							usernameFontSize="1.37rem"
 							fullNameFontSize="1.27rem"
 							onClick={null}
-							conditionalRenderingVariable={isPostLoaded}
+							conditionalRenderingVariable={isPostModalLoaded}
 						/>
 
 						<PostInteractionsStyle>
-							<Likes postID={postID} displayLabel={true} />
+							{/* {isPostModal ? <PostModalLikes /> : <PostLikes />} */}
+							{/* <PostModalLikes /> */}
+							<PostLikes />
 
 							<PostTotalComments
-								postTotalComments={post.totalComments}
-								conditionalPostTotalCommentsRenderingVariable={isPostLoaded}
+								postTotalComments={postModal.totalComments}
+								conditionalPostTotalCommentsRenderingVariable={
+									isPostModalLoaded
+								}
 							/>
 
 							<PostBookmark />
@@ -105,13 +115,15 @@ const Post = () => {
 
 					<PostVerticalMetadataStyle>
 						<PostSelectedCategories
-							selectedPostCategoriesArray={post.categories}
-							conditionalPostSelectedCategoriesRenderingVariable={isPostLoaded}
+							selectedPostCategoriesArray={postModal.categories}
+							conditionalPostSelectedCategoriesRenderingVariable={
+								isPostModalLoaded
+							}
 						/>
 
 						<PostContents
-							postContentsArray={post.contents}
-							conditionalPostContentsRenderingVariable={isPostLoaded}
+							postContentsArray={postModal.contents}
+							conditionalPostContentsRenderingVariable={isPostModalLoaded}
 						/>
 					</PostVerticalMetadataStyle>
 
@@ -145,89 +157,6 @@ const Post = () => {
 		</PostOverlayStyle>,
 		document.getElementById("post")
 	);
-
-	// return (
-	// 	<PostOverlayStyle>
-	// 		{isPostLoaded ? (
-	// 			<PostStyle>
-	// 				<PostMainDataStyle>
-	// 					<PostImages
-	// 						postImagesArray={post.images}
-	// 						conditionalPostImagesRenderingVariable={isPostLoaded}
-	// 					/>
-
-	// 					<PostTaggedUsers
-	// 						postTaggedUsersArray={post.taggedUsers}
-	// 						conditionalPostTaggedUsersRenderingVariable={isPostLoaded}
-	// 					/>
-	// 				</PostMainDataStyle>
-
-	// 				<PostHorizontalMetadataStyle>
-	// 					<User
-	// 						userID={post.user.user_id}
-	// 						avatarURL={post.user.avatar_url}
-	// 						username={post.user.username}
-	// 						fullName={post.user.full_name}
-	// 						avatarSize="3.7rem"
-	// 						usernameFontSize="1.37rem"
-	// 						fullNameFontSize="1.27rem"
-	// 						onClick={null}
-	// 						conditionalRenderingVariable={isPostLoaded}
-	// 					/>
-
-	// 					<PostInteractionsStyle>
-	// 						<Likes postID={postID} />
-
-	// 						<PostTotalComments
-	// 							postTotalComments={post.totalComments}
-	// 							conditionalPostTotalCommentsRenderingVariable={isPostLoaded}
-	// 						/>
-
-	// 						<PostBookmark />
-	// 					</PostInteractionsStyle>
-	// 				</PostHorizontalMetadataStyle>
-
-	// 				<PostVerticalMetadataStyle>
-	// 					<PostSelectedCategories
-	// 						selectedPostCategoriesArray={post.categories}
-	// 						conditionalPostSelectedCategoriesRenderingVariable={isPostLoaded}
-	// 					/>
-
-	// 					<PostContents
-	// 						postContentsArray={post.contents}
-	// 						conditionalPostContentsRenderingVariable={isPostLoaded}
-	// 					/>
-	// 				</PostVerticalMetadataStyle>
-
-	// 				<PostComment />
-
-	// 				<PostCommentPopup />
-	// 			</PostStyle>
-	// 		) : (
-	// 			<Loader />
-	// 		)}
-
-	// 		<IconElement
-	// 			iconRole="button"
-	// 			onClick={handlePostOnClick}
-	// 			iconElementStyleObject={{
-	// 				elementPosition: "absolute",
-	// 				elementTop: "1rem",
-	// 				elementRight: "1rem",
-	// 				elementZIndex: "5",
-	// 				iconSize: "1.8rem",
-	// 				elementPadding: "1.3rem",
-	// 				elementBackgroundColor: "#000000db",
-	// 				elementBoxShadow: "none",
-	// 				elementHoverBackgroundColor: "#000",
-	// 				iconColor: "#fff",
-	// 				iconHoverColor: "#f5f5f5",
-	// 			}}
-	// 		>
-	// 			<Remove />
-	// 		</IconElement>
-	// 	</PostOverlayStyle>
-	// );
 };
 
 export default Post;

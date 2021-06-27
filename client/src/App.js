@@ -1,5 +1,5 @@
 import * as React from "react";
-import { BrowserRouter, Switch, Route, Redirect } from "react-router-dom";
+import { Switch, Route, Redirect, useLocation } from "react-router-dom";
 import { useSelector } from "react-redux";
 import { ThemeProvider } from "styled-components";
 import styled from "styled-components";
@@ -34,58 +34,65 @@ function App() {
 
 	const { user } = useSelector((state) => state.userReducer);
 
+	const appLocation = useLocation();
+	const overlaidComponentLocation =
+		appLocation.state && appLocation.state.overlaidComponentLocation;
+
 	return (
 		<ThemeProvider theme={themeStyleObjectCreator(isDarkMode)}>
 			<GlobalStyle />
 
-			<BrowserRouter>
-				<GlobalPageStyle>
-					<Header
-						isDarkMode={isDarkMode}
-						setIsDarkMode={setIsDarkMode}
-						setIsResponsiveNavigationOpen={setIsResponsiveNavigationOpen}
-					/>
+			<GlobalPageStyle>
+				<Header
+					isDarkMode={isDarkMode}
+					setIsDarkMode={setIsDarkMode}
+					setIsResponsiveNavigationOpen={setIsResponsiveNavigationOpen}
+				/>
 
-					<Navigation isResponsiveNavigationOpen={isResponsiveNavigationOpen} />
+				<Navigation isResponsiveNavigationOpen={isResponsiveNavigationOpen} />
 
-					{user && <AddPostIcon />}
+				{user && <AddPostIcon />}
 
-					<Switch>
-						<Route exact path="/">
-							<HomePage />
-						</Route>
+				<Switch location={overlaidComponentLocation || appLocation}>
+					<Route exact path="/">
+						<HomePage />
+					</Route>
 
-						<Route exact path="/add-post">
-							{user ? <AddPostPage /> : <Redirect to="/login" />}
-						</Route>
+					<Route exact path="/add-post">
+						{user ? <AddPostPage /> : <Redirect to="/login" />}
+					</Route>
 
-						<Route exact path="/user/:userID">
-							<UserProfilePage />
-						</Route>
+					<Route exact path="/user/:userID">
+						<UserProfilePage />
+					</Route>
 
-						{/* FIX */}
-						<Route exact path="/post/:postID">
-							<Post />
-						</Route>
+					{/* REVIEW: 2 ways it can be rendered */}
+					<Route exact path="/post/:postID">
+						<Post />
+					</Route>
 
-						<Route exact path="/register">
-							{user ? <Redirect to="/" /> : <RegisterPage />}
-						</Route>
+					<Route exact path="/register">
+						{user ? <Redirect to="/" /> : <RegisterPage />}
+					</Route>
 
-						<Route exact path="/login">
-							{user ? <Redirect to="/" /> : <LoginPage />}
-						</Route>
+					<Route exact path="/login">
+						{user ? <Redirect to="/" /> : <LoginPage />}
+					</Route>
 
-						<Route exact path="/category-of-interest">
-							<CategoryOfInterestPage />
-						</Route>
+					<Route exact path="/category-of-interest">
+						<CategoryOfInterestPage />
+					</Route>
 
-						<Route path="/profile">
-							<PrivateProfilePage />
-						</Route>
-					</Switch>
-				</GlobalPageStyle>
-			</BrowserRouter>
+					<Route path="/profile">
+						<PrivateProfilePage />
+					</Route>
+				</Switch>
+
+				{/* REVIEW: outside of Switch Component */}
+				<Route exact path="/post/:postID">
+					<Post />
+				</Route>
+			</GlobalPageStyle>
 		</ThemeProvider>
 	);
 }

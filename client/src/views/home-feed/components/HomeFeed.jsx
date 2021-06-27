@@ -17,14 +17,8 @@ const HomeFeed = () => {
 
 	const userID = user ? user.id : 0;
 
-	const renderAfterInitialMount = React.useRef(false);
-
 	React.useEffect(() => {
-		if (homePosts.length === 0) {
-			dispatch(fetchHomeFeedPosts(userID, "initial"));
-		}
-
-		renderAfterInitialMount.current = true;
+		dispatch(fetchHomeFeedPosts(userID, "initial"));
 	}, []);
 
 	const handleLoadMoreButtonOnClick = () => {
@@ -69,22 +63,3 @@ const HomeFeed = () => {
 };
 
 export default HomeFeed;
-
-// const { isHomeFeedPostsLoading, homePosts } = useSelector(
-// 	(state) => state.homeFeedReducer
-// );
-// const { user } = useSelector((state) => state.userReducer);
-
-// const userID = user ? user.id : 0;
-
-// const dispatch = useDispatch();
-
-// React.useEffect(() => {
-// 	if (homePosts.length === 0) {
-// 		dispatch(fetchHomeFeedPosts(userID));
-// 	}
-
-// 	return () => {
-// 		console.log("UNMOUNTED");
-// 	};
-// }, []);

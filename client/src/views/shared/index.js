@@ -29,3 +29,7 @@ export { default as User } from "./user/User";
 export { default as Likes } from "./likes/Likes";
 
 export { default as Avatar } from "./avatar/Avatar";
+
+export { default as PostLikes } from "./post-likes/PostLikes";
+
+export { default as PostModalLikes } from "./post-modal-likes/PostModalLikes";

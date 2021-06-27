@@ -16,13 +16,12 @@ import {
 const PrivateProfileSidebarStyle = styled.div`
 	display: flex;
 	flex-direction: column;
-	color: var(--txt-2);
+	color: var(--txt-1);
 	padding: 2rem;
 	gap: 1rem;
-	background-color: var(--bg-post);
 	border-left: 2px solid var(--separator-1);
 	border-right: 2px solid var(--separator-1);
-	min-height: calc(100vh - 85px);
+	min-height: calc(100vh - 80px);
 `;
 
 const PrivateProfileSidebarTabStyle = styled.div`
@@ -31,6 +30,14 @@ const PrivateProfileSidebarTabStyle = styled.div`
 	gap: 1rem;
 	padding: 1rem;
 	border-radius: 1rem;
+	background-color: ${(props) =>
+		props.activePrivateProfileSidebarTab
+			? "var(--bg-active-1)"
+			: "transparent"};
+
+	& > p {
+		font-size: 1.5rem;
+	}
 
 	&:hover {
 		background-color: var(--bg-hover-2);
@@ -38,7 +45,7 @@ const PrivateProfileSidebarTabStyle = styled.div`
 	}
 `;
 
-const PrivateProfileSidebar = () => {
+const PrivateProfileSidebar = ({ userID }) => {
 	const [activeIndex, setActiveIndex] = React.useState(0);
 
 	const history = useHistory();
@@ -47,32 +54,56 @@ const PrivateProfileSidebar = () => {
 		{
 			label: "Profile",
 			icon: <Account />,
-			onClick: () => {},
+			onClick: (idx) => {
+				setActiveIndex(idx);
+
+				history.push(`/profile/${userID}`);
+			},
 		},
 		{
 			label: "Edit Profile",
 			icon: <Edit />,
-			onClick: () => {},
+			onClick: (idx) => {
+				setActiveIndex(idx);
+
+				history.push(`/profile/edit/${userID}`);
+			},
 		},
 		{
 			label: "Password",
 			icon: <Password />,
-			onClick: () => {},
+			onClick: (idx) => {
+				setActiveIndex(idx);
+
+				history.push(`/profile/password/${userID}`);
+			},
 		},
 		{
 			label: "Notifications",
 			icon: <Notification />,
-			onClick: () => {},
+			onClick: (idx) => {
+				setActiveIndex(idx);
+
+				history.push(`/profile/notifications/${userID}`);
+			},
 		},
 		{
 			label: "Stats",
 			icon: <Stats />,
-			onClick: () => {},
+			onClick: (idx) => {
+				setActiveIndex(idx);
+
+				history.push(`/profile/stats/${userID}`);
+			},
 		},
 		{
 			label: "Stories",
 			icon: <Story />,
-			onClick: () => {},
+			onClick: (idx) => {
+				setActiveIndex(idx);
+
+				history.push(`/profile/stories/${userID}`);
+			},
 		},
 	];
 
@@ -80,7 +111,10 @@ const PrivateProfileSidebar = () => {
 		<PrivateProfileSidebarStyle>
 			{privateProfileSidebarTabsArray.map((tab, idx) => {
 				return (
-					<PrivateProfileSidebarTabStyle onClick={tab.onClick}>
+					<PrivateProfileSidebarTabStyle
+						onClick={() => tab.onClick(idx)}
+						activePrivateProfileSidebarTab={idx === activeIndex}
+					>
 						<IconElement
 							iconRole="presentation"
 							iconElementStyleObject={{
@@ -92,7 +126,7 @@ const PrivateProfileSidebar = () => {
 							{tab.icon}
 						</IconElement>
 
-						<h5>{tab.label}</h5>
+						<p>{tab.label}</p>
 					</PrivateProfileSidebarTabStyle>
 				);
 			})}

@@ -46,7 +46,7 @@ const GlobalStyles = createGlobalStyle`
 
         /* TODO: active */
         --bg-active-1: ${(props) =>
-					props.theme.isDarkMode ? "#000" : "#edf0ff"};
+					props.theme.isDarkMode ? "#a1e4ff17" : "#edfaff"};
         --bg-active-2: ${(props) => (props.theme.isDarkMode ? "#fff" : "#000")};
 
         /* TODO: border and box shadow colors */
