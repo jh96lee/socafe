@@ -7,5 +7,5 @@ export const UserProfilePostsStyle = styled.div`
 	grid-auto-rows: 19rem;
 	gap: 1rem;
 	min-width: 100%;
-	min-height: 15rem;
+	min-height: 20rem;
 `;

@@ -5,28 +5,28 @@ export const UserProfileFollowButtonStyle = styled.button`
 	justify-content: center;
 	align-items: center;
 	gap: 0.7rem;
-	color: ${(props) => (props.isFollowing ? "#fff" : "var(--blue-3)")};
+	color: ${(props) => (props.isFollowing ? "#fff" : "var(--txt-1)")};
 	background-color: ${(props) =>
-		props.isFollowing ? "#3f83ff" : "transparent"};
+		props.isFollowing ? "var(--bg-clickable-1)" : "transparent"};
 	border: none;
 	border-radius: 0.5rem;
-	box-shadow: 0 0 0 1.5px
-		${(props) => (props.isFollowing ? "#3f83ff" : "var(--blue-3)")};
+	box-shadow: 0 0 0 1.6px
+		${(props) => (props.isFollowing ? "var(--bg-clickable-1)" : "var(--txt-1)")};
 
 	& > svg {
-		fill: ${(props) => (props.isFollowing ? "#fff" : "var(--blue-3)")};
-		width: 2.5rem;
-		height: 2.5rem;
+		fill: ${(props) => (props.isFollowing ? "#fff" : "var(--txt-1)")};
+		width: 2.3rem;
+		height: 2.3rem;
 	}
 
 	& > p {
-		font-size: 1.5rem;
+		font-size: 1.37rem;
 		font-weight: 500;
 	}
 
 	&:hover {
 		background-color: ${(props) =>
-			props.isFollowing ? "#0066e4c9" : "#007eff2e"};
+			props.isFollowing ? "var(--bg-clickable-hover-1)" : "var(--bg-hover-1)"};
 		cursor: pointer;
 	}
 

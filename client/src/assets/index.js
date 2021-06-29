@@ -14,6 +14,7 @@ import { ReactComponent as Submit } from "./general/submit.svg";
 import { ReactComponent as Smile } from "./general/smile.svg";
 import { ReactComponent as More } from "./general/more.svg";
 import { ReactComponent as Edit } from "./general/edit.svg";
+import { ReactComponent as Settings } from "./general/settings.svg";
 
 import { ReactComponent as SocafeDark } from "./logo/socafe-dark.svg";
 import { ReactComponent as SocafeLight } from "./logo/socafe-light.svg";
@@ -53,9 +54,11 @@ import { ReactComponent as Following } from "./user/following.svg";
 import { ReactComponent as Account } from "./user/account.svg";
 import { ReactComponent as Password } from "./user/password.svg";
 import { ReactComponent as Story } from "./user/story.svg";
+import { ReactComponent as Recommendation } from "./user/recommendation.svg";
 
 export {
 	Complete,
+	Recommendation,
 	Checkmark,
 	Plus,
 	Up,
@@ -104,4 +107,5 @@ export {
 	Follow,
 	Following,
 	Account,
+	Settings,
 };

@@ -1,5 +1,5 @@
 import * as React from "react";
-import { useHistory, useLocation, Link } from "react-router-dom";
+import { useHistory, useLocation } from "react-router-dom";
 
 import { User, PostLikes } from "../../shared";
 import HomePostImages from "./HomePostImages";

@@ -16,4 +16,3 @@ export { default as PostMainDataStyle } from "./post/PostMainDataStyle";
 export { default as PostHorizontalMetadataStyle } from "./post/PostHorizontalMetadataStyle";
 export { default as PostVerticalMetadataStyle } from "./post/PostVerticalMetadataStyle";
 export { default as PostInteractionsStyle } from "./post/PostInteractionsStyle";
-export { default as LikesStyle } from "./likes/LikesStyle";

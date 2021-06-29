@@ -1,5 +1,5 @@
 import * as React from "react";
-import { useHistory } from "react-router";
+import { useHistory, useLocation } from "react-router";
 
 import {
 	UserProfilePostStyle,
@@ -11,9 +11,15 @@ import { HeartEmpty, Comment } from "../../../assets";
 
 const UserProfilePost = ({ post }) => {
 	const history = useHistory();
+	const userProfilePostLocation = useLocation();
 
 	const handleOnClick = () => {
-		history.push(`/post/${post.post_id}`);
+		history.push({
+			pathname: `/post/${post.post_id}`,
+			state: {
+				overlaidComponentLocation: userProfilePostLocation,
+			},
+		});
 	};
 
 	return (

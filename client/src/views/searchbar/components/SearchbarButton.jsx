@@ -30,10 +30,11 @@ const SearchbarButton = () => {
 			<IconElement
 				iconRole="presentation"
 				iconElementStyleObject={{
-					iconSize: "1.5rem",
-					iconResponsiveSize: "1.5rem",
+					iconSize: "2rem",
+					iconResponsiveSize: "2rem",
 					iconColor: "#fff",
 					iconHoverColor: {},
+					elementPadding: "0.65rem",
 					elementBackgroundColor: "var(--bg-clickable-1)",
 					elementHoverBackgroundColor: "var(--bg-clickable-hover-1)",
 				}}

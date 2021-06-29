@@ -1,7 +1,7 @@
 import * as React from "react";
 import { useHistory } from "react-router";
 
-import { Skeleton } from "../index";
+import { Avatar, Skeleton } from "../index";
 
 import { UserStyle, UserMetadataStyle } from "./UserStyle";
 
@@ -13,7 +13,7 @@ const User = ({
 	avatarSize,
 	usernameFontSize,
 	fullNameFontSize,
-	onClick,
+	avatarOnClick,
 	conditionalRenderingVariable,
 }) => {
 	// REVIEW: logic for story ring needs to be added later
@@ -27,7 +27,11 @@ const User = ({
 	return (
 		<UserStyle avatarSize={avatarSize}>
 			{conditionalRenderingVariable ? (
-				<img src={avatarURL} alt={`${username}'s avatar`} onClick={onClick} />
+				<Avatar
+					avatarURL={avatarURL}
+					avatarSize="4.2rem"
+					avatarOnClick={avatarOnClick}
+				/>
 			) : (
 				<Skeleton
 					skeletonWidth={avatarSize}

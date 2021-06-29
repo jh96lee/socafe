@@ -10,7 +10,7 @@ import {
 	PostTotalComments,
 	PostBookmark,
 } from "../shared/post-parts";
-import { Skeleton, User, Likes } from "../shared";
+import { Skeleton, User } from "../shared";
 
 import {
 	PostStyle,
@@ -61,7 +61,7 @@ const PostPreview = () => {
 				/>
 
 				<PostInteractionsStyle>
-					<Likes />
+					{/* <Likes /> */}
 
 					<PostTotalComments
 						conditionalPostTotalCommentsRenderingVariable={null}

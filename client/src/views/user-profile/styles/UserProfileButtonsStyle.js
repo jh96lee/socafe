@@ -11,16 +11,17 @@ export const UserProfileButtonsStyle = styled.div`
 `;
 
 export const UserProfileButtonStyle = styled.button`
-	background-color: transparent;
+	background-color: ${(props) =>
+		props.theme.isDarkMode ? "#121212" : "#f9f9f9"};
 	border: none;
 	border-radius: 0.5rem;
-	box-shadow: 0 0 0 1px var(--icon-2);
+	box-shadow: 0 0 0 1.6px var(--separator-2);
 
 	& > svg {
 		fill: var(--icon-2);
 		margin: auto;
-		width: 1.8rem;
-		height: 1.8rem;
+		width: 2.3rem;
+		height: 2.3rem;
 	}
 
 	&:hover {

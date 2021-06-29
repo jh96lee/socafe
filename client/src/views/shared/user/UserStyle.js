@@ -4,14 +4,6 @@ export const UserStyle = styled.div`
 	display: flex;
 	align-items: center;
 	gap: 0.7rem;
-
-	& img {
-		width: ${(props) => props.avatarSize || "3.7rem"};
-		height: ${(props) => props.avatarSize || "3.7rem"};
-		object-fit: cover;
-		border-radius: 50%;
-		cursor: pointer;
-	}
 `;
 
 export const UserMetadataStyle = styled.div`

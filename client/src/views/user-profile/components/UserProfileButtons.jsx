@@ -9,7 +9,7 @@ import {
 	UserProfileButtonStyle,
 } from "../styles/UserProfileButtonsStyle";
 
-import { Down, Edit } from "../../../assets";
+import { Recommendation, Settings } from "../../../assets";
 
 const UserProfileButtons = () => {
 	const { userProfile } = useSelector((state) => state.userProfileReducer);
@@ -30,7 +30,7 @@ const UserProfileButtons = () => {
 			/>
 
 			<UserProfileButtonStyle>
-				<Down />
+				<Recommendation />
 			</UserProfileButtonStyle>
 
 			{visitorID === leaderID && (
@@ -39,7 +39,7 @@ const UserProfileButtons = () => {
 						history.push(`/profile/edit/${user.id}`);
 					}}
 				>
-					<Edit />
+					<Settings />
 				</UserProfileButtonStyle>
 			)}
 		</UserProfileButtonsStyle>

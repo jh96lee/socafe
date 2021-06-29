@@ -4,12 +4,10 @@ import { useLocation } from "react-router-dom";
 
 import { likeOrUnlikePostModal } from "../../../redux/post-modal/postModalAction";
 
-import { fetchToken } from "../../../utils/cookie/fetchToken";
-
 import { likePostRequest } from "../../../utils/likes/likePostRequest";
 import { unlikePostRequest } from "../../../utils/likes/unlikePostRequest";
 
-import { LikesStyle } from "../../../styles";
+import { PostLikesStyle } from "./PostLikesStyle";
 
 import { HeartEmpty, HeartFill } from "../../../assets";
 
@@ -82,7 +80,7 @@ const PostLikes = ({
 	}, [isPostModalLiked]);
 
 	return (
-		<LikesStyle
+		<PostLikesStyle
 			onClick={handlePostLikesOnClick}
 			postLikesIconSize={postLikesIconSize}
 			postLikesLabelFontSize={postLikesLabelFontSize}
@@ -93,7 +91,7 @@ const PostLikes = ({
 			<p>
 				{totalLikesVariable} {onPostPath && "Likes"}
 			</p>
-		</LikesStyle>
+		</PostLikesStyle>
 	);
 };
 

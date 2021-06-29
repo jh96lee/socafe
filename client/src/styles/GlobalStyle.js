@@ -26,6 +26,9 @@ const GlobalStyles = createGlobalStyle`
         --bg-5: ${(props) =>
 					props.theme.isDarkMode ? "#45616f87" : "#a2e0ff6b"};
         --bg-post: ${(props) => (props.theme.isDarkMode ? "#161719" : "#fff")};
+        --bg-filled-story:  linear-gradient(to right, #0d69ff, #16b3ff); 
+        --bg-empty-story: ${(props) =>
+					props.theme.isDarkMode ? "#3a3e42" : "#dcdcdc"};
         --bg-error: ${(props) =>
 					props.theme.isDarkMode ? "#ff000033" : "#ff5b5b4d"};
         --bg-success: ${(props) =>
@@ -59,7 +62,7 @@ const GlobalStyles = createGlobalStyle`
         
         /* TODO: clickable */
         --bg-clickable-1: ${(props) =>
-					props.theme.isDarkMode ? "#ec2348c4" : "#ed143ded"};
+					props.theme.isDarkMode ? "#ed143dd4" : "#ee002deb"};
         --bg-clickable-hover-1: ${(props) =>
 					props.theme.isDarkMode ? "#c30042" : "#d4054a"};
         --bg-clickable-disabled: ${(props) =>

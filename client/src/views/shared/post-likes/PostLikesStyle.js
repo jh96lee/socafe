@@ -1,6 +1,6 @@
 import styled from "styled-components";
 
-const LikesStyle = styled.div`
+export const PostLikesStyle = styled.div`
 	display: flex;
 	align-items: center;
 	gap: 0.7rem;
@@ -21,5 +21,3 @@ const LikesStyle = styled.div`
 		font-size: ${(props) => props.postLikesLabelFontSize || "1.4rem"};
 	}
 `;
-
-export default LikesStyle;

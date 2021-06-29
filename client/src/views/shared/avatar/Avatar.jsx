@@ -1,24 +1,41 @@
 import * as React from "react";
 
-import { AvatarStyle } from "./AvatarStyle";
+import { AvatarStyle, AvatarBubbleStyle } from "./AvatarStyle";
 
 const Avatar = ({
 	avatarURL,
 	avatarSize,
-	avatarBorderRadius,
+	avatarBorderRadius = "50%",
 	avatarOnClick,
+	isAvatarBubblePresent = false,
 }) => {
 	// TODO: need logic for this
-	const isAvatarRing = true;
+	const isAvatarRingFilled = false;
 
 	return (
 		<AvatarStyle
 			avatarSize={avatarSize}
 			avatarBorderRadius={avatarBorderRadius}
-			isAvatarRing={isAvatarRing}
+			isAvatarRingFilled={isAvatarRingFilled}
 			onClick={avatarOnClick}
 		>
 			<img src={avatarURL} alt="user avatar" />
+
+			{isAvatarBubblePresent && (
+				<React.Fragment>
+					<AvatarBubbleStyle
+						avatarSize={avatarSize}
+						isAvatarRingFilled={isAvatarRingFilled}
+						bubbleOrder={1}
+					/>
+
+					<AvatarBubbleStyle
+						avatarSize={avatarSize}
+						isAvatarRingFilled={isAvatarRingFilled}
+						bubbleOrder={2}
+					/>
+				</React.Fragment>
+			)}
 		</AvatarStyle>
 	);
 };

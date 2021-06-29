@@ -10,9 +10,9 @@ export const UserProfileMetadataStyle = styled.div`
 	}
 
 	& h2 > span {
-		font-size: 1.45rem;
-		font-weight: 400;
-		color: ${(props) => (props.theme.isDarkMode ? "#8cb5ff" : "#216ef9")};
+		font-size: 1.4rem;
+		font-weight: 500;
+		color: ${(props) => (props.theme.isDarkMode ? "#9e9e9e" : "#757575")};
 	}
 
 	& > *:nth-child(1) {
@@ -27,7 +27,7 @@ export const UserProfileMetadataStyle = styled.div`
 export const UserProfileTotalsDataStyle = styled.div`
 	display: flex;
 	align-items: center;
-	gap: 3rem;
+	gap: 2.4rem;
 
 	& > h3 {
 		color: var(--txt-1);

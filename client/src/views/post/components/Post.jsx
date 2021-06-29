@@ -1,16 +1,9 @@
 import * as React from "react";
 import ReactDom from "react-dom";
-import { useParams, useHistory, useLocation } from "react-router-dom";
+import { useParams, useHistory } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 
-import {
-	IconElement,
-	Loader,
-	User,
-	Likes,
-	PostModalLikes,
-	PostLikes,
-} from "../../shared";
+import { IconElement, Loader, User, PostLikes } from "../../shared";
 import {
 	PostImages,
 	PostTaggedUsers,
@@ -24,7 +17,6 @@ import PostCommentPopup from "../../shared/post-parts/components/PostCommentPopu
 
 import {
 	fetchPostModal,
-	likeOrUnlikePostModal,
 	resetPostModal,
 } from "../../../redux/post-modal/postModalAction";
 
@@ -46,9 +38,6 @@ const Post = () => {
 
 	const { postID } = useParams();
 	const history = useHistory();
-	const postLocation = useLocation();
-	// REVIEW: this is the deciding factor
-	const isPostModal = postLocation.state ? true : false;
 
 	const { postModal, isPostModalLoaded } = useSelector(
 		(state) => state.postModalReducer
@@ -98,8 +87,6 @@ const Post = () => {
 						/>
 
 						<PostInteractionsStyle>
-							{/* {isPostModal ? <PostModalLikes /> : <PostLikes />} */}
-							{/* <PostModalLikes /> */}
 							<PostLikes />
 
 							<PostTotalComments

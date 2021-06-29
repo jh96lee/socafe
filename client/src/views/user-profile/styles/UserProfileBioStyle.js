@@ -2,8 +2,8 @@ import styled from "styled-components";
 
 export const UserProfileBioStyle = styled.p`
 	color: var(--txt-1);
-	font-size: 1.37rem;
-	font-weight: 300;
+	font-size: 1.33rem;
+	font-weight: 400;
 `;
 
 export const UserProfileNoBioStyle = styled.div`
