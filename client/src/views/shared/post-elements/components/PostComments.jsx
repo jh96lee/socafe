@@ -14,10 +14,11 @@ const PostCommentsSkeletonsStyle = styled.div`
 	gap: 1.5rem;
 `;
 
-const PostComments = ({ conditionalPostCommentsRenderVariable }) => {
+const PostComments = ({ postConditionalRenderingVariable }) => {
 	return (
 		<PostCommentsStyle>
-			{conditionalPostCommentsRenderVariable ? (
+			{postConditionalRenderingVariable ? (
+				// TODO: render out actual comments
 				<h1>Comments</h1>
 			) : (
 				<PostCommentsSkeletonsStyle>

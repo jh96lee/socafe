@@ -6,11 +6,11 @@ import { PostContentsStyle } from "../styles/PostContentsStyle";
 
 const PostContents = ({
 	postContentsArray,
-	conditionalPostContentsRenderingVariable,
+	postConditionalRenderingVariable,
 }) => {
 	return (
 		<PostContentsStyle>
-			{conditionalPostContentsRenderingVariable ? (
+			{postConditionalRenderingVariable ? (
 				postContentsArray.map(({ type, content }, idx) => {
 					if (content === "<br>") {
 						return (

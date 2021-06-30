@@ -17,7 +17,6 @@ import {
 	Login,
 	Logout,
 	Edit,
-	Password,
 	Notification,
 	Stats,
 } from "../../../assets";

@@ -1,7 +1,7 @@
 import * as React from "react";
 import { useHistory, useLocation } from "react-router-dom";
 
-import { User, PostLikes } from "../../shared";
+import { UserMetadata, PostLikes } from "../../shared";
 import HomePostImages from "./HomePostImages";
 import HomePostContent from "./HomePostContent";
 import HomePostBookmark from "./HomePostBookmark";
@@ -31,7 +31,7 @@ const HomePost = ({ post }) => {
 	return (
 		<HomePostStyle>
 			<HomePostHeaderStyle>
-				<User
+				<UserMetadata
 					userID={user.user_id}
 					avatarURL={user.avatar_url}
 					username={user.username}

@@ -3,9 +3,9 @@ import { useHistory } from "react-router";
 
 import { Avatar, Skeleton } from "../index";
 
-import { UserStyle, UserMetadataStyle } from "./UserStyle";
+import { UserMetadataStyle, UserNameDataStyle } from "./UserMetadataStyle";
 
-const User = ({
+const UserMetadata = ({
 	userID,
 	avatarURL,
 	username,
@@ -25,7 +25,7 @@ const User = ({
 	};
 
 	return (
-		<UserStyle avatarSize={avatarSize}>
+		<UserMetadataStyle avatarSize={avatarSize}>
 			{conditionalRenderingVariable ? (
 				<Avatar
 					avatarURL={avatarURL}
@@ -40,7 +40,7 @@ const User = ({
 				/>
 			)}
 
-			<UserMetadataStyle
+			<UserNameDataStyle
 				usernameFontSize={usernameFontSize}
 				fullNameFontSize={fullNameFontSize}
 				conditionalRenderingVariable={conditionalRenderingVariable}
@@ -65,9 +65,9 @@ const User = ({
 						skeletonBorderRadius="1rem"
 					/>
 				)}
-			</UserMetadataStyle>
-		</UserStyle>
+			</UserNameDataStyle>
+		</UserMetadataStyle>
 	);
 };
 
-export default User;
+export default UserMetadata;

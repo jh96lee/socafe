@@ -1,10 +1,5 @@
 import * as React from "react";
-import { useDispatch, useSelector } from "react-redux";
-
-import {
-	uploadImage,
-	setUploadImageErrorMessage,
-} from "../../../../redux/upload-image/uploadImageAction";
+import { useDispatch } from "react-redux";
 
 import {
 	UploadImageButtonStyle,
@@ -13,43 +8,41 @@ import {
 
 import { Image } from "../../../../assets";
 
-const UploadImageButton = ({ uploadedImageType }) => {
+// REVIEW: UploadImageButton is for adding image that is it
+const UploadImageButton = ({
+	uploadedImagesArray,
+	uploadImageAction,
+	contentAdditionErrorMessageAction,
+}) => {
 	const dispatch = useDispatch();
 
-	const { uploadedPostImagesArray } = useSelector(
-		(state) => state.addPostReducer
-	);
-
-	// TODO: later change the naming of this variable
-	const imagesArray =
-		uploadedImageType === "post-image"
-			? uploadedPostImagesArray
-			: "uploadedProductImagesArray";
-
 	const handleFileInputOnChange = async (e) => {
+		if (uploadedImagesArray.length >= 3) {
+			dispatch(
+				contentAdditionErrorMessageAction({
+					image: "You can upload up to 5 images per post",
+				})
+			);
+
+			return;
+		}
+
 		// REVIEW: files property returns an object with the keys being the indexes
 		const filesObject = e.target.files;
 
 		const filesArray = Object.values(filesObject);
 
-		filesArray.forEach(async (file) => {
-			if (imagesArray.length >= 5) {
+		filesArray.forEach((file) => {
+			if (file.type === "image/png" || file.type === "image/jpeg") {
+				// REVIEW: if the type matches, upload the file/s
+				dispatch(uploadImageAction(file));
+			} else {
 				// REVIEW: render error message
 				dispatch(
-					setUploadImageErrorMessage({
-						image: "You can upload up to 5 images per post",
+					contentAdditionErrorMessageAction({
+						image: "Unsupported image format",
 					})
 				);
-			} else {
-				if (file.type === "image/png" || file.type === "image/jpeg") {
-					// REVIEW: upload image and add uploaded image to corresponding array
-					dispatch(uploadImage(uploadedImageType, file));
-				} else {
-					// REVIEW: render error message
-					dispatch(
-						setUploadImageErrorMessage({ image: "Unsupported image format" })
-					);
-				}
 			}
 		});
 	};

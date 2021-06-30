@@ -2,7 +2,7 @@ import * as React from "react";
 import { useSelector, useDispatch } from "react-redux";
 import styled from "styled-components";
 
-import { FormInput, IconElement } from "../../index";
+import { FormInput, IconElement, Skeleton } from "../../index";
 
 import { setCommentContent } from "../../../../redux/comment/commentAction";
 
@@ -34,14 +34,14 @@ const PostCommentStyle = styled.div`
 	}
 `;
 
-const PostComment = () => {
+const PostCommentInput = ({ postConditionalRenderingVariable }) => {
 	const dispatch = useDispatch();
 
 	const { taggedCommentUsersArray } = useSelector(
 		(state) => state.commentReducer
 	);
 
-	return (
+	return postConditionalRenderingVariable ? (
 		<PostCommentStyle>
 			<IconElement
 				iconID="post-comment-popup-trigger"
@@ -87,7 +87,14 @@ const PostComment = () => {
 				<Submit />
 			</IconElement>
 		</PostCommentStyle>
+	) : (
+		<Skeleton
+			skeletonHeight="4.2rem"
+			skeletonWidth="90%"
+			skeletonBorderRadius="3rem"
+			skeletonMargin="auto"
+		/>
 	);
 };
 
-export default PostComment;
+export default PostCommentInput;

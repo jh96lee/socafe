@@ -28,7 +28,7 @@ const PostTotalComments = ({
 			{conditionalPostTotalCommentsRenderingVariable ? (
 				<p>{postTotalComments} Comments</p>
 			) : (
-				<Skeleton skeletonHeight="2.6rem" skeletonWidth="7rem" />
+				<Skeleton skeletonHeight="2.6rem" skeletonWidth="5rem" />
 			)}
 		</PostTotalNumbersStyle>
 	);

@@ -1,10 +1,31 @@
 import axios from "axios";
 
-import { setUploadImageErrorMessage } from "../upload-image/uploadImageAction";
 import { resetUploadImage } from "../upload-image/uploadImageAction";
 
 import { fetchToken } from "../../utils/cookie/fetchToken";
 import { setCoupleSeconds } from "../../utils/setCoupleSeconds";
+
+export const addPostImage = (imageData) => ({
+	type: "ADD_POST_IMAGE",
+	payload: imageData,
+});
+
+export const removePostImage = (imageID) => ({
+	type: "REMOVE_POST_IMAGE",
+	payload: imageID,
+});
+
+export const setAddPostSuccessMessage = (successMessage) => ({
+	type: "SET_ADD_POST_SUCCESS_MESSAGE",
+	payload: successMessage,
+});
+
+export const setAddPostErrorMessage = (errorMessage) => ({
+	type: "SET_ADD_POST_ERROR_MESSAGE",
+	payload: errorMessage,
+});
+
+// FIX BELOW
 
 export const startUploadingPost = () => ({
 	type: "START_UPLOADING_POST",
@@ -42,16 +63,6 @@ export const removeUserOnPost = (userID) => ({
 export const addPostCaption = (childNodesArray) => ({
 	type: "ADD_POST_CAPTION",
 	payload: childNodesArray,
-});
-
-export const setAddPostErrorMessage = (errorMessage) => ({
-	type: "SET_ADD_POST_ERROR_MESSAGE",
-	payload: errorMessage,
-});
-
-const setAddPostSuccessMessage = (successMessage) => ({
-	type: "SET_ADD_POST_SUCCESS_MESSAGE",
-	payload: successMessage,
 });
 
 const resetAddPostForm = () => ({
@@ -113,13 +124,13 @@ export const uploadPost =
 			}
 		} else if (uploadedPostImagesArray.length === 0) {
 			dispatch(
-				setUploadImageErrorMessage({
+				setAddPostErrorMessage({
 					error: "At least 1 image must be added to the post",
 				})
 			);
 		} else if (selectedPostCategoriesArray.length === 0) {
 			dispatch(
-				setUploadImageErrorMessage({
+				setAddPostErrorMessage({
 					postCategory: "At least 1 category must be selected",
 				})
 			);

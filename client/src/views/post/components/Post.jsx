@@ -3,7 +3,7 @@ import ReactDom from "react-dom";
 import { useParams, useHistory } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 
-import { IconElement, Loader, User, PostLikes } from "../../shared";
+import { IconElement, Loader, UserMetadata, PostLikes } from "../../shared";
 import {
 	PostImages,
 	PostTaggedUsers,
@@ -74,7 +74,7 @@ const Post = () => {
 					</PostMainDataStyle>
 
 					<PostHorizontalMetadataStyle>
-						<User
+						<UserMetadata
 							userID={postModal.user.user_id}
 							avatarURL={postModal.user.avatar_url}
 							username={postModal.user.username}

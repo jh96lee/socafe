@@ -1,72 +1,85 @@
 import axios from "axios";
 
-export const setUploadImageErrorMessage = (errorMessage) => ({
-	type: "SET_UPLOAD_IMAGE_ERROR_MESSAGE",
-	payload: errorMessage,
+const startUploadingImage = () => ({
+	type: "START_UPLOADING_IMAGE",
 });
 
-const setUploadImageSuccessMessage = (successMessage) => ({
-	type: "SET_UPLOAD_IMAGE_SUCCESS_MESSAGE",
-	payload: successMessage,
+const endUploadingImage = () => ({
+	type: "END_UPLOADING_IMAGE",
+});
+
+const startDeletingImage = () => ({
+	type: "START_DELETING_IMAGE",
+});
+
+const endDeletingImage = () => ({
+	type: "END_DELETING_IMAGE",
 });
 
 export const resetUploadImage = () => ({
 	type: "RESET_UPLOAD_IMAGE",
 });
 
-export const uploadImage = (uploadedImageType, file) => async (dispatch) => {
-	dispatch({ type: "START_UPLOADING_IMAGE" });
+export const uploadImage =
+	(
+		file,
+		addImageAction,
+		contentAdditionSuccessMessageAction,
+		contentAdditionErrorMessageAction
+	) =>
+	async (dispatch) => {
+		dispatch(startUploadingImage());
 
-	try {
-		const formData = new FormData();
+		try {
+			const formData = new FormData();
 
-		formData.append("image", file);
+			formData.append("image", file);
 
-		// REVIEW: data contains the public_id and url of the image
-		const { data } = await axios.post(
-			"http://localhost:8080/upload/image",
-			formData,
-			{
-				headers: {
-					"Content-Type": "multipart/form-data",
-				},
+			// REVIEW: data contains the public_id and url of the image
+			const { data } = await axios.post(
+				"http://localhost:8080/upload/image",
+				formData,
+				{
+					headers: {
+						"Content-Type": "multipart/form-data",
+					},
+				}
+			);
+
+			const { id, url, width, height, error, success } = data;
+
+			if (success) {
+				dispatch(addImageAction({ id, url, width, height }));
+
+				dispatch(contentAdditionSuccessMessageAction(success));
+
+				dispatch(endUploadingImage());
+			} else if (error) {
+				dispatch(contentAdditionErrorMessageAction(error));
+
+				dispatch(endUploadingImage());
 			}
-		);
+		} catch (error) {
+			dispatch(endUploadingImage());
 
-		const { error, success } = data;
-
-		if (success) {
-			const actionType =
-				uploadedImageType === "post-image"
-					? "ADD_POST_IMAGE"
-					: "ADD_PRODUCT_IMAGE";
-
-			dispatch({
-				type: actionType,
-				payload: data,
-			});
-
-			dispatch(setUploadImageSuccessMessage(success));
-
-			dispatch({ type: "END_UPLOADING_IMAGE" });
-		} else if (error) {
-			dispatch(setUploadImageErrorMessage(error));
+			dispatch(
+				contentAdditionErrorMessageAction({
+					image: "There has been an error while uploading your image/s",
+				})
+			);
 		}
-	} catch (error) {
-		dispatch({ type: "END_UPLOADING_IMAGE" });
-
-		dispatch(
-			setUploadImageErrorMessage({
-				error: "There has been an error while uploading your image/s",
-			})
-		);
-	}
-};
+	};
 
 // REVIEW: id of the image to be deleted needs to be provided and the array needs to be modified needs to be provided as well
 export const deleteImage =
-	(uploadedImageType, uploadedImageID) => async (dispatch) => {
-		dispatch({ type: "START_DELETING_IMAGE" });
+	(
+		uploadedImageID,
+		removeImageAction,
+		contentAdditionSuccessMessageAction,
+		contentAdditionErrorMessageAction
+	) =>
+	async (dispatch) => {
+		dispatch(startDeletingImage());
 
 		try {
 			const { data } = await axios({
@@ -80,30 +93,22 @@ export const deleteImage =
 			const { error, success } = data;
 
 			if (success) {
-				const actionType =
-					uploadedImageType === "post-image"
-						? "REMOVE_POST_IMAGE"
-						: "REMOVE_PRODUCT_IMAGE";
+				dispatch(removeImageAction(uploadedImageID));
 
-				dispatch({
-					type: actionType,
-					payload: uploadedImageID,
-				});
+				dispatch(contentAdditionSuccessMessageAction(success));
 
-				dispatch(setUploadImageSuccessMessage(success));
-
-				dispatch({ type: "END_DELETING_IMAGE" });
+				dispatch(endDeletingImage());
 			} else if (error) {
-				dispatch({ type: "END_DELETING_IMAGE" });
+				dispatch(endDeletingImage());
 
-				dispatch(setUploadImageErrorMessage(error));
+				dispatch(contentAdditionErrorMessageAction(error));
 			}
 		} catch (error) {
-			dispatch({ type: "END_DELETING_IMAGE" });
+			dispatch(endDeletingImage());
 
 			dispatch(
-				setUploadImageErrorMessage({
-					error: "There has been an error while deleting the selected image",
+				contentAdditionErrorMessageAction({
+					image: "There has been an error while deleting the selected image",
 				})
 			);
 		}

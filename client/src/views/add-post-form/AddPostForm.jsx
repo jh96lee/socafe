@@ -2,8 +2,6 @@ import * as React from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { useHistory } from "react-router";
 
-import { uploadPost } from "../../redux/add-post/addPostAction";
-
 import {
 	SearchAndSelect,
 	Message,
@@ -14,12 +12,22 @@ import {
 } from "../shared";
 
 import {
+	addPostImage,
+	removePostImage,
+	setAddPostSuccessMessage,
+	setAddPostErrorMessage,
 	addPostCategory,
 	addUserOnPost,
 	removePostCategory,
 	removeUserOnPost,
-	setAddPostErrorMessage,
+	uploadPost,
 } from "../../redux/add-post/addPostAction";
+import {
+	uploadPostImage,
+	deletePostImage,
+	setPostImageSuccessMessage,
+	setPostImageErrorMessage,
+} from "../../redux/upload-post/post-image/postImageAction";
 
 import {
 	AddContentFormStyle,
@@ -33,25 +41,29 @@ const AddPostForm = () => {
 
 	const history = useHistory();
 
-	const { uploadImageErrorMessage, uploadImageSuccessMessage } = useSelector(
-		(state) => state.uploadImageReducer
-	);
 	const {
 		isPostUploading,
-		postID,
-		uploadedPostImagesArray,
+		uploadedPostID,
 		selectedPostCategoriesArray,
 		taggedPostUsersArray,
 		postCaptionNodesArray,
-		addPostErrorMessage,
 		addPostSuccessMessage,
+		addPostErrorMessage,
 	} = useSelector((state) => state.addPostReducer);
 
+	const {
+		isPostImageUploading,
+		isPostImageDeleting,
+		uploadedPostImagesArray,
+		postImageSuccessMessage,
+		postImageErrorMessage,
+	} = useSelector((state) => state.postImageReducer);
+
 	React.useEffect(() => {
-		if (postID) {
-			history.push(`/post/${postID}`);
+		if (uploadedPostID) {
+			history.push(`/post/${uploadedPostID}`);
 		}
-	}, [postID]);
+	}, [uploadedPostID]);
 
 	return (
 		<AddContentFormStyle>
@@ -60,15 +72,18 @@ const AddPostForm = () => {
 					<h3>Upload Photos</h3>
 
 					<Message
-						successMessage={
-							uploadImageSuccessMessage && uploadImageSuccessMessage
-						}
-						errorMessage={
-							uploadImageErrorMessage && uploadImageErrorMessage.image
-						}
+						successMessage={postImageSuccessMessage && postImageSuccessMessage}
+						errorMessage={postImageErrorMessage && postImageErrorMessage.image}
 					/>
 
-					<UploadImage uploadedImageType="post-image" />
+					<UploadImage
+						uploadedImagesArray={uploadedPostImagesArray}
+						uploadImageAction={uploadPostImage}
+						deleteImageAction={deletePostImage}
+						contentAdditionErrorMessageAction={setPostImageErrorMessage}
+						isImageUploading={isPostImageUploading}
+						isImageDeleting={isPostImageDeleting}
+					/>
 				</AddContentStyle>
 
 				<AddContentStyle>

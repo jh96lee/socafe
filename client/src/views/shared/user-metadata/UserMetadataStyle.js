@@ -1,12 +1,12 @@
 import styled from "styled-components";
 
-export const UserStyle = styled.div`
+export const UserMetadataStyle = styled.div`
 	display: flex;
 	align-items: center;
 	gap: 0.7rem;
 `;
 
-export const UserMetadataStyle = styled.div`
+export const UserNameDataStyle = styled.div`
 	display: flex;
 	flex-direction: column;
 	gap: ${(props) => !props.conditionalRenderingVariable && "0.3rem"};

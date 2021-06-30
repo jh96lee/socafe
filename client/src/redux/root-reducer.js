@@ -10,6 +10,7 @@ import commentReducer from "./comment/commentReducer";
 import homeFeedReducer from "./home-feed/homeFeedReducer";
 import userProfileReducer from "./user-profile/userProfileReducer";
 import postModalReducer from "./post-modal/postModalReducer";
+import postImageReducer from "./upload-post/post-image/postImageReducer";
 
 const rootReducer = combineReducers({
 	registerReducer,
@@ -23,6 +24,7 @@ const rootReducer = combineReducers({
 	homeFeedReducer,
 	userProfileReducer,
 	postModalReducer,
+	postImageReducer,
 });
 
 export default rootReducer;

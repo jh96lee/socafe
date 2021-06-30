@@ -2,6 +2,8 @@ import * as React from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { useLocation } from "react-router-dom";
 
+import { Skeleton } from "../index";
+
 import { likeOrUnlikePostModal } from "../../../redux/post-modal/postModalAction";
 
 import { likePostRequest } from "../../../utils/likes/likePostRequest";
@@ -81,16 +83,20 @@ const PostLikes = ({
 
 	return (
 		<PostLikesStyle
-			onClick={handlePostLikesOnClick}
+			onClick={disablePostLikes ? null : handlePostLikesOnClick}
 			postLikesIconSize={postLikesIconSize}
 			postLikesLabelFontSize={postLikesLabelFontSize}
 			disablePostLikes={disablePostLikes || false}
 		>
 			{isLikedVariable ? <HeartFill /> : <HeartEmpty />}
 
-			<p>
-				{totalLikesVariable} {onPostPath && "Likes"}
-			</p>
+			{disablePostLikes ? (
+				<Skeleton skeletonHeight="2.6rem" skeletonWidth="5rem" />
+			) : (
+				<p>
+					{totalLikesVariable} {onPostPath && "Likes"}
+				</p>
+			)}
 		</PostLikesStyle>
 	);
 };

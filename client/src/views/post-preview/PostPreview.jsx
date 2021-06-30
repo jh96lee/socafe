@@ -9,8 +9,8 @@ import {
 	PostComments,
 	PostTotalComments,
 	PostBookmark,
-} from "../shared/post-parts";
-import { Skeleton, User } from "../shared";
+} from "../shared/post-elements";
+import { Skeleton, UserMetadata, PostLikes } from "../shared";
 
 import {
 	PostStyle,
@@ -48,7 +48,7 @@ const PostPreview = () => {
 			</PostMainDataStyle>
 
 			<PostHorizontalMetadataStyle>
-				<User
+				<UserMetadata
 					userID={user.id}
 					avatarURL={user.avatar_url}
 					username={user.username}
@@ -61,13 +61,13 @@ const PostPreview = () => {
 				/>
 
 				<PostInteractionsStyle>
-					{/* <Likes /> */}
+					<PostLikes disablePostLikes={true} />
 
 					<PostTotalComments
 						conditionalPostTotalCommentsRenderingVariable={null}
 					/>
 
-					<PostBookmark />
+					<PostBookmark disablePostBookmark={true} />
 				</PostInteractionsStyle>
 			</PostHorizontalMetadataStyle>
 

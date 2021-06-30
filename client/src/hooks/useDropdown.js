@@ -43,7 +43,7 @@ export const useDropdown = (triggerID, dropdownMenuID, isDropdown = true) => {
 		return () => {
 			document.removeEventListener("click", listener);
 		};
-	}, []);
+	}, [triggerID, dropdownMenuID]);
 
 	return { isDropdownMenuOpen, setIsDropdownMenuOpen };
 };

@@ -10,11 +10,11 @@ import {
 
 import { Remove } from "../../../../assets";
 
-const UploadedImagePreview = ({ uploadedImage, uploadedImageType }) => {
+const UploadedImagePreview = ({ uploadedImage, deleteImageAction }) => {
 	const dispatch = useDispatch();
 
 	const handleRemoveIconOnClick = () => {
-		dispatch(deleteImage(uploadedImageType, uploadedImage.id));
+		dispatch(deleteImageAction(uploadedImage.id));
 	};
 
 	return (
@@ -23,7 +23,7 @@ const UploadedImagePreview = ({ uploadedImage, uploadedImageType }) => {
 				<Remove />
 			</UploadedImageIconDivStyle>
 
-			<img src={uploadedImage.url} />
+			<img src={uploadedImage.url} alt="uploaded content" />
 		</UploadedImagePreviewStyle>
 	);
 };

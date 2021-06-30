@@ -4,18 +4,18 @@ import { IconElement } from "../../index";
 
 import { BookmarkEmpty, BookmarkFill } from "../../../../assets";
 
-const PostBookmark = () => {
-	// TODO: fetch data if a post is bookmarked and set that as the initial state
+// TODO: functionality needs to be added
+const PostBookmark = ({ disablePostBookmark }) => {
 	const [isPostBookmarked, setIsPostBookmarked] = React.useState(false);
 
-	const handleOnClick = () => {
+	const handlePostBookmarkOnClick = () => {
 		setIsPostBookmarked((prevState) => !prevState);
 	};
 
 	return (
 		<IconElement
 			iconRole="button"
-			onClick={handleOnClick}
+			onClick={disablePostBookmark ? null : handlePostBookmarkOnClick}
 			iconElementStyleObject={{
 				elementPadding: "0rem",
 				elementHoverBackgroundColor: "none",

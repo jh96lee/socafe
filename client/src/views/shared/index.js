@@ -24,7 +24,7 @@ export { default as Message } from "./message/Message";
 
 export { default as AddPostIcon } from "./add-post-icon/AddPostIcon";
 
-export { default as User } from "./user/User";
+export { default as UserMetadata } from "./user-metadata/UserMetadata";
 
 export { default as Avatar } from "./avatar/Avatar";
 

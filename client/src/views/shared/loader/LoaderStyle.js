@@ -12,10 +12,10 @@ const spinningLoader = keyframes`
 
 // TODO
 export const LoaderWrapperStyle = styled.div`
-	position: absolute;
-	top: 50%;
-	left: 50%;
-	transform: translate(-50%, -50%);
+	position: ${(props) => props.isLoaderAbsolute && "absolute"};
+	top: ${(props) => props.isLoaderAbsolute && "50%"};
+	left: ${(props) => props.isLoaderAbsolute && "50%"};
+	transform: ${(props) => props.isLoaderAbsolute && "translate(-50%, -50%)"};
 
 	display: flex;
 	justify-content: center;
