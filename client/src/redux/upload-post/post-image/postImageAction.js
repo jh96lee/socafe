@@ -41,7 +41,9 @@ export const uploadPostImage = (file) => async (dispatch) => {
 	dispatch(startUploadingPostImage());
 
 	try {
-		const { id, url, width, height, error, success } = uploadImageRequest(file);
+		const { id, url, width, height, error, success } = await uploadImageRequest(
+			file
+		);
 
 		if (success) {
 			dispatch(addPostImage({ id, url, width, height }));
@@ -69,7 +71,7 @@ export const deletePostImage = (uploadedImageID) => async (dispatch) => {
 	dispatch(startDeletingPostImage());
 
 	try {
-		const { error, success } = deleteImageRequest(uploadedImageID);
+		const { error, success } = await deleteImageRequest(uploadedImageID);
 
 		if (success) {
 			dispatch(removePostImage(uploadedImageID));

@@ -12,8 +12,8 @@ import {
 	PostComment,
 	PostTotalComments,
 	PostBookmark,
-} from "../../shared/post-parts";
-import PostCommentPopup from "../../shared/post-parts/components/PostCommentPopup";
+} from "../../shared/post-elements";
+import PostCommentPopup from "../../shared/post-elements/components/PostCommentPopup";
 
 import {
 	fetchPostModal,

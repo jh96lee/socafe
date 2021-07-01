@@ -1,15 +1,14 @@
 import * as React from "react";
 
-import UserDropdownElement from "./UserDropdownElement";
-import CategoryDropdownElement from "./CategoryDropdownElement";
-import LinkDropdownElement from "./LinkDropdownElement";
+import {
+	UserDropdownElement,
+	CategoryDropdownElement,
+	LinkDropdownElement,
+} from "../index";
 
 const DropdownElement = ({
-	// REVIEW: individual elements to render on DropdownMenu
 	dropdownElementContent,
-	// REVIEW: type of DropdownElement component to render
-	dropdownElementComponentType,
-	// REVIEW: onClick event
+	dropdownElementType,
 	dropdownElementOnClickEventHandler,
 }) => {
 	const dropdownElementObject = {
@@ -33,7 +32,7 @@ const DropdownElement = ({
 		),
 	};
 
-	return dropdownElementObject[dropdownElementComponentType];
+	return dropdownElementObject[dropdownElementType];
 };
 
 export default DropdownElement;

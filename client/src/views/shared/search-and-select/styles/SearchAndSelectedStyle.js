@@ -15,5 +15,3 @@ export const SearchAndSelectedStyle = styled.div`
 		display: none;
 	}
 `;
-
-// ${props => props. ? "" : ""};

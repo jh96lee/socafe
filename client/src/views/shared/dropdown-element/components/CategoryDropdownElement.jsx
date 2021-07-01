@@ -12,9 +12,9 @@ const CategoryDropdownElement = ({
 	return (
 		<DropdownElementStyle
 			onClick={dropdownElementOnClickEventHandler}
-			data-value={dropdownElementContent.title}
+			data-value={dropdownElementContent.title.toLowerCase()}
 		>
-			<img src={dropdownElementContent.category_url} />
+			<img src={dropdownElementContent.category_url} alt="category" />
 
 			<DropdownElementMetadataStyle>
 				<p>{dropdownElementContent.title}</p>

@@ -14,7 +14,7 @@ const DropdownMenu = ({
 		<DropdownMenuStyle id={dropdownMenuID} {...dropdownMenuStyleObject}>
 			{dropdownElementArray.length > 0 ? (
 				dropdownElementArray.map(
-					({ content, type, onClickEventHandler }, idx) => {
+					({ type, content, onClickEventHandler }, idx) => {
 						return (
 							<DropdownElement
 								key={`${dropdownElementKey}__${idx}`}

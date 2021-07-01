@@ -5,36 +5,28 @@ import { useHistory } from "react-router";
 import {
 	SearchAndSelect,
 	Message,
-	UploadImage,
 	Caption,
 	Button,
 	Loader,
-} from "../shared";
+} from "../../shared";
+import AddPostImages from "./AddPostImages";
+import AddPostCategory from "./AddPostCategory";
 
 import {
-	addPostImage,
-	removePostImage,
-	setAddPostSuccessMessage,
 	setAddPostErrorMessage,
 	addPostCategory,
 	addUserOnPost,
 	removePostCategory,
 	removeUserOnPost,
 	uploadPost,
-} from "../../redux/add-post/addPostAction";
-import {
-	uploadPostImage,
-	deletePostImage,
-	setPostImageSuccessMessage,
-	setPostImageErrorMessage,
-} from "../../redux/upload-post/post-image/postImageAction";
+} from "../../../redux/add-post/addPostAction";
 
 import {
 	AddContentFormStyle,
 	AddContentStyle,
 	AddContentsWrapperStyle,
 	AddContentButtonWrapperStyle,
-} from "../../styles";
+} from "../../../styles";
 
 const AddPostForm = () => {
 	const dispatch = useDispatch();
@@ -50,14 +42,9 @@ const AddPostForm = () => {
 		addPostSuccessMessage,
 		addPostErrorMessage,
 	} = useSelector((state) => state.addPostReducer);
-
-	const {
-		isPostImageUploading,
-		isPostImageDeleting,
-		uploadedPostImagesArray,
-		postImageSuccessMessage,
-		postImageErrorMessage,
-	} = useSelector((state) => state.postImageReducer);
+	const { uploadedPostImagesArray } = useSelector(
+		(state) => state.postImageReducer
+	);
 
 	React.useEffect(() => {
 		if (uploadedPostID) {
@@ -68,25 +55,11 @@ const AddPostForm = () => {
 	return (
 		<AddContentFormStyle>
 			<AddContentsWrapperStyle>
-				<AddContentStyle>
-					<h3>Upload Photos</h3>
+				<AddPostImages />
 
-					<Message
-						successMessage={postImageSuccessMessage && postImageSuccessMessage}
-						errorMessage={postImageErrorMessage && postImageErrorMessage.image}
-					/>
+				<AddPostCategory />
 
-					<UploadImage
-						uploadedImagesArray={uploadedPostImagesArray}
-						uploadImageAction={uploadPostImage}
-						deleteImageAction={deletePostImage}
-						contentAdditionErrorMessageAction={setPostImageErrorMessage}
-						isImageUploading={isPostImageUploading}
-						isImageDeleting={isPostImageDeleting}
-					/>
-				</AddContentStyle>
-
-				<AddContentStyle>
+				{/* <AddContentStyle>
 					<h3>Select Categories</h3>
 
 					<Message
@@ -107,9 +80,9 @@ const AddPostForm = () => {
 						removeContentActionCreator={removePostCategory}
 						setErrorMessageActionCreator={setAddPostErrorMessage}
 					/>
-				</AddContentStyle>
+				</AddContentStyle> */}
 
-				<AddContentStyle>
+				{/* <AddContentStyle>
 					<h3>Tag Users</h3>
 
 					<Message
@@ -125,13 +98,13 @@ const AddPostForm = () => {
 						removeContentActionCreator={removeUserOnPost}
 						setErrorMessageActionCreator={setAddPostErrorMessage}
 					/>
-				</AddContentStyle>
+				</AddContentStyle> */}
 
-				<AddContentStyle>
+				{/* <AddContentStyle>
 					<h3>Caption</h3>
 
 					<Caption captionType={"caption"} />
-				</AddContentStyle>
+				</AddContentStyle> */}
 			</AddContentsWrapperStyle>
 
 			<AddContentButtonWrapperStyle>

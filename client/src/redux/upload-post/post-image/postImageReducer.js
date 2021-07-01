@@ -1,3 +1,6 @@
+import { filterArrayByID } from "../../utils/filterArrayByID";
+import { appendElementToPreviousArray } from "../../utils/appendElementToPreviousArray";
+
 const initialState = {
 	isPostImageUploading: false,
 	isPostImageDeleting: false,
@@ -38,16 +41,17 @@ const postImageReducer = (state = initialState, action) => {
 		case "ADD_POST_IMAGE":
 			return {
 				...state,
-				uploadedPostImagesArray: [
-					...state.uploadedPostImagesArray,
-					action.payload,
-				],
+				uploadedPostImagesArray: appendElementToPreviousArray(
+					state.uploadedPostImagesArray,
+					action.payload
+				),
 			};
 		case "REMOVE_POST_IMAGE":
 			return {
 				...state,
-				uploadedPostImagesArray: state.uploadedPostImagesArray.filter(
-					(image) => image.id !== action.payload
+				uploadedPostImagesArray: filterArrayByID(
+					state.uploadedPostImagesArray,
+					action.payload
 				),
 			};
 		// REVIEW: Set stating messages action types

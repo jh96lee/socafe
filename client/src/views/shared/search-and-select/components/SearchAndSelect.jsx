@@ -7,8 +7,9 @@ import SearchAndSelected from "./SearchAndSelected";
 import { addContent } from "../../../../redux/common/addContent";
 
 import { useDropdown } from "../../../../hooks/useDropdown";
+import { useSearch } from "../../../../hooks/useSearch";
 
-import { handleSearchInputOnChange } from "../../../../utils/form/handleSearchInputOnChange";
+import { dropdownElementTypeIdentifier } from "../../../../utils/dropdownElementTypeIdentifier";
 
 import { SearchAndSelectStyle } from "../styles/SearchAndSelectStyle";
 
@@ -16,71 +17,47 @@ const SearchAndSelect = ({
 	searchAndSelectType,
 	searchAndSelectAPIEndpoint,
 	searchAndSelectedArray,
-	searchAndSelectPlaceholder,
-	addContentActionCreator,
-	removeContentActionCreator,
-	setErrorMessageActionCreator,
+	addContentAction,
+	removeContentAction,
 }) => {
 	const { isDropdownMenuOpen, setIsDropdownMenuOpen } = useDropdown(
 		`search-and-select-${searchAndSelectType}-dropdown-trigger`,
 		`search-and-select-${searchAndSelectType}-dropdown-menu`
 	);
 
-	const [searchResultArray, setSearchResultArray] = React.useState([]);
+	const { searchResultsArray, handleSearchResultsOnChange } = useSearch(
+		searchAndSelectAPIEndpoint,
+		setIsDropdownMenuOpen
+	);
 
 	const dispatch = useDispatch();
 
-	const searchResultArrayCreator = () => {
-		return searchResultArray.map((result) => {
-			return {
-				content: result,
-				type:
-					searchAndSelectType === "post-user" ||
-					searchAndSelectType === "comment-user"
-						? "user"
-						: "category",
-				onClickEventHandler: () => {
-					dispatch(
-						addContent(
-							// REVIEW: provide the type (post-category, post-user, product-category)
-							searchAndSelectType,
-							// REVIEW: clicked dropdown element
-							result,
-							// REVIEW: array used for data validation
-							searchAndSelectedArray,
-							addContentActionCreator,
-							setErrorMessageActionCreator
-						)
-					);
-				},
-			};
-		});
-	};
+	const dropdownElementArray = searchResultsArray.map((result) => {
+		return {
+			type: dropdownElementTypeIdentifier(searchAndSelectType),
+			content: result,
+			onClickEventHandler: () => {
+				dispatch(addContentAction(result));
+			},
+		};
+	});
+
+	console.log(searchResultsArray);
 
 	return (
 		<SearchAndSelectStyle
 			id={`search-and-select-${searchAndSelectType}-dropdown-trigger`}
 		>
-			<SearchAndSelected
-				searchAndSelectType={searchAndSelectType}
-				searchAndSelectedArray={searchAndSelectedArray}
-				removeContentActionCreator={removeContentActionCreator}
-			/>
+			{/* <SearchAndSelected searchAndSelectedArray={searchAndSelectedArray} /> */}
 
 			<FormInput
 				id={`search-and-select-${searchAndSelectType}`}
 				name={`search-and-select-${searchAndSelectType}-input`}
 				type="text"
-				label={`search and select `}
-				placeholder={searchAndSelectPlaceholder}
-				onChange={(e) =>
-					handleSearchInputOnChange(
-						e,
-						searchAndSelectAPIEndpoint,
-						setSearchResultArray,
-						setIsDropdownMenuOpen
-					)
-				}
+				label={`search and select-${searchAndSelectType}`}
+				placeholder="Search categories for your post"
+				// onChange={(e) => handleSearchResultsOnChange(e)}
+				onChange={handleSearchResultsOnChange}
 				formInputStyleObject={{
 					labelDisplay: "none",
 					inputBackgroundColor: "transparent",
@@ -91,8 +68,8 @@ const SearchAndSelect = ({
 			{isDropdownMenuOpen && (
 				<DropdownMenu
 					dropdownMenuID={`search-and-select-${searchAndSelectType}-dropdown-menu`}
-					dropdownElementKey={`search-and-select-${searchAndSelectType}-element`}
-					dropdownElementArray={searchResultArrayCreator()}
+					dropdownElementKey={`search-and-select-${searchAndSelectType}-dropdown-element`}
+					dropdownElementArray={dropdownElementArray}
 					dropdownMenuStyleObject={{
 						menuTop: "calc(100% + 6px)",
 						menuLeft: "0",
