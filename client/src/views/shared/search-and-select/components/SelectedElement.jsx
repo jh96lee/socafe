@@ -1,28 +1,25 @@
 import * as React from "react";
-import { useDispatch } from "react-redux";
-
-import { SelectedElementStyle } from "../styles/SelectedElementStyle";
 
 import { Remove } from "../../../../assets";
 
-// REVIEW: this component has only 1 job and that is filtering the selected element/value off of the corresponding array
-const SelectedElement = ({
-	selectedContent,
-	removeContentActionCreator,
-	selectedElementSTyleObject,
-}) => {
-	const dispatch = useDispatch();
+import { SelectedElementStyle } from "../styles/SelectedElementStyle";
 
-	const handleOnClick = () => {
-		// REVIEW: this is all it needs to do
-		dispatch(removeContentActionCreator(selectedContent.id));
+const SelectedElement = ({
+	selectedElement,
+	selectedElementOnClickEventHandler,
+}) => {
+	const { id } = selectedElement;
+
+	const handleSelectedElementOnClick = () => {
+		selectedElementOnClickEventHandler(id);
 	};
 
 	return (
-		<SelectedElementStyle {...selectedElementSTyleObject}>
-			<p>{selectedContent.title || selectedContent.username}</p>
+		<SelectedElementStyle>
+			{/* FIX: check for all available properties */}
+			<p>{selectedElement.title || selectedElement.username}</p>
 
-			<Remove onClick={handleOnClick} />
+			<Remove onClick={handleSelectedElementOnClick} />
 		</SelectedElementStyle>
 	);
 };

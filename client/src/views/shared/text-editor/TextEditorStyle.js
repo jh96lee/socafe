@@ -1,6 +1,6 @@
 import styled from "styled-components";
 
-export const CaptionStyle = styled.div`
+export const TextEditorStyle = styled.div`
 	color: var(--txt-1) !important;
 	font-weight: 400;
 

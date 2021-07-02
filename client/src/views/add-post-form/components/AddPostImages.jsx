@@ -6,8 +6,8 @@ import { Message, UploadImage } from "../../shared";
 import {
 	uploadPostImage,
 	deletePostImage,
-	setPostImageErrorMessage,
-} from "../../../redux/upload-post/post-image/postImageAction";
+	setPostImagesErrorMessage,
+} from "../../../redux/upload-post/post-images/postImagesAction";
 
 import { AddContentStyle } from "../../../styles";
 
@@ -16,24 +16,24 @@ const AddPostImages = () => {
 		isPostImageUploading,
 		isPostImageDeleting,
 		uploadedPostImagesArray,
-		postImageSuccessMessage,
-		postImageErrorMessage,
-	} = useSelector((state) => state.postImageReducer);
+		postImagesSuccessMessage,
+		postImagesErrorMessage,
+	} = useSelector((state) => state.postImagesReducer);
 
 	return (
 		<AddContentStyle>
 			<h3>Upload Photos</h3>
 
 			<Message
-				successMessage={postImageSuccessMessage && postImageSuccessMessage}
-				errorMessage={postImageErrorMessage && postImageErrorMessage.image}
+				successMessage={postImagesSuccessMessage && postImagesSuccessMessage}
+				errorMessage={postImagesErrorMessage && postImagesErrorMessage.image}
 			/>
 
 			<UploadImage
 				uploadedImagesArray={uploadedPostImagesArray}
 				uploadImageAction={uploadPostImage}
 				deleteImageAction={deletePostImage}
-				contentAdditionErrorMessageAction={setPostImageErrorMessage}
+				contentAdditionErrorMessageAction={setPostImagesErrorMessage}
 				isImageUploading={isPostImageUploading}
 				isImageDeleting={isPostImageDeleting}
 			/>

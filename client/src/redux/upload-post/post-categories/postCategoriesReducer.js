@@ -6,7 +6,7 @@ const initialState = {
 	postCategoriesErrorMessage: null,
 };
 
-const postCategoryReducer = (state = initialState, action) => {
+const postCategoriesReducer = (state = initialState, action) => {
 	switch (action.type) {
 		case "ADD_POST_CATEGORY":
 			return {
@@ -24,9 +24,14 @@ const postCategoryReducer = (state = initialState, action) => {
 					action.payload
 				),
 			};
+		case "SET_POST_CATEGORIES_ERROR_MESSAGE":
+			return {
+				...state,
+				postCategoriesErrorMessage: action.payload,
+			};
 		default:
 			return state;
 	}
 };
 
-export default postCategoryReducer;
+export default postCategoriesReducer;

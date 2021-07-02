@@ -27,13 +27,13 @@ export const removePostImage = (imageID) => ({
 	payload: imageID,
 });
 
-export const setPostImageSuccessMessage = (message) => ({
-	type: "SET_POST_IMAGE_SUCCESS_MESSAGE",
+export const setPostImagesSuccessMessage = (message) => ({
+	type: "SET_POST_IMAGES_SUCCESS_MESSAGE",
 	payload: message,
 });
 
-export const setPostImageErrorMessage = (message) => ({
-	type: "SET_POST_IMAGE_ERROR_MESSAGE",
+export const setPostImagesErrorMessage = (message) => ({
+	type: "SET_POST_IMAGES_ERROR_MESSAGE",
 	payload: message,
 });
 
@@ -48,11 +48,11 @@ export const uploadPostImage = (file) => async (dispatch) => {
 		if (success) {
 			dispatch(addPostImage({ id, url, width, height }));
 
-			dispatch(setPostImageSuccessMessage(success));
+			dispatch(setPostImagesSuccessMessage(success));
 
 			dispatch(endUploadingPostImage());
 		} else if (error) {
-			dispatch(setPostImageErrorMessage(error));
+			dispatch(setPostImagesErrorMessage(error));
 
 			dispatch(endUploadingPostImage());
 		}
@@ -60,7 +60,7 @@ export const uploadPostImage = (file) => async (dispatch) => {
 		dispatch(endUploadingPostImage());
 
 		dispatch(
-			setPostImageErrorMessage({
+			setPostImagesErrorMessage({
 				image: "There has been an error while uploading your image/s",
 			})
 		);
@@ -76,19 +76,19 @@ export const deletePostImage = (uploadedImageID) => async (dispatch) => {
 		if (success) {
 			dispatch(removePostImage(uploadedImageID));
 
-			dispatch(setPostImageSuccessMessage(success));
+			dispatch(setPostImagesSuccessMessage(success));
 
 			dispatch(endDeletingPostImage());
 		} else if (error) {
 			dispatch(endDeletingPostImage());
 
-			dispatch(setPostImageErrorMessage(error));
+			dispatch(setPostImagesErrorMessage(error));
 		}
 	} catch (error) {
 		dispatch(endDeletingPostImage());
 
 		dispatch(
-			setPostImageErrorMessage({
+			setPostImagesErrorMessage({
 				image: "There has been an error while deleting the selected image",
 			})
 		);

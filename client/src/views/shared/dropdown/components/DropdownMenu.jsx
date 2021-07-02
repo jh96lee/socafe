@@ -1,6 +1,6 @@
 import * as React from "react";
 
-import DropdownCategoryElement from "./DropdownCategoryElement";
+import { DropdownCategoryElement, DropdownUserElement } from "../index";
 
 import { DropdownMenuStyle } from "../styles/DropdownMenuStyle";
 
@@ -18,6 +18,16 @@ const DropdownMenu = ({
 					if (dropdownElementType === "category") {
 						return (
 							<DropdownCategoryElement
+								key={`${dropdownMenuID}__${idx}`}
+								dropdownElement={result}
+								dropdownElementOnClickEventHandler={
+									dropdownElementOnClickEventHandler
+								}
+							/>
+						);
+					} else if (dropdownElementType === "user") {
+						return (
+							<DropdownUserElement
 								key={`${dropdownMenuID}__${idx}`}
 								dropdownElement={result}
 								dropdownElementOnClickEventHandler={

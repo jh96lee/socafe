@@ -5,8 +5,8 @@ const initialState = {
 	isPostImageUploading: false,
 	isPostImageDeleting: false,
 	uploadedPostImagesArray: [],
-	postImageSuccessMessage: null,
-	postImageErrorMessage: null,
+	postImagesSuccessMessage: null,
+	postImagesErrorMessage: null,
 };
 
 const postImageReducer = (state = initialState, action) => {
@@ -16,15 +16,15 @@ const postImageReducer = (state = initialState, action) => {
 			return {
 				...state,
 				isPostImageUploading: true,
-				postImageSuccessMessage: null,
-				postImageErrorMessage: null,
+				postImagesSuccessMessage: null,
+				postImagesErrorMessage: null,
 			};
 		case "START_DELETING_POST_IMAGE":
 			return {
 				...state,
 				isPostImageDeleting: true,
-				postImageSuccessMessage: null,
-				postImageErrorMessage: null,
+				postImagesSuccessMessage: null,
+				postImagesErrorMessage: null,
 			};
 		// REVIEW: Ending action types
 		case "END_UPLOADING_POST_IMAGE":
@@ -55,15 +55,15 @@ const postImageReducer = (state = initialState, action) => {
 				),
 			};
 		// REVIEW: Set stating messages action types
-		case "SET_POST_IMAGE_SUCCESS_MESSAGE":
+		case "SET_POST_IMAGES_SUCCESS_MESSAGE":
 			return {
 				...state,
-				postImageSuccessMessage: action.payload,
+				postImagesSuccessMessage: action.payload,
 			};
-		case "SET_POST_IMAGE_ERROR_MESSAGE":
+		case "SET_POST_IMAGES_ERROR_MESSAGE":
 			return {
 				...state,
-				postImageErrorMessage: action.payload,
+				postImagesErrorMessage: action.payload,
 			};
 		default:
 			return state;

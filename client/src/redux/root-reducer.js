@@ -10,8 +10,10 @@ import commentReducer from "./comment/commentReducer";
 import homeFeedReducer from "./home-feed/homeFeedReducer";
 import userProfileReducer from "./user-profile/userProfileReducer";
 import postModalReducer from "./post-modal/postModalReducer";
-import postImageReducer from "./upload-post/post-image/postImageReducer";
-import postCategoryReducer from "./upload-post/post-category/postCategoryReducer";
+import postImagesReducer from "./upload-post/post-images/postImagesReducer";
+import postCategoriesReducer from "./upload-post/post-categories/postCategoriesReducer";
+import postUsersReducer from "./upload-post/post-users/postUsersReducer";
+import postCaptionReducer from "./upload-post/post-caption/postCaptionReducer";
 
 const rootReducer = combineReducers({
 	registerReducer,
@@ -24,8 +26,10 @@ const rootReducer = combineReducers({
 	homeFeedReducer,
 	userProfileReducer,
 	postModalReducer,
-	postImageReducer,
-	postCategoryReducer,
+	postImagesReducer,
+	postCategoriesReducer,
+	postUsersReducer,
+	postCaptionReducer,
 });
 
 export default rootReducer;
