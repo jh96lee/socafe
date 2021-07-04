@@ -1,6 +1,6 @@
 import * as React from "react";
 
-export const useDropdown = (triggerID, dropdownMenuID, isDropdown = true) => {
+const useDropdown = (triggerID, dropdownMenuID, isDropdown = true) => {
 	const [isDropdownMenuOpen, setIsDropdownMenuOpen] = React.useState(false);
 
 	React.useEffect(() => {
@@ -47,3 +47,5 @@ export const useDropdown = (triggerID, dropdownMenuID, isDropdown = true) => {
 
 	return { isDropdownMenuOpen, setIsDropdownMenuOpen };
 };
+
+export default useDropdown;

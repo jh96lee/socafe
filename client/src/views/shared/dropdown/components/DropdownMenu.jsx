@@ -8,7 +8,7 @@ const DropdownMenu = ({
 	dropdownMenuID,
 	dropdownElementsArray,
 	dropdownElementType,
-	dropdownElementOnClickEventHandler,
+	dropdownElementOnClickEventLogic,
 	dropdownMenuStyleObject,
 }) => {
 	return (
@@ -20,8 +20,8 @@ const DropdownMenu = ({
 							<DropdownCategoryElement
 								key={`${dropdownMenuID}__${idx}`}
 								dropdownElement={result}
-								dropdownElementOnClickEventHandler={
-									dropdownElementOnClickEventHandler
+								dropdownElementOnClickEventLogic={
+									dropdownElementOnClickEventLogic
 								}
 							/>
 						);
@@ -30,8 +30,8 @@ const DropdownMenu = ({
 							<DropdownUserElement
 								key={`${dropdownMenuID}__${idx}`}
 								dropdownElement={result}
-								dropdownElementOnClickEventHandler={
-									dropdownElementOnClickEventHandler
+								dropdownElementOnClickEventLogic={
+									dropdownElementOnClickEventLogic
 								}
 							/>
 						);

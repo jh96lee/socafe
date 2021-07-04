@@ -4,14 +4,11 @@ import { Remove } from "../../../../assets";
 
 import { SelectedElementStyle } from "../styles/SelectedElementStyle";
 
-const SelectedElement = ({
-	selectedElement,
-	selectedElementOnClickEventHandler,
-}) => {
+const SelectedElement = ({ selectedElement, selectedElementOnClickLogic }) => {
 	const { id } = selectedElement;
 
 	const handleSelectedElementOnClick = () => {
-		selectedElementOnClickEventHandler(id);
+		selectedElementOnClickLogic(id);
 	};
 
 	return (

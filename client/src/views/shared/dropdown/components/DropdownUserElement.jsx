@@ -1,16 +1,14 @@
 import * as React from "react";
 
-import {
-	DropdownElementStyle,
-	DropdownElementMetadataStyle,
-} from "../../dropdown-element/styles/DropdownElementStyle";
+import { DropdownElementStyle } from "../styles/DropdownElementStyle";
+import { DropdownElementMetadataStyle } from "../styles/DropdownElementMetadataStyle";
 
 const DropdownUserElement = ({
 	dropdownElement,
-	dropdownElementOnClickEventHandler,
+	dropdownElementOnClickEventLogic,
 }) => {
 	const handleDropdownElementOnClick = () => {
-		dropdownElementOnClickEventHandler(dropdownElement);
+		dropdownElementOnClickEventLogic();
 	};
 
 	return (

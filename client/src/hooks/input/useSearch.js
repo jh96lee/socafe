@@ -1,7 +1,7 @@
 import * as React from "react";
 import axios from "axios";
 
-export const useSearch = (searchAPIEndpoint, setIsDropdownMenuOpen) => {
+const useSearch = (searchAPIEndpoint, setIsDropdownMenuOpen) => {
 	const [searchResultsArray, setSearchResultsArray] = React.useState([]);
 
 	const handleSearchResultsOnChange = async (e) => {
@@ -24,3 +24,5 @@ export const useSearch = (searchAPIEndpoint, setIsDropdownMenuOpen) => {
 		handleSearchResultsOnChange,
 	};
 };
+
+export default useSearch;

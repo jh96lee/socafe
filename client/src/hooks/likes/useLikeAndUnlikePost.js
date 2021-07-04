@@ -2,9 +2,9 @@ import * as React from "react";
 import { useSelector } from "react-redux";
 import axios from "axios";
 
-import { fetchToken } from "../utils/cookie/fetchToken";
+import { fetchToken } from "../../utils/cookie/fetchToken";
 
-export const useLikeAndUnlikePost = (postID) => {
+const useLikeAndUnlikePost = (postID) => {
 	const [isPostLiked, setIsPostLiked] = React.useState(null);
 	const [totalPostLikes, setTotalPostLikes] = React.useState(null);
 	const [isPostLikesDataLoaded, setIsPostLikesDataLoaded] =
@@ -87,3 +87,5 @@ export const useLikeAndUnlikePost = (postID) => {
 		handleLikeOnClick,
 	};
 };
+
+export default useLikeAndUnlikePost;

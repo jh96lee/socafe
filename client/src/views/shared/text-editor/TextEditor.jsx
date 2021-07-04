@@ -5,8 +5,7 @@ import { TextEditorStyle } from "./TextEditorStyle";
 
 import "react-quill/dist/quill.snow.css";
 
-// REVIEW: provide the setState method or redux action that changes the caption state
-const TextEditor = ({ setStateTextEditor }) => {
+const TextEditor = ({ textEditorOnChangeLogic }) => {
 	const reactQuillRef = React.useRef();
 
 	const handleOnChange = () => {
@@ -21,7 +20,7 @@ const TextEditor = ({ setStateTextEditor }) => {
 			};
 		});
 
-		setStateTextEditor(childNodesDataArray);
+		textEditorOnChangeLogic(childNodesDataArray);
 	};
 
 	return (

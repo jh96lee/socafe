@@ -7,7 +7,7 @@ import { SearchAndSelectedElementsStyle } from "../styles/SearchAndSelectedEleme
 const SearchAndSelectedElements = ({
 	searchAndSelectType,
 	searchAndSelectedElementsArray,
-	selectedElementOnClickEventHandler,
+	selectedElementOnClickLogic,
 }) => {
 	return (
 		<SearchAndSelectedElementsStyle>
@@ -16,9 +16,7 @@ const SearchAndSelectedElements = ({
 					<SelectedElement
 						key={`${searchAndSelectType}__${idx}`}
 						selectedElement={element}
-						selectedElementOnClickEventHandler={
-							selectedElementOnClickEventHandler
-						}
+						selectedElementOnClickLogic={selectedElementOnClickLogic}
 					/>
 				);
 			})}

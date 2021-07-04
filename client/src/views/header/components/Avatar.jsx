@@ -6,7 +6,7 @@ import { DropdownMenu, IconElement } from "../../shared";
 
 import { logoutUser } from "../../../redux/login/loginAction";
 
-import { useDropdown } from "../../../hooks/useDropdown";
+import { useDropdown } from "../../../hooks";
 
 import { AvatarStyle, AvatarimageStyle } from "../styles/AvatarStyle";
 

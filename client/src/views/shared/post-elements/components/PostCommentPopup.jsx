@@ -13,7 +13,7 @@ import {
 } from "../../../../redux/comment/commentAction";
 import { addContent } from "../../../../redux/common/addContent";
 
-import { useDropdown } from "../../../../hooks/useDropdown";
+import { useDropdown } from "../../../../hooks";
 
 import { handleSearchInputOnChange } from "../../../../utils/form/handleSearchInputOnChange";
 

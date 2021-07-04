@@ -4,8 +4,7 @@ import { FormInput } from "../..";
 import SearchAndSelectedElements from "./SearchAndSelectedElements";
 import DropdownMenu from "../../dropdown/components/DropdownMenu";
 
-import { useSearch } from "../../../../hooks/useSearch";
-import { useDropdown } from "../../../../hooks/useDropdown";
+import { useSearch, useDropdown } from "../../../../hooks";
 
 import { dropdownElementTypeIdentifier } from "../../../../utils/dropdownElementTypeIdentifier";
 
@@ -16,8 +15,8 @@ const SearchAndSelect = ({
 	searchAndSelectedElementsArray,
 	searchAndSelectInputPlaceholder,
 	searchAndSelectInputAPIEndpoint,
-	selectedElementOnClickEventHandler,
-	dropdownElementOnClickEventHandler,
+	selectedElementOnClickLogic,
+	searchAndSelectDropdownElementOnClickLogic,
 }) => {
 	const { isDropdownMenuOpen, setIsDropdownMenuOpen } = useDropdown(
 		`search-and-select-${searchAndSelectType}-dropdown-trigger`,
@@ -36,7 +35,7 @@ const SearchAndSelect = ({
 			<SearchAndSelectedElements
 				searchAndSelectType={searchAndSelectType}
 				searchAndSelectedElementsArray={searchAndSelectedElementsArray}
-				selectedElementOnClickEventHandler={selectedElementOnClickEventHandler}
+				selectedElementOnClickLogic={selectedElementOnClickLogic}
 			/>
 
 			<FormInput
@@ -60,8 +59,8 @@ const SearchAndSelect = ({
 					dropdownElementType={dropdownElementTypeIdentifier(
 						searchAndSelectType
 					)}
-					dropdownElementOnClickEventHandler={
-						dropdownElementOnClickEventHandler
+					dropdownElementOnClickEventLogic={
+						searchAndSelectDropdownElementOnClickLogic
 					}
 					dropdownMenuStyleObject={{
 						menuTop: "calc(100% + 6px)",

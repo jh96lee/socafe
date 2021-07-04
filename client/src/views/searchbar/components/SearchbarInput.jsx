@@ -3,7 +3,7 @@ import { useHistory } from "react-router";
 
 import { FormInput, DropdownMenu } from "../../shared";
 
-import { useDropdown } from "../../../hooks/useDropdown";
+import { useDropdown } from "../../../hooks";
 
 import { handleSearchInputOnChange } from "../../../utils/form/handleSearchInputOnChange";
 

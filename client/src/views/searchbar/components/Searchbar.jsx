@@ -5,7 +5,7 @@ import SearchbarInput from "./SearchbarInput";
 import SearchbarButton from "./SearchbarButton";
 import { IconElement } from "../../shared";
 
-import { useDropdown } from "../../../hooks/useDropdown";
+import { useDropdown } from "../../../hooks";
 
 import {
 	SearchbarStyle,

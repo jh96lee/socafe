@@ -2,7 +2,7 @@ import * as React from "react";
 
 import { DropdownMenu } from "../../index";
 
-import { useDropdown } from "../../../../hooks/useDropdown";
+import { useDropdown } from "../../../../hooks";
 
 import {
 	PostTaggedUsersStyle,

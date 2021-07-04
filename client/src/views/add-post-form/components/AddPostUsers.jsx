@@ -1,7 +1,9 @@
 import * as React from "react";
-import { useSelector, useDispatch } from "react-redux";
+import { useSelector } from "react-redux";
 
 import { SearchAndSelect, Message } from "../../shared";
+
+import { useSearchAndSelect } from "../../../hooks/search-and-select/useSearchAndSelect";
 
 import {
 	addPostUser,
@@ -12,55 +14,28 @@ import {
 import { AddContentStyle } from "../../../styles";
 
 const AddPostUsers = () => {
-	const dispatch = useDispatch();
-
 	const { postUsersArray, postUsersErrorMessage } = useSelector(
 		(state) => state.postUsersReducer
 	);
 
-	const selectedElementOnClickEventHandler = React.useCallback(
-		(elementID) => {
-			dispatch(removePostUser(elementID));
-		},
-		[dispatch]
-	);
-
-	const dropdownElementOnClickEventHandler = React.useCallback(
-		(element) => {
-			if (postUsersArray.length >= 3) {
-				dispatch(
-					setPostUsersErrorMessage({
-						category: "You tag up to 3 users",
-					})
-				);
-
-				return;
-			}
-
-			const postCategoryIDArray = postUsersArray.map((category) => category.id);
-
-			if (postCategoryIDArray.includes(element.id)) {
-				dispatch(
-					setPostUsersErrorMessage({
-						category: "User is already tagged",
-					})
-				);
-
-				return;
-			}
-
-			dispatch(addPostUser(element));
-		},
-		[dispatch, postUsersArray]
+	const {
+		searchAndSelectDropdownElementOnClickLogic,
+		selectedElementOnClickLogic,
+	} = useSearchAndSelect(
+		3,
+		"users",
+		"redux",
+		postUsersArray,
+		addPostUser,
+		removePostUser,
+		setPostUsersErrorMessage
 	);
 
 	return (
 		<AddContentStyle>
 			<h3>Tag Users</h3>
 
-			<Message
-				errorMessage={postUsersErrorMessage && postUsersErrorMessage.category}
-			/>
+			<Message errorMessage={postUsersErrorMessage} />
 
 			<SearchAndSelect
 				// REVIEW: this needs to be singular for dropdownElementIdentifier function to work
@@ -68,8 +43,10 @@ const AddPostUsers = () => {
 				searchAndSelectedElementsArray={postUsersArray}
 				searchAndSelectInputPlaceholder="Search for users to tag on your post"
 				searchAndSelectInputAPIEndpoint="/search/users"
-				selectedElementOnClickEventHandler={selectedElementOnClickEventHandler}
-				dropdownElementOnClickEventHandler={dropdownElementOnClickEventHandler}
+				selectedElementOnClickEventHandler={selectedElementOnClickLogic}
+				dropdownElementOnClickEventHandler={
+					searchAndSelectDropdownElementOnClickLogic
+				}
 			/>
 		</AddContentStyle>
 	);

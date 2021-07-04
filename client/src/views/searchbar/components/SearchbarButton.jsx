@@ -2,7 +2,7 @@ import * as React from "react";
 
 import { IconElement, DropdownMenu } from "../../shared";
 
-import { useDropdown } from "../../../hooks/useDropdown";
+import { useDropdown } from "../../../hooks";
 
 import { SearchbarButtonStyle } from "../styles/SearchbarButtonStyle";
 

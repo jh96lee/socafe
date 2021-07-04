@@ -1,19 +1,24 @@
 import * as React from "react";
-import { useDispatch, useSelector } from "react-redux";
+import { useSelector } from "react-redux";
 
 import { TextEditor, Message } from "../../shared";
+
+import { useTextEditor } from "../../../hooks/text-editor/useTextEditor";
 
 import {
 	setPostCaptionNodesArray,
 	setPostCaptionErrorMessage,
 } from "../../../redux/upload-post/post-caption/postCaptionAction";
 
-import { setStateTextEditorNodesArray } from "../../../utils/text-editor/setStateTextEditorNodesArray";
-
 import { AddContentStyle } from "../../../styles";
 
 const AddPostCaption = () => {
-	const dispatch = useDispatch();
+	const { textEditorOnChangeLogic } = useTextEditor(
+		500,
+		"redux",
+		setPostCaptionNodesArray,
+		setPostCaptionErrorMessage
+	);
 
 	const { postCaptionErrorMessage } = useSelector(
 		(state) => state.postCaptionReducer
@@ -25,15 +30,7 @@ const AddPostCaption = () => {
 
 			<Message errorMessage={postCaptionErrorMessage} />
 
-			<TextEditor
-				setStateTextEditor={setStateTextEditorNodesArray(
-					dispatch,
-					500,
-					"redux",
-					setPostCaptionNodesArray,
-					setPostCaptionErrorMessage
-				)}
-			/>
+			<TextEditor textEditorOnChangeLogic={textEditorOnChangeLogic} />
 		</AddContentStyle>
 	);
 };

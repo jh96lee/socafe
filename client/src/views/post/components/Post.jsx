@@ -13,7 +13,7 @@ import {
 	PostTotalComments,
 	PostBookmark,
 } from "../../shared/post-elements";
-import PostCommentPopup from "../../shared/post-elements/components/PostCommentPopup";
+// import PostCommentPopup from "../../shared/post-elements/components/PostCommentPopup";
 
 import {
 	fetchPostModal,
@@ -116,7 +116,7 @@ const Post = () => {
 
 					<PostComment />
 
-					<PostCommentPopup />
+					{/* <PostCommentPopup /> */}
 				</PostStyle>
 			) : (
 				<Loader />
