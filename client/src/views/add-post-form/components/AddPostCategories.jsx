@@ -40,7 +40,7 @@ const AddPostCategories = () => {
 			<SearchAndSelect
 				searchAndSelectType="add-post-category"
 				searchAndSelectedElementsArray={postCategoriesArray}
-				searchAndSelectInputPlaceholder="Search for categories that fit your post"
+				searchAndSelectInputPlaceholder="Search for categories"
 				searchAndSelectInputAPIEndpoint="/search/post-categories"
 				selectedElementOnClickLogic={selectedElementOnClickLogic}
 				searchAndSelectDropdownElementOnClickLogic={

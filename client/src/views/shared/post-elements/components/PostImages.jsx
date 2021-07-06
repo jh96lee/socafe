@@ -16,10 +16,7 @@ import {
 import { Right, Left } from "../../../../assets";
 
 // REVIEW: this could either be for post or post-preview
-const PostImages = ({
-	postImagesArray,
-	conditionalPostImagesRenderingVariable,
-}) => {
+const PostImages = ({ postImagesArray, conditionalRenderingVariable }) => {
 	const [currentImageIndex, setCurrentImageIndex] = React.useState(0);
 
 	const { isImageDeleting } = useSelector((state) => state.uploadImageReducer);
@@ -37,7 +34,7 @@ const PostImages = ({
 		}
 	};
 
-	return conditionalPostImagesRenderingVariable ? (
+	return conditionalRenderingVariable ? (
 		<PostImagesStyle>
 			<PostMainImageStyle
 				src={postImagesArray[currentImageIndex].url}

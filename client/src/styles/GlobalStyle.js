@@ -6,9 +6,56 @@ import { createGlobalStyle } from "styled-components";
 // REVIEW: value, we can apply different colors
 const GlobalStyles = createGlobalStyle`
     :root {
+        /* REVIEW: button default */
+        --button-default-bg-color: ${(props) =>
+					props.theme.isDarkMode ? "#ce0036" : "#ea284b"};
+        --button-default-hover-bg-color: ${(props) =>
+					props.theme.isDarkMode ? "#c10033" : "#ff0042"};
+        --button-default-focus-color: ${(props) =>
+					props.theme.isDarkMode ? "#9ee0ff" : "#00b0ff"};
+        --button-disabled-color: ${(props) =>
+					props.theme.isDarkMode ? "" : ""};
+        --button-disabled-bg-color: ${(props) =>
+					props.theme.isDarkMode ? "" : ""};
+
+        /* REVIEW: icon default */
+        --icon-default-color: ${(props) =>
+					props.theme.isDarkMode ? "#fff" : "#000"};
+        --icon-default-bg-color: ${(props) =>
+					props.theme.isDarkMode ? "#ffffff1a" : "#9a9a9a3b"};
+        --icon-default-hover-bg-color: ${(props) =>
+					props.theme.isDarkMode ? "#6f6f6f6b" : "#afafaf57"};
+        
+        /* REVIEW: input default */
+        --input-default-bg-color: ${(props) =>
+					props.theme.isDarkMode ? "#202229" : "#f9fafb"};
+        --input-default-separator-color: ${(props) =>
+					props.theme.isDarkMode ? "#0a0a0a" : "#d3dfe4"};
+        --input-placeholder-default-color: ${(props) =>
+					props.theme.isDarkMode ? "#bcbebf" : "#546a75"};
+
+        /* REVIEW: secondary element */
+        --secondary-element-default-color: ${(props) =>
+					props.theme.isDarkMode ? "#9fceff" : "#0b76cb"};
+        --secondary-element-default-bg-color: ${(props) =>
+					props.theme.isDarkMode ? "#7ed3ff24" : "#e5f6ff"};
+        --secondary-element-hover-bg-color: ${(props) =>
+					props.theme.isDarkMode ? "#3a4b544d" : "#85c9ea2b"};
+
+         /* REVIEW: texts*/
+        --text-1: ${(props) => (props.theme.isDarkMode ? "#f5f5f5" : "#000")};
+        --text-2: ${(props) =>
+					props.theme.isDarkMode ? "#949494" : "#717070"};
+
+        /* REVIEW: backgrounds */
+        --bg-3: ${(props) =>
+					props.theme.isDarkMode ? "#2a2d38" : "#91b3c33b"};
+
+        /* REVIEW: separators */
+        --separator-1: ${(props) =>
+					props.theme.isDarkMode ? "#101112" : "#d2dee4"};
+
         /* TODO: text */
-        --txt-1: ${(props) => (props.theme.isDarkMode ? "#f5f5f5" : "#000")};
-        --txt-2: ${(props) => (props.theme.isDarkMode ? "#bcbebf" : "#546a75")};
         --txt-error: ${(props) =>
 					props.theme.isDarkMode ? "#fd8097" : "#a70202"};
         --txt-success: ${(props) =>
@@ -19,8 +66,7 @@ const GlobalStyles = createGlobalStyle`
         /* TODO: background */
         --bg-1: ${(props) => (props.theme.isDarkMode ? "#18191d" : "#fff")};
         --bg-2: ${(props) => (props.theme.isDarkMode ? "#202229" : "#f9fafb")};
-        --bg-3: ${(props) =>
-					props.theme.isDarkMode ? "#21232b" : "#6096b12b"};
+ 
         --bg-4: ${(props) =>
 					props.theme.isDarkMode ? "#4f606961" : "#6096b12b"};
         --bg-5: ${(props) =>
@@ -53,8 +99,6 @@ const GlobalStyles = createGlobalStyle`
         --bg-active-2: ${(props) => (props.theme.isDarkMode ? "#fff" : "#000")};
 
         /* TODO: border and box shadow colors */
-        --separator-1: ${(props) =>
-					props.theme.isDarkMode ? "#0a0a0a" : "#d3dfe4"};
         --separator-2: ${(props) =>
 					props.theme.isDarkMode ? "#000" : "#a2a2a282"};
         --separator-focus-1: ${(props) =>
@@ -105,7 +149,7 @@ const GlobalStyles = createGlobalStyle`
     h1 {
         font-size: 2.7rem;
         font-weight: 600;
-        letter-spacing: -1.3px;
+        letter-spacing: -1.8px;
     }
 
     h2 {

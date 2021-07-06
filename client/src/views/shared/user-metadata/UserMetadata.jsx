@@ -25,11 +25,11 @@ const UserMetadata = ({
 	};
 
 	return (
-		<UserMetadataStyle avatarSize={avatarSize}>
+		<UserMetadataStyle>
 			{conditionalRenderingVariable ? (
 				<Avatar
 					avatarURL={avatarURL}
-					avatarSize="4.2rem"
+					avatarSize={avatarSize}
 					avatarOnClick={avatarOnClick}
 				/>
 			) : (

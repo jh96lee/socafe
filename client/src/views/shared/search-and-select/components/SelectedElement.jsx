@@ -1,6 +1,6 @@
 import * as React from "react";
 
-import { Remove } from "../../../../assets";
+import { CloseAlt } from "../../../../assets";
 
 import { SelectedElementStyle } from "../styles/SelectedElementStyle";
 
@@ -16,7 +16,7 @@ const SelectedElement = ({ selectedElement, selectedElementOnClickLogic }) => {
 			{/* FIX: check for all available properties */}
 			<p>{selectedElement.title || selectedElement.username}</p>
 
-			<Remove onClick={handleSelectedElementOnClick} />
+			<CloseAlt onClick={handleSelectedElementOnClick} />
 		</SelectedElementStyle>
 	);
 };

@@ -38,18 +38,26 @@ function App() {
 	const overlaidComponentLocation =
 		appLocation.state && appLocation.state.overlaidComponentLocation;
 
+	const isAddIncludedInPathname = appLocation.pathname
+		.split("/")
+		.includes("add");
+
 	return (
 		<ThemeProvider theme={themeStyleObjectCreator(isDarkMode)}>
 			<GlobalStyle />
 
 			<GlobalPageStyle>
-				<Header
-					isDarkMode={isDarkMode}
-					setIsDarkMode={setIsDarkMode}
-					setIsResponsiveNavigationOpen={setIsResponsiveNavigationOpen}
-				/>
+				{!isAddIncludedInPathname && (
+					<Header
+						isDarkMode={isDarkMode}
+						setIsDarkMode={setIsDarkMode}
+						setIsResponsiveNavigationOpen={setIsResponsiveNavigationOpen}
+					/>
+				)}
 
-				<Navigation isResponsiveNavigationOpen={isResponsiveNavigationOpen} />
+				{!isAddIncludedInPathname && (
+					<Navigation isResponsiveNavigationOpen={isResponsiveNavigationOpen} />
+				)}
 
 				{user && <AddPostIcon />}
 
@@ -58,9 +66,9 @@ function App() {
 						<HomePage />
 					</Route>
 
-					<Route exact path="/add-post">
+					{/* <Route exact path="/add-post">
 						{user ? <AddPostPage /> : <Redirect to="/login" />}
-					</Route>
+					</Route> */}
 
 					<Route exact path="/user/:userID">
 						<UserProfilePage />
@@ -85,6 +93,10 @@ function App() {
 
 					<Route path="/profile">
 						<PrivateProfilePage />
+					</Route>
+
+					<Route exact path="/add/post">
+						{user ? <AddPostPage /> : <Redirect to="/login" />}
 					</Route>
 				</Switch>
 

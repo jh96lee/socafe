@@ -6,23 +6,23 @@ export const SelectedElementStyle = styled.div`
 	gap: 1.2rem;
 	align-items: center;
 	padding: 0.7rem 1.4rem;
-	color: var(--txt-1);
-	background-color: var(--bg-4);
-	border-radius: 2rem;
+	color: var(--secondary-element-default-color);
+	background-color: var(--secondary-element-default-bg-color);
+	border-radius: 1rem;
 
 	& > p {
 		font-size: ${(props) => props.selectedElementFontSize};
+		font-weight: 500;
 	}
 
 	& > svg {
-		fill: var(--icon-2);
+		fill: var(--secondary-element-default-color);
 		width: 1rem;
 		height: 1rem;
 	}
 
 	&:hover {
 		cursor: pointer;
-		background-color: ${(props) =>
-			props.theme.isDarkMode ? "#607d8b29" : "#3c61732b"};
+		background-color: var(--secondary-element-hover-bg-color);
 	}
 `;

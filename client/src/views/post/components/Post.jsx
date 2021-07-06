@@ -25,7 +25,7 @@ import {
 	PostMainDataStyle,
 	PostHorizontalMetadataStyle,
 	PostVerticalMetadataStyle,
-	PostInteractionsStyle,
+	PostTotalsMetadataStyle,
 } from "../../../styles";
 import { PostOverlayStyle } from "../styles/PostOverlayStyle";
 
@@ -79,14 +79,14 @@ const Post = () => {
 							avatarURL={postModal.user.avatar_url}
 							username={postModal.user.username}
 							fullName={postModal.user.full_name}
-							avatarSize="3.7rem"
-							usernameFontSize="1.37rem"
-							fullNameFontSize="1.27rem"
+							avatarSize="4.4rem"
+							usernameFontSize="1.4rem"
+							fullNameFontSize="1.3rem"
 							onClick={null}
 							conditionalRenderingVariable={isPostModalLoaded}
 						/>
 
-						<PostInteractionsStyle>
+						<PostTotalsMetadataStyle>
 							<PostLikes />
 
 							<PostTotalComments
@@ -97,7 +97,7 @@ const Post = () => {
 							/>
 
 							<PostBookmark />
-						</PostInteractionsStyle>
+						</PostTotalsMetadataStyle>
 					</PostHorizontalMetadataStyle>
 
 					<PostVerticalMetadataStyle>

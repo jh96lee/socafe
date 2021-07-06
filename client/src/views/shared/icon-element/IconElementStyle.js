@@ -14,12 +14,13 @@ const IconElementStyle = styled.div`
 	outline: none;
 	border: none;
 	border-radius: 50%;
-	background-color: ${(props) => props.elementBackgroundColor || "transparent"};
+	background-color: ${(props) =>
+		props.elementBackgroundColor || "var(--icon-default-bg-color)"};
 	box-shadow: ${(props) => props.elementBoxShadow};
 
 	& svg {
-		color: ${(props) => props.iconColor || "var(--icon-1)"};
-		fill: ${(props) => props.iconColor || "var(--icon-1)"};
+		color: ${(props) => props.iconColor || "var(--icon-default-color)"};
+		fill: ${(props) => props.iconColor || "var(--icon-default-color)"};
 		width: ${(props) => props.iconSize || "2.3rem"};
 		height: ${(props) => props.iconSize || "2.3rem"};
 	}
@@ -27,12 +28,13 @@ const IconElementStyle = styled.div`
 	&:hover {
 		cursor: ${(props) => props.elementCursor || "pointer"};
 		background-color: ${(props) =>
-			props.elementHoverBackgroundColor || "var(--bg-hover-1)"};
+			props.elementHoverBackgroundColor ||
+			"var(--icon-default-hover-bg-color)"};
 	}
 
 	&:hover > svg {
-		color: ${(props) => props.iconHoverColor || "var(--icon-hover-1)"};
-		fill: ${(props) => props.iconHoverColor || "var(--icon-hover-1)"};
+		color: ${(props) => props.iconHoverColor};
+		fill: ${(props) => props.iconHoverColor};
 	}
 
 	@media (max-width: ${(props) => props.elementBreakingPoint || "350px"}) {

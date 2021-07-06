@@ -3,11 +3,12 @@ import { PageStyle } from "../../styles";
 
 const AddContentPageStyle = styled(PageStyle)`
 	display: grid;
-	grid-template-columns: 30rem auto;
-
-	@media (max-width: 800px) {
-		grid-template-columns: 1fr;
-	}
+	grid-column: 1 / 3;
+	grid-row: 1 / 3;
+	grid-template-columns: 35rem auto;
+	grid-template-rows: auto;
+	max-height: 100vh;
+	min-height: 100vh;
 `;
 
 export default AddContentPageStyle;

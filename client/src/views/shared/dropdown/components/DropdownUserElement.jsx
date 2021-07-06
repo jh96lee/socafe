@@ -8,7 +8,7 @@ const DropdownUserElement = ({
 	dropdownElementOnClickEventLogic,
 }) => {
 	const handleDropdownElementOnClick = () => {
-		dropdownElementOnClickEventLogic();
+		dropdownElementOnClickEventLogic(dropdownElement);
 	};
 
 	return (

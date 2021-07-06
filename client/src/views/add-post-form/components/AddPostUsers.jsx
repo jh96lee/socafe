@@ -41,10 +41,10 @@ const AddPostUsers = () => {
 				// REVIEW: this needs to be singular for dropdownElementIdentifier function to work
 				searchAndSelectType="add-post-user"
 				searchAndSelectedElementsArray={postUsersArray}
-				searchAndSelectInputPlaceholder="Search for users to tag on your post"
+				searchAndSelectInputPlaceholder="Search for users"
 				searchAndSelectInputAPIEndpoint="/search/users"
-				selectedElementOnClickEventHandler={selectedElementOnClickLogic}
-				dropdownElementOnClickEventHandler={
+				selectedElementOnClickLogic={selectedElementOnClickLogic}
+				searchAndSelectDropdownElementOnClickLogic={
 					searchAndSelectDropdownElementOnClickLogic
 				}
 			/>

@@ -15,6 +15,10 @@ import { ReactComponent as Smile } from "./general/smile.svg";
 import { ReactComponent as More } from "./general/more.svg";
 import { ReactComponent as Edit } from "./general/edit.svg";
 import { ReactComponent as Settings } from "./general/settings.svg";
+import { ReactComponent as PlusAlt } from "./general/plus-alt.svg";
+import { ReactComponent as ColoredImages } from "./general/colored-images.svg";
+import { ReactComponent as Images } from "./general/images.svg";
+import { ReactComponent as CloseAlt } from "./general/close-alt.svg";
 
 import { ReactComponent as SocafeDark } from "./logo/socafe-dark.svg";
 import { ReactComponent as SocafeLight } from "./logo/socafe-light.svg";
@@ -23,6 +27,7 @@ import { ReactComponent as Explore } from "./navigation/explore.svg";
 import { ReactComponent as Feedback } from "./navigation/feedback.svg";
 import { ReactComponent as Hamburger } from "./navigation/hamburger.svg";
 import { ReactComponent as Home } from "./navigation/home.svg";
+import { ReactComponent as HomeAlt } from "./navigation/home-alt.svg";
 
 import { ReactComponent as Comment } from "./post/comment.svg";
 import { ReactComponent as Image } from "./post/image.svg";
@@ -70,6 +75,7 @@ export {
 	Remove,
 	Bolt,
 	Submit,
+	CloseAlt,
 	Smile,
 	SocafeDark,
 	SocafeLight,
@@ -81,6 +87,7 @@ export {
 	MultipleUsers,
 	PlusPost,
 	BookmarkFill,
+	HomeAlt,
 	BookmarkEmpty,
 	TagUser,
 	Image,
@@ -91,10 +98,12 @@ export {
 	Search,
 	Stats,
 	Story,
+	PlusAlt,
 	User,
 	Users,
 	Register,
 	Login,
+	Images,
 	Logout,
 	Tag,
 	Password,
@@ -103,6 +112,7 @@ export {
 	More,
 	Posts,
 	Sad,
+	ColoredImages,
 	Edit,
 	Follow,
 	Following,

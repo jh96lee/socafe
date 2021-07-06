@@ -4,13 +4,10 @@ import { Skeleton } from "../../index";
 
 import { PostContentsStyle } from "../styles/PostContentsStyle";
 
-const PostContents = ({
-	postContentsArray,
-	postConditionalRenderingVariable,
-}) => {
+const PostContents = ({ postContentsArray, conditionalRenderingVariable }) => {
 	return (
 		<PostContentsStyle>
-			{postConditionalRenderingVariable ? (
+			{conditionalRenderingVariable ? (
 				postContentsArray.map(({ type, content }, idx) => {
 					if (content === "<br>") {
 						return (

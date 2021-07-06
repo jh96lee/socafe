@@ -30,7 +30,7 @@ const ButtonStyle = styled.button`
 			? "var(--bg-error)"
 			: props.buttonBackgroundColor
 			? props.buttonBackgroundColor
-			: "var(--bg-clickable-1)"};
+			: "var(--button-default-bg-color)"};
 
 	&:hover {
 		background-color: ${(props) =>
@@ -40,7 +40,7 @@ const ButtonStyle = styled.button`
 				? "var(--bg-error)"
 				: props.buttonHoverBackgroundColor
 				? props.buttonHoverBackgroundColor
-				: "var(--bg-clickable-hover-1)"};
+				: "var(--button-default-hover-bg-color)"};
 		cursor: pointer;
 	}
 

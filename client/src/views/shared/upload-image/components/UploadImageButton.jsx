@@ -6,7 +6,7 @@ import {
 	UploadImageButtonCTAStyle,
 } from "../styles/UploadImageButtonStyle";
 
-import { Image } from "../../../../assets";
+import { Images } from "../../../../assets";
 
 // REVIEW: UploadImageButton is for adding image that is it
 const UploadImageButton = ({
@@ -52,9 +52,9 @@ const UploadImageButton = ({
 			<input type="file" onChange={handleFileInputOnChange} />
 
 			<UploadImageButtonCTAStyle>
-				<Image />
+				<Images />
 
-				<p>Add Photo</p>
+				<p>Upload Images</p>
 			</UploadImageButtonCTAStyle>
 		</UploadImageButtonStyle>
 	);

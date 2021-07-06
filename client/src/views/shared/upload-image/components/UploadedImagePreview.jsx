@@ -1,8 +1,6 @@
 import * as React from "react";
 import { useDispatch } from "react-redux";
 
-import { deleteImage } from "../../../../redux/upload-image/uploadImageAction";
-
 import {
 	UploadedImagePreviewStyle,
 	UploadedImageIconDivStyle,

@@ -16,7 +16,7 @@ export const UserNameDataStyle = styled.div`
 	& > h5 {
 		font-size: ${(props) => props.usernameFontSize || "1.35rem"};
 		font-weight: 500;
-		color: var(--txt-1);
+		color: var(--text-1);
 		letter-spacing: -0.9px;
 		cursor: pointer;
 	}
@@ -24,7 +24,7 @@ export const UserNameDataStyle = styled.div`
 	& > p {
 		font-size: ${(props) => props.fullNameFontSize || "1.27rem"};
 		font-weight: 300;
-		color: ${(props) => (props.theme.isDarkMode ? "#949494" : "#717070")};
+		color: var(--text-2);
 		letter-spacing: -0.9px;
 	}
 `;

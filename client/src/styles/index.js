@@ -9,10 +9,12 @@ export { default as FormInputAndMessageStyle } from "./form/FormInputAndMessageS
 export { default as AddContentPageStyle } from "./add-content/AddContentPageStyle";
 export { default as AddContentFormStyle } from "./add-content/AddContentFormStyle";
 export { default as AddContentStyle } from "./add-content/AddContentStyle";
-export { default as AddContentsWrapperStyle } from "./add-content/AddContentsWrapperStyle";
+export { default as AddContentsStyle } from "./add-content/AddContentsStyle";
 export { default as AddContentButtonWrapperStyle } from "./add-content/AddContentButtonWrapperStyle";
+export { default as AddContentHeaderStyle } from "./add-content/AddContentHeaderStyle";
+
 export { default as PostStyle } from "./post/PostStyle";
 export { default as PostMainDataStyle } from "./post/PostMainDataStyle";
 export { default as PostHorizontalMetadataStyle } from "./post/PostHorizontalMetadataStyle";
 export { default as PostVerticalMetadataStyle } from "./post/PostVerticalMetadataStyle";
-export { default as PostInteractionsStyle } from "./post/PostInteractionsStyle";
+export { default as PostTotalsMetadataStyle } from "./post/PostTotalsMetadataStyle";

@@ -15,8 +15,7 @@ export const DropdownElementStyle = styled.div`
 	}
 
 	&:hover {
-		background-color: ${(props) =>
-			props.theme.isDarkMode ? "#48484847" : "#85c9ea2b"};
+		background-color: var(--secondary-element-hover-bg-color);
 		cursor: pointer;
 	}
 `;

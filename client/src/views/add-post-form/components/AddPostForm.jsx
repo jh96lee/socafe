@@ -2,19 +2,34 @@ import * as React from "react";
 import { useSelector } from "react-redux";
 import { useHistory } from "react-router";
 
-import { Button, Loader } from "../../shared";
+import { Button, Loader, IconElement } from "../../shared";
 import AddPostImages from "./AddPostImages";
 import AddPostCategories from "./AddPostCategories";
 import AddPostUsers from "./AddPostUsers";
 import AddPostCaption from "./AddPostCaption";
+import AddPostHeader from "./AddPostHeader";
 
 import {
 	AddContentFormStyle,
-	AddContentsWrapperStyle,
+	AddContentsStyle,
 	AddContentButtonWrapperStyle,
 } from "../../../styles";
 
 const AddPostForm = () => {
+	const { uploadedPostImagesArray } = useSelector(
+		(state) => state.postImagesReducer
+	);
+
+	const { postCategoriesArray } = useSelector(
+		(state) => state.postCategoriesReducer
+	);
+
+	const { postUsersArray } = useSelector((state) => state.postUsersReducer);
+
+	const { postCaptionNodesArray } = useSelector(
+		(state) => state.postCaptionReducer
+	);
+
 	// React.useEffect(() => {
 	// 	if (uploadedPostID) {
 	// 		history.push(`/post/${uploadedPostID}`);
@@ -23,7 +38,9 @@ const AddPostForm = () => {
 
 	return (
 		<AddContentFormStyle>
-			<AddContentsWrapperStyle>
+			<AddPostHeader />
+
+			<AddContentsStyle>
 				<AddPostImages />
 
 				<AddPostCategories />
@@ -31,34 +48,39 @@ const AddPostForm = () => {
 				<AddPostUsers />
 
 				<AddPostCaption />
-			</AddContentsWrapperStyle>
+			</AddContentsStyle>
 
 			<AddContentButtonWrapperStyle>
-				{/* <Button
+				<Button
 					disabled={
 						uploadedPostImagesArray.length === 0 ||
-						selectedPostCategoriesArray.length === 0
+						postCategoriesArray.length === 0
 					}
-					success={addPostSuccessMessage}
-					onClick={() => {
-						dispatch(
-							uploadPost(
-								uploadedPostImagesArray,
-								selectedPostCategoriesArray,
-								taggedPostUsersArray,
-								postCaptionNodesArray
-							)
-						);
-					}}
+					// disabled={
+					// 	uploadedPostImagesArray.length === 0 ||
+					// 	selectedPostCategoriesArray.length === 0
+					// }
+					// success={addPostSuccessMessage}
+					// onClick={() => {
+					// 	dispatch(
+					// 		uploadPost(
+					// 			uploadedPostImagesArray,
+					// 			selectedPostCategoriesArray,
+					// 			taggedPostUsersArray,
+					// 			postCaptionNodesArray
+					// 		)
+					// 	);
+					// }}
 				>
-					{isPostUploading ? (
+					{/* {isPostUploading ? (
 						<Loader loaderSize="2rem" loaderBorderSize="0.3rem" />
 					) : addPostSuccessMessage ? (
 						addPostSuccessMessage
 					) : (
 						"Submit"
-					)}
-				</Button> */}
+					)} */}
+					Submit
+				</Button>
 			</AddContentButtonWrapperStyle>
 		</AddContentFormStyle>
 	);

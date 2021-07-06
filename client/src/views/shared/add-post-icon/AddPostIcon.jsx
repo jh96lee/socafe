@@ -3,26 +3,24 @@ import { useHistory, useLocation } from "react-router-dom";
 
 import { AddPostIconStyle } from "./AddPostIconStyle";
 
-import { PlusPost } from "../../../assets";
+import { PlusAlt, HomeAlt } from "../../../assets";
 
 const AddPostIcon = () => {
 	const history = useHistory();
 
 	const location = useLocation();
 
-	const pathname = location.pathname;
+	const isAddIncludedInPathname = location.pathname.split("/").includes("add");
 
 	const handleOnClick = () => {
-		history.push("/add-post");
+		history.push(isAddIncludedInPathname ? "/" : "/add/post");
 	};
 
 	return (
 		<React.Fragment>
-			{pathname !== "/add-post" && (
-				<AddPostIconStyle onClick={handleOnClick}>
-					<PlusPost />
-				</AddPostIconStyle>
-			)}
+			<AddPostIconStyle onClick={handleOnClick}>
+				{isAddIncludedInPathname ? <HomeAlt /> : <PlusAlt />}
+			</AddPostIconStyle>
 		</React.Fragment>
 	);
 };

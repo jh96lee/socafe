@@ -8,7 +8,7 @@ import { Comment } from "../../../../assets";
 
 const PostTotalComments = ({
 	postTotalComments,
-	conditionalPostTotalCommentsRenderingVariable,
+	conditionalRenderingVariable,
 }) => {
 	return (
 		<PostTotalNumbersStyle>
@@ -16,16 +16,17 @@ const PostTotalComments = ({
 				iconRole="button"
 				iconElementStyleObject={{
 					elementPadding: "0rem",
+					elementBackgroundColor: "none",
 					elementHoverBackgroundColor: "none",
-					iconColor: "var(--icon-2)",
-					iconHoverColor: "#var(--icon-2)",
-					iconSize: "2.1rem",
+					iconColor: "var(--icon-default-color)",
+					iconHoverColor: "var(--icon-default-color)",
+					iconSize: "2.5rem",
 				}}
 			>
 				<Comment />
 			</IconElement>
 
-			{conditionalPostTotalCommentsRenderingVariable ? (
+			{conditionalRenderingVariable ? (
 				<p>{postTotalComments} Comments</p>
 			) : (
 				<Skeleton skeletonHeight="2.6rem" skeletonWidth="5rem" />

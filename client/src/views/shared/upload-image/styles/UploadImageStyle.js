@@ -4,13 +4,13 @@ export const UploadImageStyle = styled.div`
 	position: relative;
 	min-width: 100%;
 	max-width: 100%;
-	box-shadow: 0 0 0 1.6px var(--separator-1);
-	background-color: var(--bg-2);
+	background-color: var(--input-default-bg-color);
+	box-shadow: 0 0 0 1.2px var(--separator-1);
 	border-radius: 0.5rem;
 	padding: 1rem;
 	display: grid;
 	grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
-	grid-auto-rows: 11rem;
+	grid-auto-rows: 13rem;
 	gap: 1rem;
 
 	@media (max-width: 800px) {

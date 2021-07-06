@@ -6,7 +6,7 @@ const AddContentStyle = styled.div`
 	gap: 1rem;
 
 	& > h3 {
-		color: var(--txt-1);
+		color: var(--text-1);
 	}
 `;
 

@@ -19,7 +19,10 @@ const PostLikes = ({
 	totalLikesData,
 	postLikesIconSize,
 	postLikesLabelFontSize,
-	disablePostLikes,
+	// REVIEW: disables any functionality from triggering
+	disablePostLikesOnClick,
+	// REVIEW: hides the total amount of likes (use for PostPreview)
+	conditionalRenderingVariable,
 }) => {
 	const [isLiked, setIsLiked] = React.useState(isLikedData);
 	const [totalLikes, setTotalLikes] = React.useState(totalLikesData);
@@ -83,19 +86,18 @@ const PostLikes = ({
 
 	return (
 		<PostLikesStyle
-			onClick={disablePostLikes ? null : handlePostLikesOnClick}
+			onClick={disablePostLikesOnClick ? null : handlePostLikesOnClick}
 			postLikesIconSize={postLikesIconSize}
 			postLikesLabelFontSize={postLikesLabelFontSize}
-			disablePostLikes={disablePostLikes || false}
 		>
 			{isLikedVariable ? <HeartFill /> : <HeartEmpty />}
 
-			{disablePostLikes ? (
-				<Skeleton skeletonHeight="2.6rem" skeletonWidth="5rem" />
-			) : (
+			{conditionalRenderingVariable ? (
 				<p>
 					{totalLikesVariable} {onPostPath && "Likes"}
 				</p>
+			) : (
+				<Skeleton skeletonHeight="2.6rem" skeletonWidth="5rem" />
 			)}
 		</PostLikesStyle>
 	);

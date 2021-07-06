@@ -8,7 +8,7 @@ export const FormInputStyle = styled.div`
 
 	& label,
 	input {
-		color: var(--txt-1);
+		color: var(--text-1);
 		letter-spacing: -0.6px;
 	}
 
@@ -28,12 +28,14 @@ export const FormInputStyle = styled.div`
 		box-shadow: ${(props) =>
 			props.inputBoxShadow
 				? props.inputBoxShadow
-				: "0 0 0 1.6px var(--separator-1)"};
+				: "0 0 0 1.6px var(--input-default-separator-color)"};
 		border-radius: 0.5rem;
 		padding: ${(props) =>
 			props.inputPadding ? props.inputPadding : "1.3rem 1.45rem"};
 		background-color: ${(props) =>
-			props.inputBackgroundColor ? props.inputBackgroundColor : "var(--bg-2)"};
+			props.inputBackgroundColor
+				? props.inputBackgroundColor
+				: "var(--input-default-bg-color)"};
 	}
 
 	& input::placeholder {
@@ -41,10 +43,10 @@ export const FormInputStyle = styled.div`
 		color: ${(props) =>
 			props.inputPlaceholderColor
 				? props.inputPlaceholderColor
-				: "var(--txt-2)"};
+				: "var(--input-placeholder-default-color)"};
 	}
 
 	& input:focus {
-		box-shadow: 0 0 0 1.6px var(--separator-focus-1);
+		box-shadow: 0 0 0 1.6px var(--button-default-focus-color);
 	}
 `;

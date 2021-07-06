@@ -3,7 +3,7 @@ import styled from "styled-components";
 export const UploadImageButtonStyle = styled.div`
 	position: relative;
 	border-radius: 0.5rem;
-	background-color: var(--bg-clickable-1);
+	background-color: var(--button-default-bg-color);
 
 	& input {
 		position: relative;
@@ -16,7 +16,7 @@ export const UploadImageButtonStyle = styled.div`
 
 	&:hover {
 		cursor: pointer;
-		background-color: var(--bg-clickable-hover-1);
+		background-color: var(--button-default-hover-bg-color);
 	}
 `;
 
@@ -33,13 +33,14 @@ export const UploadImageButtonCTAStyle = styled.div`
 	z-index: 1;
 
 	& svg {
-		width: 2.5rem;
-		height: 2.5rem;
+		width: 3.2rem;
+		height: 3.2rem;
 		fill: #fff;
 	}
 
 	& p {
-		font-size: 1.27rem;
+		font-size: 1.4rem;
+		font-weight: 500;
 		color: #fff;
 	}
 `;

@@ -25,7 +25,7 @@ const AddPostImages = () => {
 			<h3>Upload Photos</h3>
 
 			<Message
-				successMessage={postImagesSuccessMessage && postImagesSuccessMessage}
+				successMessage={postImagesSuccessMessage}
 				errorMessage={postImagesErrorMessage && postImagesErrorMessage.image}
 			/>
 

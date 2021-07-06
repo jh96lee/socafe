@@ -9,9 +9,9 @@ import { Skeleton } from "../../index";
 
 const PostSelectedCategories = ({
 	selectedPostCategoriesArray,
-	conditionalPostSelectedCategoriesRenderingVariable,
+	conditionalRenderingVariable,
 }) => {
-	const postCategoriesArray = conditionalPostSelectedCategoriesRenderingVariable
+	const postCategoriesArray = conditionalRenderingVariable
 		? selectedPostCategoriesArray
 		: ["", "", ""];
 

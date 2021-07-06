@@ -7,8 +7,8 @@ export const PostLikesStyle = styled.div`
 
 	& > svg {
 		fill: #ff0000;
-		width: ${(props) => props.postLikesIconSize || "2.4rem"};
-		height: ${(props) => props.postLikesIconSize || "2.4rem"};
+		width: ${(props) => props.postLikesIconSize || "2.5rem"};
+		height: ${(props) => props.postLikesIconSize || "2.5rem"};
 	}
 
 	&:hover {

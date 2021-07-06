@@ -23,6 +23,6 @@ export const DropdownMenuStyle = styled.div`
 
 	& #dropdown-menu__no-result-message {
 		padding: 1rem;
-		color: var(--txt-1);
+		color: var(--text-1);
 	}
 `;
