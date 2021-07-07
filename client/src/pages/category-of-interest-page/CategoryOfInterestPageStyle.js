@@ -13,7 +13,7 @@ export const CategoriesOfInterestElementsWrapperStyle = styled.div`
 
 	& h2 {
 		font-size: 2.6rem;
-		color: var(--txt-1);
+		color: var(--text-1);
 		margin-bottom: 2.5rem;
 	}
 

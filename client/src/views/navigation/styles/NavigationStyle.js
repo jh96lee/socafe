@@ -35,7 +35,7 @@ export const NavigationStyle = styled.nav`
 
 	& .active span {
 		font-weight: 400;
-		color: var(--txt-1);
+		color: var(--text-1);
 	}
 
 	@media (max-width: 700px) {

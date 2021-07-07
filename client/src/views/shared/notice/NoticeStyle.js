@@ -7,7 +7,7 @@ export const NoticeStyle = styled.div`
 	transform: translateY(50%);
 
 	& > h2 {
-		color: var(--txt-1);
+		color: var(--text-1);
 		margin: 1rem 0 2rem 0;
 	}
 

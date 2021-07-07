@@ -11,8 +11,10 @@ export { default as Skeleton } from "./skeleton/Skeleton";
 export { default as Message } from "./message/Message";
 export { default as AddPostIcon } from "./add-post-icon/AddPostIcon";
 export { default as UserMetadata } from "./user-metadata/UserMetadata";
-export { default as Avatar } from "./avatar/Avatar";
+
 export { default as PostLikes } from "./post-likes/PostLikes";
+
 export { default as DropdownMenu } from "./dropdown/components/DropdownMenu";
-export { default as DropdownCategoryElement } from "./dropdown/components/DropdownCategoryElement";
-export { default as DropdownUserElement } from "./dropdown/components/DropdownUserElement";
+export { default as DropdownElement } from "./dropdown/components/DropdownElement";
+
+export { default as Avatar } from "./avatar/components/Avatar";

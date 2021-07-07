@@ -8,6 +8,6 @@ export const HomePostFooterStyle = styled.div`
 
 	& p {
 		font-size: 1.37rem;
-		color: var(--txt-1);
+		color: var(--text-1);
 	}
 `;

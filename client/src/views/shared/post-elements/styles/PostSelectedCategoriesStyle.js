@@ -8,7 +8,7 @@ export const PostSelectedCategoriesStyle = styled.div`
 
 export const PostSelectedCategoryStyle = styled.p`
 	font-size: 1.35rem;
-	color: var(--text-default);
+	color: var(--text-1);
 	background-color: var(--bg-3);
 	padding: 0.6rem 1.2rem;
 	border-radius: 1rem;

@@ -2,7 +2,7 @@ import * as React from "react";
 import styled from "styled-components";
 
 const HomePostContentStyle = styled.p`
-	color: var(--txt-1);
+	color: var(--text-1);
 	font-size: 1.36rem;
 	font-weight: 300;
 	letter-spacing: -0.2px;

@@ -4,5 +4,5 @@ export const PostTotalNumbersStyle = styled.div`
 	display: flex;
 	align-items: center;
 	gap: 0.7rem;
-	color: var(--txt-1);
+	color: var(--text-1);
 `;

@@ -16,7 +16,7 @@ import {
 const PrivateProfileSidebarStyle = styled.div`
 	display: flex;
 	flex-direction: column;
-	color: var(--txt-1);
+	color: var(--text-1);
 	padding: 2rem;
 	gap: 1rem;
 	border-left: 2px solid var(--separator-1);

@@ -29,11 +29,7 @@ const UserProfileData = () => {
 		<UserProfileDataStyle>
 			{isUserProfileLoaded ? (
 				<React.Fragment>
-					<Avatar
-						avatarSize="100%"
-						avatarBorderRadius="50%"
-						avatarURL={userProfile.avatar_url}
-					/>
+					<Avatar avatarSize="100%" avatarURL={userProfile.avatar_url} />
 
 					<UserProfileMetadata
 						fullName={userProfile.full_name}

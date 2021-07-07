@@ -39,7 +39,7 @@ const PostCommentPopupStyle = styled.div`
 	overflow: scroll;
 
 	& > svg {
-		fill: var(--txt-1);
+		fill: var(--text-1);
 		position: absolute;
 		top: 1.2rem;
 		right: 1.2rem;
@@ -50,7 +50,7 @@ const PostCommentPopupStyle = styled.div`
 
 	& > h3 {
 		font-size: 1.9rem;
-		color: var(--txt-1);
+		color: var(--text-1);
 	}
 `;
 

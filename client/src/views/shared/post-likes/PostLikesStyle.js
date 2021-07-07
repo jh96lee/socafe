@@ -17,7 +17,7 @@ export const PostLikesStyle = styled.div`
 	}
 
 	& > p {
-		color: var(--txt-1);
+		color: var(--text-1);
 		font-size: ${(props) => props.postLikesLabelFontSize || "1.4rem"};
 	}
 `;

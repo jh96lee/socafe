@@ -5,7 +5,7 @@ export const LoginPageElementWrapperStyle = styled.div`
 	margin-top: 3.5rem;
 
 	& > h2 {
-		color: var(--txt-1);
+		color: var(--text-1);
 		margin-bottom: 2rem;
 	}
 

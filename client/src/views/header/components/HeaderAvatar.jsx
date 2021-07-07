@@ -2,13 +2,13 @@ import * as React from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { useHistory } from "react-router-dom";
 
-import { DropdownMenu, IconElement } from "../../shared";
+import { DropdownMenu, IconElement, Avatar } from "../../shared";
 
 import { logoutUser } from "../../../redux/login/loginAction";
 
 import { useDropdown } from "../../../hooks";
 
-import { AvatarStyle, AvatarimageStyle } from "../styles/AvatarStyle";
+import { HeaderAvatarStyle } from "../styles/HeaderAvatarStyle";
 
 import {
 	Account,
@@ -21,10 +21,10 @@ import {
 	Stats,
 } from "../../../assets";
 
-const Avatar = () => {
+const HeaderAvatar = () => {
 	const { isDropdownMenuOpen } = useDropdown(
-		"avatar-dropdown-trigger",
-		"avatar-dropdown-menu"
+		"header-avatar-dropdown-trigger",
+		"header-avatar-dropdown-menu"
 	);
 
 	const dispatch = useDispatch();
@@ -33,7 +33,7 @@ const Avatar = () => {
 
 	const history = useHistory();
 
-	const userDropdownElementArray = React.useMemo(() => {
+	const dropdownElementsArray = React.useMemo(() => {
 		return user
 			? [
 					{
@@ -41,8 +41,7 @@ const Avatar = () => {
 							label: "Profile",
 							icon: <Account />,
 						},
-						type: "link",
-						onClickEventHandler: () => {
+						onClickLogic: () => {
 							history.push(`/profile/${user.id}`);
 						},
 					},
@@ -51,8 +50,7 @@ const Avatar = () => {
 							label: "Edit Profile",
 							icon: <Edit />,
 						},
-						type: "link",
-						onClickEventHandler: () => {
+						onClickLogic: () => {
 							history.push(`/profile/edit/${user.id}`);
 						},
 					},
@@ -61,8 +59,7 @@ const Avatar = () => {
 							label: "Notifications",
 							icon: <Notification />,
 						},
-						type: "link",
-						onClickEventHandler: () => {
+						onClickLogic: () => {
 							history.push(`/notification/${user.id}`);
 						},
 					},
@@ -71,8 +68,7 @@ const Avatar = () => {
 							label: "Stats",
 							icon: <Stats />,
 						},
-						type: "link",
-						onClickEventHandler: () => {
+						onClickLogic: () => {
 							history.push(`/stats/${user.id}`);
 						},
 					},
@@ -81,8 +77,7 @@ const Avatar = () => {
 							label: "Logout",
 							icon: <Logout />,
 						},
-						type: "link",
-						onClickEventHandler: () => {
+						onClickLogic: () => {
 							dispatch(logoutUser());
 						},
 					},
@@ -93,8 +88,7 @@ const Avatar = () => {
 							label: "Login",
 							icon: <Login />,
 						},
-						type: "link",
-						onClickEventHandler: () => {
+						onClickLogic: () => {
 							history.push("/login");
 						},
 					},
@@ -103,8 +97,7 @@ const Avatar = () => {
 							label: "Register",
 							icon: <Register />,
 						},
-						type: "link",
-						onClickEventHandler: () => {
+						onClickLogic: () => {
 							history.push("/register");
 						},
 					},
@@ -112,9 +105,9 @@ const Avatar = () => {
 	}, [user]);
 
 	return (
-		<AvatarStyle id="avatar-dropdown-trigger">
+		<HeaderAvatarStyle id="header-avatar-dropdown-trigger">
 			{user ? (
-				<AvatarimageStyle src={user.avatar_url} alt="Profile image" />
+				<Avatar avatarURL={user.avatar_url} avatarSize="4rem" />
 			) : (
 				<IconElement iconRole="button">
 					<User />
@@ -123,17 +116,17 @@ const Avatar = () => {
 
 			{isDropdownMenuOpen && (
 				<DropdownMenu
-					dropdownMenuID="avatar-dropdown-menu"
-					dropdownElementKey="avatar-dropdown-element"
-					dropdownElementArray={userDropdownElementArray}
+					dropdownMenuID="header-avatar-dropdown-menu"
+					dropdownElementsArray={dropdownElementsArray}
 					dropdownMenuStyleObject={{
 						menuTop: "calc(100% + 10px)",
 						menuRight: "0",
+						menuWidth: "22rem",
 					}}
 				/>
 			)}
-		</AvatarStyle>
+		</HeaderAvatarStyle>
 	);
 };
 
-export default Avatar;
+export default HeaderAvatar;

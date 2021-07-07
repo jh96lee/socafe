@@ -17,7 +17,7 @@ export const PostCategoryStyle = styled.div`
 	}
 
 	& > h5 {
-		color: var(--txt-1);
+		color: var(--text-1);
 		margin: 0 1.6rem;
 	}
 

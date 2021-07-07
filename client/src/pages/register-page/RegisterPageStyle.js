@@ -12,7 +12,7 @@ export const RegisterPageElementsWrapperStyle = styled.div`
 	align-items: ${(props) => props.registerStepIndex === 2 && "center"};
 
 	& > h2 {
-		color: var(--txt-1);
+		color: var(--text-1);
 		margin-bottom: 2rem;
 	}
 

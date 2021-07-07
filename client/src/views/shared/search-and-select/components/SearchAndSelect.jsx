@@ -6,8 +6,6 @@ import DropdownMenu from "../../dropdown/components/DropdownMenu";
 
 import { useSearch, useDropdown } from "../../../../hooks";
 
-import { dropdownElementTypeIdentifier } from "../../../../utils/dropdownElementTypeIdentifier";
-
 import { SearchAndSelectStyle } from "../styles/SearchAndSelectStyle";
 
 const SearchAndSelect = ({
@@ -27,6 +25,16 @@ const SearchAndSelect = ({
 		searchAndSelectInputAPIEndpoint,
 		setIsDropdownMenuOpen
 	);
+
+	// REVIEW: this provides the array that DropdownMenu needs to render
+	const dropdownMenuArray = searchResultsArray.map((result) => {
+		return {
+			content: result,
+			onClickLogic: () => {
+				searchAndSelectDropdownElementOnClickLogic(result);
+			},
+		};
+	});
 
 	return (
 		<SearchAndSelectStyle
@@ -55,13 +63,7 @@ const SearchAndSelect = ({
 			{isDropdownMenuOpen && (
 				<DropdownMenu
 					dropdownMenuID={`search-and-select-${searchAndSelectType}-dropdown-menu`}
-					dropdownElementsArray={searchResultsArray}
-					dropdownElementType={dropdownElementTypeIdentifier(
-						searchAndSelectType
-					)}
-					dropdownElementOnClickEventLogic={
-						searchAndSelectDropdownElementOnClickLogic
-					}
+					dropdownElementsArray={dropdownMenuArray}
 					dropdownMenuStyleObject={{
 						menuTop: "calc(100% + 6px)",
 						menuLeft: "0",

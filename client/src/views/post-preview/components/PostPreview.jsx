@@ -58,7 +58,7 @@ const PostPreview = () => {
 					avatarURL={user.avatar_url}
 					username={user.username}
 					fullName={user.full_name}
-					avatarSize="4.4rem"
+					avatarSize="4.2rem"
 					usernameFontSize="1.4rem"
 					fullNameFontSize="1.3rem"
 					onClick={null}

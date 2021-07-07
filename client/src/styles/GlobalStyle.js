@@ -1,7 +1,5 @@
 import { createGlobalStyle } from "styled-components";
 
-// #27282d
-
 // REVIEW: we created a Global style and within it, it can access props like isDarkMode and depending on that
 // REVIEW: value, we can apply different colors
 const GlobalStyles = createGlobalStyle`
@@ -14,9 +12,9 @@ const GlobalStyles = createGlobalStyle`
         --button-default-focus-color: ${(props) =>
 					props.theme.isDarkMode ? "#9ee0ff" : "#00b0ff"};
         --button-disabled-color: ${(props) =>
-					props.theme.isDarkMode ? "" : ""};
+					props.theme.isDarkMode ? "#ffffff66" : "#ffffffb3"};
         --button-disabled-bg-color: ${(props) =>
-					props.theme.isDarkMode ? "" : ""};
+					props.theme.isDarkMode ? "#ec23482b" : "#ec234866"};
 
         /* REVIEW: icon default */
         --icon-default-color: ${(props) =>
@@ -25,6 +23,12 @@ const GlobalStyles = createGlobalStyle`
 					props.theme.isDarkMode ? "#ffffff1a" : "#9a9a9a3b"};
         --icon-default-hover-bg-color: ${(props) =>
 					props.theme.isDarkMode ? "#6f6f6f6b" : "#afafaf57"};
+
+        /* REVIEW: icon presentation */
+        --icon-presentation-color: ${(props) =>
+					props.theme.isDarkMode ? "#92ccff" : "#64748b"};
+        --icon-presentation-bg-color: ${(props) =>
+					props.theme.isDarkMode ? "#a0d5ff1f" : "#72909e2b"};
         
         /* REVIEW: input default */
         --input-default-bg-color: ${(props) =>
@@ -66,11 +70,6 @@ const GlobalStyles = createGlobalStyle`
         /* TODO: background */
         --bg-1: ${(props) => (props.theme.isDarkMode ? "#18191d" : "#fff")};
         --bg-2: ${(props) => (props.theme.isDarkMode ? "#202229" : "#f9fafb")};
- 
-        --bg-4: ${(props) =>
-					props.theme.isDarkMode ? "#4f606961" : "#6096b12b"};
-        --bg-5: ${(props) =>
-					props.theme.isDarkMode ? "#45616f87" : "#a2e0ff6b"};
         --bg-post: ${(props) => (props.theme.isDarkMode ? "#161719" : "#fff")};
         --bg-filled-story:  linear-gradient(to right, #0d69ff, #16b3ff); 
         --bg-empty-story: ${(props) =>
@@ -79,49 +78,14 @@ const GlobalStyles = createGlobalStyle`
 					props.theme.isDarkMode ? "#ff000033" : "#ff5b5b4d"};
         --bg-success: ${(props) =>
 					props.theme.isDarkMode ? "#4caf503b" : "#0ed60e47"};
-        --bg-hover-1: ${(props) =>
-					props.theme.isDarkMode ? "#5a5a5a6b" : "#cacaca69"};
-        --bg-hover-2: ${(props) =>
-					props.theme.isDarkMode ? "#607d8b29" : "#85c9ea2b"};
 
         /* TODO: icon */
         --icon-1: ${(props) =>
 					props.theme.isDarkMode ? "#a4a4a4" : "#64748b"};    
-        --icon-2: ${(props) => (props.theme.isDarkMode ? "#fff" : "#000")};    
         --icon-3: ${(props) =>
 					props.theme.isDarkMode ? "#b6e7ff" : "#64748b"};
         --icon-hover-1: ${(props) =>
 					props.theme.isDarkMode ? "#fff" : "#000"};
-
-        /* TODO: active */
-        --bg-active-1: ${(props) =>
-					props.theme.isDarkMode ? "#a1e4ff17" : "#edfaff"};
-        --bg-active-2: ${(props) => (props.theme.isDarkMode ? "#fff" : "#000")};
-
-        /* TODO: border and box shadow colors */
-        --separator-2: ${(props) =>
-					props.theme.isDarkMode ? "#000" : "#a2a2a282"};
-        --separator-focus-1: ${(props) =>
-					props.theme.isDarkMode ? "#6c8a98" : "#90b8cb"};
-        
-        /* TODO: clickable */
-        --bg-clickable-1: ${(props) =>
-					props.theme.isDarkMode ? "#ed143dd4" : "#ee002deb"};
-        --bg-clickable-hover-1: ${(props) =>
-					props.theme.isDarkMode ? "#c30042" : "#d4054a"};
-        --bg-clickable-disabled: ${(props) =>
-					props.theme.isDarkMode ? "#ec23482b" : "#ec234866"};
-
-
-        /* TODO: colors */
-        --green-1: ${(props) =>
-					props.theme.isDarkMode ? "#01c301" : "#00a400"};
-        --blue-1: ${(props) =>
-					props.theme.isDarkMode ? "#74d4ff" : "#00a400"};
-        --blue-2: ${(props) =>
-					props.theme.isDarkMode ? "#6dd1ff52" : "#00a400"};
-        --blue-3: ${(props) =>
-					props.theme.isDarkMode ? "#8cb5ff" : "#216ef9"};
 
         /* TODO: toggle */
         --bg-toggle-1: ${(props) => (props.theme.isDarkMode ? "#000" : "#fff")};

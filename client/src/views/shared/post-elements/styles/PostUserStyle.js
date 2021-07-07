@@ -22,7 +22,7 @@ export const PostUserMetadataStyle = styled.div`
 
 	& > p {
 		font-size: 1.35rem;
-		color: var(--txt-1);
+		color: var(--text-1);
 	}
 
 	& > span {

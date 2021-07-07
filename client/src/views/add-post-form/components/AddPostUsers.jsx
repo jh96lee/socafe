@@ -3,7 +3,7 @@ import { useSelector } from "react-redux";
 
 import { SearchAndSelect, Message } from "../../shared";
 
-import { useSearchAndSelect } from "../../../hooks/search-and-select/useSearchAndSelect";
+import { useSearchAndSelectRedux } from "../../../hooks";
 
 import {
 	addPostUser,
@@ -21,10 +21,9 @@ const AddPostUsers = () => {
 	const {
 		searchAndSelectDropdownElementOnClickLogic,
 		selectedElementOnClickLogic,
-	} = useSearchAndSelect(
+	} = useSearchAndSelectRedux(
 		3,
 		"users",
-		"redux",
 		postUsersArray,
 		addPostUser,
 		removePostUser,

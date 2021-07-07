@@ -6,7 +6,7 @@ export const UserProfileMetadataStyle = styled.div`
 	padding: 0.7rem 0;
 
 	& h2 {
-		color: var(--txt-1);
+		color: var(--text-1);
 	}
 
 	& h2 > span {
@@ -30,7 +30,7 @@ export const UserProfileTotalsDataStyle = styled.div`
 	gap: 2.4rem;
 
 	& > h3 {
-		color: var(--txt-1);
+		color: var(--text-1);
 		font-weight: 500;
 	}
 

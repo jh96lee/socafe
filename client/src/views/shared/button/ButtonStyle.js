@@ -45,9 +45,10 @@ const ButtonStyle = styled.button`
 	}
 
 	&:disabled {
-		color: ${(props) => props.buttonDisabledColor || "var(--txt-disabled)"};
+		color: ${(props) =>
+			props.buttonDisabledColor || "var(--button-disabled-color)"};
 		background-color: ${(props) =>
-			props.buttonDisabledBackgroundColor || "var(--bg-clickable-disabled)"};
+			props.buttonDisabledBackgroundColor || "var(--button-disabled-bg-color)"};
 	}
 
 	&:disabled:hover {

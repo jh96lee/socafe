@@ -1,7 +1,7 @@
 import * as React from "react";
 
 import Logo from "./Logo";
-import Avatar from "./Avatar";
+import HeaderAvatar from "./HeaderAvatar";
 import { Searchbar } from "../../searchbar";
 import { Toggle, IconElement } from "../../shared";
 
@@ -31,7 +31,7 @@ const Header = ({
 			<Searchbar />
 
 			<HeaderEnd>
-				<Avatar />
+				<HeaderAvatar />
 
 				<Toggle
 					state={isDarkMode}
