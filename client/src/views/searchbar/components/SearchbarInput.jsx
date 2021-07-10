@@ -3,9 +3,7 @@ import { useHistory } from "react-router";
 
 import { FormInput, DropdownMenu } from "../../shared";
 
-import { useDropdown } from "../../../hooks";
-
-import { handleSearchInputOnChange } from "../../../utils/form/handleSearchInputOnChange";
+import { useDropdown, useSearch } from "../../../hooks";
 
 import { SearchbarInputStyle } from "../styles/SearchbarInputStyle";
 
@@ -15,23 +13,26 @@ const SearchbarInput = ({ searchType }) => {
 		"searchbar-input-dropdown-menu"
 	);
 
-	const [searchResultArray, setSearchResultArray] = React.useState([]);
+	const searchAPIEndpoint =
+		searchType === "Users" ? "/search/users" : "/search/products";
+
+	const { searchResultsArray, handleSearchResultsOnChange } = useSearch(
+		searchAPIEndpoint,
+		setIsDropdownMenuOpen
+	);
 
 	const history = useHistory();
 
-	const searchResultArrayCreator = () => {
-		return searchResultArray.map((result) => {
-			return {
-				content: result,
-				type: searchType === "Users" ? "user" : "product",
-				onClickEventHandler: () => {
-					history.push(
-						`/${searchType === "Users" ? "user" : "product"}/${result.id}`
-					);
-				},
-			};
-		});
-	};
+	const dropdownElementsArray = searchResultsArray.map((result) => {
+		return {
+			content: result,
+			onClickEventHandler: () => {
+				history.push(
+					`/${searchType === "Users" ? "user" : "product"}/${result.id}`
+				);
+			},
+		};
+	});
 
 	return (
 		<SearchbarInputStyle id="searchbar-input-dropdown-trigger">
@@ -41,17 +42,7 @@ const SearchbarInput = ({ searchType }) => {
 				type="text"
 				label="Search"
 				placeholder="Search"
-				onChange={(e) => {
-					const apiEndpoint =
-						searchType === "Users" ? "/search/users" : "/search/products";
-
-					handleSearchInputOnChange(
-						e,
-						apiEndpoint,
-						setSearchResultArray,
-						setIsDropdownMenuOpen
-					);
-				}}
+				onChange={handleSearchResultsOnChange}
 				formInputStyleObject={{
 					labelDisplay: "none",
 					inputBackgroundColor: "transparent",
@@ -64,8 +55,7 @@ const SearchbarInput = ({ searchType }) => {
 			{isDropdownMenuOpen && (
 				<DropdownMenu
 					dropdownMenuID="searchbar-input-dropdown-menu"
-					dropdownElementKey="searchbar-input-dropdown-element"
-					dropdownElementArray={searchResultArrayCreator()}
+					dropdownElementsArray={dropdownElementsArray}
 					dropdownMenuStyleObject={{
 						menuTop: "calc(100% + 7px)",
 						menuLeft: "0",

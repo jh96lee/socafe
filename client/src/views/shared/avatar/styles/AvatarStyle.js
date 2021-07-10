@@ -19,4 +19,8 @@ export const AvatarStyle = styled.div`
 		height: ${(props) => props.avatarSize};
 		stroke-width: 8%;
 	}
+
+	&:hover {
+		cursor: pointer;
+	}
 `;

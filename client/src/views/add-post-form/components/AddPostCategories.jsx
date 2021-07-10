@@ -9,7 +9,7 @@ import {
 	addPostCategory,
 	removePostCategory,
 	setPostCategoriesErrorMessage,
-} from "../../../redux/upload-post/post-categories/postCategoriesAction";
+} from "../../../redux/add-post/post-categories/postCategoriesAction";
 
 import { AddContentStyle } from "../../../styles";
 
@@ -19,8 +19,8 @@ const AddPostCategories = () => {
 	);
 
 	const {
-		searchAndSelectDropdownElementOnClickLogic,
-		selectedElementOnClickLogic,
+		searchAndSelectDropdownElementOnClickEventHandler,
+		selectedElementOnClickEventHandler,
 	} = useSearchAndSelectRedux(
 		3,
 		"categories",
@@ -41,9 +41,9 @@ const AddPostCategories = () => {
 				searchAndSelectedElementsArray={postCategoriesArray}
 				searchAndSelectInputPlaceholder="Search for categories"
 				searchAndSelectInputAPIEndpoint="/search/post-categories"
-				selectedElementOnClickLogic={selectedElementOnClickLogic}
-				searchAndSelectDropdownElementOnClickLogic={
-					searchAndSelectDropdownElementOnClickLogic
+				selectedElementOnClickEventHandler={selectedElementOnClickEventHandler}
+				searchAndSelectDropdownElementOnClickEventHandler={
+					searchAndSelectDropdownElementOnClickEventHandler
 				}
 			/>
 		</AddContentStyle>

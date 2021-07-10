@@ -8,7 +8,7 @@ import { useTextEditor } from "../../../hooks/text-editor/useTextEditor";
 import {
 	setPostCaptionNodesArray,
 	setPostCaptionErrorMessage,
-} from "../../../redux/upload-post/post-caption/postCaptionAction";
+} from "../../../redux/add-post/post-caption/postCaptionAction";
 
 import { AddContentStyle } from "../../../styles";
 

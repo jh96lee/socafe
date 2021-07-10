@@ -7,7 +7,7 @@ import {
 	uploadPostImage,
 	deletePostImage,
 	setPostImagesErrorMessage,
-} from "../../../redux/upload-post/post-images/postImagesAction";
+} from "../../../redux/add-post/post-images/postImagesAction";
 
 import { AddContentStyle } from "../../../styles";
 

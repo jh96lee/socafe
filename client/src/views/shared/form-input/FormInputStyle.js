@@ -47,6 +47,6 @@ export const FormInputStyle = styled.div`
 	}
 
 	& input:focus {
-		box-shadow: 0 0 0 1.6px var(--button-default-focus-color);
+		box-shadow: 0 0 0 1.6px var(--input-default-focus-color);
 	}
 `;

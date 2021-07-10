@@ -7,25 +7,40 @@ import { IconElement } from "../../shared";
 import { NavigationStyle } from "../styles/NavigationStyle";
 
 import {
-	Home,
-	Explore,
-	Marketplace,
-	Notification,
-	Feedback,
+	HomeFilled,
+	HomeOutline,
+	ExploreFilled,
+	ExploreOutline,
+	NotificationFilled,
+	NotificationOutline,
+	MarketplaceFilled,
+	MarketplaceOutline,
+	FeedbackFilled,
+	FeedbackOutline,
 } from "../../../assets";
 
 const Navigation = ({ isResponsiveNavigationOpen }) => {
-	const iconSize = "2.4rem";
 	const iconRole = "navigation";
+
+	const iconElementStyleObject = {
+		elementPadding: "0.85rem",
+		iconSize: "2.4rem",
+	};
 
 	const { user } = useSelector((state) => state.userReducer);
 
 	return (
 		<NavigationStyle isResponsiveNavigationOpen={isResponsiveNavigationOpen}>
 			<NavLink exact to="/">
-				<IconElement iconRole={iconRole} iconElementStyleObject={{ iconSize }}>
-					<Home />
+				<IconElement
+					iconRole={iconRole}
+					iconElementStyleObject={iconElementStyleObject}
+				>
+					<HomeFilled id="filled" />
+
+					<HomeOutline id="outline" />
 				</IconElement>
+
 				<span>Home</span>
 			</NavLink>
 
@@ -33,31 +48,48 @@ const Navigation = ({ isResponsiveNavigationOpen }) => {
 				<NavLink exact to="/notification">
 					<IconElement
 						iconRole={iconRole}
-						iconElementStyleObject={{ iconSize }}
+						iconElementStyleObject={iconElementStyleObject}
 					>
-						<Notification />
+						<NotificationFilled id="filled" />
+
+						<NotificationOutline id="outline" />
 					</IconElement>
 					<span>Notification</span>
 				</NavLink>
 			)}
 
 			<NavLink exact to="/explore">
-				<IconElement iconRole={iconRole} iconElementStyleObject={{ iconSize }}>
-					<Explore />
+				<IconElement
+					iconRole={iconRole}
+					iconElementStyleObject={iconElementStyleObject}
+				>
+					<ExploreFilled id="filled" />
+
+					<ExploreOutline id="outline" />
 				</IconElement>
 				<span>Explore</span>
 			</NavLink>
 
 			<NavLink exact to="/marketplace">
-				<IconElement iconRole={iconRole} iconElementStyleObject={{ iconSize }}>
-					<Marketplace />
+				<IconElement
+					iconRole={iconRole}
+					iconElementStyleObject={iconElementStyleObject}
+				>
+					<MarketplaceFilled id="filled" />
+
+					<MarketplaceOutline id="outline" />
 				</IconElement>
 				<span>Marketplace</span>
 			</NavLink>
 
 			<NavLink exact to="/feedback">
-				<IconElement iconRole={iconRole} iconElementStyleObject={{ iconSize }}>
-					<Feedback />
+				<IconElement
+					iconRole={iconRole}
+					iconElementStyleObject={iconElementStyleObject}
+				>
+					<FeedbackFilled id="filled" />
+
+					<FeedbackOutline id="outline" />
 				</IconElement>
 				<span>Feedback</span>
 			</NavLink>

@@ -17,7 +17,7 @@ const DropdownMenu = ({
 						<DropdownElement
 							key={`${element.id}__${idx}`}
 							dropdownElementContent={element.content}
-							dropdownElementOnClickLogic={element.onClickLogic}
+							dropdownElementOnClickEventHandler={element.onClickEventHandler}
 						/>
 					);
 				})

@@ -3,7 +3,7 @@ import ReactDom from "react-dom";
 import { useParams, useHistory } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 
-import { IconElement, Loader, UserMetadata, PostLikes } from "../../shared";
+import { IconElement, UserMetadata, PostLikes, Loader } from "../../shared";
 import {
 	PostImages,
 	PostTaggedUsers,
@@ -15,10 +15,7 @@ import {
 } from "../../shared/post-elements";
 // import PostCommentPopup from "../../shared/post-elements/components/PostCommentPopup";
 
-import {
-	fetchPostModal,
-	resetPostModal,
-} from "../../../redux/post-modal/postModalAction";
+import { fetchPost, resetPost } from "../../../redux/post/postAction";
 
 import {
 	PostStyle,
@@ -37,12 +34,12 @@ const Post = () => {
 	const dispatch = useDispatch();
 
 	const { postID } = useParams();
+
 	const history = useHistory();
 
-	const { postModal, isPostModalLoaded } = useSelector(
-		(state) => state.postModalReducer
-	);
+	const { post, isPostLoaded } = useSelector((state) => state.postReducer);
 	const { user } = useSelector((state) => state.userReducer);
+
 	const userID = user ? user.id : 0;
 
 	const handlePostOnClick = () => {
@@ -50,50 +47,48 @@ const Post = () => {
 	};
 
 	React.useEffect(() => {
-		dispatch(fetchPostModal(postID, userID));
+		dispatch(fetchPost(postID, userID));
 
 		return () => {
-			dispatch(resetPostModal());
+			dispatch(resetPost());
 		};
 	}, []);
 
 	return ReactDom.createPortal(
 		<PostOverlayStyle>
-			{isPostModalLoaded ? (
+			{isPostLoaded ? (
 				<PostStyle>
 					<PostMainDataStyle>
 						<PostImages
-							postImagesArray={postModal.images}
-							conditionalPostImagesRenderingVariable={isPostModalLoaded}
+							postImagesArray={post.images}
+							conditionalRenderingVariable={isPostLoaded}
 						/>
 
 						<PostTaggedUsers
-							postTaggedUsersArray={postModal.taggedUsers}
-							conditionalPostTaggedUsersRenderingVariable={isPostModalLoaded}
+							postTaggedUsersArray={post.taggedUsers}
+							conditionalRenderingVariable={isPostLoaded}
 						/>
 					</PostMainDataStyle>
 
 					<PostHorizontalMetadataStyle>
 						<UserMetadata
-							userID={postModal.user.user_id}
-							avatarURL={postModal.user.avatar_url}
-							username={postModal.user.username}
-							fullName={postModal.user.full_name}
+							userID={post.user.user_id}
+							avatarURL={post.user.avatar_url}
+							username={post.user.username}
+							fullName={post.user.full_name}
 							avatarSize="4.4rem"
 							usernameFontSize="1.4rem"
 							fullNameFontSize="1.3rem"
 							onClick={null}
-							conditionalRenderingVariable={isPostModalLoaded}
+							conditionalRenderingVariable={isPostLoaded}
 						/>
 
 						<PostTotalsMetadataStyle>
 							<PostLikes />
 
 							<PostTotalComments
-								postTotalComments={postModal.totalComments}
-								conditionalPostTotalCommentsRenderingVariable={
-									isPostModalLoaded
-								}
+								postTotalComments={post.totalComments}
+								conditionalRenderingVariable={isPostLoaded}
 							/>
 
 							<PostBookmark />
@@ -102,15 +97,13 @@ const Post = () => {
 
 					<PostVerticalMetadataStyle>
 						<PostSelectedCategories
-							selectedPostCategoriesArray={postModal.categories}
-							conditionalPostSelectedCategoriesRenderingVariable={
-								isPostModalLoaded
-							}
+							selectedPostCategoriesArray={post.categories}
+							conditionalRenderingVariable={isPostLoaded}
 						/>
 
 						<PostContents
-							postContentsArray={postModal.contents}
-							conditionalPostContentsRenderingVariable={isPostModalLoaded}
+							postContentsArray={post.contents}
+							conditionalRenderingVariable={isPostLoaded}
 						/>
 					</PostVerticalMetadataStyle>
 

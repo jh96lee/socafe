@@ -17,7 +17,7 @@ import {
 	Login,
 	Logout,
 	Edit,
-	Notification,
+	NotificationOutline,
 	Stats,
 } from "../../../assets";
 
@@ -41,7 +41,7 @@ const HeaderAvatar = () => {
 							label: "Profile",
 							icon: <Account />,
 						},
-						onClickLogic: () => {
+						onClickEventHandler: () => {
 							history.push(`/profile/${user.id}`);
 						},
 					},
@@ -50,16 +50,16 @@ const HeaderAvatar = () => {
 							label: "Edit Profile",
 							icon: <Edit />,
 						},
-						onClickLogic: () => {
+						onClickEventHandler: () => {
 							history.push(`/profile/edit/${user.id}`);
 						},
 					},
 					{
 						content: {
 							label: "Notifications",
-							icon: <Notification />,
+							icon: <NotificationOutline />,
 						},
-						onClickLogic: () => {
+						onClickEventHandler: () => {
 							history.push(`/notification/${user.id}`);
 						},
 					},
@@ -68,7 +68,7 @@ const HeaderAvatar = () => {
 							label: "Stats",
 							icon: <Stats />,
 						},
-						onClickLogic: () => {
+						onClickEventHandler: () => {
 							history.push(`/stats/${user.id}`);
 						},
 					},
@@ -77,7 +77,7 @@ const HeaderAvatar = () => {
 							label: "Logout",
 							icon: <Logout />,
 						},
-						onClickLogic: () => {
+						onClickEventHandler: () => {
 							dispatch(logoutUser());
 						},
 					},
@@ -88,7 +88,7 @@ const HeaderAvatar = () => {
 							label: "Login",
 							icon: <Login />,
 						},
-						onClickLogic: () => {
+						onClickEventHandler: () => {
 							history.push("/login");
 						},
 					},
@@ -97,7 +97,7 @@ const HeaderAvatar = () => {
 							label: "Register",
 							icon: <Register />,
 						},
-						onClickLogic: () => {
+						onClickEventHandler: () => {
 							history.push("/register");
 						},
 					},

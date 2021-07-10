@@ -20,9 +20,9 @@ export const SearchbarWrapperStyle = styled.div`
 	align-items: center;
 	background-color: var(--bg-1);
 	padding: 0.35rem 1.4rem;
-	border: 1px solid var(--separator-1);
+	border: 1px solid var(--input-default-separator-color);
 	border-radius: 2.5rem;
-	box-shadow: 0px 0.6px 2px 0.2px var(--separator-1);
+	box-shadow: 0px 0px 2px 0.5px var(--input-default-separator-color);
 
 	/* REVIEW: parent component's CSS controlling children components' styles */
 	& > *:nth-child(3) {

@@ -54,7 +54,7 @@ const UploadImageButton = ({
 			<UploadImageButtonCTAStyle>
 				<Images />
 
-				<p>Upload Images</p>
+				<p>Upload Image</p>
 			</UploadImageButtonCTAStyle>
 		</UploadImageButtonStyle>
 	);

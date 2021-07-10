@@ -14,14 +14,13 @@ const SearchbarButton = () => {
 		"searchbar-button-dropdown-menu"
 	);
 
-	const searchbarButtonDropdownElementArray = [
+	const dropdownElementsArray = [
 		{
-			type: "link",
 			content: {
 				icon: <Smile style={{ fill: "#000" }} />,
 				label: "This button does nothing. It's just here for decoration",
 			},
-			onClickEventHandler: null,
+			onClickEventHandler: () => {},
 		},
 	];
 
@@ -31,12 +30,10 @@ const SearchbarButton = () => {
 				iconRole="presentation"
 				iconElementStyleObject={{
 					iconSize: "1.8rem",
-					iconResponsiveSize: "1.8rem",
 					iconColor: "#fff",
-					iconHoverColor: {},
 					elementPadding: "0.6rem",
-					elementBackgroundColor: "var(--bg-clickable-1)",
-					elementHoverBackgroundColor: "var(--bg-clickable-hover-1)",
+					elementBackgroundColor: "var(--button-default-bg-color)",
+					elementHoverBackgroundColor: "var(--button-default-hover-bg-color)",
 				}}
 			>
 				<Search />
@@ -45,8 +42,7 @@ const SearchbarButton = () => {
 			{isDropdownMenuOpen && (
 				<DropdownMenu
 					dropdownMenuID="searchbar-button-dropdown-menu"
-					dropdownElementKey="searchbar-button-dropdown-element"
-					dropdownElementArray={searchbarButtonDropdownElementArray}
+					dropdownElementsArray={dropdownElementsArray}
 					dropdownMenuStyleObject={{
 						menuTop: "calc(100% + 7px)",
 						menuRight: "0",

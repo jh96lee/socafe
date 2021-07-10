@@ -39,8 +39,8 @@ export const UploadImageButtonCTAStyle = styled.div`
 	}
 
 	& p {
-		font-size: 1.4rem;
-		font-weight: 500;
+		font-size: 1.35rem;
+		font-weight: 400;
 		color: #fff;
 	}
 `;

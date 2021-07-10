@@ -9,8 +9,6 @@ const GlobalStyles = createGlobalStyle`
 					props.theme.isDarkMode ? "#ce0036" : "#ea284b"};
         --button-default-hover-bg-color: ${(props) =>
 					props.theme.isDarkMode ? "#c10033" : "#ff0042"};
-        --button-default-focus-color: ${(props) =>
-					props.theme.isDarkMode ? "#9ee0ff" : "#00b0ff"};
         --button-disabled-color: ${(props) =>
 					props.theme.isDarkMode ? "#ffffff66" : "#ffffffb3"};
         --button-disabled-bg-color: ${(props) =>
@@ -28,7 +26,13 @@ const GlobalStyles = createGlobalStyle`
         --icon-presentation-color: ${(props) =>
 					props.theme.isDarkMode ? "#92ccff" : "#64748b"};
         --icon-presentation-bg-color: ${(props) =>
-					props.theme.isDarkMode ? "#a0d5ff1f" : "#72909e2b"};
+					props.theme.isDarkMode ? "#a0d5ff1f" : "#607d8b33"};
+
+        /* REVIEW: icon link */ 
+        --icon-active-link-color: ${(props) =>
+					props.theme.isDarkMode ? "#b0e5ff" : "#5481d1"};
+        --icon-active-link-bg-color: ${(props) =>
+					props.theme.isDarkMode ? "#bad6ff3d" : "#008dff38"};
         
         /* REVIEW: input default */
         --input-default-bg-color: ${(props) =>
@@ -37,6 +41,8 @@ const GlobalStyles = createGlobalStyle`
 					props.theme.isDarkMode ? "#0a0a0a" : "#d3dfe4"};
         --input-placeholder-default-color: ${(props) =>
 					props.theme.isDarkMode ? "#bcbebf" : "#546a75"};
+        --input-default-focus-color: ${(props) =>
+					props.theme.isDarkMode ? "#9ee0ff" : "#00b0ff"};
 
         /* REVIEW: secondary element */
         --secondary-element-default-color: ${(props) =>
@@ -59,6 +65,10 @@ const GlobalStyles = createGlobalStyle`
         --separator-1: ${(props) =>
 					props.theme.isDarkMode ? "#101112" : "#d2dee4"};
 
+        /* REVIEW: story */
+        --story-empty-color: ${(props) =>
+					props.theme.isDarkMode ? "#3a3e42" : "#dcdcdc"};
+
         /* TODO: text */
         --txt-error: ${(props) =>
 					props.theme.isDarkMode ? "#fd8097" : "#a70202"};
@@ -72,8 +82,6 @@ const GlobalStyles = createGlobalStyle`
         --bg-2: ${(props) => (props.theme.isDarkMode ? "#202229" : "#f9fafb")};
         --bg-post: ${(props) => (props.theme.isDarkMode ? "#161719" : "#fff")};
         --bg-filled-story:  linear-gradient(to right, #0d69ff, #16b3ff); 
-        --bg-empty-story: ${(props) =>
-					props.theme.isDarkMode ? "#3a3e42" : "#dcdcdc"};
         --bg-error: ${(props) =>
 					props.theme.isDarkMode ? "#ff000033" : "#ff5b5b4d"};
         --bg-success: ${(props) =>

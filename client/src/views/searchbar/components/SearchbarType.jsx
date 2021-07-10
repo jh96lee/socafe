@@ -14,24 +14,25 @@ const SearchbarType = ({ searchType, setSearchType }) => {
 		"searchbar-type-dropdown-menu"
 	);
 
-	const handleOnClick = (e) => {
-		setSearchType(e.currentTarget.dataset.value);
-	};
-
-	const searchbarTypeDropdownElementArray = React.useMemo(() => {
+	const dropdownElementsArray = React.useMemo(() => {
 		return [
 			{
 				content: {
 					label: "Users",
-					icon: <Users />,
+					icon: <Users data-search-type="user" />,
 				},
-				type: "link",
-				onClickEventHandler: handleOnClick,
+				onClickEventHandler: () => {
+					setSearchType("Users");
+				},
 			},
 			{
-				content: { label: "Products", icon: <Product /> },
-				type: "link",
-				onClickEventHandler: handleOnClick,
+				content: {
+					label: "Products",
+					icon: <Product data-search-type="product" />,
+				},
+				onClickEventHandler: () => {
+					setSearchType("Products");
+				},
 			},
 		];
 	}, []);
@@ -45,8 +46,7 @@ const SearchbarType = ({ searchType, setSearchType }) => {
 			{isDropdownMenuOpen && (
 				<DropdownMenu
 					dropdownMenuID="searchbar-type-dropdown-menu"
-					dropdownElementKey="searchbar-type-dropdown-element"
-					dropdownElementArray={searchbarTypeDropdownElementArray}
+					dropdownElementsArray={dropdownElementsArray}
 					dropdownMenuStyleObject={{
 						menuTop: "calc(100% + 7px)",
 						menuLeft: "0",

@@ -2,7 +2,7 @@ import styled from "styled-components";
 
 export const NavigationStyle = styled.nav`
 	position: sticky;
-	top: 85px;
+	top: 78px;
 	display: flex;
 	flex-direction: column;
 	justify-content: center;
@@ -25,18 +25,35 @@ export const NavigationStyle = styled.nav`
 		color: var(--icon-1);
 	}
 
-	& .active > div {
-		background-color: var(--bg-4);
+	& #filled {
+		display: none;
+	}
+
+	& .active div {
+		background-color: var(--icon-active-link-bg-color);
+	}
+
+	& .active #filled {
+		display: block;
+		fill: var(--icon-active-link-color);
+	}
+
+	& .active #outline {
+		display: none;
+	}
+
+	/* & .active > div {
+		background-color: var(--icon-active-link-bg-color);
 	}
 
 	& .active svg {
-		fill: var(--icon-1);
+		fill: var(--icon-active-link-color);
 	}
 
 	& .active span {
 		font-weight: 400;
 		color: var(--text-1);
-	}
+	} */
 
 	@media (max-width: 700px) {
 		position: absolute;

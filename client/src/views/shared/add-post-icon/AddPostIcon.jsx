@@ -3,7 +3,7 @@ import { useHistory, useLocation } from "react-router-dom";
 
 import { AddPostIconStyle } from "./AddPostIconStyle";
 
-import { PlusAlt, HomeAlt } from "../../../assets";
+import { PlusAlt, HomeFilled } from "../../../assets";
 
 const AddPostIcon = () => {
 	const history = useHistory();
@@ -19,7 +19,7 @@ const AddPostIcon = () => {
 	return (
 		<React.Fragment>
 			<AddPostIconStyle onClick={handleOnClick}>
-				{isAddIncludedInPathname ? <HomeAlt /> : <PlusAlt />}
+				{isAddIncludedInPathname ? <HomeFilled /> : <PlusAlt />}
 			</AddPostIconStyle>
 		</React.Fragment>
 	);

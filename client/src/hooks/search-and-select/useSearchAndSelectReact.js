@@ -5,7 +5,9 @@ const useSearchAndSelectReact = (maxContentsLength, contentType) => {
 	const [selectContentErrorMessage, setSelectContentErrorMessage] =
 		React.useState(null);
 
-	const searchAndSelectDropdownElementOnClickLogic = (selectedElement) => {
+	const searchAndSelectDropdownElementOnClickEventHandler = (
+		selectedElement
+	) => {
 		const maxSelectedContentsErrorMessage = `You can select up to ${maxContentsLength} ${contentType}`;
 		const duplicateContentsErrorMessage = `Duplicate ${contentType} cannot be selected`;
 
@@ -30,7 +32,7 @@ const useSearchAndSelectReact = (maxContentsLength, contentType) => {
 		setSelectContentErrorMessage(null);
 	};
 
-	const selectedElementOnClickLogic = (elementID) => {
+	const selectedElementOnClickEventHandler = (elementID) => {
 		setSelectContentErrorMessage(null);
 
 		setSelectedContentsArray((prevState) => {
@@ -41,8 +43,8 @@ const useSearchAndSelectReact = (maxContentsLength, contentType) => {
 	};
 
 	return {
-		searchAndSelectDropdownElementOnClickLogic,
-		selectedElementOnClickLogic,
+		searchAndSelectDropdownElementOnClickEventHandler,
+		selectedElementOnClickEventHandler,
 		selectedContentsArray,
 		selectContentErrorMessage,
 	};

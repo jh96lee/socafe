@@ -9,7 +9,7 @@ import {
 	addPostUser,
 	removePostUser,
 	setPostUsersErrorMessage,
-} from "../../../redux/upload-post/post-users/postUsersAction";
+} from "../../../redux/add-post/post-users/postUsersAction";
 
 import { AddContentStyle } from "../../../styles";
 
@@ -19,8 +19,8 @@ const AddPostUsers = () => {
 	);
 
 	const {
-		searchAndSelectDropdownElementOnClickLogic,
-		selectedElementOnClickLogic,
+		searchAndSelectDropdownElementOnClickEventHandler,
+		selectedElementOnClickEventHandler,
 	} = useSearchAndSelectRedux(
 		3,
 		"users",
@@ -42,9 +42,9 @@ const AddPostUsers = () => {
 				searchAndSelectedElementsArray={postUsersArray}
 				searchAndSelectInputPlaceholder="Search for users"
 				searchAndSelectInputAPIEndpoint="/search/users"
-				selectedElementOnClickLogic={selectedElementOnClickLogic}
-				searchAndSelectDropdownElementOnClickLogic={
-					searchAndSelectDropdownElementOnClickLogic
+				selectedElementOnClickEventHandler={selectedElementOnClickEventHandler}
+				searchAndSelectDropdownElementOnClickEventHandler={
+					searchAndSelectDropdownElementOnClickEventHandler
 				}
 			/>
 		</AddContentStyle>

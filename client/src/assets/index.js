@@ -23,11 +23,13 @@ import { ReactComponent as CloseAlt } from "./general/close-alt.svg";
 import { ReactComponent as SocafeDark } from "./logo/socafe-dark.svg";
 import { ReactComponent as SocafeLight } from "./logo/socafe-light.svg";
 
-import { ReactComponent as Explore } from "./navigation/explore.svg";
-import { ReactComponent as Feedback } from "./navigation/feedback.svg";
+import { ReactComponent as ExploreFilled } from "./navigation/explore-filled.svg";
+import { ReactComponent as ExploreOutline } from "./navigation/explore-outline.svg";
+import { ReactComponent as FeedbackFilled } from "./navigation/feedback-filled.svg";
+import { ReactComponent as FeedbackOutline } from "./navigation/feedback-outline.svg";
 import { ReactComponent as Hamburger } from "./navigation/hamburger.svg";
-import { ReactComponent as Home } from "./navigation/home.svg";
-import { ReactComponent as HomeAlt } from "./navigation/home-alt.svg";
+import { ReactComponent as HomeFilled } from "./navigation/home-filled.svg";
+import { ReactComponent as HomeOutline } from "./navigation/home-outline.svg";
 
 import { ReactComponent as Comment } from "./post/comment.svg";
 import { ReactComponent as Image } from "./post/image.svg";
@@ -42,10 +44,12 @@ import { ReactComponent as HeartFill } from "./post/heart-fill.svg";
 import { ReactComponent as Posts } from "./post/posts.svg";
 
 import { ReactComponent as Cart } from "./product/cart.svg";
-import { ReactComponent as Marketplace } from "./product/marketplace.svg";
 import { ReactComponent as Product } from "./product/product.svg";
+import { ReactComponent as MarketplaceFilled } from "./product/marketplace-filled.svg";
+import { ReactComponent as MarketplaceOutline } from "./product/marketplace-outline.svg";
 
-import { ReactComponent as Notification } from "./user/notification.svg";
+import { ReactComponent as NotificationFilled } from "./user/notification-filled.svg";
+import { ReactComponent as NotificationOutline } from "./user/notification-outline.svg";
 import { ReactComponent as Search } from "./user/search.svg";
 import { ReactComponent as Stats } from "./user/stats.svg";
 import { ReactComponent as User } from "./user/user.svg";
@@ -79,22 +83,20 @@ export {
 	Smile,
 	SocafeDark,
 	SocafeLight,
-	Explore,
-	Feedback,
+	ExploreFilled,
+	ExploreOutline,
 	Hamburger,
-	Home,
 	Comment,
 	MultipleUsers,
 	PlusPost,
 	BookmarkFill,
-	HomeAlt,
 	BookmarkEmpty,
 	TagUser,
 	Image,
 	Cart,
-	Marketplace,
 	Product,
-	Notification,
+	NotificationFilled,
+	NotificationOutline,
 	Search,
 	Stats,
 	Story,
@@ -118,4 +120,10 @@ export {
 	Following,
 	Account,
 	Settings,
+	HomeFilled,
+	HomeOutline,
+	MarketplaceFilled,
+	MarketplaceOutline,
+	FeedbackFilled,
+	FeedbackOutline,
 };

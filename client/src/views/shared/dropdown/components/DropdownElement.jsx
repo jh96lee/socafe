@@ -7,14 +7,14 @@ import { DropdownElementMetadataStyle } from "../styles/DropdownElementMetadataS
 
 const DropdownElement = ({
 	dropdownElementContent,
-	dropdownElementOnClickLogic,
+	dropdownElementOnClickEventHandler,
+	otherProps,
 }) => {
-	const handleDropdownElementOnClick = () => {
-		dropdownElementOnClickLogic();
-	};
-
 	return (
-		<DropdownElementStyle onClick={handleDropdownElementOnClick}>
+		<DropdownElementStyle
+			onClick={dropdownElementOnClickEventHandler}
+			{...otherProps}
+		>
 			{dropdownElementContent.icon ? (
 				<IconElement
 					iconRole="presentation"

@@ -8,7 +8,7 @@ import {
 	Account,
 	Edit,
 	Password,
-	Notification,
+	NotificationOutline,
 	Stats,
 	Story,
 } from "../../../assets";
@@ -80,7 +80,7 @@ const PrivateProfileSidebar = ({ userID }) => {
 		},
 		{
 			label: "Notifications",
-			icon: <Notification />,
+			icon: <NotificationOutline />,
 			onClick: (idx) => {
 				setActiveIndex(idx);
 

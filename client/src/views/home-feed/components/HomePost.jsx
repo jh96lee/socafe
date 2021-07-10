@@ -15,6 +15,8 @@ const HomePost = ({ post }) => {
 	const { post_id, user, images, content, totalComments, totalLikes, isLiked } =
 		post;
 
+	console.log(post);
+
 	const homePostLocation = useLocation();
 	const history = useHistory();
 
@@ -54,9 +56,9 @@ const HomePost = ({ post }) => {
 
 			<HomePostFooterStyle>
 				<PostLikes
-					postID={post_id}
-					totalLikesData={totalLikes}
-					isLikedData={isLiked}
+					postIDData={post_id}
+					postIsLikedData={totalLikes}
+					postTotalLikesData={isLiked}
 				/>
 
 				<HomePostComment totalComments={totalComments} />

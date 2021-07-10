@@ -6,6 +6,7 @@ export const DropdownElementStyle = styled.div`
 	gap: 1.5rem;
 	padding: 0.6rem;
 	border-radius: 0.5rem;
+	min-width: 16rem;
 
 	& img {
 		width: 4rem;

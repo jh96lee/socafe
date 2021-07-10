@@ -14,7 +14,7 @@ export const SearchbarTypeStyle = styled.div`
 	& > svg {
 		width: 1rem;
 		height: 1rem;
-		fill: var(--icon-2);
+		fill: var(--icon-default-color);
 	}
 
 	&:hover {

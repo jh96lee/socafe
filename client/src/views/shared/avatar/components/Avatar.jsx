@@ -10,10 +10,10 @@ const Avatar = ({
 	avatarURL,
 	avatarSize,
 	avatarOnClick,
-	isAvatarBubblePresent = true,
+	isAvatarBubblePresent = false,
 }) => {
 	// TODO: need logic for this
-	const isAvatarRingFilled = true;
+	const isAvatarRingFilled = false;
 
 	return (
 		<AvatarStyle avatarSize={avatarSize}>

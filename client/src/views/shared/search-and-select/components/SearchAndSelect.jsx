@@ -13,8 +13,8 @@ const SearchAndSelect = ({
 	searchAndSelectedElementsArray,
 	searchAndSelectInputPlaceholder,
 	searchAndSelectInputAPIEndpoint,
-	selectedElementOnClickLogic,
-	searchAndSelectDropdownElementOnClickLogic,
+	selectedElementOnClickEventHandler,
+	searchAndSelectDropdownElementOnClickEventHandler,
 }) => {
 	const { isDropdownMenuOpen, setIsDropdownMenuOpen } = useDropdown(
 		`search-and-select-${searchAndSelectType}-dropdown-trigger`,
@@ -30,8 +30,8 @@ const SearchAndSelect = ({
 	const dropdownMenuArray = searchResultsArray.map((result) => {
 		return {
 			content: result,
-			onClickLogic: () => {
-				searchAndSelectDropdownElementOnClickLogic(result);
+			onClickEventHandler: () => {
+				searchAndSelectDropdownElementOnClickEventHandler(result);
 			},
 		};
 	});
@@ -43,7 +43,7 @@ const SearchAndSelect = ({
 			<SearchAndSelectedElements
 				searchAndSelectType={searchAndSelectType}
 				searchAndSelectedElementsArray={searchAndSelectedElementsArray}
-				selectedElementOnClickLogic={selectedElementOnClickLogic}
+				selectedElementOnClickEventHandler={selectedElementOnClickEventHandler}
 			/>
 
 			<FormInput

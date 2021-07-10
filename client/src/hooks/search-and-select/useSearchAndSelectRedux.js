@@ -10,7 +10,9 @@ const useSearchAndSelectRedux = (
 ) => {
 	const dispatch = useDispatch();
 
-	const searchAndSelectDropdownElementOnClickLogic = (selectedElement) => {
+	const searchAndSelectDropdownElementOnClickEventHandler = (
+		selectedElement
+	) => {
 		const maxSelectedContentsErrorMessage = `You can select up to ${maxContentsLength} ${contentType}`;
 		const duplicateContentsErrorMessage = `Duplicate ${contentType} cannot be selected`;
 
@@ -33,13 +35,13 @@ const useSearchAndSelectRedux = (
 		dispatch(addContentAction(selectedElement));
 	};
 
-	const selectedElementOnClickLogic = (elementID) => {
+	const selectedElementOnClickEventHandler = (elementID) => {
 		dispatch(removeContentAction(elementID));
 	};
 
 	return {
-		searchAndSelectDropdownElementOnClickLogic,
-		selectedElementOnClickLogic,
+		searchAndSelectDropdownElementOnClickEventHandler,
+		selectedElementOnClickEventHandler,
 	};
 };
 

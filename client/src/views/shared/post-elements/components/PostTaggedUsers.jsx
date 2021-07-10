@@ -13,7 +13,7 @@ import { MultipleUsers } from "../../../../assets";
 
 const PostTaggedUsers = ({
 	postTaggedUsersArray,
-	conditionalPostTaggedUsersRenderingVariable,
+	conditionalRenderingVariable,
 }) => {
 	const { isDropdownMenuOpen } = useDropdown(
 		"post-tagged-users-dropdown-trigger",
@@ -30,8 +30,7 @@ const PostTaggedUsers = ({
 		});
 	};
 
-	return conditionalPostTaggedUsersRenderingVariable &&
-		postTaggedUsersArray.length !== 0 ? (
+	return conditionalRenderingVariable && postTaggedUsersArray.length !== 0 ? (
 		<PostTaggedUsersStyle id="post-tagged-users-dropdown-trigger">
 			<PostTaggedUsersIconElementStyle>
 				<MultipleUsers />

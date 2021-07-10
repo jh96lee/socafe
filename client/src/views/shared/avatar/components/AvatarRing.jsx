@@ -11,19 +11,13 @@ const AvatarRing = ({ isAvatarRingFilled }) => {
 				</linearGradient>
 			</defs>
 
-			<defs>
-				<linearGradient id="empty" gradientTransform="rotate(90)">
-					<stop offset="5%" stop-color="#3a3e42" />
-
-					<stop offset="95%" stop-color="#dcdcdc" />
-				</linearGradient>
-			</defs>
-
 			<circle
 				cx="50"
 				cy="50"
 				r="45.5"
-				stroke={isAvatarRingFilled ? "url('#ring')" : "var(--bg-empty-story)"}
+				stroke={
+					isAvatarRingFilled ? "url('#ring')" : "var(--story-empty-color)"
+				}
 				fill="none"
 			/>
 		</svg>

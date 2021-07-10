@@ -4,11 +4,14 @@ import { CloseAlt } from "../../../../assets";
 
 import { SelectedElementStyle } from "../styles/SelectedElementStyle";
 
-const SelectedElement = ({ selectedElement, selectedElementOnClickLogic }) => {
+const SelectedElement = ({
+	selectedElement,
+	selectedElementOnClickEventHandler,
+}) => {
 	const { id } = selectedElement;
 
 	const handleSelectedElementOnClick = () => {
-		selectedElementOnClickLogic(id);
+		selectedElementOnClickEventHandler(id);
 	};
 
 	return (
