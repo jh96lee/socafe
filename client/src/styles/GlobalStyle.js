@@ -30,9 +30,13 @@ const GlobalStyles = createGlobalStyle`
 
         /* REVIEW: icon link */ 
         --icon-active-link-color: ${(props) =>
-					props.theme.isDarkMode ? "#b0e5ff" : "#5481d1"};
+					props.theme.isDarkMode ? "#b0e5ff" : "#44a0e4"};
         --icon-active-link-bg-color: ${(props) =>
-					props.theme.isDarkMode ? "#bad6ff3d" : "#008dff38"};
+					props.theme.isDarkMode ? "#bad6ff3d" : "#87cefa73"};
+
+        /* REVIEW: icon success */
+        --icon-success-color: ${(props) =>
+					props.theme.isDarkMode ? "#00b700" : "#009800"};
         
         /* REVIEW: input default */
         --input-default-bg-color: ${(props) =>
@@ -68,6 +72,10 @@ const GlobalStyles = createGlobalStyle`
         /* REVIEW: story */
         --story-empty-color: ${(props) =>
 					props.theme.isDarkMode ? "#3a3e42" : "#dcdcdc"};
+
+        /* REVIEW: general link */
+        --link-cta-color: ${(props) =>
+					props.theme.isDarkMode ? "#87ceeb" : "#119bc9"};
 
         /* TODO: text */
         --txt-error: ${(props) =>

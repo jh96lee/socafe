@@ -13,7 +13,7 @@ const IconElementStyle = styled.div`
 	padding: ${(props) => props.elementPadding || "0.8rem"};
 	outline: none;
 	border: none;
-	border-radius: 50%;
+	border-radius: ${(props) => props.elementBorderRadius || "50%"};
 	background-color: ${(props) =>
 		props.elementBackgroundColor || "var(--icon-default-bg-color)"};
 	box-shadow: ${(props) => props.elementBoxShadow};

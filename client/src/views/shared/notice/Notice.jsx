@@ -1,8 +1,8 @@
 import * as React from "react";
 
-import { Button } from "../index";
+import { Button, IconElement } from "../index";
 
-import { NoticeStyle, NoticeIconStyle } from "./NoticeStyle";
+import { NoticeStyle } from "./NoticeStyle";
 
 const Notice = ({
 	noticeEvent,
@@ -14,7 +14,6 @@ const Notice = ({
 		let noticeTimeout = setTimeout(() => {
 			noticeEvent();
 		}, 3000);
-
 		return () => {
 			clearTimeout(noticeTimeout);
 		};
@@ -22,17 +21,28 @@ const Notice = ({
 
 	return (
 		<NoticeStyle>
-			<NoticeIconStyle>{noticeIcon}</NoticeIconStyle>
+			<IconElement
+				iconRole="presentation"
+				iconElementStyleObject={{
+					elementPadding: "1.5rem",
+					elementBackgroundColor: "var(--icon-presentation-bg-color)",
+					elementBorderRadius: "1rem",
+					iconColor: "var(--icon-presentation-color)",
+					iconSize: "5rem",
+				}}
+			>
+				{noticeIcon}
+			</IconElement>
 
 			<h2>{noticeMainMessage}</h2>
 
-			{noticeSubMessage}
+			<p>{noticeSubMessage}</p>
 
 			<Button
 				onClick={noticeEvent}
 				buttonStyleObject={{ buttonWidth: "24rem" }}
 			>
-				Go back home
+				Go to home
 			</Button>
 		</NoticeStyle>
 	);

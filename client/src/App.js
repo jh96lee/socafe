@@ -6,13 +6,13 @@ import styled from "styled-components";
 
 import { Header, Navigation } from "./views/navigation";
 import {
-	RegisterPage,
 	LoginPage,
 	CategoryOfInterestPage,
 	HomePage,
 	AddPostPage,
 	UserProfilePage,
 	PrivateProfilePage,
+	UserRegisterPage,
 } from "./pages";
 import { AddPostIcon } from "./views/shared";
 import { Post } from "./views/post";
@@ -66,10 +66,6 @@ function App() {
 						<HomePage />
 					</Route>
 
-					{/* <Route exact path="/add-post">
-						{user ? <AddPostPage /> : <Redirect to="/login" />}
-					</Route> */}
-
 					<Route exact path="/user/:userID">
 						<UserProfilePage />
 					</Route>
@@ -80,7 +76,7 @@ function App() {
 					</Route>
 
 					<Route exact path="/register">
-						{user ? <Redirect to="/" /> : <RegisterPage />}
+						{user ? <Redirect to="/" /> : <UserRegisterPage />}
 					</Route>
 
 					<Route exact path="/login">

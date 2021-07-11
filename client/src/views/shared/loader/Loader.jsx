@@ -4,9 +4,8 @@ import { LoaderWrapperStyle, LoaderStyle } from "./LoaderStyle";
 
 const Loader = ({ isLoaderAbsolute, loaderSize, loaderBorderSize }) => {
 	return (
-		<LoaderWrapperStyle>
+		<LoaderWrapperStyle isLoaderAbsolute={isLoaderAbsolute}>
 			<LoaderStyle
-				isLoaderAbsolute={isLoaderAbsolute}
 				loaderSize={loaderSize}
 				loaderBorderSize={loaderBorderSize}
 			/>

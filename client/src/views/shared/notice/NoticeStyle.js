@@ -4,30 +4,22 @@ export const NoticeStyle = styled.div`
 	display: flex;
 	flex-direction: column;
 	align-items: center;
-	transform: translateY(50%);
+	width: 37rem;
+	padding: 3.5rem 2.5rem;
+	margin: 5rem auto;
+	border: 1px solid var(--input-default-separator-color);
+	box-shadow: 0 0 7px 1.6px var(--input-default-separator-color);
+	border-radius: 1rem;
 
 	& > h2 {
 		color: var(--text-1);
-		margin: 1rem 0 2rem 0;
+		margin: 2rem 0 1.5rem 0;
 	}
 
 	& > p {
-		color: var(--txt-2);
+		color: var(--text-2);
+		padding: 0 1rem;
 		margin-bottom: 3rem;
+		text-align: center;
 	}
-
-	& span {
-	}
-
-	& svg {
-		width: 5rem;
-		height: 5rem;
-		fill: var(--txt-success);
-	}
-`;
-
-export const NoticeIconStyle = styled.div`
-	background-color: var(--bg-success);
-	padding: 1.5rem;
-	border-radius: 1rem;
 `;

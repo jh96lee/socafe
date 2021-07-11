@@ -2,6 +2,7 @@ import styled from "styled-components";
 
 const ButtonStyle = styled.button`
 	position: ${(props) => props.buttonPosition};
+	display: block;
 	font-size: ${(props) => props.buttonFontSize || "1.4rem"};
 	font-weight: ${(props) => props.buttonFontWeight || "500"};
 	letter-spacing: -0.6px;

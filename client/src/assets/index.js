@@ -1,7 +1,9 @@
 import { ReactComponent as Complete } from "./form/complete.svg";
 import { ReactComponent as Checkmark } from "./form/checkmark.svg";
+import { ReactComponent as CheckmarkCircleFilled } from "./form/checkmark-circle-filled.svg";
 import { ReactComponent as Plus } from "./form/plus.svg";
 
+import { ReactComponent as Congratulation } from "./general/congratulation.svg";
 import { ReactComponent as Up } from "./general/up.svg";
 import { ReactComponent as Down } from "./general/down.svg";
 import { ReactComponent as Right } from "./general/right.svg";
@@ -67,8 +69,10 @@ import { ReactComponent as Recommendation } from "./user/recommendation.svg";
 
 export {
 	Complete,
+	Congratulation,
 	Recommendation,
 	Checkmark,
+	CheckmarkCircleFilled,
 	Plus,
 	Up,
 	Down,

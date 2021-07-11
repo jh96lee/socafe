@@ -10,6 +10,13 @@ import commentReducer from "./comment/commentReducer";
 import homeFeedReducer from "./home-feed/homeFeedReducer";
 import userProfileReducer from "./user-profile/userProfileReducer";
 
+import userRegisterFormReducer from "./user-register/user-register-form/userRegisterFormReducer";
+import userRegisterStepReducer from "./user-register/user-register-step/userRegisterStepReducer";
+import userRegisterFollowTopic from "./user-register/user-register-follow-topic/userRegisterFollowTopicReducer";
+
+import userFollowTopicsReducer from "./user-follow-topics/userFollowTopicsReducer";
+import userFollowingTopicsReducer from "./user-following-topics/userFollowingTopicsReducer";
+
 import postReducer from "./post/postReducer";
 
 import postImagesReducer from "./add-post/post-images/postImagesReducer";
@@ -33,6 +40,13 @@ const rootReducer = combineReducers({
 	postCaptionReducer,
 	postUploadReducer,
 	postReducer,
+
+	userRegisterFormReducer,
+	userRegisterStepReducer,
+	userRegisterFollowTopic,
+
+	userFollowTopicsReducer,
+	userFollowingTopicsReducer,
 });
 
 export default rootReducer;
