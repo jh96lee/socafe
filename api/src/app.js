@@ -10,7 +10,7 @@ const likeRouter = require("./routes/likeRoute");
 const followRouter = require("./routes/followRoute");
 const storyRouter = require("./routes/storyRoute");
 const reactionRouter = require("./routes/reactionRoute");
-const categoryRouter = require("./routes/categoryRoute");
+const topicRouter = require("./routes/topicRoute");
 
 module.exports = () => {
 	const app = express();
@@ -34,7 +34,7 @@ module.exports = () => {
 	app.use(followRouter);
 	app.use(storyRouter);
 	app.use(reactionRouter);
-	app.use(categoryRouter);
+	app.use(topicRouter);
 
 	app.use(cookieParser);
 

@@ -3,8 +3,12 @@ const pool = require("../../pool");
 const uploadPost = async (req, res) => {
 	const { userID } = res.locals;
 
-	const { imagesArray, categoriesArray, taggedUsersArray, nodesArray } =
-		req.body;
+	const {
+		postImagesArray,
+		postCategoriesArray,
+		postTaggedUsersArray,
+		postNodesArray,
+	} = req.body;
 
 	try {
 		const { rows } = await pool.queryToDatabase(
@@ -18,7 +22,7 @@ const uploadPost = async (req, res) => {
 
 		const postID = rows[0].id;
 
-		for (let image of imagesArray) {
+		for (let image of postImagesArray) {
 			const { url, width, height } = image;
 
 			await pool.queryToDatabase(
@@ -30,7 +34,7 @@ const uploadPost = async (req, res) => {
 			);
 		}
 
-		for (let category of categoriesArray) {
+		for (let category of postCategoriesArray) {
 			const { id } = category;
 
 			await pool.queryToDatabase(
@@ -42,7 +46,7 @@ const uploadPost = async (req, res) => {
 			);
 		}
 
-		for (let user of taggedUsersArray) {
+		for (let user of postTaggedUsersArray) {
 			const { id } = user;
 
 			await pool.queryToDatabase(
@@ -54,7 +58,7 @@ const uploadPost = async (req, res) => {
 			);
 		}
 
-		for (let node of nodesArray) {
+		for (let node of postNodesArray) {
 			const { type, content } = node;
 
 			await pool.queryToDatabase(
@@ -70,7 +74,7 @@ const uploadPost = async (req, res) => {
 	} catch (error) {
 		res.send({
 			error: {
-				post: "There has been an error while adding your post to the database",
+				post: "There has been an error while uploading your post",
 			},
 		});
 	}

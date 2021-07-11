@@ -26,7 +26,7 @@ const isEmailInUse = async (req, res, next) => {
 		}
 	} catch (error) {
 		res.send({
-			error: { general: "There has been an error while validating your email" },
+			error: { catch: "There has been an error while validating your email" },
 		});
 	}
 };

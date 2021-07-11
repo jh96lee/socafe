@@ -9,7 +9,7 @@ const hashPassword = require("../middlewares/user/hashPassword");
 const authenticateToken = require("../middlewares/user/authenticateToken");
 const checkError = require("../middlewares/common/checkError");
 
-const userRegister = require("../controllers/user/userRegister");
+const registerUser = require("../controllers/user/registerUser");
 const userLogin = require("../controllers/user/userLogin");
 const searchUser = require("../controllers/user/searchUser");
 const getUserProfileData = require("../controllers/user/getUserProfileData");
@@ -17,7 +17,6 @@ const getUserPosts = require("../controllers/user/getUserPosts");
 
 const userRouter = express.Router();
 
-// REVIEW: when a user registers, we insert the value and get back the inserted values via RETURNING *
 // TODO: then we send back a JWT token with the id and username being the payload of the token
 userRouter.post(
 	"/user/register",
@@ -26,7 +25,7 @@ userRouter.post(
 	isUsernameInUse,
 	checkError,
 	hashPassword,
-	userRegister
+	registerUser
 );
 
 userRouter.post("/user/login", validateEmail, userLogin);

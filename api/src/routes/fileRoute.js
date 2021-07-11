@@ -54,7 +54,7 @@ fileRouter.post(
 			} else if (error) {
 				res.send({
 					error: {
-						general: "There has been an error while deleting the image",
+						image: "There has been an error while deleting the image",
 					},
 				});
 			}

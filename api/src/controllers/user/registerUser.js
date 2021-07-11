@@ -1,10 +1,10 @@
 const pool = require("../../pool");
 const generateAndSendToken = require("../../utils/generateAndSendToken");
 
-const userRegister = async (req, res) => {
+const registerUser = async (req, res) => {
 	const { fullName, email, username, password } = req.body;
 
-	const avatarURL =
+	const defaultAvatarURL =
 		"https://res.cloudinary.com/fullstackprojectcloud/image/upload/v1621981182/default_svra7n.png";
 
 	try {
@@ -14,7 +14,7 @@ const userRegister = async (req, res) => {
             VALUES($1, $2, $3, $4, $5)
             RETURNING id, full_name, username, avatar_url;
             `,
-			[fullName, email, username, password, avatarURL]
+			[fullName, email, username, password, defaultAvatarURL]
 		);
 
 		const user = rows[0];
@@ -29,18 +29,17 @@ const userRegister = async (req, res) => {
 		} else {
 			res.send({
 				error: {
-					general:
-						"There has been an error while inserting data into the database",
+					general: "There has been an error while registering your data",
 				},
 			});
 		}
 	} catch (error) {
 		res.send({
 			error: {
-				general: "There has been an error while processing your registration",
+				catch: "There has been an error while processing your registration",
 			},
 		});
 	}
 };
 
-module.exports = userRegister;
+module.exports = registerUser;
