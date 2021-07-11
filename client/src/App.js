@@ -7,7 +7,6 @@ import styled from "styled-components";
 import { Header, Navigation } from "./views/navigation";
 import {
 	LoginPage,
-	CategoryOfInterestPage,
 	HomePage,
 	AddPostPage,
 	UserProfilePage,
@@ -81,10 +80,6 @@ function App() {
 
 					<Route exact path="/login">
 						{user ? <Redirect to="/" /> : <LoginPage />}
-					</Route>
-
-					<Route exact path="/category-of-interest">
-						<CategoryOfInterestPage />
 					</Route>
 
 					<Route path="/profile">
