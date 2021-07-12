@@ -24,7 +24,7 @@ const GlobalStyles = createGlobalStyle`
 
         /* REVIEW: icon presentation */
         --icon-presentation-color: ${(props) =>
-					props.theme.isDarkMode ? "#92ccff" : "#64748b"};
+					props.theme.isDarkMode ? "#b4dcff" : "#64748b"};
         --icon-presentation-bg-color: ${(props) =>
 					props.theme.isDarkMode ? "#a0d5ff1f" : "#607d8b33"};
 

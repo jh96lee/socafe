@@ -17,6 +17,8 @@ import { ReactComponent as Submit } from "./general/submit.svg";
 import { ReactComponent as Smile } from "./general/smile.svg";
 import { ReactComponent as More } from "./general/more.svg";
 import { ReactComponent as Edit } from "./general/edit.svg";
+
+import { ReactComponent as EditFilled } from "./general/edit-filled.svg";
 import { ReactComponent as Settings } from "./general/settings.svg";
 import { ReactComponent as PlusAlt } from "./general/plus-alt.svg";
 import { ReactComponent as ColoredImages } from "./general/colored-images.svg";
@@ -63,7 +65,6 @@ import { ReactComponent as Logout } from "./user/logout.svg";
 import { ReactComponent as Sad } from "./user/sad.svg";
 import { ReactComponent as Follow } from "./user/follow.svg";
 import { ReactComponent as Following } from "./user/following.svg";
-import { ReactComponent as Account } from "./user/account.svg";
 import { ReactComponent as Password } from "./user/password.svg";
 import { ReactComponent as Story } from "./user/story.svg";
 import { ReactComponent as Recommendation } from "./user/recommendation.svg";
@@ -83,6 +84,7 @@ export {
 	Right,
 	Left,
 	Sun,
+	EditFilled,
 	Moon,
 	Remove,
 	Bolt,
@@ -128,7 +130,6 @@ export {
 	Edit,
 	Follow,
 	Following,
-	Account,
 	Settings,
 	HomeFilled,
 	HomeOutline,

@@ -29,6 +29,7 @@ const UserRegisterForm = () => {
 	};
 
 	const isButtonDisabled = !fullName || !email || !username || !password;
+
 	return (
 		<UserRegisterFormStyle>
 			<h2>Create an account</h2>

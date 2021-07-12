@@ -5,7 +5,7 @@ import styled from "styled-components";
 import { IconElement } from "../../shared";
 
 import {
-	Account,
+	UserFilled,
 	Edit,
 	Password,
 	NotificationOutline,
@@ -53,7 +53,7 @@ const PrivateProfileSidebar = ({ userID }) => {
 	const privateProfileSidebarTabsArray = [
 		{
 			label: "Profile",
-			icon: <Account />,
+			icon: <UserFilled />,
 			onClick: (idx) => {
 				setActiveIndex(idx);
 

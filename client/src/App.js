@@ -6,11 +6,11 @@ import styled from "styled-components";
 
 import { Header, Navigation } from "./views/navigation";
 import {
-	LoginPage,
 	HomePage,
 	AddPostPage,
 	UserProfilePage,
 	PrivateProfilePage,
+	UserLoginPage,
 	UserRegisterPage,
 } from "./pages";
 import { AddPostIcon } from "./views/shared";
@@ -79,7 +79,7 @@ function App() {
 					</Route>
 
 					<Route exact path="/login">
-						{user ? <Redirect to="/" /> : <LoginPage />}
+						{user ? <Redirect to="/" /> : <UserLoginPage />}
 					</Route>
 
 					<Route path="/profile">

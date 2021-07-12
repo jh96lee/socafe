@@ -4,20 +4,19 @@ import { useHistory } from "react-router-dom";
 
 import { DropdownMenu, IconElement, Avatar } from "../../shared";
 
-import { logoutUser } from "../../../redux/login/loginAction";
+import { logoutUser } from "../../../redux/user-login/userLoginAction";
 
 import { useDropdown } from "../../../hooks";
 
 import { DropdownRelativeStyle } from "../../../styles";
 
 import {
-	Account,
 	UserFilled,
 	Register,
 	Login,
 	Logout,
-	Edit,
-	NotificationOutline,
+	EditFilled,
+	NotificationFilled,
 	Stats,
 } from "../../../assets";
 
@@ -39,7 +38,7 @@ const HeaderAvatar = () => {
 					{
 						content: {
 							label: "Profile",
-							icon: <Account />,
+							icon: <UserFilled />,
 						},
 						onClickEventHandler: () => {
 							history.push(`/profile/${user.id}`);
@@ -48,7 +47,7 @@ const HeaderAvatar = () => {
 					{
 						content: {
 							label: "Edit Profile",
-							icon: <Edit />,
+							icon: <EditFilled />,
 						},
 						onClickEventHandler: () => {
 							history.push(`/profile/edit/${user.id}`);
@@ -57,7 +56,7 @@ const HeaderAvatar = () => {
 					{
 						content: {
 							label: "Notifications",
-							icon: <NotificationOutline />,
+							icon: <NotificationFilled />,
 						},
 						onClickEventHandler: () => {
 							history.push(`/notification/${user.id}`);
