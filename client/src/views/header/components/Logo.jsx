@@ -1,7 +1,7 @@
 import React from "react";
 import { useHistory } from "react-router-dom";
 
-import { SocafeDark, SocafeLight } from "../../../assets";
+import { SocafeDark, SocafeLight, SocafeConcise } from "../../../assets";
 
 import LogoStyle from "../styles/LogoStyle";
 
@@ -14,7 +14,13 @@ const Logo = ({ isDarkMode }) => {
 
 	return (
 		<LogoStyle onClick={handleLogoOnClick} id="logo">
-			{isDarkMode ? <SocafeDark /> : <SocafeLight />}
+			{isDarkMode ? (
+				<SocafeDark id="logo__socafe-full" />
+			) : (
+				<SocafeLight id="logo__socafe-full" />
+			)}
+
+			<SocafeConcise id="logo__socafe-concise" />
 		</LogoStyle>
 	);
 };

@@ -7,7 +7,6 @@ export const SearchbarTypeStyle = styled.div`
 	gap: 0.7rem;
 
 	& > p {
-		font-size: 1.37rem;
 		color: var(--text-1);
 	}
 
@@ -19,9 +18,5 @@ export const SearchbarTypeStyle = styled.div`
 
 	&:hover {
 		cursor: pointer;
-	}
-
-	&:hover > p {
-		text-decoration: underline;
 	}
 `;

@@ -30,9 +30,9 @@ const GlobalStyles = createGlobalStyle`
 
         /* REVIEW: icon link */ 
         --icon-active-link-color: ${(props) =>
-					props.theme.isDarkMode ? "#b0e5ff" : "#44a0e4"};
+					props.theme.isDarkMode ? "#9ae1e2" : "#2196f3"};
         --icon-active-link-bg-color: ${(props) =>
-					props.theme.isDarkMode ? "#bad6ff3d" : "#87cefa73"};
+					props.theme.isDarkMode ? "#bad6ff3d" : "#2196f33b"};
 
         /* REVIEW: icon success */
         --icon-success-color: ${(props) =>
@@ -62,6 +62,7 @@ const GlobalStyles = createGlobalStyle`
 					props.theme.isDarkMode ? "#949494" : "#717070"};
 
         /* REVIEW: backgrounds */
+        --bg-1: ${(props) => (props.theme.isDarkMode ? "#18191d" : "#fff")};
         --bg-3: ${(props) =>
 					props.theme.isDarkMode ? "#2a2d38" : "#91b3c33b"};
 
@@ -86,7 +87,6 @@ const GlobalStyles = createGlobalStyle`
 					props.theme.isDarkMode ? "#ffffff66" : "#ffffffb3"};
 
         /* TODO: background */
-        --bg-1: ${(props) => (props.theme.isDarkMode ? "#18191d" : "#fff")};
         --bg-2: ${(props) => (props.theme.isDarkMode ? "#202229" : "#f9fafb")};
         --bg-post: ${(props) => (props.theme.isDarkMode ? "#161719" : "#fff")};
         --bg-filled-story:  linear-gradient(to right, #0d69ff, #16b3ff); 

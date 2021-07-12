@@ -1,24 +1,14 @@
 import * as React from "react";
 import { useSelector, useDispatch } from "react-redux";
-import styled from "styled-components";
 
 import { FormInput, Message } from "../../shared";
 
 import { setUserRegisterFormData } from "../../../redux/user-register/user-register-form/userRegisterFormAction";
 
-const FormFieldsetStyle = styled.fieldset`
-	display: flex;
-	flex-direction: column;
-	gap: 2.5rem;
-	width: 100%;
-	border: none;
-`;
-
-const FormInputAndMessageWrapperStyle = styled.div`
-	display: flex;
-	flex-direction: column;
-	gap: 0.5rem;
-`;
+import {
+	FormFieldsetStyle,
+	FormInputAndMessageWrapperStyle,
+} from "../../../styles";
 
 const UserRegisterFormFieldset = () => {
 	const dispatch = useDispatch();

@@ -1,30 +1,13 @@
 import * as React from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
-import styled from "styled-components";
 
 import { Button, Loader } from "../../shared";
 import UserRegisterFormFieldset from "./UserRegisterFormFieldset";
 
 import { registerUser } from "../../../redux/user-register/user-register-form/userRegisterFormAction";
 
-// REVIEW: Reusable
-const UserRegisterFormStyle = styled.form`
-	margin: 3.5rem auto auto auto;
-	/* REVIEW: with the exception of width */
-	width: 40rem;
-
-	& > h2 {
-		font-size: 2.4rem;
-		color: var(--text-1);
-		margin-bottom: 2rem;
-	}
-
-	& > a {
-		color: var(--link-cta-color);
-		font-weight: 500;
-	}
-`;
+import { UserRegisterFormStyle } from "../styles/UserRegisterFormStyle";
 
 const UserRegisterForm = () => {
 	const dispatch = useDispatch();

@@ -8,11 +8,11 @@ import { logoutUser } from "../../../redux/login/loginAction";
 
 import { useDropdown } from "../../../hooks";
 
-import { HeaderAvatarStyle } from "../styles/HeaderAvatarStyle";
+import { DropdownRelativeStyle } from "../../../styles";
 
 import {
 	Account,
-	User,
+	UserFilled,
 	Register,
 	Login,
 	Logout,
@@ -105,12 +105,12 @@ const HeaderAvatar = () => {
 	}, [user]);
 
 	return (
-		<HeaderAvatarStyle id="header-avatar-dropdown-trigger">
+		<DropdownRelativeStyle id="header-avatar-dropdown-trigger">
 			{user ? (
 				<Avatar avatarURL={user.avatar_url} avatarSize="4rem" />
 			) : (
 				<IconElement iconRole="button">
-					<User />
+					<UserFilled />
 				</IconElement>
 			)}
 
@@ -125,7 +125,7 @@ const HeaderAvatar = () => {
 					}}
 				/>
 			)}
-		</HeaderAvatarStyle>
+		</DropdownRelativeStyle>
 	);
 };
 

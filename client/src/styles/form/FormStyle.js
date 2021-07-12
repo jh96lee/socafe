@@ -1,15 +1,17 @@
 import styled from "styled-components";
 
 const FormStyle = styled.form`
-	width: 100%;
+	margin: 3.5rem auto auto auto;
 
-	& > button {
-		margin-top: 2.5rem;
-		margin-bottom: 0.7rem;
+	& > h2 {
+		font-size: 2.4rem;
+		color: var(--text-1);
+		margin-bottom: 2rem;
 	}
 
-	& a {
-		color: ${(props) => (props.theme.isDarkMode ? "#94c2f3" : "#1a6be8")};
+	& > a {
+		color: var(--link-cta-color);
+		font-weight: 500;
 	}
 `;
 

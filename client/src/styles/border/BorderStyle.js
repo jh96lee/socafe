@@ -1,9 +1,11 @@
 import styled from "styled-components";
 
 const BorderStyle = styled.div`
-	box-shadow: 0px 0 0px 0.8px var(--separator-1);
+	display: block;
+	background-color: var(--separator-1);
 	height: ${(props) => props.borderHeight};
-	width: 0;
+	width: ${(props) => props.borderWidth};
+	box-shadow: 0 0 0 ${(props) => props.boxShadowWidth} var(--separator-1);
 `;
 
 export default BorderStyle;

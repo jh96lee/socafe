@@ -1,6 +1,5 @@
 import * as React from "react";
 import { useDispatch, useSelector } from "react-redux";
-import styled from "styled-components";
 
 import { Loader } from "../../shared";
 import UserFollowTopicsFormTopic from "./UserFollowTopicsFormTopic";
@@ -8,14 +7,7 @@ import UserFollowTopicsFormTopic from "./UserFollowTopicsFormTopic";
 import { fetchTopics } from "../../../redux/user-follow-topics/userFollowTopicsAction";
 import { fetchFollowingTopics } from "../../../redux/user-following-topics/userFollowingTopicsAction";
 
-const UserFollowTopicsFormTopicsStyle = styled.div`
-	position: relative;
-	display: flex;
-	flex-wrap: wrap;
-	gap: 1rem;
-	width: 100%;
-	min-height: 30rem;
-`;
+import { UserFollowTopicsFormTopicsStyle } from "../styles/UserFollowTopicsFormTopicsStyle";
 
 const UserFollowTopicsFormTopics = () => {
 	const dispatch = useDispatch();

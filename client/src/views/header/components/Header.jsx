@@ -5,7 +5,9 @@ import HeaderAvatar from "./HeaderAvatar";
 import { Searchbar } from "../../searchbar";
 import { Toggle, IconElement } from "../../shared";
 
-import { HeaderStyle, HeaderStart, HeaderEnd } from "../styles/HeaderStyle";
+import { HeaderStyle } from "../styles/HeaderStyle";
+import { HeaderStartStyle } from "../styles/HeaderStartStyle";
+import { HeaderEndStyle } from "../styles/HeaderEndStyle";
 
 import { Sun, Moon, Hamburger } from "../../../assets";
 
@@ -14,38 +16,44 @@ const Header = ({
 	setIsDarkMode,
 	setIsResponsiveNavigationOpen,
 }) => {
-	const handleOnClick = () => {
+	const handleHeaderHamburgerIconOnClick = () => {
 		setIsResponsiveNavigationOpen((prevState) => !prevState);
 	};
 
 	return (
 		<HeaderStyle>
-			<HeaderStart>
-				<IconElement iconRole="button" onClick={handleOnClick}>
+			<HeaderStartStyle>
+				<IconElement
+					iconRole="button"
+					iconID="header_hamburger-icon"
+					onClick={handleHeaderHamburgerIconOnClick}
+					iconElementStyleObject={{
+						elementBackgroundColor: "transparent",
+						iconSize: "",
+					}}
+				>
 					<Hamburger />
 				</IconElement>
 
 				<Logo isDarkMode={isDarkMode} />
-			</HeaderStart>
+			</HeaderStartStyle>
 
 			<Searchbar />
 
-			<HeaderEnd>
+			<HeaderEndStyle>
 				<HeaderAvatar />
 
 				<Toggle
 					state={isDarkMode}
 					width="5rem"
-					responsiveWidth="4rem"
 					height="3rem"
-					responsiveHeight="2.5rem"
 					onClick={() => {
 						setIsDarkMode((prevState) => !prevState);
 					}}
 					type="theme"
 					icons={{ on: <Moon />, off: <Sun /> }}
 				/>
-			</HeaderEnd>
+			</HeaderEndStyle>
 		</HeaderStyle>
 	);
 };

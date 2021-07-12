@@ -7,7 +7,7 @@ import { FormInput, Message, Button, Loader } from "../shared";
 import {
 	FormStyle,
 	FormFieldsetStyle,
-	FormInputAndMessageStyle,
+	FormInputAndMessageWrapperStyle,
 } from "../../styles";
 
 import { setLoginUserInfo, loginUser } from "../../redux/login/loginAction";
@@ -45,7 +45,7 @@ const LoginForm = () => {
 	return (
 		<FormStyle>
 			<FormFieldsetStyle>
-				<FormInputAndMessageStyle>
+				<FormInputAndMessageWrapperStyle>
 					<FormInput
 						id="login-form__email"
 						label="Email"
@@ -61,9 +61,9 @@ const LoginForm = () => {
 					<Message
 						errorMessage={loginErrorMessage && loginErrorMessage.general}
 					/>
-				</FormInputAndMessageStyle>
+				</FormInputAndMessageWrapperStyle>
 
-				<FormInputAndMessageStyle>
+				<FormInputAndMessageWrapperStyle>
 					<FormInput
 						id="login-form__password"
 						label="Password"
@@ -76,7 +76,7 @@ const LoginForm = () => {
 					<Message
 						errorMessage={loginErrorMessage && loginErrorMessage.general}
 					/>
-				</FormInputAndMessageStyle>
+				</FormInputAndMessageWrapperStyle>
 			</FormFieldsetStyle>
 
 			<Button

@@ -1,7 +1,6 @@
 import * as React from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { useHistory } from "react-router";
-import styled from "styled-components";
 
 import { Notice } from "../../views/shared";
 import { UserRegisterForm } from "../../views/user-register-form";
@@ -11,13 +10,9 @@ import { setUser } from "../../redux/user/userAction";
 import { resetUserRegisterForm } from "../../redux/user-register/user-register-form/userRegisterFormAction";
 import { resetUserRegisterStepIndex } from "../../redux/user-register/user-register-step/userRegisterStepAction";
 
-import { Congratulation } from "../../assets";
+import { UserRegisterPageStyle } from "./UserRegisterPageStyle";
 
-const UserRegisterPageStyle = styled.div`
-	position: relative;
-	grid-row: 2 / 3;
-	grid-column: 2 / 3;
-`;
+import { Congratulation } from "../../assets";
 
 const UserRegisterPage = () => {
 	const dispatch = useDispatch();

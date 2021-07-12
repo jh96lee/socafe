@@ -3,26 +3,18 @@ import styled from "styled-components";
 export const NavigationStyle = styled.nav`
 	position: sticky;
 	top: 78px;
-	display: flex;
-	flex-direction: column;
-	justify-content: center;
-	align-items: center;
-	background-color: var(--bg-1);
-	height: fit-content;
 	grid-column: 1 / 2;
 	grid-row: 2 / 3;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	gap: 3rem;
+	padding-top: 2.5rem;
+	background-color: var(--bg-1);
+	height: fit-content;
 
-	& a {
-		display: flex;
-		align-items: center;
-		margin: 1.6rem 0;
-		text-decoration: none;
-	}
-
-	& a span {
+	& > a > span {
 		display: none;
-		font-size: 1.43rem;
-		color: var(--icon-1);
 	}
 
 	& #filled {
@@ -42,31 +34,34 @@ export const NavigationStyle = styled.nav`
 		display: none;
 	}
 
-	/* & .active > div {
-		background-color: var(--icon-active-link-bg-color);
-	}
-
-	& .active svg {
-		fill: var(--icon-active-link-color);
-	}
-
-	& .active span {
-		font-weight: 400;
-		color: var(--text-1);
-	} */
-
 	@media (max-width: 700px) {
 		position: absolute;
-		top: 82px;
+		top: 78px;
 		display: ${(props) => (props.isResponsiveNavigationOpen ? "flex" : "none")};
 		align-items: flex-start;
-		padding: 0 2rem;
+		padding: 3rem;
 		width: 100%;
+		height: calc(100vh - 78px);
 		z-index: 100;
+		background-color: var(--bg-1);
 
-		& a span {
-			display: block;
-			margin-left: 0.5rem;
+		& > a {
+			display: flex;
+			align-items: center;
+			gap: 1.5rem;
+			text-decoration: none;
+		}
+
+		& > a > span {
+			display: inline-block;
+			color: var(--text-1);
+			font-size: 1.5rem;
+			font-weight: 400;
+		}
+
+		& .active span {
+			font-weight: 500;
+			color: var(--icon-active-link-color);
 		}
 	}
 `;

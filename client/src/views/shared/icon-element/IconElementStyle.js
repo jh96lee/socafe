@@ -37,10 +37,10 @@ const IconElementStyle = styled.div`
 		fill: ${(props) => props.iconHoverColor};
 	}
 
-	@media (max-width: ${(props) => props.elementBreakingPoint || "350px"}) {
+	@media (max-width: ${(props) => props.elementBreakingPoint}) {
 		& svg {
-			width: ${(props) => props.iconResponsiveSize || "1.9rem"};
-			height: ${(props) => props.iconResponsiveSize || "1.9rem"};
+			width: ${(props) => props.iconResponsiveSize};
+			height: ${(props) => props.iconResponsiveSize};
 		}
 	}
 `;

@@ -2,6 +2,7 @@ import { ReactComponent as Complete } from "./form/complete.svg";
 import { ReactComponent as Checkmark } from "./form/checkmark.svg";
 import { ReactComponent as CheckmarkCircleFilled } from "./form/checkmark-circle-filled.svg";
 import { ReactComponent as Plus } from "./form/plus.svg";
+import { ReactComponent as SearchAlt } from "./form/search-alt.svg";
 
 import { ReactComponent as Congratulation } from "./general/congratulation.svg";
 import { ReactComponent as Up } from "./general/up.svg";
@@ -24,6 +25,7 @@ import { ReactComponent as CloseAlt } from "./general/close-alt.svg";
 
 import { ReactComponent as SocafeDark } from "./logo/socafe-dark.svg";
 import { ReactComponent as SocafeLight } from "./logo/socafe-light.svg";
+import { ReactComponent as SocafeConcise } from "./logo/socafe-concise.svg";
 
 import { ReactComponent as ExploreFilled } from "./navigation/explore-filled.svg";
 import { ReactComponent as ExploreOutline } from "./navigation/explore-outline.svg";
@@ -54,7 +56,6 @@ import { ReactComponent as NotificationFilled } from "./user/notification-filled
 import { ReactComponent as NotificationOutline } from "./user/notification-outline.svg";
 import { ReactComponent as Search } from "./user/search.svg";
 import { ReactComponent as Stats } from "./user/stats.svg";
-import { ReactComponent as User } from "./user/user.svg";
 import { ReactComponent as Users } from "./user/users.svg";
 import { ReactComponent as Register } from "./user/register.svg";
 import { ReactComponent as Login } from "./user/login.svg";
@@ -66,9 +67,12 @@ import { ReactComponent as Account } from "./user/account.svg";
 import { ReactComponent as Password } from "./user/password.svg";
 import { ReactComponent as Story } from "./user/story.svg";
 import { ReactComponent as Recommendation } from "./user/recommendation.svg";
+import { ReactComponent as UserFilled } from "./user/user-filled.svg";
+import { ReactComponent as UserOutline } from "./user/user-outline.svg";
 
 export {
 	Complete,
+	SearchAlt,
 	Congratulation,
 	Recommendation,
 	Checkmark,
@@ -105,8 +109,8 @@ export {
 	Stats,
 	Story,
 	PlusAlt,
-	User,
 	Users,
+	SocafeConcise,
 	Register,
 	Login,
 	Images,
@@ -117,6 +121,8 @@ export {
 	HeartFill,
 	More,
 	Posts,
+	UserFilled,
+	UserOutline,
 	Sad,
 	ColoredImages,
 	Edit,

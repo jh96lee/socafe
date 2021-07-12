@@ -31,21 +31,6 @@ const ToggleStyle = styled.div`
 		width: ${(props) => `calc(${props.height} - 1rem)`};
 		height: ${(props) => `calc(${props.height} - 1rem)`};
 	}
-
-	@media (max-width: 350px) {
-		width: ${(props) => props.responsiveWidth};
-		height: ${(props) => props.responsiveHeight};
-
-		& span {
-			width: ${(props) => `calc(${props.responsiveHeight} - 0.6rem)`};
-			height: ${(props) => `calc(${props.responsiveHeight} - 0.6rem)`};
-		}
-
-		& span > svg {
-			width: ${(props) => `calc(${props.responsiveHeight} - 1rem)`};
-			height: ${(props) => `calc(${props.responsiveHeight} - 1rem)`};
-		}
-	}
 `;
 
 export default ToggleStyle;

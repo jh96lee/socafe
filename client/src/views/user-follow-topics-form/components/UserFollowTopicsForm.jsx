@@ -1,27 +1,12 @@
 import React from "react";
 import { useSelector, useDispatch } from "react-redux";
-import styled from "styled-components";
 
 import { Button, Loader } from "../../shared";
 import UserFollowTopicsFormTopics from "./UserFollowTopicsFormTopics";
 
 import { submitTopicsToFollow } from "../../../redux/user-follow-topics/userFollowTopicsAction";
 
-const UserFollowTopicsFormStyle = styled.div`
-	margin: 3.5rem auto auto auto;
-	width: 90rem;
-
-	& > h2 {
-		font-size: 2.4rem;
-		color: var(--text-1);
-		margin-bottom: 2rem;
-	}
-
-	& > a {
-		color: var(--link-cta-color);
-		font-weight: 500;
-	}
-`;
+import { UserFollowTopicsFormStyle } from "../styles/UserFollowTopicsFormStyle";
 
 const UserFollowTopicsForm = () => {
 	const dispatch = useDispatch();

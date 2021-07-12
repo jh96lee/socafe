@@ -4,9 +4,9 @@ import { DropdownMenu } from "../../shared";
 
 import { useDropdown } from "../../../hooks";
 
-import { SearchbarTypeStyle } from "../styles/SearchbarType";
+import { SearchbarTypeStyle } from "../styles/SearchbarTypeStyle";
 
-import { Down, Users, Product } from "../../../assets";
+import { Down, Product, UserOutline } from "../../../assets";
 
 const SearchbarType = ({ searchType, setSearchType }) => {
 	const { isDropdownMenuOpen } = useDropdown(
@@ -19,7 +19,7 @@ const SearchbarType = ({ searchType, setSearchType }) => {
 			{
 				content: {
 					label: "Users",
-					icon: <Users data-search-type="user" />,
+					icon: <UserOutline data-search-type="user" />,
 				},
 				onClickEventHandler: () => {
 					setSearchType("Users");
