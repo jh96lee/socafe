@@ -10,7 +10,7 @@ const authenticateToken = require("../middlewares/user/authenticateToken");
 const checkError = require("../middlewares/common/checkError");
 
 const registerUser = require("../controllers/user/registerUser");
-const userLogin = require("../controllers/user/userLogin");
+const loginUser = require("../controllers/user/loginUser");
 const searchUser = require("../controllers/user/searchUser");
 const getUserProfileData = require("../controllers/user/getUserProfileData");
 const getUserPosts = require("../controllers/user/getUserPosts");
@@ -28,7 +28,7 @@ userRouter.post(
 	registerUser
 );
 
-userRouter.post("/user/login", validateEmail, userLogin);
+userRouter.post("/user/login", validateEmail, loginUser);
 
 userRouter.post("/search/users", searchUser);
 

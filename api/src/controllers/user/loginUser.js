@@ -3,7 +3,7 @@ const bcrypt = require("bcryptjs");
 
 const generateAndSendToken = require("../../utils/generateAndSendToken");
 
-const userLogin = async (req, res) => {
+const loginUser = async (req, res) => {
 	const { email, password } = req.body;
 
 	try {
@@ -44,10 +44,10 @@ const userLogin = async (req, res) => {
 	} catch (error) {
 		res.send({
 			error: {
-				general: "There has been an error while processing your login",
+				catch: "There has been an error while processing your login",
 			},
 		});
 	}
 };
 
-module.exports = userLogin;
+module.exports = loginUser;
