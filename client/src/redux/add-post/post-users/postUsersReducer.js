@@ -1,8 +1,10 @@
-import { filterArrayByID } from "../../utils/filterArrayByID";
-import { appendElementToPreviousArray } from "../../utils/appendElementToPreviousArray";
+import { filterArrayByID } from "../../utils/common/filterArrayByID";
+import { appendElementToPreviousArray } from "../../utils/common/appendElementToPreviousArray";
+
+const postUsersLocalStorage = JSON.parse(localStorage.getItem("postUsers"));
 
 const initialState = {
-	postUsersArray: [],
+	postUsersArray: postUsersLocalStorage ? postUsersLocalStorage : [],
 	postUsersErrorMessage: null,
 };
 

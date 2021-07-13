@@ -3,12 +3,12 @@ import { useSelector } from "react-redux";
 
 import { TextEditor, Message } from "../../shared";
 
-import { useTextEditor } from "../../../hooks/text-editor/useTextEditor";
-
 import {
 	setPostCaptionNodesArray,
 	setPostCaptionErrorMessage,
 } from "../../../redux/add-post/post-caption/postCaptionAction";
+
+import { useSaveDraft, useTextEditor } from "../../../hooks";
 
 import { AddContentStyle } from "../../../styles";
 
@@ -20,9 +20,11 @@ const AddPostCaption = () => {
 		setPostCaptionErrorMessage
 	);
 
-	const { postCaptionErrorMessage } = useSelector(
+	const { postCaptionNodesArray, postCaptionErrorMessage } = useSelector(
 		(state) => state.postCaptionReducer
 	);
+
+	useSaveDraft("postCaptions", postCaptionNodesArray);
 
 	return (
 		<AddContentStyle>

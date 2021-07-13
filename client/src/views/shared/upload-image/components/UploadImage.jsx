@@ -1,7 +1,7 @@
 import * as React from "react";
 
 import UploadImageButton from "./UploadImageButton";
-import UploadedImagePreview from "./UploadedImagePreview";
+import UploadedImage from "./UploadedImage";
 import { Loader } from "../../index";
 
 import { UploadImageStyle } from "../styles/UploadImageStyle";
@@ -21,8 +21,7 @@ const UploadImages = ({
 			) : (
 				uploadedImagesArray.map((image) => {
 					return (
-						// REVIEW: this is the individual image that was uploaded
-						<UploadedImagePreview
+						<UploadedImage
 							key={image.id}
 							uploadedImage={image}
 							deleteImageAction={deleteImageAction}

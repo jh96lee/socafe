@@ -1,6 +1,6 @@
 const initialState = {
-	topics: [],
-	isTopicsLoading: false,
+	followTopics: [],
+	isFollowTopicsLoading: false,
 	isTopicsToFollowSubmitting: false,
 	userFollowTopicsSuccessMessage: null,
 	userFollowTopicsErrorMessage: null,
@@ -8,20 +8,20 @@ const initialState = {
 
 const userFollowTopicsReducer = (state = initialState, action) => {
 	switch (action.type) {
-		case "START_FETCHING_TOPICS":
+		case "START_FETCHING_FOLLOW_TOPICS":
 			return {
 				...state,
-				isTopicsLoading: true,
+				isFollowTopicsLoading: true,
 			};
-		case "FETCHED_TOPICS":
+		case "FETCHED_FOLLOW_TOPICS":
 			return {
 				...state,
-				topics: action.payload,
+				followTopics: action.payload,
 			};
-		case "END_FETCHING_TOPICS":
+		case "END_FETCHING_FOLLOW_TOPICS":
 			return {
 				...state,
-				isTopicsLoading: false,
+				isFollowTopicsLoading: false,
 			};
 		case "START_SUBMITTING_TOPICS_TO_FOLLOW":
 			return {

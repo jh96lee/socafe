@@ -1,7 +1,6 @@
 import * as React from "react";
 import { useSelector } from "react-redux";
 
-import { PostTaggedUsers } from "../index";
 import { Skeleton } from "../../index";
 import { IconElement } from "../../index";
 
@@ -19,10 +18,12 @@ import { Right, Left } from "../../../../assets";
 const PostImages = ({ postImagesArray, conditionalRenderingVariable }) => {
 	const [currentImageIndex, setCurrentImageIndex] = React.useState(0);
 
-	const { isImageDeleting } = useSelector((state) => state.uploadImageReducer);
+	const { isPostImageDeleting } = useSelector(
+		(state) => state.postImagesReducer
+	);
 
 	// REVIEW: when an image gets deleted in PostPreview, then reset the index to 0
-	useResetPostImageIndex(isImageDeleting, setCurrentImageIndex);
+	useResetPostImageIndex(isPostImageDeleting, setCurrentImageIndex);
 
 	const handleOnClick = (e) => {
 		const direction = e.currentTarget.dataset.direction;

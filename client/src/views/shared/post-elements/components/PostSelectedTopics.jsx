@@ -1,9 +1,9 @@
 import * as React from "react";
 
 import {
-	PostSelectedCategoriesStyle,
-	PostSelectedCategoryStyle,
-} from "../styles/PostSelectedCategoriesStyle.js";
+	PostSelectedTopicsStyle,
+	PostSelectedTopicStyle,
+} from "../styles/PostSelectedTopicsStyle.js";
 
 import { Skeleton } from "../../index";
 
@@ -16,7 +16,7 @@ const PostSelectedCategories = ({
 		: ["", "", ""];
 
 	return (
-		<PostSelectedCategoriesStyle>
+		<PostSelectedTopicsStyle>
 			{postCategoriesArray.map((category, idx) => {
 				if (typeof category === "string") {
 					return (
@@ -28,13 +28,13 @@ const PostSelectedCategories = ({
 					);
 				} else {
 					return (
-						<PostSelectedCategoryStyle key={`post-category__${idx}`}>
+						<PostSelectedTopicStyle key={`post-category__${idx}`}>
 							{category.title}
-						</PostSelectedCategoryStyle>
+						</PostSelectedTopicStyle>
 					);
 				}
 			})}
-		</PostSelectedCategoriesStyle>
+		</PostSelectedTopicsStyle>
 	);
 };
 

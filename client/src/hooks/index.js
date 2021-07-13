@@ -6,3 +6,5 @@ export { default as useSearchAndSelectReact } from "./search-and-select/useSearc
 export { default as useSearchAndSelectRedux } from "./search-and-select/useSearchAndSelectRedux";
 
 export { default as useTextEditor } from "./text-editor/useTextEditor";
+
+export { default as useSaveDraft } from "./post/useSaveDraft";

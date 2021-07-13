@@ -7,7 +7,7 @@ import { IconElement, UserMetadata, PostLikes, Loader } from "../../shared";
 import {
 	PostImages,
 	PostTaggedUsers,
-	PostSelectedCategories,
+	PostSelectedTopics,
 	PostContents,
 	PostComment,
 	PostTotalComments,
@@ -96,7 +96,7 @@ const Post = () => {
 					</PostHorizontalMetadataStyle>
 
 					<PostVerticalMetadataStyle>
-						<PostSelectedCategories
+						<PostSelectedTopics
 							selectedPostCategoriesArray={post.categories}
 							conditionalRenderingVariable={isPostLoaded}
 						/>

@@ -29,7 +29,7 @@ const DropdownElement = ({
 			) : (
 				<img
 					src={
-						dropdownElementContent.category_url ||
+						dropdownElementContent.topic_url ||
 						dropdownElementContent.avatar_url
 					}
 					alt="dropdown element thumbnail"

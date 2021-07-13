@@ -26,7 +26,6 @@ export const addFollowingTopic = (topic) => ({
 });
 
 export const fetchFollowingTopics = () => async (dispatch) => {
-	console.log("FETCHING ");
 	dispatch(startFetchingFollowingTopics());
 
 	try {

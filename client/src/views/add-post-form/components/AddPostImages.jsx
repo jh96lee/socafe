@@ -9,6 +9,8 @@ import {
 	setPostImagesErrorMessage,
 } from "../../../redux/add-post/post-images/postImagesAction";
 
+import { useSaveDraft } from "../../../hooks";
+
 import { AddContentStyle } from "../../../styles";
 
 const AddPostImages = () => {
@@ -19,6 +21,8 @@ const AddPostImages = () => {
 		postImagesSuccessMessage,
 		postImagesErrorMessage,
 	} = useSelector((state) => state.postImagesReducer);
+
+	useSaveDraft("postImages", uploadedPostImagesArray);
 
 	return (
 		<AddContentStyle>

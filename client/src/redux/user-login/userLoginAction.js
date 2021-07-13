@@ -56,7 +56,7 @@ export const loginUser = (userLoginFormData) => async (dispatch) => {
 			dispatch(setUserLoginFormSuccessMessage(success));
 
 			setCoupleSeconds(() => {
-				// REVIEW: used the cookie that has just been set and decode it and go on from there
+				// REVIEW: use the cookie that has just been set and decode it and go on from there
 				dispatch(setUser());
 			}, 1000);
 		} else if (error) {

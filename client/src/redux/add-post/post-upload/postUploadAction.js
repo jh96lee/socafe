@@ -1,7 +1,7 @@
 import axios from "axios";
 
 import { setPostImagesErrorMessage } from "../post-images/postImagesAction";
-import { setPostCategoriesErrorMessage } from "../post-categories/postCategoriesAction";
+import { setPostTopicsErrorMessage } from "../post-topics/postTopicsAction";
 
 import { fetchToken } from "../../../utils/cookie/fetchToken";
 
@@ -29,24 +29,17 @@ const setPostUploadErrorMessage = (message) => ({
 });
 
 export const uploadPost =
-	(
-		postImagesArray,
-		postCategoriesArray,
-		postTaggedUsersArray,
-		postNodesArray
-	) =>
+	(postImagesArray, postTopicsArray, postTaggedUsersArray, postNodesArray) =>
 	async (dispatch) => {
 		if (postImagesArray.length === 0) {
 			dispatch(setPostImagesErrorMessage("At least 1 image must be uploaded"));
 		}
 
-		if (postCategoriesArray.length === 0) {
-			dispatch(
-				setPostCategoriesErrorMessage("At least 1 category must be selected")
-			);
+		if (postTopicsArray.length === 0) {
+			dispatch(setPostTopicsErrorMessage("At least 1 topic must be selected"));
 		}
 
-		if (postImagesArray.length > 0 || postCategoriesArray.length > 0) {
+		if (postImagesArray.length > 0 && postTopicsArray.length > 0) {
 			dispatch(startUploadingPost());
 
 			const token = fetchToken();
@@ -59,7 +52,7 @@ export const uploadPost =
 				},
 				data: {
 					postImagesArray,
-					postCategoriesArray,
+					postTopicsArray,
 					postTaggedUsersArray,
 					postNodesArray,
 				},

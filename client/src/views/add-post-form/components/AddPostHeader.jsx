@@ -11,7 +11,7 @@ const AddPostHeader = () => {
 	const history = useHistory();
 
 	const handleIconElementOnClick = () => {
-		history.goBack();
+		history.push("/");
 	};
 
 	return (

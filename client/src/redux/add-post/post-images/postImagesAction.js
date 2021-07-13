@@ -1,5 +1,5 @@
-import { uploadImageRequest } from "../../utils/uploadImageRequest";
-import { deleteImageRequest } from "../../utils/deleteImageRequest";
+import { uploadImageRequest } from "../../utils/image/uploadImageRequest";
+import { deleteImageRequest } from "../../utils/image/deleteImageRequest";
 
 export const startUploadingPostImage = () => ({
 	type: "START_UPLOADING_POST_IMAGE",

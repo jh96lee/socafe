@@ -21,7 +21,9 @@ const UserFollowTopicsForm = () => {
 		(state) => state.userFollowingTopicsReducer
 	);
 
-	const handleUserFollowTopicsFormButtonOnClick = () => {
+	const handleUserFollowTopicsFormButtonOnClick = (e) => {
+		e.preventDefault();
+
 		dispatch(submitTopicsToFollow(followingTopics));
 	};
 

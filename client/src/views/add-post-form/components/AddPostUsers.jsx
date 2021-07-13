@@ -3,7 +3,7 @@ import { useSelector } from "react-redux";
 
 import { SearchAndSelect, Message } from "../../shared";
 
-import { useSearchAndSelectRedux } from "../../../hooks";
+import { useSearchAndSelectRedux, useSaveDraft } from "../../../hooks";
 
 import {
 	addPostUser,
@@ -29,6 +29,8 @@ const AddPostUsers = () => {
 		removePostUser,
 		setPostUsersErrorMessage
 	);
+
+	useSaveDraft("postUsers", postUsersArray);
 
 	return (
 		<AddContentStyle>

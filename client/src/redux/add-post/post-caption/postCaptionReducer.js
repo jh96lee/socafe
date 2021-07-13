@@ -1,5 +1,11 @@
+const postCaptionsLocalStorage = JSON.parse(
+	localStorage.getItem("postCaptions")
+);
+
 const initialState = {
-	postCaptionNodesArray: [],
+	postCaptionNodesArray: postCaptionsLocalStorage
+		? postCaptionsLocalStorage
+		: [],
 	postCaptionErrorMessage: null,
 };
 

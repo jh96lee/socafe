@@ -4,7 +4,7 @@ import { useHistory } from "react-router";
 
 import { Button, Loader } from "../../shared";
 import AddPostImages from "./AddPostImages";
-import AddPostCategories from "./AddPostCategories";
+import AddPostTopics from "./AddPostTopics";
 import AddPostUsers from "./AddPostUsers";
 import AddPostCaption from "./AddPostCaption";
 import AddPostHeader from "./AddPostHeader";
@@ -27,9 +27,7 @@ const AddPostForm = () => {
 		(state) => state.postImagesReducer
 	);
 
-	const { postCategoriesArray } = useSelector(
-		(state) => state.postCategoriesReducer
-	);
+	const { postTopicsArray } = useSelector((state) => state.postTopicsReducer);
 
 	const { postUsersArray } = useSelector((state) => state.postUsersReducer);
 
@@ -54,7 +52,7 @@ const AddPostForm = () => {
 			<AddContentsStyle>
 				<AddPostImages />
 
-				<AddPostCategories />
+				<AddPostTopics />
 
 				<AddPostUsers />
 
@@ -64,15 +62,14 @@ const AddPostForm = () => {
 			<AddContentButtonWrapperStyle>
 				<Button
 					disabled={
-						uploadedPostImagesArray.length === 0 ||
-						postCategoriesArray.length === 0
+						uploadedPostImagesArray.length === 0 || postTopicsArray.length === 0
 					}
 					success={postUploadSuccessMessage}
 					onClick={() => {
 						dispatch(
 							uploadPost(
 								uploadedPostImagesArray,
-								postCategoriesArray,
+								postTopicsArray,
 								postUsersArray,
 								postCaptionNodesArray
 							)

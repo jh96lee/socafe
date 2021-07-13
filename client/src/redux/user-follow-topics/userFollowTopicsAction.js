@@ -5,17 +5,17 @@ import { setUserRegisterStepIndex } from "../user-register/user-register-step/us
 import { fetchToken } from "../../utils/cookie/fetchToken";
 import { setCoupleSeconds } from "../../utils/setCoupleSeconds";
 
-const startFetchingTopics = () => ({
-	type: "START_FETCHING_TOPICS",
+const startFetchingFollowTopics = () => ({
+	type: "START_FETCHING_FOLLOW_TOPICS",
 });
 
-const fetchedTopics = (topics) => ({
-	type: "FETCHED_TOPICS",
-	payload: topics,
+const fetchedFollowTopics = (followTopics) => ({
+	type: "FETCHED_FOLLOW_TOPICS",
+	payload: followTopics,
 });
 
-const endFetchingTopics = () => ({
-	type: "END_FETCHING_TOPICS",
+const endFetchingFollowTopics = () => ({
+	type: "END_FETCHING_FOLLOW_TOPICS",
 });
 
 const startSubmittingTopicsToFollow = () => ({
@@ -37,7 +37,7 @@ const setUserFollowTopicsErrorMessage = (errorMessageObject) => ({
 });
 
 export const fetchTopics = () => async (dispatch) => {
-	dispatch(startFetchingTopics());
+	dispatch(startFetchingFollowTopics());
 
 	try {
 		const token = fetchToken();
@@ -53,16 +53,16 @@ export const fetchTopics = () => async (dispatch) => {
 		const { error } = data;
 
 		if (error) {
-			dispatch(endFetchingTopics());
+			dispatch(endFetchingFollowTopics());
 
 			dispatch(setUserFollowTopicsErrorMessage(error));
 		} else {
-			dispatch(fetchedTopics(data));
+			dispatch(fetchedFollowTopics(data));
 
-			dispatch(endFetchingTopics());
+			dispatch(endFetchingFollowTopics());
 		}
 	} catch (error) {
-		dispatch(endFetchingTopics());
+		dispatch(endFetchingFollowTopics());
 
 		dispatch(setUserFollowTopicsErrorMessage(error));
 	}

@@ -15,8 +15,6 @@ const HomePost = ({ post }) => {
 	const { post_id, user, images, content, totalComments, totalLikes, isLiked } =
 		post;
 
-	console.log(post);
-
 	const homePostLocation = useLocation();
 	const history = useHistory();
 

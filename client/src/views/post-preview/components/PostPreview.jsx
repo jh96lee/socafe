@@ -3,7 +3,7 @@ import { useSelector } from "react-redux";
 
 import {
 	PostImages,
-	PostSelectedCategories,
+	PostSelectedTopics,
 	PostContents,
 	PostTaggedUsers,
 	PostComments,
@@ -25,9 +25,7 @@ const PostPreview = () => {
 		(state) => state.postImagesReducer
 	);
 
-	const { postCategoriesArray } = useSelector(
-		(state) => state.postCategoriesReducer
-	);
+	const { postTopicsArray } = useSelector((state) => state.postTopicsReducer);
 
 	const { postUsersArray } = useSelector((state) => state.postUsersReducer);
 
@@ -78,9 +76,9 @@ const PostPreview = () => {
 			</PostHorizontalMetadataStyle>
 
 			<PostVerticalMetadataStyle>
-				<PostSelectedCategories
-					selectedPostCategoriesArray={postCategoriesArray}
-					conditionalRenderingVariable={postCategoriesArray.length > 0}
+				<PostSelectedTopics
+					selectedPostCategoriesArray={postTopicsArray}
+					conditionalRenderingVariable={postTopicsArray.length > 0}
 				/>
 
 				<PostContents

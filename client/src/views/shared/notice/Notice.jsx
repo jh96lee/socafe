@@ -14,6 +14,7 @@ const Notice = ({
 		let noticeTimeout = setTimeout(() => {
 			noticeEvent();
 		}, 3000);
+
 		return () => {
 			clearTimeout(noticeTimeout);
 		};

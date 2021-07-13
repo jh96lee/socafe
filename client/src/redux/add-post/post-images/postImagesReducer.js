@@ -1,10 +1,12 @@
-import { filterArrayByID } from "../../utils/filterArrayByID";
-import { appendElementToPreviousArray } from "../../utils/appendElementToPreviousArray";
+import { filterArrayByID } from "../../utils/common/filterArrayByID";
+import { appendElementToPreviousArray } from "../../utils/common/appendElementToPreviousArray";
+
+const postImagesLocalStorage = JSON.parse(localStorage.getItem("postImages"));
 
 const initialState = {
 	isPostImageUploading: false,
 	isPostImageDeleting: false,
-	uploadedPostImagesArray: [],
+	uploadedPostImagesArray: postImagesLocalStorage ? postImagesLocalStorage : [],
 	postImagesSuccessMessage: null,
 	postImagesErrorMessage: null,
 };

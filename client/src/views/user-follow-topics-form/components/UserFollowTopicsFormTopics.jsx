@@ -12,7 +12,7 @@ import { UserFollowTopicsFormTopicsStyle } from "../styles/UserFollowTopicsFormT
 const UserFollowTopicsFormTopics = () => {
 	const dispatch = useDispatch();
 
-	const { topics, isTopicsLoading } = useSelector(
+	const { followTopics, isFollowTopicsLoading } = useSelector(
 		(state) => state.userFollowTopicsReducer
 	);
 
@@ -24,11 +24,11 @@ const UserFollowTopicsFormTopics = () => {
 
 	return (
 		<UserFollowTopicsFormTopicsStyle>
-			{isTopicsLoading ? (
+			{isFollowTopicsLoading ? (
 				<Loader isLoaderAbsolute={true} />
 			) : (
 				<React.Fragment>
-					{topics.map((topic) => {
+					{followTopics.map((topic) => {
 						return (
 							<UserFollowTopicsFormTopic
 								key={`user-form-topics-form-topic__${topic.id}`}
