@@ -11,7 +11,6 @@ export const UserNameDataStyle = styled.div`
 	flex-direction: column;
 	gap: ${(props) => !props.conditionalRenderingVariable && "0.3rem"};
 	justify-content: space-between;
-	height: 100%;
 
 	& > h5 {
 		font-size: ${(props) => props.usernameFontSize || "1.35rem"};

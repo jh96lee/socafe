@@ -31,8 +31,8 @@ const AddPostForm = () => {
 
 	const { postUsersArray } = useSelector((state) => state.postUsersReducer);
 
-	const { postCaptionNodesArray } = useSelector(
-		(state) => state.postCaptionReducer
+	const { postCaptionsNodesArray } = useSelector(
+		(state) => state.postCaptionsReducer
 	);
 
 	const dispatch = useDispatch();
@@ -71,7 +71,7 @@ const AddPostForm = () => {
 								uploadedPostImagesArray,
 								postTopicsArray,
 								postUsersArray,
-								postCaptionNodesArray
+								postCaptionsNodesArray
 							)
 						);
 					}}

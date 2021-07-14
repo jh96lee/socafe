@@ -11,45 +11,40 @@ import {
 
 import { MultipleUsers } from "../../../../assets";
 
-const PostTaggedUsers = ({
-	postTaggedUsersArray,
-	conditionalRenderingVariable,
-}) => {
+const PostTaggedUsers = ({ postTaggedUsersArray }) => {
 	const { isDropdownMenuOpen } = useDropdown(
 		"post-tagged-users-dropdown-trigger",
 		"post-tagged-users-dropdown-menu"
 	);
 
-	const postTaggedUsersArrayCreator = () => {
-		return postTaggedUsersArray.map((user) => {
-			return {
-				content: user,
-				type: "user",
-				onClickEventHandler: null,
-			};
-		});
-	};
+	const dropdownElementsArray = postTaggedUsersArray.map((user) => {
+		return {
+			content: user,
+			onClickEventHandler: null,
+		};
+	});
 
-	return conditionalRenderingVariable && postTaggedUsersArray.length !== 0 ? (
-		<PostTaggedUsersStyle id="post-tagged-users-dropdown-trigger">
-			<PostTaggedUsersIconElementStyle>
-				<MultipleUsers />
-			</PostTaggedUsersIconElementStyle>
+	return (
+		postTaggedUsersArray.length !== 0 && (
+			<PostTaggedUsersStyle id="post-tagged-users-dropdown-trigger">
+				<PostTaggedUsersIconElementStyle>
+					<MultipleUsers />
+				</PostTaggedUsersIconElementStyle>
 
-			{isDropdownMenuOpen && (
-				<DropdownMenu
-					dropdownMenuID="post-tagged-users-dropdown-menu"
-					dropdownElementKey="post-tagged-users-dropdown-element"
-					dropdownElementArray={postTaggedUsersArrayCreator()}
-					dropdownMenuStyleObject={{
-						menuBottom: "-1rem",
-						menuLeft: "-1rem",
-						menuWidth: "20rem",
-					}}
-				/>
-			)}
-		</PostTaggedUsersStyle>
-	) : null;
+				{isDropdownMenuOpen && (
+					<DropdownMenu
+						dropdownMenuID="post-tagged-users-dropdown-menu"
+						dropdownElementsArray={dropdownElementsArray}
+						dropdownMenuStyleObject={{
+							menuBottom: "-1rem",
+							menuLeft: "-1rem",
+							menuWidth: "20rem",
+						}}
+					/>
+				)}
+			</PostTaggedUsersStyle>
+		)
+	);
 };
 
 export default PostTaggedUsers;

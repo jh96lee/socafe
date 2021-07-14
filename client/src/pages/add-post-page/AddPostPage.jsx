@@ -1,19 +1,17 @@
 import * as React from "react";
-import { useSelector } from "react-redux";
-import { Prompt } from "react-router";
 
 import { PostPreview } from "../../views/post-preview";
 import { AddPostForm } from "../../views/add-post-form";
 
-import { AddContentPageStyle } from "../../styles";
+import { AddPostPageStyle } from "./AddPostPageStyle";
 
 const AddPostPage = () => {
 	return (
-		<AddContentPageStyle>
+		<AddPostPageStyle>
 			<AddPostForm />
 
 			<PostPreview />
-		</AddContentPageStyle>
+		</AddPostPageStyle>
 	);
 };
 

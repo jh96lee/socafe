@@ -4,33 +4,32 @@ import { useSelector } from "react-redux";
 import { TextEditor, Message } from "../../shared";
 
 import {
-	setPostCaptionNodesArray,
-	setPostCaptionErrorMessage,
-} from "../../../redux/add-post/post-caption/postCaptionAction";
+	setPostCaptionsNodesArray,
+	setPostCaptionsErrorMessage,
+} from "../../../redux/add-post/post-captions/postCaptionsAction";
 
-import { useSaveDraft, useTextEditor } from "../../../hooks";
+import { useSaveDraft, useTextEditorRedux } from "../../../hooks";
 
 import { AddContentStyle } from "../../../styles";
 
 const AddPostCaption = () => {
-	const { textEditorOnChangeLogic } = useTextEditor(
-		500,
-		"redux",
-		setPostCaptionNodesArray,
-		setPostCaptionErrorMessage
+	const { textEditorOnChangeLogic } = useTextEditorRedux(
+		300,
+		setPostCaptionsNodesArray,
+		setPostCaptionsErrorMessage
 	);
 
-	const { postCaptionNodesArray, postCaptionErrorMessage } = useSelector(
-		(state) => state.postCaptionReducer
+	const { postCaptionsNodesArray, postCaptionsErrorMessage } = useSelector(
+		(state) => state.postCaptionsReducer
 	);
 
-	useSaveDraft("postCaptions", postCaptionNodesArray);
+	useSaveDraft("postCaptions", postCaptionsNodesArray);
 
 	return (
 		<AddContentStyle>
 			<h3>Caption</h3>
 
-			<Message errorMessage={postCaptionErrorMessage} />
+			<Message errorMessage={postCaptionsErrorMessage} />
 
 			<TextEditor textEditorOnChangeLogic={textEditorOnChangeLogic} />
 		</AddContentStyle>

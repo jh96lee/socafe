@@ -14,25 +14,10 @@ const PostCommentsSkeletonsStyle = styled.div`
 	gap: 1.5rem;
 `;
 
-const PostComments = ({ conditionalRenderingVariable }) => {
+const PostComments = () => {
 	return (
 		<PostCommentsStyle>
-			{conditionalRenderingVariable ? (
-				// TODO: render out actual comments
-				<h1>Comments</h1>
-			) : (
-				<PostCommentsSkeletonsStyle>
-					<Skeleton skeletonHeight="3rem" skeletonWidth="100%" />
-
-					<Skeleton skeletonHeight="3rem" skeletonWidth="100%" />
-
-					<Skeleton skeletonHeight="3rem" skeletonWidth="100%" />
-
-					<Skeleton skeletonHeight="3rem" skeletonWidth="100%" />
-
-					<Skeleton skeletonHeight="3rem" skeletonWidth="100%" />
-				</PostCommentsSkeletonsStyle>
-			)}
+			<h1>Comments</h1>
 		</PostCommentsStyle>
 	);
 };

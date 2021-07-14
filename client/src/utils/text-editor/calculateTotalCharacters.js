@@ -3,7 +3,7 @@ export const calculateTotalCharacters = (nodesArray) => {
 		if (node.type === "br") {
 			return 0;
 		} else {
-			return node.content.length;
+			return node.nodeValue.length;
 		}
 	});
 

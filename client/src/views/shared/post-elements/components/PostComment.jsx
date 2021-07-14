@@ -34,14 +34,14 @@ const PostCommentStyle = styled.div`
 	}
 `;
 
-const PostCommentInput = ({ postConditionalRenderingVariable }) => {
+const PostCommentInput = () => {
 	const dispatch = useDispatch();
 
 	const { taggedCommentUsersArray } = useSelector(
 		(state) => state.commentReducer
 	);
 
-	return postConditionalRenderingVariable ? (
+	return (
 		<PostCommentStyle>
 			<IconElement
 				iconID="post-comment-popup-trigger"
@@ -87,13 +87,6 @@ const PostCommentInput = ({ postConditionalRenderingVariable }) => {
 				<Submit />
 			</IconElement>
 		</PostCommentStyle>
-	) : (
-		<Skeleton
-			skeletonHeight="4.2rem"
-			skeletonWidth="90%"
-			skeletonBorderRadius="3rem"
-			skeletonMargin="auto"
-		/>
 	);
 };
 

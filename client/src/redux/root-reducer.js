@@ -18,7 +18,7 @@ import postReducer from "./post/postReducer";
 import postImagesReducer from "./add-post/post-images/postImagesReducer";
 import postTopicsReducer from "./add-post/post-topics/postTopicsReducer";
 import postUsersReducer from "./add-post/post-users/postUsersReducer";
-import postCaptionReducer from "./add-post/post-caption/postCaptionReducer";
+import postCaptionsReducer from "./add-post/post-captions/postCaptionsReducer";
 import postUploadReducer from "./add-post/post-upload/postUploadReducer";
 
 const rootReducer = combineReducers({
@@ -31,7 +31,7 @@ const rootReducer = combineReducers({
 	postImagesReducer,
 	postTopicsReducer,
 	postUsersReducer,
-	postCaptionReducer,
+	postCaptionsReducer,
 	postUploadReducer,
 
 	postReducer,

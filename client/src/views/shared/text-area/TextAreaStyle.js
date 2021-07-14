@@ -1,8 +1,7 @@
 import styled from "styled-components";
 
-export const PostContentsStyle = styled.div`
+export const TextAreaStyle = styled.div`
 	color: var(--text-1);
-	padding: 0 1rem;
 
 	& p {
 		font-size: 1.3rem;

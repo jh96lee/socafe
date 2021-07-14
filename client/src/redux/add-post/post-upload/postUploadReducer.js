@@ -1,5 +1,5 @@
 const initalState = {
-	postID: null,
+	uploadedPostID: null,
 	isPostUploading: false,
 	postUploadSuccessMessage: null,
 	postUploadErrorMessage: null,
@@ -16,7 +16,7 @@ const postUploadReducer = (state = initalState, action) => {
 		case "UPLOADED_POST":
 			return {
 				...state,
-				postID: action.payload,
+				uploadedPostID: action.payload,
 			};
 		case "END_UPLOADING_POST":
 			return {

@@ -14,7 +14,7 @@ import {
 	UserRegisterPage,
 } from "./pages";
 import { AddPostIcon } from "./views/shared";
-import { Post } from "./views/post";
+// import { Post } from "./views/post";
 
 import GlobalStyle from "./styles/GlobalStyle";
 
@@ -70,9 +70,9 @@ function App() {
 					</Route>
 
 					{/* REVIEW: 2 ways it can be rendered */}
-					<Route exact path="/post/:postID">
+					{/* <Route exact path="/post/:postID">
 						<Post />
-					</Route>
+					</Route> */}
 
 					<Route exact path="/register">
 						{user ? <Redirect to="/" /> : <UserRegisterPage />}
@@ -92,9 +92,9 @@ function App() {
 				</Switch>
 
 				{/* REVIEW: outside of Switch Component */}
-				<Route exact path="/post/:postID">
+				{/* <Route exact path="/post/:postID">
 					<Post />
-				</Route>
+				</Route> */}
 			</GlobalPageStyle>
 		</ThemeProvider>
 	);

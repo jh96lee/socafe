@@ -15,7 +15,7 @@ import {
 import { Right, Left } from "../../../../assets";
 
 // REVIEW: this could either be for post or post-preview
-const PostImages = ({ postImagesArray, conditionalRenderingVariable }) => {
+const PostImages = ({ postImagesArray }) => {
 	const [currentImageIndex, setCurrentImageIndex] = React.useState(0);
 
 	const { isPostImageDeleting } = useSelector(
@@ -35,7 +35,7 @@ const PostImages = ({ postImagesArray, conditionalRenderingVariable }) => {
 		}
 	};
 
-	return conditionalRenderingVariable ? (
+	return (
 		<PostImagesStyle>
 			<PostMainImageStyle
 				src={postImagesArray[currentImageIndex].url}
@@ -97,8 +97,6 @@ const PostImages = ({ postImagesArray, conditionalRenderingVariable }) => {
 				</React.Fragment>
 			)}
 		</PostImagesStyle>
-	) : (
-		<Skeleton skeletonWidth="100%" skeletonHeight="100%" />
 	);
 };
 

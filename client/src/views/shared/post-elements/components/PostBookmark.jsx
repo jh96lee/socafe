@@ -5,7 +5,7 @@ import { IconElement } from "../../index";
 import { BookmarkEmpty, BookmarkFill } from "../../../../assets";
 
 // TODO: functionality needs to be added
-const PostBookmark = ({ disablePostBookmarkOnClick }) => {
+const PostBookmark = () => {
 	const [isPostBookmarked, setIsPostBookmarked] = React.useState(false);
 
 	const handlePostBookmarkOnClick = () => {
@@ -15,7 +15,7 @@ const PostBookmark = ({ disablePostBookmarkOnClick }) => {
 	return (
 		<IconElement
 			iconRole="button"
-			onClick={disablePostBookmarkOnClick ? null : handlePostBookmarkOnClick}
+			onClick={handlePostBookmarkOnClick}
 			iconElementStyleObject={{
 				elementPadding: "0rem",
 				elementBackgroundColor: "none",

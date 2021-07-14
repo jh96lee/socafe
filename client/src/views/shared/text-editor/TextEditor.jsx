@@ -13,14 +13,14 @@ const TextEditor = ({ textEditorOnChangeLogic }) => {
 			reactQuillRef.current.editor.root.childNodes
 		);
 
-		const childNodesDataArray = reactQuillChildNodesArray.map((node) => {
+		const textEditorNodesArray = reactQuillChildNodesArray.map((node) => {
 			return {
-				type: node.innerHTML === "<br>" ? "br" : "p",
-				content: node.innerHTML,
+				nodeType: node.innerHTML === "<br>" ? "br" : "p",
+				nodeValue: node.innerHTML,
 			};
 		});
 
-		textEditorOnChangeLogic(childNodesDataArray);
+		textEditorOnChangeLogic(textEditorNodesArray);
 	};
 
 	return (

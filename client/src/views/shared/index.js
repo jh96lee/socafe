@@ -15,6 +15,7 @@ export { default as UploadImage } from "./upload-image/components/UploadImage";
 export { default as SearchAndSelect } from "./search-and-select/components/SearchAndSelect";
 
 export { default as TextEditor } from "./text-editor/TextEditor";
+export { default as TextArea } from "./text-area/TextArea";
 
 export { default as Skeleton } from "./skeleton/Skeleton";
 
@@ -23,6 +24,12 @@ export { default as Message } from "./message/Message";
 export { default as AddPostIcon } from "./add-post-icon/AddPostIcon";
 
 export { default as UserMetadata } from "./user-metadata/UserMetadata";
+
+export { default as PostBookmark } from "./post-elements/components/PostBookmark";
+export { default as PostImages } from "./post-elements/components/PostImages";
+export { default as PostTaggedUsers } from "./post-elements/components/PostTaggedUsers";
+export { default as PostTopics } from "./post-elements/components/PostTopics";
+export { default as PostTotalComments } from "./post-elements/components/PostTotalComments";
 
 export { default as PostLikes } from "./post-likes/PostLikes";
 
