@@ -190,7 +190,11 @@ const GlobalStyles = createGlobalStyle`
         display: block;
     }
 
-    
+    @media (max-width: 500px) {
+        html {
+            font-size: 57%;
+        }
+    }
 `;
 
 export default GlobalStyles;

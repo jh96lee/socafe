@@ -14,7 +14,6 @@ const UserMetadata = ({
 	usernameFontSize,
 	fullNameFontSize,
 	avatarOnClick,
-	conditionalRenderingVariable,
 }) => {
 	// REVIEW: logic for story ring needs to be added later
 
@@ -26,45 +25,20 @@ const UserMetadata = ({
 
 	return (
 		<UserMetadataStyle>
-			{conditionalRenderingVariable ? (
-				<Avatar
-					avatarURL={avatarURL}
-					avatarSize={avatarSize}
-					avatarOnClick={avatarOnClick}
-				/>
-			) : (
-				<Skeleton
-					skeletonWidth={avatarSize}
-					skeletonHeight={avatarSize}
-					skeletonBorderRadius="50%"
-				/>
-			)}
+			<Avatar
+				avatarURL={avatarURL}
+				avatarSize={avatarSize}
+				avatarOnClick={avatarOnClick}
+			/>
 
 			<UserNameDataStyle
 				usernameFontSize={usernameFontSize}
 				fullNameFontSize={fullNameFontSize}
-				conditionalRenderingVariable={conditionalRenderingVariable}
 				onClick={handleUsernameOnClick}
 			>
-				{conditionalRenderingVariable ? (
-					<h5>@{username}</h5>
-				) : (
-					<Skeleton
-						skeletonWidth="6.5rem"
-						skeletonHeight="1.7rem"
-						skeletonBorderRadius="1rem"
-					/>
-				)}
+				<h5>@{username}</h5>
 
-				{conditionalRenderingVariable ? (
-					<p>{fullName}</p>
-				) : (
-					<Skeleton
-						skeletonWidth="8rem"
-						skeletonHeight="1.5rem"
-						skeletonBorderRadius="1rem"
-					/>
-				)}
+				<p>{fullName}</p>
 			</UserNameDataStyle>
 		</UserMetadataStyle>
 	);

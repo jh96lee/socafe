@@ -9,8 +9,7 @@ export const UserMetadataStyle = styled.div`
 export const UserNameDataStyle = styled.div`
 	display: flex;
 	flex-direction: column;
-	gap: ${(props) => !props.conditionalRenderingVariable && "0.3rem"};
-	justify-content: space-between;
+	gap: 0.3rem;
 
 	& > h5 {
 		font-size: ${(props) => props.usernameFontSize || "1.35rem"};

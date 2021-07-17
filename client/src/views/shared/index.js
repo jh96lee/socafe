@@ -30,6 +30,7 @@ export { default as PostImages } from "./post-elements/components/PostImages";
 export { default as PostTaggedUsers } from "./post-elements/components/PostTaggedUsers";
 export { default as PostTopics } from "./post-elements/components/PostTopics";
 export { default as PostTotalComments } from "./post-elements/components/PostTotalComments";
+export { default as PostMain } from "./post-elements/components/PostMain";
 
 export { default as PostLikes } from "./post-likes/PostLikes";
 

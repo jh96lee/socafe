@@ -5,7 +5,7 @@ const AddContentFormStyle = styled.div`
 	grid-template-rows: min-content auto min-content;
 	min-height: 100%;
 	max-height: 100vh;
-	box-shadow: 1.4px 0 0 0 var(--separator-1);
+	box-shadow: 0 0 0 1.4px var(--separator-1);
 `;
 
 export default AddContentFormStyle;

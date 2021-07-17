@@ -8,7 +8,7 @@ const PostTopics = ({ postTopicsArray }) => {
 			{postTopicsArray.map((topic, idx) => {
 				return (
 					<PostTopicStyle key={`post-category__${idx}`}>
-						{topic.title}
+						#{topic.title}
 					</PostTopicStyle>
 				);
 			})}

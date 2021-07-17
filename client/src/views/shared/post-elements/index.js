@@ -5,3 +5,5 @@ export { default as PostComment } from "./components/PostComment";
 export { default as PostComments } from "./components/PostComments";
 export { default as PostTotalComments } from "./components/PostTotalComments";
 export { default as PostBookmark } from "./components/PostBookmark";
+
+export { default as PostMain } from "./components/PostMain";

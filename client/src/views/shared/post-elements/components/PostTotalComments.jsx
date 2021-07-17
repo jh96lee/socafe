@@ -1,15 +1,12 @@
 import * as React from "react";
 
-import { IconElement, Skeleton } from "../../index";
+import { IconElement } from "../../index";
 
 import { PostTotalNumbersStyle } from "../styles/PostTotalNumbersStyle";
 
 import { Comment } from "../../../../assets";
 
-const PostTotalComments = ({
-	postTotalComments,
-	conditionalRenderingVariable,
-}) => {
+const PostTotalComments = ({ postTotalComments }) => {
 	return (
 		<PostTotalNumbersStyle>
 			<IconElement
@@ -26,11 +23,7 @@ const PostTotalComments = ({
 				<Comment />
 			</IconElement>
 
-			{conditionalRenderingVariable ? (
-				<p>{postTotalComments} Comments</p>
-			) : (
-				<Skeleton skeletonHeight="2.6rem" skeletonWidth="5rem" />
-			)}
+			<p>{postTotalComments} Comments</p>
 		</PostTotalNumbersStyle>
 	);
 };

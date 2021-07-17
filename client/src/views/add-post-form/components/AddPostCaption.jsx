@@ -14,7 +14,7 @@ import { AddContentStyle } from "../../../styles";
 
 const AddPostCaption = () => {
 	const { textEditorOnChangeLogic } = useTextEditorRedux(
-		300,
+		1000,
 		setPostCaptionsNodesArray,
 		setPostCaptionsErrorMessage
 	);

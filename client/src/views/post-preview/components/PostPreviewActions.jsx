@@ -3,15 +3,9 @@ import styled from "styled-components";
 
 import { Skeleton } from "../../shared";
 
-import {
-	Comment,
-	HeartEmpty,
-	BookmarkEmpty,
-	UserFilled,
-} from "../../../assets";
+import { Comment, HeartEmpty, BookmarkEmpty } from "../../../assets";
 
-// REVIEW: likes, comments, and bookmark
-const PostModalActivityStyle = styled.div`
+const PostActionsStyle = styled.div`
 	display: flex;
 	align-items: center;
 	gap: 1.4rem;
@@ -20,44 +14,42 @@ const PostModalActivityStyle = styled.div`
 		fill: var(--icon-default-color);
 		width: 2.5rem;
 		height: 2.5rem;
+		cursor: pointer;
 	}
 
 	& #post-preview__heart-empty {
 		fill: #ff0000;
 	}
 
-	& #post-preview__heart-empty {
-		cursor: pointer;
+	& #post-preview__heart-empty:hover {
 		fill: #d80000;
 	}
 `;
 
-const PostModalActivityAndDataStyle = styled.div`
+const PostActionAndDataStyle = styled.div`
 	display: flex;
 	align-items: center;
 	gap: 0.7rem;
 `;
 
-const PostPreviewActivity = () => {
+const PostPreviewActions = () => {
 	return (
-		<PostModalActivityStyle>
-			<PostModalActivityAndDataStyle>
+		<PostActionsStyle>
+			<PostActionAndDataStyle>
 				<HeartEmpty id="post-preview__heart-empty" />
 
 				<Skeleton skeletonWidth="4rem" skeletonHeight="2.5rem" />
-			</PostModalActivityAndDataStyle>
+			</PostActionAndDataStyle>
 
-			<PostModalActivityAndDataStyle>
+			<PostActionAndDataStyle>
 				<Comment />
 
 				<Skeleton skeletonWidth="4rem" skeletonHeight="2.5rem" />
-			</PostModalActivityAndDataStyle>
+			</PostActionAndDataStyle>
 
 			<BookmarkEmpty />
-
-			<UserFilled id="test-trigger" />
-		</PostModalActivityStyle>
+		</PostActionsStyle>
 	);
 };
 
-export default PostPreviewActivity;
+export default PostPreviewActions;

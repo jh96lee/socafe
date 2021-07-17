@@ -17,6 +17,8 @@ import { ReactComponent as Submit } from "./general/submit.svg";
 import { ReactComponent as Smile } from "./general/smile.svg";
 import { ReactComponent as More } from "./general/more.svg";
 import { ReactComponent as Edit } from "./general/edit.svg";
+import { ReactComponent as Open } from "./general/open.svg";
+import { ReactComponent as DoubleArrowLeft } from "./general/double-arrow-left.svg";
 
 import { ReactComponent as EditFilled } from "./general/edit-filled.svg";
 import { ReactComponent as Settings } from "./general/settings.svg";
@@ -74,10 +76,12 @@ import { ReactComponent as UserOutline } from "./user/user-outline.svg";
 export {
 	Complete,
 	SearchAlt,
+	DoubleArrowLeft,
 	Congratulation,
 	Recommendation,
 	Checkmark,
 	CheckmarkCircleFilled,
+	Open,
 	Plus,
 	Up,
 	Down,
