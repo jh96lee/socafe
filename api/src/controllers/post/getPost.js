@@ -27,15 +27,15 @@ const getPost = async (req, res) => {
 		[postID]
 	);
 
-	const postCategoriesData = await pool.queryToDatabase(
+	const postTopicsData = await pool.queryToDatabase(
 		`
 		SELECT
-		category_id,
+		topic_id,
 		title
-		FROM post_categories
-		JOIN categories_posts
-		ON post_categories.id = categories_posts.category_id
-		WHERE categories_posts.post_id=$1;
+		FROM post_topics
+		JOIN topics_posts
+		ON post_topics.id = topics_posts.topic_id
+		WHERE topics_posts.post_id=$1;
 		`,
 		[postID]
 	);
@@ -55,12 +55,12 @@ const getPost = async (req, res) => {
 		[postID]
 	);
 
-	const postContentsData = await pool.queryToDatabase(
+	const postCaptionsData = await pool.queryToDatabase(
 		`
 		SELECT
-		content_type AS type,
-		content
-		FROM post_contents
+		node_type,
+		node_value
+		FROM post_captions
 		WHERE post_id=$1;
 		`,
 		[postID]
@@ -106,8 +106,8 @@ const getPost = async (req, res) => {
 		user: postUserData.rows[0],
 		isLiked: isLiked.rows[0] ? true : false,
 		images: postImagesData.rows,
-		categories: postCategoriesData.rows,
-		contents: postContentsData.rows,
+		topics: postTopicsData.rows,
+		captions: postCaptionsData.rows,
 		taggedUsers: taggedUsersData.rows,
 		totalLikes: parseInt(totalPostLikesData.rows[0].count),
 		totalComments: parseInt(totalPostCommentsData.rows[0].count),

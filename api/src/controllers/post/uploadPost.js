@@ -1,11 +1,11 @@
 const pool = require("../../pool");
 
 const uploadPost = async (req, res) => {
-	const { userID } = res.locals;
+	const userID = parseInt(res.locals.userID);
 
 	const {
 		postImagesArray,
-		postCategoriesArray,
+		postTopicsArray,
 		postTaggedUsersArray,
 		postNodesArray,
 	} = req.body;
@@ -34,12 +34,12 @@ const uploadPost = async (req, res) => {
 			);
 		}
 
-		for (let category of postCategoriesArray) {
-			const { id } = category;
+		for (let topic of postTopicsArray) {
+			const { id } = topic;
 
 			await pool.queryToDatabase(
 				`
-				INSERT INTO categories_posts(category_id, post_id)
+				INSERT INTO topics_posts(topic_id, post_id)
 				VALUES ($1, $2);
 				 `,
 				[id, postID]
@@ -63,7 +63,7 @@ const uploadPost = async (req, res) => {
 
 			await pool.queryToDatabase(
 				`
-				INSERT INTO post_contents(content_type, content, post_id)
+				INSERT INTO post_captions(node_type, node_value, post_id)
 				VALUES ($1, $2, $3);
 				`,
 				[type, content, postID]
@@ -74,7 +74,7 @@ const uploadPost = async (req, res) => {
 	} catch (error) {
 		res.send({
 			error: {
-				post: "There has been an error while uploading your post",
+				catch: "There has been an error while uploading your post",
 			},
 		});
 	}
