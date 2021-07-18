@@ -1,7 +1,13 @@
 import * as React from "react";
 
-const useDropdown = (triggerID, dropdownMenuID, isDropdown = true) => {
-	const [isDropdownMenuOpen, setIsDropdownMenuOpen] = React.useState(false);
+const useDropdown = (
+	triggerID,
+	dropdownMenuID,
+	isDropdown = true,
+	initialIsOpen = false
+) => {
+	const [isDropdownMenuOpen, setIsDropdownMenuOpen] =
+		React.useState(initialIsOpen);
 
 	React.useEffect(() => {
 		const listener = document.addEventListener("click", (e) => {

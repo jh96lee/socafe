@@ -1,53 +1,35 @@
 import * as React from "react";
 import styled from "styled-components";
 
-import { Skeleton } from "../../shared";
+import { IconElement } from "../../shared";
 
-import { Comment, HeartEmpty, BookmarkEmpty } from "../../../assets";
+import { HeartFill, BookmarkEmpty, CommentOutline } from "../../../assets";
 
-const PostActionsStyle = styled.div`
-	display: flex;
-	align-items: center;
-	gap: 1.4rem;
+import {
+	PostActionsStyle,
+	PostPreviewLikeStyle,
+} from "../styles/PostPreviewActionsStyle";
 
-	& svg {
-		fill: var(--icon-default-color);
-		width: 2.5rem;
-		height: 2.5rem;
-		cursor: pointer;
-	}
-
-	& #post-preview__heart-empty {
-		fill: #ff0000;
-	}
-
-	& #post-preview__heart-empty:hover {
-		fill: #d80000;
-	}
-`;
-
-const PostActionAndDataStyle = styled.div`
-	display: flex;
-	align-items: center;
-	gap: 0.7rem;
-`;
-
-const PostPreviewActions = () => {
+const PostPreviewActions = ({ handleOpenAndClosePostCommentsOnClick }) => {
 	return (
 		<PostActionsStyle>
-			<PostActionAndDataStyle>
-				<HeartEmpty id="post-preview__heart-empty" />
+			<PostPreviewLikeStyle>
+				<HeartFill />
 
-				<Skeleton skeletonWidth="4rem" skeletonHeight="2.5rem" />
-			</PostActionAndDataStyle>
+				<h6>Liked</h6>
+			</PostPreviewLikeStyle>
 
-			<PostActionAndDataStyle>
-				<Comment />
+			<IconElement iconRole="button">
+				<BookmarkEmpty />
+			</IconElement>
 
-				<Skeleton skeletonWidth="4rem" skeletonHeight="2.5rem" />
-			</PostActionAndDataStyle>
-
-			<BookmarkEmpty />
+			<IconElement
+				onClick={handleOpenAndClosePostCommentsOnClick}
+				iconRole="button"
+				iconID="post-preview-actions__comment-outline"
+			>
+				<CommentOutline />
+			</IconElement>
 		</PostActionsStyle>
 	);
 };

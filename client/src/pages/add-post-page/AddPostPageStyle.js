@@ -11,11 +11,5 @@ export const AddPostPageStyle = styled.div`
 
 	@media (max-width: 1000px) {
 		grid-template-columns: 1fr;
-		width: 80%;
-		margin: auto;
-	}
-
-	@media (max-width: 500px) {
-		width: 100%;
 	}
 `;

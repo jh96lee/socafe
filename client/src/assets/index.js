@@ -19,6 +19,8 @@ import { ReactComponent as More } from "./general/more.svg";
 import { ReactComponent as Edit } from "./general/edit.svg";
 import { ReactComponent as Open } from "./general/open.svg";
 import { ReactComponent as DoubleArrowLeft } from "./general/double-arrow-left.svg";
+import { ReactComponent as Date } from "./general/date.svg";
+import { ReactComponent as ClockFilled } from "./general/clock-filled.svg";
 
 import { ReactComponent as EditFilled } from "./general/edit-filled.svg";
 import { ReactComponent as Settings } from "./general/settings.svg";
@@ -40,6 +42,8 @@ import { ReactComponent as HomeFilled } from "./navigation/home-filled.svg";
 import { ReactComponent as HomeOutline } from "./navigation/home-outline.svg";
 
 import { ReactComponent as Comment } from "./post/comment.svg";
+import { ReactComponent as CommentFilled } from "./post/comment-filled.svg";
+import { ReactComponent as CommentOutline } from "./post/comment-outline.svg";
 import { ReactComponent as Image } from "./post/image.svg";
 import { ReactComponent as MultipleUsers } from "./post/multiple-users.svg";
 import { ReactComponent as PlusPost } from "./post/plus.svg";
@@ -90,6 +94,7 @@ export {
 	Sun,
 	EditFilled,
 	Moon,
+	ClockFilled,
 	Remove,
 	Bolt,
 	Submit,
@@ -104,6 +109,8 @@ export {
 	MultipleUsers,
 	PlusPost,
 	BookmarkFill,
+	CommentFilled,
+	CommentOutline,
 	BookmarkEmpty,
 	TagUser,
 	Image,
@@ -112,6 +119,7 @@ export {
 	NotificationFilled,
 	NotificationOutline,
 	Search,
+	Date,
 	Stats,
 	Story,
 	PlusAlt,
