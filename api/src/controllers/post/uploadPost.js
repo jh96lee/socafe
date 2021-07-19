@@ -20,7 +20,7 @@ const uploadPost = async (req, res) => {
 			[0, userID]
 		);
 
-		const postID = rows[0].id;
+		const postID = parseInt(rows[0].id);
 
 		for (let image of postImagesArray) {
 			const { url, width, height } = image;
@@ -51,22 +51,22 @@ const uploadPost = async (req, res) => {
 
 			await pool.queryToDatabase(
 				`
-				INSERT INTO tagging(post_id, comment_id, user_id)
-				VALUES ($1, $2, $3);
+				INSERT INTO users_posts(post_id, user_id)
+				VALUES ($1, $2);
 				`,
-				[postID, null, id]
+				[postID, id]
 			);
 		}
 
 		for (let node of postNodesArray) {
-			const { type, content } = node;
+			const { nodeType, nodeValue } = node;
 
 			await pool.queryToDatabase(
 				`
 				INSERT INTO post_captions(node_type, node_value, post_id)
 				VALUES ($1, $2, $3);
 				`,
-				[type, content, postID]
+				[nodeType, nodeValue, postID]
 			);
 		}
 
