@@ -17,8 +17,8 @@ const PostCommentStyle = styled.div`
 	gap: 0.7rem;
 	padding: 0.3rem 1rem;
 	border-radius: 2rem;
-	height: 90%;
-	width: 90%;
+	height: 100%;
+	width: 100%;
 	margin: auto;
 	box-shadow: 0 0 0 1.6px var(--separator-1);
 

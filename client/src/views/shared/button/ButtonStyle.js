@@ -18,17 +18,17 @@ const ButtonStyle = styled.button`
 	outline: none;
 	color: ${(props) =>
 		props.success
-			? "var(--txt-success)"
+			? "var(--text-success-color)"
 			: props.error
-			? "var(--txt-error)"
+			? "var(--text-error-color)"
 			: props.buttonColor
 			? props.buttonColor
 			: "#fff"};
 	background-color: ${(props) =>
 		props.success
-			? "var(--bg-success)"
+			? "var(--bg-success-color)"
 			: props.error
-			? "var(--bg-error)"
+			? "var(--bg-error-color)"
 			: props.buttonBackgroundColor
 			? props.buttonBackgroundColor
 			: "var(--button-default-bg-color)"};
@@ -36,9 +36,9 @@ const ButtonStyle = styled.button`
 	&:hover {
 		background-color: ${(props) =>
 			props.success
-				? "var(--bg-success)"
+				? "var(--bg-success-color)"
 				: props.error
-				? "var(--bg-error)"
+				? "var(--bg-error-color)"
 				: props.buttonHoverBackgroundColor
 				? props.buttonHoverBackgroundColor
 				: "var(--button-default-hover-bg-color)"};

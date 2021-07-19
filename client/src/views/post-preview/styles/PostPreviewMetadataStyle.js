@@ -8,23 +8,25 @@ export const PostPreviewMetadataStyle = styled.div`
 	margin: auto;
 	padding: 4rem 5rem;
 
-	& > *:not(:last-child) {
+	& > * {
 		grid-column: 1 / 3;
 	}
 
+	/* REVIEW: override the above grid-column value */
 	& > *:nth-child(1) {
 		grid-column: 1 / 2;
 		grid-row: 1;
 		justify-self: start;
 	}
 
+	/* REVIEW: override the above grid-column value */
 	& > *:nth-child(2) {
 		grid-column: 2 / 3;
 		grid-row: 1;
 		justify-self: end;
 	}
 
-	@media (max-width: 1300px) {
-		grid-auto-rows: auto 40vw min-content auto min-content;
+	@media (max-width: 1600px) {
+		grid-auto-rows: auto 35vw min-content auto min-content;
 	}
 `;

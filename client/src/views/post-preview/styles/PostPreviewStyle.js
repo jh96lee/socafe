@@ -29,23 +29,8 @@ export const PostPreviewStyle = styled.div`
 		}
 
 		& > *:nth-child(2) {
+			position: absolute;
 			width: 40rem;
 		}
-	}
-
-	@media (max-width: 1300px) {
-		width: 90%;
-
-		& > *:nth-child(1) {
-			width: 95%;
-		}
-
-		& > *:nth-child(2) {
-			width: 40rem;
-		}
-	}
-
-	@media (max-width: 1000px) {
-		display: none;
 	}
 `;

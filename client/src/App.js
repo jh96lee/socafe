@@ -14,9 +14,11 @@ import {
 	UserRegisterPage,
 } from "./pages";
 import { AddPostIcon } from "./views/shared";
-// import { Post } from "./views/post";
+import { MainPost } from "./views/main-post";
 
 import GlobalStyle from "./styles/GlobalStyle";
+
+import PostCommentInput from "./practice/PostCommentInput";
 
 const GlobalPageStyle = styled.main`
 	display: grid;
@@ -62,7 +64,8 @@ function App() {
 
 				<Switch location={overlaidComponentLocation || appLocation}>
 					<Route exact path="/">
-						<HomePage />
+						{/* <HomePage /> */}
+						<PostCommentInput />
 					</Route>
 
 					<Route exact path="/user/:userID">
@@ -70,9 +73,9 @@ function App() {
 					</Route>
 
 					{/* REVIEW: 2 ways it can be rendered */}
-					{/* <Route exact path="/post/:postID">
-						<Post />
-					</Route> */}
+					<Route exact path="/post/:postID">
+						<MainPost />
+					</Route>
 
 					<Route exact path="/register">
 						{user ? <Redirect to="/" /> : <UserRegisterPage />}

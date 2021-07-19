@@ -35,5 +35,5 @@ export const PostOverlayImageStyle = styled.img`
 	z-index: 1;
 	width: 105%;
 	height: 105%;
-	filter: blur(10px);
+	filter: blur(12px);
 `;

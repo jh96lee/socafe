@@ -13,7 +13,10 @@ import PostPreviewNumericData from "./PostPreviewNumericData";
 
 import { PostPreviewMetadataStyle } from "../styles/PostPreviewMetadataStyle";
 
-const PostPreviewMetadata = ({ handleOpenAndClosePostCommentsOnClick }) => {
+const PostPreviewMetadata = ({
+	isPostCommentsOpen,
+	handleOpenAndClosePostCommentsOnClick,
+}) => {
 	const { uploadedPostImagesArray } = useSelector(
 		(state) => state.postImagesReducer
 	);
@@ -42,6 +45,7 @@ const PostPreviewMetadata = ({ handleOpenAndClosePostCommentsOnClick }) => {
 			/>
 
 			<PostPreviewActions
+				isPostCommentsOpen={isPostCommentsOpen}
 				handleOpenAndClosePostCommentsOnClick={
 					handleOpenAndClosePostCommentsOnClick
 				}
@@ -53,6 +57,7 @@ const PostPreviewMetadata = ({ handleOpenAndClosePostCommentsOnClick }) => {
 			/>
 
 			<PostPreviewNumericData />
+
 			{postCaptionsNodesArray.length === 1 &&
 			postCaptionsNodesArray[0].nodeType === "br" ? (
 				<Skeleton skeletonWidth="100%" skeletonHeight="20rem" />

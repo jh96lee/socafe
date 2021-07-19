@@ -5,8 +5,8 @@ import { Skeleton } from "../../shared";
 import { HeartFill, ClockFilled, CommentFilled } from "../../../assets";
 
 import {
-	PostPreviewTotalsDataStyle,
-	PostPreviewTotalsDataAndIconStyle,
+	PostPreviewNumericDataStyle,
+	PostPreviewNumericDataAndIconStyle,
 } from "../styles/PostPreviewNumericDataStyle";
 
 const PostPreviewNumericData = () => {
@@ -14,34 +14,34 @@ const PostPreviewNumericData = () => {
 	const postPreviewNumericDataSkeletonHeight = "2.4rem";
 
 	return (
-		<PostPreviewTotalsDataStyle>
-			<PostPreviewTotalsDataAndIconStyle>
+		<PostPreviewNumericDataStyle>
+			<PostPreviewNumericDataAndIconStyle>
 				<HeartFill />
 
 				<Skeleton
 					skeletonWidth={postPreviewNumericDataSkeletonWidth}
 					skeletonHeight={postPreviewNumericDataSkeletonHeight}
 				/>
-			</PostPreviewTotalsDataAndIconStyle>
+			</PostPreviewNumericDataAndIconStyle>
 
-			<PostPreviewTotalsDataAndIconStyle>
+			<PostPreviewNumericDataAndIconStyle>
 				<CommentFilled />
 
 				<Skeleton
 					skeletonWidth={postPreviewNumericDataSkeletonWidth}
 					skeletonHeight={postPreviewNumericDataSkeletonHeight}
 				/>
-			</PostPreviewTotalsDataAndIconStyle>
+			</PostPreviewNumericDataAndIconStyle>
 
-			<PostPreviewTotalsDataAndIconStyle>
+			<PostPreviewNumericDataAndIconStyle>
 				<ClockFilled />
 
 				<Skeleton
 					skeletonWidth={postPreviewNumericDataSkeletonWidth}
 					skeletonHeight={postPreviewNumericDataSkeletonHeight}
 				/>
-			</PostPreviewTotalsDataAndIconStyle>
-		</PostPreviewTotalsDataStyle>
+			</PostPreviewNumericDataAndIconStyle>
+		</PostPreviewNumericDataStyle>
 	);
 };
 

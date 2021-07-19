@@ -10,10 +10,6 @@ export const PostPreviewCommentsStyle = styled.div`
 	background-color: var(--bg-1);
 	height: 70rem;
 	box-shadow: -1.6px 0 0 0 var(--input-default-separator-color);
-
-	@media (max-width: 1600px) {
-		position: absolute;
-	}
 `;
 
 export const PostPreviewCommentsHeaderStyle = styled.div`

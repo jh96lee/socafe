@@ -3,15 +3,15 @@ import * as React from "react";
 import { PostPreview } from "../../views/post-preview";
 import { AddPostForm } from "../../views/add-post-form";
 
-import { AddPostPageStyle } from "./AddPostPageStyle";
+import { AddContentPageStyle } from "../../styles";
 
 const AddPostPage = () => {
 	return (
-		<AddPostPageStyle>
+		<AddContentPageStyle>
 			<AddPostForm />
 
 			<PostPreview />
-		</AddPostPageStyle>
+		</AddContentPageStyle>
 	);
 };
 

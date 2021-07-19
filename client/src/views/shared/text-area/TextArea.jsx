@@ -5,15 +5,19 @@ import { TextAreaStyle } from "./TextAreaStyle";
 const TextArea = ({ textAreaNodesArray }) => {
 	return (
 		<TextAreaStyle>
-			{textAreaNodesArray.map(({ nodeType, nodeValue }, idx) => {
-				if (nodeValue === "<br>") {
+			{textAreaNodesArray.map((node, idx) => {
+				if (node.nodeType === "br" || node.node_type === "br") {
 					return (
-						<p key={`${nodeType}__${idx}`}>
+						<p key={`${node.nodeType || node.node_type}__${idx}`}>
 							<br />
 						</p>
 					);
 				} else {
-					return <p key={`${nodeType}__${idx}`}>{nodeValue}</p>;
+					return (
+						<p key={`${node.nodeType || node.node_type}__${idx}`}>
+							{node.nodeValue || node.node_value}
+						</p>
+					);
 				}
 			})}
 		</TextAreaStyle>

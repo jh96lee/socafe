@@ -3,22 +3,21 @@ import * as React from "react";
 import PostPreviewMetadata from "./PostPreviewMetadata";
 import PostPreviewComments from "./PostPreviewComments";
 
+import { usePostCommentsDisplay } from "../../../hooks";
+
 import { PostPreviewStyle } from "../styles/PostPreviewStyle";
 
 const PostPreview = () => {
-	const [isPostCommentsOpen, setIsPostCommentsOpen] = React.useState(true);
-
-	const handleOpenAndClosePostCommentsOnClick = () => {
-		setIsPostCommentsOpen((prevState) => !prevState);
-	};
-
-	const handleClosePostCommentsOnClick = () => {
-		setIsPostCommentsOpen(false);
-	};
+	const {
+		isPostCommentsOpen,
+		handleOpenAndClosePostCommentsOnClick,
+		handleClosePostCommentsOnClick,
+	} = usePostCommentsDisplay();
 
 	return (
 		<PostPreviewStyle>
 			<PostPreviewMetadata
+				isPostCommentsOpen={isPostCommentsOpen}
 				handleOpenAndClosePostCommentsOnClick={
 					handleOpenAndClosePostCommentsOnClick
 				}

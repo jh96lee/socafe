@@ -1,4 +1,5 @@
 import * as React from "react";
+import styled from "styled-components";
 
 import { IconElement } from "../../shared";
 
@@ -9,14 +10,18 @@ import {
 	CommentFilled,
 } from "../../../assets";
 
-import { PostActionsStyle } from "../styles/PostPreviewActionsStyle";
+const MainPostActionsStyle = styled.div`
+	display: flex;
+	align-items: center;
+	gap: 1.4rem;
+`;
 
-const PostPreviewActions = ({
+const MainPostActions = ({
 	isPostCommentsOpen,
 	handleOpenAndClosePostCommentsOnClick,
 }) => {
 	return (
-		<PostActionsStyle>
+		<MainPostActionsStyle>
 			<IconElement
 				iconRole="button"
 				iconElementStyleObject={{
@@ -48,8 +53,8 @@ const PostPreviewActions = ({
 			>
 				{isPostCommentsOpen ? <CommentFilled /> : <CommentOutline />}
 			</IconElement>
-		</PostActionsStyle>
+		</MainPostActionsStyle>
 	);
 };
 
-export default PostPreviewActions;
+export default MainPostActions;

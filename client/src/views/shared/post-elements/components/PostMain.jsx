@@ -14,7 +14,7 @@ const PostMainStyle = styled.div`
 const PostMain = ({ postImagesArray, postTaggedUsersArray }) => {
 	return (
 		<PostMainStyle>
-			{postImagesArray.length > 0 ? (
+			{!postImagesArray || postImagesArray.length > 0 ? (
 				<PostImages postImagesArray={postImagesArray} />
 			) : (
 				<Skeleton skeletonWidth="100%" skeletonHeight="100%" />

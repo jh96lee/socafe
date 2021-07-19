@@ -15,6 +15,8 @@ import userFollowingTopicsReducer from "./user-following-topics/userFollowingTop
 
 import postReducer from "./post/postReducer";
 
+import mainPostReducer from "./main-post/mainPostReducer";
+
 import postImagesReducer from "./add-post/post-images/postImagesReducer";
 import postTopicsReducer from "./add-post/post-topics/postTopicsReducer";
 import postUsersReducer from "./add-post/post-users/postUsersReducer";
@@ -35,6 +37,8 @@ const rootReducer = combineReducers({
 	postUploadReducer,
 
 	postReducer,
+
+	mainPostReducer,
 
 	userLoginReducer,
 

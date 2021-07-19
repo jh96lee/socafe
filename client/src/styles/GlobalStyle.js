@@ -78,22 +78,30 @@ const GlobalStyles = createGlobalStyle`
         --link-cta-color: ${(props) =>
 					props.theme.isDarkMode ? "#87ceeb" : "#119bc9"};
 
-        /* TODO: text */
-        --txt-error: ${(props) =>
+        /* REVIEW: text on form */
+        --text-error-color: ${(props) =>
 					props.theme.isDarkMode ? "#fd8097" : "#a70202"};
-        --txt-success: ${(props) =>
+        --text-success-color: ${(props) =>
 					props.theme.isDarkMode ? "#8cff90" : "#0e6d12"};
-        --txt-disabled: ${(props) =>
+        --text-disabled-color: ${(props) =>
 					props.theme.isDarkMode ? "#ffffff66" : "#ffffffb3"};
+        --bg-error-color: ${(props) =>
+					props.theme.isDarkMode ? "#ff000033" : "#ff5b5b4d"};
+        --bg-success-color: ${(props) =>
+					props.theme.isDarkMode ? "#4caf503b" : "#0ed60e47"};
+
+        /* REVIEW: likes */
+        --likes-icon-color: ${(props) =>
+					props.theme.isDarkMode ? "#ff1a56" : "#ff1a56"};
+        --likes-bg-color: ${(props) =>
+					props.theme.isDarkMode ? "#d2003729" : "#ffc0cb"};
+        --likes-hover-bg-color: ${(props) =>
+					props.theme.isDarkMode ? "#ff00003d" : "#fbb4c0"};
 
         /* TODO: background */
         --bg-2: ${(props) => (props.theme.isDarkMode ? "#202229" : "#f9fafb")};
         --bg-post: ${(props) => (props.theme.isDarkMode ? "#161719" : "#fff")};
         --bg-filled-story:  linear-gradient(to right, #0d69ff, #16b3ff); 
-        --bg-error: ${(props) =>
-					props.theme.isDarkMode ? "#ff000033" : "#ff5b5b4d"};
-        --bg-success: ${(props) =>
-					props.theme.isDarkMode ? "#4caf503b" : "#0ed60e47"};
 
         /* TODO: icon */
         --icon-1: ${(props) =>
@@ -190,6 +198,7 @@ const GlobalStyles = createGlobalStyle`
         display: block;
     }
 
+    /* REVIEW: decrease font size when size hits 500px or below */
     @media (max-width: 500px) {
         html {
             font-size: 57%;
