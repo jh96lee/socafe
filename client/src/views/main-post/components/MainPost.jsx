@@ -6,8 +6,9 @@ import styled from "styled-components";
 import { Loader } from "../../shared";
 import MainPostMetadata from "./MainPostMetadata";
 import MainPostComments from "./MainPostComments";
+import MainPostSearchUsersPopup from "./MainPostSearchUsersPopup";
 
-import { usePostCommentsDisplay } from "../../../hooks";
+import { useDropdown, usePostCommentsDisplay } from "../../../hooks";
 
 import { fetchMainPost } from "../../../redux/main-post/mainPostAction";
 
@@ -29,7 +30,8 @@ const MainPostStyle = styled.div`
 		${(props) => (props.theme.isDarkMode ? "#000" : "#00000033")};
 
 	& > *:nth-child(1) {
-		width: 70%;
+		/* width: 70%; */
+		width: 100%;
 	}
 
 	& > *:nth-child(2) {
@@ -43,6 +45,13 @@ const MainPost = () => {
 		handleOpenAndClosePostCommentsOnClick,
 		handleClosePostCommentsOnClick,
 	} = usePostCommentsDisplay();
+
+	const { isDropdownMenuOpen, setIsDropdownMenuOpen } = useDropdown(
+		"",
+		"",
+		false,
+		false
+	);
 
 	const dispatch = useDispatch();
 
@@ -64,18 +73,21 @@ const MainPost = () => {
 		<MainPostStyle>
 			{isMainPostLoaded ? (
 				<React.Fragment>
-					<MainPostMetadata
+					{/* <MainPostMetadata
 						mainPost={mainPost}
 						isPostCommentsOpen={isPostCommentsOpen}
 						handleOpenAndClosePostCommentsOnClick={
 							handleOpenAndClosePostCommentsOnClick
 						}
-					/>
+					/> */}
 
 					<MainPostComments
 						isPostCommentsOpen={isPostCommentsOpen}
+						setIsPostSearchUsersPopupOpen={setIsDropdownMenuOpen}
 						handleClosePostCommentsOnClick={handleClosePostCommentsOnClick}
 					/>
+
+					{/* <MainPostSearchUsersPopup /> */}
 				</React.Fragment>
 			) : (
 				<Loader />

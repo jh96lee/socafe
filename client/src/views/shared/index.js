@@ -13,6 +13,8 @@ export { default as Notice } from "./notice/Notice";
 export { default as UploadImage } from "./upload-image/components/UploadImage";
 
 export { default as SearchAndSelect } from "./search-and-select/components/SearchAndSelect";
+export { default as SearchAndSelectedElements } from "./search-and-select/components/SearchAndSelectedElements";
+export { default as SelectedElement } from "./search-and-select/components/SelectedElement";
 
 export { default as TextEditor } from "./text-editor/TextEditor";
 export { default as TextArea } from "./text-area/TextArea";
@@ -25,12 +27,10 @@ export { default as AddPostIcon } from "./add-post-icon/AddPostIcon";
 
 export { default as UserMetadata } from "./user-metadata/UserMetadata";
 
-export { default as PostBookmark } from "./post-elements/components/PostBookmark";
 export { default as PostImages } from "./post-elements/components/PostImages";
 export { default as PostTaggedUsers } from "./post-elements/components/PostTaggedUsers";
 export { default as PostTopics } from "./post-elements/components/PostTopics";
 export { default as PostMain } from "./post-elements/components/PostMain";
-export { default as PostCommentInput } from "./post-elements/components/PostCommentInput";
 
 export { default as PostLikes } from "./post-likes/PostLikes";
 

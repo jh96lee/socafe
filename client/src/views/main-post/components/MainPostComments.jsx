@@ -1,7 +1,8 @@
 import * as React from "react";
 import styled from "styled-components";
 
-import { PostCommentInput, IconElement } from "../../shared";
+import { IconElement } from "../../shared";
+import MainPostCommentInput from "./MainPostCommentInput";
 
 import { CloseAlt } from "../../../assets";
 
@@ -11,7 +12,7 @@ const MainPostCommentsStyle = styled.div`
 	right: 0;
 	z-index: 10;
 	display: ${(props) => (props.isPostCommentsOpen ? "grid" : "none")};
-	grid-auto-rows: min-content auto min-content;
+	grid-auto-rows: 1fr;
 	background-color: var(--bg-1);
 	box-shadow: -1.6px 0 0 0 var(--input-default-separator-color);
 `;
@@ -48,7 +49,7 @@ const MainPostComments = ({
 }) => {
 	return (
 		<MainPostCommentsStyle isPostCommentsOpen={isPostCommentsOpen}>
-			<MainPostCommentsHeaderStyle>
+			{/* <MainPostCommentsHeaderStyle>
 				<h5>Comments</h5>
 
 				<IconElement
@@ -69,10 +70,10 @@ const MainPostComments = ({
 				<p>Comment 2</p>
 
 				<p>Comment 3</p>
-			</MainPostUsersCommentsStyle>
+			</MainPostUsersCommentsStyle> */}
 
 			<MainPostCommentInputStyle>
-				<PostCommentInput />
+				<MainPostCommentInput />
 			</MainPostCommentInputStyle>
 		</MainPostCommentsStyle>
 	);

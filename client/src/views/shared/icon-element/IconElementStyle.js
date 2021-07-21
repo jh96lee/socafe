@@ -9,6 +9,7 @@ const IconElementStyle = styled.div`
 	z-index: ${(props) => props.elementZIndex};
 	transform: ${(props) => props.elementTransform};
 	display: flex;
+	justify-content: center;
 	align-items: center;
 	padding: ${(props) => props.elementPadding || "0.8rem"};
 	outline: none;

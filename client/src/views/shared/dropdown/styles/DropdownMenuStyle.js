@@ -8,6 +8,7 @@ export const DropdownMenuStyle = styled.div`
 	left: ${(props) => props.menuLeft};
 	z-index: 100;
 	width: ${(props) => props.menuWidth || "fit-content"};
+	transform: ${(props) => props.menuTransform};
 	box-shadow: 0 0px 0px 1.6px var(--separator-1);
 	background-color: var(--bg-1);
 	padding: 1rem;

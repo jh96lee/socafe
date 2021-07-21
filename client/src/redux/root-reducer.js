@@ -1,7 +1,6 @@
 import { combineReducers } from "redux";
 import userReducer from "./user/userReducer";
 
-import commentReducer from "./comment/commentReducer";
 import homeFeedReducer from "./home-feed/homeFeedReducer";
 import userProfileReducer from "./user-profile/userProfileReducer";
 
@@ -23,10 +22,11 @@ import postUsersReducer from "./add-post/post-users/postUsersReducer";
 import postCaptionsReducer from "./add-post/post-captions/postCaptionsReducer";
 import postUploadReducer from "./add-post/post-upload/postUploadReducer";
 
+import postCommentReducer from "./post-comment/postCommentReducer";
+
 const rootReducer = combineReducers({
 	userReducer,
 
-	commentReducer,
 	homeFeedReducer,
 	userProfileReducer,
 
@@ -47,6 +47,8 @@ const rootReducer = combineReducers({
 
 	userFollowTopicsReducer,
 	userFollowingTopicsReducer,
+
+	postCommentReducer,
 });
 
 export default rootReducer;

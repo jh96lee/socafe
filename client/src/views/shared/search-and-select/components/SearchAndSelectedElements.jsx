@@ -8,9 +8,10 @@ const SearchAndSelectedElements = ({
 	searchAndSelectType,
 	searchAndSelectedElementsArray,
 	selectedElementOnClickEventHandler,
+	searchAndSelectedElementsStyleObject,
 }) => {
 	return (
-		<SearchAndSelectedElementsStyle>
+		<SearchAndSelectedElementsStyle {...searchAndSelectedElementsStyleObject}>
 			{searchAndSelectedElementsArray.map((element, idx) => {
 				return (
 					<SelectedElement

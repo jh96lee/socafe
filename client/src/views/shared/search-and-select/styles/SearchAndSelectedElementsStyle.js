@@ -4,7 +4,7 @@ export const SearchAndSelectedElementsStyle = styled.div`
 	display: flex;
 	flex-wrap: wrap;
 	gap: 1rem;
-	padding: ${(props) => props.searchAndSelectedPadding || "1.5rem"};
+	padding: ${(props) => props.searchAndSelectedElementsPadding || "1.5rem"};
 	position: relative;
 	border: none;
 	border-radius: 0.5rem;
