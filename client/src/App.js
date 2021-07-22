@@ -18,8 +18,6 @@ import { MainPost } from "./views/main-post";
 
 import GlobalStyle from "./styles/GlobalStyle";
 
-import PostCommentInput from "./practice/PostCommentInput";
-
 const GlobalPageStyle = styled.main`
 	display: grid;
 	grid-template-columns: 7.8rem auto;
@@ -64,8 +62,7 @@ function App() {
 
 				<Switch location={overlaidComponentLocation || appLocation}>
 					<Route exact path="/">
-						{/* <HomePage /> */}
-						<PostCommentInput />
+						<HomePage />
 					</Route>
 
 					<Route exact path="/user/:userID">

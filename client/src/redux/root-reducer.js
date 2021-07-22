@@ -15,14 +15,13 @@ import userFollowingTopicsReducer from "./user-following-topics/userFollowingTop
 import postReducer from "./post/postReducer";
 
 import mainPostReducer from "./main-post/mainPostReducer";
+import mainPostCommentInputReducer from "./main-post-comment-input/mainPostCommentInputReducer";
 
 import postImagesReducer from "./add-post/post-images/postImagesReducer";
 import postTopicsReducer from "./add-post/post-topics/postTopicsReducer";
 import postUsersReducer from "./add-post/post-users/postUsersReducer";
 import postCaptionsReducer from "./add-post/post-captions/postCaptionsReducer";
 import postUploadReducer from "./add-post/post-upload/postUploadReducer";
-
-import postCommentReducer from "./post-comment/postCommentReducer";
 
 const rootReducer = combineReducers({
 	userReducer,
@@ -39,6 +38,7 @@ const rootReducer = combineReducers({
 	postReducer,
 
 	mainPostReducer,
+	mainPostCommentInputReducer,
 
 	userLoginReducer,
 
@@ -47,8 +47,6 @@ const rootReducer = combineReducers({
 
 	userFollowTopicsReducer,
 	userFollowingTopicsReducer,
-
-	postCommentReducer,
 });
 
 export default rootReducer;

@@ -5,8 +5,7 @@ import styled from "styled-components";
 
 import { Loader } from "../../shared";
 import MainPostMetadata from "./MainPostMetadata";
-import MainPostComments from "./MainPostComments";
-import MainPostSearchUsersPopup from "./MainPostSearchUsersPopup";
+import { MainPostComments } from "../../main-post-comments";
 
 import { useDropdown, usePostCommentsDisplay } from "../../../hooks";
 
@@ -86,8 +85,6 @@ const MainPost = () => {
 						setIsPostSearchUsersPopupOpen={setIsDropdownMenuOpen}
 						handleClosePostCommentsOnClick={handleClosePostCommentsOnClick}
 					/>
-
-					{/* <MainPostSearchUsersPopup /> */}
 				</React.Fragment>
 			) : (
 				<Loader />

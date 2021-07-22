@@ -18,6 +18,8 @@ const IconElementStyle = styled.div`
 	background-color: ${(props) =>
 		props.elementBackgroundColor || "var(--icon-default-bg-color)"};
 	box-shadow: ${(props) => props.elementBoxShadow};
+	width: ${(props) => props.elementWidth};
+	height: ${(props) => props.elementHeight};
 
 	& svg {
 		color: ${(props) => props.iconColor || "var(--icon-default-color)"};
