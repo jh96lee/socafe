@@ -105,7 +105,7 @@ const getPost = async (req, res) => {
 			`
 			SELECT
 			COUNT(*) 
-			FROM post_comments
+			FROM comments
 			WHERE post_id=$1;
 			`,
 			[postID]
