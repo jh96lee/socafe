@@ -1,67 +1,45 @@
 import * as React from "react";
-import { useSelector } from "react-redux";
-import styled from "styled-components";
-import axios from "axios";
+import { useSelector, useDispatch } from "react-redux";
+import { useParams } from "react-router-dom";
 
 import { MainPostParentComment } from "../../main-post-parent-comment";
 
-const MainPostCommentsMyParentCommentsStyle = styled.div`
-	height: 100%;
-	overflow: scroll;
-`;
+import { addNewMyParentComment } from "../../../redux/main-post-comments/main-post-my-parent-comments/mainPostMyParentCommentsAction";
+import { resetSubmittedMainPostComment } from "../../../redux/main-post-comment-input/mainPostCommentInputAction";
 
-const MainPostCommentsMyParentComments = () => {
-	const [myParentComments, setMyParentComments] = React.useState([]);
-	const [isMyCommentsLoaded, setIsMyCommentsLoaded] = React.useState(false);
+const MainPostCommentsMyParentComments = ({ myParentComments }) => {
+	const dispatch = useDispatch();
 
-	const { user } = useSelector((state) => state.userReducer);
+	const postID = parseInt(useParams().postID);
 
 	const { submittedMainPostComment } = useSelector(
 		(state) => state.mainPostCommentInputReducer
 	);
 
-	const fetchMyComments = async () => {
-		setIsMyCommentsLoaded(false);
-
-		const { data } = await axios({
-			method: "GET",
-			url: `http://localhost:8080/comment/my/${user.id}`,
-		});
-
-		console.log(data);
-
-		setMyParentComments(data);
-
-		setIsMyCommentsLoaded(true);
-	};
-
-	React.useEffect(() => {
-		fetchMyComments();
-	}, []);
-
 	React.useEffect(() => {
 		if (submittedMainPostComment) {
-			if (submittedMainPostComment.comment_owner.id === parseInt(user.id)) {
-				setMyParentComments((prevState) => [
-					...prevState,
-					submittedMainPostComment,
-				]);
+			if (
+				submittedMainPostComment.parent_comment_id === null &&
+				submittedMainPostComment.post_id === postID
+			) {
+				dispatch(addNewMyParentComment(submittedMainPostComment));
+
+				dispatch(resetSubmittedMainPostComment());
 			}
 		}
 	}, [submittedMainPostComment]);
 
 	return (
-		<MainPostCommentsMyParentCommentsStyle>
-			{setIsMyCommentsLoaded &&
-				myParentComments.map((comment, idx) => {
-					return (
-						<MainPostParentComment
-							key={`main-post-comments__my-parent-comment__${idx}`}
-							parentComment={comment}
-						/>
-					);
-				})}
-		</MainPostCommentsMyParentCommentsStyle>
+		<React.Fragment>
+			{myParentComments.map((comment, idx) => {
+				return (
+					<MainPostParentComment
+						key={`main-post-comments__my-parent-comment__${idx}`}
+						parentComment={comment}
+					/>
+				);
+			})}
+		</React.Fragment>
 	);
 };
 

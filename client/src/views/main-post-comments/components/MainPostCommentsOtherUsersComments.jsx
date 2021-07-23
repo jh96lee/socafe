@@ -1,14 +1,19 @@
 import * as React from "react";
-import styled from "styled-components";
 
-const MainPostCommentsOtherUsersCommentsStyle = styled.div`
-	height: 100%;
-	overflow: scroll;
-`;
+import { MainPostParentComment } from "../../main-post-parent-comment";
 
-const MainPostCommentsOtherUsersComments = () => {
+const MainPostCommentsOtherUsersComments = ({ otherUsersComments }) => {
 	return (
-		<MainPostCommentsOtherUsersCommentsStyle></MainPostCommentsOtherUsersCommentsStyle>
+		<React.Fragment>
+			{otherUsersComments.map((comment, idx) => {
+				return (
+					<MainPostParentComment
+						key={`main-post-comments__other-user-comment__${idx}`}
+						parentComment={comment}
+					/>
+				);
+			})}
+		</React.Fragment>
 	);
 };
 

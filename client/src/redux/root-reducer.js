@@ -16,6 +16,8 @@ import postReducer from "./post/postReducer";
 
 import mainPostReducer from "./main-post/mainPostReducer";
 import mainPostCommentInputReducer from "./main-post-comment-input/mainPostCommentInputReducer";
+import mainPostMyParentCommentsReducer from "./main-post-comments/main-post-my-parent-comments/mainPostMyParentCommentsReducer";
+import mainPostOtherUsersCommentsReducer from "./main-post-comments/main-post-other-users-comments/mainPostOtherUsersCommentsReducer";
 
 import postImagesReducer from "./add-post/post-images/postImagesReducer";
 import postTopicsReducer from "./add-post/post-topics/postTopicsReducer";
@@ -39,6 +41,8 @@ const rootReducer = combineReducers({
 
 	mainPostReducer,
 	mainPostCommentInputReducer,
+	mainPostMyParentCommentsReducer,
+	mainPostOtherUsersCommentsReducer,
 
 	userLoginReducer,
 

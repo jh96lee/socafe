@@ -6,15 +6,10 @@ import MainPostCommentsFooter from "./MainPostCommentsFooter";
 
 import { MainPostCommentsStyle } from "../styles/MainPostCommentsStyle";
 
-const MainPostComments = ({
-	isPostCommentsOpen,
-	handleClosePostCommentsOnClick,
-}) => {
+const MainPostComments = () => {
 	return (
-		<MainPostCommentsStyle isPostCommentsOpen={isPostCommentsOpen}>
-			<MainPostCommentsHeader
-				handleClosePostCommentsOnClick={handleClosePostCommentsOnClick}
-			/>
+		<MainPostCommentsStyle>
+			<MainPostCommentsHeader />
 
 			<MainPostCommentsBody />
 

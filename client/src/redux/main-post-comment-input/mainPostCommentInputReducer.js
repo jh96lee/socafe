@@ -2,6 +2,7 @@ const initialState = {
 	mainPostID: null,
 	mainPostCommentParentCommentID: null,
 	mainPostCommentRepliedCommentOwnerID: null,
+	mainPostCommentRepliedCommentOwnerUsername: null,
 	submittedMainPostComment: null,
 	isMainPostCommentSubmitting: false,
 };
@@ -38,8 +39,17 @@ const mainPostCommentInputReducer = (state = initialState, action) => {
 				...state,
 				mainPostCommentRepliedCommentOwnerID: action.payload,
 			};
-		case "RESET_MAIN_POST_COMMENT":
-			return state;
+		case "RESET_SUBMITTED_MAIN_POST_COMMENT":
+			return {
+				...state,
+				submittedMainPostComment: null,
+			};
+
+		case "SET_MAIN_POST_COMMENT_REPLIED_COMMENT_OWNER_USERNAME":
+			return {
+				...state,
+				mainPostCommentRepliedCommentOwnerUsername: action.payload,
+			};
 		default:
 			return state;
 	}

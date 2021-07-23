@@ -18,7 +18,7 @@ const MainPostMetadataStyle = styled.div`
 	grid-auto-rows: auto 50rem min-content auto min-content;
 	gap: 1.8rem;
 	margin: auto;
-	padding: 4rem 5rem;
+	padding: 4rem 0;
 
 	& > * {
 		grid-column: 1 / 3;

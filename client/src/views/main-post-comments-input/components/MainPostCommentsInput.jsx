@@ -1,5 +1,5 @@
 import React from "react";
-import { useSelector, useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { useParams } from "react-router-dom";
 import axios from "axios";
 
@@ -24,6 +24,10 @@ const MainPostCommentsInput = () => {
 	const [searchUsersArray, setSearchUsersArray] = React.useState([]);
 
 	const dispatch = useDispatch();
+
+	const { mainPostCommentRepliedCommentOwnerUsername } = useSelector(
+		(state) => state.mainPostCommentInputReducer
+	);
 
 	const postID = parseInt(useParams().postID);
 
@@ -108,19 +112,21 @@ const MainPostCommentsInput = () => {
 					const range = document.createRange();
 					const selection = getSelection();
 
+					const anchorNode = selection.anchorNode;
 					const anchorOffset = selection.anchorOffset;
 
 					const updatedTextContent = addSpaceToString(
-						contentEditableSearchUserRef.current.textContent,
+						anchorNode.textContent,
 						anchorOffset
 					);
 
 					spanTag.textContent = updatedTextContent;
 
 					// REVIEW: replace the broken p tag with the new span tag
+					// TODO: anchorNode is the text and parentNode is the p tag
 					mainPostCommentsContentEditableRef.current.replaceChild(
 						spanTag,
-						contentEditableSearchUserRef.current
+						anchorNode.parentNode
 					);
 
 					range.setStart(spanTag, 1);
@@ -191,6 +197,24 @@ const MainPostCommentsInput = () => {
 	React.useEffect(() => {
 		dispatch(setMainPostID(postID));
 	}, [postID]);
+
+	React.useEffect(() => {
+		if (mainPostCommentRepliedCommentOwnerUsername) {
+			const contentEditableChildNodesArray = Array.from(
+				mainPostCommentsContentEditableRef.current.childNodes
+			);
+
+			contentEditableChildNodesArray.forEach((node) =>
+				mainPostCommentsContentEditableRef.current.removeChild(node)
+			);
+
+			const paragraphTag = document.createElement("p");
+
+			paragraphTag.textContent = `@${mainPostCommentRepliedCommentOwnerUsername}`;
+
+			mainPostCommentsContentEditableRef.current.append(paragraphTag);
+		}
+	}, [mainPostCommentRepliedCommentOwnerUsername]);
 
 	return (
 		<MainPostCommentsInputStyle>

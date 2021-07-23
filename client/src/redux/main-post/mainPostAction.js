@@ -13,7 +13,7 @@ const endFetchingMainPost = () => ({
 	type: "END_FETCHING_MAIN_POST",
 });
 
-export const fetchMainPost = (postID, userID) => async (dispatch, getState) => {
+export const fetchMainPost = (postID, userID) => async (dispatch) => {
 	dispatch(startFetchingMainPost());
 
 	try {

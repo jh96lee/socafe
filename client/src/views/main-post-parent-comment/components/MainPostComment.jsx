@@ -1,18 +1,25 @@
 import * as React from "react";
+import { useDispatch } from "react-redux";
 import { Link } from "react-router-dom";
 import styled from "styled-components";
 
 import { Avatar } from "../../shared";
 import MainPostCommentCaptions from "./MainPostCommentCaptions";
 
+import {
+	setMainPostCommentRepliedCommentOwnerUsername,
+	setMainPostCommentParentCommentID,
+	setMainPostCommentRepliedCommentOwnerID,
+} from "../../../redux/main-post-comment-input/mainPostCommentInputAction";
+
 import { HeartEmpty } from "../../../assets";
 
 const MainPostCommentStyle = styled.div`
-	display: flex;
+	display: grid;
+	grid-template-columns: min-content 1fr min-content;
 	gap: 1.4rem;
 	color: var(--text-1);
-	width: fit-content;
-	max-width: 30rem;
+	width: 100%;
 `;
 
 const MainPostCommentBodyStyle = styled.div`
@@ -39,16 +46,12 @@ const DotStyle = styled.div`
 	border-radius: 50%;
 `;
 
-const MainPostCommentFooterStyle = styled.div`
-	display: flex;
-	justify-content: space-between;
-	align-items: center;
-`;
-
 const MainPostCommentLikesStyle = styled.div`
 	display: flex;
+	flex-direction: column;
+	justify-content: center;
 	align-items: center;
-	gap: 0.5rem;
+	gap: 0.2rem;
 
 	& svg {
 		fill: var(--icon-default-color);
@@ -58,22 +61,31 @@ const MainPostCommentLikesStyle = styled.div`
 `;
 
 const MainPostComment = ({ comment }) => {
+	const dispatch = useDispatch();
+
 	const {
+		avatar_url,
 		comment_id,
-		comment_owner,
-		parent_comment_id,
 		post_comment_child_nodes_array,
+		user_id,
+		username,
 	} = comment;
+
+	const handleReplySpanOnClick = () => {
+		dispatch(setMainPostCommentRepliedCommentOwnerUsername(username));
+
+		dispatch(setMainPostCommentParentCommentID(comment_id));
+
+		dispatch(setMainPostCommentRepliedCommentOwnerID(user_id));
+	};
 
 	return (
 		<MainPostCommentStyle>
-			<Avatar avatarURL={comment_owner.avatar_url} avatarSize="4.5rem" />
+			<Avatar avatarURL={avatar_url} avatarSize="4rem" />
 
 			<MainPostCommentBodyStyle>
 				<MainPostCommentHeaderStyle>
-					<Link to={`/user/${comment_owner.username}`}>
-						{comment_owner.username}
-					</Link>
+					<Link to={`/user/${username}`}>{username}</Link>
 
 					<DotStyle />
 
@@ -84,16 +96,14 @@ const MainPostComment = ({ comment }) => {
 					commentNodesArray={post_comment_child_nodes_array}
 				/>
 
-				<MainPostCommentFooterStyle>
-					<span>reply</span>
-
-					<MainPostCommentLikesStyle>
-						<HeartEmpty />
-
-						<p>5</p>
-					</MainPostCommentLikesStyle>
-				</MainPostCommentFooterStyle>
+				<span onClick={handleReplySpanOnClick}>reply</span>
 			</MainPostCommentBodyStyle>
+
+			<MainPostCommentLikesStyle>
+				<HeartEmpty />
+
+				<p>5</p>
+			</MainPostCommentLikesStyle>
 		</MainPostCommentStyle>
 	);
 };

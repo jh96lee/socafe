@@ -32,8 +32,16 @@ export const setMainPostCommentRepliedCommentOwnerID = (
 	payload: repliedCommentOwnerID,
 });
 
-export const resetMainPostComment = () => ({
-	type: "RESET_MAIN_POST_COMMENT",
+// TODO: fix
+export const setMainPostCommentRepliedCommentOwnerUsername = (
+	repliedCommentOwnerUsername
+) => ({
+	type: "SET_MAIN_POST_COMMENT_REPLIED_COMMENT_OWNER_USERNAME",
+	payload: repliedCommentOwnerUsername,
+});
+
+export const resetSubmittedMainPostComment = () => ({
+	type: "RESET_SUBMITTED_MAIN_POST_COMMENT",
 });
 
 export const submitMainPostComment =
@@ -75,9 +83,12 @@ export const submitMainPostComment =
 			const {
 				error,
 				success,
+				user_id,
+				username,
+				avatar_url,
 				comment_id,
+				post_id,
 				parent_comment_id,
-				comment_owner,
 				replied_comment_owner_username,
 				post_comment_child_nodes_array,
 			} = data;
@@ -87,9 +98,12 @@ export const submitMainPostComment =
 			} else if (success) {
 				dispatch(
 					submittedMainPostComment({
+						user_id,
+						username,
+						avatar_url,
 						comment_id,
+						post_id,
 						parent_comment_id,
-						comment_owner,
 						replied_comment_owner_username,
 						post_comment_child_nodes_array,
 					})

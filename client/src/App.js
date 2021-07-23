@@ -58,7 +58,7 @@ function App() {
 					<Navigation isResponsiveNavigationOpen={isResponsiveNavigationOpen} />
 				)}
 
-				{user && <AddPostIcon />}
+				{/* {user && <AddPostIcon />} */}
 
 				<Switch location={overlaidComponentLocation || appLocation}>
 					<Route exact path="/">

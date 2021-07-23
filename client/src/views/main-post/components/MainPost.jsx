@@ -12,29 +12,19 @@ import { useDropdown, usePostCommentsDisplay } from "../../../hooks";
 import { fetchMainPost } from "../../../redux/main-post/mainPostAction";
 
 const MainPostStyle = styled.div`
-	position: fixed;
-	bottom: 0;
-	left: 50%;
-	transform: translateX(-50%);
-	z-index: 50;
 	display: flex;
 	background: var(--bg-1);
 	width: 100%;
 	height: 95vh;
 	overflow: scroll;
 	margin: auto;
-	border-radius: 2rem;
-	border: 1px solid var(--input-default-separator-color);
-	box-shadow: 0 2px 12px
-		${(props) => (props.theme.isDarkMode ? "#000" : "#00000033")};
 
 	& > *:nth-child(1) {
-		/* width: 70%; */
-		width: 100%;
+		width: 45%;
 	}
 
 	& > *:nth-child(2) {
-		width: 30%;
+		width: 27%;
 	}
 `;
 
@@ -72,13 +62,13 @@ const MainPost = () => {
 		<MainPostStyle>
 			{isMainPostLoaded ? (
 				<React.Fragment>
-					{/* <MainPostMetadata
+					<MainPostMetadata
 						mainPost={mainPost}
 						isPostCommentsOpen={isPostCommentsOpen}
 						handleOpenAndClosePostCommentsOnClick={
 							handleOpenAndClosePostCommentsOnClick
 						}
-					/> */}
+					/>
 
 					<MainPostComments
 						isPostCommentsOpen={isPostCommentsOpen}
