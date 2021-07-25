@@ -1,28 +1,32 @@
 const initialState = {
 	mainPostID: null,
+	mainPostComment: null,
 	mainPostCommentParentCommentID: null,
-	mainPostCommentRepliedCommentOwnerID: null,
-	mainPostCommentRepliedCommentOwnerUsername: null,
-	submittedMainPostComment: null,
-	isMainPostCommentSubmitting: false,
+	// REVIEW: use this data to figure out who will receive comment related notification
+	// REVIEW: does not matter if the username is appended or the user manually removed the appended username,
+	// REVIEW: notification that someone replied to his or her comment needs to be sent
+	mainPostCommentRepliedCommentID: null,
+	// REVIEW: this state is simply used for appending username to contenteditable
+	mainPostCommentReplyingToUsername: null,
+	isMainPostCommentPosting: false,
 };
 
 const mainPostCommentInputReducer = (state = initialState, action) => {
 	switch (action.type) {
-		case "START_SUBMITTING_MAIN_POST_COMMENT":
+		case "START_POSTING_MAIN_POST_COMMENT":
 			return {
 				...state,
-				isMainPostCommentSubmitting: true,
+				isMainPostCommentPosting: true,
 			};
-		case "SUBMITTED_MAIN_POST_COMMENT":
+		case "POSTED_MAIN_POST_COMMENT":
 			return {
 				...state,
-				submittedMainPostComment: action.payload,
+				mainPostComment: action.payload,
 			};
-		case "END_SUBMITTING_MAIN_POST_COMMENT":
+		case "END_POSTING_MAIN_POST_COMMENT":
 			return {
 				...state,
-				isMainPostCommentSubmitting: false,
+				isMainPostCommentPosting: false,
 			};
 		case "SET_MAIN_POST_ID":
 			return {
@@ -34,21 +38,28 @@ const mainPostCommentInputReducer = (state = initialState, action) => {
 				...state,
 				mainPostCommentParentCommentID: action.payload,
 			};
-		case "SET_MAIN_POST_COMMENT_REPLIED_COMMENT_OWNER_ID":
+		case "SET_MAIN_POST_COMMENT_REPLIED_COMMENT_ID":
 			return {
 				...state,
-				mainPostCommentRepliedCommentOwnerID: action.payload,
+				mainPostCommentRepliedCommentID: action.payload,
 			};
-		case "RESET_SUBMITTED_MAIN_POST_COMMENT":
+		case "SET_MAIN_POST_COMMENT_REPLYING_TO_USERNAME":
 			return {
 				...state,
-				submittedMainPostComment: null,
+				mainPostCommentReplyingToUsername: action.payload,
 			};
-
-		case "SET_MAIN_POST_COMMENT_REPLIED_COMMENT_OWNER_USERNAME":
+		case "RESET_POSTED_MAIN_POST_COMMENT":
 			return {
 				...state,
-				mainPostCommentRepliedCommentOwnerUsername: action.payload,
+				mainPostComment: null,
+			};
+		case "RESET_MAIN_POST_COMMENT":
+			return {
+				...state,
+				mainPostComment: null,
+				mainPostCommentParentCommentID: null,
+				mainPostCommentRepliedCommentID: null,
+				mainPostCommentReplyingToUsername: null,
 			};
 		default:
 			return state;

@@ -7,12 +7,14 @@ import { Avatar } from "../../shared";
 import MainPostCommentCaptions from "./MainPostCommentCaptions";
 
 import {
-	setMainPostCommentRepliedCommentOwnerUsername,
+	setMainPostCommentReplyingToUsername,
 	setMainPostCommentParentCommentID,
-	setMainPostCommentRepliedCommentOwnerID,
+	setMainPostCommentRepliedCommentID,
 } from "../../../redux/main-post-comment-input/mainPostCommentInputAction";
 
-import { HeartEmpty } from "../../../assets";
+import { convertDate } from "../../../utils/date/convertDate";
+
+import { HeartEmpty, HeartFill } from "../../../assets";
 
 const MainPostCommentStyle = styled.div`
 	display: grid;
@@ -60,23 +62,25 @@ const MainPostCommentLikesStyle = styled.div`
 	}
 `;
 
-const MainPostComment = ({ comment }) => {
+const MainPostComment = ({ comment, replyParentCommentID }) => {
 	const dispatch = useDispatch();
 
 	const {
+		created_at,
 		avatar_url,
-		comment_id,
-		post_comment_child_nodes_array,
-		user_id,
 		username,
+		comment_id,
+		comment_nodes_array,
+		comment_total_likes,
+		comment_is_liked,
 	} = comment;
 
 	const handleReplySpanOnClick = () => {
-		dispatch(setMainPostCommentRepliedCommentOwnerUsername(username));
+		dispatch(setMainPostCommentReplyingToUsername(username));
 
-		dispatch(setMainPostCommentParentCommentID(comment_id));
+		dispatch(setMainPostCommentParentCommentID(replyParentCommentID));
 
-		dispatch(setMainPostCommentRepliedCommentOwnerID(user_id));
+		dispatch(setMainPostCommentRepliedCommentID(comment_id));
 	};
 
 	return (
@@ -89,20 +93,18 @@ const MainPostComment = ({ comment }) => {
 
 					<DotStyle />
 
-					<span>May 5th, 2021</span>
+					<span>{convertDate(created_at)}</span>
 				</MainPostCommentHeaderStyle>
 
-				<MainPostCommentCaptions
-					commentNodesArray={post_comment_child_nodes_array}
-				/>
+				<MainPostCommentCaptions commentNodesArray={comment_nodes_array} />
 
 				<span onClick={handleReplySpanOnClick}>reply</span>
 			</MainPostCommentBodyStyle>
 
 			<MainPostCommentLikesStyle>
-				<HeartEmpty />
+				{comment_is_liked ? <HeartFill /> : <HeartEmpty />}
 
-				<p>5</p>
+				<p>{comment_total_likes}</p>
 			</MainPostCommentLikesStyle>
 		</MainPostCommentStyle>
 	);

@@ -25,7 +25,7 @@ const MainPostCommentsInput = () => {
 
 	const dispatch = useDispatch();
 
-	const { mainPostCommentRepliedCommentOwnerUsername } = useSelector(
+	const { mainPostCommentReplyingToUsername } = useSelector(
 		(state) => state.mainPostCommentInputReducer
 	);
 
@@ -191,6 +191,7 @@ const MainPostCommentsInput = () => {
 			mainPostCommentsContentEditableRef.current.childNodes
 		);
 
+		// FIX: change name
 		dispatch(submitMainPostComment(contentEditableChildNodesArray));
 	};
 
@@ -199,7 +200,7 @@ const MainPostCommentsInput = () => {
 	}, [postID]);
 
 	React.useEffect(() => {
-		if (mainPostCommentRepliedCommentOwnerUsername) {
+		if (mainPostCommentReplyingToUsername) {
 			const contentEditableChildNodesArray = Array.from(
 				mainPostCommentsContentEditableRef.current.childNodes
 			);
@@ -210,11 +211,13 @@ const MainPostCommentsInput = () => {
 
 			const paragraphTag = document.createElement("p");
 
-			paragraphTag.textContent = `@${mainPostCommentRepliedCommentOwnerUsername}`;
+			paragraphTag.textContent = `@${mainPostCommentReplyingToUsername}`;
+
+			paragraphTag.setAttribute("data-comment-mention-type", "reply");
 
 			mainPostCommentsContentEditableRef.current.append(paragraphTag);
 		}
-	}, [mainPostCommentRepliedCommentOwnerUsername]);
+	}, [mainPostCommentReplyingToUsername]);
 
 	return (
 		<MainPostCommentsInputStyle>

@@ -10,7 +10,10 @@ const MainPostCommentRepliesStyle = styled.div`
 	width: 100%;
 `;
 
-const MainPostCommentReplies = ({ postCommentReplies }) => {
+const MainPostCommentReplies = ({
+	postCommentReplies,
+	replyParentCommentID,
+}) => {
 	return (
 		<MainPostCommentRepliesStyle>
 			{postCommentReplies.map((reply, idx) => {
@@ -18,6 +21,7 @@ const MainPostCommentReplies = ({ postCommentReplies }) => {
 					<MainPostComment
 						key={`main-post-comment__reply__${idx}`}
 						comment={reply}
+						replyParentCommentID={replyParentCommentID}
 					/>
 				);
 			})}

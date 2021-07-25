@@ -2,17 +2,17 @@ import axios from "axios";
 
 import { fetchToken } from "../../utils/cookie/fetchToken";
 
-const startSubmittingMainPostComment = () => ({
-	type: "START_SUBMITTING_MAIN_POST_COMMENT",
+const startPostingMainPostComment = () => ({
+	type: "START_POSTING_MAIN_POST_COMMENT",
 });
 
-const submittedMainPostComment = (commentObject) => ({
-	type: "SUBMITTED_MAIN_POST_COMMENT",
+const postedMainPostComment = (commentObject) => ({
+	type: "POSTED_MAIN_POST_COMMENT",
 	payload: commentObject,
 });
 
-const endSubmittingMainPostComment = () => ({
-	type: "END_SUBMITTING_MAIN_POST_COMMENT",
+const endPostingMainPostComment = () => ({
+	type: "END_POSTING_MAIN_POST_COMMENT",
 });
 
 export const setMainPostID = (postID) => ({
@@ -25,35 +25,44 @@ export const setMainPostCommentParentCommentID = (parentCommentID) => ({
 	payload: parentCommentID,
 });
 
-export const setMainPostCommentRepliedCommentOwnerID = (
-	repliedCommentOwnerID
-) => ({
-	type: "SET_MAIN_POST_COMMENT_REPLIED_COMMENT_OWNER_ID",
-	payload: repliedCommentOwnerID,
+export const setMainPostCommentRepliedCommentID = (repliedCommentID) => ({
+	type: "SET_MAIN_POST_COMMENT_REPLIED_COMMENT_ID",
+	payload: repliedCommentID,
 });
 
-// TODO: fix
-export const setMainPostCommentRepliedCommentOwnerUsername = (
-	repliedCommentOwnerUsername
-) => ({
-	type: "SET_MAIN_POST_COMMENT_REPLIED_COMMENT_OWNER_USERNAME",
-	payload: repliedCommentOwnerUsername,
+export const setMainPostCommentReplyingToUsername = (replyingToUsername) => ({
+	type: "SET_MAIN_POST_COMMENT_REPLYING_TO_USERNAME",
+	payload: replyingToUsername,
 });
 
-export const resetSubmittedMainPostComment = () => ({
-	type: "RESET_SUBMITTED_MAIN_POST_COMMENT",
+export const resetPostedMainPostComment = () => ({
+	type: "RESET_POSTED_MAIN_POST_COMMENT",
+});
+
+export const resetMainPostComment = () => ({
+	type: "RESET_MAIN_POST_COMMENT",
 });
 
 export const submitMainPostComment =
 	(contentEditableChildNodesArray) => async (dispatch, getState) => {
-		dispatch(startSubmittingMainPostComment());
+		dispatch(startPostingMainPostComment());
 
-		const commentNodesArray = contentEditableChildNodesArray.map((node) => {
-			return {
-				nodeType: node.nodeName,
-				nodeValue: node.textContent,
-			};
-		});
+		const mainPostCommentNodesArray = contentEditableChildNodesArray.map(
+			(node) => {
+				return {
+					nodeType: node.nodeName,
+					nodeValue: node.textContent,
+					mentionType:
+						node.nodeName === "SPAN"
+							? null
+							: node.dataset.commentMentionType
+							? node.dataset.commentMentionType
+							: "tag",
+				};
+			}
+		);
+
+		console.log(mainPostCommentNodesArray);
 
 		const token = fetchToken();
 
@@ -61,19 +70,17 @@ export const submitMainPostComment =
 			const {
 				mainPostID,
 				mainPostCommentParentCommentID,
-				mainPostCommentRepliedCommentOwnerID,
+				mainPostCommentRepliedCommentID,
 			} = getState().mainPostCommentInputReducer;
-
-			console.log("TRIGGER");
 
 			const { data } = await axios({
 				method: "POST",
 				url: "http://localhost:8080/upload/post/comment",
 				data: {
-					postID: mainPostID,
-					parentCommentID: mainPostCommentParentCommentID,
-					repliedCommentOwnerID: mainPostCommentRepliedCommentOwnerID,
-					commentNodesArray,
+					mainPostID,
+					mainPostCommentParentCommentID,
+					mainPostCommentRepliedCommentID,
+					mainPostCommentNodesArray,
 				},
 				headers: {
 					Authorization: `Bearer ${token}`,
@@ -81,37 +88,43 @@ export const submitMainPostComment =
 			});
 
 			const {
-				error,
-				success,
+				comment_id,
+				created_at,
 				user_id,
 				username,
 				avatar_url,
-				comment_id,
 				post_id,
 				parent_comment_id,
-				replied_comment_owner_username,
-				post_comment_child_nodes_array,
+				comment_nodes_array,
+				comment_total_likes,
+				comment_total_replies,
+				comment_is_liked,
+				success,
+				error,
 			} = data;
 
 			if (error) {
-				dispatch(endSubmittingMainPostComment());
+				dispatch(endPostingMainPostComment());
 			} else if (success) {
 				dispatch(
-					submittedMainPostComment({
+					postedMainPostComment({
+						comment_id,
+						created_at,
 						user_id,
 						username,
 						avatar_url,
-						comment_id,
 						post_id,
 						parent_comment_id,
-						replied_comment_owner_username,
-						post_comment_child_nodes_array,
+						comment_nodes_array,
+						comment_total_likes,
+						comment_total_replies,
+						comment_is_liked,
 					})
 				);
 
-				dispatch(endSubmittingMainPostComment());
+				dispatch(endPostingMainPostComment());
 			}
 		} catch (error) {
-			dispatch(endSubmittingMainPostComment());
+			dispatch(endPostingMainPostComment());
 		}
 	};

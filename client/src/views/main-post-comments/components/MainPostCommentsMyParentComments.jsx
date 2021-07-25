@@ -5,29 +5,32 @@ import { useParams } from "react-router-dom";
 import { MainPostParentComment } from "../../main-post-parent-comment";
 
 import { addNewMyParentComment } from "../../../redux/main-post-comments/main-post-my-parent-comments/mainPostMyParentCommentsAction";
-import { resetSubmittedMainPostComment } from "../../../redux/main-post-comment-input/mainPostCommentInputAction";
+import {
+	resetPostedMainPostComment,
+	resetMainPostComment,
+} from "../../../redux/main-post-comment-input/mainPostCommentInputAction";
 
 const MainPostCommentsMyParentComments = ({ myParentComments }) => {
 	const dispatch = useDispatch();
 
 	const postID = parseInt(useParams().postID);
 
-	const { submittedMainPostComment } = useSelector(
+	const { mainPostComment } = useSelector(
 		(state) => state.mainPostCommentInputReducer
 	);
 
 	React.useEffect(() => {
-		if (submittedMainPostComment) {
+		if (mainPostComment) {
 			if (
-				submittedMainPostComment.parent_comment_id === null &&
-				submittedMainPostComment.post_id === postID
+				mainPostComment.parent_comment_id === null &&
+				mainPostComment.post_id === postID
 			) {
-				dispatch(addNewMyParentComment(submittedMainPostComment));
+				dispatch(addNewMyParentComment(mainPostComment));
 
-				dispatch(resetSubmittedMainPostComment());
+				dispatch(resetMainPostComment());
 			}
 		}
-	}, [submittedMainPostComment]);
+	}, [mainPostComment]);
 
 	return (
 		<React.Fragment>
