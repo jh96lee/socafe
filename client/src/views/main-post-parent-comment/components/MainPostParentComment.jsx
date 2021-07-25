@@ -109,7 +109,7 @@ const MainPostParentComment = ({ parentComment }) => {
 			) {
 				setIsPostCommentRepliesOpen(true);
 
-				setPostCommentReplies((prevState) => [mainPostComment, ...prevState]);
+				setPostCommentReplies((prevState) => [...prevState, mainPostComment]);
 
 				dispatch(resetMainPostComment());
 			}
