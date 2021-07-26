@@ -1,7 +1,6 @@
 import * as React from "react";
 import { useDispatch } from "react-redux";
 import { Link } from "react-router-dom";
-import styled from "styled-components";
 import axios from "axios";
 
 import { Avatar } from "../../shared";
@@ -16,55 +15,15 @@ import {
 import { convertDate } from "../../../utils/date/convertDate";
 import { fetchToken } from "../../../utils/cookie/fetchToken";
 
+import {
+	MainPostCommentStyle,
+	MainPostCommentBodyStyle,
+	MainPostCommentHeaderStyle,
+	MainPostCommentLikesStyle,
+	MainPostCommentDotStyle,
+} from "../styles/MainPostCommentStyle";
+
 import { HeartEmpty, HeartFill } from "../../../assets";
-
-const MainPostCommentStyle = styled.div`
-	display: grid;
-	grid-template-columns: min-content 1fr min-content;
-	gap: 1.4rem;
-	color: var(--text-1);
-	width: 100%;
-`;
-
-const MainPostCommentBodyStyle = styled.div`
-	display: flex;
-	flex-direction: column;
-`;
-
-const MainPostCommentHeaderStyle = styled.div`
-	display: flex;
-	align-items: center;
-	gap: 1.5rem;
-
-	& > a {
-		color: var(--text-1);
-		font-size: 1.45rem;
-		font-weight: 500;
-	}
-`;
-
-const DotStyle = styled.div`
-	height: 3px;
-	width: 3px;
-	background-color: grey;
-	border-radius: 50%;
-`;
-
-const MainPostCommentLikesStyle = styled.div`
-	display: flex;
-	flex-direction: column;
-	justify-content: center;
-	align-items: center;
-	gap: 0.2rem;
-
-	& svg {
-		color: var(--likes-icon-color);
-		fill: var(--likes-icon-color);
-		width: 1.7rem;
-		height: 1.7rem;
-		cursor: pointer;
-	}
-`;
 
 const MainPostComment = ({ comment, replyParentCommentID }) => {
 	const {
@@ -121,7 +80,6 @@ const MainPostComment = ({ comment, replyParentCommentID }) => {
 
 	React.useEffect(() => {
 		if (afterInitialMount.current) {
-			console.log("LIKING AND UNLIKING COMMENT");
 			if (isCommentLiked) {
 				setCommentTotalLikes((prevState) => prevState + 1);
 
@@ -144,7 +102,7 @@ const MainPostComment = ({ comment, replyParentCommentID }) => {
 				<MainPostCommentHeaderStyle>
 					<Link to={`/user/${username}`}>{username}</Link>
 
-					<DotStyle />
+					<MainPostCommentDotStyle />
 
 					<span>{convertDate(created_at)}</span>
 				</MainPostCommentHeaderStyle>

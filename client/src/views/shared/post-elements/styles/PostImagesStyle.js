@@ -6,7 +6,6 @@ export const PostImagesStyle = styled.div`
 	position: relative;
 	width: 100%;
 	height: 100%;
-	border-radius: 2rem;
 	overflow: hidden;
 
 	& > img {
@@ -21,8 +20,8 @@ export const PostMainImageStyle = styled.img`
 	top: 50%;
 	left: 50%;
 	transform: translate(-50%, -50%);
-	width: ${(props) => (props.isImageTall ? "auto" : "101%")};
-	height: ${(props) => (props.isImageTall ? "101%" : "auto")};
+	width: ${(props) => (props.isImageTall ? "auto" : "80%")};
+	height: ${(props) => (props.isImageTall ? "80%" : "auto")};
 	max-width: 101%;
 	max-height: 101%;
 `;
@@ -35,5 +34,5 @@ export const PostOverlayImageStyle = styled.img`
 	z-index: 1;
 	width: 105%;
 	height: 105%;
-	filter: blur(12px);
+	filter: blur(16px);
 `;

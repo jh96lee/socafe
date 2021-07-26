@@ -36,9 +36,9 @@ const PostTaggedUsers = ({ postTaggedUsersArray }) => {
 						dropdownMenuID="post-tagged-users-dropdown-menu"
 						dropdownElementsArray={dropdownElementsArray}
 						dropdownMenuStyleObject={{
-							menuBottom: "-1rem",
-							menuLeft: "-1rem",
-							menuWidth: "20rem",
+							menuBottom: "0rem",
+							menuLeft: "0rem",
+							menuWidth: "25rem",
 						}}
 					/>
 				)}

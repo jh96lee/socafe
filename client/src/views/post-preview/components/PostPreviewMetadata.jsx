@@ -1,13 +1,7 @@
 import * as React from "react";
 import { useSelector } from "react-redux";
 
-import {
-	UserMetadata,
-	PostMain,
-	PostTopics,
-	TextArea,
-	Skeleton,
-} from "../../shared";
+import { UserMetadata, PostTopics, TextArea, Skeleton } from "../../shared";
 import PostPreviewActions from "./PostPreviewActions";
 import PostPreviewNumericData from "./PostPreviewNumericData";
 
@@ -51,10 +45,10 @@ const PostPreviewMetadata = ({
 				}
 			/>
 
-			<PostMain
+			{/* <PostMain
 				postImagesArray={uploadedPostImagesArray}
 				postTaggedUsersArray={postUsersArray}
-			/>
+			/> */}
 
 			<PostPreviewNumericData />
 

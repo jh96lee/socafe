@@ -5,10 +5,7 @@ import { useParams } from "react-router-dom";
 import { MainPostParentComment } from "../../main-post-parent-comment";
 
 import { addNewMyParentComment } from "../../../redux/main-post-comments/main-post-my-parent-comments/mainPostMyParentCommentsAction";
-import {
-	resetPostedMainPostComment,
-	resetMainPostComment,
-} from "../../../redux/main-post-comment-input/mainPostCommentInputAction";
+import { resetMainPostComment } from "../../../redux/main-post-comment-input/mainPostCommentInputAction";
 
 const MainPostCommentsMyParentComments = ({ myParentComments }) => {
 	const dispatch = useDispatch();
@@ -34,10 +31,10 @@ const MainPostCommentsMyParentComments = ({ myParentComments }) => {
 
 	return (
 		<React.Fragment>
-			{myParentComments.map((comment, idx) => {
+			{myParentComments.map((comment) => {
 				return (
 					<MainPostParentComment
-						key={`main-post-comments__my-parent-comment__${idx}`}
+						key={comment.comment_id}
 						parentComment={comment}
 					/>
 				);

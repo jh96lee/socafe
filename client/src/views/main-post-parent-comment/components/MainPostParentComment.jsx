@@ -1,61 +1,23 @@
 import * as React from "react";
 import { useSelector, useDispatch } from "react-redux";
-import styled from "styled-components";
 import axios from "axios";
 
 import MainPostCommentReplies from "./MainPostCommentReplies";
 import MainPostComment from "./MainPostComment";
 
+import { resetMainPostComment } from "../../../redux/main-post-comment-input/mainPostCommentInputAction";
+
 import {
-	resetPostedMainPostComment,
-	resetMainPostComment,
-} from "../../../redux/main-post-comment-input/mainPostCommentInputAction";
+	MainPostParentCommentStyle,
+	MainPostCommentViewRepliesStyle,
+} from "../styles/MainPostParentCommentStyle";
 
 import { Up, Down } from "../../../assets";
 
-const MainPostParentCommentStyle = styled.div`
-	display: flex;
-	flex-direction: column;
-	gap: 2rem;
-
-	& > *:first-child {
-		width: 100%;
-	}
-
-	& > *:not(:first-child) {
-		width: 85%;
-		margin-left: auto;
-	}
-`;
-
-const MainPostCommentViewRepliesStyle = styled.div`
-	display: flex;
-	align-items: center;
-	gap: 0.5rem;
-
-	& > p {
-		font-size: 1.2rem;
-		color: var(--text-1);
-	}
-
-	& > svg {
-		fill: var(--icon-default-color);
-		width: 1.2rem;
-		height: 1.2rem;
-	}
-
-	&:hover {
-		cursor: pointer;
-	}
-
-	&:hover > p {
-		text-decoration: underline;
-	}
-`;
-
 const MainPostParentComment = ({ parentComment }) => {
 	const [postCommentReplies, setPostCommentReplies] = React.useState([]);
-	const [isPostCommentRepliesLoading, setIsPostCommentRepliesLoading] =
+	// FIX
+	const [isPostCommentRepliesLoaded, setIsPostCommentRepliesLoaded] =
 		React.useState(false);
 	const [isPostCommentRepliesOpen, setIsPostCommentRepliesOpen] =
 		React.useState(false);
@@ -77,7 +39,7 @@ const MainPostParentComment = ({ parentComment }) => {
 	const { user } = useSelector((state) => state.userReducer);
 
 	const fetchPostCommentReplies = async () => {
-		setIsPostCommentRepliesLoading(true);
+		setIsPostCommentRepliesLoaded(false);
 
 		const userID = user ? user.id : 0;
 
@@ -88,7 +50,7 @@ const MainPostParentComment = ({ parentComment }) => {
 
 		setPostCommentReplies(data);
 
-		setIsPostCommentRepliesLoading(false);
+		setIsPostCommentRepliesLoaded(true);
 	};
 
 	React.useEffect(() => {
@@ -115,8 +77,6 @@ const MainPostParentComment = ({ parentComment }) => {
 			}
 		}
 	}, [mainPostComment]);
-
-	console.log("PARENT", parentComment);
 
 	return (
 		<MainPostParentCommentStyle>

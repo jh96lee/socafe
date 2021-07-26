@@ -1,57 +1,60 @@
 import * as React from "react";
-import styled from "styled-components";
 
 import { IconElement } from "../../shared";
 
 import {
-	HeartFill,
-	BookmarkEmpty,
-	CommentOutline,
-	CommentFilled,
-} from "../../../assets";
+	MainPostActionsStyle,
+	MainPostActionStyle,
+} from "../styles/MainPostActionsStyle";
 
-const MainPostActionsStyle = styled.div`
-	display: flex;
-	align-items: center;
-	gap: 1.4rem;
-`;
+import { HeartFill, BookmarkEmpty, CommentOutline } from "../../../assets";
 
 const MainPostActions = ({
-	isPostCommentsOpen,
-	handleOpenAndClosePostCommentsOnClick,
+	postTotalLikes,
+	postTotalComments,
+	postIsLiked,
 }) => {
+	const iconSize = "2.2rem";
+
 	return (
 		<MainPostActionsStyle>
-			<IconElement
-				iconRole="button"
-				iconElementStyleObject={{
-					elementBackgroundColor: "var(--likes-bg-color)",
-					elementHoverBackgroundColor: "var(--likes-hover-bg-color)",
-					iconColor: "var(--likes-icon-color)",
-					iconSize: "2.3rem",
-				}}
-			>
-				<HeartFill />
-			</IconElement>
+			<MainPostActionStyle>
+				<IconElement
+					iconRole="button"
+					iconElementStyleObject={{
+						elementBackgroundColor: "var(--likes-bg-color)",
+						elementHoverBackgroundColor: "var(--likes-hover-bg-color)",
+						iconColor: "var(--likes-icon-color)",
+						iconSize,
+					}}
+				>
+					<HeartFill />
+				</IconElement>
+
+				<h5>{postTotalLikes}</h5>
+			</MainPostActionStyle>
+
+			<MainPostActionStyle>
+				<IconElement
+					iconRole="button"
+					iconID="post-preview-actions__comment-outline"
+					iconElementStyleObject={{
+						iconSize,
+					}}
+				>
+					<CommentOutline />
+				</IconElement>
+
+				<h5>{postTotalComments}</h5>
+			</MainPostActionStyle>
 
 			<IconElement
 				iconRole="button"
 				iconElementStyleObject={{
-					iconSize: "2.3rem",
+					iconSize,
 				}}
 			>
 				<BookmarkEmpty />
-			</IconElement>
-
-			<IconElement
-				onClick={handleOpenAndClosePostCommentsOnClick}
-				iconRole="button"
-				iconID="post-preview-actions__comment-outline"
-				iconElementStyleObject={{
-					iconSize: "2.3rem",
-				}}
-			>
-				{isPostCommentsOpen ? <CommentFilled /> : <CommentOutline />}
 			</IconElement>
 		</MainPostActionsStyle>
 	);

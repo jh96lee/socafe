@@ -1,14 +1,8 @@
 import * as React from "react";
-import styled from "styled-components";
 
 import MainPostComment from "./MainPostComment";
 
-const MainPostCommentRepliesStyle = styled.div`
-	display: flex;
-	flex-direction: column;
-	gap: 2.5rem;
-	width: 100%;
-`;
+import { MainPostCommentRepliesStyle } from "../styles/MainPostCommentRepliesStyle";
 
 const MainPostCommentReplies = ({
 	postCommentReplies,
@@ -16,10 +10,10 @@ const MainPostCommentReplies = ({
 }) => {
 	return (
 		<MainPostCommentRepliesStyle>
-			{postCommentReplies.map((reply, idx) => {
+			{postCommentReplies.map((reply) => {
 				return (
 					<MainPostComment
-						key={`main-post-comment__reply__${idx}`}
+						key={reply.comment_id}
 						comment={reply}
 						replyParentCommentID={replyParentCommentID}
 					/>
