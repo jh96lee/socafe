@@ -6,7 +6,7 @@ import axios from "axios";
 import { IconElement, DropdownMenu } from "../../shared";
 
 import {
-	submitMainPostComment,
+	postMainPostComment,
 	setMainPostID,
 } from "../../../redux/main-post-comment-input/mainPostCommentInputAction";
 
@@ -191,8 +191,9 @@ const MainPostCommentsInput = () => {
 			mainPostCommentsContentEditableRef.current.childNodes
 		);
 
-		// FIX: change name
-		dispatch(submitMainPostComment(contentEditableChildNodesArray));
+		dispatch(postMainPostComment(contentEditableChildNodesArray));
+
+		mainPostCommentsContentEditableRef.current.textContent = "";
 	};
 
 	React.useEffect(() => {

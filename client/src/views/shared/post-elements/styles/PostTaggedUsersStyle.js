@@ -8,14 +8,14 @@ export const PostTaggedUsersStyle = styled.div`
 `;
 
 export const PostTaggedUsersIconElementStyle = styled.div`
+	background-color: #fff;
 	padding: 0.9rem;
 	border-radius: 50%;
-	background-color: #000000db;
-	cursor: pointer;
+	box-shadow: 0 0 0 1px #dedede;
 
 	& > svg {
 		width: 2.5rem;
 		height: 2.5rem;
-		fill: #fff;
+		fill: #000;
 	}
 `;

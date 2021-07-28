@@ -1,6 +1,6 @@
 import * as React from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { useParams } from "react-router-dom";
+import { useParams, useLocation } from "react-router-dom";
 
 import { Loader } from "../../shared";
 import MainPostLeft from "./MainPostLeft";
@@ -25,8 +25,17 @@ const MainPost = () => {
 		dispatch(fetchMainPost(postID, userID));
 	}, [postID]);
 
+	const mainPostLocation = useLocation();
+
+	const isOverlayMainPost =
+		mainPostLocation.state && mainPostLocation.state.overlaidComponentLocation
+			? true
+			: false;
+
+	console.log("MAIN POST", isOverlayMainPost);
+
 	return (
-		<MainPostStyle>
+		<MainPostStyle isOverlayMainPost={isOverlayMainPost}>
 			{isMainPostLoaded ? (
 				<React.Fragment>
 					<MainPostLeft />

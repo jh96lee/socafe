@@ -1,49 +1,49 @@
 import * as React from "react";
-import { useParams } from "react-router-dom";
 import axios from "axios";
+import styled from "styled-components";
 
 import { Loader } from "../../shared";
-import { UserProfilePost } from "../index";
+import UserProfilePost from "./UserProfilePost";
 
-import { UserProfilePostsStyle } from "../styles/UserProfilePostsStyle";
+const UserProfilePostsStyle = styled.div`
+	display: grid;
+	grid-template-columns: repeat(3, 1fr);
+	grid-auto-rows: 18rem;
+	justify-content: center;
+	gap: 2.5rem 1.5rem;
+`;
 
-const UserProfilePosts = () => {
-	const [userProfilePosts, setUserProfilePosts] = React.useState([]);
-	const [isUserProfilePostsLoaded, setIsUserProfilePostsLoaded] =
-		React.useState(false);
-
-	// REVIEW: profile owner
-	const leaderID = useParams().userID;
+const UserProfilePosts = ({ profilePostsEndpoint }) => {
+	const [profilePosts, setProfilePosts] = React.useState([]);
+	const [isProfilePostsLoaded, setIsProfilePostsLoaded] = React.useState(false);
 
 	const fetchUserPosts = async () => {
-		setIsUserProfilePostsLoaded(false);
+		setIsProfilePostsLoaded(false);
 
 		const { data } = await axios({
 			method: "GET",
-			url: `http://localhost:8080/profile/posts/${leaderID}`,
+			url: `http://localhost:8080${profilePostsEndpoint}`,
 		});
 
-		setUserProfilePosts(data);
+		setProfilePosts(data);
 
-		setIsUserProfilePostsLoaded(true);
+		setIsProfilePostsLoaded(true);
 	};
 
 	React.useEffect(() => {
-		fetchUserPosts();
-	}, [leaderID]);
+		fetchUserPosts(profilePostsEndpoint);
+	}, [profilePostsEndpoint]);
 
 	return (
 		<UserProfilePostsStyle>
-			{isUserProfilePostsLoaded ? (
+			{!isProfilePostsLoaded ? (
+				<Loader />
+			) : profilePosts.error ? null : (
 				<React.Fragment>
-					{userProfilePosts.map((post, idx) => {
-						return (
-							<UserProfilePost key={`user-profile-post__${idx}`} post={post} />
-						);
+					{profilePosts.map((post) => {
+						return <UserProfilePost key={post.post_id} post={post} />;
 					})}
 				</React.Fragment>
-			) : (
-				<Loader />
 			)}
 		</UserProfilePostsStyle>
 	);

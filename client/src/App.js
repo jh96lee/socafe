@@ -9,7 +9,6 @@ import {
 	HomePage,
 	AddPostPage,
 	UserProfilePage,
-	PrivateProfilePage,
 	UserLoginPage,
 	UserRegisterPage,
 } from "./pages";
@@ -65,7 +64,7 @@ function App() {
 						<HomePage />
 					</Route>
 
-					<Route exact path="/user/:userID">
+					<Route exact path="/user/:username">
 						<UserProfilePage />
 					</Route>
 
@@ -82,19 +81,17 @@ function App() {
 						{user ? <Redirect to="/" /> : <UserLoginPage />}
 					</Route>
 
-					<Route path="/profile">
-						<PrivateProfilePage />
-					</Route>
-
 					<Route exact path="/add/post">
 						{user ? <AddPostPage /> : <Redirect to="/login" />}
 					</Route>
 				</Switch>
 
 				{/* REVIEW: outside of Switch Component */}
-				{/* <Route exact path="/post/:postID">
-					<Post />
-				</Route> */}
+				{overlaidComponentLocation && (
+					<Route exact path="/post/:postID">
+						<MainPost />
+					</Route>
+				)}
 			</GlobalPageStyle>
 		</ThemeProvider>
 	);

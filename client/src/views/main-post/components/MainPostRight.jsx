@@ -6,11 +6,7 @@ import { MainPostComments } from "../../main-post-comments";
 import { MainPostCommentsInput } from "../../main-post-comments-input";
 import MainPostActions from "./MainPostActions";
 
-import {
-	MainPostRightStyle,
-	MainPostRightHeaderStyle,
-	MainPostRightBodyStyle,
-} from "../styles/MainPostRightStyle";
+import { MainPostRightBodyStyle } from "../styles/MainPostRightStyle";
 
 const MainPostRight = () => {
 	const { user } = useSelector((state) => state.userReducer);
@@ -20,26 +16,24 @@ const MainPostRight = () => {
 		mainPost;
 
 	return (
-		<MainPostRightStyle>
-			<MainPostRightHeaderStyle>
-				{/* FIX */}
-				<UserMetadata
-					userID={user.id}
-					avatarURL={user.avatar_url}
-					username={user.username}
-					fullName={user.full_name}
-					avatarSize="4.5rem"
-					usernameFontSize="1.4rem"
-					fullNameFontSize="1.3rem"
-					avatarOnClick={null}
-				/>
+		<React.Fragment>
+			{/* FIX: user metadata should be the one who created this post */}
+			<UserMetadata
+				userID={user.id}
+				avatarURL={user.avatar_url}
+				username={user.username}
+				fullName={user.full_name}
+				avatarSize="4.5rem"
+				usernameFontSize="1.4rem"
+				fullNameFontSize="1.3rem"
+				avatarOnClick={null}
+			/>
 
-				<MainPostActions
-					postTotalLikes={total_post_likes}
-					postTotalComments={total_post_comments}
-					postIsLiked={false}
-				/>
-			</MainPostRightHeaderStyle>
+			<MainPostActions
+				postTotalLikes={total_post_likes}
+				postTotalComments={total_post_comments}
+				postIsLiked={false}
+			/>
 
 			<MainPostRightBodyStyle>
 				<TextArea textAreaNodesArray={post_captions} />
@@ -50,7 +44,7 @@ const MainPostRight = () => {
 			</MainPostRightBodyStyle>
 
 			<MainPostCommentsInput />
-		</MainPostRightStyle>
+		</React.Fragment>
 	);
 };
 

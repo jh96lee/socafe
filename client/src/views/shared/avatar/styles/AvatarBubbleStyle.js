@@ -11,7 +11,7 @@ export const AvatarBubbleStyle = styled.div`
 		`calc(${props.avatarSize} * ${props.bubbleOrder === 1 ? "0.25" : "0.09"})`};
 	background: ${(props) =>
 		props.isAvatarRingFilled
-			? "var(--bg-filled-story)"
-			: "var(--bg-empty-story)"};
+			? "var(--story-filled-color)"
+			: "var(--story-empty-color)"};
 	border-radius: 50%;
 `;

@@ -1,44 +1,42 @@
 import * as React from "react";
-import { useHistory, useLocation } from "react-router";
+import { useLocation, useHistory } from "react-router-dom";
+import styled from "styled-components";
 
-import {
-	UserProfilePostStyle,
-	UserProfilePostMetadataStyle,
-	UserProfilePostTotalStyle,
-} from "../styles/UserProfilePostStyle";
+import { HeartFill, CommentFilled } from "../../../assets";
 
-import { HeartEmpty, Comment } from "../../../assets";
+const UserProfilePostStyle = styled.div`
+	& > img {
+		width: 100%;
+		height: 100%;
+		object-fit: cover;
+		border-radius: 1rem;
+	}
+`;
 
 const UserProfilePost = ({ post }) => {
-	const history = useHistory();
-	const userProfilePostLocation = useLocation();
+	const {
+		post_id,
+		user_profile_post_images,
+		user_profile_post_total_likes,
+		user_profile_post_total_comments,
+	} = post;
 
-	const handleOnClick = () => {
+	const location = useLocation();
+	const history = useHistory();
+
+	const handlePostOnClick = () => {
 		history.push({
-			pathname: `/post/${post.post_id}`,
-			state: {
-				overlaidComponentLocation: userProfilePostLocation,
-			},
+			pathname: `/post/${post_id}`,
+			state: { overlaidComponentLocation: location },
 		});
 	};
 
 	return (
-		<UserProfilePostStyle onClick={handleOnClick}>
-			<img src={post.image_url} alt="User profile post thumbnail" />
+		<UserProfilePostStyle onClick={handlePostOnClick}>
+			<img src={user_profile_post_images[0].image_url} alt="post thumbnail" />
+			{/* <HeartFill />
 
-			<UserProfilePostMetadataStyle id="user-profile-post__metadata">
-				<UserProfilePostTotalStyle>
-					<HeartEmpty id="user-profile-post-total__heart" />
-
-					<h4>{post.totalLikes}</h4>
-				</UserProfilePostTotalStyle>
-
-				<UserProfilePostTotalStyle>
-					<Comment />
-
-					<h4>{post.totalComments}</h4>
-				</UserProfilePostTotalStyle>
-			</UserProfilePostMetadataStyle>
+			<CommentFilled /> */}
 		</UserProfilePostStyle>
 	);
 };

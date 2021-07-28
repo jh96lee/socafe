@@ -22,8 +22,8 @@ export const PostMainImageStyle = styled.img`
 	transform: translate(-50%, -50%);
 	width: ${(props) => (props.isImageTall ? "auto" : "80%")};
 	height: ${(props) => (props.isImageTall ? "80%" : "auto")};
-	max-width: 101%;
-	max-height: 101%;
+	max-width: 90%;
+	max-height: 90%;
 `;
 
 export const PostOverlayImageStyle = styled.img`

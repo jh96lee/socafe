@@ -1,47 +1,21 @@
-import React from "react";
-import { useSelector } from "react-redux";
-import { useParams, useHistory } from "react-router";
+import * as React from "react";
+import styled from "styled-components";
 
-import UserProfileFollowButton from "./UserProfileFollowButton";
+import { Button } from "../../shared";
 
-import {
-	UserProfileButtonsStyle,
-	UserProfileButtonStyle,
-} from "../styles/UserProfileButtonsStyle";
-
-import { Recommendation, Settings } from "../../../assets";
+const UserProfileButtonsStyle = styled.div``;
 
 const UserProfileButtons = () => {
-	const { userProfile } = useSelector((state) => state.userProfileReducer);
-	const { user } = useSelector((state) => state.userReducer);
-
-	const leaderID = parseInt(useParams().userID);
-	const visitorID = user ? parseInt(user.id) : 0;
-
-	const history = useHistory();
-
 	return (
-		<UserProfileButtonsStyle profileOwnerVisited={visitorID === leaderID}>
-			<UserProfileFollowButton
-				leaderID={leaderID}
-				visitorID={visitorID}
-				isUserFollowing={userProfile.isFollowing}
-				profileOwnerVisited={visitorID === leaderID}
-			/>
-
-			<UserProfileButtonStyle>
-				<Recommendation />
-			</UserProfileButtonStyle>
-
-			{visitorID === leaderID && (
-				<UserProfileButtonStyle
-					onClick={() => {
-						history.push(`/profile/edit/${user.id}`);
-					}}
-				>
-					<Settings />
-				</UserProfileButtonStyle>
-			)}
+		<UserProfileButtonsStyle>
+			<Button
+				buttonStyleObject={{
+					buttonFontSize: "1.43rem",
+					buttonHeight: "fit-content",
+				}}
+			>
+				Follow
+			</Button>
 		</UserProfileButtonsStyle>
 	);
 };

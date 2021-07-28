@@ -53,7 +53,33 @@ export const PostOverlayImageStyle = styled.img`
 	filter: blur(15px);
 `;
 
-// REVIEW: this could either be for post or post-preview
+const PostImagesDirectionsStyle = styled.div`
+	position: absolute;
+	z-index: 10;
+	bottom: 1.5rem;
+	right: 1.5rem;
+	display: flex;
+	align-items: center;
+	gap: 0.5rem;
+`;
+
+const PostImagesDirectionStyle = styled.div`
+	background-color: #fff;
+	padding: 0.9rem;
+	border-radius: 50%;
+	box-shadow: 0 0 0 1px #dedede;
+
+	& > svg {
+		fill: #000;
+		width: 2.5rem;
+		height: 2.5rem;
+	}
+
+	&:hover {
+		cursor: pointer;
+	}
+`;
+
 const PostImages = ({ postImagesArray }) => {
 	const [currentImageIndex, setCurrentImageIndex] = React.useState(0);
 
@@ -86,54 +112,58 @@ const PostImages = ({ postImagesArray }) => {
 
 			<PostOverlayImageStyle src={postImagesArray[currentImageIndex].url} />
 
-			{postImagesArray.length !== 0 && (
-				<React.Fragment>
-					{currentImageIndex !== postImagesArray.length - 1 && (
-						<IconElement
-							onClick={handleOnClick}
-							iconElementStyleObject={{
-								elementPosition: "absolute",
-								elementTop: "50%",
-								elementRight: "1rem",
-								elementTransform: "translateY(-50%)",
-								elementZIndex: "5",
-								iconSize: "1.8rem",
-								elementPadding: "1.3rem",
-								elementBackgroundColor: "#fff",
-								elementBoxShadow: "0 0 0 1.6px #b9c8cf",
-								elementHoverBackgroundColor: "#fff",
-								iconColor: "#000",
-								iconHoverColor: "#000",
-							}}
-							otherProps={{ "data-direction": "right" }}
-						>
-							<Right />
-						</IconElement>
-					)}
+			{/* <PostImagesDirectionStyle></PostImagesDirectionStyle> */}
 
+			{postImagesArray.length !== 0 && (
+				<PostImagesDirectionsStyle>
 					{currentImageIndex !== 0 && (
-						<IconElement
+						<PostImagesDirectionStyle
 							onClick={handleOnClick}
-							iconElementStyleObject={{
-								elementPosition: "absolute",
-								elementTop: "50%",
-								elementLeft: "1rem",
-								elementTransform: "translateY(-50%)",
-								elementZIndex: "5",
-								iconSize: "1.8rem",
-								elementPadding: "1.3rem",
-								elementBackgroundColor: "#fff",
-								elementBoxShadow: "0 0 0 1.6px #b9c8cf",
-								elementHoverBackgroundColor: "#fff",
-								iconColor: "#000",
-								iconHoverColor: "#000",
-							}}
-							otherProps={{ "data-direction": "left" }}
+							// iconElementStyleObject={{
+							// 	elementPosition: "absolute",
+							// 	elementTop: "50%",
+							// 	elementLeft: "1rem",
+							// 	elementTransform: "translateY(-50%)",
+							// 	elementZIndex: "5",
+							// 	iconSize: "1.8rem",
+							// 	elementPadding: "1.3rem",
+							// 	elementBackgroundColor: "#fff",
+							// 	elementBoxShadow: "0 0 0 1.6px #b9c8cf",
+							// 	elementHoverBackgroundColor: "#fff",
+							// 	iconColor: "#000",
+							// 	iconHoverColor: "#000",
+							// }}
+							// otherProps={{ "data-direction": "left" }}
+							data-direction="left"
 						>
 							<Left />
-						</IconElement>
+						</PostImagesDirectionStyle>
 					)}
-				</React.Fragment>
+
+					{currentImageIndex !== postImagesArray.length - 1 && (
+						<PostImagesDirectionStyle
+							onClick={handleOnClick}
+							// iconElementStyleObject={{
+							// 	elementPosition: "absolute",
+							// 	elementTop: "50%",
+							// 	elementRight: "1rem",
+							// 	elementTransform: "translateY(-50%)",
+							// 	elementZIndex: "5",
+							// 	iconSize: "1.8rem",
+							// 	elementPadding: "1.3rem",
+							// 	elementBackgroundColor: "#fff",
+							// 	elementBoxShadow: "0 0 0 1.6px #b9c8cf",
+							// 	elementHoverBackgroundColor: "#fff",
+							// 	iconColor: "#000",
+							// 	iconHoverColor: "#000",
+							// }}
+							data-direction="right"
+							// otherProps={{ "data-direction": "right" }}
+						>
+							<Right />
+						</PostImagesDirectionStyle>
+					)}
+				</PostImagesDirectionsStyle>
 			)}
 		</PostImagesStyle>
 	);

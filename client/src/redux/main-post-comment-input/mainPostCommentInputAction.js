@@ -43,7 +43,7 @@ export const resetMainPostComment = () => ({
 	type: "RESET_MAIN_POST_COMMENT",
 });
 
-export const submitMainPostComment =
+export const postMainPostComment =
 	(contentEditableChildNodesArray) => async (dispatch, getState) => {
 		dispatch(startPostingMainPostComment());
 
@@ -61,8 +61,6 @@ export const submitMainPostComment =
 				};
 			}
 		);
-
-		console.log(mainPostCommentNodesArray);
 
 		const token = fetchToken();
 

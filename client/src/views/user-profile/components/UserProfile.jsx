@@ -1,59 +1,109 @@
-import * as React from "react";
-import { useParams } from "react-router";
+import React from "react";
+import axios from "axios";
+import { useSelector } from "react-redux";
+import { useParams } from "react-router-dom";
+import styled from "styled-components";
 
-import { UserProfileData, UserProfilePosts, UserProfileTabs } from "../index";
+import { TextArea, Loader } from "../../shared";
+import { UserProfileCover } from "../index";
+import UserProfileUserMetadata from "./UserProfileUserMetadata";
+import UserProfileNumericMetadata from "./UserProfileNumericMetadata";
+import UserProfileButtons from "./UserProfileButtons";
+import UserProfileFollowingTopics from "./UserProfileFollowingTopics";
 
-import { UserProfileStyle } from "../styles/UserProfileStyle";
+const UserProfileStyle = styled.div`
+	position: relative;
+	z-index: 10;
+	display: flex;
+	flex-direction: column;
+	border-radius: 1rem;
+	overflow: hidden;
+	background-color: var(--input-default-bg-color);
+	background-color: var(--bg-2);
+	border: 1px solid var(--input-default-separator-color);
 
-import { Posts, HeartEmpty, BookmarkEmpty, Tag } from "../../../assets";
+	& > *:nth-child(1) {
+		height: 18rem;
+	}
+`;
+
+const UserProfileBodyStyle = styled.div`
+	display: flex;
+	flex-direction: column;
+	gap: 1.5rem;
+	margin: 1.8rem 0;
+	padding: 0 1.8rem;
+
+	& p {
+		font-size: 1.3rem;
+		font-weight: 400;
+	}
+`;
 
 const UserProfile = () => {
-	const [currentProfileIndex, setCurrentProfileIndex] = React.useState(0);
+	const [profileOwner, setProfileOwner] = React.useState({});
+	const [isProfileOwnerLoaded, setIsProfileOwnerLoaded] = React.useState(false);
 
-	const { userID } = useParams();
+	const { user } = useSelector((state) => state.userReducer);
 
-	const handleTabsOnClick = React.useCallback((idx) => {
-		setCurrentProfileIndex(idx);
-	}, []);
+	const visitorID = user ? user.id : 0;
 
-	const userProfileContentType = React.useMemo(() => {
-		return {
-			0: {
-				icon: <Posts />,
-				label: "Posts",
-				content: <UserProfilePosts userID={userID} />,
-			},
-			1: {
-				icon: <HeartEmpty />,
-				label: "Liked",
-				content: <h1>Liked posts</h1>,
-			},
-			2: {
-				icon: <BookmarkEmpty />,
-				label: "Bookmarked",
-				content: <h1>Bookmarded posts</h1>,
-			},
-			3: {
-				icon: <Tag />,
-				label: "Tagged",
-				content: <h1>Tagged posts</h1>,
-			},
-		};
-	}, [userID]);
+	const { username } = useParams();
 
-	const userProfileTabs = Object.values(userProfileContentType);
+	const fetchUserProfile = async () => {
+		setIsProfileOwnerLoaded(false);
+
+		const { data } = await axios({
+			method: "GET",
+			url: `http://localhost:8080/profile/user/${username}/${visitorID}`,
+		});
+
+		setProfileOwner(data);
+
+		console.log(data);
+
+		setIsProfileOwnerLoaded(true);
+	};
+
+	React.useEffect(() => {
+		fetchUserProfile();
+	}, [username]);
 
 	return (
 		<UserProfileStyle>
-			<UserProfileData />
+			{!isProfileOwnerLoaded ? (
+				<Loader />
+			) : profileOwner.error ? (
+				<h1>User not found</h1>
+			) : (
+				<React.Fragment>
+					<UserProfileCover />
 
-			<UserProfileTabs
-				userProfileTabs={userProfileTabs}
-				currentProfileIndex={currentProfileIndex}
-				handleTabsOnClick={handleTabsOnClick}
-			/>
+					<UserProfileUserMetadata
+						avatarURL={profileOwner.avatar_url}
+						fullName={profileOwner.full_name}
+						username={profileOwner.username}
+					/>
 
-			<UserProfilePosts userID={userID} />
+					<UserProfileBodyStyle>
+						<TextArea
+							textAreaNodesArray={profileOwner.user_profile_bio_nodes_array}
+						/>
+
+						<UserProfileNumericMetadata
+							totalPosts={profileOwner.user_profile_total_posts}
+							totalFollowers={profileOwner.user_profile_total_followers}
+							totalFollowings={profileOwner.user_profile_total_following}
+						/>
+
+						<UserProfileButtons />
+					</UserProfileBodyStyle>
+
+					<UserProfileFollowingTopics
+						followingTopics={profileOwner.user_profile_following_topics_array}
+					/>
+				</React.Fragment>
+			)}
 		</UserProfileStyle>
 	);
 };
