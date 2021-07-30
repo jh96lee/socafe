@@ -12,7 +12,7 @@ const postRouter = express.Router();
 
 postRouter.post("/upload/post", authenticateToken, uploadPost);
 
-postRouter.get("/post/:postID/:userID", getMainPost);
+postRouter.get("/post/:postID/:visitorID", getMainPost);
 
 postRouter.get("/likes/:postID", getPostLikes);
 

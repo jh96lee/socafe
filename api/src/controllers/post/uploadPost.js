@@ -46,8 +46,8 @@ const uploadPost = async (req, res) => {
 			);
 		}
 
-		for (let user of postTaggedUsersArray) {
-			const { id } = user;
+		for (let taggedUser of postTaggedUsersArray) {
+			const { id } = taggedUser;
 
 			await pool.queryToDatabase(
 				`
