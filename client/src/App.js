@@ -61,7 +61,7 @@ function App() {
 
 				<Switch location={overlaidComponentLocation || appLocation}>
 					<Route exact path="/">
-						<HomePage />
+						{/* <HomePage /> */}
 					</Route>
 
 					<Route exact path="/user/:username">

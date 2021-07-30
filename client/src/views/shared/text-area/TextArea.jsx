@@ -6,7 +6,7 @@ const TextArea = ({ textAreaNodesArray }) => {
 	return (
 		<TextAreaStyle>
 			{textAreaNodesArray.map((node, idx) => {
-				if (node.nodeType === "br" || node.node_type === "br") {
+				if (node.nodeType === "BR" || node.node_type === "BR") {
 					return (
 						<p key={`${node.nodeType || node.node_type}__${idx}`}>
 							<br />

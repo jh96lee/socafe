@@ -1,5 +1,7 @@
 import styled from "styled-components";
 
-export const MainPostLeftStyle = styled.div`
+const PostMainStyle = styled.div`
 	position: relative;
 `;
+
+export default PostMainStyle;

@@ -19,7 +19,7 @@ export { default as AddContentButtonWrapperStyle } from "./add-content/AddConten
 export { default as AddContentHeaderStyle } from "./add-content/AddContentHeaderStyle";
 
 export { default as PostStyle } from "./post/PostStyle";
-export { default as PostMainDataStyle } from "./post/PostMainDataStyle";
-export { default as PostHorizontalMetadataStyle } from "./post/PostHorizontalMetadataStyle";
-export { default as PostVerticalMetadataStyle } from "./post/PostVerticalMetadataStyle";
-export { default as PostTotalsMetadataStyle } from "./post/PostTotalsMetadataStyle";
+export { default as PostMainStyle } from "./post/PostMainStyle";
+export { default as PostOverflowStyle } from "./post/PostOverflowStyle";
+export { default as PostActionsStyle } from "./post/PostActionsStyle";
+export { default as PostActionStyle } from "./post/PostActionStyle";

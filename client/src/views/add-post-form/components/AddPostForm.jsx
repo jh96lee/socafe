@@ -18,32 +18,34 @@ import {
 } from "../../../styles";
 
 const AddPostForm = () => {
-	// FIX: render out error message
-	const { postID, isPostUploading, postUploadSuccessMessage } = useSelector(
-		(state) => state.postUploadReducer
-	);
-
-	const { uploadedPostImagesArray } = useSelector(
-		(state) => state.postImagesReducer
-	);
-
-	const { postTopicsArray } = useSelector((state) => state.postTopicsReducer);
-
-	const { postUsersArray } = useSelector((state) => state.postUsersReducer);
-
-	const { postCaptionsNodesArray } = useSelector(
-		(state) => state.postCaptionsReducer
-	);
-
 	const dispatch = useDispatch();
 
 	const history = useHistory();
 
+	const { uploadedPostID, isPostUploading, postUploadSuccessMessage } =
+		useSelector((state) => state.postUploadReducer);
+
+	const { uploadedPostImagesArray } = useSelector(
+		(state) => state.postImagesReducer
+	);
+	const { postTopicsArray } = useSelector((state) => state.postTopicsReducer);
+	const { postUsersArray } = useSelector((state) => state.postUsersReducer);
+	const { postCaptionsNodesArray } = useSelector(
+		(state) => state.postCaptionsReducer
+	);
+
 	React.useEffect(() => {
-		if (postID) {
-			history.push(`/post/${postID}`);
+		if (uploadedPostID) {
+			console.log("PUSH");
+
+			localStorage.removeItem("postTopics");
+			localStorage.removeItem("postUsers");
+			localStorage.removeItem("postCaptions");
+			localStorage.removeItem("postImages");
+
+			history.push(`/post/${uploadedPostID}`);
 		}
-	}, [postID]);
+	}, [uploadedPostID]);
 
 	return (
 		<AddContentFormStyle>

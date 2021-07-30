@@ -11,7 +11,7 @@ const AddContentPageStyle = styled(PageStyle)`
 	max-height: 100vh;
 	min-height: 100vh;
 
-	@media (max-width: 1200px) {
+	@media (max-width: 1000px) {
 		grid-template-columns: 1fr;
 		justify-content: center;
 
@@ -26,7 +26,7 @@ const AddContentPageStyle = styled(PageStyle)`
 
 	@media (max-width: 500px) {
 		& > * {
-			width: 100%;
+			width: 100% !important;
 		}
 	}
 `;

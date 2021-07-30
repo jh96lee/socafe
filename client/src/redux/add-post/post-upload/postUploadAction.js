@@ -4,6 +4,7 @@ import { setPostImagesErrorMessage } from "../post-images/postImagesAction";
 import { setPostTopicsErrorMessage } from "../post-topics/postTopicsAction";
 
 import { fetchToken } from "../../../utils/cookie/fetchToken";
+import { removeTailEndBreakingPoints } from "../../../utils/text-editor/removeTailEndBreakingPoints";
 
 const startUploadingPost = () => ({
 	type: "START_UPLOADING_POST",
@@ -54,7 +55,7 @@ export const uploadPost =
 					postImagesArray,
 					postTopicsArray,
 					postTaggedUsersArray,
-					postNodesArray,
+					postNodesArray: removeTailEndBreakingPoints(postNodesArray),
 				},
 			});
 

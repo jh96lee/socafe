@@ -13,13 +13,13 @@ const endFetchingMainPost = () => ({
 	type: "END_FETCHING_MAIN_POST",
 });
 
-export const fetchMainPost = (postID, userID) => async (dispatch) => {
+export const fetchMainPost = (postID, visitorID) => async (dispatch) => {
 	dispatch(startFetchingMainPost());
 
 	try {
 		const { data } = await axios({
 			method: "GET",
-			url: `http://localhost:8080/post/${postID}/${userID}`,
+			url: `http://localhost:8080/post/${postID}/${visitorID}`,
 		});
 
 		const { error } = data;

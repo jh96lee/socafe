@@ -15,10 +15,12 @@ const TextEditor = ({ textEditorOnChangeLogic }) => {
 
 		const textEditorNodesArray = reactQuillChildNodesArray.map((node) => {
 			return {
-				nodeType: node.innerHTML === "<br>" ? "br" : "p",
+				nodeType: node.innerHTML === "<br>" ? "BR" : "P",
 				nodeValue: node.innerHTML,
 			};
 		});
+
+		console.log(textEditorNodesArray);
 
 		textEditorOnChangeLogic(textEditorNodesArray);
 	};

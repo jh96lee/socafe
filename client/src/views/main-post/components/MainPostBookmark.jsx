@@ -1,12 +1,12 @@
 import * as React from "react";
 
-import { IconElement } from "../../index";
+import { IconElement } from "../../shared";
 
-import { BookmarkEmpty, BookmarkFill } from "../../../../assets";
+import { BookmarkEmpty, BookmarkFill } from "../../../assets";
 
-// TODO: functionality needs to be added
-const PostBookmark = () => {
-	const [isPostBookmarked, setIsPostBookmarked] = React.useState(false);
+const PostBookmark = ({ bookmarkIconSize, isBookmarkedProp }) => {
+	const [isPostBookmarked, setIsPostBookmarked] =
+		React.useState(isBookmarkedProp);
 
 	const handlePostBookmarkOnClick = () => {
 		setIsPostBookmarked((prevState) => !prevState);
@@ -17,12 +17,7 @@ const PostBookmark = () => {
 			iconRole="button"
 			onClick={handlePostBookmarkOnClick}
 			iconElementStyleObject={{
-				elementPadding: "0rem",
-				elementBackgroundColor: "none",
-				elementHoverBackgroundColor: "none",
-				iconColor: "var(--icon-default-color)",
-				iconHoverColor: "var(--icon-default-color)",
-				iconSize: "2.5rem",
+				iconSize: bookmarkIconSize,
 			}}
 		>
 			{isPostBookmarked ? <BookmarkFill /> : <BookmarkEmpty />}

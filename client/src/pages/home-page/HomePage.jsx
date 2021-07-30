@@ -7,11 +7,7 @@ import styled from "styled-components";
 const HomePageStyle = styled.div``;
 
 const HomePage = () => {
-	return (
-		<HomePageStyle>
-			<HomeFeed />
-		</HomePageStyle>
-	);
+	return <HomePageStyle></HomePageStyle>;
 };
 
 export default HomePage;
