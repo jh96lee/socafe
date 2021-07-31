@@ -1,6 +1,6 @@
 import * as React from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { useParams, useLocation } from "react-router-dom";
+import { useParams, useLocation, useHistory } from "react-router-dom";
 
 import {
 	Loader,
@@ -9,6 +9,7 @@ import {
 	PostTopics,
 	UserMetadata,
 	TextArea,
+	IconElement,
 } from "../../shared";
 import { MainPostComments } from "../../main-post-comments";
 import { MainPostCommentsInput } from "../../main-post-comments-input";
@@ -19,6 +20,8 @@ import { fetchMainPost } from "../../../redux/main-post/mainPostAction";
 import { MainPostStyle } from "../styles/MainPostStyle";
 import { MainPostOverflowStyle } from "../styles/MainPostOverflowStyle";
 import { PostMainStyle } from "../../../styles";
+
+import { CloseAlt, Remove, GoBack } from "../../../assets";
 
 const MainPost = () => {
 	const dispatch = useDispatch();
@@ -33,6 +36,8 @@ const MainPost = () => {
 		mainPostLocation.state && mainPostLocation.state.overlaidComponentLocation
 			? true
 			: false;
+
+	const history = useHistory();
 
 	const { isMainPostLoaded, mainPost } = useSelector(
 		(state) => state.mainPostReducer
@@ -55,6 +60,10 @@ const MainPost = () => {
 		post_is_bookmarked,
 	} = mainPost;
 
+	const handleRemoveIconElementOnClick = () => {
+		history.goBack();
+	};
+
 	return (
 		<MainPostStyle
 			isMainPostOverlaid={isMainPostOverlaid}
@@ -68,6 +77,24 @@ const MainPost = () => {
 				<React.Fragment>
 					{/* REVIEW: 1st child */}
 					<PostMainStyle>
+						{isMainPostOverlaid && (
+							<IconElement
+								iconRole="button"
+								onClick={handleRemoveIconElementOnClick}
+								iconElementStyleObject={{
+									elementPosition: "absolute",
+									elementTop: "1.5rem",
+									elementLeft: "1.5rem",
+									elementZIndex: "10",
+									// elementPadding: "1.2rem",
+									elementBackgroundColor: "#0000004a",
+									iconSize: "2.5rem",
+								}}
+							>
+								<Remove />
+							</IconElement>
+						)}
+
 						<PostImages postImagesArray={post_images} />
 
 						<PostTaggedUsers postTaggedUsersArray={post_tagged_users} />

@@ -1,8 +1,10 @@
 const initialState = {
 	userProfile: {},
-	totalFollowers: null,
-	totalFollowing: null,
+	userTotalFollowers: null,
+	userTotalFollowings: null,
+	isVisitorFollowing: null,
 	isUserProfileLoaded: false,
+	userProfileErrorMessage: null,
 };
 
 const userProfileReducer = (state = initialState, action) => {
@@ -15,42 +17,42 @@ const userProfileReducer = (state = initialState, action) => {
 		case "FETCHED_USER_PROFILE":
 			return {
 				...state,
-				userProfile: action.payload,
-			};
-		case "FETCHED_TOTAL_FOLLOWERS":
-			return {
-				...state,
-				totalFollowers: action.payload,
-			};
-		case "FETCHED_TOTAL_FOLLOWING":
-			return {
-				...state,
-				totalFollowing: action.payload,
+				...action.payload,
 			};
 		case "END_FETCHING_USER_PROFILE":
 			return {
 				...state,
 				isUserProfileLoaded: true,
 			};
-		case "INCREMENT_TOTAL_FOLLOWERS":
+		case "SET_USER_PROFILE_ERROR_MESSAGE":
 			return {
 				...state,
-				totalFollowers: state.totalFollowers + 1,
+				userProfileErrorMessage: action.payload,
 			};
-		case "DECREMENT_TOTAL_FOLLOWERS":
+		case "SET_IS_VISITOR_FOLLOWING":
 			return {
 				...state,
-				totalFollowers: state.totalFollowers - 1,
+				isVisitorFollowing: !state.isVisitorFollowing,
 			};
-		case "INCREMENT_TOTAL_FOLLOWING":
+		case "INCREMENT_USER_TOTAL_FOLLOWERS":
 			return {
 				...state,
-				totalFollowing: state.totalFollowing + 1,
+				userTotalFollowers: state.userTotalFollowers + 1,
 			};
-		case "DECREMENT_TOTAL_FOLLOWING":
+		case "DECREMENT_USER_TOTAL_FOLLOWERS":
 			return {
 				...state,
-				totalFollowing: state.totalFollowing - 1,
+				userTotalFollowers: state.userTotalFollowers - 1,
+			};
+		case "INCREMENT_USER_TOTAL_FOLLOWINGS":
+			return {
+				...state,
+				userTotalFollowings: state.userTotalFollowings + 1,
+			};
+		case "DECREMENT_USER_TOTAL_FOLLOWINGS":
+			return {
+				...state,
+				userTotalFollowings: state.userTotalFollowings - 1,
 			};
 		default:
 			return state;

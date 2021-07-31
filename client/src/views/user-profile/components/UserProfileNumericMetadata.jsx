@@ -1,9 +1,15 @@
 import React from "react";
+import { useSelector } from "react-redux";
 import styled from "styled-components";
 
 const UserProfileNumericMetadataStyle = styled.div`
 	display: flex;
 	justify-content: space-evenly;
+
+	@media (max-width: 800px) {
+		justify-content: center;
+		gap: 15%;
+	}
 `;
 
 const UserProfileTotalsStyle = styled.div`
@@ -16,27 +22,27 @@ const UserProfileTotalsStyle = styled.div`
 	}
 `;
 
-const UserProfileNumericMetadata = ({
-	totalPosts,
-	totalFollowers,
-	totalFollowings,
-}) => {
+const UserProfileNumericMetadata = () => {
+	const { userProfile, userTotalFollowers, userTotalFollowings } = useSelector(
+		(state) => state.userProfileReducer
+	);
+
 	return (
 		<UserProfileNumericMetadataStyle>
 			<UserProfileTotalsStyle>
-				<h3>{totalPosts}</h3>
+				<h3>{userProfile.user_profile_total_posts}</h3>
 
 				<span>posts</span>
 			</UserProfileTotalsStyle>
 
 			<UserProfileTotalsStyle>
-				<h3>{totalFollowers}</h3>
+				<h3>{userTotalFollowers}</h3>
 
 				<span>followers</span>
 			</UserProfileTotalsStyle>
 
 			<UserProfileTotalsStyle>
-				<h3>{totalFollowings}</h3>
+				<h3>{userTotalFollowings}</h3>
 
 				<span>following</span>
 			</UserProfileTotalsStyle>

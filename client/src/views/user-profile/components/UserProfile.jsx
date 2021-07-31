@@ -1,6 +1,6 @@
 import React from "react";
 import axios from "axios";
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
 import { useParams } from "react-router-dom";
 import styled from "styled-components";
 
@@ -11,11 +11,17 @@ import UserProfileNumericMetadata from "./UserProfileNumericMetadata";
 import UserProfileButtons from "./UserProfileButtons";
 import UserProfileFollowingTopics from "./UserProfileFollowingTopics";
 
+import { fetchUserProfile } from "../../../redux/user-profile/userProfileAction";
+
+import { Avatar } from "../../shared";
+
 const UserProfileStyle = styled.div`
 	position: relative;
 	z-index: 10;
 	display: flex;
 	flex-direction: column;
+	width: 100%;
+	height: fit-content;
 	border-radius: 1rem;
 	overflow: hidden;
 	background-color: var(--input-default-bg-color);
@@ -27,81 +33,114 @@ const UserProfileStyle = styled.div`
 	}
 `;
 
-const UserProfileBodyStyle = styled.div`
+const UserProfileUserNamesMetadataStyle = styled.div`
 	display: flex;
 	flex-direction: column;
-	gap: 1.5rem;
-	margin: 1.8rem 0;
-	padding: 0 1.8rem;
 
-	& p {
-		font-size: 1.3rem;
-		font-weight: 400;
+	& > h5 {
+		color: var(--text-1);
+		font-size: 1.7rem;
+		font-weight: 600;
+	}
+`;
+
+const UserProfileBodyStyle = styled.div`
+	display: grid;
+	grid-template-columns: min-content 1fr;
+	width: 100%;
+
+	& > *:nth-child(1) {
+		justify-self: start;
+		margin: -6rem 0 0 2rem;
+	}
+
+	& > *:nth-child(2) {
+		margin: 0.5rem 0 0 1rem;
+	}
+
+	& > *:nth-child(3),
+	& > *:nth-child(4),
+	& > *:nth-child(5) {
+		grid-column: 1 / 4;
+		margin-top: 1.35rem;
+		padding: 0 2rem;
+	}
+
+	@media (max-width: 800px) {
+		grid-template-columns: min-content 1fr 18rem;
+
+		& > *:nth-child(5) {
+			grid-column: 3 / 4;
+			grid-row: 1 / 2;
+		}
+	}
+
+	@media (max-width: 500px) {
+		grid-template-columns: min-content 1fr;
+
+		& > *:nth-child(3),
+		& > *:nth-child(4),
+		& > *:nth-child(5) {
+			padding: 0 3rem;
+		}
+
+		& > *:nth-child(5) {
+			grid-column: 1 / 4;
+			grid-row: 4;
+		}
 	}
 `;
 
 const UserProfile = () => {
-	const [profileOwner, setProfileOwner] = React.useState({});
-	const [isProfileOwnerLoaded, setIsProfileOwnerLoaded] = React.useState(false);
+	const dispatch = useDispatch();
 
 	const { user } = useSelector((state) => state.userReducer);
 
+	const { userProfile, isUserProfileLoaded, userProfileErrorMessage } =
+		useSelector((state) => state.userProfileReducer);
+
 	const visitorID = user ? user.id : 0;
 
-	const { username } = useParams();
-
-	const fetchUserProfile = async () => {
-		setIsProfileOwnerLoaded(false);
-
-		const { data } = await axios({
-			method: "GET",
-			url: `http://localhost:8080/profile/user/${username}/${visitorID}`,
-		});
-
-		setProfileOwner(data);
-
-		console.log(data);
-
-		setIsProfileOwnerLoaded(true);
-	};
+	const leaderUsername = useParams().username;
 
 	React.useEffect(() => {
-		fetchUserProfile();
-	}, [username]);
+		dispatch(fetchUserProfile(leaderUsername, visitorID));
+	}, [leaderUsername]);
 
 	return (
-		<UserProfileStyle>
-			{!isProfileOwnerLoaded ? (
+		<UserProfileStyle data-user-id={userProfile.id}>
+			{!isUserProfileLoaded ? (
 				<Loader />
-			) : profileOwner.error ? (
+			) : userProfileErrorMessage ? (
 				<h1>User not found</h1>
 			) : (
 				<React.Fragment>
 					<UserProfileCover />
 
-					<UserProfileUserMetadata
-						avatarURL={profileOwner.avatar_url}
-						fullName={profileOwner.full_name}
-						username={profileOwner.username}
-					/>
-
 					<UserProfileBodyStyle>
-						<TextArea
-							textAreaNodesArray={profileOwner.user_profile_bio_nodes_array}
+						<Avatar
+							avatarURL={userProfile.avatar_url}
+							avatarSize="12rem"
+							avatarOnClick={null}
+							isAvatarBubblePresent={false}
 						/>
 
-						<UserProfileNumericMetadata
-							totalPosts={profileOwner.user_profile_total_posts}
-							totalFollowers={profileOwner.user_profile_total_followers}
-							totalFollowings={profileOwner.user_profile_total_following}
+						<UserProfileUserNamesMetadataStyle>
+							<h5>{userProfile.full_name}</h5>
+
+							<span>@{userProfile.username}</span>
+						</UserProfileUserNamesMetadataStyle>
+
+						<TextArea
+							textAreaNodesArray={userProfile.user_profile_bio_nodes_array}
 						/>
+
+						<UserProfileNumericMetadata />
 
 						<UserProfileButtons />
 					</UserProfileBodyStyle>
 
-					<UserProfileFollowingTopics
-						followingTopics={profileOwner.user_profile_following_topics_array}
-					/>
+					<UserProfileFollowingTopics />
 				</React.Fragment>
 			)}
 		</UserProfileStyle>

@@ -52,13 +52,10 @@ function App() {
 						setIsResponsiveNavigationOpen={setIsResponsiveNavigationOpen}
 					/>
 				)}
-
 				{!isAddIncludedInPathname && (
 					<Navigation isResponsiveNavigationOpen={isResponsiveNavigationOpen} />
 				)}
-
 				{/* {user && <AddPostIcon />} */}
-
 				<Switch location={overlaidComponentLocation || appLocation}>
 					<Route exact path="/">
 						{/* <HomePage /> */}

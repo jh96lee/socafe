@@ -1,11 +1,13 @@
 import * as React from "react";
+import { useSelector } from "react-redux";
 import styled from "styled-components";
 
 const UserProfileFollowingTopicsStyle = styled.div`
-	display: flex;
-	flex-wrap: wrap;
+	display: grid;
+	grid-template-columns: repeat(auto-fit, minmax(75px, 1fr));
+	justify-content: center;
 	gap: 1.5rem;
-	padding: 2rem;
+	padding: 3rem;
 `;
 
 const UserProfileFollowingTopicStyle = styled.div`
@@ -32,10 +34,12 @@ const UserProfileFollowingTopicStyle = styled.div`
 	}
 `;
 
-const UserProfileFollowingTopics = ({ followingTopics }) => {
+const UserProfileFollowingTopics = () => {
+	const { userProfile } = useSelector((state) => state.userProfileReducer);
+
 	return (
 		<UserProfileFollowingTopicsStyle>
-			{followingTopics.map((topic) => {
+			{userProfile.user_profile_following_topics_array.map((topic) => {
 				return (
 					<UserProfileFollowingTopicStyle key={topic.topic_id}>
 						<img src={topic.topic_url} alt="topic thumbnail" />

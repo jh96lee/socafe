@@ -20,11 +20,11 @@ const UserMetadata = ({
 	const history = useHistory();
 
 	const handleUsernameOnClick = () => {
-		history.push(`/user/${userID}`);
+		history.push(`/user/${username}`);
 	};
 
 	return (
-		<UserMetadataStyle>
+		<UserMetadataStyle data-user-id={userID}>
 			<Avatar
 				avatarURL={avatarURL}
 				avatarSize={avatarSize}

@@ -1,4 +1,5 @@
 import React from "react";
+import { useSelector } from "react-redux";
 import styled from "styled-components";
 
 import { Avatar } from "../../shared";
@@ -6,7 +7,7 @@ import { Avatar } from "../../shared";
 const UserProfileUserMetadataStyle = styled.div`
 	display: flex;
 	gap: 0.7rem;
-	padding: 0.7rem 1.8rem;
+	padding: 0.7rem 1.8rem 0 1.8rem;
 
 	& > *:nth-child(1) {
 		margin-top: -6.35rem;
@@ -24,20 +25,22 @@ const UserProfileUserNamesMetadataStyle = styled.div`
 	}
 `;
 
-const UserProfileUserMetadata = ({ avatarURL, fullName, username }) => {
+const UserProfileUserMetadata = () => {
+	const { userProfile } = useSelector((state) => state.userProfileReducer);
+
 	return (
 		<UserProfileUserMetadataStyle>
 			<Avatar
-				avatarURL={avatarURL}
+				avatarURL={userProfile.avatar_url}
 				avatarSize="12rem"
 				avatarOnClick={null}
 				isAvatarBubblePresent={false}
 			/>
 
 			<UserProfileUserNamesMetadataStyle>
-				<h5>{fullName}</h5>
+				<h5>{userProfile.full_name}</h5>
 
-				<span>@{username}</span>
+				<span>@{userProfile.username}</span>
 			</UserProfileUserNamesMetadataStyle>
 		</UserProfileUserMetadataStyle>
 	);

@@ -11,6 +11,10 @@ const LogoStyle = styled.div`
 		display: none;
 	}
 
+	&:hover {
+		cursor: pointer;
+	}
+
 	@media (max-width: 400px) {
 		#logo__socafe-full {
 			display: none;

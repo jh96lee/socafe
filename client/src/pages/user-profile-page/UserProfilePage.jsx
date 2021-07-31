@@ -14,11 +14,11 @@ import { Posts, HeartEmpty, BookmarkEmpty, Tag } from "../../assets";
 
 const UserProfilePageStyle = styled(PageStyle)`
 	display: grid;
-	grid-template-columns: 33rem 1fr;
+	grid-template-columns: 35rem 1fr;
 	grid-auto-rows: min-content 1fr;
 	gap: 1.8rem 2.5rem;
-	width: 115rem;
-	min-width: 115rem;
+	width: 90%;
+	min-width: 90%;
 	margin: 3rem auto;
 
 	& > *:nth-child(1) {
@@ -35,12 +35,31 @@ const UserProfilePageStyle = styled(PageStyle)`
 		grid-column: 2 / 3;
 		grid-row: 2 / 3;
 	}
+
+	@media (max-width: 800px) {
+		grid-template-columns: 1fr;
+		grid-auto-rows: min-content;
+
+		& > * {
+			grid-column: 1 / 2 !important;
+		}
+
+		& > *:nth-child(1) {
+			grid-row: 1 / 2;
+		}
+
+		& > *:nth-child(2) {
+			grid-row: 2 / 3;
+		}
+
+		& > *:nth-child(3) {
+			grid-row: 3 / 4;
+		}
+	}
 `;
 
 const UserProfilePage = () => {
 	const { username } = useParams();
-
-	console.log(username);
 
 	const userProfileTabsArray = React.useMemo(() => {
 		return [
@@ -87,6 +106,7 @@ const UserProfilePage = () => {
 				userProfileTabsArray={userProfileTabsArray}
 				handleTabOnClick={handleTabOnClick}
 			/>
+			{/* <div /> */}
 
 			<UserProfilePosts profilePostsEndpoint={profilePostsEndpoint} />
 		</UserProfilePageStyle>

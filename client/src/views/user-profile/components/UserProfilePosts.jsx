@@ -7,7 +7,8 @@ import UserProfilePost from "./UserProfilePost";
 
 const UserProfilePostsStyle = styled.div`
 	display: grid;
-	grid-template-columns: repeat(3, 1fr);
+	/* grid-template-columns: repeat(4, 1fr); */
+	grid-template-columns: repeat(auto-fit, minmax(20rem, 1fr));
 	grid-auto-rows: 18rem;
 	justify-content: center;
 	gap: 2.5rem 1.5rem;

@@ -41,7 +41,7 @@ const HeaderAvatar = () => {
 							icon: <UserFilled />,
 						},
 						onClickEventHandler: () => {
-							history.push(`/profile/${user.id}`);
+							history.push(`/user/${user.username}`);
 						},
 					},
 					{

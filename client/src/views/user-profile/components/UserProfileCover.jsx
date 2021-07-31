@@ -1,4 +1,5 @@
 import React from "react";
+import { useParams } from "react-router-dom";
 import styled from "styled-components";
 
 const UserProfileCoverStyle = styled.div`
@@ -31,6 +32,8 @@ const UserProfileCover = () => {
 	const minShapeSize = 20;
 	const maxShapeSize = 40;
 	const numberOfShapes = 3;
+
+	const { username } = useParams();
 
 	const shapeRandomizer = (
 		minX,
@@ -67,51 +70,65 @@ const UserProfileCover = () => {
 		return shapesArray;
 	};
 
-	const topLeftShapes = shapeRandomizer(
-		0,
-		33,
-		0,
-		33,
-		minShapeSize,
-		maxShapeSize,
-		numberOfShapes
-	);
-	const topRightShapes = shapeRandomizer(
-		66,
-		99,
-		0,
-		33,
-		minShapeSize,
-		maxShapeSize,
-		numberOfShapes
-	);
-	const bottomLeftShapes = shapeRandomizer(
-		0,
-		33,
-		66,
-		99,
-		minShapeSize,
-		maxShapeSize,
-		numberOfShapes
-	);
-	const bottomRightShapes = shapeRandomizer(
-		66,
-		99,
-		66,
-		99,
-		minShapeSize,
-		maxShapeSize,
-		numberOfShapes
-	);
-	const centerShapes = shapeRandomizer(
-		33,
-		66,
-		33,
-		66,
-		minShapeSize,
-		maxShapeSize,
-		numberOfShapes
-	);
+	const topLeftShapes = React.useMemo(() => {
+		return shapeRandomizer(
+			0,
+			33,
+			0,
+			33,
+			minShapeSize,
+			maxShapeSize,
+			numberOfShapes
+		);
+	}, [username]);
+
+	const topRightShapes = React.useMemo(() => {
+		return shapeRandomizer(
+			66,
+			99,
+			0,
+			33,
+			minShapeSize,
+			maxShapeSize,
+			numberOfShapes
+		);
+	}, [username]);
+
+	const bottomLeftShapes = React.useMemo(() => {
+		return shapeRandomizer(
+			0,
+			33,
+			66,
+			99,
+			minShapeSize,
+			maxShapeSize,
+			numberOfShapes
+		);
+	}, [username]);
+
+	const bottomRightShapes = React.useMemo(() => {
+		return shapeRandomizer(
+			66,
+			99,
+			66,
+			99,
+			minShapeSize,
+			maxShapeSize,
+			numberOfShapes
+		);
+	}, [username]);
+
+	const centerShapes = React.useMemo(() => {
+		return shapeRandomizer(
+			33,
+			66,
+			33,
+			66,
+			minShapeSize,
+			maxShapeSize,
+			numberOfShapes
+		);
+	}, [username]);
 
 	return (
 		<UserProfileCoverStyle>

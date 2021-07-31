@@ -21,6 +21,7 @@ import { ReactComponent as Open } from "./general/open.svg";
 import { ReactComponent as DoubleArrowLeft } from "./general/double-arrow-left.svg";
 import { ReactComponent as Date } from "./general/date.svg";
 import { ReactComponent as ClockFilled } from "./general/clock-filled.svg";
+import { ReactComponent as GoBack } from "./general/go-back.svg";
 
 import { ReactComponent as EditFilled } from "./general/edit-filled.svg";
 import { ReactComponent as Settings } from "./general/settings.svg";
@@ -129,6 +130,7 @@ export {
 	Login,
 	Images,
 	Logout,
+	GoBack,
 	Tag,
 	Password,
 	HeartEmpty,

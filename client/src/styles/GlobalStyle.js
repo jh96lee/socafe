@@ -93,6 +93,12 @@ const GlobalStyles = createGlobalStyle`
         --bg-success-color: ${(props) =>
 					props.theme.isDarkMode ? "#4caf503b" : "#0ed60e47"};
 
+        /* REVIEW: active and inactive */
+        --active-default-color: ${(props) =>
+					props.theme.isDarkMode ? "#fff" : "#000"};
+        --inactive-default-color: ${(props) =>
+					props.theme.isDarkMode ? "#878787" : "#939393"};
+
         /* REVIEW: likes */
         --likes-icon-color: ${(props) =>
 					props.theme.isDarkMode ? "#ff1a56" : "#ff1a56"};
