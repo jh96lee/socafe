@@ -72,7 +72,7 @@ userRouter.get("/profile/user/:ownerUsername/:visitorID", async (req, res) => {
 			[ownerID]
 		);
 
-		const userProfileTotalFollowingData = await pool.queryToDatabase(
+		const userProfileTotalFollowingsData = await pool.queryToDatabase(
 			`
 			SELECT 
 			COUNT(*)::INT
@@ -121,7 +121,8 @@ userRouter.get("/profile/user/:ownerUsername/:visitorID", async (req, res) => {
 			...userProfileOwnerData.rows[0],
 			user_profile_total_posts: userProfileTotalPostsData.rows[0].count,
 			user_profile_total_followers: userProfileTotalFollowersData.rows[0].count,
-			user_profile_total_following: userProfileTotalFollowingData.rows[0].count,
+			user_profile_total_followings:
+				userProfileTotalFollowingsData.rows[0].count,
 			user_profile_following_topics_array:
 				userProfileFollowingTopicsArrayData.rows,
 			user_profile_bio_nodes_array: userProfileBioData.rows,
