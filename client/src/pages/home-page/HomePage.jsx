@@ -1,13 +1,17 @@
 import * as React from "react";
 
-import { HomeFeed } from "../../views/home-feed";
+import { HomeFeedPosts } from "../../views/home-feed-posts";
 
 import styled from "styled-components";
 
 const HomePageStyle = styled.div``;
 
 const HomePage = () => {
-	return <HomePageStyle></HomePageStyle>;
+	return (
+		<HomePageStyle>
+			<HomeFeedPosts />
+		</HomePageStyle>
+	);
 };
 
 export default HomePage;

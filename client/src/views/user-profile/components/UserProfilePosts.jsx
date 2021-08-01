@@ -1,18 +1,10 @@
 import * as React from "react";
 import axios from "axios";
-import styled from "styled-components";
 
 import { Loader } from "../../shared";
 import UserProfilePost from "./UserProfilePost";
 
-const UserProfilePostsStyle = styled.div`
-	display: grid;
-	/* grid-template-columns: repeat(4, 1fr); */
-	grid-template-columns: repeat(auto-fit, minmax(20rem, 1fr));
-	grid-auto-rows: 18rem;
-	justify-content: center;
-	gap: 2.5rem 1.5rem;
-`;
+import { UserProfilePostsStyle } from "../styles/UserProfilePostsStyle";
 
 const UserProfilePosts = ({ profilePostsEndpoint }) => {
 	const [profilePosts, setProfilePosts] = React.useState([]);

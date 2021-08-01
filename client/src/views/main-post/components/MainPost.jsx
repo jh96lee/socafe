@@ -86,7 +86,6 @@ const MainPost = () => {
 									elementTop: "1.5rem",
 									elementLeft: "1.5rem",
 									elementZIndex: "10",
-									// elementPadding: "1.2rem",
 									elementBackgroundColor: "#0000004a",
 									iconSize: "2.5rem",
 								}}

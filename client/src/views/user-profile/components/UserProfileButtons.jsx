@@ -1,8 +1,6 @@
 import * as React from "react";
 import { useSelector, useDispatch } from "react-redux";
 
-import { Button } from "../../shared";
-
 import {
 	followUser,
 	unfollowUser,
@@ -24,10 +22,6 @@ const UserProfileButtonStyle = styled.button`
 	font-weight: 500;
 	letter-spacing: -0.4px;
 	color: ${(props) => (props.isFollowing ? "var(--text-1)" : "#fff")};
-	/* background-color: ${(props) =>
-		props.isFollowing
-			? "var(--button-default-bg-color)"
-			: "var(--button-default-bg-color)"}; */
 	color: ${(props) => (props.isFollowing ? "" : "#fff")};
 	background-color: ${(props) =>
 		props.isFollowing ? "transparent" : "var(--button-default-bg-color)"};

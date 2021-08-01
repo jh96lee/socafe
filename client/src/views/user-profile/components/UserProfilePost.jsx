@@ -1,17 +1,13 @@
 import * as React from "react";
 import { useLocation, useHistory } from "react-router-dom";
-import styled from "styled-components";
+
+import {
+	UserProfilePostStyle,
+	UserProfilePostMetadataOverlayStyle,
+	UserProfilePostMetadataStyle,
+} from "../styles/UserProfilePostStyle";
 
 import { HeartFill, CommentFilled } from "../../../assets";
-
-const UserProfilePostStyle = styled.div`
-	& > img {
-		width: 100%;
-		height: 100%;
-		object-fit: cover;
-		border-radius: 1rem;
-	}
-`;
 
 const UserProfilePost = ({ post }) => {
 	const {
@@ -34,9 +30,20 @@ const UserProfilePost = ({ post }) => {
 	return (
 		<UserProfilePostStyle onClick={handlePostOnClick}>
 			<img src={user_profile_post_images[0].image_url} alt="post thumbnail" />
-			{/* <HeartFill />
 
-			<CommentFilled /> */}
+			<UserProfilePostMetadataOverlayStyle id="user-profile-post__post-metadata-overlay">
+				<UserProfilePostMetadataStyle>
+					<HeartFill id="user-profile-post__heart" />
+
+					<h4>{user_profile_post_total_likes}</h4>
+				</UserProfilePostMetadataStyle>
+
+				<UserProfilePostMetadataStyle>
+					<CommentFilled />
+
+					<h4>{user_profile_post_total_comments}</h4>
+				</UserProfilePostMetadataStyle>
+			</UserProfilePostMetadataOverlayStyle>
 		</UserProfilePostStyle>
 	);
 };

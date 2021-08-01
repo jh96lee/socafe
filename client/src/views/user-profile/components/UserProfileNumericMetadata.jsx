@@ -1,26 +1,10 @@
 import React from "react";
 import { useSelector } from "react-redux";
-import styled from "styled-components";
 
-const UserProfileNumericMetadataStyle = styled.div`
-	display: flex;
-	justify-content: space-evenly;
-
-	@media (max-width: 800px) {
-		justify-content: center;
-		gap: 15%;
-	}
-`;
-
-const UserProfileTotalsStyle = styled.div`
-	display: flex;
-	flex-direction: column;
-	align-items: center;
-
-	& > h3 {
-		color: var(--text-1);
-	}
-`;
+import {
+	UserProfileNumericMetadataStyle,
+	UserProfileTotalsStyle,
+} from "../styles/UserProfileNumericMetadataStyle";
 
 const UserProfileNumericMetadata = () => {
 	const { userProfile, userTotalFollowers, userTotalFollowings } = useSelector(

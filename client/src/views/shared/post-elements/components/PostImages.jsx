@@ -53,6 +53,7 @@ const PostImages = ({ postImagesArray }) => {
 							onClick={handleDirectionOnClick}
 							iconElementStyleObject={{
 								elementBackgroundColor: "#0000004a",
+								iconColor: "#fff",
 								iconSize: "2.5rem",
 							}}
 							otherProps={{ "data-direction": "left" }}
@@ -66,6 +67,7 @@ const PostImages = ({ postImagesArray }) => {
 							onClick={handleDirectionOnClick}
 							iconElementStyleObject={{
 								elementBackgroundColor: "#0000004a",
+								iconColor: "#fff",
 								iconSize: "2.5rem",
 							}}
 							otherProps={{ "data-direction": "right" }}

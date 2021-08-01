@@ -20,8 +20,6 @@ const TextEditor = ({ textEditorOnChangeLogic }) => {
 			};
 		});
 
-		console.log(textEditorNodesArray);
-
 		textEditorOnChangeLogic(textEditorNodesArray);
 	};
 

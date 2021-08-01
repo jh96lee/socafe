@@ -36,8 +36,6 @@ const AddPostForm = () => {
 
 	React.useEffect(() => {
 		if (uploadedPostID) {
-			console.log("PUSH");
-
 			localStorage.removeItem("postTopics");
 			localStorage.removeItem("postUsers");
 			localStorage.removeItem("postCaptions");
