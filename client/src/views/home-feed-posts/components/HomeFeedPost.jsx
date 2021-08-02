@@ -1,7 +1,13 @@
 import * as React from "react";
 import { useHistory, useLocation } from "react-router-dom";
 
-import { UserMetadata, IconElement, TextArea } from "../../shared";
+import {
+	UserMetadata,
+	IconElement,
+	TextArea,
+	PostLike,
+	PostBookmark,
+} from "../../shared";
 import HomePostImages from "./HomePostImages";
 
 import { HomeFeedPostStyle } from "../styles/HomeFeedPostStyle";
@@ -9,7 +15,7 @@ import { HomeFeedPostHeaderStyle } from "../styles/HomeFeedPostHeaderStyle";
 import { HomeFeedPostFooterStyle } from "../styles/HomeFeedPostFooterStyle";
 import { PostActionStyle } from "../../../styles";
 
-import { BookmarkEmpty, HeartEmpty, CommentOutline } from "../../../assets";
+import { CommentOutline } from "../../../assets";
 
 const HomePost = ({ post }) => {
 	const {
@@ -47,15 +53,11 @@ const HomePost = ({ post }) => {
 					avatarOnClick={() => {}}
 				/>
 
-				<IconElement
-					iconRole="button"
-					iconElementStyleObject={{
-						elementBackgroundColor: "transparent",
-						iconSize: "2.2rem",
-					}}
-				>
-					<BookmarkEmpty />
-				</IconElement>
+				<PostBookmark
+					isBookmarkIconBackgroundTransparent={true}
+					postIDProp={post_id}
+					isBookmarkedProp={post_is_bookmarked}
+				/>
 			</HomeFeedPostHeaderStyle>
 
 			<TextArea textAreaNodesArray={post_captions} charactersLimit={100} />
@@ -66,23 +68,12 @@ const HomePost = ({ post }) => {
 			/>
 
 			<HomeFeedPostFooterStyle>
-				<PostActionStyle>
-					<IconElement
-						iconRole="button"
-						iconElementStyleObject={{
-							// elementBackgroundColor: "var(--likes-bg-color)",
-							elementBackgroundColor: "transparent",
-							elementHoverBackgroundColor: "var(--likes-hover-bg-color)",
-							elementPadding: "0.7rem",
-							iconColor: "var(--likes-icon-color)",
-							iconSize: "2.2rem",
-						}}
-					>
-						<HeartEmpty />
-					</IconElement>
-
-					<h5>{post_total_likes}</h5>
-				</PostActionStyle>
+				<PostLike
+					isLikeIconBackgroundTransparent={true}
+					postIDProp={post_id}
+					isLikedProp={post_is_liked}
+					totalLikesProp={post_total_likes}
+				/>
 
 				<PostActionStyle>
 					<IconElement

@@ -2,7 +2,8 @@ export { default as useDropdown } from "./dropdown/useDropdown";
 
 export { default as useSearch } from "./input/useSearch";
 
-export { default as useLikeAndUnlikePost } from "./likes/useLikeAndUnlikePost";
+export { default as usePostLike } from "./post/usePostLike";
+export { default as usePostBookmark } from "./post/usePostBookmark";
 
 export { default as useSearchAndSelectReact } from "./search-and-select/useSearchAndSelectReact";
 export { default as useSearchAndSelectRedux } from "./search-and-select/useSearchAndSelectRedux";

@@ -1,6 +1,8 @@
 import * as React from "react";
 import { useLocation, useHistory } from "react-router-dom";
 
+import { usePostLike } from "../../../hooks";
+
 import {
 	UserProfilePostStyle,
 	UserProfilePostMetadataOverlayStyle,
@@ -12,10 +14,19 @@ import { HeartFill, CommentFilled } from "../../../assets";
 const UserProfilePost = ({ post }) => {
 	const {
 		post_id,
-		user_profile_post_images,
-		user_profile_post_total_likes,
-		user_profile_post_total_comments,
+		post_images,
+		post_total_likes,
+		post_total_comments,
+		post_is_liked,
 	} = post;
+
+	console.log(post);
+
+	const { postTotalLikes } = usePostLike(
+		post_is_liked,
+		post_total_likes,
+		post_id
+	);
 
 	const location = useLocation();
 	const history = useHistory();
@@ -29,19 +40,19 @@ const UserProfilePost = ({ post }) => {
 
 	return (
 		<UserProfilePostStyle onClick={handlePostOnClick}>
-			<img src={user_profile_post_images[0].image_url} alt="post thumbnail" />
+			<img src={post_images[0].url} alt="post thumbnail" />
 
 			<UserProfilePostMetadataOverlayStyle id="user-profile-post__post-metadata-overlay">
 				<UserProfilePostMetadataStyle>
 					<HeartFill id="user-profile-post__heart" />
 
-					<h4>{user_profile_post_total_likes}</h4>
+					<h4>{postTotalLikes}</h4>
 				</UserProfilePostMetadataStyle>
 
 				<UserProfilePostMetadataStyle>
 					<CommentFilled />
 
-					<h4>{user_profile_post_total_comments}</h4>
+					<h4>{post_total_comments}</h4>
 				</UserProfilePostMetadataStyle>
 			</UserProfilePostMetadataOverlayStyle>
 		</UserProfilePostStyle>

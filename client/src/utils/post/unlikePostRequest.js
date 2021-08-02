@@ -2,12 +2,12 @@ import axios from "axios";
 
 import { fetchToken } from "../cookie/fetchToken";
 
-export const likePostRequest = async (postID) => {
+export const unlikePostRequest = async (postID) => {
 	const token = fetchToken();
 
 	await axios({
-		method: "POST",
-		url: `http://localhost:8080/like/post/${postID}`,
+		method: "DELETE",
+		url: `http://localhost:8080/post/unlike/${postID}`,
 		headers: {
 			Authorization: `Bearer ${token}`,
 		},

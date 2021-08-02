@@ -30,6 +30,8 @@ export { default as UserMetadata } from "./user-metadata/UserMetadata";
 export { default as PostImages } from "./post-elements/components/PostImages";
 export { default as PostTaggedUsers } from "./post-elements/components/PostTaggedUsers";
 export { default as PostTopics } from "./post-elements/components/PostTopics";
+export { default as PostLike } from "./post-elements/components/PostLike";
+export { default as PostBookmark } from "./post-elements/components/PostBookmark";
 
 export { default as PostLikes } from "./post-likes/PostLikes";
 

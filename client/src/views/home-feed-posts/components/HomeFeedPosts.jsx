@@ -12,7 +12,6 @@ const HomeFeedPosts = () => {
 	const { user } = useSelector((state) => state.userReducer);
 	const {
 		homeFeedPosts,
-		homeFeedRecommendations,
 		isHomeFeedPostsLoaded,
 		isHomeFeedsLoadingMore,
 		homeFeedPostsCurrentPage,
@@ -34,7 +33,7 @@ const HomeFeedPosts = () => {
 			{isHomeFeedPostsLoaded ? (
 				<React.Fragment>
 					{homeFeedPosts.map((post) => {
-						return <HomePost key={`home-post__${post.id}`} post={post} />;
+						return <HomePost key={`home-post__${post.post_id}`} post={post} />;
 					})}
 				</React.Fragment>
 			) : (

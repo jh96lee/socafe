@@ -15,13 +15,16 @@ import { MainPostComments } from "../../main-post-comments";
 import { MainPostCommentsInput } from "../../main-post-comments-input";
 import MainPostActions from "./MainPostActions";
 
-import { fetchMainPost } from "../../../redux/main-post/mainPostAction";
+import {
+	fetchMainPost,
+	resetMainPost,
+} from "../../../redux/main-post/mainPostAction";
 
 import { MainPostStyle } from "../styles/MainPostStyle";
 import { MainPostOverflowStyle } from "../styles/MainPostOverflowStyle";
 import { PostMainStyle } from "../../../styles";
 
-import { CloseAlt, Remove, GoBack } from "../../../assets";
+import { Remove } from "../../../assets";
 
 const MainPost = () => {
 	const dispatch = useDispatch();
@@ -39,26 +42,23 @@ const MainPost = () => {
 
 	const history = useHistory();
 
-	const { isMainPostLoaded, mainPost } = useSelector(
-		(state) => state.mainPostReducer
-	);
+	const {
+		isMainPostLoaded,
+		mainPostID,
+		mainPostOwner,
+		mainPostImages,
+		mainPostTopics,
+		mainPostCaptions,
+		mainPostTaggedUsers,
+	} = useSelector((state) => state.mainPostReducer);
 
 	React.useEffect(() => {
 		dispatch(fetchMainPost(postID, visitorID));
-	}, [postID, visitorID]);
 
-	const {
-		post_id,
-		post_owner,
-		post_images,
-		post_topics,
-		post_captions,
-		post_tagged_users,
-		post_total_likes,
-		post_total_comments,
-		post_is_liked,
-		post_is_bookmarked,
-	} = mainPost;
+		return () => {
+			dispatch(resetMainPost());
+		};
+	}, [postID, visitorID]);
 
 	const handleRemoveIconElementOnClick = () => {
 		history.goBack();
@@ -71,7 +71,7 @@ const MainPost = () => {
 		>
 			{!isMainPostLoaded ? (
 				<Loader />
-			) : !mainPost.post_id ? (
+			) : !mainPostID ? (
 				<h1 style={{ color: "#fff" }}>Post does not exist</h1>
 			) : (
 				<React.Fragment>
@@ -94,17 +94,17 @@ const MainPost = () => {
 							</IconElement>
 						)}
 
-						<PostImages postImagesArray={post_images} />
+						<PostImages postImagesArray={mainPostImages} />
 
-						<PostTaggedUsers postTaggedUsersArray={post_tagged_users} />
+						<PostTaggedUsers postTaggedUsersArray={mainPostTaggedUsers} />
 					</PostMainStyle>
 
 					{/* REVIEW: 2nd child */}
 					<UserMetadata
-						userID={post_owner.id}
-						avatarURL={post_owner.avatar_url}
-						username={post_owner.username}
-						fullName={post_owner.full_name}
+						userID={mainPostOwner.id}
+						avatarURL={mainPostOwner.avatar_url}
+						username={mainPostOwner.username}
+						fullName={mainPostOwner.full_name}
 						avatarSize="4.5rem"
 						usernameFontSize="1.4rem"
 						fullNameFontSize="1.3rem"
@@ -112,18 +112,13 @@ const MainPost = () => {
 					/>
 
 					{/* REVIEW: 3rd child */}
-					<MainPostActions
-						isLikedProp={post_is_liked}
-						totalLikesProp={post_total_likes}
-						totalPostCommentsProp={post_total_comments}
-						isBookmarkedProp={post_is_bookmarked}
-					/>
+					<MainPostActions />
 
 					{/* REVIEW: 4th child */}
 					<MainPostOverflowStyle>
-						<TextArea textAreaNodesArray={post_captions} />
+						<TextArea textAreaNodesArray={mainPostCaptions} />
 
-						<PostTopics postTopicsArray={post_topics} />
+						<PostTopics postTopicsArray={mainPostTopics} />
 
 						<MainPostComments />
 					</MainPostOverflowStyle>

@@ -1,29 +1,31 @@
 import * as React from "react";
+import { useSelector } from "react-redux";
 
-import { IconElement } from "../../shared";
-
-import MainPostLike from "./MainPostLike";
-import MainPostBookmark from "./MainPostBookmark";
+import { IconElement, PostLike, PostBookmark } from "../../shared";
 
 import { MainPostActionsStyle } from "../styles/MainPostActionsStyle";
 import { PostActionStyle } from "../../../styles";
 
 import { CommentOutline } from "../../../assets";
 
-const MainPostActions = ({
-	isLikedProp,
-	totalLikesProp,
-	totalPostCommentsProp,
-	isBookmarkedProp,
-}) => {
+const MainPostActions = () => {
 	const iconSize = "2.2rem";
+
+	const {
+		mainPostID,
+		isMainPostLiked,
+		mainPostTotalLikes,
+		mainPostTotalComments,
+		isMainPostBookmarked,
+	} = useSelector((state) => state.mainPostReducer);
 
 	return (
 		<MainPostActionsStyle>
-			<MainPostLike
+			<PostLike
 				likeIconSize={iconSize}
-				isLikedProp={isLikedProp}
-				totalLikesProp={totalLikesProp}
+				postIDProp={mainPostID}
+				isLikedProp={isMainPostLiked}
+				totalLikesProp={mainPostTotalLikes}
 			/>
 
 			<PostActionStyle>
@@ -36,12 +38,13 @@ const MainPostActions = ({
 					<CommentOutline />
 				</IconElement>
 
-				<h5>{totalPostCommentsProp}</h5>
+				<h5>{mainPostTotalComments}</h5>
 			</PostActionStyle>
 
-			<MainPostBookmark
+			<PostBookmark
 				bookmarkIconSize={iconSize}
-				isBookmarkedProp={isBookmarkedProp}
+				postIDProp={mainPostID}
+				isBookmarkedProp={isMainPostBookmarked}
 			/>
 		</MainPostActionsStyle>
 	);
