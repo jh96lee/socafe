@@ -2,11 +2,11 @@ import React from "react";
 import { useParams } from "react-router-dom";
 
 import {
-	UserProfileCoverStyle,
-	UserProfileCoverDotStyle,
-} from "../styles/UserProfileCoverStyle";
+	UserProfileOwnerCoverStyle,
+	UserProfileOwnerCoverDotStyle,
+} from "../styles/UserProfileOwnerCoverStyle";
 
-const UserProfileCover = () => {
+const UserProfileOwnerCover = () => {
 	const minShapeSize = 20;
 	const maxShapeSize = 40;
 	const numberOfShapes = 3;
@@ -109,10 +109,10 @@ const UserProfileCover = () => {
 	}, [username]);
 
 	return (
-		<UserProfileCoverStyle>
+		<UserProfileOwnerCoverStyle>
 			{topLeftShapes.map((shape, idx) => {
 				return (
-					<UserProfileCoverDotStyle
+					<UserProfileOwnerCoverDotStyle
 						key={`top-left-shapes__${idx}`}
 						shapeLeft={shape.shapeLeft}
 						shapeTop={shape.shapeTop}
@@ -124,7 +124,7 @@ const UserProfileCover = () => {
 
 			{topRightShapes.map((shape, idx) => {
 				return (
-					<UserProfileCoverDotStyle
+					<UserProfileOwnerCoverDotStyle
 						key={`top-left-shapes__${idx}`}
 						shapeLeft={shape.shapeLeft}
 						shapeTop={shape.shapeTop}
@@ -136,7 +136,7 @@ const UserProfileCover = () => {
 
 			{bottomLeftShapes.map((shape, idx) => {
 				return (
-					<UserProfileCoverDotStyle
+					<UserProfileOwnerCoverDotStyle
 						key={`top-left-shapes__${idx}`}
 						shapeLeft={shape.shapeLeft}
 						shapeTop={shape.shapeTop}
@@ -148,7 +148,7 @@ const UserProfileCover = () => {
 
 			{bottomRightShapes.map((shape, idx) => {
 				return (
-					<UserProfileCoverDotStyle
+					<UserProfileOwnerCoverDotStyle
 						key={`top-left-shapes__${idx}`}
 						shapeLeft={shape.shapeLeft}
 						shapeTop={shape.shapeTop}
@@ -160,7 +160,7 @@ const UserProfileCover = () => {
 
 			{centerShapes.map((shape, idx) => {
 				return (
-					<UserProfileCoverDotStyle
+					<UserProfileOwnerCoverDotStyle
 						key={`top-left-shapes__${idx}`}
 						shapeLeft={shape.shapeLeft}
 						shapeTop={shape.shapeTop}
@@ -169,8 +169,8 @@ const UserProfileCover = () => {
 					/>
 				);
 			})}
-		</UserProfileCoverStyle>
+		</UserProfileOwnerCoverStyle>
 	);
 };
 
-export default UserProfileCover;
+export default UserProfileOwnerCover;

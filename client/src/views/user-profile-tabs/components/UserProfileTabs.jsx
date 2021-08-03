@@ -6,17 +6,21 @@ import {
 } from "../styles/UserProfileTabsStyle";
 
 const UserProfileTabs = ({
-	activeTabIndex,
+	currentProfileTabIndex,
+	setCurrentProfileTabIndex,
 	userProfileTabsArray,
-	handleTabOnClick,
 }) => {
+	const handleProfileTabOnClick = (e, idx) => {
+		setCurrentProfileTabIndex(idx);
+	};
+
 	return (
 		<UserProfileTabsStyle>
-			{userProfileTabsArray.map(({ postsEndpoint, tabIcon, tabLabel }, idx) => {
+			{userProfileTabsArray.map(({ tabIcon, tabLabel }, idx) => {
 				return (
 					<UserProfileTabStyle
-						isTabActive={activeTabIndex === idx}
-						onClick={(e) => handleTabOnClick(e, idx, postsEndpoint)}
+						isTabActive={currentProfileTabIndex === idx}
+						onClick={(e) => handleProfileTabOnClick(e, idx)}
 					>
 						{tabIcon}
 

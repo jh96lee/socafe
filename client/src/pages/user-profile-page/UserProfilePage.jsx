@@ -1,67 +1,89 @@
 import * as React from "react";
+import { useDispatch, useSelector } from "react-redux";
 import { useParams } from "react-router-dom";
 
-import {
-	UserProfile,
-	UserProfilePosts,
-	UserProfileTabs,
-} from "../../views/user-profile";
+import { Loader } from "../../views/shared";
+import { UserProfileOwner } from "../../views/user-profile-owner";
+import { UserProfileTabs } from "../../views/user-profile-tabs";
+import { UserProfilePosts } from "../../views/user-profile-posts";
+
+import { fetchProfileOwner } from "../../redux/user-profile/user-profile-owner/userProfileOwnerAction";
+import { fetchUserProfilePosts } from "../../redux/user-profile/user-profile-posts/userProfilePostsAction";
 
 import { UserProfilePageStyle } from "./UserProfilePageStyle";
 
 import { Posts, HeartEmpty, BookmarkEmpty, Tag } from "../../assets";
 
 const UserProfilePage = () => {
-	const { username } = useParams();
+	const [currentProfileTabIndex, setCurrentProfileTabIndex] = React.useState(0);
+
+	const dispatch = useDispatch();
+
+	const { user } = useSelector((state) => state.userReducer);
+	const visitorID = user ? user.id : 0;
+
+	const { profileOwner, isProfileOwnerLoaded } = useSelector(
+		(state) => state.userProfileOwnerReducer
+	);
+
+	const { userProfilePosts, isUserProfilePostsLoading } = useSelector(
+		(state) => state.userProfilePostsReducer
+	);
+
+	const leaderUsername = useParams().username;
 
 	const userProfileTabsArray = React.useMemo(() => {
 		return [
 			{
-				postsEndpoint: `/profile/posts/${username}`,
+				profilePostsType: "posts",
 				tabIcon: <Posts />,
 				tabLabel: "Posts",
 			},
 			{
-				postsEndpoint: `/profile/posts/${username}`,
+				profilePostsType: "likes",
 				tabIcon: <HeartEmpty />,
 				tabLabel: "Likes",
 			},
 			{
-				postsEndpoint: `/profile/bookmarks/${username}`,
+				profilePostsType: "bookmarks",
 				tabIcon: <BookmarkEmpty />,
 				tabLabel: "Bookmarks",
 			},
 			{
-				postsEndpoint: `/profile/tagged/${username}`,
+				profilePostsType: "tagged",
 				tabIcon: <Tag />,
 				tabLabel: "Tagged",
 			},
 		];
-	}, [username]);
+	}, []);
 
-	const [activeTabIndex, setActiveTabIndex] = React.useState(0);
-	const [profilePostsEndpoint, setProfilePostsEndpoint] = React.useState(
-		userProfileTabsArray[0].postsEndpoint
-	);
+	React.useEffect(() => {
+		dispatch(fetchProfileOwner(leaderUsername, visitorID));
+	}, [leaderUsername]);
 
-	const handleTabOnClick = (e, idx, apiEndpoint) => {
-		setActiveTabIndex(idx);
+	React.useEffect(() => {
+		dispatch(
+			fetchUserProfilePosts(
+				`/profile/${userProfileTabsArray[currentProfileTabIndex].profilePostsType}/${leaderUsername}/${visitorID}`
+			)
+		);
+	}, [leaderUsername, currentProfileTabIndex]);
 
-		setProfilePostsEndpoint(apiEndpoint);
-	};
-
-	return (
+	return !isProfileOwnerLoaded && isUserProfilePostsLoading ? (
+		<Loader />
+	) : !profileOwner.id ? (
+		<h1 style={{ color: "var(--text-1)" }}>User not found</h1>
+	) : (
 		<UserProfilePageStyle>
-			<UserProfile />
+			<UserProfileOwner />
 
 			<UserProfileTabs
-				activeTabIndex={activeTabIndex}
+				currentProfileTabIndex={currentProfileTabIndex}
+				setCurrentProfileTabIndex={setCurrentProfileTabIndex}
 				userProfileTabsArray={userProfileTabsArray}
-				handleTabOnClick={handleTabOnClick}
 			/>
-			{/* <div /> */}
 
-			<UserProfilePosts profilePostsEndpoint={profilePostsEndpoint} />
+			<UserProfilePosts />
 		</UserProfilePageStyle>
 	);
 };

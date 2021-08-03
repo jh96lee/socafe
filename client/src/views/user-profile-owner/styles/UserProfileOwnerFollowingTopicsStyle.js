@@ -1,14 +1,13 @@
 import styled from "styled-components";
 
-export const UserProfileFollowingTopicsStyle = styled.div`
+export const UserProfileOwnerFollowingTopicsStyle = styled.div`
 	display: grid;
 	grid-template-columns: repeat(auto-fit, minmax(75px, 1fr));
 	justify-content: center;
 	gap: 1.5rem;
-	padding: 3rem;
 `;
 
-export const UserProfileFollowingTopicStyle = styled.div`
+export const UserProfileOwnerFollowingTopicStyle = styled.div`
 	position: relative;
 	display: flex;
 	flex-direction: column;

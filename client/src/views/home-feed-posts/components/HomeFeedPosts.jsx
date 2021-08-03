@@ -30,7 +30,9 @@ const HomeFeedPosts = () => {
 
 	return (
 		<HomeFeedStyle>
-			{isHomeFeedPostsLoaded ? (
+			{!user ? (
+				<h1 style={{ color: "#fff" }}>LOGIN OR REGISTER PLEASE</h1>
+			) : isHomeFeedPostsLoaded ? (
 				<React.Fragment>
 					{homeFeedPosts.map((post) => {
 						return <HomePost key={`home-post__${post.post_id}`} post={post} />;

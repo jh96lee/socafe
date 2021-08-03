@@ -1,6 +1,6 @@
 import styled from "styled-components";
 
-export const UserProfileStyle = styled.div`
+export const UserProfileOwnerStyle = styled.div`
 	position: relative;
 	z-index: 10;
 	display: flex;
@@ -14,6 +14,6 @@ export const UserProfileStyle = styled.div`
 	border: 1px solid var(--input-default-separator-color);
 
 	& > *:nth-child(1) {
-		height: 18rem;
+		height: 20rem;
 	}
 `;

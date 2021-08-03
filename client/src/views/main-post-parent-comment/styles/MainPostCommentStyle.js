@@ -11,6 +11,11 @@ export const MainPostCommentStyle = styled.div`
 export const MainPostCommentBodyStyle = styled.div`
 	display: flex;
 	flex-direction: column;
+
+	& > span:hover {
+		cursor: pointer;
+		text-decoration: underline;
+	}
 `;
 
 export const MainPostCommentHeaderStyle = styled.div`

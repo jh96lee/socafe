@@ -246,9 +246,11 @@ const MainPostCommentsInput = () => {
 				<DropdownMenu
 					dropdownElementsArray={dropdownElementsArray}
 					dropdownMenuStyleObject={{
-						menuTop: "calc(-100% - 10px)",
-						menuLeft: "0",
-						menuWidth: "100%",
+						menuBottom: "calc(100% + 5px)",
+						menuLeft: "50%",
+						menuWidth: "99%",
+						menuBorderRadius: "0.5rem",
+						menuTransform: "translate(-50%, 0)",
 					}}
 				/>
 			)}

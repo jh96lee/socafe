@@ -1,6 +1,6 @@
 import styled from "styled-components";
 
-export const UserProfileCoverStyle = styled.div`
+export const UserProfileOwnerCoverStyle = styled.div`
 	position: relative;
 	z-index: 5;
 	background-color: ${(props) =>
@@ -14,7 +14,7 @@ export const UserProfileCoverStyle = styled.div`
 	border-top-right-radius: 1rem;
 `;
 
-export const UserProfileCoverDotStyle = styled.div`
+export const UserProfileOwnerCoverDotStyle = styled.div`
 	position: absolute;
 	top: ${(props) => `${props.shapeTop}%`};
 	left: ${(props) => `${props.shapeLeft}%`};

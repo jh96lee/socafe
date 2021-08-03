@@ -20,8 +20,6 @@ const UserProfilePost = ({ post }) => {
 		post_is_liked,
 	} = post;
 
-	console.log(post);
-
 	const { postTotalLikes } = usePostLike(
 		post_is_liked,
 		post_total_likes,

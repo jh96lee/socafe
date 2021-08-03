@@ -1,6 +1,7 @@
 import styled from "styled-components";
 
 export const MainPostCommentsInputStyle = styled.div`
+	position: relative;
 	display: grid;
 	grid-template-columns: 1fr min-content;
 	gap: 1rem;

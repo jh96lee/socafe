@@ -12,10 +12,11 @@ export const DropdownMenuStyle = styled.div`
 	box-shadow: 0 0px 0px 1.6px var(--separator-1);
 	background-color: var(--bg-1);
 	padding: 1rem;
-	border-radius: 1rem;
+	border-radius: ${(props) => props.menuBorderRadius || "1rem"};
 	display: flex;
 	flex-direction: column;
 	height: fit-content;
+	max-height: 30rem;
 	overflow: scroll;
 
 	& > *:not(:last-child) {

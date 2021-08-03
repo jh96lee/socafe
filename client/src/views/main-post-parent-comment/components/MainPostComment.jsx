@@ -61,7 +61,7 @@ const MainPostComment = ({ comment, replyParentCommentID }) => {
 	const likeComment = async () => {
 		axios({
 			method: "POST",
-			url: `http://localhost:8080/like/comment/${comment_id}`,
+			url: `http://localhost:8080/comment/like/${comment_id}`,
 			headers: {
 				Authorization: `Bearer ${token}`,
 			},
@@ -71,7 +71,7 @@ const MainPostComment = ({ comment, replyParentCommentID }) => {
 	const unlikeComment = async () => {
 		axios({
 			method: "DELETE",
-			url: `http://localhost:8080/unlike/comment/${comment_id}`,
+			url: `http://localhost:8080/comment/unlike/${comment_id}`,
 			headers: {
 				Authorization: `Bearer ${token}`,
 			},

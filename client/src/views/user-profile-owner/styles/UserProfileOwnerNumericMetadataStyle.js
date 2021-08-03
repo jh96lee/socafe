@@ -1,6 +1,6 @@
 import styled from "styled-components";
 
-export const UserProfileNumericMetadataStyle = styled.div`
+export const UserProfileOwnerNumericMetadataStyle = styled.div`
 	display: flex;
 	justify-content: space-evenly;
 
@@ -10,12 +10,17 @@ export const UserProfileNumericMetadataStyle = styled.div`
 	}
 `;
 
-export const UserProfileTotalsStyle = styled.div`
+export const UserProfileOwnerTotalsStyle = styled.div`
 	display: flex;
 	flex-direction: column;
 	align-items: center;
 
 	& > h3 {
 		color: var(--text-1);
+	}
+
+	& > span {
+		font-size: 1.4rem;
+		font-weight: 400;
 	}
 `;

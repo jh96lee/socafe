@@ -26,7 +26,7 @@ const usePostLike = (initialIsLiked, initialTotalLikes, postLikePostID) => {
 		: postTotalLikes;
 
 	const handlePostLikeOnClick = () => {
-		if (isPostLikeOnMainPost && mainPostID) {
+		if (mainPostID) {
 			dispatch(likeOrUnlikePost(postLikePostID));
 		} else if (!isPostLikeOnMainPost && !mainPostID) {
 			setIsPostLiked((prevState) => !prevState);

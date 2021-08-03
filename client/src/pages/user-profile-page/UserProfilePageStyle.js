@@ -4,7 +4,7 @@ import { PageStyle } from "../../styles";
 
 export const UserProfilePageStyle = styled(PageStyle)`
 	display: grid;
-	grid-template-columns: 35rem 1fr;
+	grid-template-columns: 37rem 1fr;
 	grid-auto-rows: min-content 1fr;
 	gap: 1.8rem 2.5rem;
 	width: 90%;
