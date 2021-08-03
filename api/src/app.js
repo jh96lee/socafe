@@ -2,14 +2,12 @@ const express = require("express");
 const cors = require("cors");
 const cookieParser = require("cookie-parser");
 const dotenv = require("dotenv");
+
 const userRouter = require("./routes/userRoute");
 const postRouter = require("./routes/postRoute");
 const fileRouter = require("./routes/fileRoute");
 const commentRouter = require("./routes/commentRoute");
-const likeRouter = require("./routes/likeRoute");
 const followRouter = require("./routes/followRoute");
-const storyRouter = require("./routes/storyRoute");
-const reactionRouter = require("./routes/reactionRoute");
 const topicRouter = require("./routes/topicRoute");
 
 module.exports = () => {
@@ -30,10 +28,7 @@ module.exports = () => {
 	app.use(postRouter);
 	app.use(fileRouter);
 	app.use(commentRouter);
-	app.use(likeRouter);
 	app.use(followRouter);
-	app.use(storyRouter);
-	app.use(reactionRouter);
 	app.use(topicRouter);
 
 	app.use(cookieParser);

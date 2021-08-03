@@ -1,7 +1,7 @@
 const pool = require("../pool");
 
 class PostRepo {
-	static async getPostBasicData(postID) {
+	static async getPostBasics(postID) {
 		const { rows } = await pool.queryToDatabase(
 			`
 			SELECT
@@ -16,7 +16,7 @@ class PostRepo {
 		return rows[0];
 	}
 
-	static async getPostImagesData(postID) {
+	static async getPostImages(postID) {
 		const { rows } = await pool.queryToDatabase(
 			`
             SELECT 
@@ -32,7 +32,7 @@ class PostRepo {
 		return rows;
 	}
 
-	static async getPostTopicsData(postID) {
+	static async getPostTopics(postID) {
 		const { rows } = await pool.queryToDatabase(
 			`
             SELECT
@@ -49,7 +49,7 @@ class PostRepo {
 		return rows;
 	}
 
-	static async getPostOwnerData(ownerID) {
+	static async getPostOwner(ownerID) {
 		const { rows } = await pool.queryToDatabase(
 			`
             SELECT
@@ -66,7 +66,7 @@ class PostRepo {
 		return rows[0];
 	}
 
-	static async getPostCaptionsData(postID) {
+	static async getPostCaptions(postID) {
 		const { rows } = await pool.queryToDatabase(
 			`
             SELECT
@@ -81,7 +81,7 @@ class PostRepo {
 		return rows;
 	}
 
-	static async getPostTaggedUsersData(postID) {
+	static async getPostTaggedUsers(postID) {
 		const { rows } = await pool.queryToDatabase(
 			`
             SELECT
@@ -100,7 +100,7 @@ class PostRepo {
 		return rows;
 	}
 
-	static async getPostTotalLikesData(postID) {
+	static async getPostTotalLikes(postID) {
 		const { rows } = await pool.queryToDatabase(
 			`
             SELECT
@@ -114,7 +114,7 @@ class PostRepo {
 		return rows[0].count;
 	}
 
-	static async getPostTotalCommentsData(postID) {
+	static async getPostTotalComments(postID) {
 		const { rows } = await pool.queryToDatabase(
 			`
             SELECT
@@ -128,7 +128,7 @@ class PostRepo {
 		return rows[0].count;
 	}
 
-	static async getPostIsLikedData(visitorID, postID) {
+	static async getPostIsLiked(visitorID, postID) {
 		const { rows } = await pool.queryToDatabase(
 			`
             SELECT
@@ -142,7 +142,7 @@ class PostRepo {
 		return rows[0] ? true : false;
 	}
 
-	static async getPostIsBookmarkedData(visitorID, postID) {
+	static async getPostIsBookmarked(visitorID, postID) {
 		const { rows } = await pool.queryToDatabase(
 			`
             SELECT

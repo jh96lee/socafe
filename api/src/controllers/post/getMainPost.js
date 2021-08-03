@@ -6,7 +6,7 @@ const getMainPost = async (req, res) => {
 	const visitorID = parseInt(req.params.visitorID);
 
 	try {
-		const postBasicData = await PostRepo.getPostBasicData(postID);
+		const postBasicData = await PostRepo.getPostBasics(postID);
 
 		if (!postBasicData) {
 			res.send({ post_id: null });
@@ -14,28 +14,23 @@ const getMainPost = async (req, res) => {
 			const { user_id, updated_at } = postBasicData;
 			const ownerID = user_id;
 
-			const postImagesData = await PostRepo.getPostImagesData(postID);
+			const postImagesData = await PostRepo.getPostImages(postID);
 
-			const postTopicsData = await PostRepo.getPostTopicsData(postID);
+			const postTopicsData = await PostRepo.getPostTopics(postID);
 
-			const postOwnerData = await PostRepo.getPostOwnerData(ownerID);
+			const postOwnerData = await PostRepo.getPostOwner(ownerID);
 
-			const postCaptionsData = await PostRepo.getPostCaptionsData(postID);
+			const postCaptionsData = await PostRepo.getPostCaptions(postID);
 
-			const postTaggedUsersData = await PostRepo.getPostTaggedUsersData(postID);
+			const postTaggedUsersData = await PostRepo.getPostTaggedUsers(postID);
 
-			const postTotalLikesData = await PostRepo.getPostTotalLikesData(postID);
+			const postTotalLikesData = await PostRepo.getPostTotalLikes(postID);
 
-			const postTotalCommentsData = await PostRepo.getPostTotalCommentsData(
-				postID
-			);
+			const postTotalCommentsData = await PostRepo.getPostTotalComments(postID);
 
-			const postIsLikedData = await PostRepo.getPostIsLikedData(
-				visitorID,
-				postID
-			);
+			const postIsLikedData = await PostRepo.getPostIsLiked(visitorID, postID);
 
-			const postIsBookmarkedData = await PostRepo.getPostIsBookmarkedData(
+			const postIsBookmarkedData = await PostRepo.getPostIsBookmarked(
 				visitorID,
 				postID
 			);

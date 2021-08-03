@@ -1,6 +1,5 @@
 const express = require("express");
 const authenticateToken = require("../middlewares/user/authenticateToken");
-const pool = require("../pool");
 
 const getTopics = require("../controllers/topic/getTopics");
 const getUserFollowingTopics = require("../controllers/topic/getUserFollowingTopics");

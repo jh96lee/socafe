@@ -5,6 +5,8 @@ const uploadPostComment = require("../controllers/comment/uploadPostComment");
 const getMyParentComments = require("../controllers/comment/getMyParentComments");
 const getOtherUsersParentComments = require("../controllers/comment/getOtherUsersParentComments");
 const getParentCommentReplies = require("../controllers/comment/getParentCommentReplies");
+const likeComment = require("../controllers/post/likeComment");
+const unlikeComment = require("../controllers/post/unlikeComment");
 
 const commentRouter = express.Router();
 
@@ -28,6 +30,14 @@ commentRouter.get(
 commentRouter.get(
 	"/comment/reply/:userID/:parentCommentID",
 	getParentCommentReplies
+);
+
+commentRouter.post("/comment/like/:commentID", authenticateToken, likeComment);
+
+commentRouter.delete(
+	"/comment/unlike/:commentID",
+	authenticateToken,
+	unlikeComment
 );
 
 module.exports = commentRouter;

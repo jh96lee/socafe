@@ -1,136 +1,70 @@
 const pool = require("../../pool");
 
+const PostRepo = require("../../repos/post-repo");
+
 const getHomeFeedPosts = async (req, res) => {
-	const userID = parseInt(req.query.userID);
-	const page = parseInt(req.query.page);
-	const pageSize = parseInt(req.query.pageSize);
+	const visitorID = parseInt(res.locals.userID);
 
-	const greaterThanIndex = page * pageSize - pageSize;
-	const lessThanIndex = page * pageSize + 1;
+	const homeFeedPostsArray = [];
 
-	// REVIEW: fetch the IDs' of posts that needs to be fetched
-	const { rows } = await pool.queryToDatabase(
-		`
-		SELECT
-		o.post_id AS id
-		FROM (
-			SELECT
-			posts.id AS post_id,
-			ROW_NUMBER() OVER (ORDER BY posts.created_at) AS index
-			FROM following
-			JOIN posts
-			ON following.leader_id = posts.user_id
-			WHERE follower_id=$1
-			ORDER BY posts.updated_at
-		) AS o
-		WHERE index > $2 AND index < $3
-		`,
-		[userID, greaterThanIndex, lessThanIndex]
-	);
-
-	const postIDsArray = rows.map((row) => parseInt(row.id));
-
-	const postsArray = [];
-
-	for (let postID of postIDsArray) {
-		const isLiked = await pool.queryToDatabase(
+	try {
+		const { rows } = await pool.queryToDatabase(
 			`
-			SELECT
-			id
-			FROM post_likes
-			WHERE user_id=$1 AND post_id=$2
-			`,
-			[userID, postID]
+            SELECT 
+            leader_id AS owner_id,
+            posts.id AS post_id,
+            ROW_NUMBER() OVER (ORDER BY posts.created_at DESC) AS index
+            FROM following 
+            JOIN posts
+            ON posts.user_id=leader_id
+            WHERE follower_id=$1;
+            `,
+			[visitorID]
 		);
 
-		const userData = await pool.queryToDatabase(
-			`
-			SELECT
-			users.id AS user_id,
-			posts.id AS post_id,
-			posts.updated_at AS created_at,
-			username,
-			full_name,
-			avatar_url
-			FROM posts
-			JOIN users
-			ON posts.user_id = users.id
-			WHERE posts.id=$1
-			`,
-			[postID]
-		);
+		for (let leaderPost of rows) {
+			const ownerID = parseInt(leaderPost.owner_id);
+			const postID = parseInt(leaderPost.post_id);
 
-		const imageData = await pool.queryToDatabase(
-			`
-			SELECT
-			image_url,
-			image_width AS width,
-			image_height AS height
-			FROM posts
-			JOIN post_images
-			ON posts.id = post_images.post_id
-			JOIN (
-				SELECT
-				COUNT(*) AS total_images,
-				posts.id AS post_id
-				FROM posts
-				JOIN post_images
-				ON posts.id = post_images.post_id
-				GROUP BY posts.id
-			) AS o
-			ON posts.id = o.post_id
-			WHERE posts.id=$1
-			ORDER BY posts.created_at 
-			`,
-			[postID]
-		);
+			const postImagesData = await PostRepo.getPostImages(postID);
 
-		const postContentData = await pool.queryToDatabase(
-			`
-			SELECT
-			content_type,
-			content
-			FROM posts
-			JOIN post_contents
-			ON posts.id = post_contents.post_id
-			WHERE posts.id=$1
-			`,
-			[postID]
-		);
+			const postOwnerData = await PostRepo.getPostOwner(ownerID);
 
-		const totalPostLikesData = await pool.queryToDatabase(
-			`
-			SELECT 
-			COUNT(*)
-			FROM post_likes
-			WHERE post_id=$1;
-			`,
-			[postID]
-		);
+			const postCaptionsData = await PostRepo.getPostCaptions(postID);
 
-		const totalPostCommentsData = await pool.queryToDatabase(
-			`
-			SELECT 
-			COUNT(*) 
-			FROM comments 
-			WHERE post_id=$1;
-			`,
-			[postID]
-		);
+			const postTotalLikesData = await PostRepo.getPostTotalLikes(postID);
 
-		postsArray.push({
-			post_id: postID,
-			user: userData.rows[0],
-			isLiked: isLiked.rows[0] ? true : false,
-			images: [...imageData.rows],
-			// REVIEW: property content is singular because we only want 1 block of content
-			content: postContentData.rows[0],
-			totalLikes: parseInt(totalPostLikesData.rows[0].count),
-			totalComments: parseInt(totalPostCommentsData.rows[0].count),
+			const postTotalCommentsData = await PostRepo.getPostTotalComments(postID);
+
+			const postIsLikedData = await PostRepo.getPostIsLiked(visitorID, postID);
+
+			const postIsBookmarkedData = await PostRepo.getPostIsBookmarked(
+				visitorID,
+				postID
+			);
+
+			homeFeedPostsArray.push({
+				post_id: postID,
+				post_owner: postOwnerData,
+				post_images: postImagesData,
+				post_captions: postCaptionsData,
+				post_total_likes: postTotalLikesData,
+				post_total_comments: postTotalCommentsData,
+				post_is_liked: postIsLikedData,
+				post_is_bookmarked: postIsBookmarkedData,
+			});
+		}
+
+		res.send({
+			home_feed_posts: homeFeedPostsArray,
+		});
+	} catch (error) {
+		res.send({
+			error: {
+				catch: "There has been an error while fetching data for your home feed",
+			},
 		});
 	}
-
-	res.send(postsArray);
 };
 
 module.exports = getHomeFeedPosts;

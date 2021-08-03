@@ -1,23 +1,12 @@
-const pool = require("../../pool");
+const UserRepo = require("../../repos/user-repo");
 
 const searchUser = async (req, res) => {
 	const { searchInput } = req.body;
 
-	const like = `%${searchInput}%`;
-
 	try {
-		const { rows } = await pool.queryToDatabase(
-			`
-			SELECT 
-			id, full_name, username, avatar_url FROM 
-			users 
-			WHERE 
-			LOWER(username) LIKE $1
-			`,
-			[like]
-		);
+		const searchedUsers = await UserRepo.searchUsersByUsername(searchInput);
 
-		res.send(rows);
+		res.send(searchedUsers);
 	} catch (error) {
 		res.send({
 			error: {

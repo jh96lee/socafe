@@ -3,20 +3,13 @@ const bcrypt = require("bcryptjs");
 
 const generateAndSendToken = require("../../utils/generateAndSendToken");
 
+const UserRepo = require("../../repos/user-repo");
+
 const loginUser = async (req, res) => {
 	const { email, password } = req.body;
 
 	try {
-		const { rows } = await pool.queryToDatabase(
-			`
-			SELECT id, full_name, username, avatar_url, password 
-			FROM users
-			WHERE email=$1;
-			`,
-			[email]
-		);
-
-		const user = rows[0];
+		const user = await UserRepo.getUserByEmail(email);
 
 		if (user) {
 			// REVIEW: the result variable is either true or false
