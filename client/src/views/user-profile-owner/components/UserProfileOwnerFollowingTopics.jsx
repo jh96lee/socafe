@@ -13,12 +13,12 @@ const UserProfileOwnerFollowingTopics = () => {
 
 	return (
 		<UserProfileOwnerFollowingTopicsStyle>
-			{profileOwner.user_profile_following_topics_array.map((topic) => {
+			{profileOwner.profile_following_topics_array.map((topic) => {
 				return (
-					<UserProfileOwnerFollowingTopicStyle key={topic.topic_id}>
+					<UserProfileOwnerFollowingTopicStyle key={topic.id}>
 						<img src={topic.topic_url} alt="topic thumbnail" />
 
-						<span>{topic.title}</span>
+						<p>{topic.title}</p>
 					</UserProfileOwnerFollowingTopicStyle>
 				);
 			})}

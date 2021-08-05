@@ -20,19 +20,19 @@ const UserProfileOwnerBody = () => {
 		<UserProfileOwnerBodyStyle>
 			<Avatar
 				avatarURL={profileOwner.avatar_url}
-				avatarSize="15rem"
+				avatarSize="13rem"
 				avatarOnClick={null}
 				isAvatarBubblePresent={false}
 			/>
 
 			<UserProfileOwnerUserNamesMetadataStyle>
-				<h5>{profileOwner.full_name}</h5>
+				<h4>{profileOwner.full_name}</h4>
 
 				<span>@{profileOwner.username}</span>
 			</UserProfileOwnerUserNamesMetadataStyle>
 
 			<TextArea
-				textAreaNodesArray={profileOwner.user_profile_bio_nodes_array}
+				textAreaNodesArray={profileOwner.profile_bio_nodes_array}
 				charactersLimit={100}
 			/>
 

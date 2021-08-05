@@ -9,8 +9,8 @@ export { default as useSearchAndSelectReact } from "./search-and-select/useSearc
 export { default as useSearchAndSelectRedux } from "./search-and-select/useSearchAndSelectRedux";
 
 export { default as useTextEditor } from "./text-editor/useTextEditor";
-export { default as useTextEditorRedux } from "./text-editor/useTextEditorRedux";
-export { default as useTextEditorReact } from "./text-editor/useTextEditorReact";
 
 export { default as useSaveDraft } from "./post/useSaveDraft";
 export { default as usePostCommentsDisplay } from "./post/usePostCommentsDisplay";
+
+export { default as useUploadOrDeleteImage } from "./image/useUploadOrDeleteImage";

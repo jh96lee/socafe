@@ -3,7 +3,9 @@ const initialState = {
 	isMainPostLiked: null,
 	mainPostTotalLikes: null,
 	isMainPostBookmarked: null,
+	mainPost: {},
 	isMainPostLoaded: false,
+	mainPostErrorMessage: null,
 };
 
 const mainPostReducer = (state = initialState, action) => {
@@ -22,6 +24,11 @@ const mainPostReducer = (state = initialState, action) => {
 			return {
 				...state,
 				isMainPostLoaded: true,
+			};
+		case "SET_MAIN_POST_ERROR_MESSAGE":
+			return {
+				...state,
+				mainPostErrorMessage: action.payload,
 			};
 		case "SET_IS_MAIN_POST_LIKED":
 			return {

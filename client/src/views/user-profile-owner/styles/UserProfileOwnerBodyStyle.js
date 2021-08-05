@@ -4,7 +4,7 @@ export const UserProfileOwnerBodyStyle = styled.div`
 	display: grid;
 	grid-template-columns: min-content 1fr;
 	width: 100%;
-	gap: 2rem 0;
+	gap: 2.8rem 0;
 	padding: 0 2rem 2rem 2rem;
 
 	& > *:empty {
@@ -13,7 +13,7 @@ export const UserProfileOwnerBodyStyle = styled.div`
 
 	& > *:nth-child(1) {
 		justify-self: start;
-		margin-top: -8rem;
+		margin-top: -6.5rem;
 	}
 
 	& > *:nth-child(2) {
@@ -25,6 +25,10 @@ export const UserProfileOwnerBodyStyle = styled.div`
 	& > *:nth-child(5),
 	& > *:nth-child(6) {
 		grid-column: 1 / 4;
+	}
+
+	& > *:nth-child(6) {
+		margin-top: 0.7rem;
 	}
 
 	@media (max-width: 800px) {
@@ -66,9 +70,9 @@ export const UserProfileOwnerUserNamesMetadataStyle = styled.div`
 	display: flex;
 	flex-direction: column;
 
-	& > h5 {
+	& > h4 {
 		color: var(--text-1);
-		font-size: 1.7rem;
 		font-weight: 600;
+		letter-spacing: -0.9px;
 	}
 `;

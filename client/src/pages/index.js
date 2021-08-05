@@ -7,3 +7,5 @@ export { default as UserProfilePage } from "./user-profile-page/UserProfilePage"
 export { default as UserLoginPage } from "./user-login-page/UserLoginPage";
 
 export { default as UserRegisterPage } from "./user-register-page/UserRegisterPage";
+
+export { default as EditProfilePage } from "./edit-profile-page/EditProfilePage";

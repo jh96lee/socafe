@@ -1,8 +1,5 @@
 import axios from "axios";
 
-import { setPostImagesErrorMessage } from "../post-images/postImagesAction";
-import { setPostTopicsErrorMessage } from "../post-topics/postTopicsAction";
-
 import { fetchToken } from "../../../utils/cookie/fetchToken";
 import { removeTailEndBreakingPoints } from "../../../utils/text-editor/removeTailEndBreakingPoints";
 
@@ -32,14 +29,6 @@ const setPostUploadErrorMessage = (message) => ({
 export const uploadPost =
 	(postImagesArray, postTopicsArray, postTaggedUsersArray, postNodesArray) =>
 	async (dispatch) => {
-		if (postImagesArray.length === 0) {
-			dispatch(setPostImagesErrorMessage("At least 1 image must be uploaded"));
-		}
-
-		if (postTopicsArray.length === 0) {
-			dispatch(setPostTopicsErrorMessage("At least 1 topic must be selected"));
-		}
-
 		if (postImagesArray.length > 0 && postTopicsArray.length > 0) {
 			dispatch(startUploadingPost());
 

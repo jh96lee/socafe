@@ -25,8 +25,12 @@ import postUploadReducer from "./add-post/post-upload/postUploadReducer";
 import userProfileOwnerReducer from "./user-profile/user-profile-owner/userProfileOwnerReducer";
 import userProfilePostsReducer from "./user-profile/user-profile-posts/userProfilePostsReducer";
 
+import editProfileReducer from "./edit-profile/editProfileReducer";
+
 const rootReducer = combineReducers({
 	userReducer,
+
+	editProfileReducer,
 
 	homeFeedPostsReducer,
 

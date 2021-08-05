@@ -18,6 +18,11 @@ const endFetchingMainPost = () => ({
 	type: "END_FETCHING_MAIN_POST",
 });
 
+const setMainPostErrorMessage = (errorMessage) => ({
+	type: "SET_MAIN_POST_ERROR_MESSAGE",
+	payload: errorMessage,
+});
+
 export const setIsMainPostLiked = () => ({
 	type: "SET_IS_MAIN_POST_LIKED",
 });
@@ -60,6 +65,8 @@ export const fetchMainPost = (postID, visitorID) => async (dispatch) => {
 		} = data;
 
 		if (error) {
+			dispatch(setMainPostErrorMessage(error));
+
 			dispatch(endFetchingMainPost());
 		} else {
 			dispatch(setMainPostTotalLikes(post_total_likes));
@@ -67,16 +74,18 @@ export const fetchMainPost = (postID, visitorID) => async (dispatch) => {
 			dispatch(
 				fetchedMainPost({
 					mainPostID: post_id,
-					mainPostDate: post_date,
-					mainPostOwner: post_owner,
-					mainPostImages: post_images,
-					mainPostCaptions: post_captions,
-					mainPostTopics: post_topics,
-					mainPostTaggedUsers: post_tagged_users,
 					isMainPostLiked: post_is_liked,
-					isMainPostBookmarked: post_is_bookmarked,
 					mainPostTotalLikes: post_total_likes,
-					mainPostTotalComments: post_total_comments,
+					isMainPostBookmarked: post_is_bookmarked,
+					mainPost: {
+						post_date,
+						post_owner,
+						post_images,
+						post_captions,
+						post_topics,
+						post_tagged_users,
+						post_total_comments,
+					},
 				})
 			);
 

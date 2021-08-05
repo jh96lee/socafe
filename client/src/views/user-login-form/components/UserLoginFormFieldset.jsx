@@ -39,7 +39,8 @@ const UserLoginFormFieldset = () => {
 
 				<Message
 					errorMessage={
-						userLoginFormErrorMessage && userLoginFormErrorMessage.email
+						(userLoginFormErrorMessage && userLoginFormErrorMessage.email) ||
+						(userLoginFormErrorMessage && userLoginFormErrorMessage.login)
 					}
 				/>
 			</FormInputAndMessageWrapperStyle>
@@ -56,7 +57,8 @@ const UserLoginFormFieldset = () => {
 
 				<Message
 					errorMessage={
-						userLoginFormErrorMessage && userLoginFormErrorMessage.password
+						(userLoginFormErrorMessage && userLoginFormErrorMessage.password) ||
+						(userLoginFormErrorMessage && userLoginFormErrorMessage.login)
 					}
 				/>
 			</FormInputAndMessageWrapperStyle>

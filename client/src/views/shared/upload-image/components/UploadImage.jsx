@@ -8,9 +8,8 @@ import { UploadImageStyle } from "../styles/UploadImageStyle";
 
 const UploadImages = ({
 	uploadedImagesArray,
-	uploadImageAction,
-	deleteImageAction,
-	contentAdditionErrorMessageAction,
+	handleUploadImageButtonOnChange,
+	handleUploadedImageRemoveIconOnClick,
 	isImageUploading,
 	isImageDeleting,
 }) => {
@@ -24,16 +23,16 @@ const UploadImages = ({
 						<UploadedImage
 							key={image.id}
 							uploadedImage={image}
-							deleteImageAction={deleteImageAction}
+							handleUploadedImageRemoveIconOnClick={
+								handleUploadedImageRemoveIconOnClick
+							}
 						/>
 					);
 				})
 			)}
 
 			<UploadImageButton
-				uploadedImagesArray={uploadedImagesArray}
-				uploadImageAction={uploadImageAction}
-				contentAdditionErrorMessageAction={contentAdditionErrorMessageAction}
+				handleUploadImageButtonOnChange={handleUploadImageButtonOnChange}
 			/>
 		</UploadImageStyle>
 	);

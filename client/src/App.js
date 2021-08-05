@@ -11,6 +11,7 @@ import {
 	UserProfilePage,
 	UserLoginPage,
 	UserRegisterPage,
+	EditProfilePage,
 } from "./pages";
 import { AddPostIcon } from "./views/shared";
 import { MainPost } from "./views/main-post";
@@ -55,7 +56,9 @@ function App() {
 				{!isAddIncludedInPathname && (
 					<Navigation isResponsiveNavigationOpen={isResponsiveNavigationOpen} />
 				)}
+
 				{/* {user && <AddPostIcon />} */}
+
 				<Switch location={overlaidComponentLocation || appLocation}>
 					<Route exact path="/">
 						<HomePage />
@@ -80,6 +83,10 @@ function App() {
 
 					<Route exact path="/add/post">
 						{user ? <AddPostPage /> : <Redirect to="/login" />}
+					</Route>
+
+					<Route exact path="/edit/profile">
+						{user ? <EditProfilePage /> : <Redirect to="/login" />}
 					</Route>
 				</Switch>
 

@@ -37,14 +37,16 @@ const PostImages = ({ postImagesArray }) => {
 	return (
 		<PostImagesStyle>
 			<PostMainImageStyle
-				src={postImagesArray[currentImageIndex].url}
+				src={postImagesArray[currentImageIndex].image_url}
 				isImageTall={
-					postImagesArray[currentImageIndex].height >
-					postImagesArray[currentImageIndex].width
+					postImagesArray[currentImageIndex].image_height >
+					postImagesArray[currentImageIndex].image_width
 				}
 			/>
 
-			<PostOverlayImageStyle src={postImagesArray[currentImageIndex].url} />
+			<PostOverlayImageStyle
+				src={postImagesArray[currentImageIndex].image_url}
+			/>
 
 			{postImagesArray.length !== 0 && (
 				<PostImagesDirectionsStyle>

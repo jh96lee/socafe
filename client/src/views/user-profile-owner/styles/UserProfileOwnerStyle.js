@@ -9,7 +9,6 @@ export const UserProfileOwnerStyle = styled.div`
 	height: fit-content;
 	border-radius: 1rem;
 	overflow: hidden;
-	background-color: var(--input-default-bg-color);
 	background-color: var(--bg-2);
 	border: 1px solid var(--input-default-separator-color);
 

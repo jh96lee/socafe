@@ -30,7 +30,7 @@ const AddPostForm = () => {
 	);
 	const { postTopicsArray } = useSelector((state) => state.postTopicsReducer);
 	const { postUsersArray } = useSelector((state) => state.postUsersReducer);
-	const { postCaptionsNodesArray } = useSelector(
+	const { postCaptionsNodesArray, postCaptionsErrorMessage } = useSelector(
 		(state) => state.postCaptionsReducer
 	);
 
@@ -62,7 +62,9 @@ const AddPostForm = () => {
 			<AddContentButtonWrapperStyle>
 				<Button
 					disabled={
-						uploadedPostImagesArray.length === 0 || postTopicsArray.length === 0
+						uploadedPostImagesArray.length === 0 ||
+						postTopicsArray.length === 0 ||
+						postCaptionsErrorMessage
 					}
 					success={postUploadSuccessMessage}
 					onClick={() => {

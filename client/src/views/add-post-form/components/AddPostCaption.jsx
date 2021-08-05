@@ -8,12 +8,12 @@ import {
 	setPostCaptionsErrorMessage,
 } from "../../../redux/add-post/post-captions/postCaptionsAction";
 
-import { useSaveDraft, useTextEditorRedux } from "../../../hooks";
+import { useSaveDraft, useTextEditor } from "../../../hooks";
 
 import { AddContentStyle } from "../../../styles";
 
 const AddPostCaption = () => {
-	const { textEditorOnChangeLogic } = useTextEditorRedux(
+	const { textEditorOnChangeLogic } = useTextEditor(
 		1000,
 		setPostCaptionsNodesArray,
 		setPostCaptionsErrorMessage
@@ -29,7 +29,11 @@ const AddPostCaption = () => {
 		<AddContentStyle>
 			<h3>Caption</h3>
 
-			<Message errorMessage={postCaptionsErrorMessage} />
+			<Message
+				errorMessage={
+					postCaptionsErrorMessage && postCaptionsErrorMessage.textEditor
+				}
+			/>
 
 			<TextEditor textEditorOnChangeLogic={textEditorOnChangeLogic} />
 		</AddContentStyle>

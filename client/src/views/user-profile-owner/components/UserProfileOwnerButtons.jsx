@@ -28,7 +28,7 @@ const UserProfileButtons = () => {
 
 	const afterInitialMount = React.useRef();
 
-	const handleFollowButtonOnClick = async () => {
+	const handleFollowButtonOnClick = () => {
 		dispatch(setIsVisitorFollowingProfileOwner());
 	};
 

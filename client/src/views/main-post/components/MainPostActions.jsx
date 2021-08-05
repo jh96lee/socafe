@@ -15,8 +15,8 @@ const MainPostActions = () => {
 		mainPostID,
 		isMainPostLiked,
 		mainPostTotalLikes,
-		mainPostTotalComments,
 		isMainPostBookmarked,
+		mainPost,
 	} = useSelector((state) => state.mainPostReducer);
 
 	return (
@@ -38,7 +38,7 @@ const MainPostActions = () => {
 					<CommentOutline />
 				</IconElement>
 
-				<h5>{mainPostTotalComments}</h5>
+				<h5>{mainPost.post_total_comments}</h5>
 			</PostActionStyle>
 
 			<PostBookmark

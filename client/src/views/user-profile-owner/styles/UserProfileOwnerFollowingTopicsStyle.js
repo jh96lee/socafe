@@ -4,7 +4,7 @@ export const UserProfileOwnerFollowingTopicsStyle = styled.div`
 	display: grid;
 	grid-template-columns: repeat(auto-fit, minmax(75px, 1fr));
 	justify-content: center;
-	gap: 1.5rem;
+	gap: 2.2rem 1.5rem;
 `;
 
 export const UserProfileOwnerFollowingTopicStyle = styled.div`
@@ -22,8 +22,8 @@ export const UserProfileOwnerFollowingTopicStyle = styled.div`
 		border: 2px solid var(--input-default-separator-color);
 	}
 
-	& > span {
-		font-weight: 400;
+	& > p {
+		color: var(--text-1);
 	}
 
 	&:hover {

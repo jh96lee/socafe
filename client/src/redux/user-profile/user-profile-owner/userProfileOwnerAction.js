@@ -15,6 +15,11 @@ const endFetchingProfileOwner = () => ({
 	type: "END_FETCHING_PROFILE_OWNER",
 });
 
+const setProfileOwnerErrorMessage = (errorMessage) => ({
+	type: "SET_PROFILE_OWNER_ERROR_MESSAGE",
+	payload: errorMessage,
+});
+
 export const setIsVisitorFollowingProfileOwner = () => ({
 	type: "SET_IS_VISITOR_FOLLOWING_PROFILE_OWNER",
 });
@@ -36,29 +41,33 @@ export const decrementProfileOwnerTotalFollowings = () => ({
 });
 
 export const fetchProfileOwner =
-	(leaderUsername, visitorID) => async (dispatch) => {
+	(ownerUsername, visitorID) => async (dispatch) => {
 		dispatch(startFetchingProfileOwner());
 
 		const { data } = await axios({
 			method: "GET",
-			url: `http://localhost:8080/profile/user/${leaderUsername}/${visitorID}`,
+			url: `http://localhost:8080/profile/user/${ownerUsername}/${visitorID}`,
 		});
+
+		console.log(data);
 
 		const {
 			id,
-			avatar_url,
 			username,
 			full_name,
-			user_profile_bio_nodes_array,
-			user_profile_following_topics_array,
-			user_profile_is_following,
-			user_profile_total_followers,
-			user_profile_total_followings,
-			user_profile_total_posts,
+			avatar_url,
+			profile_bio_nodes_array,
+			profile_following_topics_array,
+			profile_is_following,
+			profile_total_followers,
+			profile_total_followings,
+			profile_total_posts,
 			error,
 		} = data;
 
 		if (error) {
+			dispatch(setProfileOwnerErrorMessage(error));
+
 			dispatch(endFetchingProfileOwner());
 		} else {
 			dispatch(
@@ -68,13 +77,13 @@ export const fetchProfileOwner =
 						avatar_url,
 						username,
 						full_name,
-						user_profile_bio_nodes_array,
-						user_profile_following_topics_array,
-						user_profile_total_posts,
+						profile_bio_nodes_array,
+						profile_following_topics_array,
+						profile_total_posts,
 					},
-					profileOwnerTotalFollowers: user_profile_total_followers,
-					profileOwnerTotalFollowings: user_profile_total_followings,
-					isVisitorFollowingProfileOwner: user_profile_is_following,
+					profileOwnerTotalFollowers: profile_total_followers,
+					profileOwnerTotalFollowings: profile_total_followings,
+					isVisitorFollowingProfileOwner: profile_is_following,
 				})
 			);
 

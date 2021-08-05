@@ -13,8 +13,6 @@ import {
 	ExploreOutline,
 	NotificationFilled,
 	NotificationOutline,
-	MarketplaceFilled,
-	MarketplaceOutline,
 	FeedbackFilled,
 	FeedbackOutline,
 } from "../../../assets";
@@ -68,18 +66,6 @@ const Navigation = ({ isResponsiveNavigationOpen }) => {
 					<ExploreOutline id="outline" />
 				</IconElement>
 				<span>Explore</span>
-			</NavLink>
-
-			<NavLink exact to="/marketplace">
-				<IconElement
-					iconRole={iconRole}
-					iconElementStyleObject={iconElementStyleObject}
-				>
-					<MarketplaceFilled id="filled" />
-
-					<MarketplaceOutline id="outline" />
-				</IconElement>
-				<span>Marketplace</span>
 			</NavLink>
 
 			<NavLink exact to="/feedback">

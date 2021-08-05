@@ -8,7 +8,7 @@ import "react-quill/dist/quill.snow.css";
 const TextEditor = ({ textEditorOnChangeLogic }) => {
 	const reactQuillRef = React.useRef();
 
-	const handleOnChange = () => {
+	const handleTextEditorOnChange = () => {
 		const reactQuillChildNodesArray = Array.from(
 			reactQuillRef.current.editor.root.childNodes
 		);
@@ -25,7 +25,11 @@ const TextEditor = ({ textEditorOnChangeLogic }) => {
 
 	return (
 		<TextEditorStyle>
-			<ReactQuill ref={reactQuillRef} onChange={handleOnChange} formats={[]} />
+			<ReactQuill
+				ref={reactQuillRef}
+				onChange={handleTextEditorOnChange}
+				formats={[]}
+			/>
 		</TextEditorStyle>
 	);
 };

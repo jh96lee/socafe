@@ -16,7 +16,7 @@ const UserProfileOwnerNumericMetadata = () => {
 	return (
 		<UserProfileOwnerNumericMetadataStyle>
 			<UserProfileOwnerTotalsStyle>
-				<h3>{profileOwner.user_profile_total_posts}</h3>
+				<h3>{profileOwner.profile_total_posts}</h3>
 
 				<span>posts</span>
 			</UserProfileOwnerTotalsStyle>

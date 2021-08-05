@@ -1,13 +1,13 @@
 import * as React from "react";
 import { useDispatch } from "react-redux";
 
-import { calculateTotalCharacters } from "../../utils/text-editor/calculateTotalCharacters";
+import { calculateTotalCharacters } from "../../utils/text-area/calculateTotalCharacters";
 
 export const useTextEditor = (
-	maxCharacterLength,
-	setStateMethod,
-	setStateNodesArrayAction,
-	setStateErrorMessage
+	maxCharactersLength,
+	setStateTextEditorNodesArrayAction,
+	setStateTextEditorErrorMessagesAction,
+	setStateMethod = "redux"
 ) => {
 	const [textEditorNodesArray, setTextEditorNodesArray] = React.useState([]);
 	const [textEditorErrorMessage, setTextEditorErrorMessage] =
@@ -16,24 +16,24 @@ export const useTextEditor = (
 	const dispatch = useDispatch();
 
 	const textEditorOnChangeLogic = (nodesArray) => {
-		const totalCharacters = calculateTotalCharacters(nodesArray);
+		const textEditorTotalCharacters = calculateTotalCharacters(nodesArray);
 
-		if (totalCharacters > maxCharacterLength) {
-			const errorMessage = `Your input must be ${maxCharacterLength} characters or fewer`;
+		if (textEditorTotalCharacters > maxCharactersLength) {
+			const errorMessage = {
+				textEditor: `Your input must be ${maxCharactersLength} characters or fewer`,
+			};
 
 			setStateMethod === "redux"
-				? dispatch(setStateErrorMessage(errorMessage))
+				? dispatch(setStateTextEditorErrorMessagesAction(errorMessage))
 				: setTextEditorErrorMessage(errorMessage);
 		} else {
-			if (setStateMethod === "redux") {
-				dispatch(setStateNodesArrayAction(nodesArray));
+			setStateMethod === "redux"
+				? dispatch(setStateTextEditorErrorMessagesAction(null))
+				: setTextEditorErrorMessage(null);
 
-				dispatch(setStateErrorMessage(null));
-			} else {
-				setTextEditorNodesArray(nodesArray);
-
-				setTextEditorErrorMessage(null);
-			}
+			setStateMethod === "redux"
+				? dispatch(setStateTextEditorNodesArrayAction(nodesArray))
+				: setTextEditorNodesArray(nodesArray);
 		}
 	};
 

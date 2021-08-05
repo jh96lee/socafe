@@ -28,7 +28,7 @@ const SearchbarInput = ({ searchType }) => {
 			content: result,
 			onClickEventHandler: () => {
 				history.push(
-					`/${searchType === "Users" ? "user" : "product"}/${result.id}`
+					`/${searchType === "Users" ? "user" : "product"}/${result.username}`
 				);
 			},
 		};

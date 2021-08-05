@@ -4,6 +4,7 @@ const initialState = {
 	profileOwnerTotalFollowings: null,
 	isVisitorFollowingProfileOwner: null,
 	isProfileOwnerLoaded: false,
+	profileOwnerErrorMessage: null,
 };
 
 const userProfileReducer = (state = initialState, action) => {
@@ -23,10 +24,15 @@ const userProfileReducer = (state = initialState, action) => {
 				...state,
 				isProfileOwnerLoaded: true,
 			};
+		case "SET_PROFILE_OWNER_ERROR_MESSAGE":
+			return {
+				...state,
+				profileOwnerErrorMessage: action.payload,
+			};
 		case "SET_IS_VISITOR_FOLLOWING_PROFILE_OWNER":
 			return {
 				...state,
-				isVisitorFollowingProfileOwner: !state.isVisitorFollowing,
+				isVisitorFollowingProfileOwner: !state.isVisitorFollowingProfileOwner,
 			};
 		case "INCREMENT_PROFILE_OWNER_TOTAL_FOLLOWERS":
 			return {

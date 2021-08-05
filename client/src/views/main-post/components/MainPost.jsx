@@ -42,15 +42,8 @@ const MainPost = () => {
 
 	const history = useHistory();
 
-	const {
-		isMainPostLoaded,
-		mainPostID,
-		mainPostOwner,
-		mainPostImages,
-		mainPostTopics,
-		mainPostCaptions,
-		mainPostTaggedUsers,
-	} = useSelector((state) => state.mainPostReducer);
+	const { isMainPostLoaded, mainPostID, mainPost, mainPostErrorMessage } =
+		useSelector((state) => state.mainPostReducer);
 
 	React.useEffect(() => {
 		dispatch(fetchMainPost(postID, visitorID));
@@ -71,7 +64,7 @@ const MainPost = () => {
 		>
 			{!isMainPostLoaded ? (
 				<Loader />
-			) : !mainPostID ? (
+			) : mainPostErrorMessage ? (
 				<h1 style={{ color: "#fff" }}>Post does not exist</h1>
 			) : (
 				<React.Fragment>
@@ -94,17 +87,19 @@ const MainPost = () => {
 							</IconElement>
 						)}
 
-						<PostImages postImagesArray={mainPostImages} />
+						<PostImages postImagesArray={mainPost.post_images} />
 
-						<PostTaggedUsers postTaggedUsersArray={mainPostTaggedUsers} />
+						<PostTaggedUsers
+							postTaggedUsersArray={mainPost.post_tagged_users}
+						/>
 					</PostMainStyle>
 
 					{/* REVIEW: 2nd child */}
 					<UserMetadata
-						userID={mainPostOwner.id}
-						avatarURL={mainPostOwner.avatar_url}
-						username={mainPostOwner.username}
-						fullName={mainPostOwner.full_name}
+						userID={mainPost.post_owner.id}
+						avatarURL={mainPost.post_owner.avatar_url}
+						username={mainPost.post_owner.username}
+						fullName={mainPost.post_owner.full_name}
 						avatarSize="4.5rem"
 						usernameFontSize="1.4rem"
 						fullNameFontSize="1.3rem"
@@ -116,9 +111,12 @@ const MainPost = () => {
 
 					{/* REVIEW: 4th child */}
 					<MainPostOverflowStyle>
-						<TextArea textAreaNodesArray={mainPostCaptions} />
+						<TextArea
+							textAreaNodesArray={mainPost.post_captions}
+							charactersLimit={350}
+						/>
 
-						<PostTopics postTopicsArray={mainPostTopics} />
+						<PostTopics postTopicsArray={mainPost.post_topics} />
 
 						<MainPostComments />
 					</MainPostOverflowStyle>
