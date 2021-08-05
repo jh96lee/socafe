@@ -4,6 +4,7 @@ const deleteImage = async (req, res) => {
 	await uploader.destroy(req.body.id, (result, error) => {
 		if (result) {
 			res.send({
+				id: req.body.id,
 				success: "Your image has been deleted successfully",
 			});
 		} else if (error) {

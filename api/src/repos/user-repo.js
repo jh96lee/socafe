@@ -1,41 +1,106 @@
 const pool = require("../pool");
 
 class UserRepo {
-	// TODO: postUserBasics
-	static async postUserBasics(
-		fullName,
-		email,
-		username,
-		password,
-		defaultAvatarURL
-	) {
+	// REVIEW: getUserByID
+	static async getUserByID(userID) {
 		const { rows } = await pool.queryToDatabase(
 			`
-            INSERT INTO users
-			(full_name, email, username, password, avatar_url)
-            VALUES($1, $2, $3, $4, $5)
-            RETURNING id, full_name, username, avatar_url;
-            `,
-			[fullName, email, username, password, defaultAvatarURL]
+			SELECT
+			users.id AS id,
+			users.created_at AS created_at,
+			username,
+			full_name,
+			email,
+			avatar_url
+			FROM users
+			JOIN user_avatars
+			ON users.id=user_avatars.user_id
+			WHERE users.id=$1;
+			`,
+			[userID]
 		);
 
 		return rows[0];
 	}
 
-	// TODO: getUserByEmail
-	static async getUserByEmail(email) {
+	// REVIEW: getUserByUsername
+	static async getUserByUsername(username) {
 		const { rows } = await pool.queryToDatabase(
 			`
-			SELECT 
-			id, 
-			full_name, 
-			username, 
-			avatar_url, 
-			password 
+			SELECT
+			users.id AS id,
+			users.created_at AS created_at,
+			username,
+			full_name,
+			email,
+			avatar_url
 			FROM users
-			WHERE email=$1;
+			JOIN user_avatars
+			ON users.id=user_avatars.user_id
+			WHERE users.username=$1;
+			`,
+			[username]
+		);
+
+		return rows[0];
+	}
+
+	// REVIEW: getUserPassword
+	static async getUserPassword(email) {
+		const { rows } = await pool.queryToDatabase(
+			`
+			SELECT
+			users.id AS id,
+			users.created_at AS created_at,
+			username,
+			full_name,
+			email,
+			avatar_url,
+			password
+			FROM users
+			JOIN user_avatars
+			ON users.id=user_avatars.user_id
+			WHERE users.email=$1;
 			`,
 			[email]
+		);
+
+		return rows[0];
+	}
+
+	// REVIEW: insertUser
+	static async insertUser(fullName, email, username, password) {
+		const { rows } = await pool.queryToDatabase(
+			`
+            INSERT INTO users
+			(full_name, email, username, password)
+            VALUES ($1, $2, $3, $4)
+            RETURNING id, full_name, username;
+            `,
+			[fullName, email, username, password]
+		);
+
+		return rows[0];
+	}
+
+	// REVIEW: insertUser
+	static async insertDefaultAvatar(userID) {
+		const { rows } = await pool.queryToDatabase(
+			`
+			INSERT INTO user_avatars
+			(image_public_id, avatar_url, user_id)
+			VALUES ($1, $2, $3)
+			RETURNING 
+			id,
+			image_public_id,
+			avatar_url,
+			user_id
+			`,
+			[
+				"avatar_default",
+				"https://res.cloudinary.com/fullstackprojectcloud/image/upload/v1628146457/avatar_default.png",
+				userID,
+			]
 		);
 
 		return rows[0];
@@ -61,26 +126,8 @@ class UserRepo {
 		return rows;
 	}
 
-	// TODO: getProfileOwnerBasics
-	static async getProfileOwnerBasics(ownerUsername) {
-		const { rows } = await pool.queryToDatabase(
-			`
-            SELECT
-			id,
-			username,
-			full_name,
-			avatar_url
-			FROM users
-			WHERE username=$1;
-            `,
-			[ownerUsername]
-		);
-
-		return rows[0];
-	}
-
-	// TODO: getProfileOwnerTotalPosts
-	static async getProfileOwnerTotalPosts(ownerID) {
+	// REVIEW: getProfileTotalPosts
+	static async getProfileTotalPosts(ownerID) {
 		const { rows } = await pool.queryToDatabase(
 			`
             SELECT
@@ -94,8 +141,8 @@ class UserRepo {
 		return rows[0].count;
 	}
 
-	// TODO: getProfileOwnerTotalFollowers
-	static async getProfileOwnerTotalFollowers(ownerID) {
+	// REVIEW: getProfileTotalFollowers
+	static async getProfileTotalFollowers(ownerID) {
 		const { rows } = await pool.queryToDatabase(
 			`
             SELECT 
@@ -109,8 +156,8 @@ class UserRepo {
 		return rows[0].count;
 	}
 
-	// TODO: getProfileOwnerTotalFollowings
-	static async getProfileOwnerTotalFollowings(ownerID) {
+	// REVIEW: getProfileTotalFollowings
+	static async getProfileTotalFollowings(ownerID) {
 		const { rows } = await pool.queryToDatabase(
 			`
             SELECT 
@@ -124,7 +171,7 @@ class UserRepo {
 		return rows[0].count;
 	}
 
-	// TODO: getProfileBio
+	// REVIEW: getProfileBio
 	static async getProfileBio(ownerID) {
 		const { rows } = await pool.queryToDatabase(
 			`
@@ -140,27 +187,8 @@ class UserRepo {
 		return rows;
 	}
 
-	// TODO: getProfileFollowingTopics
-	static async getProfileFollowingTopics(ownerID) {
-		const { rows } = await pool.queryToDatabase(
-			`
-            SELECT 
-            topic_id,
-            title,
-            topic_url
-            FROM topics_users 
-            JOIN post_topics
-            ON topics_users.topic_id=post_topics.id
-            WHERE topics_users.user_id=$1;
-            `,
-			[ownerID]
-		);
-
-		return rows;
-	}
-
-	// TODO: getIsVisitorFollowingProfileOwner
-	static async getIsVisitorFollowingProfileOwner(ownerID, visitorID) {
+	// REVIEW: getProfileIsFollowing
+	static async getProfileIsFollowing(ownerID, visitorID) {
 		const { rows } = await pool.queryToDatabase(
 			`
             SELECT

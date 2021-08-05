@@ -1,12 +1,12 @@
 const pool = require("../pool");
 
 class PostRepo {
-	static async getPostBasics(postID) {
+	static async getPost(postID) {
 		const { rows } = await pool.queryToDatabase(
 			`
 			SELECT
 			updated_at,
-			user_id
+			user_id AS id
 			FROM posts
 			WHERE id=$1;
 			`,
@@ -20,9 +20,10 @@ class PostRepo {
 		const { rows } = await pool.queryToDatabase(
 			`
             SELECT 
-            image_url AS url, 
-            image_width AS width, 
-            image_height AS height
+			image_public_id,
+            image_url, 
+            image_width, 
+            image_height
             FROM post_images 
             WHERE post_id=$1;
             `,
@@ -36,7 +37,7 @@ class PostRepo {
 		const { rows } = await pool.queryToDatabase(
 			`
             SELECT
-            topic_id,
+            topic_id AS id,
             title
             FROM topics_posts
             JOIN post_topics
@@ -47,23 +48,6 @@ class PostRepo {
 		);
 
 		return rows;
-	}
-
-	static async getPostOwner(ownerID) {
-		const { rows } = await pool.queryToDatabase(
-			`
-            SELECT
-            users.id AS user_id,
-            users.full_name AS full_name,
-            users.username AS username,
-            users.avatar_url AS avatar_url
-            FROM users
-            WHERE id=$1;
-            `,
-			[ownerID]
-		);
-
-		return rows[0];
 	}
 
 	static async getPostCaptions(postID) {
@@ -81,19 +65,14 @@ class PostRepo {
 		return rows;
 	}
 
-	static async getPostTaggedUsers(postID) {
+	static async getTaggedUsersID(postID) {
 		const { rows } = await pool.queryToDatabase(
 			`
-            SELECT
-            users.id AS user_id,
-            users.full_name AS full_name,
-            users.username AS username,
-            users.avatar_url AS avatar_url
-            FROM users_posts
-            JOIN users
-            ON users.id=users_posts.user_id
-            WHERE post_id=$1;
-            `,
+			SELECT
+			user_id AS id
+			FROM users_posts
+			WHERE post_id=$1
+			`,
 			[postID]
 		);
 

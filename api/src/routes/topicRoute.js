@@ -1,4 +1,5 @@
 const express = require("express");
+
 const authenticateToken = require("../middlewares/user/authenticateToken");
 
 const getTopics = require("../controllers/topic/getTopics");

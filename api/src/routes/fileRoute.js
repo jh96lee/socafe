@@ -1,8 +1,7 @@
 const express = require("express");
-const { multerUploads, parseImage } = require("../utils/multer");
+const { multerUploads } = require("../utils/image/multer");
 const {
 	cloudinaryConfigMiddleware,
-	uploader,
 } = require("../middlewares/cloudinaryMiddleware");
 
 const uploadImage = require("../controllers/file/uploadImage");

@@ -1,4 +1,4 @@
-const { parseImage } = require("../../utils/multer");
+const { parseImage } = require("../../utils/image/multer");
 const { uploader } = require("../../middlewares/cloudinaryMiddleware");
 
 const uploadImage = async (req, res) => {
@@ -18,7 +18,7 @@ const uploadImage = async (req, res) => {
 		} catch (error) {
 			res.send({
 				error: {
-					image:
+					catch:
 						"There has been an error while uploading your image to the cloud",
 				},
 			});

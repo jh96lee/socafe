@@ -1,36 +1,45 @@
 const pool = require("../../pool");
 const PostRepo = require("../../repos/post-repo");
+const UserRepo = require("../../repos/user-repo");
 
 const getMainPost = async (req, res) => {
 	const postID = parseInt(req.params.postID);
 	const visitorID = parseInt(req.params.visitorID);
 
 	try {
-		const postBasicData = await PostRepo.getPostBasics(postID);
+		const post = await PostRepo.getPost(postID);
 
-		if (!postBasicData) {
-			res.send({ post_id: null });
+		if (!post) {
+			res.send({ error: { post: "Post does not exist" } });
 		} else {
-			const { user_id, updated_at } = postBasicData;
-			const ownerID = user_id;
+			const { id, updated_at } = post;
+			const ownerID = id;
 
-			const postImagesData = await PostRepo.getPostImages(postID);
+			const postImages = await PostRepo.getPostImages(postID);
 
-			const postTopicsData = await PostRepo.getPostTopics(postID);
+			const postTopics = await PostRepo.getPostTopics(postID);
 
-			const postOwnerData = await PostRepo.getPostOwner(ownerID);
+			const postOwner = await UserRepo.getUserByID(ownerID);
 
-			const postCaptionsData = await PostRepo.getPostCaptions(postID);
+			const postCaptions = await PostRepo.getPostCaptions(postID);
 
-			const postTaggedUsersData = await PostRepo.getPostTaggedUsers(postID);
+			const postTaggedUsers = [];
 
-			const postTotalLikesData = await PostRepo.getPostTotalLikes(postID);
+			const taggedUsersID = await PostRepo.getTaggedUsersID(postID);
 
-			const postTotalCommentsData = await PostRepo.getPostTotalComments(postID);
+			for (let taggedUserID of taggedUsersID) {
+				const user = await UserRepo.getUserByID(taggedUserID);
 
-			const postIsLikedData = await PostRepo.getPostIsLiked(visitorID, postID);
+				postTaggedUsers.push(user);
+			}
 
-			const postIsBookmarkedData = await PostRepo.getPostIsBookmarked(
+			const postTotalLikes = await PostRepo.getPostTotalLikes(postID);
+
+			const postTotalComments = await PostRepo.getPostTotalComments(postID);
+
+			const postIsLiked = await PostRepo.getPostIsLiked(visitorID, postID);
+
+			const postIsBookmarked = await PostRepo.getPostIsBookmarked(
 				visitorID,
 				postID
 			);
@@ -38,18 +47,19 @@ const getMainPost = async (req, res) => {
 			res.send({
 				post_id: postID,
 				post_date: updated_at,
-				post_owner: postOwnerData,
-				post_images: postImagesData,
-				post_topics: postTopicsData,
-				post_captions: postCaptionsData,
-				post_tagged_users: postTaggedUsersData,
-				post_total_likes: postTotalLikesData,
-				post_total_comments: postTotalCommentsData,
-				post_is_liked: postIsLikedData,
-				post_is_bookmarked: postIsBookmarkedData,
+				post_owner: postOwner,
+				post_images: postImages,
+				post_topics: postTopics,
+				post_captions: postCaptions,
+				post_tagged_users: postTaggedUsers,
+				post_total_likes: postTotalLikes,
+				post_total_comments: postTotalComments,
+				post_is_liked: postIsLiked,
+				post_is_bookmarked: postIsBookmarked,
 			});
 		}
 	} catch (error) {
+		console.log(error);
 		res.send({
 			error: {
 				catch: "There has been an error while fetching post data",

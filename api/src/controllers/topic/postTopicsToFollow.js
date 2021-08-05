@@ -16,9 +16,9 @@ const postTopicsToFollow = async (req, res) => {
 			for (topicID of topicIDsArray) {
 				await pool.queryToDatabase(
 					`
-						INSERT INTO topics_users(user_id, topic_id)
-						VALUES ($1, $2);
-						`,
+					INSERT INTO topics_users(user_id, topic_id)
+					VALUES ($1, $2);
+					`,
 					[userID, topicID]
 				);
 			}

@@ -1,24 +1,24 @@
-const generateAndSendToken = require("../../utils/generateAndSendToken");
+const generateAndSendToken = require("../../utils/user/generateAndSendToken");
 
 const UserRepo = require("../../repos/user-repo");
 
 const registerUser = async (req, res) => {
 	const { fullName, email, username, password } = req.body;
 
-	const defaultAvatarURL =
-		"https://res.cloudinary.com/fullstackprojectcloud/image/upload/v1621981182/default_svra7n.png";
-
 	try {
-		const registeredUser = await UserRepo.postUserBasics(
+		const registeredUser = await UserRepo.insertUser(
 			fullName,
 			email,
 			username,
-			password,
-			defaultAvatarURL
+			password
 		);
 
+		const userID = registeredUser.id;
+
+		const { avatar_url } = await UserRepo.insertDefaultAvatar(userID);
+
 		if (registeredUser) {
-			const { id, full_name, username, avatar_url } = registeredUser;
+			const { id, full_name, username } = registeredUser;
 
 			generateAndSendToken(res, {
 				id,
@@ -29,7 +29,7 @@ const registerUser = async (req, res) => {
 		} else {
 			res.send({
 				error: {
-					general: "There has been an error while registering your data",
+					register: "There has been an error while registering your data",
 				},
 			});
 		}
