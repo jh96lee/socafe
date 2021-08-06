@@ -1,6 +1,6 @@
 const initialState = {
 	userProfilePosts: [],
-	isUserProfilePostsLoading: false,
+	isUserProfilePostsLoaded: false,
 };
 
 const userProfilePostsReducer = (state = initialState, action) => {
@@ -8,7 +8,7 @@ const userProfilePostsReducer = (state = initialState, action) => {
 		case "START_FETCHING_USER_PROFILE_POSTS":
 			return {
 				...state,
-				isUserProfilePostsLoading: true,
+				isUserProfilePostsLoaded: false,
 			};
 		case "FETCHED_USER_PROFILE_POSTS":
 			return {
@@ -18,7 +18,7 @@ const userProfilePostsReducer = (state = initialState, action) => {
 		case "END_FETCHING_USER_PROFILE_POSTS":
 			return {
 				...state,
-				isUserProfilePostsLoading: false,
+				isUserProfilePostsLoaded: true,
 			};
 		default:
 			return state;

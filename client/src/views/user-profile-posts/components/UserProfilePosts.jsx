@@ -7,13 +7,13 @@ import UserProfilePost from "./UserProfilePost";
 import { UserProfilePostsStyle } from "../styles/UserProfilePostsStyle";
 
 const UserProfilePosts = () => {
-	const { userProfilePosts, isUserProfilePostsLoading } = useSelector(
+	const { userProfilePosts, isUserProfilePostsLoaded } = useSelector(
 		(state) => state.userProfilePostsReducer
 	);
 
 	return (
 		<UserProfilePostsStyle>
-			{isUserProfilePostsLoading ? (
+			{!isUserProfilePostsLoaded ? (
 				<Loader />
 			) : (
 				userProfilePosts.map((post) => {

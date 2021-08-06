@@ -50,7 +50,7 @@ const HeaderAvatar = () => {
 							icon: <EditFilled />,
 						},
 						onClickEventHandler: () => {
-							history.push(`/profile/edit/${user.id}`);
+							history.push("/edit/profile");
 						},
 					},
 					{

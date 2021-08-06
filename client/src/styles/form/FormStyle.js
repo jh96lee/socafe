@@ -1,7 +1,7 @@
 import styled from "styled-components";
 
 const FormStyle = styled.form`
-	margin: 3.5rem auto auto auto;
+	margin: 3.5rem auto;
 
 	& > h2 {
 		font-size: 2.4rem;
@@ -12,6 +12,10 @@ const FormStyle = styled.form`
 	& > a {
 		color: var(--link-cta-color);
 		font-weight: 500;
+	}
+
+	@media (max-width: 500px) {
+		width: 90% !important;
 	}
 `;
 

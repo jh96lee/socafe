@@ -202,7 +202,7 @@ const GlobalStyles = createGlobalStyle`
     p {
         font-size: 1.4rem;
         font-weight: 400;
-        letter-spacing: -0.7px;
+        letter-spacing: -0.5px;
     }
 
     span {

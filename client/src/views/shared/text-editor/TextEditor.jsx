@@ -5,29 +5,58 @@ import { TextEditorStyle } from "./TextEditorStyle";
 
 import "react-quill/dist/quill.snow.css";
 
-const TextEditor = ({ textEditorOnChangeLogic }) => {
+const TextEditor = ({
+	textEditorOnKeyDownLogic,
+	initialTextEditorNodesArray,
+}) => {
 	const reactQuillRef = React.useRef();
 
-	const handleTextEditorOnChange = () => {
-		const reactQuillChildNodesArray = Array.from(
-			reactQuillRef.current.editor.root.childNodes
-		);
+	const handleTextEditorOnKeydown = (e) => {
+		if (reactQuillRef.current) {
+			const reactQuillChildNodesArray = Array.from(
+				reactQuillRef.current.editor.root.childNodes
+			);
 
-		const textEditorNodesArray = reactQuillChildNodesArray.map((node) => {
-			return {
-				nodeType: node.innerHTML === "<br>" ? "BR" : "P",
-				nodeValue: node.innerHTML,
-			};
-		});
+			const textEditorNodesArray = reactQuillChildNodesArray.map((node) => {
+				return {
+					nodeType: node.innerHTML === "<br>" ? "BR" : "P",
+					nodeValue: node.innerHTML,
+				};
+			});
 
-		textEditorOnChangeLogic(textEditorNodesArray);
+			textEditorOnKeyDownLogic(textEditorNodesArray);
+		}
 	};
+
+	React.useEffect(() => {
+		const initialPTag = reactQuillRef.current.editor.root.querySelector("p");
+
+		reactQuillRef.current.editor.root.removeChild(initialPTag);
+
+		if (initialTextEditorNodesArray) {
+			initialTextEditorNodesArray.forEach(({ node_type, node_value }) => {
+				const pTag = document.createElement("p");
+
+				if (node_type === "P") {
+					pTag.textContent = node_value;
+
+					reactQuillRef.current.editor.root.append(pTag);
+				} else {
+					const breakingTag = document.createElement("br");
+
+					pTag.appendChild(breakingTag);
+
+					reactQuillRef.current.editor.root.append(pTag);
+				}
+			});
+		}
+	}, []);
 
 	return (
 		<TextEditorStyle>
 			<ReactQuill
 				ref={reactQuillRef}
-				onChange={handleTextEditorOnChange}
+				onKeyDown={handleTextEditorOnKeydown}
 				formats={[]}
 			/>
 		</TextEditorStyle>

@@ -22,16 +22,11 @@ const UserProfilePage = () => {
 	const { user } = useSelector((state) => state.userReducer);
 	const visitorID = user ? user.id : 0;
 
-	const { profileOwner, isProfileOwnerLoaded, profileOwnerErrorMessage } =
-		useSelector((state) => state.userProfileOwnerReducer);
-
-	const { isUserProfilePostsLoading } = useSelector(
-		(state) => state.userProfilePostsReducer
+	const { profileOwner, profileOwnerErrorMessage } = useSelector(
+		(state) => state.userProfileOwnerReducer
 	);
 
 	const ownerUsername = useParams().username;
-
-	console.log(profileOwner);
 
 	const userProfileTabsArray = React.useMemo(() => {
 		return [
@@ -65,15 +60,12 @@ const UserProfilePage = () => {
 	React.useEffect(() => {
 		dispatch(
 			fetchUserProfilePosts(
-				`/profile/${userProfileTabsArray[currentProfileTabIndex].profilePostsType}/${ownerUsername}/${visitorID}`
+				`/profile/posts/${userProfileTabsArray[currentProfileTabIndex].profilePostsType}/${ownerUsername}/${visitorID}`
 			)
 		);
 	}, [ownerUsername, currentProfileTabIndex]);
 
-	// && isUserProfilePostsLoading
-	return !isProfileOwnerLoaded ? (
-		<Loader />
-	) : profileOwnerErrorMessage ? (
+	return profileOwnerErrorMessage ? (
 		<h1 style={{ color: "var(--text-1)" }}>User not found</h1>
 	) : (
 		<UserProfilePageStyle>
@@ -85,7 +77,7 @@ const UserProfilePage = () => {
 				userProfileTabsArray={userProfileTabsArray}
 			/>
 
-			{/* <UserProfilePosts /> */}
+			<UserProfilePosts />
 		</UserProfilePageStyle>
 	);
 };

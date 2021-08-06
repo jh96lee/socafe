@@ -38,7 +38,7 @@ const UserProfilePost = ({ post }) => {
 
 	return (
 		<UserProfilePostStyle onClick={handlePostOnClick}>
-			<img src={post_images[0].url} alt="post thumbnail" />
+			<img src={post_images[0].image_url} alt="post thumbnail" />
 
 			<UserProfilePostMetadataOverlayStyle id="user-profile-post__post-metadata-overlay">
 				<UserProfilePostMetadataStyle>

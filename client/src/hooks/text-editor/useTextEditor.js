@@ -15,7 +15,7 @@ export const useTextEditor = (
 
 	const dispatch = useDispatch();
 
-	const textEditorOnChangeLogic = (nodesArray) => {
+	const textEditorOnKeyDownLogic = (nodesArray) => {
 		const textEditorTotalCharacters = calculateTotalCharacters(nodesArray);
 
 		if (textEditorTotalCharacters > maxCharactersLength) {
@@ -40,7 +40,7 @@ export const useTextEditor = (
 	return {
 		textEditorNodesArray,
 		textEditorErrorMessage,
-		textEditorOnChangeLogic,
+		textEditorOnKeyDownLogic,
 	};
 };
 

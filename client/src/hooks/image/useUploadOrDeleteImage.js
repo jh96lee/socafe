@@ -14,6 +14,10 @@ const useUploadOrDeleteImage = () => {
 
 		const image = filesArray[0];
 
+		if (!image) {
+			return;
+		}
+
 		if (image.type === "image/jpeg" || image.type === "image/png") {
 			setIsImageUploading(true);
 			setImageErrorMessage(null);

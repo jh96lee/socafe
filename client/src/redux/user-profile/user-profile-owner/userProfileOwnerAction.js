@@ -49,8 +49,6 @@ export const fetchProfileOwner =
 			url: `http://localhost:8080/profile/user/${ownerUsername}/${visitorID}`,
 		});
 
-		console.log(data);
-
 		const {
 			id,
 			username,

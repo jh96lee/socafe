@@ -7,6 +7,9 @@ const FormInput = ({
 	label,
 	name,
 	type,
+	value,
+	defaultValue,
+	inputRef,
 	placeholder,
 	onChange,
 	formInputStyleObject,
@@ -19,6 +22,9 @@ const FormInput = ({
 				id={id}
 				name={name}
 				type={type}
+				value={value}
+				defaultValue={defaultValue}
+				ref={inputRef}
 				placeholder={placeholder}
 				onChange={onChange}
 			/>

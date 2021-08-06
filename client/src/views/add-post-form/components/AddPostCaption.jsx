@@ -13,7 +13,7 @@ import { useSaveDraft, useTextEditor } from "../../../hooks";
 import { AddContentStyle } from "../../../styles";
 
 const AddPostCaption = () => {
-	const { textEditorOnChangeLogic } = useTextEditor(
+	const { textEditorOnKeyDownLogic } = useTextEditor(
 		1000,
 		setPostCaptionsNodesArray,
 		setPostCaptionsErrorMessage
@@ -35,7 +35,7 @@ const AddPostCaption = () => {
 				}
 			/>
 
-			<TextEditor textEditorOnChangeLogic={textEditorOnChangeLogic} />
+			<TextEditor textEditorOnKeyDownLogic={textEditorOnKeyDownLogic} />
 		</AddContentStyle>
 	);
 };

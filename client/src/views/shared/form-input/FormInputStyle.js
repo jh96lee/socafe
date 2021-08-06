@@ -9,7 +9,7 @@ export const FormInputStyle = styled.div`
 	& label,
 	input {
 		color: var(--text-1);
-		letter-spacing: -0.6px;
+		letter-spacing: -0.5px;
 	}
 
 	& label {
@@ -28,7 +28,7 @@ export const FormInputStyle = styled.div`
 		box-shadow: ${(props) =>
 			props.inputBoxShadow
 				? props.inputBoxShadow
-				: "0 0 0 1.6px var(--input-default-separator-color)"};
+				: "0 0 0 1.4px var(--input-default-separator-color)"};
 		border-radius: 0.5rem;
 		padding: ${(props) =>
 			props.inputPadding ? props.inputPadding : "1.3rem 1.45rem"};
