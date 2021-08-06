@@ -59,7 +59,6 @@ const getMainPost = async (req, res) => {
 			});
 		}
 	} catch (error) {
-		console.log(error);
 		res.send({
 			error: {
 				catch: "There has been an error while fetching post data",

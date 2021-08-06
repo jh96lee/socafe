@@ -4,6 +4,10 @@ const pool = require("../../pool");
 const isUsernameInUse = async (req, res, next) => {
 	const { username } = req.body;
 
+	if (!username || username.length === 0) {
+		return next();
+	}
+
 	try {
 		const { rows } = await pool.queryToDatabase(
 			`
@@ -19,9 +23,9 @@ const isUsernameInUse = async (req, res, next) => {
 		if (userID) {
 			res.locals.username = "This username is already being used";
 
-			next();
+			return next();
 		} else {
-			next();
+			return next();
 		}
 	} catch (error) {
 		res.send({

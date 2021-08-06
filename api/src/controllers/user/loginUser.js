@@ -36,7 +36,6 @@ const loginUser = async (req, res) => {
 			res.send({ error: { login: "Invalid email and/or password" } });
 		}
 	} catch (error) {
-		console.log(error);
 		res.send({
 			error: {
 				catch: "There has been an error while processing your login",

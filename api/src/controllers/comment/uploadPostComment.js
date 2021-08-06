@@ -194,8 +194,6 @@ const uploadPostComment = async (req, res) => {
 			success: "Success",
 		});
 	} catch (error) {
-		console.log(error);
-
 		res.send({
 			error: { catch: "There has been an error while posting your comment" },
 		});

@@ -10,60 +10,54 @@ const getUserProfilePosts = async (req, res) => {
 
 	const profilePostSQL = {
 		posts: `SELECT id FROM posts WHERE user_id=$1;`,
-		likes: `SELECT post_id FROM post_likes WHERE user_id=$1;`,
-		bookmarks: `SELECT post_id FROM post_bookmarks WHERE user_id=$1;`,
-		tagged: `SELECT post_id FROM users_posts WHERE user_id=$1;
+		likes: `SELECT post_id AS id FROM post_likes WHERE user_id=$1;`,
+		bookmarks: `SELECT post_id AS id FROM post_bookmarks WHERE user_id=$1;`,
+		tagged: `SELECT post_id AS id FROM users_posts WHERE user_id=$1;
         `,
 	};
 
 	try {
-		const profileOwnerBasicsData = await UserRepo.getProfileOwnerBasics(
-			ownerUsername
-		);
+		const profileOwner = await UserRepo.getUserByUsername(ownerUsername);
 
-		if (profileOwnerBasicsData) {
-			const ownerID = profileOwnerBasicsData.id;
+		if (profileOwner) {
+			const ownerID = profileOwner.id;
 
-			const profileOwnerPostsArray = [];
+			const profilePostsArray = [];
 
-			const profileOwnerPostData = await pool.queryToDatabase(
+			const profilePostIDs = await pool.queryToDatabase(
 				profilePostSQL[profilePostType],
 				[ownerID]
 			);
 
-			const profileOwnerPostIDsArray = profileOwnerPostData.rows.map((post) => {
-				return post.post_id || post.id;
+			const profilePostIDsArray = profilePostIDs.rows.map((post) => {
+				return post.id;
 			});
 
-			for (let postID of profileOwnerPostIDsArray) {
-				const postImagesData = await PostRepo.getPostImages(postID);
+			for (let postID of profilePostIDsArray) {
+				const postImages = await PostRepo.getPostImages(postID);
 
-				const postTotalLikesData = await PostRepo.getPostTotalLikes(postID);
+				const postTotalLikes = await PostRepo.getPostTotalLikes(postID);
 
-				const postTotalCommentsData = await PostRepo.getPostTotalComments(
-					postID
-				);
+				const postTotalComments = await PostRepo.getPostTotalComments(postID);
 
-				const postIsLikedData = await PostRepo.getPostIsLiked(
-					visitorID,
-					postID
-				);
+				const postIsLiked = await PostRepo.getPostIsLiked(visitorID, postID);
 
-				profileOwnerPostsArray.push({
+				profilePostsArray.push({
 					post_id: postID,
-					post_images: postImagesData,
-					post_total_likes: postTotalLikesData,
-					post_total_comments: postTotalCommentsData,
-					post_is_liked: postIsLikedData,
+					post_images: postImages,
+					post_total_likes: postTotalLikes,
+					post_total_comments: postTotalComments,
+					post_is_liked: postIsLiked,
 				});
 			}
 
-			res.send(profileOwnerPostsArray);
+			res.send(profilePostsArray);
 		} else {
-			res.send([]);
+			res.send({
+				error: { profile: "User not found" },
+			});
 		}
 	} catch (error) {
-		console.log(error);
 		res.send({
 			error: {
 				catch:

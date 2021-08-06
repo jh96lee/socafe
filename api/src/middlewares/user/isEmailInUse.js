@@ -5,6 +5,10 @@ const isEmailInUse = async (req, res, next) => {
 	const { email } = req.body;
 
 	try {
+		if (!email || email.length === 0) {
+			return next();
+		}
+
 		const { rows } = await pool.queryToDatabase(
 			`
 			SELECT id
@@ -20,9 +24,9 @@ const isEmailInUse = async (req, res, next) => {
 			// REVIEW: use res.locals instead of appending properties to req.body and moving onto the next middleware
 			res.locals.email = "This email is already being used";
 
-			next();
+			return next();
 		} else {
-			next();
+			return next();
 		}
 	} catch (error) {
 		res.send({

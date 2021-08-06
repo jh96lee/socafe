@@ -19,7 +19,7 @@ const authenticateToken = (req, res, next) => {
 		} else {
 			res.locals.userID = decoded.id;
 
-			next();
+			return next();
 		}
 	});
 };

@@ -4,10 +4,14 @@ const isEmail = require("validator/lib/isEmail");
 const validateEmail = (req, res, next) => {
 	const { email } = req.body;
 
+	if (!email || email.length === 0) {
+		return next();
+	}
+
 	const validationResult = isEmail(email);
 
 	if (validationResult) {
-		next();
+		return next();
 	} else {
 		res.send({ error: { email: "Invalid email format" } });
 	}

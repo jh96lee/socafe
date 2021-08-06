@@ -18,6 +18,7 @@ const getProfileOwner = require("../controllers/user/getProfileOwner");
 const getProfilePosts = require("../controllers/user/getProfilePosts");
 
 const destroyImage = require("../utils/image/destroyImage");
+const generateToken = require("../utils/user/generateToken");
 
 const userRouter = express.Router();
 
@@ -43,29 +44,18 @@ userRouter.get(
 	getProfilePosts
 );
 
+// FIX: ???
 userRouter.get("/profile/edit", authenticateToken, async (req, res) => {
 	const userID = parseInt(res.locals.userID);
 
 	try {
-		const userBasicData = await pool.queryToDatabase(
-			`
-			SELECT 
-			id,
-			avatar_url, 
-			email,
-			full_name,
-			username
-			FROM users
-			WHERE id=$1;
-			`,
-			[userID]
-		);
+		const user = await UserRepo.getUserByID(userID);
 
-		const userProfileBioData = await UserRepo.getProfileBio(userID);
+		const bio = await UserRepo.getProfileBio(userID);
 
 		res.send({
-			...userBasicData.rows[0],
-			user_profile_bio_nodes_array: userProfileBioData,
+			...user,
+			bio_nodes_array: bio,
 		});
 	} catch (error) {
 		res.send({
@@ -76,45 +66,159 @@ userRouter.get("/profile/edit", authenticateToken, async (req, res) => {
 	}
 });
 
+// REVIEW: edit profile
+userRouter.put(
+	"/profile/edit",
+	validateEmail,
+	isEmailInUse,
+	isUsernameInUse,
+	checkError,
+	authenticateToken,
+	async (req, res) => {
+		const userID = parseInt(res.locals.userID);
+
+		const { fullName, username, email, bioNodesArray } = req.body;
+
+		try {
+			if (fullName) {
+				await pool.queryToDatabase(
+					`
+					UPDATE users
+					SET
+					full_name=$1
+					WHERE id=$2;
+					`,
+					[fullName, userID]
+				);
+			}
+
+			if (username) {
+				await pool.queryToDatabase(
+					`
+					UPDATE users
+					SET
+					username=$1
+					WHERE id=$2;
+					`,
+					[username, userID]
+				);
+			}
+
+			if (email) {
+				await pool.queryToDatabase(
+					`
+					UPDATE users
+					SET
+					email=$1
+					WHERE id=$2;;
+					`,
+					[email, userID]
+				);
+			}
+
+			if (bioNodesArray.length > 0) {
+				await pool.queryToDatabase(
+					`
+					DELETE 
+					FROM user_bios
+					WHERE user_id=$1
+					`,
+					[userID]
+				);
+
+				for (let node of bioNodesArray) {
+					const { nodeType, nodeValue } = node;
+
+					await pool.queryToDatabase(
+						`
+						INSERT INTO user_bios
+						(node_type, node_value, user_id)
+						VALUES
+						($1, $2, $3);
+						`,
+						[nodeType, nodeValue, userID]
+					);
+				}
+			}
+
+			const user = await UserRepo.getUserByID(userID);
+
+			if (user) {
+				const token = generateToken({
+					id: user.id,
+					full_name: user.full_name,
+					username: user.username,
+					avatar_url: user.avatar_url,
+				});
+
+				res.send({
+					token,
+					success: "Success",
+				});
+			}
+		} catch (error) {
+			res.send({
+				error: { catch: "There has been an error while updating your profile" },
+			});
+		}
+	}
+);
+
 userRouter.put("/profile/edit/avatar", authenticateToken, async (req, res) => {
 	const userID = parseInt(res.locals.userID);
 
-	const { prevAvatar, newAvatar } = req.body;
+	const { newAvatar } = req.body;
 
-	const defaultAvatarURL =
-		"https://res.cloudinary.com/fullstackprojectcloud/image/upload/v1621981182/default_svra7n.png";
-
-	const updatedUserProfileData = await pool.queryToDatabase(
+	const prevAvatar = await pool.queryToDatabase(
 		`
-		UPDATE users
-		SET 
-		avatar_url=$1
-		WHERE id=$2
-		RETURNING 
-		id, 
-		avatar_url, 
-		email, 
-		full_name, 
-		username;
+		SELECT
+		image_public_id
+		FROM user_avatars
+		WHERE user_id=$1
 		`,
-		[newAvatar.avatar_url, userID]
+		[userID]
 	);
 
-	const updatedAvatarURL = updatedUserProfileData.rows[0].avatar_url;
+	const prevAvatarPublicID = prevAvatar.rows[0].image_public_id;
 
-	if (prevAvatar.avatar_url !== defaultAvatarURL) {
-		destroyImage(prevAvatar.id);
+	if (prevAvatarPublicID !== "avatar_default") {
+		destroyImage(prevAvatarPublicID);
 	}
 
-	if (updatedAvatarURL === newAvatar.avatar_url) {
+	const updatedAvatar = await pool.queryToDatabase(
+		`
+		UPDATE user_avatars
+		SET 
+		image_public_id=$1,
+		avatar_url=$2
+		RETURNING
+		id,
+		image_public_id,
+		avatar_url;
+		`,
+		[newAvatar.id, newAvatar.url]
+	);
+
+	const user = await UserRepo.getUserByID(userID);
+	const { id, full_name, username, avatar_url } = user;
+
+	if (updatedAvatar.rows[0].avatar_url === newAvatar.url) {
+		const token = generateToken({
+			id,
+			full_name,
+			username,
+			avatar_url,
+		});
+
 		res.send({
-			updated_avatar_url: updatedAvatarURL,
-			success: "Your avatar has been successfully updated",
+			token,
+			updated_avatar_url: avatar_url,
+			success: "Success",
 		});
 	} else {
 		res.send({
 			error: {
-				image: "There has been an error while updating your avatar",
+				edit: "There has been an error while updating your avatar",
 			},
 		});
 	}
