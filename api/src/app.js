@@ -5,7 +5,7 @@ const dotenv = require("dotenv");
 
 const userRouter = require("./routes/userRoute");
 const postRouter = require("./routes/postRoute");
-const fileRouter = require("./routes/fileRoute");
+const imageRouter = require("./routes/imageRoute");
 const commentRouter = require("./routes/commentRoute");
 const followRouter = require("./routes/followRoute");
 const topicRouter = require("./routes/topicRoute");
@@ -26,7 +26,7 @@ module.exports = () => {
 
 	app.use(userRouter);
 	app.use(postRouter);
-	app.use(fileRouter);
+	app.use(imageRouter);
 	app.use(commentRouter);
 	app.use(followRouter);
 	app.use(topicRouter);
