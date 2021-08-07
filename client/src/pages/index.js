@@ -9,3 +9,5 @@ export { default as UserLoginPage } from "./user-login-page/UserLoginPage";
 export { default as UserRegisterPage } from "./user-register-page/UserRegisterPage";
 
 export { default as EditProfilePage } from "./edit-profile-page/EditProfilePage";
+
+export { default as ChangePasswordPage } from "./change-password-page/ChangePasswordPage";

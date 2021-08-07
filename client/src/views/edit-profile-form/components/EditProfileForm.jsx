@@ -1,6 +1,5 @@
 import * as React from "react";
 import { useDispatch, useSelector } from "react-redux";
-import styled from "styled-components";
 
 import { Loader, Button } from "../../shared";
 import EditProfileFormChangeAvatar from "./EditProfileFormChangeAvatar";
@@ -49,6 +48,8 @@ const EditProfileForm = () => {
 		<EditProfileFormStyle>
 			{isInitialProfileLoaded ? (
 				<React.Fragment>
+					<h2>Edit Profile</h2>
+
 					<EditProfileFormChangeAvatar />
 
 					<EditProfileFormFieldset />

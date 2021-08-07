@@ -27,8 +27,12 @@ import userProfilePostsReducer from "./user-profile/user-profile-posts/userProfi
 
 import editProfileReducer from "./edit-profile/editProfileReducer";
 
+import changePasswordReducer from "./change-password/changePasswordReducer";
+
 const rootReducer = combineReducers({
 	userReducer,
+
+	changePasswordReducer,
 
 	editProfileReducer,
 

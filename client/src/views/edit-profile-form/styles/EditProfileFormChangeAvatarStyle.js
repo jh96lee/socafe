@@ -4,7 +4,7 @@ export const EditProfileFormChangeAvatarStyle = styled.div`
 	display: flex;
 	align-items: center;
 	gap: 2rem;
-	margin: 3rem 0;
+	margin-bottom: 3rem;
 `;
 
 export const EditProfileFormChangeAvatarButtonStyle = styled.div`

@@ -12,6 +12,7 @@ import {
 	UserLoginPage,
 	UserRegisterPage,
 	EditProfilePage,
+	ChangePasswordPage,
 } from "./pages";
 import { AddPostIcon } from "./views/shared";
 import { MainPost } from "./views/main-post";
@@ -87,6 +88,10 @@ function App() {
 
 					<Route exact path="/edit/profile">
 						{user ? <EditProfilePage /> : <Redirect to="/login" />}
+					</Route>
+
+					<Route exact path="/edit/profile/password">
+						{user ? <ChangePasswordPage /> : <Redirect to="/login" />}
 					</Route>
 				</Switch>
 
