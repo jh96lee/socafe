@@ -192,12 +192,13 @@ userRouter.put("/profile/edit/avatar", authenticateToken, async (req, res) => {
 		SET 
 		image_public_id=$1,
 		avatar_url=$2
+		WHERE user_id=$3
 		RETURNING
 		id,
 		image_public_id,
 		avatar_url;
 		`,
-		[newAvatar.id, newAvatar.url]
+		[newAvatar.id, newAvatar.url, userID]
 	);
 
 	const user = await UserRepo.getUserByID(userID);
