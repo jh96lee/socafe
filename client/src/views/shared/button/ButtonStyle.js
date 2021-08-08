@@ -7,7 +7,7 @@ const ButtonStyle = styled.button`
 	font-weight: ${(props) => props.buttonFontWeight || "500"};
 	letter-spacing: -0.6px;
 	width: ${(props) => props.buttonWidth || "100%"};
-	height: ${(props) => props.buttonHeight || "100%"};
+	height: ${(props) => props.buttonHeight || "fit-content"};
 	min-width: ${(props) => props.buttonMinWidth};
 	min-height: ${(props) => props.buttonMinHeight};
 	padding: ${(props) => props.buttonPadding || "1.3rem"};

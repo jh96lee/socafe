@@ -4,6 +4,7 @@ const initialState = {
 	isTopicsToFollowSubmitting: false,
 	userFollowTopicsSuccessMessage: null,
 	userFollowTopicsErrorMessage: null,
+	isTopicsToFollowUpdating: false,
 };
 
 const userFollowTopicsReducer = (state = initialState, action) => {
@@ -26,13 +27,24 @@ const userFollowTopicsReducer = (state = initialState, action) => {
 		case "START_SUBMITTING_TOPICS_TO_FOLLOW":
 			return {
 				...state,
-				userFollowTopicsErrorMessage: null,
 				isTopicsToFollowSubmitting: true,
+				userFollowTopicsErrorMessage: null,
 			};
 		case "END_SUBMITTING_TOPICS_TO_FOLLOW":
 			return {
 				...state,
 				isTopicsToFollowSubmitting: false,
+			};
+		case "START_UPDATING_TOPICS_TO_FOLLOW":
+			return {
+				...state,
+				isTopicsToFollowUpdating: true,
+				userFollowTopicsErrorMessage: null,
+			};
+		case "END_UPDATING_TOPICS_TO_FOLLOW":
+			return {
+				...state,
+				isTopicsToFollowUpdating: false,
 			};
 		case "SET_USER_FOLLOW_TOPICS_ERROR_MESSAGE":
 			return {
@@ -45,6 +57,8 @@ const userFollowTopicsReducer = (state = initialState, action) => {
 				userFollowTopicsSuccessMessage: action.payload,
 				userFollowTopicsErrorMessage: null,
 			};
+		case "RESET_USER_FOLLOW_TOPICS":
+			return initialState;
 		default:
 			return state;
 	}

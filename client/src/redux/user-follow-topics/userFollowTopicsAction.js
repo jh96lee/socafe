@@ -26,6 +26,14 @@ const endSubmittingTopicsToFollow = () => ({
 	type: "END_SUBMITTING_TOPICS_TO_FOLLOW",
 });
 
+const startUpdatingTopicsToFollow = () => ({
+	type: "START_UPDATING_TOPICS_TO_FOLLOW",
+});
+
+const endUpdatingTopicsToFollow = () => ({
+	type: "END_UPDATING_TOPICS_TO_FOLLOW",
+});
+
 const setUserFollowTopicsSuccessMessage = (successMessage) => ({
 	type: "SET_USER_FOLLOW_TOPICS_SUCCESS_MESSAGE",
 	payload: successMessage,
@@ -34,6 +42,10 @@ const setUserFollowTopicsSuccessMessage = (successMessage) => ({
 const setUserFollowTopicsErrorMessage = (errorMessageObject) => ({
 	type: "SET_USER_FOLLOW_TOPICS_ERROR_MESSAGE",
 	payload: errorMessageObject,
+});
+
+export const resetUserFollowTopics = () => ({
+	type: "RESET_USER_FOLLOW_TOPICS",
 });
 
 export const fetchTopics = () => async (dispatch) => {
@@ -97,13 +109,48 @@ export const submitTopicsToFollow =
 
 				dispatch(setUserFollowTopicsSuccessMessage(success));
 
-				// FIX: situational
 				setCoupleSeconds(() => {
 					dispatch(setUserRegisterStepIndex(2));
 				}, 1500);
 			}
 		} catch (error) {
 			dispatch(endSubmittingTopicsToFollow());
+
+			dispatch(setUserFollowTopicsErrorMessage(error));
+		}
+	};
+
+export const updateTopicsToFollow =
+	(topicsToFollowArray) => async (dispatch) => {
+		dispatch(startUpdatingTopicsToFollow());
+
+		try {
+			const token = fetchToken();
+
+			const { data } = await axios({
+				method: "PUT",
+				url: "http://localhost:8080/topic/follow",
+				headers: {
+					Authorization: `Bearer ${token}`,
+				},
+				data: {
+					topicsToFollowArray,
+				},
+			});
+
+			const { success, error } = data;
+
+			if (error) {
+				dispatch(endUpdatingTopicsToFollow());
+
+				dispatch(setUserFollowTopicsErrorMessage(error));
+			} else if (success) {
+				dispatch(endUpdatingTopicsToFollow());
+
+				dispatch(setUserFollowTopicsSuccessMessage(success));
+			}
+		} catch (error) {
+			dispatch(endUpdatingTopicsToFollow());
 
 			dispatch(setUserFollowTopicsErrorMessage(error));
 		}

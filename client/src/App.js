@@ -12,10 +12,11 @@ import {
 	UserLoginPage,
 	UserRegisterPage,
 	EditProfilePage,
-	ChangePasswordPage,
 } from "./pages";
 import { AddPostIcon } from "./views/shared";
 import { MainPost } from "./views/main-post";
+
+import Pagination from "./Pagination";
 
 import GlobalStyle from "./styles/GlobalStyle";
 
@@ -58,11 +59,12 @@ function App() {
 					<Navigation isResponsiveNavigationOpen={isResponsiveNavigationOpen} />
 				)}
 
-				{/* {user && <AddPostIcon />} */}
+				{user && <AddPostIcon />}
 
 				<Switch location={overlaidComponentLocation || appLocation}>
 					<Route exact path="/">
-						<HomePage />
+						{/* <HomePage /> */}
+						<Pagination />
 					</Route>
 
 					<Route exact path="/user/:username">
@@ -86,12 +88,8 @@ function App() {
 						{user ? <AddPostPage /> : <Redirect to="/login" />}
 					</Route>
 
-					<Route exact path="/edit/profile">
+					<Route path="/edit/profile">
 						{user ? <EditProfilePage /> : <Redirect to="/login" />}
-					</Route>
-
-					<Route exact path="/edit/profile/password">
-						{user ? <ChangePasswordPage /> : <Redirect to="/login" />}
 					</Route>
 				</Switch>
 

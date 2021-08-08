@@ -22,7 +22,6 @@ import { ReactComponent as DoubleArrowLeft } from "./general/double-arrow-left.s
 import { ReactComponent as Date } from "./general/date.svg";
 import { ReactComponent as ClockFilled } from "./general/clock-filled.svg";
 import { ReactComponent as GoBack } from "./general/go-back.svg";
-
 import { ReactComponent as EditFilled } from "./general/edit-filled.svg";
 import { ReactComponent as Settings } from "./general/settings.svg";
 import { ReactComponent as PlusAlt } from "./general/plus-alt.svg";
@@ -55,6 +54,7 @@ import { ReactComponent as Tag } from "./post/tag.svg";
 import { ReactComponent as HeartEmpty } from "./post/heart-empty.svg";
 import { ReactComponent as HeartFill } from "./post/heart-fill.svg";
 import { ReactComponent as Posts } from "./post/posts.svg";
+import { ReactComponent as StarFilled } from "./post/star-filled.svg";
 
 import { ReactComponent as Cart } from "./product/cart.svg";
 import { ReactComponent as Product } from "./product/product.svg";
@@ -77,9 +77,12 @@ import { ReactComponent as Story } from "./user/story.svg";
 import { ReactComponent as Recommendation } from "./user/recommendation.svg";
 import { ReactComponent as UserFilled } from "./user/user-filled.svg";
 import { ReactComponent as UserOutline } from "./user/user-outline.svg";
+import { ReactComponent as PasswordFilled } from "./user/password-filled.svg";
 
 export {
 	Complete,
+	StarFilled,
+	PasswordFilled,
 	SearchAlt,
 	DoubleArrowLeft,
 	Congratulation,

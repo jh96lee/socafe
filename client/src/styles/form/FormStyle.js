@@ -16,6 +16,10 @@ const FormStyle = styled.form`
 
 	@media (max-width: 500px) {
 		width: 90% !important;
+
+		& button {
+			width: 100%;
+		}
 	}
 `;
 

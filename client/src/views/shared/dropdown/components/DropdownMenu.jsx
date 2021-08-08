@@ -8,21 +8,30 @@ const DropdownMenu = ({
 	dropdownMenuID,
 	dropdownElementsArray,
 	dropdownMenuStyleObject,
+	children,
 }) => {
 	return (
 		<DropdownMenuStyle id={dropdownMenuID} {...dropdownMenuStyleObject}>
-			{dropdownElementsArray.length > 0 ? (
-				dropdownElementsArray.map((element, idx) => {
-					return (
-						<DropdownElement
-							key={`${element.id}__${idx}`}
-							dropdownElementContent={element.content}
-							dropdownElementOnClickEventHandler={element.onClickEventHandler}
-						/>
-					);
-				})
+			{!children ? (
+				<React.Fragment>
+					{dropdownElementsArray.length > 0 ? (
+						dropdownElementsArray.map((element, idx) => {
+							return (
+								<DropdownElement
+									key={`${element.id}__${idx}`}
+									dropdownElementContent={element.content}
+									dropdownElementOnClickEventHandler={
+										element.onClickEventHandler
+									}
+								/>
+							);
+						})
+					) : (
+						<p id="dropdown-menu__no-result-message">No Search Result</p>
+					)}
+				</React.Fragment>
 			) : (
-				<p id="dropdown-menu__no-result-message">No Search Result</p>
+				children
 			)}
 		</DropdownMenuStyle>
 	);

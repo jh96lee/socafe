@@ -1,38 +1,69 @@
 import * as React from "react";
 import { useHistory } from "react-router";
 
-import { FormInput, DropdownMenu } from "../../shared";
+import { FormInput, DropdownMenu, DropdownElement } from "../../shared";
 
-import { useDropdown, useSearch } from "../../../hooks";
+import { useDropdown, usePagination } from "../../../hooks";
 
 import { SearchbarInputStyle } from "../styles/SearchbarInputStyle";
 
 const SearchbarInput = ({ searchType }) => {
 	const { isDropdownMenuOpen, setIsDropdownMenuOpen } = useDropdown(
 		"searchbar-input-dropdown-trigger",
-		"searchbar-input-dropdown-menu"
+		"searchbar-input-dropdown-menu",
+		false
 	);
 
-	const searchAPIEndpoint =
-		searchType === "Users" ? "/search/users" : "/search/products";
+	const defaultSearchEndpoint =
+		searchType === "Users" ? "/search/users" : "/search/topics";
 
-	const { searchResultsArray, handleSearchResultsOnChange } = useSearch(
-		searchAPIEndpoint,
-		setIsDropdownMenuOpen
-	);
+	const {
+		currentPage,
+		contents,
+		nextAPIEndpoint,
+		isExtraContentsLoading,
+		fetchContents,
+		loadMoreButtonOnClickLogic,
+	} = usePagination(defaultSearchEndpoint, 1);
+
+	const handleLoadMoreButtonOnClick = () => {
+		loadMoreButtonOnClickLogic();
+	};
+
+	const handleSearchbarInputOnChange = async (e) => {
+		await fetchContents(true, "POST", {
+			searchInput: e.target.value ? e.target.value : null,
+		});
+
+		setIsDropdownMenuOpen(true);
+	};
 
 	const history = useHistory();
 
-	const dropdownElementsArray = searchResultsArray.map((result) => {
-		return {
-			content: result,
-			onClickEventHandler: () => {
-				history.push(
-					`/${searchType === "Users" ? "user" : "product"}/${result.username}`
-				);
-			},
-		};
-	});
+	const dropdownElementsArray = React.useMemo(() => {
+		return contents.map((result) => {
+			return {
+				content: result,
+				onClickEventHandler: () => {
+					setIsDropdownMenuOpen(false);
+
+					history.push(
+						`/${searchType === "Users" ? "user" : "product"}/${result.username}`
+					);
+				},
+			};
+		});
+	}, [contents]);
+
+	const searchbarInputRef = React.useRef();
+
+	React.useEffect(() => {
+		if (contents.length > 0) {
+			fetchContents(false, "POST", {
+				searchInput: searchbarInputRef.current.value,
+			});
+		}
+	}, [currentPage]);
 
 	return (
 		<SearchbarInputStyle id="searchbar-input-dropdown-trigger">
@@ -41,8 +72,9 @@ const SearchbarInput = ({ searchType }) => {
 				name="search"
 				type="text"
 				label="Search"
+				inputRef={searchbarInputRef}
 				placeholder="Search"
-				onChange={handleSearchResultsOnChange}
+				onChange={handleSearchbarInputOnChange}
 				formInputStyleObject={{
 					labelDisplay: "none",
 					inputBackgroundColor: "transparent",
@@ -55,13 +87,32 @@ const SearchbarInput = ({ searchType }) => {
 			{isDropdownMenuOpen && (
 				<DropdownMenu
 					dropdownMenuID="searchbar-input-dropdown-menu"
-					dropdownElementsArray={dropdownElementsArray}
 					dropdownMenuStyleObject={{
 						menuTop: "calc(100% + 7px)",
 						menuLeft: "0",
 						menuWidth: "100%",
 					}}
-				/>
+				>
+					{dropdownElementsArray.length > 0 ? (
+						dropdownElementsArray.map((element, idx) => {
+							return (
+								<DropdownElement
+									key={`${element.id}__${idx}`}
+									dropdownElementContent={element.content}
+									dropdownElementOnClickEventHandler={
+										element.onClickEventHandler
+									}
+								/>
+							);
+						})
+					) : (
+						<p id="dropdown-menu__no-result-message">No Search Result</p>
+					)}
+
+					{nextAPIEndpoint === null || contents.length === 0 ? null : (
+						<button onClick={handleLoadMoreButtonOnClick}>Load More</button>
+					)}
+				</DropdownMenu>
 			)}
 		</SearchbarInputStyle>
 	);

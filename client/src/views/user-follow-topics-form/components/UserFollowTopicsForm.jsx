@@ -1,15 +1,24 @@
 import React from "react";
 import { useSelector, useDispatch } from "react-redux";
+import { useLocation } from "react-router-dom";
 
 import { Button, Loader } from "../../shared";
 import UserFollowTopicsFormTopics from "./UserFollowTopicsFormTopics";
 
-import { submitTopicsToFollow } from "../../../redux/user-follow-topics/userFollowTopicsAction";
+import {
+	submitTopicsToFollow,
+	updateTopicsToFollow,
+	resetUserFollowTopics,
+} from "../../../redux/user-follow-topics/userFollowTopicsAction";
 
 import { UserFollowTopicsFormStyle } from "../styles/UserFollowTopicsFormStyle";
 
 const UserFollowTopicsForm = () => {
 	const dispatch = useDispatch();
+
+	const location = useLocation();
+
+	const isEditing = location.pathname.split("/").includes("edit");
 
 	const {
 		isTopicsToFollowSubmitting,
@@ -24,11 +33,21 @@ const UserFollowTopicsForm = () => {
 	const handleUserFollowTopicsFormButtonOnClick = (e) => {
 		e.preventDefault();
 
-		dispatch(submitTopicsToFollow(followingTopics));
+		if (isEditing) {
+			dispatch(updateTopicsToFollow(followingTopics));
+		} else {
+			dispatch(submitTopicsToFollow(followingTopics));
+		}
 	};
 
+	React.useEffect(() => {
+		return () => {
+			dispatch(resetUserFollowTopics());
+		};
+	}, []);
+
 	return (
-		<UserFollowTopicsFormStyle>
+		<UserFollowTopicsFormStyle isEditingFollowTopicsForm={isEditing}>
 			<h2>Choose Topics to Follow</h2>
 
 			<UserFollowTopicsFormTopics />

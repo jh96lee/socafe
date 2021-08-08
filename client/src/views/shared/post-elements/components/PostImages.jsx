@@ -3,7 +3,7 @@ import { useSelector } from "react-redux";
 
 import { IconElement } from "../../index";
 
-import useResetPostImageIndex from "../../../../hooks/useResetPostImageIndex";
+import useResetPostImageIndex from "../../../../hooks/post/useResetPostImageIndex";
 
 import {
 	PostImagesStyle,

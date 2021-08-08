@@ -9,7 +9,7 @@ export const NavigationStyle = styled.nav`
 	flex-direction: column;
 	align-items: center;
 	gap: 3rem;
-	padding-top: 2.5rem;
+	padding-top: 3rem;
 	background-color: var(--bg-1);
 	height: fit-content;
 
