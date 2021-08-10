@@ -1,5 +1,7 @@
 const pool = require("../../pool");
 
+const UserRepo = require("../../repos/user-repo");
+
 const uploadPostComment = async (req, res) => {
 	const userID = parseInt(res.locals.userID);
 
@@ -158,17 +160,7 @@ const uploadPostComment = async (req, res) => {
 		}
 
 		// REVIEW: data of comment's owner
-		const mainPostCommentUserData = await pool.queryToDatabase(
-			`
-            SELECT 
-            id AS user_id,  
-            username,
-            avatar_url
-            FROM users
-            WHERE id=$1;
-            `,
-			[userID]
-		);
+		const mainPostCommentUserData = await UserRepo.getUserByID(user_id);
 
 		const mainPostCommentNodesArrayData = await pool.queryToDatabase(
 			`
@@ -184,7 +176,7 @@ const uploadPostComment = async (req, res) => {
 		res.send({
 			comment_id: mainPostCommentID,
 			created_at: mainPostCreatedAt,
-			...mainPostCommentUserData.rows[0],
+			...mainPostCommentUserData,
 			post_id: mainPostID,
 			parent_comment_id: mainPostCommentParentCommentID,
 			comment_nodes_array: mainPostCommentNodesArrayData.rows,

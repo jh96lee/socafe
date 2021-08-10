@@ -1,5 +1,7 @@
 const pool = require("../../pool");
 
+const UserRepo = require("../../repos/user-repo");
+
 const getParentCommentReplies = async (req, res) => {
 	const userID = parseInt(req.params.userID);
 	const parentCommentID = parseInt(req.params.parentCommentID);
@@ -24,17 +26,7 @@ const getParentCommentReplies = async (req, res) => {
 		const { id, created_at, user_id, post_id, parent_comment_id } =
 			parentCommentReply;
 
-		const mainPostCommentReplyUserData = await pool.queryToDatabase(
-			`
-            SELECT 
-            id AS user_id,  
-            avatar_url,
-            username
-            FROM users
-            WHERE id=$1;
-            `,
-			[user_id]
-		);
+		const mainPostCommentReplyUserData = await UserRepo.getUserByID(user_id);
 
 		const mainPostCommentNodesArrayData = await pool.queryToDatabase(
 			`
@@ -80,7 +72,7 @@ const getParentCommentReplies = async (req, res) => {
 		parentCommentRepliesArray.push({
 			comment_id: id,
 			created_at,
-			...mainPostCommentReplyUserData.rows[0],
+			...mainPostCommentReplyUserData,
 			post_id,
 			parent_comment_id,
 			comment_nodes_array: mainPostCommentNodesArrayData.rows,

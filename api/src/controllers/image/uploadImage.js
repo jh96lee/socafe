@@ -10,9 +10,9 @@ const uploadImage = async (req, res) => {
 
 			res.send({
 				id: imageObject.public_id,
-				url: imageObject.url,
-				width: imageObject.width,
-				height: imageObject.height,
+				image_url: imageObject.url,
+				image_width: imageObject.width,
+				image_height: imageObject.height,
 				success: "Image uploaded successfully",
 			});
 		} catch (error) {

@@ -23,14 +23,14 @@ const uploadPost = async (req, res) => {
 		const postID = parseInt(rows[0].id);
 
 		for (let image of postImagesArray) {
-			const { id, url, width, height } = image;
+			const { id, image_url, image_width, image_height } = image;
 
 			await pool.queryToDatabase(
 				`
 				INSERT INTO post_images(image_public_id, image_url, image_width, image_height, post_id)
 				VALUES ($1, $2, $3, $4, $5);
 				`,
-				[id, url, width, height, postID]
+				[id, image_url, image_width, image_height, postID]
 			);
 		}
 

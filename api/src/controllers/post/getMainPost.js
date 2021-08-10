@@ -27,8 +27,8 @@ const getMainPost = async (req, res) => {
 
 			const taggedUsersID = await PostRepo.getTaggedUsersID(postID);
 
-			for (let taggedUserID of taggedUsersID) {
-				const user = await UserRepo.getUserByID(taggedUserID);
+			for (let taggedUser of taggedUsersID) {
+				const user = await UserRepo.getUserByID(taggedUser.id);
 
 				postTaggedUsers.push(user);
 			}
