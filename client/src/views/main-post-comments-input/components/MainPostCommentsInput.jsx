@@ -1,14 +1,15 @@
 import React from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useParams } from "react-router-dom";
-import axios from "axios";
 
-import { IconElement, DropdownMenu } from "../../shared";
+import { IconElement, DropdownMenu, DropdownElement } from "../../shared";
 
 import {
 	postMainPostComment,
 	setMainPostID,
 } from "../../../redux/main-post-comment-input/mainPostCommentInputAction";
+
+import { usePagination } from "../../../hooks";
 
 import { addSpaceToString } from "../../../utils/comment/addSpaceToString";
 import { setCaret } from "../../../utils/comment/setCaret";
@@ -21,9 +22,16 @@ import { Submit } from "../../../assets";
 const MainPostCommentsInput = () => {
 	const [isSearchUsersDropdownOpen, setIsSearchUsersDropdownOpen] =
 		React.useState(false);
-	const [searchUsersArray, setSearchUsersArray] = React.useState([]);
 
 	const dispatch = useDispatch();
+
+	const {
+		currentPage,
+		contents,
+		fetchContents,
+		nextAPIEndpoint,
+		loadMoreButtonOnClickLogic,
+	} = usePagination("/search/users", 1, false);
 
 	const { mainPostCommentReplyingToUsername } = useSelector(
 		(state) => state.mainPostCommentInputReducer
@@ -157,15 +165,9 @@ const MainPostCommentsInput = () => {
 
 			const searchUsersInput = selection.anchorNode.textContent.substring(1);
 
-			const { data } = await axios({
-				method: "POST",
-				url: "http://localhost:8080/search/users",
-				data: {
-					searchInput: searchUsersInput ? searchUsersInput : null,
-				},
+			await fetchContents(true, "POST", {
+				searchInput: searchUsersInput ? searchUsersInput : null,
 			});
-
-			setSearchUsersArray(data);
 
 			// REVIEW: to know which p tag triggered this action and when a user has been selected from the dropdown
 			// REVIEW: we know which node to replace/update
@@ -175,7 +177,7 @@ const MainPostCommentsInput = () => {
 		}
 	};
 
-	const dropdownElementsArray = searchUsersArray.map((result) => {
+	const dropdownElementsArray = contents.map((result) => {
 		return {
 			content: result,
 			onClickEventHandler: () => {
@@ -185,6 +187,10 @@ const MainPostCommentsInput = () => {
 			},
 		};
 	});
+
+	const handleLoadMoreButtonOnClick = () => {
+		loadMoreButtonOnClickLogic();
+	};
 
 	const handlePostCommentSubmitOnClick = () => {
 		const contentEditableChildNodesArray = Array.from(
@@ -199,6 +205,15 @@ const MainPostCommentsInput = () => {
 	React.useEffect(() => {
 		dispatch(setMainPostID(postID));
 	}, [postID]);
+
+	React.useEffect(() => {
+		if (contents.length > 0) {
+			fetchContents(false, "POST", {
+				searchInput:
+					contentEditableSearchUserRef.current.textContent.substring(1),
+			});
+		}
+	}, [currentPage]);
 
 	React.useEffect(() => {
 		if (mainPostCommentReplyingToUsername) {
@@ -252,7 +267,27 @@ const MainPostCommentsInput = () => {
 						menuBorderRadius: "0.5rem",
 						menuTransform: "translate(-50%, 0)",
 					}}
-				/>
+				>
+					{dropdownElementsArray.length > 0 ? (
+						dropdownElementsArray.map((element, idx) => {
+							return (
+								<DropdownElement
+									key={`${element.id}__${idx}`}
+									dropdownElementContent={element.content}
+									dropdownElementOnClickEventHandler={
+										element.onClickEventHandler
+									}
+								/>
+							);
+						})
+					) : (
+						<p id="dropdown-menu__no-result-message">No Search Result</p>
+					)}
+
+					{nextAPIEndpoint === null || contents.length === 0 ? null : (
+						<button onClick={handleLoadMoreButtonOnClick}>Load More</button>
+					)}
+				</DropdownMenu>
 			)}
 		</MainPostCommentsInputStyle>
 	);

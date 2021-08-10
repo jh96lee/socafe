@@ -27,7 +27,7 @@ const EditProfileFormFieldset = () => {
 		editProfileErrorMessage,
 	} = useSelector((state) => state.editProfileReducer);
 
-	const { textEditorOnKeyDownLogic } = useTextEditor(
+	const { textEditorOnKeyUpLogic } = useTextEditor(
 		150,
 		setEditedBioNodesArray,
 		setEditProfileErrorMessage,
@@ -104,7 +104,7 @@ const EditProfileFormFieldset = () => {
 				/>
 
 				<TextEditor
-					textEditorOnKeyDownLogic={textEditorOnKeyDownLogic}
+					textEditorOnKeyUpLogic={textEditorOnKeyUpLogic}
 					initialTextEditorNodesArray={initialProfile.bio_nodes_array}
 				/>
 			</FormInputAndMessageWrapperStyle>

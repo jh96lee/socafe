@@ -31,7 +31,7 @@ const UploadedImage = ({
 				<CloseAlt />
 			</IconElement>
 
-			<img src={uploadedImage.url} alt="uploaded content" />
+			<img src={uploadedImage.image_url} alt="uploaded content" />
 		</UploadedImageStyle>
 	);
 };

@@ -16,8 +16,6 @@ import {
 import { AddPostIcon } from "./views/shared";
 import { MainPost } from "./views/main-post";
 
-import Pagination from "./Pagination";
-
 import GlobalStyle from "./styles/GlobalStyle";
 
 const GlobalPageStyle = styled.main`
@@ -63,8 +61,7 @@ function App() {
 
 				<Switch location={overlaidComponentLocation || appLocation}>
 					<Route exact path="/">
-						{/* <HomePage /> */}
-						<Pagination />
+						<HomePage />
 					</Route>
 
 					<Route exact path="/user/:username">

@@ -1,6 +1,6 @@
 import styled from "styled-components";
 
-export const SearchAndSelectedElementsStyle = styled.div`
+export const SearchAndSelectedContentsStyle = styled.div`
 	display: flex;
 	flex-wrap: wrap;
 	gap: 1rem;

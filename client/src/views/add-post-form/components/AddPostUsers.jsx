@@ -3,7 +3,7 @@ import { useSelector } from "react-redux";
 
 import { SearchAndSelect, Message } from "../../shared";
 
-import { useSearchAndSelectRedux, useSaveDraft } from "../../../hooks";
+import { useSearchAndSelect, useSaveDraft } from "../../../hooks";
 
 import {
 	addPostUser,
@@ -18,35 +18,34 @@ const AddPostUsers = () => {
 		(state) => state.postUsersReducer
 	);
 
-	const {
-		searchAndSelectDropdownElementOnClickEventHandler,
-		selectedElementOnClickEventHandler,
-	} = useSearchAndSelectRedux(
-		3,
-		"users",
-		postUsersArray,
-		addPostUser,
-		removePostUser,
-		setPostUsersErrorMessage
-	);
-
+	const { dropdownElementOnClickLogic, selectedContentRemoveIconOnClickLogic } =
+		useSearchAndSelect(
+			3,
+			"user",
+			true,
+			postUsersArray,
+			addPostUser,
+			removePostUser,
+			setPostUsersErrorMessage
+		);
 	useSaveDraft("postUsers", postUsersArray);
 
 	return (
 		<AddContentStyle>
 			<h3>Tag Users</h3>
 
-			<Message errorMessage={postUsersErrorMessage} />
+			<Message
+				errorMessage={postUsersErrorMessage && postUsersErrorMessage.user}
+			/>
 
 			<SearchAndSelect
-				// REVIEW: this needs to be singular for dropdownElementIdentifier function to work
 				searchAndSelectType="add-post-user"
-				searchAndSelectedElementsArray={postUsersArray}
+				searchAndSelectedContentsArray={postUsersArray}
 				searchAndSelectInputPlaceholder="Search for users"
 				searchAndSelectInputAPIEndpoint="/search/users"
-				selectedElementOnClickEventHandler={selectedElementOnClickEventHandler}
-				searchAndSelectDropdownElementOnClickEventHandler={
-					searchAndSelectDropdownElementOnClickEventHandler
+				dropdownElementOnClickLogic={dropdownElementOnClickLogic}
+				selectedContentRemoveIconOnClickLogic={
+					selectedContentRemoveIconOnClickLogic
 				}
 			/>
 		</AddContentStyle>

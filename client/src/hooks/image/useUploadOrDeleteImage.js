@@ -37,10 +37,10 @@ const useUploadOrDeleteImage = () => {
 				}
 			);
 
-			const { id, url, width, height, success, error } = data;
+			const { id, image_url, image_width, image_height, success, error } = data;
 
 			if (success) {
-				setUploadedImage({ id, url, width, height });
+				setUploadedImage({ id, image_url, image_width, image_height });
 
 				setImageSuccessMessage(success);
 

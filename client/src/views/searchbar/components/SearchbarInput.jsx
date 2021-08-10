@@ -24,7 +24,7 @@ const SearchbarInput = ({ searchType }) => {
 		isExtraContentsLoading,
 		fetchContents,
 		loadMoreButtonOnClickLogic,
-	} = usePagination(defaultSearchEndpoint, 1);
+	} = usePagination(defaultSearchEndpoint, 5);
 
 	const handleLoadMoreButtonOnClick = () => {
 		loadMoreButtonOnClickLogic();
@@ -48,7 +48,9 @@ const SearchbarInput = ({ searchType }) => {
 					setIsDropdownMenuOpen(false);
 
 					history.push(
-						`/${searchType === "Users" ? "user" : "product"}/${result.username}`
+						`/${searchType === "Users" ? "user" : "topic"}/${
+							result.username.toLowerCase() || result.title.toLowerCase()
+						}`
 					);
 				},
 			};

@@ -81,8 +81,6 @@ export const changePassword = () => async (dispatch, getState) => {
 
 	const { error, success } = data;
 
-	console.log(data);
-
 	if (error) {
 		dispatch(setChangePasswordErrorMessage(error));
 

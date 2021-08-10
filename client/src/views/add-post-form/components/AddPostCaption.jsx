@@ -13,10 +13,11 @@ import { useSaveDraft, useTextEditor } from "../../../hooks";
 import { AddContentStyle } from "../../../styles";
 
 const AddPostCaption = () => {
-	const { textEditorOnKeyDownLogic } = useTextEditor(
+	const { textEditorOnKeyUpLogic } = useTextEditor(
 		1000,
 		setPostCaptionsNodesArray,
-		setPostCaptionsErrorMessage
+		setPostCaptionsErrorMessage,
+		"redux"
 	);
 
 	const { postCaptionsNodesArray, postCaptionsErrorMessage } = useSelector(
@@ -35,7 +36,10 @@ const AddPostCaption = () => {
 				}
 			/>
 
-			<TextEditor textEditorOnKeyDownLogic={textEditorOnKeyDownLogic} />
+			<TextEditor
+				textEditorOnKeyUpLogic={textEditorOnKeyUpLogic}
+				initialTextEditorNodesArray={postCaptionsNodesArray}
+			/>
 		</AddContentStyle>
 	);
 };

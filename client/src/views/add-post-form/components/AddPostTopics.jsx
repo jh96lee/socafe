@@ -9,7 +9,7 @@ import {
 	setPostTopicsErrorMessage,
 } from "../../../redux/add-post/post-topics/postTopicsAction";
 
-import { useSearchAndSelectRedux, useSaveDraft } from "../../../hooks";
+import { useSearchAndSelect, useSaveDraft } from "../../../hooks";
 
 import { AddContentStyle } from "../../../styles";
 
@@ -18,17 +18,16 @@ const AddPostTopics = () => {
 		(state) => state.postTopicsReducer
 	);
 
-	const {
-		searchAndSelectDropdownElementOnClickEventHandler,
-		selectedElementOnClickEventHandler,
-	} = useSearchAndSelectRedux(
-		3,
-		"topics",
-		postTopicsArray,
-		addPostTopics,
-		removePostTopic,
-		setPostTopicsErrorMessage
-	);
+	const { dropdownElementOnClickLogic, selectedContentRemoveIconOnClickLogic } =
+		useSearchAndSelect(
+			3,
+			"topic",
+			true,
+			postTopicsArray,
+			addPostTopics,
+			removePostTopic,
+			setPostTopicsErrorMessage
+		);
 
 	useSaveDraft("postTopics", postTopicsArray);
 
@@ -36,16 +35,18 @@ const AddPostTopics = () => {
 		<AddContentStyle>
 			<h3>Select Topics</h3>
 
-			<Message errorMessage={postTopicsErrorMessage} />
+			<Message
+				errorMessage={postTopicsErrorMessage && postTopicsErrorMessage.topic}
+			/>
 
 			<SearchAndSelect
 				searchAndSelectType="add-post-topic"
-				searchAndSelectedElementsArray={postTopicsArray}
+				searchAndSelectedContentsArray={postTopicsArray}
 				searchAndSelectInputPlaceholder="Search for topics"
 				searchAndSelectInputAPIEndpoint="/search/topics"
-				selectedElementOnClickEventHandler={selectedElementOnClickEventHandler}
-				searchAndSelectDropdownElementOnClickEventHandler={
-					searchAndSelectDropdownElementOnClickEventHandler
+				dropdownElementOnClickLogic={dropdownElementOnClickLogic}
+				selectedContentRemoveIconOnClickLogic={
+					selectedContentRemoveIconOnClickLogic
 				}
 			/>
 		</AddContentStyle>

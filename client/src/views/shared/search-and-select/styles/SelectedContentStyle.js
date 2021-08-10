@@ -1,6 +1,6 @@
 import styled from "styled-components";
 
-export const SelectedElementStyle = styled.div`
+export const SelectedContentStyle = styled.div`
 	position: relative;
 	display: flex;
 	gap: 1.2rem;

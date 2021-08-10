@@ -5,7 +5,7 @@ import axios from "axios";
 const usePagination = (
 	defaultEndpoint,
 	pageSize = 3,
-	setStateMethod = "react",
+	setStateViaRedux = false,
 	setStateInitialContentsAction = null,
 	setStateExtraContentsAction = null
 ) => {
@@ -18,6 +18,7 @@ const usePagination = (
 		React.useState(false);
 	const [isExtraContentsLoading, setIsExtraContentsLoading] =
 		React.useState(false);
+
 	const size = pageSize;
 
 	const fetchContents = async (isInitialFetch, method, data, headers) => {
@@ -40,20 +41,17 @@ const usePagination = (
 			headers,
 		});
 
-		// TODO: remove later
-		console.log(result.data);
-
 		const { error } = result.data;
 
 		if (!error) {
 			const { contents, next } = result.data;
 
 			if (isInitialFetch) {
-				setStateMethod === "redux"
+				setStateViaRedux === "redux"
 					? dispatch(setStateInitialContentsAction(contents))
 					: setContents(contents);
 			} else {
-				setStateMethod === "redux"
+				setStateViaRedux === "redux"
 					? dispatch(setStateExtraContentsAction(contents))
 					: setContents((prevState) => [...prevState, ...contents]);
 			}

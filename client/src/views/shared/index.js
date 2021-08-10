@@ -13,8 +13,8 @@ export { default as Notice } from "./notice/Notice";
 export { default as UploadImage } from "./upload-image/components/UploadImage";
 
 export { default as SearchAndSelect } from "./search-and-select/components/SearchAndSelect";
-export { default as SearchAndSelectedElements } from "./search-and-select/components/SearchAndSelectedElements";
-export { default as SelectedElement } from "./search-and-select/components/SelectedElement";
+export { default as SearchAndSelectedContents } from "./search-and-select/components/SearchAndSelectedContents";
+export { default as SelectedContent } from "./search-and-select/components/SelectedContent";
 
 export { default as TextEditor } from "./text-editor/TextEditor";
 export { default as TextArea } from "./text-area/TextArea";

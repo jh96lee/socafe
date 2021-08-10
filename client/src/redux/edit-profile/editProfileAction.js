@@ -137,8 +137,6 @@ export const updateProfile = () => async (dispatch, getState) => {
 
 	const { success, error } = data;
 
-	console.log("UPDATED DATA", data);
-
 	if (error) {
 		dispatch(setEditProfileErrorMessage(error));
 	} else {

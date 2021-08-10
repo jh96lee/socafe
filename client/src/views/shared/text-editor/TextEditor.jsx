@@ -6,12 +6,12 @@ import { TextEditorStyle } from "./TextEditorStyle";
 import "react-quill/dist/quill.snow.css";
 
 const TextEditor = ({
-	textEditorOnKeyDownLogic,
+	textEditorOnKeyUpLogic,
 	initialTextEditorNodesArray,
 }) => {
 	const reactQuillRef = React.useRef();
 
-	const handleTextEditorOnKeydown = (e) => {
+	const handleTextEditorOnKeyUp = (e) => {
 		if (reactQuillRef.current) {
 			const reactQuillChildNodesArray = Array.from(
 				reactQuillRef.current.editor.root.childNodes
@@ -24,7 +24,7 @@ const TextEditor = ({
 				};
 			});
 
-			textEditorOnKeyDownLogic(textEditorNodesArray);
+			textEditorOnKeyUpLogic(textEditorNodesArray);
 		}
 	};
 
@@ -34,11 +34,15 @@ const TextEditor = ({
 		reactQuillRef.current.editor.root.removeChild(initialPTag);
 
 		if (initialTextEditorNodesArray) {
-			initialTextEditorNodesArray.forEach(({ node_type, node_value }) => {
+			initialTextEditorNodesArray.forEach((node) => {
 				const pTag = document.createElement("p");
 
-				if (node_type === "P") {
-					pTag.textContent = node_value;
+				if (node.node_type === "P" || node.nodeType === "P") {
+					const textContentValue = node.node_value
+						? node.node_value
+						: node.nodeValue;
+
+					pTag.textContent = textContentValue;
 
 					reactQuillRef.current.editor.root.append(pTag);
 				} else {
@@ -56,7 +60,7 @@ const TextEditor = ({
 		<TextEditorStyle>
 			<ReactQuill
 				ref={reactQuillRef}
-				onKeyDown={handleTextEditorOnKeydown}
+				onKeyUp={handleTextEditorOnKeyUp}
 				formats={[]}
 			/>
 		</TextEditorStyle>
