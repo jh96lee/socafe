@@ -10,7 +10,7 @@ export const MainPostParentCommentStyle = styled.div`
 	}
 
 	& > *:not(:first-child) {
-		padding-left: 5.4rem;
+		padding-left: 5rem;
 	}
 `;
 

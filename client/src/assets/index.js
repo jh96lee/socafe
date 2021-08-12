@@ -16,6 +16,7 @@ import { ReactComponent as Bolt } from "./general/bolt.svg";
 import { ReactComponent as Submit } from "./general/submit.svg";
 import { ReactComponent as Smile } from "./general/smile.svg";
 import { ReactComponent as More } from "./general/more.svg";
+import { ReactComponent as MoreHorizontal } from "./general/more-horizontal.svg";
 import { ReactComponent as Edit } from "./general/edit.svg";
 import { ReactComponent as Open } from "./general/open.svg";
 import { ReactComponent as DoubleArrowLeft } from "./general/double-arrow-left.svg";
@@ -28,6 +29,7 @@ import { ReactComponent as PlusAlt } from "./general/plus-alt.svg";
 import { ReactComponent as ColoredImages } from "./general/colored-images.svg";
 import { ReactComponent as Images } from "./general/images.svg";
 import { ReactComponent as CloseAlt } from "./general/close-alt.svg";
+import { ReactComponent as TrashOutline } from "./general/trash-outline.svg";
 
 import { ReactComponent as SocafeDark } from "./logo/socafe-dark.svg";
 import { ReactComponent as SocafeLight } from "./logo/socafe-light.svg";
@@ -82,6 +84,8 @@ import { ReactComponent as PasswordFilled } from "./user/password-filled.svg";
 export {
 	Complete,
 	StarFilled,
+	MoreHorizontal,
+	TrashOutline,
 	PasswordFilled,
 	SearchAlt,
 	DoubleArrowLeft,

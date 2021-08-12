@@ -17,8 +17,6 @@ import { Right, Left } from "../../../../assets";
 const PostImages = ({ postImagesArray }) => {
 	const [currentImageIndex, setCurrentImageIndex] = React.useState(0);
 
-	console.log(postImagesArray);
-
 	const { isPostImageDeleting } = useSelector(
 		(state) => state.postImagesReducer
 	);

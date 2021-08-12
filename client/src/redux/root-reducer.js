@@ -13,8 +13,8 @@ import userFollowingTopicsReducer from "./user-following-topics/userFollowingTop
 
 import mainPostReducer from "./main-post/mainPostReducer";
 import mainPostCommentInputReducer from "./main-post-comment-input/mainPostCommentInputReducer";
-import mainPostMyParentCommentsReducer from "./main-post-comments/main-post-my-parent-comments/mainPostMyParentCommentsReducer";
-import mainPostOtherUsersCommentsReducer from "./main-post-comments/main-post-other-users-comments/mainPostOtherUsersCommentsReducer";
+import mainPostMyParentCommentsReducer from "./main-post-all-comments/main-post-my-parent-comments/mainPostMyParentCommentsReducer";
+import mainPostOtherParentCommentsReducer from "./main-post-all-comments/main-post-other-parent-comments/mainPostOtherParentCommentsReducer";
 
 import postImagesReducer from "./add-post/post-images/postImagesReducer";
 import postTopicsReducer from "./add-post/post-topics/postTopicsReducer";
@@ -29,10 +29,14 @@ import editProfileReducer from "./edit-profile/editProfileReducer";
 
 import changePasswordReducer from "./change-password/changePasswordReducer";
 
+import commentNotificationsReducer from "./notifications/comment-notifications/commentNotificationsReducer";
+
 const rootReducer = combineReducers({
 	userReducer,
 
 	changePasswordReducer,
+
+	commentNotificationsReducer,
 
 	editProfileReducer,
 
@@ -47,7 +51,7 @@ const rootReducer = combineReducers({
 	mainPostReducer,
 	mainPostCommentInputReducer,
 	mainPostMyParentCommentsReducer,
-	mainPostOtherUsersCommentsReducer,
+	mainPostOtherParentCommentsReducer,
 
 	userLoginReducer,
 

@@ -2,12 +2,8 @@ const initialState = {
 	mainPostID: null,
 	mainPostComment: null,
 	mainPostCommentParentCommentID: null,
-	// REVIEW: use this data to figure out who will receive comment related notification
-	// REVIEW: does not matter if the username is appended or the user manually removed the appended username,
-	// REVIEW: notification that someone replied to his or her comment needs to be sent
 	mainPostCommentRepliedCommentID: null,
-	// REVIEW: this state is simply used for appending username to contenteditable
-	mainPostCommentReplyingToUsername: null,
+	mainPostCommentRepliedCommentUsername: null,
 	isMainPostCommentPosting: false,
 };
 
@@ -43,10 +39,10 @@ const mainPostCommentInputReducer = (state = initialState, action) => {
 				...state,
 				mainPostCommentRepliedCommentID: action.payload,
 			};
-		case "SET_MAIN_POST_COMMENT_REPLYING_TO_USERNAME":
+		case "SET_MAIN_POST_COMMENT_REPLIED_COMMENT_USERNAME":
 			return {
 				...state,
-				mainPostCommentReplyingToUsername: action.payload,
+				mainPostCommentRepliedCommentUsername: action.payload,
 			};
 		case "RESET_POSTED_MAIN_POST_COMMENT":
 			return {
@@ -59,7 +55,8 @@ const mainPostCommentInputReducer = (state = initialState, action) => {
 				mainPostComment: null,
 				mainPostCommentParentCommentID: null,
 				mainPostCommentRepliedCommentID: null,
-				mainPostCommentReplyingToUsername: null,
+				mainPostCommentRepliedCommentUsername: null,
+				isMainPostCommentPosting: false,
 			};
 		default:
 			return state;

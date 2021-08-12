@@ -33,7 +33,11 @@ const MainPostCommentsInput = () => {
 		loadMoreButtonOnClickLogic,
 	} = usePagination("/search/users", 1, false);
 
-	const { mainPostCommentReplyingToUsername } = useSelector(
+	const { mainPostCommentRepliedCommentUsername } = useSelector(
+		(state) => state.mainPostCommentInputReducer
+	);
+
+	const { mainPostComment } = useSelector(
 		(state) => state.mainPostCommentInputReducer
 	);
 
@@ -216,7 +220,7 @@ const MainPostCommentsInput = () => {
 	}, [currentPage]);
 
 	React.useEffect(() => {
-		if (mainPostCommentReplyingToUsername) {
+		if (mainPostCommentRepliedCommentUsername) {
 			const contentEditableChildNodesArray = Array.from(
 				mainPostCommentsContentEditableRef.current.childNodes
 			);
@@ -227,13 +231,19 @@ const MainPostCommentsInput = () => {
 
 			const paragraphTag = document.createElement("p");
 
-			paragraphTag.textContent = `@${mainPostCommentReplyingToUsername}`;
+			paragraphTag.textContent = `@${mainPostCommentRepliedCommentUsername}`;
 
 			paragraphTag.setAttribute("data-comment-mention-type", "reply");
 
 			mainPostCommentsContentEditableRef.current.append(paragraphTag);
 		}
-	}, [mainPostCommentReplyingToUsername]);
+	}, [mainPostCommentRepliedCommentUsername]);
+
+	React.useEffect(() => {
+		if (mainPostComment) {
+			mainPostCommentsContentEditableRef.current.textContent = "";
+		}
+	}, [mainPostComment]);
 
 	return (
 		<MainPostCommentsInputStyle>

@@ -1,5 +1,7 @@
 import axios from "axios";
 
+import { postCommentNotifications } from "../notifications/comment-notifications/commentNotificationsAction";
+
 import { fetchToken } from "../../utils/cookie/fetchToken";
 
 const startPostingMainPostComment = () => ({
@@ -30,8 +32,10 @@ export const setMainPostCommentRepliedCommentID = (repliedCommentID) => ({
 	payload: repliedCommentID,
 });
 
-export const setMainPostCommentReplyingToUsername = (replyingToUsername) => ({
-	type: "SET_MAIN_POST_COMMENT_REPLYING_TO_USERNAME",
+export const setMainPostCommentRepliedCommentUsername = (
+	replyingToUsername
+) => ({
+	type: "SET_MAIN_POST_COMMENT_REPLIED_COMMENT_USERNAME",
 	payload: replyingToUsername,
 });
 
@@ -39,6 +43,7 @@ export const resetPostedMainPostComment = () => ({
 	type: "RESET_POSTED_MAIN_POST_COMMENT",
 });
 
+// TODO: used for resetting main post comment once it has been added to my parent comments section
 export const resetMainPostComment = () => ({
 	type: "RESET_MAIN_POST_COMMENT",
 });
@@ -77,7 +82,6 @@ export const postMainPostComment =
 				data: {
 					mainPostID,
 					mainPostCommentParentCommentID,
-					mainPostCommentRepliedCommentID,
 					mainPostCommentNodesArray,
 				},
 				headers: {
@@ -86,17 +90,15 @@ export const postMainPostComment =
 			});
 
 			const {
-				comment_id,
+				id,
 				created_at,
-				user_id,
-				username,
-				avatar_url,
-				post_id,
-				parent_comment_id,
 				comment_nodes_array,
+				comment_is_liked,
 				comment_total_likes,
 				comment_total_replies,
-				comment_is_liked,
+				comment_user,
+				parent_comment_id,
+				post_id,
 				success,
 				error,
 			} = data;
@@ -106,21 +108,29 @@ export const postMainPostComment =
 			} else if (success) {
 				dispatch(
 					postedMainPostComment({
-						comment_id,
+						id,
 						created_at,
-						user_id,
-						username,
-						avatar_url,
-						post_id,
-						parent_comment_id,
 						comment_nodes_array,
+						comment_is_liked,
 						comment_total_likes,
 						comment_total_replies,
-						comment_is_liked,
+						comment_user,
+						parent_comment_id,
+						post_id,
 					})
 				);
 
 				dispatch(endPostingMainPostComment());
+
+				dispatch(
+					postCommentNotifications(
+						id,
+						post_id,
+						parent_comment_id,
+						mainPostCommentRepliedCommentID,
+						comment_nodes_array
+					)
+				);
 			}
 		} catch (error) {
 			dispatch(endPostingMainPostComment());
