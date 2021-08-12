@@ -6,7 +6,7 @@ const getMyParentComments = async (req, res) => {
 	const userID = parseInt(req.params.userID);
 	const postID = parseInt(req.params.postID);
 
-	const myCommentsArray = [];
+	const myParentCommentsArray = [];
 
 	const myParentCommentsArrayData = await pool.queryToDatabase(
 		`
@@ -14,19 +14,20 @@ const getMyParentComments = async (req, res) => {
         id,
 		created_at,
 		user_id,
-        parent_comment_id
+        parent_comment_id,
+		post_id
         FROM comments
         WHERE user_id=$1 AND post_id=$2 AND parent_comment_id IS NULL;
         `,
 		[userID, postID]
 	);
 
-	for (let myComment of myParentCommentsArrayData.rows) {
-		const { id, created_at, user_id, parent_comment_id } = myComment;
+	for (let myParentComment of myParentCommentsArrayData.rows) {
+		const { id, user_id } = myParentComment;
 
-		const mainPostCommentUserData = await UserRepo.getUserByID(user_id);
+		const myParentCommentUserData = await UserRepo.getUserByID(user_id);
 
-		const mainPostCommentNodesArrayData = await pool.queryToDatabase(
+		const myParentCommentNodesArrayData = await pool.queryToDatabase(
 			`
 			SELECT
 			node_type, 
@@ -37,7 +38,7 @@ const getMyParentComments = async (req, res) => {
 			[id]
 		);
 
-		const mainPostCommentTotalLikesData = await pool.queryToDatabase(
+		const myParentCommentTotalLikesData = await pool.queryToDatabase(
 			`
 			SELECT 
 			COUNT(*)::INT
@@ -47,7 +48,7 @@ const getMyParentComments = async (req, res) => {
 			[id]
 		);
 
-		const mainPostCommentTotalRepliesData = await pool.queryToDatabase(
+		const myParentCommentTotalRepliesData = await pool.queryToDatabase(
 			`
 			SELECT 
 			COUNT(*)::INT
@@ -57,7 +58,7 @@ const getMyParentComments = async (req, res) => {
 			[id]
 		);
 
-		const mainPostCommentIsLikedData = await pool.queryToDatabase(
+		const myParentCommentIsLikedData = await pool.queryToDatabase(
 			`
 			SELECT
 			id
@@ -67,20 +68,17 @@ const getMyParentComments = async (req, res) => {
 			[userID, id]
 		);
 
-		myCommentsArray.push({
-			comment_id: id,
-			created_at,
-			...mainPostCommentUserData,
-			post_id: postID,
-			parent_comment_id,
-			comment_nodes_array: mainPostCommentNodesArrayData.rows,
-			comment_total_likes: mainPostCommentTotalLikesData.rows[0].count,
-			comment_total_replies: mainPostCommentTotalRepliesData.rows[0].count,
-			comment_is_liked: mainPostCommentIsLikedData.rows[0] ? true : false,
+		myParentCommentsArray.push({
+			...myParentComment,
+			comment_user: myParentCommentUserData,
+			comment_nodes_array: myParentCommentNodesArrayData.rows,
+			comment_total_likes: myParentCommentTotalLikesData.rows[0].count,
+			comment_total_replies: myParentCommentTotalRepliesData.rows[0].count,
+			comment_is_liked: myParentCommentIsLikedData.rows[0] ? true : false,
 		});
 	}
 
-	res.send(myCommentsArray);
+	res.send(myParentCommentsArray);
 };
 
 module.exports = getMyParentComments;

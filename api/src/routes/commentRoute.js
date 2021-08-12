@@ -3,10 +3,11 @@ const authenticateToken = require("../middlewares/user/authenticateToken");
 
 const uploadPostComment = require("../controllers/comment/uploadPostComment");
 const getMyParentComments = require("../controllers/comment/getMyParentComments");
-const getOtherUsersParentComments = require("../controllers/comment/getOtherUsersParentComments");
+const getOtherParentComments = require("../controllers/comment/getOtherParentComments");
 const getParentCommentReplies = require("../controllers/comment/getParentCommentReplies");
-const likeComment = require("../controllers/post/likeComment");
-const unlikeComment = require("../controllers/post/unlikeComment");
+const likeComment = require("../controllers/comment/likeComment");
+const unlikeComment = require("../controllers/comment/unlikeComment");
+const deleteComment = require("../controllers/comment/deleteComment");
 
 const commentRouter = express.Router();
 
@@ -18,12 +19,12 @@ commentRouter.post(
 );
 
 // TODO: fetch my parent comments
-commentRouter.get("/comment/my/:userID/:postID", getMyParentComments);
+commentRouter.get("/comment/parent/my/:userID/:postID", getMyParentComments);
 
 // TODO: fetch my other users' parent comments
 commentRouter.get(
-	"/comment/other/:userID/:postID",
-	getOtherUsersParentComments
+	"/comment/parent/other/:userID/:postID",
+	getOtherParentComments
 );
 
 // TODO: fetch my parent comment's replies
@@ -38,6 +39,12 @@ commentRouter.delete(
 	"/comment/unlike/:commentID",
 	authenticateToken,
 	unlikeComment
+);
+
+commentRouter.delete(
+	"/comment/delete/:commentID",
+	authenticateToken,
+	deleteComment
 );
 
 module.exports = commentRouter;
