@@ -7,7 +7,8 @@ const usePagination = (
 	pageSize = 3,
 	setStateViaRedux = false,
 	setStateInitialContentsAction = null,
-	setStateExtraContentsAction = null
+	setStateExtraContentsAction = null,
+	isExtraContentAppendedAtTheBottom
 ) => {
 	const dispatch = useDispatch();
 
@@ -43,17 +44,21 @@ const usePagination = (
 
 		const { error } = result.data;
 
+		console.log(result.data);
+
 		if (!error) {
 			const { contents, next } = result.data;
 
 			if (isInitialFetch) {
-				setStateViaRedux === "redux"
+				setStateViaRedux
 					? dispatch(setStateInitialContentsAction(contents))
 					: setContents(contents);
 			} else {
-				setStateViaRedux === "redux"
+				setStateViaRedux
 					? dispatch(setStateExtraContentsAction(contents))
-					: setContents((prevState) => [...prevState, ...contents]);
+					: isExtraContentAppendedAtTheBottom
+					? setContents((prevState) => [...prevState, ...contents])
+					: setContents((prevState) => [...contents, ...prevState]);
 			}
 
 			setNextAPIEndpoint(next);
@@ -72,7 +77,9 @@ const usePagination = (
 
 	return {
 		contents,
+		setContents,
 		currentPage,
+		setCurrentPage,
 		nextAPIEndpoint,
 		isInitialContentsLoaded,
 		isExtraContentsLoading,

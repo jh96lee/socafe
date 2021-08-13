@@ -6,7 +6,7 @@ import MainPostCommentEnd from "./MainPostCommentEnd";
 
 import { MainPostCommentStyle } from "../styles/MainPostCommentStyle";
 
-const MainPostComment = ({ comment }) => {
+const MainPostComment = ({ comment, setDeletedCommentID }) => {
 	const {
 		id,
 		created_at,
@@ -34,6 +34,8 @@ const MainPostComment = ({ comment }) => {
 				commentUserID={comment_user.id}
 				isCommentLikedProp={comment_is_liked}
 				commentTotalLikesProp={comment_total_likes}
+				parentCommentID={parent_comment_id}
+				setDeletedCommentID={setDeletedCommentID}
 			/>
 		</MainPostCommentStyle>
 	);

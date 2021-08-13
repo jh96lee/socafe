@@ -12,9 +12,8 @@ import userFollowTopicsReducer from "./user-follow-topics/userFollowTopicsReduce
 import userFollowingTopicsReducer from "./user-following-topics/userFollowingTopicsReducer";
 
 import mainPostReducer from "./main-post/mainPostReducer";
+import mainPostCommentsReducer from "./main-post-comments/mainPostCommentsReducer";
 import mainPostCommentInputReducer from "./main-post-comment-input/mainPostCommentInputReducer";
-import mainPostMyParentCommentsReducer from "./main-post-all-comments/main-post-my-parent-comments/mainPostMyParentCommentsReducer";
-import mainPostOtherParentCommentsReducer from "./main-post-all-comments/main-post-other-parent-comments/mainPostOtherParentCommentsReducer";
 
 import postImagesReducer from "./add-post/post-images/postImagesReducer";
 import postTopicsReducer from "./add-post/post-topics/postTopicsReducer";
@@ -49,9 +48,8 @@ const rootReducer = combineReducers({
 	postUploadReducer,
 
 	mainPostReducer,
+	mainPostCommentsReducer,
 	mainPostCommentInputReducer,
-	mainPostMyParentCommentsReducer,
-	mainPostOtherParentCommentsReducer,
 
 	userLoginReducer,
 

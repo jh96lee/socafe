@@ -33,9 +33,10 @@ const MainPostCommentsInput = () => {
 		loadMoreButtonOnClickLogic,
 	} = usePagination("/search/users", 1, false);
 
-	const { mainPostCommentRepliedCommentUsername } = useSelector(
-		(state) => state.mainPostCommentInputReducer
-	);
+	const {
+		mainPostCommentRepliedCommentUsername,
+		mainPostCommentRepliedCommentID,
+	} = useSelector((state) => state.mainPostCommentInputReducer);
 
 	const { mainPostComment } = useSelector(
 		(state) => state.mainPostCommentInputReducer
@@ -237,7 +238,7 @@ const MainPostCommentsInput = () => {
 
 			mainPostCommentsContentEditableRef.current.append(paragraphTag);
 		}
-	}, [mainPostCommentRepliedCommentUsername]);
+	}, [mainPostCommentRepliedCommentUsername, mainPostCommentRepliedCommentID]);
 
 	React.useEffect(() => {
 		if (mainPostComment) {

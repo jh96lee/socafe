@@ -11,6 +11,7 @@ const IconElementStyle = styled.div`
 	display: flex;
 	justify-content: center;
 	align-items: center;
+	margin: ${(props) => props.elementMargin};
 	padding: ${(props) => props.elementPadding || "0.8rem"};
 	outline: none;
 	border: none;

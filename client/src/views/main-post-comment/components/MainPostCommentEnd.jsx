@@ -11,6 +11,8 @@ const MainPostCommentEnd = ({
 	commentUserID,
 	isCommentLikedProp,
 	commentTotalLikesProp,
+	parentCommentID,
+	setDeletedCommentID,
 }) => {
 	const { user } = useSelector((state) => state.userReducer);
 
@@ -19,7 +21,11 @@ const MainPostCommentEnd = ({
 	return (
 		<MainPostCommentEndStyle>
 			{userID === commentUserID && (
-				<MainPostCommentMore commentID={commentID} />
+				<MainPostCommentMore
+					commentID={commentID}
+					parentCommentID={parentCommentID}
+					setDeletedCommentID={setDeletedCommentID}
+				/>
 			)}
 
 			<MainPostCommentLike

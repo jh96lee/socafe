@@ -11,7 +11,7 @@ import {
 	TextArea,
 	IconElement,
 } from "../../shared";
-import { MainPostAllComments } from "../../main-post-all-comments";
+import { MainPostComments } from "../../main-post-comments";
 import { MainPostCommentsInput } from "../../main-post-comments-input";
 import MainPostActions from "./MainPostActions";
 
@@ -118,7 +118,7 @@ const MainPost = () => {
 
 						<PostTopics postTopicsArray={mainPost.post_topics} />
 
-						<MainPostAllComments />
+						<MainPostComments />
 					</MainPostOverflowStyle>
 
 					{/* REVIEW: 5th child */}

@@ -1,40 +1,24 @@
 import * as React from "react";
-import { useSelector } from "react-redux";
-import axios from "axios";
 
 import { Loader } from "../../shared";
 import { MainPostComment } from "../../main-post-comment";
 
 import { MainPostCommentRepliesStyle } from "../styles/MainPostCommentRepliesStyle";
 
-const MainPostCommentReplies = ({ commentID }) => {
-	const [replies, setReplies] = React.useState([]);
-	const [isRepliesLoaded, setIsRepliesLoaded] = React.useState(false);
-
-	const { user } = useSelector((state) => state.userReducer);
-
-	const userID = user ? user.id : 0;
-
-	const fetchCommentReplies = async () => {
-		setIsRepliesLoaded(false);
-
-		const { data } = await axios({
-			method: "GET",
-			url: `http://localhost:8080/comment/reply/${userID}/${commentID}`,
-		});
-
-		const { error } = data;
-
-		if (!error) {
-			setReplies(data);
-		}
-
-		setIsRepliesLoaded(true);
-	};
+const MainPostCommentReplies = ({ replies, setReplies, isRepliesLoaded }) => {
+	const [deletedCommentID, setDeletedCommentID] = React.useState(false);
 
 	React.useEffect(() => {
-		fetchCommentReplies();
-	}, []);
+		if (deletedCommentID) {
+			setReplies((prevState) => {
+				return prevState.filter((comment) => {
+					return comment.id !== deletedCommentID;
+				});
+			});
+		}
+
+		setDeletedCommentID(null);
+	}, [deletedCommentID]);
 
 	return (
 		<MainPostCommentRepliesStyle>
@@ -45,6 +29,7 @@ const MainPostCommentReplies = ({ commentID }) => {
 							<MainPostComment
 								key={`main-post-comment__reply-${reply.id}`}
 								comment={reply}
+								setDeletedCommentID={setDeletedCommentID}
 							/>
 						);
 					})}

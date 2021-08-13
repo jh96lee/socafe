@@ -3,7 +3,7 @@ import { useDispatch } from "react-redux";
 
 import { DropdownMenu } from "../../shared";
 
-import { removeMyParentComment } from "../../../redux/main-post-all-comments/main-post-my-parent-comments/mainPostMyParentCommentsAction";
+import { removePostComment } from "../../../redux/main-post-comments/mainPostCommentsAction";
 
 import { useDropdown } from "../../../hooks";
 
@@ -13,7 +13,11 @@ import { MainPostCommentMoreStyle } from "../styles/MainPostCommentMoreStyle";
 
 import { MoreHorizontal, TrashOutline } from "../../../assets";
 
-const MainPostCommentMore = ({ commentID }) => {
+const MainPostCommentMore = ({
+	commentID,
+	parentCommentID,
+	setDeletedCommentID,
+}) => {
 	const dispatch = useDispatch();
 
 	const { isDropdownMenuOpen, setIsDropdownMenuOpen } = useDropdown(
@@ -34,7 +38,11 @@ const MainPostCommentMore = ({ commentID }) => {
 				const { success } = data;
 
 				if (success) {
-					dispatch(removeMyParentComment(commentID));
+					if (!parentCommentID) {
+						dispatch(removePostComment(commentID));
+					} else {
+						setDeletedCommentID(commentID);
+					}
 				}
 			},
 		},

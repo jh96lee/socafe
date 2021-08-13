@@ -21,7 +21,6 @@ const SearchbarInput = ({ searchType }) => {
 		currentPage,
 		contents,
 		nextAPIEndpoint,
-		isExtraContentsLoading,
 		fetchContents,
 		loadMoreButtonOnClickLogic,
 	} = usePagination(defaultSearchEndpoint, 5);

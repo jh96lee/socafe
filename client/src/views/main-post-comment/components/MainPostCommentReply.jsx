@@ -16,8 +16,6 @@ const MainPostCommentReply = ({ commentID, parentCommentID, username }) => {
 		const commentParentID =
 			parentCommentID === null ? commentID : parentCommentID;
 
-		console.log(commentParentID);
-
 		dispatch(setMainPostCommentParentCommentID(commentParentID));
 
 		dispatch(setMainPostCommentRepliedCommentID(commentID));
