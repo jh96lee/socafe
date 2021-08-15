@@ -39,10 +39,6 @@ export const setMainPostCommentRepliedCommentUsername = (
 	payload: replyingToUsername,
 });
 
-export const resetPostedMainPostComment = () => ({
-	type: "RESET_POSTED_MAIN_POST_COMMENT",
-});
-
 // TODO: used for resetting main post comment once it has been added to my parent comments section
 export const resetMainPostComment = () => ({
 	type: "RESET_MAIN_POST_COMMENT",

@@ -30,6 +30,9 @@ import changePasswordReducer from "./change-password/changePasswordReducer";
 
 import commentNotificationsReducer from "./notifications/comment-notifications/commentNotificationsReducer";
 
+import storyBackgroundReducer from "./add-story/story-background/storyBackgroundReducer";
+import storyTextsReducer from "./add-story/story-texts/storyTextsReducer";
+
 const rootReducer = combineReducers({
 	userReducer,
 
@@ -61,6 +64,9 @@ const rootReducer = combineReducers({
 
 	userProfileOwnerReducer,
 	userProfilePostsReducer,
+
+	storyBackgroundReducer,
+	storyTextsReducer,
 });
 
 export default rootReducer;

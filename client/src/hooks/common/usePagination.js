@@ -44,8 +44,6 @@ const usePagination = (
 
 		const { error } = result.data;
 
-		console.log(result.data);
-
 		if (!error) {
 			const { contents, next } = result.data;
 

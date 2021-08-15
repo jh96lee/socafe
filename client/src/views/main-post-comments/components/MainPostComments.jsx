@@ -18,7 +18,7 @@ import { MainPostAllCommentsStyle } from "../styles/MainPostAllCommentsStyle";
 
 import { Plus } from "../../../assets";
 
-const MainPostAllComments = () => {
+const MainPostComments = () => {
 	const dispatch = useDispatch();
 
 	const { postComments } = useSelector(
@@ -43,7 +43,7 @@ const MainPostAllComments = () => {
 		isInitialContentsLoaded,
 	} = usePagination(
 		`/comment/parent/${postID}/${userID}`,
-		2,
+		5,
 		true,
 		fetchedPostComments,
 		fetchedExtraPostComments
@@ -86,12 +86,12 @@ const MainPostAllComments = () => {
 						return (
 							<MainPostParentComment
 								key={`post-comment__${comment.id}`}
-								comment={comment}
+								parentComment={comment}
 							/>
 						);
 					})}
 
-					{currentPage > 0 && nextAPIEndpoint === null ? null : (
+					{nextAPIEndpoint === null || postComments.length === 0 ? null : (
 						<IconElement
 							onClick={handleMyParentCommentsLoadMoreButtonOnClick}
 							iconElementStyleObject={{
@@ -109,4 +109,4 @@ const MainPostAllComments = () => {
 	);
 };
 
-export default MainPostAllComments;
+export default MainPostComments;

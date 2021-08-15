@@ -35,7 +35,7 @@ const MainPostCommentReplies = ({ replies, setReplies, isRepliesLoaded }) => {
 					})}
 				</React.Fragment>
 			) : (
-				<Loader />
+				<Loader loaderSize="2.7rem" loaderBorderSize="0.38rem" />
 			)}
 		</MainPostCommentRepliesStyle>
 	);

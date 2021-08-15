@@ -7,7 +7,8 @@ import {
 
 const HomePostImages = ({ postImagesArray, onClick }) => {
 	const numberOfImages = postImagesArray.length;
-	const isFirstImageWide = postImagesArray[0].width > postImagesArray[0].height;
+	const isFirstImageWide =
+		postImagesArray[0].image_width > postImagesArray[0].image_height;
 
 	const homePostImageGrid = (numberOfImages, isFirstImageWide) => {
 		if (numberOfImages === 1) {
@@ -45,7 +46,7 @@ const HomePostImages = ({ postImagesArray, onClick }) => {
 				return (
 					<HomePostImageStyle
 						key={`home-post-image__${idx}`}
-						homePostImageURL={image.url}
+						homePostImageURL={image.image_url}
 					/>
 				);
 			})}

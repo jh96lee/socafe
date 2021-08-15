@@ -5,4 +5,5 @@ export const MainPostCommentRepliesStyle = styled.div`
 	flex-direction: column;
 	gap: 2.5rem;
 	width: 100%;
+	min-height: 3rem;
 `;

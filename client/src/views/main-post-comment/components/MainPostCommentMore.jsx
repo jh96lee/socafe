@@ -14,7 +14,9 @@ import { MainPostCommentMoreStyle } from "../styles/MainPostCommentMoreStyle";
 import { MoreHorizontal, TrashOutline } from "../../../assets";
 
 const MainPostCommentMore = ({
+	// REVIEW: id of this comment
 	commentID,
+	// REVIEW: parent comment id of this comment
 	parentCommentID,
 	setDeletedCommentID,
 }) => {

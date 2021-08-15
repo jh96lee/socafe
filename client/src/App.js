@@ -8,6 +8,7 @@ import { Header, Navigation } from "./views/navigation";
 import {
 	HomePage,
 	AddPostPage,
+	AddStoryPage,
 	UserProfilePage,
 	UserLoginPage,
 	UserRegisterPage,
@@ -83,6 +84,10 @@ function App() {
 
 					<Route exact path="/add/post">
 						{user ? <AddPostPage /> : <Redirect to="/login" />}
+					</Route>
+
+					<Route exact path="/add/story">
+						<AddStoryPage />
 					</Route>
 
 					<Route path="/edit/profile">

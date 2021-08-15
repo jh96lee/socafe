@@ -3,6 +3,9 @@ import { ReactComponent as Checkmark } from "./form/checkmark.svg";
 import { ReactComponent as CheckmarkCircleFilled } from "./form/checkmark-circle-filled.svg";
 import { ReactComponent as Plus } from "./form/plus.svg";
 import { ReactComponent as SearchAlt } from "./form/search-alt.svg";
+import { ReactComponent as Bold } from "./form/bold.svg";
+import { ReactComponent as Italics } from "./form/italics.svg";
+import { ReactComponent as Underline } from "./form/underline.svg";
 
 import { ReactComponent as Congratulation } from "./general/congratulation.svg";
 import { ReactComponent as Up } from "./general/up.svg";
@@ -158,4 +161,7 @@ export {
 	MarketplaceOutline,
 	FeedbackFilled,
 	FeedbackOutline,
+	Bold,
+	Italics,
+	Underline,
 };

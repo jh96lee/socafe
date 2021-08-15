@@ -44,11 +44,6 @@ const mainPostCommentInputReducer = (state = initialState, action) => {
 				...state,
 				mainPostCommentRepliedCommentUsername: action.payload,
 			};
-		case "RESET_POSTED_MAIN_POST_COMMENT":
-			return {
-				...state,
-				mainPostComment: null,
-			};
 		case "RESET_MAIN_POST_COMMENT":
 			return {
 				...state,
