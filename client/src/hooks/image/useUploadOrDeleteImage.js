@@ -9,6 +9,7 @@ const useUploadOrDeleteImage = () => {
 	const [imageErrorMessage, setImageErrorMessage] = React.useState(null);
 	const [imageSuccessMessage, setImageSuccessMessage] = React.useState(null);
 
+	// REVIEW: insert this into input with file type's onchange event
 	const uploadImageLogic = async (e) => {
 		const filesArray = Array.from(e.target.files);
 
@@ -55,6 +56,8 @@ const useUploadOrDeleteImage = () => {
 		}
 	};
 
+	// REVIEW: insert this into any image deleting function
+	// REVIEW: it will then setState the ID of the deleted image ID and now we can use that to filter that image off of an array
 	const deleteImageLogic = async (imageID) => {
 		setIsImageDeleting(true);
 		setImageErrorMessage(null);

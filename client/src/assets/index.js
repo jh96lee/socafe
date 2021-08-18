@@ -6,6 +6,7 @@ import { ReactComponent as SearchAlt } from "./form/search-alt.svg";
 import { ReactComponent as Bold } from "./form/bold.svg";
 import { ReactComponent as Italics } from "./form/italics.svg";
 import { ReactComponent as Underline } from "./form/underline.svg";
+import { ReactComponent as TextFilled } from "./form/text-filled.svg";
 
 import { ReactComponent as Congratulation } from "./general/congratulation.svg";
 import { ReactComponent as Up } from "./general/up.svg";
@@ -107,6 +108,7 @@ export {
 	Moon,
 	ClockFilled,
 	Remove,
+	TextFilled,
 	Bolt,
 	Submit,
 	CloseAlt,

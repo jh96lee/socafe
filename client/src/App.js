@@ -16,6 +16,7 @@ import {
 } from "./pages";
 import { AddPostIcon } from "./views/shared";
 import { MainPost } from "./views/main-post";
+import { Story } from "./views/story";
 
 import GlobalStyle from "./styles/GlobalStyle";
 
@@ -72,6 +73,10 @@ function App() {
 					{/* REVIEW: 2 ways it can be rendered */}
 					<Route exact path="/post/:postID">
 						<MainPost />
+					</Route>
+
+					<Route exact path="/story/:storyID">
+						<Story />
 					</Route>
 
 					<Route exact path="/register">

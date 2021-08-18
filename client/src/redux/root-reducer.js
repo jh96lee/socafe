@@ -31,7 +31,9 @@ import changePasswordReducer from "./change-password/changePasswordReducer";
 import commentNotificationsReducer from "./notifications/comment-notifications/commentNotificationsReducer";
 
 import storyBackgroundReducer from "./add-story/story-background/storyBackgroundReducer";
-import storyTextsReducer from "./add-story/story-texts/storyTextsReducer";
+import storyTextReducer from "./add-story/story-text/storyTextReducer";
+import storyImageReducer from "./add-story/story-image/storyImageReducer";
+import storyUploadReducer from "./add-story/story-upload/storyUploadReducer";
 
 const rootReducer = combineReducers({
 	userReducer,
@@ -66,7 +68,9 @@ const rootReducer = combineReducers({
 	userProfilePostsReducer,
 
 	storyBackgroundReducer,
-	storyTextsReducer,
+	storyTextReducer,
+	storyImageReducer,
+	storyUploadReducer,
 });
 
 export default rootReducer;

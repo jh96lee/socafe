@@ -2,7 +2,10 @@ import * as React from "react";
 import { useSelector, useDispatch } from "react-redux";
 import styled from "styled-components";
 
-import { setSelectedStoryBackground } from "../../../redux/add-story/story-background/storyBackgroundAction";
+import {
+	setSelectedStoryBackground,
+	fetchStoryBackgrounds,
+} from "../../../redux/add-story/story-background/storyBackgroundAction";
 
 import { AddContentStyle } from "../../../styles";
 
@@ -27,16 +30,20 @@ const AddStoryBackground = () => {
 		(state) => state.storyBackgroundReducer
 	);
 
+	React.useEffect(() => {
+		dispatch(fetchStoryBackgrounds());
+	}, []);
+
 	return (
 		<AddContentStyle>
 			<h3>Add Background</h3>
 
 			<StoryBackgroundsStyle>
-				{storyBackgrounds.map((background, idx) => {
+				{storyBackgrounds.map(({ id, background_gradient }, idx) => {
 					return (
 						<StoryBackgroundStyle
-							key={`story-background__${idx}`}
-							background={background}
+							key={`story-background__${id}`}
+							background={background_gradient}
 							onClick={() => {
 								dispatch(setSelectedStoryBackground(storyBackgrounds[idx]));
 							}}
