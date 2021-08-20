@@ -1,28 +1,29 @@
 import * as React from "react";
-import axios from "axios";
 import { useParams } from "react-router-dom";
-import { useSelector } from "react-redux";
-import styled from "styled-components";
+import { useSelector, useDispatch } from "react-redux";
 
-import { Loader } from "../../shared";
+import { Loader, UserMetadata } from "../../shared";
 import StoryImage from "./StoryImage";
 import StoryText from "./StoryText";
+import { ProgressBars } from "../../progress-bars";
 
-const StoryPreviewStyle = styled.div`
-	position: relative;
-	display: block;
-	margin: 3.5rem auto;
-	width: 48rem;
-	height: 65rem;
-	border: 2px solid var(--separator-2);
-	border-radius: 1rem;
-	overflow: hidden;
-	background: ${(props) => props.storyBackground};
-`;
+import { fetchActiveStory } from "../../../redux/story/active-story/activeStoryAction";
+
+import { convertPixelsToViewWidth } from "../../../utils/story/convertPixelsToViewWidth";
+
+import { StoryStyle, StoryHeaderStyle } from "../styles/StoryStyle";
 
 const Story = () => {
-	const [story, setStory] = React.useState({});
-	const [isStoryLoaded, setIsStoryLoaded] = React.useState(false);
+	const dispatch = useDispatch();
+
+	const { activeStory, isActiveStoryLoaded } = useSelector(
+		(state) => state.activeStoryReducer
+	);
+
+	const { story_background, story_image, story_text, story_owner } =
+		activeStory;
+
+	console.log(activeStory);
 
 	const storyID = parseInt(useParams().storyID);
 
@@ -30,37 +31,43 @@ const Story = () => {
 
 	const userID = user ? user.id : 0;
 
-	const fetchStory = async () => {
-		setIsStoryLoaded(false);
-
-		const { data } = await axios({
-			method: "GET",
-			url: `http://localhost:8080/story/${storyID}/${userID}`,
-		});
-
-		const { error } = data;
-
-		if (!error) {
-			setStory(data);
-		}
-
-		setIsStoryLoaded(true);
-	};
+	const storyRef = React.useRef();
 
 	React.useEffect(() => {
-		fetchStory();
-	}, []);
+		dispatch(fetchActiveStory(storyID, userID));
+	}, [storyID]);
 
-	return isStoryLoaded ? (
-		<StoryPreviewStyle
-			storyBackground={story.story_background.background_gradient}
+	return (
+		<StoryStyle
+			ref={storyRef}
+			storyBackground={
+				activeStory.story_background && story_background.background_gradient
+			}
+			responsiveStoryWidth={convertPixelsToViewWidth("480px", 600)}
+			responsiveStoryHeight={convertPixelsToViewWidth("720px", 600)}
 		>
-			<StoryImage storyImage={story.story_image} />
+			{isActiveStoryLoaded ? (
+				<React.Fragment>
+					<StoryHeaderStyle>
+						<ProgressBars />
 
-			<StoryText storyText={story.story_text} />
-		</StoryPreviewStyle>
-	) : (
-		<Loader />
+						<UserMetadata
+							userID={story_owner.id}
+							avatarURL={story_owner.avatar_url}
+							username={story_owner.username}
+							avatarSize="3.6rem"
+							usernameFontSize="1.4rem"
+						/>
+					</StoryHeaderStyle>
+
+					<StoryImage storyImage={story_image} />
+
+					<StoryText storyText={story_text} />
+				</React.Fragment>
+			) : (
+				<Loader isLoaderAbsolute={true} />
+			)}
+		</StoryStyle>
 	);
 };
 

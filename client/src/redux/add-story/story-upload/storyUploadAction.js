@@ -28,7 +28,7 @@ const setSuccessUploadErrorMessage = (message) => ({
 export const uploadStory = () => async (dispatch, getState) => {
 	const { selectedStoryBackground } = getState().storyBackgroundReducer;
 
-	const { uploadedStoryImage, imageTop, imageLeft } =
+	const { uploadedStoryImage, imageTop, imageLeft, isImageTransformed } =
 		getState().storyImageReducer;
 
 	const {
@@ -42,6 +42,7 @@ export const uploadStory = () => async (dispatch, getState) => {
 		selectedTextColorIndex,
 		textTop,
 		textLeft,
+		isTextTransformed,
 	} = getState().storyTextReducer;
 
 	if (uploadedStoryImage || storyTextContent.length > 0) {
@@ -60,7 +61,12 @@ export const uploadStory = () => async (dispatch, getState) => {
 			},
 			data: {
 				storyBackground: selectedStoryBackground,
-				storyImage: { uploadedStoryImage, imageTop, imageLeft },
+				storyImage: {
+					uploadedStoryImage,
+					imageTop,
+					imageLeft,
+					isImageTransformed,
+				},
 				storyText: {
 					storyTextContent,
 					isBold,
@@ -70,6 +76,7 @@ export const uploadStory = () => async (dispatch, getState) => {
 					selectedTextColor,
 					textTop,
 					textLeft,
+					isTextTransformed,
 				},
 			},
 		});

@@ -4,7 +4,12 @@ import styled from "styled-components";
 
 import { IconElement, Loader } from "../../shared";
 
-import { setUploadedStoryImage } from "../../../redux/add-story/story-image/storyImageAction";
+import {
+	setUploadedStoryImage,
+	setUploadedStoryImageLeft,
+	setUploadedStoryImageTop,
+	setIsUploadedStoryImageTransformed,
+} from "../../../redux/add-story/story-image/storyImageAction";
 
 import { useUploadOrDeleteImage } from "../../../hooks";
 
@@ -21,6 +26,7 @@ const StoryImageStyle = styled.div`
 	cursor: move;
 
 	& > img {
+		display: flex;
 		width: ${(props) => (props.isImageTall ? "auto" : "100%")};
 		height: ${(props) => (props.isImageTall ? "100%" : "auto")};
 		object-fit: cover;
@@ -31,7 +37,10 @@ const StoryImageStyle = styled.div`
 	}
 `;
 
-const StoryImage = ({ draggableElementRef, handleDraggableOnMouseDown }) => {
+const StoryPreviewImage = ({
+	draggableElementRef,
+	handleDraggableOnMouseDown,
+}) => {
 	const dispatch = useDispatch();
 
 	const { uploadedStoryImage } = useSelector(
@@ -50,6 +59,14 @@ const StoryImage = ({ draggableElementRef, handleDraggableOnMouseDown }) => {
 		draggableElementRef.current.style.left = "50%";
 
 		draggableElementRef.current.style.transform = "translate(-50%, -50%)";
+
+		return () => {
+			dispatch(setUploadedStoryImageTop(null));
+
+			dispatch(setUploadedStoryImageLeft(null));
+
+			dispatch(setIsUploadedStoryImageTransformed(null));
+		};
 	}, [uploadedStoryImage]);
 
 	const handleRemoveIconOnClick = () => {
@@ -98,4 +115,4 @@ const StoryImage = ({ draggableElementRef, handleDraggableOnMouseDown }) => {
 	);
 };
 
-export default StoryImage;
+export default StoryPreviewImage;

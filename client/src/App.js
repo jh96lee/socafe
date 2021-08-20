@@ -13,10 +13,13 @@ import {
 	UserLoginPage,
 	UserRegisterPage,
 	EditProfilePage,
+	StoryPage,
 } from "./pages";
 import { AddPostIcon } from "./views/shared";
 import { MainPost } from "./views/main-post";
 import { Story } from "./views/story";
+
+import { ProgressBar } from "./views/progress-bars";
 
 import GlobalStyle from "./styles/GlobalStyle";
 
@@ -75,8 +78,11 @@ function App() {
 						<MainPost />
 					</Route>
 
+					{/* <Route exact path="/story/:userID/:storyID">
+						<StoryPage />
+					</Route> */}
 					<Route exact path="/story/:storyID">
-						<Story />
+						<StoryPage />
 					</Route>
 
 					<Route exact path="/register">

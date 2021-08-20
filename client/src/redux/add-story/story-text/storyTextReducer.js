@@ -25,6 +25,7 @@ const initialState = {
 	selectedTextColorIndex: null,
 	textTop: null,
 	textLeft: null,
+	isTextTransformed: null,
 };
 
 const storyTextReducer = (state = initialState, action) => {
@@ -64,6 +65,11 @@ const storyTextReducer = (state = initialState, action) => {
 			return {
 				...state,
 				textLeft: action.payload,
+			};
+		case "SET_IS_TEXT_TRANSFORMED":
+			return {
+				...state,
+				isTextTransformed: action.payload,
 			};
 		default:
 			return state;

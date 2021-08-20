@@ -60,7 +60,7 @@ const AddStoryForm = () => {
 
 	React.useEffect(() => {
 		if (uploadedStoryID) {
-			history.push(`/story/${uploadedStoryID}`);
+			history.push(`/`);
 		}
 	}, [uploadedStoryID]);
 

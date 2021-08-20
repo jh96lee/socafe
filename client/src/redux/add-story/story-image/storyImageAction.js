@@ -12,3 +12,8 @@ export const setUploadedStoryImageLeft = (left) => ({
 	type: "SET_UPLOADED_STORY_IMAGE_LEFT",
 	payload: left,
 });
+
+export const setIsUploadedStoryImageTransformed = (boolean) => ({
+	type: "SET_IS_UPLOADED_STORY_IMAGE_TRANSFORMED",
+	payload: boolean,
+});

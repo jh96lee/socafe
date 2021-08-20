@@ -38,3 +38,8 @@ export const setStoryTextLeft = (left) => ({
 	type: "SET_STORY_TEXT_LEFT",
 	payload: left,
 });
+
+export const setIsTextTransformed = (boolean) => ({
+	type: "SET_IS_TEXT_TRANSFORMED",
+	payload: boolean,
+});

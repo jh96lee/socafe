@@ -2,29 +2,39 @@ import * as React from "react";
 import { useDispatch, useSelector } from "react-redux";
 import styled from "styled-components";
 
-import StoryText from "./StoryText";
-import StoryImage from "./StoryImage";
+import StoryPreviewText from "./StoryPreviewText";
+import StoryPreviewImage from "./StoryPreviewImage";
 
 import {
 	setUploadedStoryImageTop,
 	setUploadedStoryImageLeft,
+	setIsUploadedStoryImageTransformed,
 } from "../../../redux/add-story/story-image/storyImageAction";
 import {
 	setStoryTextTop,
 	setStoryTextLeft,
+	setIsTextTransformed,
 } from "../../../redux/add-story/story-text/storyTextAction";
+
+import { convertPixelsToViewWidth } from "../../../utils/story/convertPixelsToViewWidth";
 
 const StoryPreviewStyle = styled.div`
 	position: relative;
 	display: block;
 	margin: 3.5rem auto;
-	width: 48rem;
-	height: 65rem;
 	border: 2px solid var(--separator-2);
 	border-radius: 1rem;
 	overflow: hidden;
 	margin: auto;
 	background: ${(props) => props.storyBackground};
+
+	width: 48rem;
+	height: 72rem;
+
+	@media (max-width: 1000px) {
+		width: ${(props) => props.responsiveStoryPreviewWidth};
+		height: ${(props) => props.responsiveStoryPreviewHeight};
+	}
 `;
 
 const StoryPreview = () => {
@@ -72,6 +82,11 @@ const StoryPreview = () => {
 			return;
 		}
 
+		// FIX
+		if (e.target.id === "story-image__child") {
+			e.preventDefault();
+		}
+
 		// REVIEW: fixed
 		draggableElementRef.current = e.target.id.split("__").includes("child")
 			? e.target.parentNode
@@ -100,10 +115,20 @@ const StoryPreview = () => {
 			dispatch(
 				setUploadedStoryImageLeft(draggableElementRef.current.style.left)
 			);
-		} else {
+
+			const isTransformedBoolean =
+				draggableElementRef.current.style.transform === "none" ? false : true;
+
+			dispatch(setIsUploadedStoryImageTransformed(isTransformedBoolean));
+		} else if (draggableElementRef.current.id === "story-text") {
 			dispatch(setStoryTextTop(draggableElementRef.current.style.top));
 
 			dispatch(setStoryTextLeft(draggableElementRef.current.style.left));
+
+			const isTransformedBoolean =
+				draggableElementRef.current.style.transform === "none" ? false : true;
+
+			dispatch(setIsTextTransformed(isTransformedBoolean));
 		}
 
 		draggableElementRef.current.style.boxShadow = "none";
@@ -119,16 +144,18 @@ const StoryPreview = () => {
 			ref={containerRef}
 			onMouseUp={handleContainerOnMouseUp}
 			storyBackground={selectedStoryBackground.background_gradient}
+			responsiveStoryPreviewWidth={convertPixelsToViewWidth("480px", 1000)}
+			responsiveStoryPreviewHeight={convertPixelsToViewWidth("720px", 1000)}
 		>
 			{isStoryTextAdded && (
-				<StoryText
+				<StoryPreviewText
 					draggableElementRef={draggableElementRef}
 					handleDraggableOnMouseDown={handleDraggableOnMouseDown}
 				/>
 			)}
 
 			{uploadedStoryImage && (
-				<StoryImage
+				<StoryPreviewImage
 					draggableElementRef={draggableElementRef}
 					handleDraggableOnMouseDown={handleDraggableOnMouseDown}
 				/>

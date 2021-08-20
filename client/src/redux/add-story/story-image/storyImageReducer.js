@@ -2,6 +2,7 @@ const initialState = {
 	uploadedStoryImage: null,
 	imageTop: null,
 	imageLeft: null,
+	isImageTransformed: null,
 };
 
 const storyImageReducer = (state = initialState, action) => {
@@ -20,6 +21,11 @@ const storyImageReducer = (state = initialState, action) => {
 			return {
 				...state,
 				imageLeft: action.payload,
+			};
+		case "SET_IS_UPLOADED_STORY_IMAGE_TRANSFORMED":
+			return {
+				...state,
+				isImageTransformed: action.payload,
 			};
 		default:
 			return state;
