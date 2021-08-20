@@ -32,11 +32,10 @@ storyRouter.get("/story/backgrounds", async (req, res) => {
 storyRouter.post("/upload/story", authenticateToken, async (req, res) => {
 	const userID = parseInt(res.locals.userID);
 
-	console.log(req.body);
-
 	const { storyBackground, storyImage, storyText } = req.body;
 
-	const { uploadedStoryImage, imageTop, imageLeft } = storyImage;
+	const { uploadedStoryImage, imageTop, imageLeft, isImageTransformed } =
+		storyImage;
 
 	const {
 		storyTextContent,
@@ -47,6 +46,7 @@ storyRouter.post("/upload/story", authenticateToken, async (req, res) => {
 		selectedTextColor,
 		textTop,
 		textLeft,
+		isTextTransformed,
 	} = storyText;
 
 	try {
@@ -77,9 +77,9 @@ storyRouter.post("/upload/story", authenticateToken, async (req, res) => {
 			await pool.queryToDatabase(
 				`
                 INSERT INTO story_images
-                (image_public_id, image_url, image_width, image_height, story_id, story_image_top, story_image_left)
+                (image_public_id, image_url, image_width, image_height, story_id, story_image_top, story_image_left, story_is_image_transformed)
                 VALUES 
-                ($1, $2, $3, $4, $5, $6, $7);
+                ($1, $2, $3, $4, $5, $6, $7, $8);
                 `,
 				[
 					uploadedStoryImage.id,
@@ -89,6 +89,7 @@ storyRouter.post("/upload/story", authenticateToken, async (req, res) => {
 					storyID,
 					imageTop,
 					imageLeft,
+					isImageTransformed ? 1 : 0,
 				]
 			);
 		}
@@ -97,9 +98,9 @@ storyRouter.post("/upload/story", authenticateToken, async (req, res) => {
 			await pool.queryToDatabase(
 				`
                 INSERT INTO story_texts
-                (story_id, node_type, node_value, story_text_top, story_text_left, story_text_is_bold, story_text_is_italic, story_text_is_underline, story_text_size, story_text_color)
+                (story_id, node_type, node_value, story_text_top, story_text_left, story_text_is_bold, story_text_is_italic, story_text_is_underline, story_text_size, story_text_color, story_is_text_transformed)
                 VALUES 
-                ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10);
+                ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11);
                 `,
 				[
 					storyID,
@@ -112,6 +113,7 @@ storyRouter.post("/upload/story", authenticateToken, async (req, res) => {
 					isUnderline ? 1 : 0,
 					selectedTextSize,
 					selectedTextColor,
+					isTextTransformed ? 1 : 0,
 				]
 			);
 		}
@@ -174,7 +176,8 @@ storyRouter.get("/story/:storyID/:visitorID", async (req, res) => {
                 image_width,
                 image_height,
                 story_image_top,
-                story_image_left
+                story_image_left,
+				story_is_image_transformed
                 FROM story_images
                 WHERE story_id=$1;
                 `,
@@ -192,7 +195,8 @@ storyRouter.get("/story/:storyID/:visitorID", async (req, res) => {
                 story_text_is_italic,
                 story_text_is_underline,
                 story_text_size,
-                story_text_color
+                story_text_color,
+				story_is_text_transformed
                 FROM story_texts
                 WHERE story_id=$1;
                 `,
@@ -207,7 +211,64 @@ storyRouter.get("/story/:storyID/:visitorID", async (req, res) => {
 				story_text: storyTextData.rows[0],
 			});
 		}
-	} catch (error) {}
+	} catch (error) {
+		res.send({
+			error: {
+				catch: "There has been an error while fetching your story",
+			},
+		});
+	}
+});
+
+storyRouter.get("/story/feed", authenticateToken, async (req, res) => {
+	const userID = parseInt(res.locals.userID);
+
+	const homeFeedStoriesArray = [];
+
+	try {
+		const leaderIDsArrayData = await pool.queryToDatabase(
+			`
+			SELECT 
+			leader_id
+			FROM following
+			WHERE follower_id=$1
+			`,
+			[userID]
+		);
+
+		if (leaderIDsArrayData.length === 0) {
+			res.send(homeFeedStoriesArray);
+		} else {
+			for (leader of leaderIDsArrayData.rows) {
+				const leaderID = leader.leader_id;
+
+				const storyOwnerData = await UserRepo.getUserByID(leaderID);
+
+				const storyIDsArrayData = await pool.queryToDatabase(
+					`
+					SELECT 
+					id
+					FROM stories
+					WHERE user_id=$1;
+					`,
+					[leaderID]
+				);
+
+				homeFeedStoriesArray.push({
+					storyOwner: storyOwnerData,
+					storyIDsArray: storyIDsArrayData.rows.map((idObject) => idObject.id),
+				});
+			}
+
+			res.send(homeFeedStoriesArray);
+		}
+	} catch (error) {
+		res.send({
+			error: {
+				catch: "There has been an error while fetching stories for your feed",
+			},
+		});
+	}
 });
 
 module.exports = storyRouter;

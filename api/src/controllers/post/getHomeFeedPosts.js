@@ -116,7 +116,6 @@ const getHomeFeedPosts = async (req, res) => {
 			next: nextAPIEndpoint,
 		});
 	} catch (error) {
-		console.log(error);
 		res.send({
 			error: {
 				catch: "There has been an error while fetching data for your home feed",

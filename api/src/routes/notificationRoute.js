@@ -157,9 +157,6 @@ notificationRouter.post(
 				success: "Success",
 			});
 		} catch (error) {
-			// TODO: remove later
-			console.log(error);
-
 			res.send({
 				error: {
 					catch: "There has been an error while registering user notification",
