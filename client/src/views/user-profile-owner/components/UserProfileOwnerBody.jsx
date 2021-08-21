@@ -19,6 +19,8 @@ const UserProfileOwnerBody = () => {
 	return (
 		<UserProfileOwnerBodyStyle>
 			<Avatar
+				userID={profileOwner.id}
+				username={profileOwner.username}
 				avatarURL={profileOwner.avatar_url}
 				avatarSize="13rem"
 				avatarOnClick={null}

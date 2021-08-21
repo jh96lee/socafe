@@ -2,7 +2,7 @@ const initialState = {
 	// REVIEW: currently active story that the user is viewing
 	activeStoryIndex: null,
 	// TODO: this is used when storyViewshipArray is empty (when user reloads or enters story URL)
-	userStoryIDsArray: [9, 10, 11],
+	userStoryIDsArray: null,
 };
 
 const storyViewershipReducer = (state = initialState, action) => {
@@ -21,6 +21,11 @@ const storyViewershipReducer = (state = initialState, action) => {
 			return {
 				...state,
 				activeStoryIndex: state.activeStoryIndex + 1,
+			};
+		case "SET_USER_STORY_IDS_ARRAY":
+			return {
+				...state,
+				userStoryIDsArray: action.payload,
 			};
 		default:
 			return state;

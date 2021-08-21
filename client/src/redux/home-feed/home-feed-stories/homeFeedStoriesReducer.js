@@ -3,7 +3,7 @@ const initialState = {
 	homeFeedStories: [],
 	isHomeFeedStoriesLoaded: false,
 	// REVIEW: selected user and story object at homefeed
-	clickedHomeFeedUserIndex: null,
+	selectedUserStoriesIndex: null,
 };
 
 const storyViewershipReducer = (state = initialState, action) => {
@@ -23,6 +23,17 @@ const storyViewershipReducer = (state = initialState, action) => {
 				...state,
 				isHomeFeedStoriesLoaded: true,
 			};
+		case "SET_SELECTED_USER_STORIES_INDEX":
+			return {
+				...state,
+				selectedUserStoriesIndex: action.payload,
+			};
+		case "SET_TO_NEXT_SELECTED_USER_STORIES_INDEX":
+			return {
+				...state,
+				selectedUserStoriesIndex: state.selectedUserStoriesIndex + 1,
+			};
+
 		default:
 			return state;
 	}

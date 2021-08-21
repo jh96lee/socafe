@@ -43,7 +43,7 @@ const HomePost = ({ post }) => {
 		<HomeFeedPostStyle>
 			<HomeFeedPostHeaderStyle>
 				<UserMetadata
-					userID={post_owner.user_id}
+					userID={post_owner.id}
 					avatarURL={post_owner.avatar_url}
 					username={post_owner.username}
 					fullName={post_owner.full_name}

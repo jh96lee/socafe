@@ -1,12 +1,16 @@
 import * as React from "react";
 import styled from "styled-components";
 import { useSelector, useDispatch } from "react-redux";
-import { useParams, useHistory } from "react-router-dom";
+import { useParams, useHistory, useLocation } from "react-router-dom";
 
 import {
 	setToNextActiveStoryIndex,
 	setActiveStoryIndex,
 } from "../../../redux/story/story-viewership/storyViewershipAction";
+import {
+	setToNextSelectedUserStoriesIndex,
+	setSelectedUserStoriesIndex,
+} from "../../../redux/home-feed/home-feed-stories/homeFeedStoriesAction";
 
 const ProgressBarStyle = styled.div`
 	position: relative;
@@ -36,7 +40,12 @@ const ProgressBar = ({ progressBarIndex }) => {
 
 	const history = useHistory();
 
+	const userID = parseInt(useParams().userID);
 	const storyID = parseInt(useParams().storyID);
+
+	const { homeFeedStories, selectedUserStoriesIndex } = useSelector(
+		(state) => state.homeFeedStoriesReducer
+	);
 
 	const { activeStoryIndex, userStoryIDsArray } = useSelector(
 		(state) => state.storyViewershipReducer
@@ -89,6 +98,11 @@ const ProgressBar = ({ progressBarIndex }) => {
 				if (width >= 99) {
 					if (activeStoryIndex !== userStoryIDsArray.length - 1) {
 						dispatch(setToNextActiveStoryIndex());
+					} else if (
+						activeStoryIndex === userStoryIDsArray.length - 1 &&
+						selectedUserStoriesIndex !== homeFeedStories.length - 1
+					) {
+						dispatch(setToNextSelectedUserStoriesIndex());
 					}
 				}
 			}
@@ -97,9 +111,17 @@ const ProgressBar = ({ progressBarIndex }) => {
 
 	React.useEffect(() => {
 		if (activeStoryIndex !== null) {
-			history.push(`/story/${userStoryIDsArray[activeStoryIndex]}`);
+			history.push(`/story/${userID}/${userStoryIDsArray[activeStoryIndex]}`);
 		}
 	}, [activeStoryIndex]);
+
+	React.useEffect(() => {
+		if (selectedUserStoriesIndex !== null) {
+			const { storyOwner } = homeFeedStories[selectedUserStoriesIndex];
+
+			history.push(`/story/${storyOwner.id}/${userStoryIDsArray[0]}`);
+		}
+	}, [selectedUserStoriesIndex]);
 
 	return (
 		<ProgressBarStyle>

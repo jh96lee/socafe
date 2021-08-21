@@ -1,4 +1,6 @@
 import * as React from "react";
+import axios from "axios";
+import { useSelector } from "react-redux";
 
 import AvatarRing from "./AvatarRing";
 
@@ -7,13 +9,63 @@ import { AvatarImageStyle } from "../styles/AvatarImageStyle";
 import { AvatarBubbleStyle } from "../styles/AvatarBubbleStyle";
 
 const Avatar = ({
+	userID,
+	username,
 	avatarURL,
 	avatarSize,
 	avatarOnClick,
 	isAvatarBubblePresent = false,
 }) => {
-	// TODO: need logic for this
-	const isAvatarRingFilled = false;
+	const [avatarOwnerStoryIDsArray, setAvatarOwnerStoryIDsArray] =
+		React.useState(null);
+	const [isAvatarRingFilled, setIsAvatarRingFilled] = React.useState(false);
+
+	const fetchStoryIDs = async () => {
+		const { data } = await axios({
+			method: "GET",
+			url: `http://localhost:8080/story/ids/${userID}`,
+		});
+
+		const { error } = data;
+
+		if (!error) {
+			setAvatarOwnerStoryIDsArray(data);
+		}
+	};
+
+	React.useEffect(() => {
+		fetchStoryIDs();
+	}, []);
+
+	// REVIEW: make sure that the typing matches (both are numbers)
+	React.useEffect(() => {
+		// FIX
+		const viewedStory = {
+			demo: [9, 10],
+		};
+
+		if (avatarOwnerStoryIDsArray) {
+			if (!viewedStory[username]) {
+				setIsAvatarRingFilled(true);
+			} else if (viewedStory[username]) {
+				const viewedAvatarOwnerStoriesArray = viewedStory[username];
+
+				for (let i = 0; i < avatarOwnerStoryIDsArray.length; i++) {
+					const avatarOwnerStoryID = avatarOwnerStoryIDsArray[i];
+
+					if (
+						viewedAvatarOwnerStoriesArray.indexOf(avatarOwnerStoryID) === -1
+					) {
+						setIsAvatarRingFilled(true);
+
+						break;
+					} else {
+						continue;
+					}
+				}
+			}
+		}
+	}, [avatarOwnerStoryIDsArray, username]);
 
 	return (
 		<AvatarStyle avatarSize={avatarSize}>

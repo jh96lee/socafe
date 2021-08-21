@@ -19,7 +19,12 @@ const MainPostComment = ({ comment, setDeletedCommentID }) => {
 
 	return (
 		<MainPostCommentStyle>
-			<Avatar avatarURL={comment_user.avatar_url} avatarSize="4rem" />
+			<Avatar
+				userID={comment_user.id}
+				username={comment_user.username}
+				avatarURL={comment_user.avatar_url}
+				avatarSize="4rem"
+			/>
 
 			<MainPostCommentCenter
 				commentID={id}

@@ -81,7 +81,7 @@ function App() {
 					{/* <Route exact path="/story/:userID/:storyID">
 						<StoryPage />
 					</Route> */}
-					<Route exact path="/story/:storyID">
+					<Route exact path="/story/:userID/:storyID">
 						<StoryPage />
 					</Route>
 

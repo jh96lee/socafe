@@ -15,6 +15,15 @@ const endFetchingHomeFeedStories = () => ({
 	type: "END_FETCHING_HOME_FEED_STORIES",
 });
 
+export const setSelectedUserStoriesIndex = (index) => ({
+	type: "SET_SELECTED_USER_STORIES_INDEX",
+	payload: index,
+});
+
+export const setToNextSelectedUserStoriesIndex = () => ({
+	type: "SET_TO_NEXT_SELECTED_USER_STORIES_INDEX",
+});
+
 export const fetchHomeFeedStories = () => async (dispatch) => {
 	dispatch(startFetchingHomeFeedStories());
 

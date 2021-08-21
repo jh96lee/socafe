@@ -26,6 +26,8 @@ const UserMetadata = ({
 	return (
 		<UserMetadataStyle data-user-id={userID}>
 			<Avatar
+				userID={userID}
+				username={username}
 				avatarURL={avatarURL}
 				avatarSize={avatarSize}
 				avatarOnClick={avatarOnClick}
