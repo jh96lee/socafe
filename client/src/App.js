@@ -17,9 +17,6 @@ import {
 } from "./pages";
 import { AddPostIcon } from "./views/shared";
 import { MainPost } from "./views/main-post";
-import { Story } from "./views/story";
-
-import { ProgressBar } from "./views/progress-bars";
 
 import GlobalStyle from "./styles/GlobalStyle";
 

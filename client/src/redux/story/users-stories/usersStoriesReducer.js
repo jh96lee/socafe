@@ -1,6 +1,6 @@
 const initialState = {
 	usersStoriesArray: null,
-	isUsersStoriesArrayLoaded: false,
+	usersStoriesNextAPIEndpoint: "",
 	selectedUserStoriesIndex: null,
 	userStoryIDsArray: null,
 	// REVIEW: this value is to properly render out the progress bar
@@ -10,11 +10,6 @@ const initialState = {
 
 const usersStoriesReducer = (state = initialState, action) => {
 	switch (action.type) {
-		case "START_FETCHING_USERS_STORIES_ARRAY":
-			return {
-				...state,
-				isUsersStoriesArrayLoaded: false,
-			};
 		case "SET_USERS_STORIES_ARRAY":
 			return {
 				...state,
@@ -25,10 +20,15 @@ const usersStoriesReducer = (state = initialState, action) => {
 				...state,
 				usersStoriesArray: action.payload,
 			};
-		case "END_FETCHING_USERS_STORIES_ARRAY":
+		case "FETCHED_EXTRA_USERS_STORIES_ARRAY":
 			return {
 				...state,
-				isUsersStoriesArrayLoaded: true,
+				usersStoriesArray: [...state.usersStoriesArray, ...action.payload],
+			};
+		case "SET_USERS_STORIES_NEXT_API_ENDPOINT":
+			return {
+				...state,
+				usersStoriesNextAPIEndpoint: action.payload,
 			};
 		case "SET_SELECTED_USER_STORIES_INDEX":
 			return {

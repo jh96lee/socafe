@@ -6,6 +6,7 @@ import { IconElement } from "../../shared";
 import Story from "./Story";
 
 import { setSelectedUserStoriesIndex } from "../../../redux/story/users-stories/usersStoriesAction";
+import { setViewedStories } from "../../../redux/story/viewed-stories/viewedStoriesAction";
 
 import { ActiveStoryStyle } from "../styles/ActiveStoryStyle";
 
@@ -24,6 +25,8 @@ const ActiveStory = () => {
 	} = useSelector((state) => state.usersStoriesReducer);
 
 	const { activeStory } = useSelector((state) => state.activeStoryReducer);
+
+	const { viewedStories } = useSelector((state) => state.viewedStoriesReducer);
 
 	// TODO: LEFT ONCLICK
 	const handleStoryLeftOnClick = () => {
@@ -57,6 +60,42 @@ const ActiveStory = () => {
 	// TODO: RIGHT ONCLICK
 	const handleStoryRightOnClick = () => {
 		if (activeStory.id) {
+			if (activeUserStoryIndex === userStoryIDsArray.length - 1) {
+				const updatedViewedStories = { ...viewedStories };
+
+				const { storyOwner, storyIDsArray } =
+					usersStoriesArray[selectedUserStoriesIndex];
+
+				const viewedStoryOwnerUsername = storyOwner.username;
+
+				if (!viewedStories[viewedStoryOwnerUsername]) {
+					updatedViewedStories[viewedStoryOwnerUsername] = storyIDsArray;
+				} else {
+					for (let i = 0; i < storyIDsArray.length; i++) {
+						const recentlyViewedStoryID = userStoryIDsArray[i];
+
+						const indexOfRecentlyViewedStoryID = viewedStories[
+							viewedStoryOwnerUsername
+						].indexOf(recentlyViewedStoryID);
+
+						if (indexOfRecentlyViewedStoryID === -1) {
+							updatedViewedStories[viewedStoryOwnerUsername].push(
+								recentlyViewedStoryID
+							);
+						} else {
+							continue;
+						}
+					}
+				}
+
+				dispatch(setViewedStories(updatedViewedStories));
+
+				localStorage.setItem(
+					"viewedStories",
+					JSON.stringify(updatedViewedStories)
+				);
+			}
+
 			// REVIEW: activeUserStoryIndex MUST be less than the following value for it to move onto the next story
 			if (activeUserStoryIndex < userStoryIDsArray.length - 1) {
 				const { storyURLsArray } = usersStoriesArray[selectedUserStoriesIndex];

@@ -1,5 +1,6 @@
 const initialState = {
 	homeFeedPosts: [],
+	homeFeedPostsNextAPIEndpoint: "",
 };
 
 const homeFeedPostsReducer = (state = initialState, action) => {
@@ -13,6 +14,11 @@ const homeFeedPostsReducer = (state = initialState, action) => {
 			return {
 				...state,
 				homeFeedPosts: [...state.homeFeedPosts, ...action.payload],
+			};
+		case "SET_HOME_FEED_POSTS_NEXT_API_ENDPOINT":
+			return {
+				...state,
+				homeFeedPostsNextAPIEndpoint: action.payload,
 			};
 		default:
 			return state;

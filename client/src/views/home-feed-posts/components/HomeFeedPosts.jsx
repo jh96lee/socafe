@@ -7,6 +7,7 @@ import { Loader } from "../../shared";
 import {
 	fetchedHomeFeedPosts,
 	fetchedExtraHomeFeedPosts,
+	setHomeFeedPostsNextAPIEndpoint,
 } from "../../../redux/home-feed/home-feed-posts/homeFeedPostsAction";
 
 import { usePagination } from "../../../hooks";
@@ -17,27 +18,32 @@ import { HomeFeedStyle } from "../styles/HomeFeedStyle";
 
 const HomeFeedPosts = () => {
 	const { user } = useSelector((state) => state.userReducer);
-	const { homeFeedPosts } = useSelector((state) => state.homeFeedPostsReducer);
+	const { homeFeedPosts, homeFeedPostsNextAPIEndpoint } = useSelector(
+		(state) => state.homeFeedPostsReducer
+	);
 
 	const {
 		currentPage,
 		setCurrentPage,
-		nextAPIEndpoint,
 		isInitialContentsLoaded,
 		isExtraContentsLoading,
 		fetchContents,
 	} = usePagination(
 		"/post/feed",
-		5,
+		1,
+		false,
 		true,
 		fetchedHomeFeedPosts,
 		fetchedExtraHomeFeedPosts,
-		false
+		setHomeFeedPostsNextAPIEndpoint,
+		homeFeedPostsNextAPIEndpoint
 	);
 
 	const handleLoadMoreButtonOnClick = () => {
 		setCurrentPage((prevState) => prevState + 1);
 	};
+
+	const afterInitialMount = React.useRef(false);
 
 	React.useEffect(() => {
 		if (user) {
@@ -52,13 +58,17 @@ const HomeFeedPosts = () => {
 	}, []);
 
 	React.useEffect(() => {
-		if (homeFeedPosts.length > 0) {
-			const token = fetchToken();
+		if (afterInitialMount.current) {
+			if (homeFeedPosts.length > 0) {
+				const token = fetchToken();
 
-			fetchContents(false, "GET", null, {
-				Authorization: `Bearer ${token}`,
-			});
+				fetchContents(false, "GET", null, {
+					Authorization: `Bearer ${token}`,
+				});
+			}
 		}
+
+		afterInitialMount.current = true;
 	}, [currentPage]);
 
 	return (
@@ -71,7 +81,8 @@ const HomeFeedPosts = () => {
 						return <HomePost key={`home-post__${post.post_id}`} post={post} />;
 					})}
 
-					{nextAPIEndpoint === null || homeFeedPosts.length === 0 ? null : (
+					{homeFeedPostsNextAPIEndpoint === null ||
+					homeFeedPosts.length === 0 ? null : (
 						<button onClick={handleLoadMoreButtonOnClick}>
 							{isExtraContentsLoading ? (
 								<Loader

@@ -6,13 +6,23 @@ const startFetchingUsersStoriesArray = () => ({
 	type: "START_FETCHING_USERS_STORIES_ARRAY",
 });
 
-const fetchedUsersStoriesArray = (storiesArray) => ({
+export const fetchedUsersStoriesArray = (storiesArray) => ({
 	type: "FETCHED_USERS_STORIES_ARRAY",
 	payload: storiesArray,
 });
 
+export const fetchedExtraUsersStoriesArray = (extraStoriesArray) => ({
+	type: "FETCHED_EXTRA_USERS_STORIES_ARRAY",
+	payload: extraStoriesArray,
+});
+
 const endFetchingUsersStoriesArray = () => ({
 	type: "END_FETCHING_USERS_STORIES_ARRAY",
+});
+
+export const setUsersStoriesNextAPIEndpoint = (apiEndpoint) => ({
+	type: "SET_USERS_STORIES_NEXT_API_ENDPOINT",
+	payload: apiEndpoint,
 });
 
 export const setSelectedUserStoriesIndex = (index) => ({

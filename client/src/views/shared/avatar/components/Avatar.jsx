@@ -20,6 +20,8 @@ const Avatar = ({
 		React.useState(null);
 	const [isAvatarRingFilled, setIsAvatarRingFilled] = React.useState(false);
 
+	const { viewedStories } = useSelector((state) => state.viewedStoriesReducer);
+
 	const fetchStoryIDs = async () => {
 		const { data } = await axios({
 			method: "GET",
@@ -39,16 +41,11 @@ const Avatar = ({
 
 	// REVIEW: make sure that the typing matches (both are numbers)
 	React.useEffect(() => {
-		// FIX
-		const viewedStory = {
-			demo: [9, 10],
-		};
-
 		if (avatarOwnerStoryIDsArray) {
-			if (!viewedStory[username]) {
+			if (!viewedStories[username]) {
 				setIsAvatarRingFilled(true);
-			} else if (viewedStory[username]) {
-				const viewedAvatarOwnerStoriesArray = viewedStory[username];
+			} else if (viewedStories[username]) {
+				const viewedAvatarOwnerStoriesArray = viewedStories[username];
 
 				for (let i = 0; i < avatarOwnerStoryIDsArray.length; i++) {
 					const avatarOwnerStoryID = avatarOwnerStoryIDsArray[i];

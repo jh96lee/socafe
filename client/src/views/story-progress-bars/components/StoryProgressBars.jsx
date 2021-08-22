@@ -7,7 +7,7 @@ import { StoryProgressBarsStyle } from "../styles/StoryProgressBarsStyle";
 
 const StoryProgressBars = () => {
 	const { userStoryIDsArray } = useSelector(
-		(state) => state.storyViewershipReducer
+		(state) => state.usersStoriesReducer
 	);
 
 	return (

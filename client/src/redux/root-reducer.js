@@ -37,8 +37,8 @@ import storyImageReducer from "./add-story/story-image/storyImageReducer";
 import storyUploadReducer from "./add-story/story-upload/storyUploadReducer";
 
 import activeStoryReducer from "./story/active-story/activeStoryReducer";
-import storyViewershipReducer from "./story/story-viewership/storyViewershipReducer";
 import usersStoriesReducer from "./story/users-stories/usersStoriesReducer";
+import viewedStoriesReducer from "./story/viewed-stories/viewedStoriesReducer";
 
 const rootReducer = combineReducers({
 	userReducer,
@@ -82,7 +82,7 @@ const rootReducer = combineReducers({
 	storyImageReducer,
 	storyUploadReducer,
 
-	storyViewershipReducer,
+	viewedStoriesReducer,
 });
 
 export default rootReducer;

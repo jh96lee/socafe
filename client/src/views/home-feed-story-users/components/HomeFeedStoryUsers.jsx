@@ -1,27 +1,54 @@
 import * as React from "react";
-import { useDispatch, useSelector } from "react-redux";
+import { useSelector } from "react-redux";
 
 import HomeFeedStoryUser from "./HomeFeedStoryUser";
 import { Loader } from "../../shared";
 
-import { fetchUsersStoriesArray } from "../../../redux/story/users-stories/usersStoriesAction";
+import {
+	fetchedUsersStoriesArray,
+	fetchedExtraUsersStoriesArray,
+	setUsersStoriesNextAPIEndpoint,
+} from "../../../redux/story/users-stories/usersStoriesAction";
+
+import { usePagination } from "../../../hooks";
+
+import { fetchToken } from "../../../utils/cookie/fetchToken";
 
 import { HomeFeedStoryUsersStyle } from "../styles/HomeFeedStoryUsersStyle";
 
 const HomeFeedStoryUsers = () => {
-	const dispatch = useDispatch();
+	const { user } = useSelector((state) => state.userReducer);
 
-	const { usersStoriesArray, isUsersStoriesArrayLoaded } = useSelector(
+	const { usersStoriesArray, usersStoriesNextAPIEndpoint } = useSelector(
 		(state) => state.usersStoriesReducer
 	);
 
+	const { isInitialContentsLoaded, fetchContents } = usePagination(
+		"/story/feed",
+		2,
+		false,
+		true,
+		fetchedUsersStoriesArray,
+		fetchedExtraUsersStoriesArray,
+		setUsersStoriesNextAPIEndpoint,
+		usersStoriesNextAPIEndpoint
+	);
+
 	React.useEffect(() => {
-		dispatch(fetchUsersStoriesArray());
+		if (user) {
+			const token = fetchToken();
+
+			fetchContents(true, "GET", null, {
+				Authorization: `Bearer ${token}`,
+			});
+		} else {
+			console.log("Login or register CTA");
+		}
 	}, []);
 
 	return (
 		<HomeFeedStoryUsersStyle>
-			{isUsersStoriesArrayLoaded ? (
+			{isInitialContentsLoaded ? (
 				<React.Fragment>
 					{usersStoriesArray.map(({ storyOwner, storyIDsArray }, idx) => {
 						return (

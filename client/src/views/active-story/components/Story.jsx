@@ -60,9 +60,9 @@ const Story = () => {
 						/>
 					</StoryHeaderStyle>
 
-					<StoryImage storyImage={story_image} />
+					{story_image && <StoryImage storyImage={story_image} />}
 
-					<StoryText storyText={story_text} />
+					{story_text && <StoryText storyText={story_text} />}
 				</React.Fragment>
 			) : (
 				<Loader isLoaderAbsolute={true} />

@@ -5,10 +5,12 @@ import axios from "axios";
 const usePagination = (
 	defaultEndpoint,
 	pageSize = 3,
+	isExtraContentAppendedAtTheBottom,
 	setStateViaRedux = false,
 	setStateInitialContentsAction = null,
 	setStateExtraContentsAction = null,
-	isExtraContentAppendedAtTheBottom
+	setStateNextAPIEndpointAction = null,
+	nextAPIEndpointReduxState = null
 ) => {
 	const dispatch = useDispatch();
 
@@ -33,6 +35,8 @@ const usePagination = (
 
 		const apiEndpoint = isInitialFetch
 			? `${defaultEndpoint}?page=1&size=${size}`
+			: setStateViaRedux
+			? nextAPIEndpointReduxState
 			: nextAPIEndpoint;
 
 		const result = await axios({
@@ -59,7 +63,9 @@ const usePagination = (
 					: setContents((prevState) => [...contents, ...prevState]);
 			}
 
-			setNextAPIEndpoint(next);
+			setStateViaRedux
+				? dispatch(setStateNextAPIEndpointAction(next))
+				: setNextAPIEndpoint(next);
 		}
 
 		if (isInitialFetch) {
