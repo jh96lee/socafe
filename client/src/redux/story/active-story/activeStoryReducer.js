@@ -1,6 +1,7 @@
 const initialState = {
 	activeStory: {},
 	isActiveStoryLoaded: false,
+	activeStoryErrorMessage: null,
 };
 
 const activeStoryReducer = (state = initialState, action) => {
@@ -19,6 +20,11 @@ const activeStoryReducer = (state = initialState, action) => {
 			return {
 				...state,
 				isActiveStoryLoaded: true,
+			};
+		case "SET_ACTIVE_STORY_ERROR_MESSAGE":
+			return {
+				...state,
+				activeStoryErrorMessage: action.payload,
 			};
 		default:
 			return state;

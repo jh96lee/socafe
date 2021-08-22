@@ -1,7 +1,7 @@
 import * as React from "react";
 
 import { HomeFeedPosts } from "../../views/home-feed-posts";
-import { HomeFeedStories } from "../../views/home-feed-stories";
+import { HomeFeedStoryUsers } from "../../views/home-feed-story-users";
 
 import styled from "styled-components";
 
@@ -15,7 +15,7 @@ const HomePageStyle = styled.div`
 const HomePage = () => {
 	return (
 		<HomePageStyle>
-			<HomeFeedStories />
+			<HomeFeedStoryUsers />
 
 			<HomeFeedPosts />
 		</HomePageStyle>

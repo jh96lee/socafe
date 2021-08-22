@@ -38,6 +38,7 @@ import storyUploadReducer from "./add-story/story-upload/storyUploadReducer";
 
 import activeStoryReducer from "./story/active-story/activeStoryReducer";
 import storyViewershipReducer from "./story/story-viewership/storyViewershipReducer";
+import usersStoriesReducer from "./story/users-stories/usersStoriesReducer";
 
 const rootReducer = combineReducers({
 	userReducer,
@@ -73,6 +74,8 @@ const rootReducer = combineReducers({
 
 	userProfileOwnerReducer,
 	userProfilePostsReducer,
+
+	usersStoriesReducer,
 
 	storyBackgroundReducer,
 	storyTextReducer,

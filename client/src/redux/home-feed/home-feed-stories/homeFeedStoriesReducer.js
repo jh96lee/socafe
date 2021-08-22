@@ -6,7 +6,7 @@ const initialState = {
 	selectedUserStoriesIndex: null,
 };
 
-const storyViewershipReducer = (state = initialState, action) => {
+const homeFeedStoriesReducer = (state = initialState, action) => {
 	switch (action.type) {
 		case "START_FETCHING_HOME_FEED_STORIES":
 			return {
@@ -39,4 +39,4 @@ const storyViewershipReducer = (state = initialState, action) => {
 	}
 };
 
-export default storyViewershipReducer;
+export default homeFeedStoriesReducer;

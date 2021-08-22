@@ -5,7 +5,7 @@ import { useSelector, useDispatch } from "react-redux";
 import { Loader, UserMetadata } from "../../shared";
 import StoryImage from "./StoryImage";
 import StoryText from "./StoryText";
-import { ProgressBars } from "../../progress-bars";
+import { StoryProgressBars } from "../../story-progress-bars";
 
 import { fetchActiveStory } from "../../../redux/story/active-story/activeStoryAction";
 
@@ -16,28 +16,28 @@ import { StoryStyle, StoryHeaderStyle } from "../styles/StoryStyle";
 const Story = () => {
 	const dispatch = useDispatch();
 
-	const { activeStory, isActiveStoryLoaded } = useSelector(
-		(state) => state.activeStoryReducer
-	);
+	const { activeStory, isActiveStoryLoaded, activeStoryErrorMessage } =
+		useSelector((state) => state.activeStoryReducer);
 
 	const { story_background, story_image, story_text, story_owner } =
 		activeStory;
 
-	console.log(activeStory);
-
 	const storyID = parseInt(useParams().storyID);
+	const ownerID = parseInt(useParams().userID);
 
 	const { user } = useSelector((state) => state.userReducer);
 
-	const userID = user ? user.id : 0;
+	const visitorID = user ? user.id : 0;
 
 	const storyRef = React.useRef();
 
 	React.useEffect(() => {
-		dispatch(fetchActiveStory(storyID, userID));
+		dispatch(fetchActiveStory(storyID, ownerID, visitorID));
 	}, [storyID]);
 
-	return (
+	return activeStoryErrorMessage ? (
+		<h1>{activeStoryErrorMessage && activeStoryErrorMessage.story}</h1>
+	) : (
 		<StoryStyle
 			ref={storyRef}
 			storyBackground={
@@ -49,7 +49,7 @@ const Story = () => {
 			{isActiveStoryLoaded ? (
 				<React.Fragment>
 					<StoryHeaderStyle>
-						<ProgressBars />
+						<StoryProgressBars />
 
 						<UserMetadata
 							userID={story_owner.id}

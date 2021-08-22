@@ -13,23 +13,31 @@ const endFetchingActiveStory = () => ({
 	type: "END_FETCHING_ACTIVE_STORY",
 });
 
-export const fetchActiveStory = (storyID, userID) => async (dispatch) => {
-	dispatch(startFetchingActiveStory());
+const setActiveStoryErrorMessage = (errorMessage) => ({
+	type: "SET_ACTIVE_STORY_ERROR_MESSAGE",
+	payload: errorMessage,
+});
 
-	try {
-		const { data } = await axios({
-			method: "GET",
-			url: `http://localhost:8080/story/${storyID}/${userID}`,
-		});
+export const fetchActiveStory =
+	(storyID, ownerID, visitorID) => async (dispatch) => {
+		dispatch(startFetchingActiveStory());
 
-		const { error } = data;
+		try {
+			const { data } = await axios({
+				method: "GET",
+				url: `http://localhost:8080/story/${storyID}/${ownerID}/${visitorID}`,
+			});
 
-		if (!error) {
-			dispatch(fetchedActiveStory(data));
+			const { error } = data;
+
+			if (!error) {
+				dispatch(fetchedActiveStory(data));
+			} else {
+				dispatch(setActiveStoryErrorMessage(error));
+			}
+
+			dispatch(endFetchingActiveStory());
+		} catch (error) {
+			dispatch(endFetchingActiveStory());
 		}
-
-		dispatch(endFetchingActiveStory());
-	} catch (error) {
-		dispatch(endFetchingActiveStory());
-	}
-};
+	};

@@ -1,126 +1,62 @@
 import * as React from "react";
 import styled from "styled-components";
 import { useSelector, useDispatch } from "react-redux";
-import { useHistory } from "react-router-dom";
+import { useParams } from "react-router-dom";
 
-import { Story } from "../../views/story";
-import { IconElement, Avatar } from "../../views/shared";
-
-import {
-	setToNextActiveStoryIndex,
-	setToPreviousActiveStoryIndex,
-} from "../../redux/story/story-viewership/storyViewershipAction";
+import { StorySidebar } from "../../views/story-sidebar";
+import { ActiveStory } from "../../views/active-story";
 
 import {
-	AddContentHeaderStyle,
-	AddContentFormStyle,
-	AddContentsStyle,
-} from "../../styles";
+	setActiveUserStoryIndex,
+	setUserStoryIDsArray,
+	setSelectedUserStoriesIndex,
+	fetchSpecificUserStoriesArray,
+} from "../../redux/story/users-stories/usersStoriesAction";
 
-import { Left, Right } from "../../assets";
-
-const StoryPageStyle = styled.div`
-	position: fixed;
-	z-index: 50;
-	width: 100vw;
-	height: 100vh;
-	background-color: #1a1a1a;
-
-	display: grid;
-	grid-template-columns: 35rem 1fr;
-	gap: 3rem;
-`;
-
-const HomeFeedStoryStyle = styled.div`
-	display: flex;
-	align-items: center;
-	gap: 1rem;
-
-	& > p {
-		color: var(--text-1);
-		font-size: 1.4rem;
-	}
-`;
-
-const ActiveStoryStyle = styled.div`
-	display: flex;
-	align-items: center;
-	gap: 2rem;
-
-	margin: auto;
-`;
+import { StoryPageStyle } from "./StoryPageStyle";
 
 const StoryPage = () => {
 	const dispatch = useDispatch();
 
-	const history = useHistory();
-
-	const { homeFeedStories } = useSelector(
-		(state) => state.homeFeedStoriesReducer
+	const { usersStoriesArray, selectedUserStoriesIndex } = useSelector(
+		(state) => state.usersStoriesReducer
 	);
 
-	const { activeStory } = useSelector((state) => state.activeStoryReducer);
+	const userID = parseInt(useParams().userID);
+	const storyID = parseInt(useParams().storyID);
 
-	const handleStoryLeftOnClick = () => {
-		if (activeStory.id) {
-			dispatch(setToPreviousActiveStoryIndex());
+	React.useEffect(() => {
+		if (!usersStoriesArray) {
+			dispatch(fetchSpecificUserStoriesArray(userID));
 		}
-	};
+	}, []);
 
-	const handleStoryRightOnClick = () => {
-		if (activeStory.id) {
-			dispatch(setToNextActiveStoryIndex());
+	React.useEffect(() => {
+		if (!usersStoriesArray) {
+			dispatch(setSelectedUserStoriesIndex(0));
 		}
-	};
+
+		if (usersStoriesArray) {
+			// REVIEW: When HomeFeedStoryUser is clicked, selectedUserStoriesIndex is setStated and we can use that value to determine which object to access
+			// REVIEW: within usersStoriesArray
+			const { storyIDsArray } = usersStoriesArray[selectedUserStoriesIndex];
+
+			// REVIEW: retrieve storyID via useParams and figure out which the index of the storyID parameter within storyIDsArray
+			const activeStoryIndex = storyIDsArray.indexOf(storyID);
+
+			// REVIEW: setState activeStoryIndex => allows us to properly render out StoryProgressBar
+			dispatch(setActiveUserStoryIndex(activeStoryIndex));
+
+			// REVIEW: use this array to render/map out certain number of progress bars
+			dispatch(setUserStoryIDsArray(storyIDsArray));
+		}
+	}, [usersStoriesArray, userID, storyID]);
 
 	return (
 		<StoryPageStyle>
-			<AddContentFormStyle>
-				<AddContentHeaderStyle>
-					<IconElement
-						iconElementStyleObject={{
-							elementPadding: "0.6rem",
-							iconSize: "2.5rem",
-						}}
-						onClick={() => history.push("/")}
-					>
-						<Left />
-					</IconElement>
+			<StorySidebar />
 
-					<h2>Stories</h2>
-				</AddContentHeaderStyle>
-
-				<AddContentsStyle>
-					{homeFeedStories.length !== 0 &&
-						homeFeedStories.map(({ storyOwner, storyIDsArray }) => {
-							return (
-								<HomeFeedStoryStyle>
-									<Avatar
-										userID={storyOwner.id}
-										username={storyOwner.username}
-										avatarURL={storyOwner.avatar_url}
-										avatarSize="5rem"
-										isAvatarBubblePresent={true}
-									/>
-
-									<p>{storyOwner.username}</p>
-								</HomeFeedStoryStyle>
-							);
-						})}
-				</AddContentsStyle>
-			</AddContentFormStyle>
-
-			<ActiveStoryStyle>
-				<IconElement onClick={handleStoryLeftOnClick}>
-					<Left />
-				</IconElement>
-
-				<Story />
-
-				<IconElement onClick={handleStoryRightOnClick}>
-					<Right />
-				</IconElement>
-			</ActiveStoryStyle>
+			{usersStoriesArray && <ActiveStory />}
 		</StoryPageStyle>
 	);
 };
