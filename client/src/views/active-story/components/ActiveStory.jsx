@@ -8,6 +8,8 @@ import Story from "./Story";
 import { setSelectedUserStoriesIndex } from "../../../redux/story/users-stories/usersStoriesAction";
 import { setViewedStories } from "../../../redux/story/viewed-stories/viewedStoriesAction";
 
+import { updateViewedStories } from "../../../utils/story/updateViewedStories";
+
 import { ActiveStoryStyle } from "../styles/ActiveStoryStyle";
 
 import { Left, Right } from "../../../assets";
@@ -61,32 +63,12 @@ const ActiveStory = () => {
 	const handleStoryRightOnClick = () => {
 		if (activeStory.id) {
 			if (activeUserStoryIndex === userStoryIDsArray.length - 1) {
-				const updatedViewedStories = { ...viewedStories };
-
-				const { storyOwner, storyIDsArray } =
-					usersStoriesArray[selectedUserStoriesIndex];
-
-				const viewedStoryOwnerUsername = storyOwner.username;
-
-				if (!viewedStories[viewedStoryOwnerUsername]) {
-					updatedViewedStories[viewedStoryOwnerUsername] = storyIDsArray;
-				} else {
-					for (let i = 0; i < storyIDsArray.length; i++) {
-						const recentlyViewedStoryID = userStoryIDsArray[i];
-
-						const indexOfRecentlyViewedStoryID = viewedStories[
-							viewedStoryOwnerUsername
-						].indexOf(recentlyViewedStoryID);
-
-						if (indexOfRecentlyViewedStoryID === -1) {
-							updatedViewedStories[viewedStoryOwnerUsername].push(
-								recentlyViewedStoryID
-							);
-						} else {
-							continue;
-						}
-					}
-				}
+				const updatedViewedStories = updateViewedStories(
+					viewedStories,
+					usersStoriesArray,
+					selectedUserStoriesIndex,
+					userStoryIDsArray
+				);
 
 				dispatch(setViewedStories(updatedViewedStories));
 

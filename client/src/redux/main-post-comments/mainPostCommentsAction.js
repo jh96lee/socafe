@@ -17,3 +17,12 @@ export const removePostComment = (commentID) => ({
 	type: "REMOVE_POST_COMMENT",
 	payload: commentID,
 });
+
+export const setPostCommentsNextAPIEndpoint = (nextApiEndpoint) => ({
+	type: "SET_POST_COMMENTS_NEXT_API_ENDPOINT",
+	payload: nextApiEndpoint,
+});
+
+export const resetPostcomments = () => ({
+	type: "RESET_POST_COMMENTS",
+});

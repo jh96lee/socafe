@@ -1,5 +1,6 @@
 const initialState = {
 	postComments: [],
+	postCommentsNextAPIEndpoint: "",
 };
 
 const mainPostCommentReducer = (state = initialState, action) => {
@@ -26,6 +27,13 @@ const mainPostCommentReducer = (state = initialState, action) => {
 					(comment) => comment.id !== action.payload
 				),
 			};
+		case "SET_POST_COMMENTS_NEXT_API_ENDPOINT":
+			return {
+				...state,
+				postCommentsNextAPIEndpoint: action.payload,
+			};
+		case "RESET_POST_COMMENTS":
+			return initialState;
 		default:
 			return state;
 	}

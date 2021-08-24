@@ -5,6 +5,8 @@ import { useHistory } from "react-router-dom";
 import { setSelectedUserStoriesIndex } from "../../../redux/story/users-stories/usersStoriesAction";
 import { setViewedStories } from "../../../redux/story/viewed-stories/viewedStoriesAction";
 
+import { updateViewedStories } from "../../../utils/story/updateViewedStories";
+
 import {
 	StoryProgressBarStyle,
 	StoryProgressionBarStyle,
@@ -66,34 +68,14 @@ const StoryProgressBar = ({ progressBarIndex }) => {
 			if (activeUserStoryIndex === progressBarIndex) {
 				if (width >= 99) {
 					if (activeUserStoryIndex === userStoryIDsArray.length - 1) {
-						const updatedViewedStories = { ...viewedStories };
+						const updatedViewedStories = updateViewedStories(
+							viewedStories,
+							usersStoriesArray,
+							selectedUserStoriesIndex,
+							userStoryIDsArray
+						);
 
-						const { storyOwner, storyIDsArray } =
-							usersStoriesArray[selectedUserStoriesIndex];
-
-						const viewedStoryOwnerUsername = storyOwner.username;
-
-						if (!viewedStories[viewedStoryOwnerUsername]) {
-							updatedViewedStories[viewedStoryOwnerUsername] = storyIDsArray;
-						} else {
-							for (let i = 0; i < storyIDsArray.length; i++) {
-								const recentlyViewedStoryID = userStoryIDsArray[i];
-
-								const indexOfRecentlyViewedStoryID = viewedStories[
-									viewedStoryOwnerUsername
-								].indexOf(recentlyViewedStoryID);
-
-								if (indexOfRecentlyViewedStoryID === -1) {
-									updatedViewedStories[viewedStoryOwnerUsername].push(
-										recentlyViewedStoryID
-									);
-								} else {
-									continue;
-								}
-							}
-						}
-
-						dispatch(setViewedStories(updatedViewedStories));
+						dispatch(updatedViewedStories);
 
 						localStorage.setItem(
 							"viewedStories",

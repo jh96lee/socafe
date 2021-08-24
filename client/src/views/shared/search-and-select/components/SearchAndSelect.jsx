@@ -28,7 +28,7 @@ const SearchAndSelect = ({
 		nextAPIEndpoint,
 		fetchContents,
 		loadMoreButtonOnClickLogic,
-	} = usePagination(searchAndSelectInputAPIEndpoint, 5, false);
+	} = usePagination(searchAndSelectInputAPIEndpoint, 5, true);
 
 	const handleFormInputOnChange = (e) => {
 		setIsDropdownMenuOpen(true);

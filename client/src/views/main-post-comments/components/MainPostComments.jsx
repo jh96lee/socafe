@@ -8,6 +8,8 @@ import { MainPostParentComment } from "../../main-post-parent-comment";
 import {
 	fetchedPostComments,
 	fetchedExtraPostComments,
+	setPostCommentsNextAPIEndpoint,
+	resetPostcomments,
 } from "../../../redux/main-post-comments/mainPostCommentsAction";
 import { addNewPostComment } from "../../../redux/main-post-comments/mainPostCommentsAction";
 import { resetMainPostComment } from "../../../redux/main-post-comment-input/mainPostCommentInputAction";
@@ -21,7 +23,7 @@ import { Plus } from "../../../assets";
 const MainPostComments = () => {
 	const dispatch = useDispatch();
 
-	const { postComments } = useSelector(
+	const { postComments, postCommentsNextAPIEndpoint } = useSelector(
 		(state) => state.mainPostCommentsReducer
 	);
 
@@ -38,19 +40,25 @@ const MainPostComments = () => {
 	const {
 		currentPage,
 		setCurrentPage,
-		nextAPIEndpoint,
 		fetchContents,
 		isInitialContentsLoaded,
 	} = usePagination(
 		`/comment/parent/${postID}/${userID}`,
 		5,
+		false,
 		true,
 		fetchedPostComments,
-		fetchedExtraPostComments
+		fetchedExtraPostComments,
+		setPostCommentsNextAPIEndpoint,
+		postCommentsNextAPIEndpoint
 	);
 
 	React.useEffect(() => {
 		fetchContents(true, "GET", null, null);
+
+		return () => {
+			dispatch(resetPostcomments());
+		};
 	}, [postID]);
 
 	React.useEffect(() => {
@@ -91,7 +99,8 @@ const MainPostComments = () => {
 						);
 					})}
 
-					{nextAPIEndpoint === null || postComments.length === 0 ? null : (
+					{postCommentsNextAPIEndpoint === null ||
+					postComments.length === 0 ? null : (
 						<IconElement
 							onClick={handleMyParentCommentsLoadMoreButtonOnClick}
 							iconElementStyleObject={{

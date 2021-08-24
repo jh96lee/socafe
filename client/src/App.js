@@ -14,6 +14,7 @@ import {
 	UserRegisterPage,
 	EditProfilePage,
 	StoryPage,
+	ExplorePage,
 } from "./pages";
 import { AddPostIcon } from "./views/shared";
 import { MainPost } from "./views/main-post";
@@ -100,6 +101,10 @@ function App() {
 
 					<Route path="/edit/profile">
 						{user ? <EditProfilePage /> : <Redirect to="/login" />}
+					</Route>
+
+					<Route path="/explore">
+						<ExplorePage />
 					</Route>
 				</Switch>
 

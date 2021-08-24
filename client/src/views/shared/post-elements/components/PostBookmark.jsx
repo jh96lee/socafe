@@ -21,19 +21,17 @@ const PostBookmark = ({
 	);
 
 	return (
-		<PostLikeStyle>
-			<IconElement
-				iconRole="button"
-				onClick={handlePostBookmarkOnClick}
-				iconElementStyleObject={{
-					elementBackgroundColor:
-						isBookmarkIconBackgroundTransparent && "transparent",
-					iconSize: bookmarkIconSize,
-				}}
-			>
-				{isBookmarkedState ? <BookmarkFill /> : <BookmarkEmpty />}
-			</IconElement>
-		</PostLikeStyle>
+		<IconElement
+			iconRole="button"
+			onClick={handlePostBookmarkOnClick}
+			iconElementStyleObject={{
+				elementBackgroundColor:
+					isBookmarkIconBackgroundTransparent && "transparent",
+				iconSize: bookmarkIconSize,
+			}}
+		>
+			{isBookmarkedState ? <BookmarkFill /> : <BookmarkEmpty />}
+		</IconElement>
 	);
 };
 

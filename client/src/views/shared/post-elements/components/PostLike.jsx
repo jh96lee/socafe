@@ -8,12 +8,17 @@ import { HeartEmpty, HeartFill } from "../../../../assets";
 
 import { usePostLike } from "../../../../hooks";
 
+import styled from "styled-components";
+
+const PostLikeIconWrapperStyle = styled.div`
+	border-radius: 50%;
+`;
+
 const PostLike = ({
-	likeIconSize = "2.2rem",
-	isLikeIconBackgroundTransparent = false,
 	postIDProp,
 	isLikedProp,
 	totalLikesProp,
+	postLikeStyleObject,
 }) => {
 	const { isLikedState, totalLikesState, handlePostLikeOnClick } = usePostLike(
 		isLikedProp,
@@ -22,21 +27,10 @@ const PostLike = ({
 	);
 
 	return (
-		<PostLikeStyle>
-			<IconElement
-				iconRole="button"
-				onClick={handlePostLikeOnClick}
-				iconElementStyleObject={{
-					elementBackgroundColor: isLikeIconBackgroundTransparent
-						? "transparent"
-						: "var(--likes-bg-color)",
-					elementHoverBackgroundColor: "var(--likes-hover-bg-color)",
-					iconColor: "var(--likes-icon-color)",
-					iconSize: likeIconSize,
-				}}
-			>
+		<PostLikeStyle {...postLikeStyleObject}>
+			<PostLikeIconWrapperStyle onClick={handlePostLikeOnClick}>
 				{isLikedState ? <HeartFill /> : <HeartEmpty />}
-			</IconElement>
+			</PostLikeIconWrapperStyle>
 
 			<h5>{totalLikesState}</h5>
 		</PostLikeStyle>

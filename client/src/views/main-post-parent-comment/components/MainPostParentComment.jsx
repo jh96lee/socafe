@@ -34,14 +34,7 @@ const MainPostParentComment = ({ parentComment }) => {
 		setCurrentPage,
 		nextAPIEndpoint,
 		fetchContents,
-	} = usePagination(
-		`/comment/reply/${id}/${userID}`,
-		3,
-		false,
-		null,
-		null,
-		false
-	);
+	} = usePagination(`/comment/reply/${id}/${userID}`, 3, false);
 
 	const afterInitialMount = React.useRef(false);
 

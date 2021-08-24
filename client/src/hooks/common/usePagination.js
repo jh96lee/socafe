@@ -10,7 +10,8 @@ const usePagination = (
 	setStateInitialContentsAction = null,
 	setStateExtraContentsAction = null,
 	setStateNextAPIEndpointAction = null,
-	nextAPIEndpointReduxState = null
+	nextAPIEndpointReduxState = null,
+	customQueryString = null
 ) => {
 	const dispatch = useDispatch();
 
@@ -34,10 +35,16 @@ const usePagination = (
 		}
 
 		const apiEndpoint = isInitialFetch
-			? `${defaultEndpoint}?page=1&size=${size}`
+			? `${defaultEndpoint}?page=1&size=${size}${
+					customQueryString ? customQueryString : ""
+			  }`
 			: setStateViaRedux
-			? nextAPIEndpointReduxState
-			: nextAPIEndpoint;
+			? `${nextAPIEndpointReduxState}${
+					customQueryString ? customQueryString : ""
+			  }`
+			: `${nextAPIEndpoint}${customQueryString ? customQueryString : ""}`;
+
+		console.log(apiEndpoint);
 
 		const result = await axios({
 			method,

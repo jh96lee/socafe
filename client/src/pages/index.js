@@ -13,3 +13,5 @@ export { default as UserRegisterPage } from "./user-register-page/UserRegisterPa
 export { default as EditProfilePage } from "./edit-profile-page/EditProfilePage";
 
 export { default as StoryPage } from "./story-page/StoryPage";
+
+export { default as ExplorePage } from "./explore-page/ExplorePage";

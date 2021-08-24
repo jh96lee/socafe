@@ -14,6 +14,7 @@ const UserMetadata = ({
 	usernameFontSize,
 	fullNameFontSize,
 	avatarOnClick,
+	userMetadataStyleObject,
 }) => {
 	// REVIEW: logic for story ring needs to be added later
 
@@ -24,7 +25,12 @@ const UserMetadata = ({
 	};
 
 	return (
-		<UserMetadataStyle data-user-id={userID}>
+		<UserMetadataStyle
+			data-user-id={userID}
+			{...userMetadataStyleObject}
+			usernameFontSize={usernameFontSize}
+			fullNameFontSize={fullNameFontSize}
+		>
 			<Avatar
 				userID={userID}
 				username={username}
@@ -33,15 +39,11 @@ const UserMetadata = ({
 				avatarOnClick={avatarOnClick}
 			/>
 
-			<UserNameDataStyle
-				usernameFontSize={usernameFontSize}
-				fullNameFontSize={fullNameFontSize}
-				onClick={handleUsernameOnClick}
-			>
+			<div onClick={handleUsernameOnClick}>
 				<h5>@{username}</h5>
 
 				<p>{fullName}</p>
-			</UserNameDataStyle>
+			</div>
 		</UserMetadataStyle>
 	);
 };

@@ -1,28 +1,34 @@
 import styled from "styled-components";
 
 export const UserMetadataStyle = styled.div`
+	position: ${(props) => props.userMetadataPosition};
+	top: ${(props) => props.userMetadataTop};
+	right: ${(props) => props.userMetadataRight};
+	bottom: ${(props) => props.userMetadataBottom};
+	left: ${(props) => props.userMetadataLeft};
+	z-index: ${(props) => props.userMetadataZIndex};
 	display: flex;
 	align-items: center;
 	gap: 0.7rem;
-`;
 
-export const UserNameDataStyle = styled.div`
-	display: flex;
-	flex-direction: column;
-	gap: 0.3rem;
+	& > *:first-child {
+		display: flex;
+		flex-direction: column;
+		gap: 0.3rem;
+	}
 
-	& > h5 {
+	& > *:last-child > h5 {
 		font-size: ${(props) => props.usernameFontSize || "1.35rem"};
 		font-weight: 500;
-		color: var(--text-1);
-		letter-spacing: -0.9px;
+		color: ${(props) => props.userMetadataUsernameColor || "var(--text-1)"};
+		letter-spacing: -0.6px;
 		cursor: pointer;
 	}
 
-	& > p {
+	& > *:last-child > p {
 		font-size: ${(props) => props.fullNameFontSize || "1.27rem"};
 		font-weight: 300;
-		color: var(--text-2);
-		letter-spacing: -0.9px;
+		color: ${(props) => props.userMetadataFullNameColor || "var(--text-2)"};
+		letter-spacing: -0.6px;
 	}
 `;
