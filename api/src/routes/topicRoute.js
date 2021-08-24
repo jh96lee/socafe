@@ -9,8 +9,11 @@ const getUserFollowingTopics = require("../controllers/topic/getUserFollowingTop
 const getAllTopicsWithIsFollowingTopicData = require("../controllers/topic/getAllTopicsWithIsFollowingTopicData");
 const postTopicsToFollow = require("../controllers/topic/postTopicsToFollow");
 const searchTopics = require("../controllers/topic/searchTopics");
+const getMostUsedTopics = require("../controllers/topic/getMostUsedTopics");
 
 const topicRouter = express.Router();
+
+topicRouter.get("/topic/explore", getMostUsedTopics);
 
 // REVIEW: this is for general topics fetching
 topicRouter.get("/topic", getTopics);

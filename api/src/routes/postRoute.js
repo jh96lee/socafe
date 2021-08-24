@@ -9,6 +9,7 @@ const unlikePost = require("../controllers/post/unlikePost");
 const bookmarkPost = require("../controllers/post/bookmarkPost");
 const unbookmarkPost = require("../controllers/post/unbookmarkPost");
 const getHomeFeedPosts = require("../controllers/post/getHomeFeedPosts");
+const getExplorePosts = require("../controllers/post/getExplorePosts");
 
 const postRouter = express.Router();
 
@@ -29,5 +30,7 @@ postRouter.delete(
 	authenticateToken,
 	unbookmarkPost
 );
+
+postRouter.get("/post/explore", authenticateToken, getExplorePosts);
 
 module.exports = postRouter;

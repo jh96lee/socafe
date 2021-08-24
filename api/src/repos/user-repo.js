@@ -37,9 +37,9 @@ class UserRepo {
 			FROM users
 			JOIN user_avatars
 			ON users.id=user_avatars.user_id
-			WHERE users.username=$1;
+			WHERE LOWER(users.username)=$1;
 			`,
-			[username]
+			[username.toLowerCase()]
 		);
 
 		return rows[0];
