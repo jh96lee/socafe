@@ -7,6 +7,14 @@ export const likePostRequest = async (postID) => {
 
 	await axios({
 		method: "POST",
+		url: `http://localhost:8080/notification/post/${postID}`,
+		headers: {
+			Authorization: `Bearer ${token}`,
+		},
+	});
+
+	await axios({
+		method: "POST",
 		url: `http://localhost:8080/post/like/${postID}`,
 		headers: {
 			Authorization: `Bearer ${token}`,

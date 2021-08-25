@@ -54,11 +54,7 @@ export const postMainPostComment =
 					nodeType: node.nodeName,
 					nodeValue: node.textContent,
 					mentionType:
-						node.nodeName === "SPAN"
-							? null
-							: node.dataset.commentMentionType
-							? node.dataset.commentMentionType
-							: "tag",
+						node.nodeName === "SPAN" ? null : node.dataset.commentMentionType,
 				};
 			}
 		);

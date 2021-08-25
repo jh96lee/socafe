@@ -1,6 +1,7 @@
 import axios from "axios";
 
-import { fetchToken } from "../../../utils/cookie/fetchToken";
+import { followUserRequest } from "../../../utils/user/followUserRequest";
+import { unfollowUserRequest } from "../../../utils/user/unfollowUserRequest";
 
 const startFetchingProfileOwner = () => ({
 	type: "START_FETCHING_PROFILE_OWNER",
@@ -90,15 +91,7 @@ export const fetchProfileOwner =
 	};
 
 export const followUser = (profileOwnerID, visitorID) => async (dispatch) => {
-	const token = fetchToken();
-
-	await axios({
-		method: "POST",
-		url: `http://localhost:8080/follow/${profileOwnerID}`,
-		headers: {
-			Authorization: `Bearer ${token}`,
-		},
-	});
+	await followUserRequest(profileOwnerID);
 
 	if (profileOwnerID === visitorID) {
 		dispatch(incrementProfileOwnerTotalFollowings());
@@ -108,15 +101,7 @@ export const followUser = (profileOwnerID, visitorID) => async (dispatch) => {
 };
 
 export const unfollowUser = (profileOwnerID, visitorID) => async (dispatch) => {
-	const token = fetchToken();
-
-	await axios({
-		method: "DELETE",
-		url: `http://localhost:8080/unfollow/${profileOwnerID}`,
-		headers: {
-			Authorization: `Bearer ${token}`,
-		},
-	});
+	await unfollowUserRequest(profileOwnerID);
 
 	if (profileOwnerID === visitorID) {
 		dispatch(decrementProfileOwnerTotalFollowings());

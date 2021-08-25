@@ -44,8 +44,6 @@ const usePagination = (
 			  }`
 			: `${nextAPIEndpoint}${customQueryString ? customQueryString : ""}`;
 
-		console.log(apiEndpoint);
-
 		const result = await axios({
 			method,
 			url: `${url}${apiEndpoint}`,

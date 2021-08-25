@@ -15,6 +15,7 @@ import {
 	EditProfilePage,
 	StoryPage,
 	ExplorePage,
+	NotificationsPage,
 } from "./pages";
 import { AddPostIcon } from "./views/shared";
 import { MainPost } from "./views/main-post";
@@ -76,9 +77,6 @@ function App() {
 						<MainPost />
 					</Route>
 
-					{/* <Route exact path="/story/:userID/:storyID">
-						<StoryPage />
-					</Route> */}
 					<Route exact path="/story/:userID/:storyID">
 						<StoryPage />
 					</Route>
@@ -103,8 +101,12 @@ function App() {
 						{user ? <EditProfilePage /> : <Redirect to="/login" />}
 					</Route>
 
-					<Route path="/explore">
+					<Route exact path="/explore">
 						<ExplorePage />
+					</Route>
+
+					<Route exact path="/notifications">
+						<NotificationsPage />
 					</Route>
 				</Switch>
 

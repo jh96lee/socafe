@@ -59,7 +59,7 @@ const HeaderAvatar = () => {
 							icon: <NotificationFilled />,
 						},
 						onClickEventHandler: () => {
-							history.push(`/notification/${user.id}`);
+							history.push(`/notifications`);
 						},
 					},
 					{

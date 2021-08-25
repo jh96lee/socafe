@@ -75,7 +75,7 @@ const StoryProgressBar = ({ progressBarIndex }) => {
 							userStoryIDsArray
 						);
 
-						dispatch(updatedViewedStories);
+						dispatch(setViewedStories(updatedViewedStories));
 
 						localStorage.setItem(
 							"viewedStories",

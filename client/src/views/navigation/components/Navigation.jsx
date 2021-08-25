@@ -43,7 +43,7 @@ const Navigation = ({ isResponsiveNavigationOpen }) => {
 			</NavLink>
 
 			{user && (
-				<NavLink exact to="/notification">
+				<NavLink exact to="/notifications">
 					<IconElement
 						iconRole={iconRole}
 						iconElementStyleObject={iconElementStyleObject}

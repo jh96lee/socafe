@@ -42,6 +42,12 @@ const Avatar = ({
 	// REVIEW: make sure that the typing matches (both are numbers)
 	React.useEffect(() => {
 		if (avatarOwnerStoryIDsArray) {
+			if (avatarOwnerStoryIDsArray.length === 0) {
+				setIsAvatarRingFilled(false);
+
+				return;
+			}
+
 			if (!viewedStories[username]) {
 				setIsAvatarRingFilled(true);
 			} else if (viewedStories[username]) {

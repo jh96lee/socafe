@@ -3,7 +3,7 @@ import styled from "styled-components";
 export const MainPostParentCommentStyle = styled.div`
 	display: flex;
 	flex-direction: column;
-	gap: 1.6rem;
+	gap: 0.6rem;
 
 	& > *:first-child {
 		width: 100%;

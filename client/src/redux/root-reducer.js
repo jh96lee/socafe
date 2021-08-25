@@ -28,8 +28,6 @@ import editProfileReducer from "./edit-profile/editProfileReducer";
 
 import changePasswordReducer from "./change-password/changePasswordReducer";
 
-import commentNotificationsReducer from "./notifications/comment-notifications/commentNotificationsReducer";
-
 import storyBackgroundReducer from "./add-story/story-background/storyBackgroundReducer";
 import storyTextReducer from "./add-story/story-text/storyTextReducer";
 import storyImageReducer from "./add-story/story-image/storyImageReducer";
@@ -41,14 +39,14 @@ import viewedStoriesReducer from "./story/viewed-stories/viewedStoriesReducer";
 
 import exploreReducer from "./explore/exploreReducer";
 
+import notificationsReducer from "./notifications/notificationsReducer";
+
 const rootReducer = combineReducers({
 	userReducer,
 
 	activeStoryReducer,
 
 	changePasswordReducer,
-
-	commentNotificationsReducer,
 
 	editProfileReducer,
 
@@ -65,6 +63,8 @@ const rootReducer = combineReducers({
 	mainPostReducer,
 	mainPostCommentsReducer,
 	mainPostCommentInputReducer,
+
+	notificationsReducer,
 
 	userLoginReducer,
 

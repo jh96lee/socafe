@@ -135,6 +135,12 @@ const GlobalStyles = createGlobalStyle`
         --brown-1: ${(props) =>
 					props.theme.isDarkMode ? "#a86e5c" : "#a76955"};
         --red-1: ${(props) => (props.theme.isDarkMode ? "#f4506d" : "#ed335f")};
+
+        /* FIX */
+        --active-blue: ${(props) =>
+					props.theme.isDarkMode ? "#00d0ff17" : "#00d0ff36"};
+        --active-yellow: ${(props) =>
+					props.theme.isDarkMode ? "#ffc1072e" : "#ffc1072e"};
     }
 
     *,

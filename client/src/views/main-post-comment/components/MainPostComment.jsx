@@ -1,4 +1,5 @@
 import * as React from "react";
+import { useSelector } from "react-redux";
 
 import { Avatar } from "../../shared";
 import MainPostCommentCenter from "./MainPostCommentCenter";
@@ -15,10 +16,19 @@ const MainPostComment = ({ comment, setDeletedCommentID }) => {
 		comment_nodes_array,
 		comment_total_likes,
 		parent_comment_id,
+		post_id,
 	} = comment;
 
+	console.log(comment);
+
+	const { notiPostID, notiInstigatedCommentID, notiReceivedCommentID } =
+		useSelector((state) => state.notificationsReducer);
+
 	return (
-		<MainPostCommentStyle>
+		<MainPostCommentStyle
+			isInstigatingComment={id === notiInstigatedCommentID}
+			isReceivingComment={id === notiReceivedCommentID}
+		>
 			<Avatar
 				userID={comment_user.id}
 				username={comment_user.username}

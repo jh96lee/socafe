@@ -74,6 +74,8 @@ const MainPostCommentsInput = () => {
 
 			const paragraphTag = document.createElement("p");
 
+			paragraphTag.setAttribute("data-comment-mention-type", "TAG");
+
 			paragraphTag.textContent = "@";
 
 			mainPostCommentsContentEditableRef.current.append(paragraphTag);
@@ -234,7 +236,7 @@ const MainPostCommentsInput = () => {
 
 			paragraphTag.textContent = `@${mainPostCommentRepliedCommentUsername}`;
 
-			paragraphTag.setAttribute("data-comment-mention-type", "reply");
+			paragraphTag.setAttribute("data-comment-mention-type", "REPLY");
 
 			mainPostCommentsContentEditableRef.current.append(paragraphTag);
 		}

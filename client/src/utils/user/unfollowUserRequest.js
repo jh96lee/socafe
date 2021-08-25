@@ -2,12 +2,12 @@ import axios from "axios";
 
 import { fetchToken } from "../cookie/fetchToken";
 
-export const unlikePostRequest = async (postID) => {
+export const unfollowUserRequest = async (profileOwnerID) => {
 	const token = fetchToken();
 
 	await axios({
 		method: "DELETE",
-		url: `http://localhost:8080/notification/post/${postID}`,
+		url: `http://localhost:8080/notification/follow/${profileOwnerID}`,
 		headers: {
 			Authorization: `Bearer ${token}`,
 		},
@@ -15,7 +15,7 @@ export const unlikePostRequest = async (postID) => {
 
 	await axios({
 		method: "DELETE",
-		url: `http://localhost:8080/post/unlike/${postID}`,
+		url: `http://localhost:8080/unfollow/${profileOwnerID}`,
 		headers: {
 			Authorization: `Bearer ${token}`,
 		},
