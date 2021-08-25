@@ -26,7 +26,6 @@ const getMostUsedTopics = async (req, res) => {
 
 		res.send(mostUsedTopicsData.rows);
 	} catch (error) {
-		console.log(error);
 		res.send({
 			error: {
 				catch:

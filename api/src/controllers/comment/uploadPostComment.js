@@ -32,8 +32,8 @@ const uploadPostComment = async (req, res) => {
 			const { nodeType, nodeValue, mentionType } = node;
 
 			const revisedNodeType =
-				(mentionType === "tag" && nodeValue[0] === "@") ||
-				mentionType === "reply"
+				(mentionType === "TAG" && nodeValue[0] === "@") ||
+				mentionType === "REPLY"
 					? nodeType
 					: "SPAN";
 
