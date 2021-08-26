@@ -33,11 +33,11 @@ const postCommentNotifications = async (req, res) => {
 			await pool.queryToDatabase(
 				`
 				INSERT INTO notifications 
-				(instigator_id, receiver_id, post_id, instigated_comment_id, received_comment_id, notification_type)
+				(instigator_id, receiver_id, post_id, instigated_comment_id, received_comment_id, notification_type, is_notification_checked)
 				VALUES
-				($1, $2, $3, $4, $5, $6);
+				($1, $2, $3, $4, $5, $6, $7);
                 `,
-				[instigatorID, receiverID, mainPostID, mainCommentID, null, "POST"]
+				[instigatorID, receiverID, mainPostID, mainCommentID, null, "POST", 0]
 			);
 		}
 
@@ -62,9 +62,9 @@ const postCommentNotifications = async (req, res) => {
 			await pool.queryToDatabase(
 				`
 				INSERT INTO notifications 
-				(instigator_id, receiver_id, post_id, instigated_comment_id, received_comment_id, notification_type)
+				(instigator_id, receiver_id, post_id, instigated_comment_id, received_comment_id, notification_type, is_notification_checked)
 				VALUES
-				($1, $2, $3, $4, $5, $6);
+				($1, $2, $3, $4, $5, $6, $7);
                 `,
 				[
 					instigatorID,
@@ -73,6 +73,7 @@ const postCommentNotifications = async (req, res) => {
 					mainCommentID,
 					mainPostCommentParentCommentID,
 					"REPLY",
+					0,
 				]
 			);
 		} else if (
@@ -108,9 +109,9 @@ const postCommentNotifications = async (req, res) => {
 				await pool.queryToDatabase(
 					`
 					INSERT INTO notifications 
-					(instigator_id, receiver_id, post_id, instigated_comment_id, received_comment_id, notification_type)
+					(instigator_id, receiver_id, post_id, instigated_comment_id, received_comment_id, notification_type, is_notification_checked)
 					VALUES
-					($1, $2, $3, $4, $5, $6);
+					($1, $2, $3, $4, $5, $6, $7);
 					`,
 					[
 						instigatorID,
@@ -119,6 +120,7 @@ const postCommentNotifications = async (req, res) => {
 						mainCommentID,
 						commentID,
 						notificationType,
+						0,
 					]
 				);
 			}
@@ -149,11 +151,19 @@ const postCommentNotifications = async (req, res) => {
 						await pool.queryToDatabase(
 							`
 							INSERT INTO notifications 
-							(instigator_id, receiver_id, post_id, instigated_comment_id, received_comment_id, notification_type)
+							(instigator_id, receiver_id, post_id, instigated_comment_id, received_comment_id, notification_type, is_notification_checked)
 							VALUES
-							($1, $2, $3, $4, $5, $6);
+							($1, $2, $3, $4, $5, $6, $7);
                             `,
-							[instigatorID, receiverID, mainPostID, mainCommentID, null, "TAG"]
+							[
+								instigatorID,
+								receiverID,
+								mainPostID,
+								mainCommentID,
+								null,
+								"TAG",
+								0,
+							]
 						);
 					}
 				}

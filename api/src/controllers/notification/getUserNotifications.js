@@ -21,7 +21,8 @@ const getUserNotifications = async (req, res) => {
             post_id,
             instigated_comment_id,
             received_comment_id,
-            notification_type
+            notification_type,
+            is_notification_checked
             FROM (
                 SELECT 
                 *,
@@ -43,7 +44,8 @@ const getUserNotifications = async (req, res) => {
             post_id,
             instigated_comment_id,
             received_comment_id,
-            notification_type
+            notification_type,
+            is_notification_checked
             FROM (
                 SELECT 
                 *,

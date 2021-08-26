@@ -10,6 +10,8 @@ const deletePostLikeNotification = require("../controllers/notification/deletePo
 const postFollowingNotification = require("../controllers/notification/postFollowingNotification");
 const deleteFollowingNotification = require("../controllers/notification/deleteFollowingNotification");
 const getUserNotifications = require("../controllers/notification/getUserNotifications");
+const putIsNotificationChecked = require("../controllers/notification/putIsNotificationChecked");
+const getHomeFeedNotifications = require("../controllers/notification/getHomeFeedNotifications");
 
 const notificationRouter = express.Router();
 
@@ -47,6 +49,18 @@ notificationRouter.get(
 	"/notification/user",
 	authenticateToken,
 	getUserNotifications
+);
+
+notificationRouter.put(
+	"/notification/status/:notificationID",
+	authenticateToken,
+	putIsNotificationChecked
+);
+
+notificationRouter.get(
+	"/notification/feed",
+	authenticateToken,
+	getHomeFeedNotifications
 );
 
 module.exports = notificationRouter;
