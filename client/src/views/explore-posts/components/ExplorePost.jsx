@@ -7,32 +7,50 @@ import styled from "styled-components";
 
 const ExplorePostStyle = styled.div`
 	position: relative;
-	display: grid;
-	grid-auto-rows: min-content 1fr min-content;
-
-	gap: 1.2rem;
+	display: flex;
+	flex-direction: column;
 	width: 100%;
+	height: 100%;
+	max-height: 100%;
 	border-radius: 1rem;
 	overflow: hidden;
 
-	& > img {
-		display: block;
+	/* box-shadow: 0 0 0 1.3px var(--separator-1); */
+
+	& > * {
 		width: 100%;
-		height: 15vw;
+	}
+
+	& > *:first-child {
+		height: calc(100% - 6.5rem);
+	}
+
+	& > *:last-child {
+		min-height: 6.5rem;
+	}
+
+	&:hover {
+		cursor: pointer;
+	}
+`;
+
+const ExplorePostImageContainerStyle = styled.div`
+	display: flex;
+	background-color: antiquewhite;
+
+	& > img {
+		width: 100%;
+		height: 100%;
 		object-fit: cover;
 		border-radius: 1rem;
 	}
 `;
 
 const ExplorePostFooterStyle = styled.div`
-	display: grid;
-	grid-template-columns: 1fr min-content min-content;
-	gap: 1.2rem;
-	padding: 0 0.5rem;
-
-	& > *:first-child {
-		justify-self: start;
-	}
+	display: flex;
+	justify-content: space-between;
+	background-color: var(--bg-post);
+	padding: 0 1rem;
 `;
 
 const ExplorePost = ({ post }) => {
@@ -52,9 +70,14 @@ const ExplorePost = ({ post }) => {
 	return (
 		<ExplorePostStyle
 			isImageTall={post_images[0].image_height > post_images[0].image_width}
-			onClick={handlePostOnClick}
 		>
-			<img src={post_images[0].image_url} alt="explore post" />
+			<ExplorePostImageContainerStyle>
+				<img
+					src={post_images[0].image_url}
+					alt="explore post"
+					onClick={handlePostOnClick}
+				/>
+			</ExplorePostImageContainerStyle>
 
 			<ExplorePostFooterStyle>
 				<UserMetadata
@@ -66,6 +89,7 @@ const ExplorePost = ({ post }) => {
 					usernameFontSize="1.35rem"
 					fullNameFontSize="1.2rem"
 				/>
+
 				<PostLike
 					postIDProp={post_id}
 					isLikedProp={post_is_liked}

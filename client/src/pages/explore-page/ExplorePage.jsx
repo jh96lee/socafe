@@ -13,7 +13,7 @@ const ExplorePageStyle = styled(PageStyle)`
 	margin-bottom: 2rem;
 
 	& > * {
-		width: 90%;
+		width: 85%;
 		margin: auto;
 	}
 

@@ -2,11 +2,11 @@ import styled from "styled-components";
 
 export const HomeFeedStyle = styled.div`
 	display: grid;
-	grid-template-columns: 58rem;
+	grid-template-columns: 100%;
 	gap: 3rem 2rem;
 	margin: auto;
 	justify-content: center;
-	width: fit-content;
+	width: 100%;
 
 	/* FIX */
 	& button {

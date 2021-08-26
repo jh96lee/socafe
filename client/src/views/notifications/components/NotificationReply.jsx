@@ -15,18 +15,18 @@ const NotificationTextStyle = styled.p`
 	}
 `;
 
-const NotificationLike = ({ notification, handlePostLinkOnClick }) => {
-	const { instigator, post_id } = notification;
+const NotificationReply = ({ notification, handlePostLinkOnClick }) => {
+	const { id, instigator, post_id } = notification;
 
 	return (
 		<NotificationTextStyle>
 			<Link to={`/user/${instigator.username}`}>{instigator.full_name}</Link>{" "}
-			liked your{" "}
-			<Link to={`/post/${post_id}`} onClick={handlePostLinkOnClick}>
+			replied to your comment that you left on this{" "}
+			<Link to={`/post/${post_id}`} onClick={() => handlePostLinkOnClick(id)}>
 				post
 			</Link>
 		</NotificationTextStyle>
 	);
 };
 
-export default NotificationLike;
+export default NotificationReply;

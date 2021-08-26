@@ -2,7 +2,7 @@ import * as React from "react";
 import { useDispatch, useSelector } from "react-redux";
 
 import { Loader } from "../../shared";
-import ExplorePost from "../../../pages/explore-page/ExplorePost";
+import ExplorePost from "./ExplorePost";
 
 import {
 	fetchedExplorePosts,
@@ -25,8 +25,13 @@ const ExplorePostsStyle = styled.div`
 const ExplorePostsContainerStyle = styled.div`
 	display: grid;
 	grid-template-columns: repeat(5, 1fr);
-	grid-auto-rows: 1fr;
+	grid-auto-rows: 15vw;
 	gap: 3rem 2rem;
+
+	& > *:first-child {
+		grid-column: 1 / 3;
+		grid-row: 1 / 3;
+	}
 `;
 
 const ExplorePosts = () => {

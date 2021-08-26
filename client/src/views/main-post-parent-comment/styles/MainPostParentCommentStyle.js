@@ -9,7 +9,12 @@ export const MainPostParentCommentStyle = styled.div`
 		width: 100%;
 	}
 
-	& > *:not(:first-child) {
+	& > *:nth-child(2) {
+		padding-left: 6.35rem;
+		padding-right: 1.35rem;
+	}
+
+	& > *:last-child {
 		padding-left: 5rem;
 	}
 `;

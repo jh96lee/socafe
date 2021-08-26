@@ -9,5 +9,5 @@ export const HomeFeedPostStyle = styled.div`
 	padding: 2rem;
 	box-shadow: 0 0 0 1.3px var(--input-default-separator-color);
 	border-radius: 1.8rem;
-	background-color: var(--bg-post);
+	background-color: var(--bg-1);
 `;

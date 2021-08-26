@@ -1,8 +1,7 @@
 import React from "react";
-import { Link } from "react-router-dom";
 import { useDispatch } from "react-redux";
 
-import { Avatar } from "../../views/shared";
+import { Avatar } from "../../shared";
 import NotificationLike from "./NotificationLike";
 import NotificationFollow from "./NotificationFollow";
 import NotificationPost from "./NotificationPost";
@@ -14,15 +13,35 @@ import {
 	setNotiPostID,
 	setNotiInstigatedCommentID,
 	setNotiReceivedCommentID,
-} from "../../redux/notifications/notificationsAction";
+} from "../../../redux/notifications/notificationsAction";
 
-import { convertDate } from "../../utils/date/convertDate";
+import { convertDate } from "../../../utils/date/convertDate";
+import { checkedNotificationsRequest } from "../../../utils/notification/checkedNotificationRequest";
 
 import styled from "styled-components";
 
-const NotificationStyle = styled.div``;
+const NotificationStyle = styled.div`
+	position: relative;
+	display: flex;
+	width: 100%;
+`;
 
-const NotificationContentStyle = styled.div``;
+const NotificationContentStyle = styled.div`
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+	gap: 0.5rem;
+	margin-left: 1.2rem;
+`;
+
+const NotificationAlert = styled.div`
+	width: 1.1rem;
+	height: 1.1rem;
+	border-radius: 50%;
+	background-color: #6495ed;
+	align-self: center;
+	margin-left: auto;
+`;
 
 const Notification = ({ notification }) => {
 	const dispatch = useDispatch();
@@ -34,14 +53,17 @@ const Notification = ({ notification }) => {
 		received_comment_id,
 		post_id,
 		notification_type,
+		is_notification_checked,
 	} = notification;
 
-	const handlePostLinkOnClick = () => {
+	const handlePostLinkOnClick = (notificationID) => {
 		dispatch(setNotiPostID(post_id));
 
 		dispatch(setNotiInstigatedCommentID(instigated_comment_id));
 
 		dispatch(setNotiReceivedCommentID(received_comment_id));
+
+		checkedNotificationsRequest(notificationID);
 	};
 
 	return (
@@ -93,8 +115,10 @@ const Notification = ({ notification }) => {
 					/>
 				)}
 
-				<p>{convertDate(created_at)}</p>
+				<span>{convertDate(created_at)}</span>
 			</NotificationContentStyle>
+
+			{!is_notification_checked && <NotificationAlert />}
 		</NotificationStyle>
 	);
 };

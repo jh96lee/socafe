@@ -62,7 +62,7 @@ const GlobalStyles = createGlobalStyle`
 					props.theme.isDarkMode ? "#949494" : "#717070"};
 
         /* REVIEW: backgrounds */
-        --bg-1: ${(props) => (props.theme.isDarkMode ? "#18191d" : "#fff")};
+        --bg-1: ${(props) => (props.theme.isDarkMode ? "#18191d" : "#f6f8ff")};
         --bg-3: ${(props) =>
 					props.theme.isDarkMode ? "#2a2d38" : "#91b3c33b"};
 

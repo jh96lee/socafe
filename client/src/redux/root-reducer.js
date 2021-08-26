@@ -40,6 +40,7 @@ import viewedStoriesReducer from "./story/viewed-stories/viewedStoriesReducer";
 import exploreReducer from "./explore/exploreReducer";
 
 import notificationsReducer from "./notifications/notificationsReducer";
+import commentNotificationsReducer from "./notifications/comment-notifications/commentNotificationsReducer";
 
 const rootReducer = combineReducers({
 	userReducer,
@@ -47,6 +48,8 @@ const rootReducer = combineReducers({
 	activeStoryReducer,
 
 	changePasswordReducer,
+
+	commentNotificationsReducer,
 
 	editProfileReducer,
 
