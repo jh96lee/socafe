@@ -1,16 +1,19 @@
 import * as React from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { useHistory } from "react-router-dom";
+import { useHistory, useParams } from "react-router-dom";
 
-import { IconElement } from "../../shared";
-import Story from "./Story";
+import { IconElement, UserMetadata, Loader } from "../../shared";
+import { Story } from "../../story";
+import { StoryProgressBars } from "../../story-progress-bars";
 
-import { setSelectedUserStoriesIndex } from "../../../redux/story/users-stories/usersStoriesAction";
+import { setSelectedUserStoriesIndex } from "../../../redux/story/story-viewership/storyViewershipAction";
 import { setViewedStories } from "../../../redux/story/viewed-stories/viewedStoriesAction";
+import { fetchActiveStory } from "../../../redux/story/active-story/activeStoryAction";
 
 import { updateViewedStories } from "../../../utils/story/updateViewedStories";
 
 import { ActiveStoryStyle } from "../styles/ActiveStoryStyle";
+import { ActiveStoryHeaderStyle } from "../styles/ActiveStoryHeaderStyle";
 
 import { Left, Right } from "../../../assets";
 
@@ -19,14 +22,24 @@ const ActiveStory = () => {
 
 	const history = useHistory();
 
-	const {
-		usersStoriesArray,
-		selectedUserStoriesIndex,
-		userStoryIDsArray,
-		activeUserStoryIndex,
-	} = useSelector((state) => state.usersStoriesReducer);
+	const storyID = parseInt(useParams().storyID);
+	const ownerID = parseInt(useParams().userID);
 
-	const { activeStory } = useSelector((state) => state.activeStoryReducer);
+	React.useEffect(() => {
+		dispatch(fetchActiveStory(storyID, ownerID));
+	}, [storyID]);
+
+	const { activeStory, isActiveStoryLoaded } = useSelector(
+		(state) => state.activeStoryReducer
+	);
+
+	const { homeFeedStoriesArray } = useSelector(
+		(state) => state.homeFeedStoriesReducer
+	);
+
+	const { selectedUserStoriesIndex, activeUserStoryIndex } = useSelector(
+		(state) => state.storyViewershipReducer
+	);
 
 	const { viewedStories } = useSelector((state) => state.viewedStoriesReducer);
 
@@ -37,7 +50,8 @@ const ActiveStory = () => {
 			// REVIEW: therefore, going backwards is allowed
 			if (activeUserStoryIndex > 0) {
 				// REVIEW: selectedUserStoriesIndex will always be set, whether the user refreshed the page, entered Story Page URL, or clicked on HomeFeedStoryUser
-				const { storyURLsArray } = usersStoriesArray[selectedUserStoriesIndex];
+				const { storyURLsArray } =
+					homeFeedStoriesArray[selectedUserStoriesIndex];
 
 				const prevUserStoryIndex = activeUserStoryIndex - 1;
 
@@ -45,14 +59,14 @@ const ActiveStory = () => {
 			} else if (
 				// REVIEW: within usersStoriesIndex, if the current selected user index is NOT 0, that means going backwards should be allowed
 				// REVIEW: also usersStoriesArray should at least longer than 1 for it to either go backwards or forwards
-				usersStoriesArray.length > 1 &&
+				homeFeedStoriesArray.length > 1 &&
 				selectedUserStoriesIndex !== 0
 			) {
 				const prevUserStoriesIndex = selectedUserStoriesIndex - 1;
 
 				dispatch(setSelectedUserStoriesIndex(prevUserStoriesIndex));
 
-				const { storyURLsArray } = usersStoriesArray[prevUserStoriesIndex];
+				const { storyURLsArray } = homeFeedStoriesArray[prevUserStoriesIndex];
 
 				history.push(storyURLsArray[0]);
 			}
@@ -62,12 +76,14 @@ const ActiveStory = () => {
 	// TODO: RIGHT ONCLICK
 	const handleStoryRightOnClick = () => {
 		if (activeStory.id) {
-			if (activeUserStoryIndex === userStoryIDsArray.length - 1) {
+			const { storyIDsArray } = homeFeedStoriesArray[selectedUserStoriesIndex];
+
+			if (activeUserStoryIndex === storyIDsArray.length - 1) {
 				const updatedViewedStories = updateViewedStories(
 					viewedStories,
-					usersStoriesArray,
+					homeFeedStoriesArray,
 					selectedUserStoriesIndex,
-					userStoryIDsArray
+					homeFeedStoriesArray[selectedUserStoriesIndex].storyIDsArray
 				);
 
 				dispatch(setViewedStories(updatedViewedStories));
@@ -79,22 +95,22 @@ const ActiveStory = () => {
 			}
 
 			// REVIEW: activeUserStoryIndex MUST be less than the following value for it to move onto the next story
-			if (activeUserStoryIndex < userStoryIDsArray.length - 1) {
-				const { storyURLsArray } = usersStoriesArray[selectedUserStoriesIndex];
+			if (activeUserStoryIndex < storyIDsArray.length - 1) {
+				const { storyURLsArray } =
+					homeFeedStoriesArray[selectedUserStoriesIndex];
 
 				const nextUserStoryIndex = activeUserStoryIndex + 1;
 
 				history.push(storyURLsArray[nextUserStoryIndex]);
-				// REVIEW: this means that the user got to StoryPage via clicking on HomeFeedStory at homefeed
 			} else if (
-				usersStoriesArray.length > 1 &&
-				selectedUserStoriesIndex !== usersStoriesArray.length - 1
+				homeFeedStoriesArray.length > 1 &&
+				selectedUserStoriesIndex !== homeFeedStoriesArray.length - 1
 			) {
 				const nextUserStoriesIndex = selectedUserStoriesIndex + 1;
 
 				dispatch(setSelectedUserStoriesIndex(nextUserStoriesIndex));
 
-				const { storyURLsArray } = usersStoriesArray[nextUserStoriesIndex];
+				const { storyURLsArray } = homeFeedStoriesArray[nextUserStoriesIndex];
 
 				history.push(storyURLsArray[0]);
 			}
@@ -103,15 +119,33 @@ const ActiveStory = () => {
 
 	return (
 		<ActiveStoryStyle>
-			<IconElement onClick={handleStoryLeftOnClick}>
-				<Left />
-			</IconElement>
+			{isActiveStoryLoaded ? (
+				<React.Fragment>
+					<IconElement onClick={handleStoryLeftOnClick}>
+						<Left />
+					</IconElement>
 
-			<Story />
+					<ActiveStoryHeaderStyle>
+						<StoryProgressBars />
 
-			<IconElement onClick={handleStoryRightOnClick}>
-				<Right />
-			</IconElement>
+						<UserMetadata
+							userID={activeStory && activeStory.story_owner.id}
+							avatarURL={activeStory && activeStory.story_owner.avatar_url}
+							username={activeStory && activeStory.story_owner.username}
+							avatarSize="3.6rem"
+							usernameFontSize="1.4rem"
+						/>
+					</ActiveStoryHeaderStyle>
+
+					<Story story={activeStory} />
+
+					<IconElement onClick={handleStoryRightOnClick}>
+						<Right />
+					</IconElement>
+				</React.Fragment>
+			) : (
+				<Loader />
+			)}
 		</ActiveStoryStyle>
 	);
 };

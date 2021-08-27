@@ -18,26 +18,25 @@ const setActiveStoryErrorMessage = (errorMessage) => ({
 	payload: errorMessage,
 });
 
-export const fetchActiveStory =
-	(storyID, ownerID, visitorID) => async (dispatch) => {
-		dispatch(startFetchingActiveStory());
+export const fetchActiveStory = (storyID, ownerID) => async (dispatch) => {
+	dispatch(startFetchingActiveStory());
 
-		try {
-			const { data } = await axios({
-				method: "GET",
-				url: `http://localhost:8080/story/${storyID}/${ownerID}/${visitorID}`,
-			});
+	try {
+		const { data } = await axios({
+			method: "GET",
+			url: `http://localhost:8080/story/${storyID}/${ownerID}`,
+		});
 
-			const { error } = data;
+		const { error } = data;
 
-			if (!error) {
-				dispatch(fetchedActiveStory(data));
-			} else {
-				dispatch(setActiveStoryErrorMessage(error));
-			}
-
-			dispatch(endFetchingActiveStory());
-		} catch (error) {
-			dispatch(endFetchingActiveStory());
+		if (!error) {
+			dispatch(fetchedActiveStory(data));
+		} else {
+			dispatch(setActiveStoryErrorMessage(error));
 		}
-	};
+
+		dispatch(endFetchingActiveStory());
+	} catch (error) {
+		dispatch(endFetchingActiveStory());
+	}
+};

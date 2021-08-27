@@ -4,7 +4,7 @@ import { useHistory } from "react-router-dom";
 
 import { Avatar } from "../../shared";
 
-import { setSelectedUserStoriesIndex } from "../../../redux/story/users-stories/usersStoriesAction";
+import { setSelectedUserStoriesIndex } from "../../../redux/story/story-viewership/storyViewershipAction";
 
 import { HomeFeedStoryUserStyle } from "../styles/HomeFeedStoryUserStyle";
 
@@ -14,6 +14,7 @@ const HomeFeedStoryUser = ({ storyOwner, storyIDsArray, storyIndex }) => {
 	const history = useHistory();
 
 	const handleHomeFeedStoryUserOnClick = () => {
+		// REVIEW: set selectedUserStoriesIndex
 		dispatch(setSelectedUserStoriesIndex(storyIndex));
 
 		history.push(`/story/${storyOwner.id}/${storyIDsArray[0]}`);

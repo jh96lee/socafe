@@ -2,7 +2,7 @@ import * as React from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { useHistory } from "react-router-dom";
 
-import { setSelectedUserStoriesIndex } from "../../../redux/story/users-stories/usersStoriesAction";
+import { setSelectedUserStoriesIndex } from "../../../redux/story/story-viewership/storyViewershipAction";
 import { setViewedStories } from "../../../redux/story/viewed-stories/viewedStoriesAction";
 
 import { updateViewedStories } from "../../../utils/story/updateViewedStories";
@@ -19,15 +19,17 @@ const StoryProgressBar = ({ progressBarIndex }) => {
 
 	const history = useHistory();
 
-	const {
-		usersStoriesArray,
-		selectedUserStoriesIndex,
-		userStoryIDsArray,
-		activeUserStoryIndex,
-	} = useSelector((state) => state.usersStoriesReducer);
+	const { homeFeedStoriesArray } = useSelector(
+		(state) => state.homeFeedStoriesReducer
+	);
+
+	const { selectedUserStoriesIndex, activeUserStoryIndex } = useSelector(
+		(state) => state.storyViewershipReducer
+	);
 
 	const { viewedStories } = useSelector((state) => state.viewedStoriesReducer);
 
+	// REVIEW: this useEffect is to set up bar's UI
 	React.useEffect(() => {
 		let progressBarInterval;
 
@@ -66,13 +68,17 @@ const StoryProgressBar = ({ progressBarIndex }) => {
 	React.useEffect(() => {
 		if (activeUserStoryIndex !== null) {
 			if (activeUserStoryIndex === progressBarIndex) {
+				const { storyIDsArray } =
+					homeFeedStoriesArray[selectedUserStoriesIndex];
+
 				if (width >= 99) {
-					if (activeUserStoryIndex === userStoryIDsArray.length - 1) {
+					// REVIEW: if activeUserStoryIndex reaches the end of a specific user's storyIDsArray, then update viewed stories data
+					if (activeUserStoryIndex === storyIDsArray.length - 1) {
 						const updatedViewedStories = updateViewedStories(
 							viewedStories,
-							usersStoriesArray,
+							homeFeedStoriesArray,
 							selectedUserStoriesIndex,
-							userStoryIDsArray
+							storyIDsArray
 						);
 
 						dispatch(setViewedStories(updatedViewedStories));
@@ -83,22 +89,23 @@ const StoryProgressBar = ({ progressBarIndex }) => {
 						);
 					}
 
-					if (activeUserStoryIndex < userStoryIDsArray.length - 1) {
+					if (activeUserStoryIndex < storyIDsArray.length - 1) {
 						const { storyURLsArray } =
-							usersStoriesArray[selectedUserStoriesIndex];
+							homeFeedStoriesArray[selectedUserStoriesIndex];
 
 						const nextUserStoryIndex = activeUserStoryIndex + 1;
 
 						history.push(storyURLsArray[nextUserStoryIndex]);
 					} else if (
-						usersStoriesArray.length > 1 &&
-						selectedUserStoriesIndex !== usersStoriesArray.length - 1
+						homeFeedStoriesArray.length > 1 &&
+						selectedUserStoriesIndex !== homeFeedStoriesArray.length - 1
 					) {
 						const nextUserStoriesIndex = selectedUserStoriesIndex + 1;
 
 						dispatch(setSelectedUserStoriesIndex(nextUserStoriesIndex));
 
-						const { storyURLsArray } = usersStoriesArray[nextUserStoriesIndex];
+						const { storyURLsArray } =
+							homeFeedStoriesArray[nextUserStoriesIndex];
 
 						history.push(storyURLsArray[0]);
 					}

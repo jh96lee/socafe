@@ -5,10 +5,10 @@ import HomeFeedStoryUser from "./HomeFeedStoryUser";
 import { Loader } from "../../shared";
 
 import {
-	fetchedUsersStoriesArray,
-	fetchedExtraUsersStoriesArray,
-	setUsersStoriesNextAPIEndpoint,
-} from "../../../redux/story/users-stories/usersStoriesAction";
+	fetchedHomeFeedStoriesArray,
+	fetchedExtraHomeFeedStoriesArray,
+	setHomeFeedStoriesNextAPIEndpoint,
+} from "../../../redux/home-feed/home-feed-stories/homeFeedStoriesAction";
 
 import { usePagination } from "../../../hooks";
 
@@ -19,8 +19,8 @@ import { HomeFeedStoryUsersStyle } from "../styles/HomeFeedStoryUsersStyle";
 const HomeFeedStoryUsers = () => {
 	const { user } = useSelector((state) => state.userReducer);
 
-	const { usersStoriesArray, usersStoriesNextAPIEndpoint } = useSelector(
-		(state) => state.usersStoriesReducer
+	const { homeFeedStoriesArray, homeFeedStoriesNextAPIEndpoint } = useSelector(
+		(state) => state.homeFeedStoriesReducer
 	);
 
 	const { isInitialContentsLoaded, fetchContents } = usePagination(
@@ -28,10 +28,10 @@ const HomeFeedStoryUsers = () => {
 		2,
 		false,
 		true,
-		fetchedUsersStoriesArray,
-		fetchedExtraUsersStoriesArray,
-		setUsersStoriesNextAPIEndpoint,
-		usersStoriesNextAPIEndpoint
+		fetchedHomeFeedStoriesArray,
+		fetchedExtraHomeFeedStoriesArray,
+		setHomeFeedStoriesNextAPIEndpoint,
+		homeFeedStoriesNextAPIEndpoint
 	);
 
 	React.useEffect(() => {
@@ -50,7 +50,7 @@ const HomeFeedStoryUsers = () => {
 		<HomeFeedStoryUsersStyle>
 			{isInitialContentsLoaded ? (
 				<React.Fragment>
-					{usersStoriesArray.map(({ storyOwner, storyIDsArray }, idx) => {
+					{homeFeedStoriesArray.map(({ storyOwner, storyIDsArray }, idx) => {
 						return (
 							<HomeFeedStoryUser
 								key={`home-feed-story__${storyOwner.username}`}

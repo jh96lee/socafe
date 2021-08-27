@@ -2,6 +2,7 @@ import { combineReducers } from "redux";
 import userReducer from "./user/userReducer";
 
 import homeFeedPostsReducer from "./home-feed/home-feed-posts/homeFeedPostsReducer";
+import homeFeedStoriesReducer from "./home-feed/home-feed-stories/homeFeedStoriesReducer";
 
 import userLoginReducer from "./user-login/userLoginReducer";
 
@@ -34,7 +35,7 @@ import storyImageReducer from "./add-story/story-image/storyImageReducer";
 import storyUploadReducer from "./add-story/story-upload/storyUploadReducer";
 
 import activeStoryReducer from "./story/active-story/activeStoryReducer";
-import usersStoriesReducer from "./story/users-stories/usersStoriesReducer";
+import storyViewershipReducer from "./story/story-viewership/storyViewershipReducer";
 import viewedStoriesReducer from "./story/viewed-stories/viewedStoriesReducer";
 
 import exploreReducer from "./explore/exploreReducer";
@@ -56,6 +57,7 @@ const rootReducer = combineReducers({
 	exploreReducer,
 
 	homeFeedPostsReducer,
+	homeFeedStoriesReducer,
 
 	postImagesReducer,
 	postTopicsReducer,
@@ -80,12 +82,12 @@ const rootReducer = combineReducers({
 	userProfileOwnerReducer,
 	userProfilePostsReducer,
 
-	usersStoriesReducer,
-
 	storyBackgroundReducer,
 	storyTextReducer,
 	storyImageReducer,
 	storyUploadReducer,
+
+	storyViewershipReducer,
 
 	viewedStoriesReducer,
 });

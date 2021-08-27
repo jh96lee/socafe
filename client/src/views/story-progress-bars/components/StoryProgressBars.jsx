@@ -6,15 +6,21 @@ import { StoryProgressBar } from "../index";
 import { StoryProgressBarsStyle } from "../styles/StoryProgressBarsStyle";
 
 const StoryProgressBars = () => {
-	const { userStoryIDsArray } = useSelector(
-		(state) => state.usersStoriesReducer
+	const { homeFeedStoriesArray } = useSelector(
+		(state) => state.homeFeedStoriesReducer
+	);
+
+	const { selectedUserStoriesIndex } = useSelector(
+		(state) => state.storyViewershipReducer
 	);
 
 	return (
 		<StoryProgressBarsStyle>
-			{userStoryIDsArray.map((storyID, idx) => {
-				return <StoryProgressBar storyID={storyID} progressBarIndex={idx} />;
-			})}
+			{homeFeedStoriesArray[selectedUserStoriesIndex].storyIDsArray.map(
+				(storyID, idx) => {
+					return <StoryProgressBar storyID={storyID} progressBarIndex={idx} />;
+				}
+			)}
 		</StoryProgressBarsStyle>
 	);
 };

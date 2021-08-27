@@ -4,7 +4,7 @@ import { useHistory } from "react-router-dom";
 
 import { Avatar } from "../../shared";
 
-import { setSelectedUserStoriesIndex } from "../../../redux/story/users-stories/usersStoriesAction";
+import { setSelectedUserStoriesIndex } from "../../../redux/story/story-viewership/storyViewershipAction";
 
 import { StorySidebarUserStyle } from "../styles/StorySidebarUserStyle";
 
@@ -13,12 +13,12 @@ const StorySidebarUser = ({ storyOwner, storyUserIdx }) => {
 
 	const history = useHistory();
 
-	const { usersStoriesArray } = useSelector(
-		(state) => state.usersStoriesReducer
+	const { homeFeedStoriesArray } = useSelector(
+		(state) => state.homeFeedStoriesReducer
 	);
 
 	const handleStorySidebarUserOnClick = () => {
-		const { storyURLsArray } = usersStoriesArray[storyUserIdx];
+		const { storyURLsArray } = homeFeedStoriesArray[storyUserIdx];
 
 		dispatch(setSelectedUserStoriesIndex(storyUserIdx));
 

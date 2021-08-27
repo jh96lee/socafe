@@ -5,10 +5,10 @@ import StorySidebarUser from "./StorySidebarUser";
 import { Loader } from "../../shared";
 
 import {
-	fetchedUsersStoriesArray,
-	fetchedExtraUsersStoriesArray,
-	setUsersStoriesNextAPIEndpoint,
-} from "../../../redux/story/users-stories/usersStoriesAction";
+	fetchedHomeFeedStoriesArray,
+	fetchedExtraHomeFeedStoriesArray,
+	setHomeFeedStoriesNextAPIEndpoint,
+} from "../../../redux/home-feed/home-feed-stories/homeFeedStoriesAction";
 
 import { usePagination } from "../../../hooks";
 
@@ -18,10 +18,10 @@ import { StorySidebarUsersStyle } from "../styles/StorySidebarUsersStyle";
 
 const StorySidebarUsers = () => {
 	const {
-		usersStoriesArray,
-		usersStoriesNextAPIEndpoint,
-		usersStoriesErrorMessage,
-	} = useSelector((state) => state.usersStoriesReducer);
+		homeFeedStoriesArray,
+		homeFeedStoriesErrorMessage,
+		homeFeedStoriesNextAPIEndpoint,
+	} = useSelector((state) => state.homeFeedStoriesReducer);
 
 	const { currentPage, setCurrentPage, isExtraContentsLoading, fetchContents } =
 		usePagination(
@@ -29,16 +29,16 @@ const StorySidebarUsers = () => {
 			2,
 			false,
 			true,
-			fetchedUsersStoriesArray,
-			fetchedExtraUsersStoriesArray,
-			setUsersStoriesNextAPIEndpoint,
-			usersStoriesNextAPIEndpoint
+			fetchedHomeFeedStoriesArray,
+			fetchedExtraHomeFeedStoriesArray,
+			setHomeFeedStoriesNextAPIEndpoint,
+			homeFeedStoriesNextAPIEndpoint
 		);
 
 	const afterInitialMount = React.useRef(false);
 
 	React.useEffect(() => {
-		if (usersStoriesArray && afterInitialMount.current) {
+		if (homeFeedStoriesArray && afterInitialMount.current) {
 			const token = fetchToken();
 
 			fetchContents(false, "GET", null, {
@@ -55,19 +55,21 @@ const StorySidebarUsers = () => {
 
 	return (
 		<StorySidebarUsersStyle>
-			{usersStoriesArray && !usersStoriesErrorMessage ? (
-				usersStoriesArray.map(({ storyOwner }, idx) => {
+			{homeFeedStoriesArray && !homeFeedStoriesErrorMessage ? (
+				homeFeedStoriesArray.map(({ storyOwner }, idx) => {
 					return (
 						<StorySidebarUser storyOwner={storyOwner} storyUserIdx={idx} />
 					);
 				})
 			) : (
-				<h1>{usersStoriesErrorMessage && usersStoriesErrorMessage.story}</h1>
+				<h1>
+					{homeFeedStoriesErrorMessage && homeFeedStoriesErrorMessage.story}
+				</h1>
 			)}
 
-			{usersStoriesNextAPIEndpoint === null ||
-			!usersStoriesArray ||
-			(usersStoriesArray && usersStoriesNextAPIEndpoint === "") ? null : (
+			{homeFeedStoriesNextAPIEndpoint === null ||
+			!homeFeedStoriesArray ||
+			(homeFeedStoriesArray && homeFeedStoriesNextAPIEndpoint === "") ? null : (
 				<button onClick={handleLoadMoreButtonOnClick}>
 					{isExtraContentsLoading ? (
 						<Loader
