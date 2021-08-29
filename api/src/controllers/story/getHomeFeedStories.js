@@ -1,6 +1,7 @@
 const pool = require("../../pool");
 
 const UserRepo = require("../../repos/user-repo");
+const StoryRepo = require("../../repos/story-repo");
 
 const calculatePaginationIndexes = require("../../utils/common/calculatePaginationIndexes");
 
@@ -82,11 +83,11 @@ const getHomeFeedStories = async (req, res) => {
 
 			const storyIDsArrayData = await pool.queryToDatabase(
 				`
-					SELECT 
-					id
-					FROM stories
-					WHERE user_id=$1;
-					`,
+				SELECT 
+				id
+				FROM stories
+				WHERE user_id=$1;
+				`,
 				[leaderID]
 			);
 

@@ -45,7 +45,7 @@ userRouter.get(
 	getProfilePosts
 );
 
-// FIX: ???
+// FIX: route endpoint
 userRouter.get("/profile/edit", authenticateToken, async (req, res) => {
 	const userID = parseInt(res.locals.userID);
 

@@ -12,6 +12,7 @@ const getStoryBackgrounds = require("../controllers/story/getStoryBackgrounds");
 const uploadStory = require("../controllers/story/uploadStory");
 const getUserStory = require("../controllers/story/getUserStory");
 const getHomeFeedStories = require("../controllers/story/getHomeFeedStories");
+const getUserProfileStories = require("../controllers/story/getUserProfileStories");
 
 const storyRouter = express.Router();
 
@@ -24,8 +25,10 @@ storyRouter.get("/story/backgrounds", getStoryBackgrounds);
 
 storyRouter.post("/upload/story", authenticateToken, uploadStory);
 
-storyRouter.get("/story/:storyID/:ownerID/:visitorID", getUserStory);
+storyRouter.get("/story/:storyID/:ownerID", getUserStory);
 
 storyRouter.get("/story/feed", authenticateToken, getHomeFeedStories);
+
+storyRouter.get("/profile/story", authenticateToken, getUserProfileStories);
 
 module.exports = storyRouter;

@@ -38,7 +38,7 @@ const getHomeFeedNotifications = async (req, res) => {
 			});
 		}
 
-		res.send(homeFeedNotificationsData.rows);
+		res.send(homeFeedNotificationsArray);
 	} catch (error) {
 		res.send({
 			error: {
