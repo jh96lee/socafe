@@ -3,11 +3,11 @@ import { useHistory } from "react-router";
 
 import { IconElement } from "../../shared";
 
-import { AddContentHeaderStyle } from "../../../styles";
+import { PageSidebarHeaderStyle } from "../../../styles";
 
 import { Left } from "../../../assets";
 
-const AddStoryHeader = () => {
+const AddStorySidebarHeader = () => {
 	const history = useHistory();
 
 	const handleIconElementOnClick = () => {
@@ -15,7 +15,7 @@ const AddStoryHeader = () => {
 	};
 
 	return (
-		<AddContentHeaderStyle>
+		<PageSidebarHeaderStyle>
 			<IconElement
 				iconElementStyleObject={{
 					elementPadding: "0.6rem",
@@ -27,8 +27,8 @@ const AddStoryHeader = () => {
 			</IconElement>
 
 			<h2>Add Story</h2>
-		</AddContentHeaderStyle>
+		</PageSidebarHeaderStyle>
 	);
 };
 
-export default AddStoryHeader;
+export default AddStorySidebarHeader;

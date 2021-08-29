@@ -1,27 +1,12 @@
 import * as React from "react";
+import { useDispatch, useSelector } from "react-redux";
 import styled from "styled-components";
 
-import { AddStoryForm } from "../../views/add-story-form";
+import { Loader } from "../../views/shared";
+import { AddStorySidebar } from "../../views/add-story-sidebar";
 import { StoryPreview } from "../../views/story-preview";
 
-import { AddContentPageStyle } from "../../styles";
-
-const StoryPreviewPageStyle = styled.div`
-	display: grid;
-	grid-template-columns: 35rem 1fr;
-`;
-
-const StorySelectorsStyle = styled.div`
-	display: flex;
-	gap: 1rem;
-`;
-
-const BG = styled.div`
-	background: ${(props) => props.bg};
-	width: 4rem;
-	height: 4rem;
-	border-radius: 50%;
-`;
+import { fetchStoryBackgrounds } from "../../redux/add-story/story-background/storyBackgroundAction";
 
 const AddStoryPage = styled.div`
 	display: flex;
@@ -32,14 +17,31 @@ const AddStoryPage = styled.div`
 	grid-template-rows: auto;
 	max-height: 100vh;
 	min-height: 100vh;
+	min-width: 100vw;
 `;
 
 const StoryPage = () => {
+	const dispatch = useDispatch();
+
+	const { isStoryBackgroundsLoaded } = useSelector(
+		(state) => state.storyBackgroundReducer
+	);
+
+	React.useEffect(() => {
+		dispatch(fetchStoryBackgrounds());
+	}, []);
+
 	return (
 		<AddStoryPage>
-			<AddStoryForm />
+			{isStoryBackgroundsLoaded ? (
+				<React.Fragment>
+					<AddStorySidebar />
 
-			<StoryPreview />
+					<StoryPreview />
+				</React.Fragment>
+			) : (
+				<Loader />
+			)}
 		</AddStoryPage>
 	);
 };

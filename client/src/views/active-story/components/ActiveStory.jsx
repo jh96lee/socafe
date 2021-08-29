@@ -14,6 +14,7 @@ import { updateViewedStories } from "../../../utils/story/updateViewedStories";
 
 import { ActiveStoryStyle } from "../styles/ActiveStoryStyle";
 import { ActiveStoryHeaderStyle } from "../styles/ActiveStoryHeaderStyle";
+import { ActiveStoryDirectionsStyle } from "../styles/ActiveStoryDirectionsStyle";
 
 import { Left, Right } from "../../../assets";
 
@@ -121,10 +122,6 @@ const ActiveStory = () => {
 		<ActiveStoryStyle>
 			{isActiveStoryLoaded ? (
 				<React.Fragment>
-					<IconElement onClick={handleStoryLeftOnClick}>
-						<Left />
-					</IconElement>
-
 					<ActiveStoryHeaderStyle>
 						<StoryProgressBars />
 
@@ -139,9 +136,27 @@ const ActiveStory = () => {
 
 					<Story story={activeStory} />
 
-					<IconElement onClick={handleStoryRightOnClick}>
-						<Right />
-					</IconElement>
+					<ActiveStoryDirectionsStyle>
+						<IconElement
+							onClick={handleStoryLeftOnClick}
+							iconElementStyleObject={{
+								elementBackgroundColor: "#0000004a",
+								iconSize: "2.5rem",
+							}}
+						>
+							<Left />
+						</IconElement>
+
+						<IconElement
+							onClick={handleStoryRightOnClick}
+							iconElementStyleObject={{
+								elementBackgroundColor: "#0000004a",
+								iconSize: "2.5rem",
+							}}
+						>
+							<Right />
+						</IconElement>
+					</ActiveStoryDirectionsStyle>
 				</React.Fragment>
 			) : (
 				<Loader />

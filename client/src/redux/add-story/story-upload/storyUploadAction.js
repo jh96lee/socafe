@@ -26,7 +26,8 @@ const setSuccessUploadErrorMessage = (message) => ({
 });
 
 export const uploadStory = () => async (dispatch, getState) => {
-	const { selectedStoryBackground } = getState().storyBackgroundReducer;
+	const { storyBackground, selectedStoryBackgroundIndex } =
+		getState().storyBackgroundReducer;
 
 	const { uploadedStoryImage, imageTop, imageLeft, isImageTransformed } =
 		getState().storyImageReducer;
@@ -60,7 +61,7 @@ export const uploadStory = () => async (dispatch, getState) => {
 				Authorization: `Bearer ${token}`,
 			},
 			data: {
-				storyBackground: selectedStoryBackground,
+				storyBackground: storyBackground[selectedStoryBackgroundIndex],
 				storyImage: {
 					uploadedStoryImage,
 					imageTop,

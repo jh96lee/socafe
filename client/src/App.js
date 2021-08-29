@@ -16,6 +16,7 @@ import {
 	StoryPage,
 	ExplorePage,
 	NotificationsPage,
+	UserStoriesPage,
 } from "./pages";
 import { AddPostIcon } from "./views/shared";
 import { MainPost } from "./views/main-post";
@@ -107,6 +108,10 @@ function App() {
 
 					<Route exact path="/notifications">
 						<NotificationsPage />
+					</Route>
+
+					<Route exact path="/stories">
+						<UserStoriesPage />
 					</Route>
 				</Switch>
 

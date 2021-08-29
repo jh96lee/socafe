@@ -17,3 +17,5 @@ export { default as StoryPage } from "./story-page/StoryPage";
 export { default as ExplorePage } from "./explore-page/ExplorePage";
 
 export { default as NotificationsPage } from "./notifications-page/NotificationsPage";
+
+export { default as UserStoriesPage } from "./user-stories-page/UserStoriesPage";

@@ -1,6 +1,5 @@
 import * as React from "react";
 import { useDispatch, useSelector } from "react-redux";
-import styled from "styled-components";
 
 import StoryPreviewText from "./StoryPreviewText";
 import StoryPreviewImage from "./StoryPreviewImage";
@@ -16,42 +15,44 @@ import {
 	setIsTextTransformed,
 } from "../../../redux/add-story/story-text/storyTextAction";
 
-import { convertPixelsToViewWidth } from "../../../utils/story/convertPixelsToViewWidth";
+import { useStory } from "../../../hooks";
 
-const StoryPreviewStyle = styled.div`
-	position: relative;
-	display: block;
-	margin: 3.5rem auto;
-	border: 2px solid var(--separator-2);
-	border-radius: 1rem;
-	overflow: hidden;
-	margin: auto;
-	background: ${(props) => props.storyBackground};
+import { StoryStyle } from "../../../styles";
 
-	width: 48rem;
-	height: 72rem;
-
-	@media (max-width: 1000px) {
-		width: ${(props) => props.responsiveStoryPreviewWidth};
-		height: ${(props) => props.responsiveStoryPreviewHeight};
-	}
-`;
-
-const StoryPreview = () => {
+const StoryPreview = ({ convertUnitToViewWidthBreakingPoint = 1000 }) => {
 	const dispatch = useDispatch();
 
-	const { selectedStoryBackground } = useSelector(
+	const { storyBackgrounds, selectedStoryBackgroundIndex } = useSelector(
 		(state) => state.storyBackgroundReducer
 	);
 
-	const { isStoryTextAdded } = useSelector((state) => state.storyTextReducer);
+	const { isStoryTextAdded, textSizeRatiosArray, selectedTextSizeRatioIndex } =
+		useSelector((state) => state.storyTextReducer);
 
 	const { uploadedStoryImage } = useSelector(
 		(state) => state.storyImageReducer
 	);
 
-	const containerRef = React.useRef();
+	const storyPreviewRef = React.useRef();
 	const draggableElementRef = React.useRef();
+
+	const storyTextRatio = React.useMemo(() => {
+		return textSizeRatiosArray[selectedTextSizeRatioIndex].ratio;
+	}, [selectedTextSizeRatioIndex]);
+
+	// TODO: useStory hook
+	const {
+		storyWidth,
+		storyHeight,
+		storyFontSize,
+		responsiveStoryWidth,
+		responsiveStoryHeight,
+		responsiveStoryFontSize,
+	} = useStory(
+		storyPreviewRef,
+		storyTextRatio,
+		convertUnitToViewWidthBreakingPoint
+	);
 
 	let draggableClickedX;
 	let draggableClickedY;
@@ -62,28 +63,33 @@ const StoryPreview = () => {
 		draggableElementRef.current.style.transform = "none";
 
 		const { width: containerWidth, height: containerHeight } =
-			containerRef.current.getBoundingClientRect();
+			storyPreviewRef.current.getBoundingClientRect();
 
 		draggableElementRef.current.style.left = `${
-			((e.clientX - containerRef.current.offsetLeft - draggableClickedX) /
+			((e.clientX - storyPreviewRef.current.offsetLeft - draggableClickedX) /
 				containerWidth) *
 			100
 		}%`;
 
 		draggableElementRef.current.style.top = `${
-			((e.clientY - containerRef.current.offsetTop - draggableClickedY) /
+			((e.clientY - storyPreviewRef.current.offsetTop - draggableClickedY) /
 				containerHeight) *
 			100
 		}%`;
 	};
 
+	// REVIEW: set what the draggable element is
 	const handleDraggableOnMouseDown = (e) => {
-		if (!e.target.id) {
+		if (
+			!e.target.id ||
+			e.target.nodeName === "svg" ||
+			e.target.nodeName === "path"
+		) {
 			return;
 		}
 
-		// FIX
-		if (e.target.id === "story-image__child") {
+		// REVIEW: fixed
+		if (e.target.nodeName === "IMG") {
 			e.preventDefault();
 		}
 
@@ -101,11 +107,20 @@ const StoryPreview = () => {
 		draggableClickedX = e.clientX - x;
 		draggableClickedY = e.clientY - y;
 
-		containerRef.current.addEventListener("mousemove", mouseMoveEventHandler);
+		storyPreviewRef.current.addEventListener(
+			"mousemove",
+			mouseMoveEventHandler
+		);
 	};
 
+	// REVIEW: set state top and left values
 	const handleContainerOnMouseUp = (e) => {
-		if (!draggableElementRef.current) {
+		if (
+			!draggableElementRef.current ||
+			!e.target.id ||
+			e.target.nodeName === "svg" ||
+			e.target.nodeName === "path"
+		) {
 			return;
 		}
 
@@ -133,22 +148,30 @@ const StoryPreview = () => {
 
 		draggableElementRef.current.style.boxShadow = "none";
 
-		containerRef.current.removeEventListener(
+		storyPreviewRef.current.removeEventListener(
 			"mousemove",
 			mouseMoveEventHandler
 		);
 	};
 
 	return (
-		<StoryPreviewStyle
-			ref={containerRef}
+		<StoryStyle
+			ref={storyPreviewRef}
 			onMouseUp={handleContainerOnMouseUp}
-			storyBackground={selectedStoryBackground.background_gradient}
-			responsiveStoryPreviewWidth={convertPixelsToViewWidth("480px", 1000)}
-			responsiveStoryPreviewHeight={convertPixelsToViewWidth("720px", 1000)}
+			storyBackground={
+				storyBackgrounds &&
+				storyBackgrounds[selectedStoryBackgroundIndex].background_gradient
+			}
+			storyWidth={storyWidth}
+			storyHeight={storyHeight}
+			responsiveStoryWidth={responsiveStoryWidth}
+			responsiveStoryHeight={responsiveStoryHeight}
+			convertUnitToViewWidthBreakingPoint={convertUnitToViewWidthBreakingPoint}
 		>
 			{isStoryTextAdded && (
 				<StoryPreviewText
+					storyFontSize={storyFontSize}
+					responsiveStoryFontSize={responsiveStoryFontSize}
 					draggableElementRef={draggableElementRef}
 					handleDraggableOnMouseDown={handleDraggableOnMouseDown}
 				/>
@@ -160,7 +183,7 @@ const StoryPreview = () => {
 					handleDraggableOnMouseDown={handleDraggableOnMouseDown}
 				/>
 			)}
-		</StoryPreviewStyle>
+		</StoryStyle>
 	);
 };
 

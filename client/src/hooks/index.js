@@ -15,3 +15,5 @@ export { default as usePostCommentsDisplay } from "./post/usePostCommentsDisplay
 export { default as useUploadOrDeleteImage } from "./image/useUploadOrDeleteImage";
 
 export { default as usePagination } from "./common/usePagination";
+
+export { default as useStory } from "./story/useStory";

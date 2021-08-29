@@ -29,6 +29,12 @@ export const setSelectedTextSizeIndex = (index) => ({
 	payload: index,
 });
 
+// REVIEW: fix
+export const setSelectedTextSizeRatioIndex = (index) => ({
+	type: "SET_SELECTED_TEXT_SIZE_RATIO_INDEX",
+	payload: index,
+});
+
 export const setStoryTextTop = (top) => ({
 	type: "SET_STORY_TEXT_TOP",
 	payload: top,
@@ -42,4 +48,8 @@ export const setStoryTextLeft = (left) => ({
 export const setIsTextTransformed = (boolean) => ({
 	type: "SET_IS_TEXT_TRANSFORMED",
 	payload: boolean,
+});
+
+export const resetStoryText = () => ({
+	type: "RESET_STORY_TEXT",
 });

@@ -2,12 +2,9 @@ import * as React from "react";
 import { useSelector, useDispatch } from "react-redux";
 import styled from "styled-components";
 
-import {
-	setSelectedStoryBackground,
-	fetchStoryBackgrounds,
-} from "../../../redux/add-story/story-background/storyBackgroundAction";
+import { setSelectedStoryBackgroundIndex } from "../../../redux/add-story/story-background/storyBackgroundAction";
 
-import { AddContentStyle } from "../../../styles";
+import { PageSidebarBodyLabeledRowStyle } from "../../../styles";
 
 const StoryBackgroundsStyle = styled.div`
 	display: flex;
@@ -30,12 +27,8 @@ const AddStoryBackground = () => {
 		(state) => state.storyBackgroundReducer
 	);
 
-	React.useEffect(() => {
-		dispatch(fetchStoryBackgrounds());
-	}, []);
-
 	return (
-		<AddContentStyle>
+		<PageSidebarBodyLabeledRowStyle>
 			<h3>Add Background</h3>
 
 			<StoryBackgroundsStyle>
@@ -45,13 +38,13 @@ const AddStoryBackground = () => {
 							key={`story-background__${id}`}
 							background={background_gradient}
 							onClick={() => {
-								dispatch(setSelectedStoryBackground(storyBackgrounds[idx]));
+								dispatch(setSelectedStoryBackgroundIndex(idx));
 							}}
 						/>
 					);
 				})}
 			</StoryBackgroundsStyle>
-		</AddContentStyle>
+		</PageSidebarBodyLabeledRowStyle>
 	);
 };
 

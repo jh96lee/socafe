@@ -15,7 +15,7 @@ export const StoryTextStyle = styled.p`
 	font-weight: ${(props) => (props.isTextBold ? "600" : "400")};
 	font-style: ${(props) => props.isTextItalic && "italic"};
 	text-decoration: ${(props) => props.isTextUnderline && "underline"};
-	padding: 1rem;
+	/* padding: 1rem; */
 
 	font-size: ${(props) => props.storyPreviewTextSize};
 

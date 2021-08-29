@@ -18,6 +18,11 @@ export const setSelectedStoryBackground = (backgroundObject) => ({
 	payload: backgroundObject,
 });
 
+export const setSelectedStoryBackgroundIndex = (index) => ({
+	type: "SET_SELECTED_STORY_BACKGROUND_INDEX",
+	payload: index,
+});
+
 export const fetchStoryBackgrounds = () => async (dispatch) => {
 	dispatch(startFetchingStoryBackgrounds());
 
