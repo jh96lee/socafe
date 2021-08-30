@@ -18,8 +18,9 @@ export const StoryPreviewTextContentEditableStyle = styled.div`
 	outline: none;
 
 	&:empty {
-		box-shadow: 0 0 0 1.6px var(--separator-2);
-		padding: 1rem;
+		border-radius: 0;
+		/* FIX: color */
+		border-bottom: 2px solid grey;
 	}
 
 	&:hover {
@@ -36,7 +37,8 @@ export const StoryPreviewTextContentEditableStyle = styled.div`
 		text-decoration: none !important;
 	}
 
-	@media (max-width: 1000px) {
+	@media (max-width: ${(props) =>
+			`${props.convertUnitToViewWidthBreakingPoint}px`}) {
 		font-size: ${(props) => `${props.responsiveStoryFontSize}vw`} !important;
 	}
 `;

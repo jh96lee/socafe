@@ -23,6 +23,7 @@ const StoryPreviewText = ({
 	responsiveStoryFontSize,
 	draggableElementRef,
 	handleDraggableOnMouseDown,
+	convertUnitToViewWidthBreakingPoint,
 }) => {
 	const dispatch = useDispatch();
 
@@ -112,6 +113,7 @@ const StoryPreviewText = ({
 			id="story-text"
 			ref={draggableElementRef}
 			onMouseDown={handleDraggableOnMouseDown}
+			convertUnitToViewWidthBreakingPoint={convertUnitToViewWidthBreakingPoint}
 		>
 			<StoryPreviewTextContentEditableStyle
 				id="story-text__child"

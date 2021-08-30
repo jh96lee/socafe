@@ -4,6 +4,8 @@ export { default as DropdownRelativeStyle } from "./dropdown/DropdownRelativeSty
 export { default as DropdownUnsetStyle } from "./dropdown/DropdownUnsetStyle";
 
 export { default as PageStyle } from "./page/PageStyle";
+export { default as PageWithSidebarStyle } from "./page/PageWithSidebarStyle";
+
 export { default as BorderStyle } from "./border/BorderStyle";
 
 export { default as FormPageStyle } from "./form/FormPageStyle";

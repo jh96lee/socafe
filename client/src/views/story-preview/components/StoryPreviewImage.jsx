@@ -1,6 +1,5 @@
 import * as React from "react";
 import { useSelector, useDispatch } from "react-redux";
-import styled from "styled-components";
 
 import { IconElement, Loader } from "../../shared";
 
@@ -13,29 +12,9 @@ import {
 
 import { useUploadOrDeleteImage } from "../../../hooks";
 
+import { StoryPreviewImageStyle } from "../styles/StoryPreviewImageStyle";
+
 import { Remove } from "../../../assets";
-
-const StoryImageStyle = styled.div`
-	position: absolute;
-	z-index: 1;
-	display: block;
-	width: ${(props) => (props.isImageTall ? "auto" : "90%")};
-	height: ${(props) => (props.isImageTall ? "90%" : "auto")};
-	border-radius: 1rem;
-	overflow: hidden;
-	cursor: move;
-
-	& > img {
-		display: flex;
-		width: ${(props) => (props.isImageTall ? "auto" : "100%")};
-		height: ${(props) => (props.isImageTall ? "100%" : "auto")};
-		object-fit: cover;
-	}
-
-	&:hover {
-		cursor: pointer;
-	}
-`;
 
 const StoryPreviewImage = ({
 	draggableElementRef,
@@ -76,7 +55,7 @@ const StoryPreviewImage = ({
 	};
 
 	return uploadedStoryImage ? (
-		<StoryImageStyle
+		<StoryPreviewImageStyle
 			id="story-image"
 			ref={draggableElementRef}
 			onMouseDown={handleDraggableOnMouseDown}
@@ -109,7 +88,7 @@ const StoryPreviewImage = ({
 			>
 				<Remove />
 			</IconElement>
-		</StoryImageStyle>
+		</StoryPreviewImageStyle>
 	) : (
 		<Loader isLoaderAbsolute={true} />
 	);

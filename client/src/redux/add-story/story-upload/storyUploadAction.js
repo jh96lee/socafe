@@ -26,7 +26,7 @@ const setSuccessUploadErrorMessage = (message) => ({
 });
 
 export const uploadStory = () => async (dispatch, getState) => {
-	const { storyBackground, selectedStoryBackgroundIndex } =
+	const { storyBackgrounds, selectedStoryBackgroundIndex } =
 		getState().storyBackgroundReducer;
 
 	const { uploadedStoryImage, imageTop, imageLeft, isImageTransformed } =
@@ -34,12 +34,12 @@ export const uploadStory = () => async (dispatch, getState) => {
 
 	const {
 		textColorsArray,
-		textSizesArray,
+		textSizeRatiosArray,
 		storyTextContent,
 		isBold,
 		isItalic,
 		isUnderline,
-		selectedTextSizeIndex,
+		selectedTextSizeRatioIndex,
 		selectedTextColorIndex,
 		textTop,
 		textLeft,
@@ -49,7 +49,8 @@ export const uploadStory = () => async (dispatch, getState) => {
 	if (uploadedStoryImage || storyTextContent.length > 0) {
 		dispatch(startUploadingStory());
 
-		const selectedTextSize = textSizesArray[selectedTextSizeIndex];
+		const selectedTextSizeRatio =
+			textSizeRatiosArray[selectedTextSizeRatioIndex].ratio;
 		const selectedTextColor = textColorsArray[selectedTextColorIndex];
 
 		const token = fetchToken();
@@ -61,7 +62,7 @@ export const uploadStory = () => async (dispatch, getState) => {
 				Authorization: `Bearer ${token}`,
 			},
 			data: {
-				storyBackground: storyBackground[selectedStoryBackgroundIndex],
+				storyBackground: storyBackgrounds[selectedStoryBackgroundIndex],
 				storyImage: {
 					uploadedStoryImage,
 					imageTop,
@@ -73,7 +74,7 @@ export const uploadStory = () => async (dispatch, getState) => {
 					isBold,
 					isItalic,
 					isUnderline,
-					selectedTextSize,
+					selectedTextSizeRatio,
 					selectedTextColor,
 					textTop,
 					textLeft,

@@ -8,7 +8,12 @@ import AddStorySidebarFooter from "./AddStorySidebarFooter";
 
 import { PageSidebarStyle } from "../../../styles";
 
-const AddStoryForm = () => {
+const AddStorySidebar = ({
+	isResponsiveAddStorySidebarOpen,
+	setisResponsiveAddStorySidebarOpen,
+	addStorySidebarID,
+	absoluteSidebarBreakingPoint,
+}) => {
 	const history = useHistory();
 
 	const { uploadedStoryID } = useSelector((state) => state.storyUploadReducer);
@@ -20,8 +25,15 @@ const AddStoryForm = () => {
 	}, [uploadedStoryID]);
 
 	return (
-		<PageSidebarStyle>
-			<AddStorySidebarHeader />
+		<PageSidebarStyle
+			id={addStorySidebarID}
+			isResponsiveSidebarOpen={isResponsiveAddStorySidebarOpen}
+			absoluteSidebarBreakingPoint={absoluteSidebarBreakingPoint}
+		>
+			<AddStorySidebarHeader
+				absoluteSidebarBreakingPoint={absoluteSidebarBreakingPoint}
+				setisResponsiveAddStorySidebarOpen={setisResponsiveAddStorySidebarOpen}
+			/>
 
 			<AddStorySidebarBody />
 
@@ -30,4 +42,4 @@ const AddStoryForm = () => {
 	);
 };
 
-export default AddStoryForm;
+export default AddStorySidebar;

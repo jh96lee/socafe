@@ -19,7 +19,7 @@ export const LoaderWrapperStyle = styled.div`
 
 	display: flex;
 	justify-content: center;
-	margin: auto;
+	margin: ${(props) => props.loaderMargin || "auto"};
 	border-radius: 50%;
 `;
 

@@ -4,6 +4,7 @@ import { useParams } from "react-router-dom";
 
 import { StorySidebar } from "../../views/story-sidebar";
 import { ActiveStory } from "../../views/active-story";
+import { IconElement } from "../../views/shared";
 
 import { fetchCurrentUserStories } from "../../redux/home-feed/home-feed-stories/homeFeedStoriesAction";
 import {
@@ -11,7 +12,12 @@ import {
 	setActiveUserStoryIndex,
 } from "../../redux/story/story-viewership/storyViewershipAction";
 
+import { useDropdown } from "../../hooks";
+
 import { StoryPageStyle } from "./StoryPageStyle";
+import { PageWithSidebarStyle } from "../../styles";
+
+import { SidebarFilled } from "../../assets";
 
 const StoryPage = () => {
 	const dispatch = useDispatch();
@@ -26,6 +32,20 @@ const StoryPage = () => {
 
 	const userID = parseInt(useParams().userID);
 	const storyID = parseInt(useParams().storyID);
+
+	// TODO: UI setting values
+	const absoluteSidebarBreakingPoint = 1000;
+	const convertUnitToViewWidthBreakingPoint = 600;
+	const responsiveStorySidebarTriggerID = "responsive-story-sidebar-trigger";
+	const responsiveStorySidebarID = "responsive-story-sidebar";
+
+	const { isDropdownMenuOpen, setIsDropdownMenuOpen } = useDropdown(
+		responsiveStorySidebarTriggerID,
+		responsiveStorySidebarID,
+		false,
+		true
+	);
+	// TODO: UI setting values
 
 	React.useEffect(() => {
 		// REVIEW: if homeFeedStoriesArray does not exist because the user either refreshed the page or entered the URL directly,
@@ -53,11 +73,37 @@ const StoryPage = () => {
 	}, [homeFeedStoriesArray, userID, storyID]);
 
 	return (
-		<StoryPageStyle>
-			<StorySidebar />
+		<PageWithSidebarStyle
+			id="story-page"
+			absoluteSidebarBreakingPoint={absoluteSidebarBreakingPoint}
+		>
+			<StorySidebar
+				isResponsiveStorySidebarOpen={isDropdownMenuOpen}
+				setisResponsiveStorySidebarOpen={setIsDropdownMenuOpen}
+				storySidebarID={responsiveStorySidebarID}
+				absoluteSidebarBreakingPoint={absoluteSidebarBreakingPoint}
+			/>
 
-			{homeFeedStoriesArray && <ActiveStory />}
-		</StoryPageStyle>
+			{homeFeedStoriesArray && (
+				<ActiveStory
+					convertUnitToViewWidthBreakingPoint={
+						convertUnitToViewWidthBreakingPoint
+					}
+				/>
+			)}
+
+			<IconElement
+				iconRole="button"
+				iconID={responsiveStorySidebarTriggerID}
+				iconElementStyleObject={{
+					elementPadding: "1rem",
+					elementWidth: "fit-content",
+					elementHeight: "fit-content",
+				}}
+			>
+				<SidebarFilled />
+			</IconElement>
+		</PageWithSidebarStyle>
 	);
 };
 

@@ -34,6 +34,7 @@ import { ReactComponent as ColoredImages } from "./general/colored-images.svg";
 import { ReactComponent as Images } from "./general/images.svg";
 import { ReactComponent as CloseAlt } from "./general/close-alt.svg";
 import { ReactComponent as TrashOutline } from "./general/trash-outline.svg";
+import { ReactComponent as SidebarFilled } from "./general/sidebar-filled.svg";
 
 import { ReactComponent as SocafeDark } from "./logo/socafe-dark.svg";
 import { ReactComponent as SocafeLight } from "./logo/socafe-light.svg";
@@ -106,6 +107,7 @@ export {
 	Sun,
 	EditFilled,
 	Moon,
+	SidebarFilled,
 	ClockFilled,
 	Remove,
 	TextFilled,

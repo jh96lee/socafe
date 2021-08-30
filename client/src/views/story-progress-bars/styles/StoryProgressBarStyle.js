@@ -6,7 +6,8 @@ export const StoryProgressBarStyle = styled.div`
 	background-color: #72727273;
 	width: 100%;
 	height: 0.5rem;
-	border-radius: 1rem;
+	border-top-left-radius: 1rem;
+	border-top-right-radius: 1rem;
 	overflow: hidden;
 `;
 

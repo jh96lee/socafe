@@ -95,7 +95,7 @@ function App() {
 					</Route>
 
 					<Route exact path="/add/story">
-						<AddStoryPage />
+						{user ? <AddStoryPage /> : <Redirect to="/login" />}
 					</Route>
 
 					<Route path="/edit/profile">

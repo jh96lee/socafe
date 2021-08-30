@@ -19,7 +19,7 @@ import { useStory } from "../../../hooks";
 
 import { StoryStyle } from "../../../styles";
 
-const StoryPreview = ({ convertUnitToViewWidthBreakingPoint = 1000 }) => {
+const StoryPreview = ({ convertUnitToViewWidthBreakingPoint }) => {
 	const dispatch = useDispatch();
 
 	const { storyBackgrounds, selectedStoryBackgroundIndex } = useSelector(
@@ -62,18 +62,18 @@ const StoryPreview = ({ convertUnitToViewWidthBreakingPoint = 1000 }) => {
 
 		draggableElementRef.current.style.transform = "none";
 
-		const { width: containerWidth, height: containerHeight } =
+		const { width: storyPreviewWidth, height: storyPreviewHeight } =
 			storyPreviewRef.current.getBoundingClientRect();
 
 		draggableElementRef.current.style.left = `${
 			((e.clientX - storyPreviewRef.current.offsetLeft - draggableClickedX) /
-				containerWidth) *
+				storyPreviewWidth) *
 			100
 		}%`;
 
 		draggableElementRef.current.style.top = `${
 			((e.clientY - storyPreviewRef.current.offsetTop - draggableClickedY) /
-				containerHeight) *
+				storyPreviewHeight) *
 			100
 		}%`;
 	};
@@ -81,9 +81,10 @@ const StoryPreview = ({ convertUnitToViewWidthBreakingPoint = 1000 }) => {
 	// REVIEW: set what the draggable element is
 	const handleDraggableOnMouseDown = (e) => {
 		if (
-			!e.target.id ||
-			e.target.nodeName === "svg" ||
-			e.target.nodeName === "path"
+			e.target.id !== "story-text" &&
+			e.target.id !== "story-text__child" &&
+			e.target.id !== "story-image" &&
+			e.target.id !== "story-image__child"
 		) {
 			return;
 		}
@@ -98,10 +99,6 @@ const StoryPreview = ({ convertUnitToViewWidthBreakingPoint = 1000 }) => {
 			? e.target.parentNode
 			: e.target;
 
-		// REVIEW: fixed
-		draggableElementRef.current.style.boxShadow =
-			"0 0 0 1.6px var(--separator-2)";
-
 		const { x, y } = draggableElementRef.current.getBoundingClientRect();
 
 		draggableClickedX = e.clientX - x;
@@ -114,12 +111,13 @@ const StoryPreview = ({ convertUnitToViewWidthBreakingPoint = 1000 }) => {
 	};
 
 	// REVIEW: set state top and left values
-	const handleContainerOnMouseUp = (e) => {
+	const handleStoryPreviewOnMouseUp = (e) => {
 		if (
 			!draggableElementRef.current ||
-			!e.target.id ||
-			e.target.nodeName === "svg" ||
-			e.target.nodeName === "path"
+			(e.target.id !== "story-text" &&
+				e.target.id !== "story-text__child" &&
+				e.target.id !== "story-image" &&
+				e.target.id !== "story-image__child")
 		) {
 			return;
 		}
@@ -157,7 +155,7 @@ const StoryPreview = ({ convertUnitToViewWidthBreakingPoint = 1000 }) => {
 	return (
 		<StoryStyle
 			ref={storyPreviewRef}
-			onMouseUp={handleContainerOnMouseUp}
+			onMouseUp={handleStoryPreviewOnMouseUp}
 			storyBackground={
 				storyBackgrounds &&
 				storyBackgrounds[selectedStoryBackgroundIndex].background_gradient
@@ -174,6 +172,9 @@ const StoryPreview = ({ convertUnitToViewWidthBreakingPoint = 1000 }) => {
 					responsiveStoryFontSize={responsiveStoryFontSize}
 					draggableElementRef={draggableElementRef}
 					handleDraggableOnMouseDown={handleDraggableOnMouseDown}
+					convertUnitToViewWidthBreakingPoint={
+						convertUnitToViewWidthBreakingPoint
+					}
 				/>
 			)}
 

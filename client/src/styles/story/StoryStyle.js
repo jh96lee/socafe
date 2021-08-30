@@ -8,7 +8,7 @@ const StoryStyle = styled.div`
 	height: ${(props) => `${props.storyHeight}vh`};
 	margin: auto;
 	border-radius: 1rem;
-	border: 2px solid var(--separator-2);
+	overflow: hidden;
 
 	@media (max-width: ${(props) =>
 			`${props.convertUnitToViewWidthBreakingPoint}px`}) {

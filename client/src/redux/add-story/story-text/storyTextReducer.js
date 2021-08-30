@@ -16,8 +16,6 @@ const initialState = {
 		"#00ABE1",
 		"#FDD935",
 	],
-	// FIX
-	textSizesArray: ["1.4rem", "1.6rem", "1.8rem", "2.0rem", "2.2rem", "2.4rem"],
 	textSizeRatiosArray: [
 		{ label: "ES", ratio: 0.018 },
 		{ label: "S", ratio: 0.022 },
@@ -29,8 +27,6 @@ const initialState = {
 	isBold: false,
 	isItalic: false,
 	isUnderline: false,
-	// FIX
-	selectedTextSizeIndex: 2,
 	// REVIEW: fix
 	selectedTextSizeRatioIndex: 2,
 	selectedTextColorIndex: 0,

@@ -2,7 +2,7 @@ import React from "react";
 import { useDispatch, useSelector } from "react-redux";
 import styled from "styled-components";
 
-import { IconElement } from "../../shared";
+import { IconElement, Loader } from "../../shared";
 
 import { setUploadedStoryImage } from "../../../redux/add-story/story-image/storyImageAction";
 
@@ -71,9 +71,13 @@ const AddStoryImage = () => {
 		(state) => state.storyImageReducer
 	);
 
-	const { deleteImageLogic } = useUploadOrDeleteImage();
-
-	const { uploadedImage, uploadImageLogic } = useUploadOrDeleteImage();
+	const {
+		uploadedImage,
+		uploadImageLogic,
+		deleteImageLogic,
+		isImageDeleting,
+		isImageUploading,
+	} = useUploadOrDeleteImage();
 
 	const handleAddStoryImageOnClick = (e) => {
 		if (uploadedStoryImage) {
@@ -110,7 +114,15 @@ const AddStoryImage = () => {
 					<h5>Add Image</h5>
 				</AddStoryContentCTAStyle>
 
-				{uploadedStoryImage && <CheckmarkCircleFilled />}
+				{isImageDeleting || isImageUploading ? (
+					<Loader
+						loaderSize="2.5rem"
+						loaderBorderSize="0.5rem"
+						loaderStyleObject={{ loaderMargin: "0 0 0 auto" }}
+					/>
+				) : uploadedStoryImage ? (
+					<CheckmarkCircleFilled />
+				) : null}
 			</AddStoryContentStyle>
 		</AddStoryImageStyle>
 	);

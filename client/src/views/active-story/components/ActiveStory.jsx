@@ -18,7 +18,7 @@ import { ActiveStoryDirectionsStyle } from "../styles/ActiveStoryDirectionsStyle
 
 import { Left, Right } from "../../../assets";
 
-const ActiveStory = () => {
+const ActiveStory = ({ convertUnitToViewWidthBreakingPoint }) => {
 	const dispatch = useDispatch();
 
 	const history = useHistory();
@@ -134,7 +134,12 @@ const ActiveStory = () => {
 						/>
 					</ActiveStoryHeaderStyle>
 
-					<Story story={activeStory} />
+					<Story
+						story={activeStory}
+						convertUnitToViewWidthBreakingPoint={
+							convertUnitToViewWidthBreakingPoint
+						}
+					/>
 
 					<ActiveStoryDirectionsStyle>
 						<IconElement

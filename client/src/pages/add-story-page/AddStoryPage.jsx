@@ -1,24 +1,17 @@
 import * as React from "react";
 import { useDispatch, useSelector } from "react-redux";
-import styled from "styled-components";
 
-import { Loader } from "../../views/shared";
+import { Loader, IconElement } from "../../views/shared";
 import { AddStorySidebar } from "../../views/add-story-sidebar";
 import { StoryPreview } from "../../views/story-preview";
 
 import { fetchStoryBackgrounds } from "../../redux/add-story/story-background/storyBackgroundAction";
 
-const AddStoryPage = styled.div`
-	display: flex;
-	display: grid;
-	grid-column: 1 / 3;
-	grid-row: 1 / 3;
-	grid-template-columns: 35rem auto;
-	grid-template-rows: auto;
-	max-height: 100vh;
-	min-height: 100vh;
-	min-width: 100vw;
-`;
+import { useDropdown } from "../../hooks";
+
+import { PageWithSidebarStyle } from "../../styles";
+
+import { SidebarFilled } from "../../assets";
 
 const StoryPage = () => {
 	const dispatch = useDispatch();
@@ -31,18 +24,55 @@ const StoryPage = () => {
 		dispatch(fetchStoryBackgrounds());
 	}, []);
 
+	const absoluteSidebarBreakingPoint = 1000;
+	const convertUnitToViewWidthBreakingPoint = 600;
+	const responsiveAddStorySidebarTriggerID =
+		"responsive-add-story-sidebar-trigger";
+	const responsiveAddStorySidebarID = "responsive-add-story-sidebar";
+
+	const { isDropdownMenuOpen, setIsDropdownMenuOpen } = useDropdown(
+		responsiveAddStorySidebarTriggerID,
+		responsiveAddStorySidebarID,
+		false,
+		true
+	);
+
 	return (
-		<AddStoryPage>
+		<PageWithSidebarStyle
+			id="add-story-page"
+			absoluteSidebarBreakingPoint={absoluteSidebarBreakingPoint}
+		>
 			{isStoryBackgroundsLoaded ? (
 				<React.Fragment>
-					<AddStorySidebar />
+					<AddStorySidebar
+						isResponsiveAddStorySidebarOpen={isDropdownMenuOpen}
+						setisResponsiveAddStorySidebarOpen={setIsDropdownMenuOpen}
+						addStorySidebarID={responsiveAddStorySidebarID}
+						absoluteSidebarBreakingPoint={absoluteSidebarBreakingPoint}
+					/>
 
-					<StoryPreview />
+					<StoryPreview
+						convertUnitToViewWidthBreakingPoint={
+							convertUnitToViewWidthBreakingPoint
+						}
+					/>
+
+					<IconElement
+						iconRole="button"
+						iconID={responsiveAddStorySidebarTriggerID}
+						iconElementStyleObject={{
+							elementPadding: "1rem",
+							elementWidth: "fit-content",
+							elementHeight: "fit-content",
+						}}
+					>
+						<SidebarFilled />
+					</IconElement>
 				</React.Fragment>
 			) : (
 				<Loader />
 			)}
-		</AddStoryPage>
+		</PageWithSidebarStyle>
 	);
 };
 

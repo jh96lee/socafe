@@ -1,10 +1,38 @@
 import React from "react";
 
-import { convertPixelsToViewWidth } from "../../../utils/story/convertPixelsToViewWidth";
+// import { StoryTextStyle } from "../styles/StoryTextStyle";
 
-import { StoryTextStyle } from "../styles/StoryTextStyle";
+import styled from "styled-components";
 
-const StoryText = ({ storyText }) => {
+// TODO: reusable
+const StoryTextStyle = styled.p`
+	position: absolute;
+	top: ${(props) => (props.textTop === null ? "50%" : props.textTop)};
+	left: ${(props) => (props.textLeft === null ? "50%" : props.textLeft)};
+	transform: ${(props) =>
+		(props.textTop === null && props.textLeft === null) ||
+		props.isTextTransformed
+			? "translate(-50%, -50%)"
+			: "none"};
+	z-index: 10;
+	color: ${(props) => (props.textColor ? props.textColor : "var(--text-1")};
+	font-size: ${(props) => `${props.storyFontSize}vh`};
+	font-weight: ${(props) => (props.isTextBold ? "600" : "400")};
+	font-style: ${(props) => props.isTextItalic && "italic"};
+	text-decoration: ${(props) => props.isTextUnderline && "underline"};
+
+	@media (max-width: ${(props) =>
+			`${props.convertUnitToViewWidthBreakingPoint}px`}) {
+		font-size: ${(props) => `${props.responsiveStoryFontSize}vw`} !important;
+	}
+`;
+
+const StoryText = ({
+	storyText,
+	storyFontSize,
+	responsiveStoryFontSize,
+	convertUnitToViewWidthBreakingPoint,
+}) => {
 	const {
 		node_value,
 		story_text_is_bold,
@@ -27,8 +55,9 @@ const StoryText = ({ storyText }) => {
 			textSize={story_text_size}
 			isTextTransformed={story_is_text_transformed}
 			textColor={story_text_color}
-			storyPreviewTextSize={story_text_size}
-			responsiveStoryTextSize={convertPixelsToViewWidth(story_text_size, 600)}
+			storyFontSize={storyFontSize}
+			responsiveStoryFontSize={responsiveStoryFontSize}
+			convertUnitToViewWidthBreakingPoint={convertUnitToViewWidthBreakingPoint}
 		>
 			{node_value}
 		</StoryTextStyle>

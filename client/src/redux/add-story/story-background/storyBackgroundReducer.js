@@ -1,8 +1,7 @@
 const initialState = {
 	isStoryBackgroundsLoaded: false,
 	storyBackgrounds: [],
-	selectedStoryBackground: {},
-	selectedStoryBackgroundIndex: 9,
+	selectedStoryBackgroundIndex: 0,
 };
 
 const storyBackgroundReducer = (state = initialState, action) => {

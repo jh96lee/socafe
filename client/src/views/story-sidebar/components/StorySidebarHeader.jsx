@@ -1,5 +1,5 @@
 import * as React from "react";
-import { useHistory } from "react-router";
+import { useHistory } from "react-router-dom";
 
 import { IconElement } from "../../shared";
 
@@ -7,9 +7,9 @@ import { PageSidebarHeaderStyle } from "../../../styles";
 
 import { Left, Remove } from "../../../assets";
 
-const AddStorySidebarHeader = ({
+const StorySidebarHeader = ({
 	absoluteSidebarBreakingPoint,
-	setisResponsiveAddStorySidebarOpen,
+	setisResponsiveStorySidebarOpen,
 }) => {
 	const history = useHistory();
 
@@ -18,7 +18,7 @@ const AddStorySidebarHeader = ({
 	};
 
 	const handleRemoveIconOnClick = () => {
-		setisResponsiveAddStorySidebarOpen(false);
+		setisResponsiveStorySidebarOpen(false);
 	};
 
 	return (
@@ -35,7 +35,7 @@ const AddStorySidebarHeader = ({
 				<Left />
 			</IconElement>
 
-			<h2>Add Story</h2>
+			<h2>Stories</h2>
 
 			<IconElement
 				iconElementStyleObject={{
@@ -50,4 +50,4 @@ const AddStorySidebarHeader = ({
 	);
 };
 
-export default AddStorySidebarHeader;
+export default StorySidebarHeader;

@@ -3,7 +3,7 @@ import styled from "styled-components";
 export const HeaderStyle = styled.header`
 	position: sticky;
 	top: 0;
-	z-index: 20;
+	z-index: 10;
 	grid-column: 1 / 3;
 	grid-row: 1 / 2;
 	display: flex;

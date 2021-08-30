@@ -3,33 +3,57 @@ import { useHistory } from "react-router-dom";
 
 import { IconElement } from "../../shared";
 import StorySidebarUsers from "./StorySidebarUsers";
+import StorySidebarHeader from "./StorySidebarHeader";
 
-// FIX
-import {
-	StorySidebarStyle,
-	StorySidebarHeaderStyle,
-} from "../styles/StorySidebarStyle";
+import { PageSidebarStyle } from "../../../styles";
 
-import { Left } from "../../../assets";
+import styled from "styled-components";
 
-const StorySidebar = () => {
-	const history = useHistory();
+const StorySidebarStyle = styled(PageSidebarStyle)`
+	/* FIX */
+	& button {
+		position: relative;
+		outline: none;
+		border: none;
+		border-radius: 0.5rem;
+		padding: 1.4rem 0;
+		color: var(--text-1);
+		background-color: transparent;
+		border: 2px solid var(--separator-2);
 
+		display: flex;
+		justify-content: center;
+		align-items: center;
+
+		& > svg {
+			fill: var(--icon-default-color);
+			width: 2rem;
+			height: 2rem;
+		}
+
+		&:hover {
+			cursor: pointer;
+			background-color: var(--secondary-element-hover-bg-color);
+		}
+	}
+`;
+
+const StorySidebar = ({
+	isResponsiveStorySidebarOpen,
+	setisResponsiveStorySidebarOpen,
+	storySidebarID,
+	absoluteSidebarBreakingPoint,
+}) => {
 	return (
-		<StorySidebarStyle>
-			<StorySidebarHeaderStyle>
-				<IconElement
-					iconElementStyleObject={{
-						elementPadding: "0.6rem",
-						iconSize: "2.5rem",
-					}}
-					onClick={() => history.push("/")}
-				>
-					<Left />
-				</IconElement>
-
-				<h2>Stories</h2>
-			</StorySidebarHeaderStyle>
+		<StorySidebarStyle
+			id={storySidebarID}
+			isResponsiveSidebarOpen={isResponsiveStorySidebarOpen}
+			absoluteSidebarBreakingPoint={absoluteSidebarBreakingPoint}
+		>
+			<StorySidebarHeader
+				absoluteSidebarBreakingPoint={absoluteSidebarBreakingPoint}
+				setisResponsiveStorySidebarOpen={setisResponsiveStorySidebarOpen}
+			/>
 
 			<StorySidebarUsers />
 		</StorySidebarStyle>

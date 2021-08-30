@@ -14,6 +14,8 @@ import { usePagination } from "../../../hooks";
 
 import { fetchToken } from "../../../utils/cookie/fetchToken";
 
+import { Down } from "../../../assets";
+
 import { StorySidebarUsersStyle } from "../styles/StorySidebarUsersStyle";
 
 const StorySidebarUsers = () => {
@@ -78,7 +80,7 @@ const StorySidebarUsers = () => {
 							loaderBorderSize="0.4rem"
 						/>
 					) : (
-						"Load More"
+						<Down />
 					)}
 				</button>
 			)}
