@@ -218,6 +218,7 @@ userRouter.put("/profile/edit/avatar", authenticateToken, async (req, res) => {
 			success: "Success",
 		});
 	} else {
+		console.log(error);
 		res.send({
 			error: {
 				edit: "There has been an error while updating your avatar",

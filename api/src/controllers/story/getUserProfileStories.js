@@ -66,6 +66,7 @@ const getUserProfileStories = async (req, res) => {
 			const storyText = await StoryRepo.getStoryTextByID(storyID);
 
 			userProfileStoriesArray.push({
+				id: storyID,
 				story_background: storyBackground,
 				story_image: storyImage,
 				story_text: storyText,

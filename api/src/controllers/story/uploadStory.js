@@ -13,7 +13,7 @@ const uploadStory = async (req, res) => {
 		isBold,
 		isItalic,
 		isUnderline,
-		selectedTextSize,
+		selectedTextSizeRatio,
 		selectedTextColor,
 		textTop,
 		textLeft,
@@ -69,7 +69,7 @@ const uploadStory = async (req, res) => {
 			await pool.queryToDatabase(
 				`
                 INSERT INTO story_texts
-                (story_id, node_type, node_value, story_text_top, story_text_left, story_text_is_bold, story_text_is_italic, story_text_is_underline, story_text_size, story_text_color, story_is_text_transformed)
+                (story_id, node_type, node_value, story_text_top, story_text_left, story_text_is_bold, story_text_is_italic, story_text_is_underline, story_text_size_ratio, story_text_color, story_is_text_transformed)
                 VALUES 
                 ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11);
                 `,
@@ -82,7 +82,7 @@ const uploadStory = async (req, res) => {
 					isBold ? 1 : 0,
 					isItalic ? 1 : 0,
 					isUnderline ? 1 : 0,
-					selectedTextSize,
+					selectedTextSizeRatio,
 					selectedTextColor,
 					isTextTransformed ? 1 : 0,
 				]

@@ -17,6 +17,7 @@ imageRouter.post(
 	uploadImage
 );
 
+// FIX
 imageRouter.post("/delete/image", cloudinaryConfigMiddleware, deleteImage);
 
 module.exports = imageRouter;

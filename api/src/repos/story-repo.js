@@ -65,7 +65,7 @@ class StoryRepo {
             story_text_is_bold,
             story_text_is_italic,
             story_text_is_underline,
-            story_text_size,
+            story_text_size_ratio,
             story_text_color,
             story_is_text_transformed
             FROM story_texts
