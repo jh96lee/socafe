@@ -7,6 +7,7 @@ export const UserProfileOwnerButtonsStyle = styled.div`
 	gap: 0.6rem;
 `;
 
+// FIX
 export const UserProfileOwnerButtonStyle = styled.button`
 	display: flex;
 	justify-content: center;

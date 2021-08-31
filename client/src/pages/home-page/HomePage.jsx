@@ -4,6 +4,7 @@ import { useHistory } from "react-router-dom";
 import { HomeFeedPosts } from "../../views/home-feed-posts";
 import { HomeFeedStoryUsers } from "../../views/home-feed-story-users";
 import { HomeFeedNotifications } from "../../views/home-feed-notifications";
+import { HomeFeedUserSuggestions } from "../../views/home-feed-user-suggestions";
 
 // import Notification from "../notifications-page/Notification";
 
@@ -32,7 +33,6 @@ const HomePageStyle = styled(PageStyle)`
 	}
 
 	& > *:last-child {
-		justify-content: flex-end;
 		width: 35rem;
 	}
 `;
@@ -46,7 +46,8 @@ const HomePageLeftStyle = styled.div`
 
 const HomePageRightStyle = styled.div`
 	display: flex;
-	justify-content: flex-end;
+	flex-direction: column;
+	gap: 2rem;
 `;
 
 const HomePage = () => {
@@ -60,6 +61,8 @@ const HomePage = () => {
 
 			<HomePageRightStyle>
 				<HomeFeedNotifications />
+
+				<HomeFeedUserSuggestions />
 			</HomePageRightStyle>
 		</HomePageStyle>
 	);
