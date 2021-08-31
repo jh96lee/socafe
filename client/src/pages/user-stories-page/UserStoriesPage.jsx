@@ -1,30 +1,44 @@
 import * as React from "react";
-import styled from "styled-components";
+import { useSelector } from "react-redux";
 
-import UserStory from "./UserStory";
+import { UserStories, UserStoryPopup } from "../../views/user-stories";
 import { Loader } from "../../views/shared";
 
-import { usePagination } from "../../hooks";
+import {
+	fetchedUserStories,
+	fetchedExtraUserStories,
+	setUserStoriesNextAPIEndpoint,
+} from "../../redux/user-stories/userStoriesAction";
+
+import { usePagination, useDropdown } from "../../hooks";
 
 import { fetchToken } from "../../utils/cookie/fetchToken";
 
-import { PageStyle } from "../../styles";
-
-const UserStoriesPageStyle = styled(PageStyle)`
-	display: flex;
-	justify-content: center;
-	align-items: center;
-	min-height: calc(100vh - 7.8rem);
-`;
+import { UserStoriesPageStyle } from "./UserStoriesPageStyle";
 
 const UserStoriesPage = () => {
+	const { userStoriesArray, userStoriesNextAPIEndpoint } = useSelector(
+		(state) => state.userStoriesReducer
+	);
+
 	const {
-		contents,
 		fetchContents,
+		currentPage,
+		setCurrentPage,
 		isInitialContentsLoaded,
 		isExtraContentsLoading,
-		nextAPIEndpoint,
-	} = usePagination("/profile/story", 2, false, false);
+	} = usePagination(
+		"/profile/story",
+		5,
+		true,
+		true,
+		fetchedUserStories,
+		fetchedExtraUserStories,
+		setUserStoriesNextAPIEndpoint,
+		userStoriesNextAPIEndpoint
+	);
+
+	const afterInitialMount = React.useRef(false);
 
 	React.useEffect(() => {
 		const token = fetchToken();
@@ -34,15 +48,56 @@ const UserStoriesPage = () => {
 		});
 	}, []);
 
+	React.useEffect(() => {
+		if (afterInitialMount.current) {
+			if (userStoriesArray.length > 0) {
+				const token = fetchToken();
+
+				fetchContents(false, "GET", null, {
+					Authorization: `Bearer ${token}`,
+				});
+			}
+		}
+
+		afterInitialMount.current = true;
+	}, [currentPage]);
+
+	const { isDropdownMenuOpen, setIsDropdownMenuOpen } = useDropdown(
+		"user-story-trigger",
+		"user-story-popup",
+		false
+	);
+
+	const handleLoadMoreButtonOnClick = () => {
+		setCurrentPage((prevState) => prevState + 1);
+	};
+
 	return (
-		<UserStoriesPageStyle>
+		<UserStoriesPageStyle id="user-stories-page">
 			{isInitialContentsLoaded ? (
 				<React.Fragment>
-					{contents.map((content, idx) => {
-						if (idx === 1) {
-							return <UserStory story={content} />;
-						}
-					})}
+					<h1>Stories</h1>
+
+					<UserStories />
+
+					{isDropdownMenuOpen && (
+						<UserStoryPopup setIsDropdownMenuOpen={setIsDropdownMenuOpen} />
+					)}
+
+					{userStoriesNextAPIEndpoint === null ||
+					userStoriesArray.length === 0 ? null : (
+						<button onClick={handleLoadMoreButtonOnClick}>
+							{isExtraContentsLoading ? (
+								<Loader
+									isLoaderAbsolute={false}
+									loaderSize="2.4rem"
+									loaderBorderSize="0.4rem"
+								/>
+							) : (
+								"Load More"
+							)}
+						</button>
+					)}
 				</React.Fragment>
 			) : (
 				<Loader />

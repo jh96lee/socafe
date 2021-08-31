@@ -3,7 +3,8 @@ import * as React from "react";
 const useStory = (
 	storyRef,
 	storyTextSizeRatio,
-	convertUnitToViewWidthBreakingPoint
+	convertUnitToViewWidthBreakingPoint,
+	storyParentHeightProp
 ) => {
 	const [storyWidth, setStoryWidth] = React.useState();
 	const [storyHeight, setStoryHeight] = React.useState();
@@ -36,7 +37,9 @@ const useStory = (
 		}
 
 		// REVIEW: pixels unit
-		const storyParentHeight = storyPageNode.clientHeight;
+		const storyParentHeight = storyParentHeightProp
+			? storyParentHeightProp
+			: storyPageNode.clientHeight;
 
 		const storyHeightInPixels = storyParentHeight * 0.9;
 		const storyWidthInPixels = (storyHeightInPixels * 3.3) / 5;

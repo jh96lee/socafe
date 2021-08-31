@@ -7,7 +7,12 @@ import { useStory } from "../../../hooks";
 
 import { StoryStyle } from "../../../styles";
 
-const Story = ({ story, convertUnitToViewWidthBreakingPoint }) => {
+const Story = ({
+	story,
+	convertUnitToViewWidthBreakingPoint,
+	storyParentHeightProp,
+	storyOnClick,
+}) => {
 	const { story_background, story_image, story_text } = story;
 
 	const storyRef = React.useRef();
@@ -22,12 +27,14 @@ const Story = ({ story, convertUnitToViewWidthBreakingPoint }) => {
 	} = useStory(
 		storyRef,
 		story_text ? story_text.story_text_size_ratio : null,
-		convertUnitToViewWidthBreakingPoint
+		convertUnitToViewWidthBreakingPoint,
+		storyParentHeightProp
 	);
 
 	return (
 		<StoryStyle
 			ref={storyRef}
+			onClick={storyOnClick}
 			storyBackground={
 				story.story_background && story_background.background_gradient
 			}

@@ -14,7 +14,6 @@ import {
 
 import { useDropdown } from "../../hooks";
 
-import { StoryPageStyle } from "./StoryPageStyle";
 import { PageWithSidebarStyle } from "../../styles";
 
 import { SidebarFilled } from "../../assets";

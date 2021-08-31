@@ -43,6 +43,8 @@ import exploreReducer from "./explore/exploreReducer";
 import notificationsReducer from "./notifications/notificationsReducer";
 import commentNotificationsReducer from "./notifications/comment-notifications/commentNotificationsReducer";
 
+import userStoriesReducer from "./user-stories/userStoriesReducer";
+
 const rootReducer = combineReducers({
 	userReducer,
 
@@ -81,6 +83,8 @@ const rootReducer = combineReducers({
 
 	userProfileOwnerReducer,
 	userProfilePostsReducer,
+
+	userStoriesReducer,
 
 	storyBackgroundReducer,
 	storyTextReducer,
