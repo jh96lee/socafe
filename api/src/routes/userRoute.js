@@ -17,6 +17,7 @@ const loginUser = require("../controllers/user/loginUser");
 const searchUser = require("../controllers/user/searchUser");
 const getProfileOwner = require("../controllers/user/getProfileOwner");
 const getProfilePosts = require("../controllers/user/getProfilePosts");
+const getUserSuggestions = require("../controllers/user/getUserSuggestions");
 
 const destroyImage = require("../utils/image/destroyImage");
 const generateToken = require("../utils/user/generateToken");
@@ -44,6 +45,8 @@ userRouter.get(
 	"/profile/posts/:profilePostType/:ownerUsername/:visitorID",
 	getProfilePosts
 );
+
+userRouter.get("/user/suggestions", authenticateToken, getUserSuggestions);
 
 // FIX: route endpoint
 userRouter.get("/profile/edit", authenticateToken, async (req, res) => {
@@ -165,6 +168,7 @@ userRouter.put(
 	}
 );
 
+// FIX
 userRouter.put("/profile/edit/avatar", authenticateToken, async (req, res) => {
 	const userID = parseInt(res.locals.userID);
 
@@ -218,7 +222,6 @@ userRouter.put("/profile/edit/avatar", authenticateToken, async (req, res) => {
 			success: "Success",
 		});
 	} else {
-		console.log(error);
 		res.send({
 			error: {
 				edit: "There has been an error while updating your avatar",
