@@ -1,18 +1,11 @@
-const pool = require("../../pool");
+const CommentRepo = require("../../repos/comment-repo");
 
-const unlikeComment = async (req, res) => {
+const deleteCommentLike = async (req, res) => {
 	const userID = parseInt(res.locals.userID);
 	const commentID = parseInt(req.params.commentID);
 
 	try {
-		await pool.queryToDatabase(
-			`
-			DELETE 
-			FROM comment_likes 
-			WHERE comment_id=$1 AND user_id=$2;
-			`,
-			[commentID, userID]
-		);
+		await CommentRepo.deleteCommentLike(userID, commentID);
 
 		res.send({ success: "Success" });
 	} catch (error) {
@@ -24,4 +17,4 @@ const unlikeComment = async (req, res) => {
 	}
 };
 
-module.exports = unlikeComment;
+module.exports = deleteCommentLike;
