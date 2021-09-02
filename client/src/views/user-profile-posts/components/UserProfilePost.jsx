@@ -1,7 +1,10 @@
 import * as React from "react";
+import axios from "axios";
 import { useLocation, useHistory } from "react-router-dom";
 
 import { usePostLike } from "../../../hooks";
+
+import { fetchToken } from "../../../utils/cookie/fetchToken";
 
 import {
 	UserProfilePostStyle,
@@ -9,7 +12,8 @@ import {
 	UserProfilePostMetadataStyle,
 } from "../styles/UserProfilePostStyle";
 
-import { HeartFill, CommentFilled } from "../../../assets";
+import { HeartFill, CommentFilled, More } from "../../../assets";
+import { IconElement } from "../../shared";
 
 const UserProfilePost = ({ post }) => {
 	const {
@@ -37,8 +41,12 @@ const UserProfilePost = ({ post }) => {
 	};
 
 	return (
-		<UserProfilePostStyle onClick={handlePostOnClick}>
-			<img src={post_images[0].image_url} alt="post thumbnail" />
+		<UserProfilePostStyle>
+			<img
+				src={post_images[0].image_url}
+				alt="post thumbnail"
+				onClick={handlePostOnClick}
+			/>
 
 			<UserProfilePostMetadataOverlayStyle id="user-profile-post__post-metadata-overlay">
 				<UserProfilePostMetadataStyle>
@@ -53,6 +61,32 @@ const UserProfilePost = ({ post }) => {
 					<h4>{post_total_comments}</h4>
 				</UserProfilePostMetadataStyle>
 			</UserProfilePostMetadataOverlayStyle>
+
+			<IconElement
+				iconElementStyleObject={{
+					elementPosition: "absolute",
+					elementTop: "1rem",
+					elementRight: "1rem",
+					elementZIndex: "100",
+				}}
+				onClick={async () => {
+					const token = fetchToken();
+
+					const { data } = await axios({
+						method: "DELETE",
+						url: `http://localhost:8080/post/delete/${post_id}`,
+						headers: {
+							Authorization: `Bearer ${token}`,
+						},
+					});
+
+					const { id, success, error } = data;
+
+					console.log(id);
+				}}
+			>
+				<More />
+			</IconElement>
 		</UserProfilePostStyle>
 	);
 };

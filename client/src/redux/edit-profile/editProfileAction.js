@@ -18,22 +18,9 @@ const endFetchingInitialProfile = () => ({
 	type: "END_FETCHING_INITIAL_PROFILE",
 });
 
-const startUpdatingProfile = () => ({
-	type: "START_UPDATING_PROFILE",
-});
-
-const endUpdatingProfile = () => ({
-	type: "END_UPDATING_PROFILE",
-});
-
 export const setEditedFormData = (editedForm) => ({
 	type: "SET_EDITED_FORM_DATA",
 	payload: editedForm,
-});
-
-export const setUpdatedAvatarURL = (updatedAvatarURL) => ({
-	type: "SET_UPDATED_AVATAR_URL",
-	payload: updatedAvatarURL,
 });
 
 export const setEditedBioNodesArray = (nodesArray) => ({
@@ -73,46 +60,28 @@ export const fetchInitialProfile = () => async (dispatch) => {
 		},
 	});
 
+	const {
+		id,
+		username,
+		full_name: fullName,
+		email,
+		bio_nodes_array: bioNodesArray,
+	} = data;
+
 	if (data) {
-		dispatch(fetchedInitialProfile(data));
+		dispatch(
+			fetchedInitialProfile({
+				id,
+				username,
+				fullName,
+				email,
+				bioNodesArray,
+			})
+		);
 
 		dispatch(endFetchingInitialProfile());
 	} else {
 		dispatch(endFetchingInitialProfile());
-	}
-};
-
-// TODO: update avatar
-export const updateProfileAvatar = (uploadedAvatar) => async (dispatch) => {
-	dispatch(startUpdatingProfile());
-
-	const prevToken = fetchToken();
-
-	const { data } = await axios({
-		method: "PUT",
-		url: "http://localhost:8080/profile/edit/avatar",
-		data: {
-			newAvatar: uploadedAvatar,
-		},
-		headers: {
-			Authorization: `Bearer ${prevToken}`,
-		},
-	});
-
-	const { error, success, updated_avatar_url, token } = data;
-
-	if (error) {
-		dispatch(setEditProfileErrorMessage(error));
-
-		dispatch(endUpdatingProfile());
-	} else if (success) {
-		dispatch(setUpdatedAvatarURL(updated_avatar_url));
-
-		setCookie("token", token);
-
-		dispatch(setUser());
-
-		dispatch(endUpdatingProfile());
 	}
 };
 

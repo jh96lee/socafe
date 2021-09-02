@@ -1,10 +1,9 @@
 const initialState = {
 	initialProfile: {},
-	editedFullName: "",
-	editedUsername: "",
-	editedEmail: "",
-	editedBioNodesArray: [],
-	updatedAvatarURL: "",
+	editedFullName: null,
+	editedUsername: null,
+	editedEmail: null,
+	editedBioNodesArray: null,
 	isInitialProfileLoaded: false,
 	isProfileUpdating: false,
 	editProfileSuccessMessage: null,
@@ -44,11 +43,6 @@ const editProfileReducer = (state = initialState, action) => {
 				...action.payload,
 				editProfileSuccessMessage: null,
 				editProfileErrorMessage: null,
-			};
-		case "SET_UPDATED_AVATAR_URL":
-			return {
-				...state,
-				updatedAvatarURL: action.payload,
 			};
 		case "SET_EDITED_BIO_NODES_ARRAY":
 			return {

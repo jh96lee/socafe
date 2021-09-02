@@ -1,11 +1,15 @@
 import * as React from "react";
+import axios from "axios";
 import { useDispatch, useSelector } from "react-redux";
 
 import { Avatar, Loader } from "../../shared";
 
 import { useUploadOrDeleteImage } from "../../../hooks";
 
-import { updateProfileAvatar } from "../../../redux/edit-profile/editProfileAction";
+import { setUser } from "../../../redux/user/userAction";
+
+import { fetchToken } from "../../../utils/cookie/fetchToken";
+import { setCookie } from "../../../utils/cookie/setCookie";
 
 import {
 	EditProfileFormChangeAvatarStyle,
@@ -13,11 +17,38 @@ import {
 } from "../styles/EditProfileFormChangeAvatarStyle";
 
 const EditProfileFormChangeAvatar = () => {
+	const [isAvatarUpdating, setIsAvatarUpdating] = React.useState(false);
+
+	const { user } = useSelector((state) => state.userReducer);
+
 	const dispatch = useDispatch();
 
-	const { initialProfile, updatedAvatarURL, isProfileUpdating } = useSelector(
-		(state) => state.editProfileReducer
-	);
+	const updateAvatar = async (updatedAvatar) => {
+		setIsAvatarUpdating(true);
+
+		const token = fetchToken();
+
+		const { data } = await axios({
+			method: "PUT",
+			url: "http://localhost:8080/profile/edit/avatar",
+			headers: {
+				Authorization: `Bearer ${token}`,
+			},
+			data: {
+				updatedAvatar,
+			},
+		});
+
+		const { token: updatedToken, success } = data;
+
+		if (success) {
+			setCookie("token", updatedToken);
+
+			dispatch(setUser());
+		}
+
+		setIsAvatarUpdating(false);
+	};
 
 	const { uploadedImage, uploadImageLogic, isImageUploading } =
 		useUploadOrDeleteImage();
@@ -31,24 +62,23 @@ const EditProfileFormChangeAvatar = () => {
 			return;
 		}
 
-		dispatch(updateProfileAvatar(uploadedImage));
+		updateAvatar(uploadedImage);
 	}, [dispatch, uploadedImage]);
 
 	return (
 		<EditProfileFormChangeAvatarStyle>
 			<Avatar
-				avatarURL={
-					updatedAvatarURL ? updatedAvatarURL : initialProfile.avatar_url
-				}
+				avatarURL={user.avatar_url}
 				avatarSize="12rem"
 				isAvatarBubblePresent={true}
 			/>
 
+			{/* FIX: UI */}
 			<EditProfileFormChangeAvatarButtonStyle>
 				<input type="file" onChange={handleFileInputOnChange} />
 
 				<button>
-					{isProfileUpdating || isImageUploading ? (
+					{isAvatarUpdating || isImageUploading ? (
 						<Loader
 							isLoaderAbsolute={true}
 							loaderSize="2.8rem"

@@ -1,40 +1,26 @@
 import * as React from "react";
 import ReactQuill from "react-quill";
 
+import { calculateTotalCharacters } from "../../../utils/text-area/calculateTotalCharacters";
+
 import { TextEditorStyle } from "./TextEditorStyle";
 
 import "react-quill/dist/quill.snow.css";
 
 const TextEditor = ({
-	textEditorOnKeyUpLogic,
-	initialTextEditorNodesArray,
+	initialNodesArray = [],
+	textEditorMaxCharacters,
+	handleTextEditorOnKeyUp,
 }) => {
-	const reactQuillRef = React.useRef();
-
-	const handleTextEditorOnKeyUp = (e) => {
-		if (reactQuillRef.current) {
-			const reactQuillChildNodesArray = Array.from(
-				reactQuillRef.current.editor.root.childNodes
-			);
-
-			const textEditorNodesArray = reactQuillChildNodesArray.map((node) => {
-				return {
-					nodeType: node.innerHTML === "<br>" ? "BR" : "P",
-					nodeValue: node.innerHTML,
-				};
-			});
-
-			textEditorOnKeyUpLogic(textEditorNodesArray);
-		}
-	};
+	const textEditorRef = React.useRef();
 
 	React.useEffect(() => {
-		const initialPTag = reactQuillRef.current.editor.root.querySelector("p");
+		const initialPTag = textEditorRef.current.editor.root.querySelector("p");
 
-		reactQuillRef.current.editor.root.removeChild(initialPTag);
+		textEditorRef.current.editor.root.removeChild(initialPTag);
 
-		if (initialTextEditorNodesArray) {
-			initialTextEditorNodesArray.forEach((node) => {
+		if (initialNodesArray.length > 0) {
+			initialNodesArray.forEach((node) => {
 				const pTag = document.createElement("p");
 
 				if (node.node_type === "P" || node.nodeType === "P") {
@@ -44,23 +30,48 @@ const TextEditor = ({
 
 					pTag.textContent = textContentValue;
 
-					reactQuillRef.current.editor.root.append(pTag);
+					textEditorRef.current.editor.root.append(pTag);
 				} else {
-					const breakingTag = document.createElement("br");
+					const brTag = document.createElement("br");
 
-					pTag.appendChild(breakingTag);
+					pTag.appendChild(brTag);
 
-					reactQuillRef.current.editor.root.append(pTag);
+					textEditorRef.current.editor.root.append(pTag);
 				}
 			});
 		}
 	}, []);
 
+	// REVIEW: all this does is calculate total characters in the editor and prevent user from any input when limitation is exceeded
+	// TODO: had to separate onKeyDown and onKeyUp, because onKeyDown does not give the most recent text values
+	const handleTextEditorOnKeyDown = (e) => {
+		const textEditorChildrenArray = Array.from(e.target.childNodes);
+
+		const textEditorNodesArray = textEditorChildrenArray.map((node) => {
+			return {
+				nodeType: node.innerHTML === "<br>" ? "BR" : "P",
+				nodeValue: node.innerHTML,
+			};
+		});
+
+		const textEditorTotalCharacters =
+			calculateTotalCharacters(textEditorNodesArray);
+
+		if (textEditorTotalCharacters > textEditorMaxCharacters) {
+			if (e.key === "Backspace") {
+				return;
+			} else {
+				e.preventDefault();
+			}
+		}
+	};
+
 	return (
 		<TextEditorStyle>
 			<ReactQuill
-				ref={reactQuillRef}
+				ref={textEditorRef}
 				onKeyUp={handleTextEditorOnKeyUp}
+				onKeyDown={handleTextEditorOnKeyDown}
 				formats={[]}
 			/>
 		</TextEditorStyle>

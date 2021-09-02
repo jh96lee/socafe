@@ -20,6 +20,7 @@ const EditProfileForm = () => {
 	const dispatch = useDispatch();
 
 	const {
+		initialProfile,
 		editedFullName,
 		editedUsername,
 		editedEmail,
@@ -53,41 +54,41 @@ const EditProfileForm = () => {
 					<EditProfileFormChangeAvatar />
 
 					<EditProfileFormFieldset />
+
+					<Button
+						disabled={
+							editProfileErrorMessage ||
+							(!editedFullName &&
+								!editedUsername &&
+								!editedEmail &&
+								!editedBioNodesArray)
+						}
+						success={editProfileSuccessMessage}
+						error={editProfileErrorMessage}
+						onClick={handleEditProfileButtonOnClick}
+						buttonStyleObject={{
+							buttonMargin: "2rem 0 1rem 0",
+						}}
+					>
+						{isProfileUpdating ? (
+							<Loader loaderSize="2rem" loaderBorderSize="0.4rem" />
+						) : editProfileErrorMessage ? (
+							"Error"
+						) : (
+							"Submit"
+						)}
+					</Button>
+
+					{editProfileSuccessMessage && (
+						<EditProfileMessageStyle>
+							<CheckmarkCircleFilled />
+
+							<p>Successfully updated!</p>
+						</EditProfileMessageStyle>
+					)}
 				</React.Fragment>
 			) : (
 				<Loader />
-			)}
-
-			<Button
-				disabled={
-					editProfileErrorMessage ||
-					(!editedFullName &&
-						!editedUsername &&
-						!editedEmail &&
-						editedBioNodesArray.length === 0)
-				}
-				success={editProfileSuccessMessage}
-				error={editProfileErrorMessage}
-				onClick={handleEditProfileButtonOnClick}
-				buttonStyleObject={{
-					buttonMargin: "2rem 0 1rem 0",
-				}}
-			>
-				{isProfileUpdating ? (
-					<Loader loaderSize="2rem" loaderBorderSize="0.4rem" />
-				) : editProfileErrorMessage ? (
-					"Error"
-				) : (
-					"Submit"
-				)}
-			</Button>
-
-			{editProfileSuccessMessage && (
-				<EditProfileMessageStyle>
-					<CheckmarkCircleFilled />
-
-					<p>Successfully updated!</p>
-				</EditProfileMessageStyle>
 			)}
 		</EditProfileFormStyle>
 	);

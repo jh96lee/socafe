@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from "react-redux";
 
 import { FormInput, Message, TextEditor } from "../../shared";
 
-import { useTextEditor } from "../../../hooks";
+import { useTextEditorRedux } from "../../../hooks";
 
 import {
 	setEditedFormData,
@@ -27,24 +27,23 @@ const EditProfileFormFieldset = () => {
 		editProfileErrorMessage,
 	} = useSelector((state) => state.editProfileReducer);
 
-	const { textEditorOnKeyUpLogic } = useTextEditor(
-		150,
-		setEditedBioNodesArray,
-		setEditProfileErrorMessage,
-		"redux"
-	);
-
 	const handleFormInputOnChange = (e) => {
 		const editProfileObject = {
 			editedFullName,
-			editedUsername,
 			editedEmail,
+			editedUsername,
 		};
 
 		editProfileObject[e.target.name] = e.target.value;
 
 		dispatch(setEditedFormData(editProfileObject));
 	};
+
+	const { handleTextEditorOnKeyUp } = useTextEditorRedux(
+		20,
+		setEditedBioNodesArray,
+		setEditProfileErrorMessage
+	);
 
 	return (
 		<FormFieldsetStyle>
@@ -54,7 +53,7 @@ const EditProfileFormFieldset = () => {
 					label="Full Name"
 					name="editedFullName"
 					type="text"
-					defaultValue={initialProfile.full_name}
+					defaultValue={initialProfile.fullName}
 					placeholder="Full name"
 					onChange={handleFormInputOnChange}
 				/>
@@ -104,8 +103,9 @@ const EditProfileFormFieldset = () => {
 				/>
 
 				<TextEditor
-					textEditorOnKeyUpLogic={textEditorOnKeyUpLogic}
-					initialTextEditorNodesArray={initialProfile.bio_nodes_array}
+					textEditorMaxCharacters={20}
+					initialNodesArray={initialProfile.bioNodesArray}
+					handleTextEditorOnKeyUp={handleTextEditorOnKeyUp}
 				/>
 			</FormInputAndMessageWrapperStyle>
 		</FormFieldsetStyle>

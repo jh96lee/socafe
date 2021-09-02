@@ -8,16 +8,17 @@ import {
 	setPostCaptionsErrorMessage,
 } from "../../../redux/add-post/post-captions/postCaptionsAction";
 
-import { useSaveDraft, useTextEditor } from "../../../hooks";
+import { useSaveDraft, useTextEditorRedux } from "../../../hooks";
 
 import { AddContentStyle } from "../../../styles";
 
 const AddPostCaption = () => {
-	const { textEditorOnKeyUpLogic } = useTextEditor(
-		1000,
+	const textEditorMaxCharacters = 500;
+
+	const { handleTextEditorOnKeyUp } = useTextEditorRedux(
+		textEditorMaxCharacters,
 		setPostCaptionsNodesArray,
-		setPostCaptionsErrorMessage,
-		"redux"
+		setPostCaptionsErrorMessage
 	);
 
 	const { postCaptionsNodesArray, postCaptionsErrorMessage } = useSelector(
@@ -37,8 +38,9 @@ const AddPostCaption = () => {
 			/>
 
 			<TextEditor
-				textEditorOnKeyUpLogic={textEditorOnKeyUpLogic}
-				initialTextEditorNodesArray={postCaptionsNodesArray}
+				initialNodesArray={postCaptionsNodesArray}
+				textEditorMaxCharacters={textEditorMaxCharacters}
+				handleTextEditorOnKeyUp={handleTextEditorOnKeyUp}
 			/>
 		</AddContentStyle>
 	);

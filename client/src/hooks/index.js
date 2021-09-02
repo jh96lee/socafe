@@ -12,8 +12,11 @@ export { default as useTextEditor } from "./text-editor/useTextEditor";
 export { default as useSaveDraft } from "./post/useSaveDraft";
 export { default as usePostCommentsDisplay } from "./post/usePostCommentsDisplay";
 
-export { default as useUploadOrDeleteImage } from "./image/useUploadOrDeleteImage";
+export { default as useUploadOrDeleteImage } from "./common/useUploadOrDeleteImage";
 
 export { default as usePagination } from "./common/usePagination";
 
 export { default as useStory } from "./story/useStory";
+
+export { default as useTextEditorRedux } from "./redux/text-editor/userTextEditorRedux";
+export { default as useTextEditorReact } from "./react/text-editor/useTextEditorReact";
