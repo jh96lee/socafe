@@ -81,8 +81,6 @@ const UserProfilePost = ({ post }) => {
 					});
 
 					const { id, success, error } = data;
-
-					console.log(id);
 				}}
 			>
 				<More />

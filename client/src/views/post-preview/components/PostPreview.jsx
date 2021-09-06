@@ -18,6 +18,8 @@ import { PostPreviewStyle } from "../styles/PostPreviewStyle";
 import { PostPreviewOverflowStyle } from "../styles/PostPreviewOverflowStyle";
 import { PostMainStyle } from "../../../styles";
 
+import { useHistory } from "react-router-dom";
+
 const PostPreview = () => {
 	const { user } = useSelector((state) => state.userReducer);
 	const { uploadedPostImagesArray } = useSelector(

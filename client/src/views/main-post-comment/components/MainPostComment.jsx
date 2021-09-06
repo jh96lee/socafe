@@ -19,10 +19,9 @@ const MainPostComment = ({ comment, setDeletedCommentID }) => {
 		post_id,
 	} = comment;
 
-	console.log(comment);
-
-	const { notiPostID, notiInstigatedCommentID, notiReceivedCommentID } =
-		useSelector((state) => state.notificationsReducer);
+	const { notiInstigatedCommentID, notiReceivedCommentID } = useSelector(
+		(state) => state.notificationsReducer
+	);
 
 	return (
 		<MainPostCommentStyle

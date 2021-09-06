@@ -17,6 +17,7 @@ import {
 	ExplorePage,
 	NotificationsPage,
 	UserStoriesPage,
+	StatsPage,
 } from "./pages";
 import { AddPostIcon } from "./views/shared";
 import { MainPost } from "./views/main-post";
@@ -67,6 +68,10 @@ function App() {
 				<Switch location={overlaidComponentLocation || appLocation}>
 					<Route exact path="/">
 						<HomePage />
+					</Route>
+
+					<Route exact path="/stats">
+						<StatsPage />
 					</Route>
 
 					<Route exact path="/user/:username">

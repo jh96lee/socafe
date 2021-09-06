@@ -19,3 +19,5 @@ export { default as ExplorePage } from "./explore-page/ExplorePage";
 export { default as NotificationsPage } from "./notifications-page/NotificationsPage";
 
 export { default as UserStoriesPage } from "./user-stories-page/UserStoriesPage";
+
+export { default as StatsPage } from "./stats-page/StatsPage";

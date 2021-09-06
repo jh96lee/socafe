@@ -161,37 +161,37 @@ const GlobalStyles = createGlobalStyle`
     h1 {
         font-size: 2.7rem;
         font-weight: 600;
-        letter-spacing: -1.8px;
+        letter-spacing: -0.7px;
     }
 
     h2 {
         font-size: 2.2rem;
         font-weight: 600;
-        letter-spacing: -1.3px;
+        letter-spacing: -0.7px;
     }
 
     h3 {
-        font-size: 1.82rem;
+        font-size: 1.94rem;
         font-weight: 600;
-        letter-spacing: -1.2px;
+        letter-spacing: -0.7px;
     }
 
     h4 {
-        font-size: 1.64rem;
-        font-weight: 500;
-        letter-spacing: -1.2px;
+        font-size: 1.74rem;
+        font-weight: 600;
+        letter-spacing: -0.7px;
     }
 
     h5 {
         font-size: 1.5rem;
         letter-spacing: -0.9px;
-        font-weight: 500;
+        font-weight: 600;
     }
 
     h6 {
         font-size: 1.37rem;
         letter-spacing: -0.9px;
-        font-weight: 500;
+        font-weight: 600;
     }
 
     a {

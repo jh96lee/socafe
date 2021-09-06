@@ -45,6 +45,8 @@ import commentNotificationsReducer from "./notifications/comment-notifications/c
 
 import userStoriesReducer from "./user-stories/userStoriesReducer";
 
+import statsGraphReducer from "./stats/stats-graph/statsGraphReducer";
+
 const rootReducer = combineReducers({
 	userReducer,
 
@@ -85,6 +87,8 @@ const rootReducer = combineReducers({
 	userProfilePostsReducer,
 
 	userStoriesReducer,
+
+	statsGraphReducer,
 
 	storyBackgroundReducer,
 	storyTextReducer,

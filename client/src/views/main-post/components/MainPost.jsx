@@ -1,4 +1,5 @@
 import * as React from "react";
+import axios from "axios";
 import { useDispatch, useSelector } from "react-redux";
 import { useParams, useLocation, useHistory } from "react-router-dom";
 
@@ -19,6 +20,8 @@ import {
 	fetchMainPost,
 	resetMainPost,
 } from "../../../redux/main-post/mainPostAction";
+
+import { fetchToken } from "../../../utils/cookie/fetchToken";
 
 import { MainPostStyle } from "../styles/MainPostStyle";
 import { MainPostOverflowStyle } from "../styles/MainPostOverflowStyle";
@@ -42,8 +45,9 @@ const MainPost = () => {
 
 	const history = useHistory();
 
-	const { isMainPostLoaded, mainPostID, mainPost, mainPostErrorMessage } =
-		useSelector((state) => state.mainPostReducer);
+	const { isMainPostLoaded, mainPost, mainPostErrorMessage } = useSelector(
+		(state) => state.mainPostReducer
+	);
 
 	React.useEffect(() => {
 		dispatch(fetchMainPost(postID, visitorID));
@@ -52,6 +56,25 @@ const MainPost = () => {
 			dispatch(resetMainPost());
 		};
 	}, [postID, visitorID]);
+
+	// TODO
+	const addPostView = async () => {
+		const token = fetchToken();
+
+		await axios({
+			method: "POST",
+			url: `http://localhost:8080/post/view/${postID}`,
+			headers: {
+				Authorization: `Bearer ${token}`,
+			},
+		});
+	};
+
+	React.useEffect(() => {
+		addPostView();
+	}, []);
+
+	// TODO
 
 	const handleRemoveIconElementOnClick = () => {
 		history.goBack();

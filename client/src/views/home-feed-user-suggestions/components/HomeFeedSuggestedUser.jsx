@@ -26,7 +26,6 @@ const HomeFeedSuggestedUser = ({ suggestedUser }) => {
 	React.useEffect(() => {
 		if (afterInitialMount.current) {
 			if (isFollowing) {
-				console.log(suggestedUser.id);
 				followUserRequest(suggestedUser.id);
 			} else {
 				unfollowUserRequest(suggestedUser.id);

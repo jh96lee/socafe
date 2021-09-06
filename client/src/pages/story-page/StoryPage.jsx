@@ -1,4 +1,5 @@
 import * as React from "react";
+import axios from "axios";
 import { useSelector, useDispatch } from "react-redux";
 import { useParams } from "react-router-dom";
 
@@ -13,6 +14,8 @@ import {
 } from "../../redux/story/story-viewership/storyViewershipAction";
 
 import { useDropdown } from "../../hooks";
+
+import { fetchToken } from "../../utils/cookie/fetchToken";
 
 import { PageWithSidebarStyle } from "../../styles";
 
@@ -70,6 +73,25 @@ const StoryPage = () => {
 			dispatch(setActiveUserStoryIndex(activeStoryIndex));
 		}
 	}, [homeFeedStoriesArray, userID, storyID]);
+
+	// TODO
+	const addStoryView = async () => {
+		const token = fetchToken();
+
+		await axios({
+			method: "POST",
+			url: `http://localhost:8080/story/view/${storyID}`,
+			headers: {
+				Authorization: `Bearer ${token}`,
+			},
+		});
+	};
+
+	React.useEffect(() => {
+		addStoryView();
+	}, [storyID]);
+
+	// TODO
 
 	return (
 		<PageWithSidebarStyle
