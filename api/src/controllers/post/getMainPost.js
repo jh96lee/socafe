@@ -12,7 +12,7 @@ const getMainPost = async (req, res) => {
 		if (!post) {
 			res.send({ error: { post: "Post does not exist" } });
 		} else {
-			const { id, updated_at } = post;
+			const { id, created_at } = post;
 			const ownerID = id;
 
 			const postImages = await PostRepo.getPostImages(postID);
@@ -46,7 +46,7 @@ const getMainPost = async (req, res) => {
 
 			res.send({
 				post_id: postID,
-				post_date: updated_at,
+				post_date: created_at,
 				post_owner: postOwner,
 				post_images: postImages,
 				post_topics: postTopics,

@@ -19,7 +19,6 @@ const getHomeFeedPosts = async (req, res) => {
 			SELECT
 			id AS post_id,
 			created_at, 
-			post_views,
 			user_id AS owner_id
 			FROM (
 				SELECT
@@ -45,7 +44,6 @@ const getHomeFeedPosts = async (req, res) => {
 			SELECT
 			id AS post_id,
 			created_at, 
-			post_views,
 			user_id AS owner_id
 			FROM (
 				SELECT

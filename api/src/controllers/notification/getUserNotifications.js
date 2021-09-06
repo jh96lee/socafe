@@ -78,7 +78,6 @@ const getUserNotifications = async (req, res) => {
 
 		res.send({ contents: notificationsArray, next: nextAPIEndpoint });
 	} catch (error) {
-		console.log(error);
 		res.send({
 			error: {
 				catch: "There has been an error while fetching for your notifications",

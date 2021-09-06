@@ -5,7 +5,7 @@ class PostRepo {
 		const { rows } = await pool.queryToDatabase(
 			`
 			SELECT
-			updated_at,
+			created_at,
 			user_id AS id
 			FROM posts
 			WHERE id=$1;

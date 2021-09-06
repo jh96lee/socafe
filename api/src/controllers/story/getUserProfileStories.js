@@ -75,7 +75,6 @@ const getUserProfileStories = async (req, res) => {
 
 		res.send({ contents: userProfileStoriesArray, next: nextAPIEndpoint });
 	} catch (error) {
-		console.log(error);
 		res.send({
 			error: {
 				catch: "There has been an error while fetching for your stories",

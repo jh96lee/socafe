@@ -14,6 +14,7 @@ const unbookmarkPost = require("../controllers/post/unbookmarkPost");
 const getHomeFeedPosts = require("../controllers/post/getHomeFeedPosts");
 const getExplorePosts = require("../controllers/post/getExplorePosts");
 const deletePost = require("../controllers/post/deletePost");
+const addPostView = require("../controllers/post/addPostView");
 
 const postRouter = express.Router();
 
@@ -43,5 +44,7 @@ postRouter.delete(
 	authenticateToken,
 	deletePost
 );
+
+postRouter.post("/post/view/:postID", authenticateToken, addPostView);
 
 module.exports = postRouter;

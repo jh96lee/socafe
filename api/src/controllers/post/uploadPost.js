@@ -13,11 +13,11 @@ const uploadPost = async (req, res) => {
 	try {
 		const { rows } = await pool.queryToDatabase(
 			`
-			INSERT INTO posts(post_views, user_id)
-			VALUES ($1, $2)
+			INSERT INTO posts(user_id)
+			VALUES ($1)
 			RETURNING posts.id;
 			`,
-			[0, userID]
+			[userID]
 		);
 
 		const postID = parseInt(rows[0].id);

@@ -7,6 +7,8 @@ const {
 const uploadImage = require("../controllers/image/uploadImage");
 const deleteImage = require("../controllers/image/deleteImage");
 
+const destoryImage = require("../utils/image/destroyImage");
+
 const imageRouter = express.Router();
 
 // TODO: middleware provides the appropriate credentials and multerUploads will check for an "image" field and upload it to memory

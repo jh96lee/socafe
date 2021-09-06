@@ -17,6 +17,7 @@ const getUserStory = require("../controllers/story/getUserStory");
 const getHomeFeedStories = require("../controllers/story/getHomeFeedStories");
 const getUserProfileStories = require("../controllers/story/getUserProfileStories");
 const deleteStory = require("../controllers/story/deleteStory");
+const addStoryView = require("../controllers/story/addStoryView");
 
 const storyRouter = express.Router();
 
@@ -41,5 +42,7 @@ storyRouter.delete(
 	cloudinaryConfigMiddleware,
 	deleteStory
 );
+
+storyRouter.post("/story/view/:storyID", authenticateToken, addStoryView);
 
 module.exports = storyRouter;

@@ -62,8 +62,8 @@ const getUserSuggestions = async (req, res) => {
 			(element) => element.user_id
 		);
 
-		for (let userID of suggestedUserIDsArray) {
-			const suggestedUser = await UserRepo.getUserByID(userID);
+		for (let suggestedUserID of suggestedUserIDsArray) {
+			const suggestedUser = await UserRepo.getUserByID(suggestedUserID);
 
 			// REVIEW: double checking
 			const isUserFollowingSuggestedUser = await UserRepo.getProfileIsFollowing(
