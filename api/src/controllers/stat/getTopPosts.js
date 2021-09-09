@@ -1,0 +1,103 @@
+const pool = require("../../pool");
+
+const PostRepo = require("../../repos/post-repo");
+
+const getTop10Posts = async (req, res) => {
+	const userID = parseInt(res.locals.userID);
+	const { topBy } = req.params;
+
+	const top10PostsQueryObject = {
+		views: `
+        SELECT
+        p.id,
+        COUNT(*)
+        FROM (
+            SELECT
+            *
+            FROM posts
+            WHERE user_id=$1
+        ) AS p
+        JOIN post_views
+        ON p.id=post_views.post_id
+        GROUP BY p.id
+        ORDER BY count DESC
+        LIMIT 10;
+        `,
+		comments: `
+        SELECT
+        p.id,
+        COUNT(*)
+        FROM (
+            SELECT
+            *
+            FROM posts
+            WHERE user_id=$1
+        ) AS p
+        JOIN comments
+        ON p.id=comments.post_id
+        GROUP BY p.id
+        ORDER BY count DESC
+        LIMIT 10;
+        `,
+		likes: `
+        SELECT
+        p.id,
+        COUNT(*)
+        FROM (
+            SELECT
+            *
+            FROM posts
+            WHERE user_id=$1
+        ) AS p
+        JOIN post_likes
+        ON p.id=post_likes.post_id
+        GROUP BY p.id
+        ORDER BY count DESC
+        LIMIT 10;
+        `,
+	};
+
+	try {
+		const topPostsArray = [];
+
+		const topPostsData = await pool.queryToDatabase(
+			top10PostsQueryObject[topBy],
+			[userID]
+		);
+
+		for (let post of topPostsData.rows) {
+			const { id } = post;
+
+			const postBasics = await PostRepo.getPost(id);
+
+			const postTotalViews = await PostRepo.getPostTotalViews(id);
+
+			const postImages = await PostRepo.getPostImages(id);
+
+			const postTotalLikes = await PostRepo.getPostTotalLikes(id);
+
+			const postTotalComments = await PostRepo.getPostTotalComments(id);
+
+			const postTopics = await PostRepo.getPostTopics(id);
+
+			topPostsArray.push({
+				...postBasics,
+				post_total_views: postTotalViews,
+				post_images: postImages,
+				post_topics: postTopics,
+				post_total_likes: postTotalLikes,
+				post_total_comments: postTotalComments,
+			});
+		}
+
+		res.send(topPostsArray);
+	} catch (error) {
+		res.send({
+			error: {
+				catch: "There has been an error while fetching for top 10 posts",
+			},
+		});
+	}
+};
+
+module.exports = getTop10Posts;

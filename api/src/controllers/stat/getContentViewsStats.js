@@ -1,9 +1,9 @@
 const pool = require("../../pool");
 
-const getPostViewsStats = async (req, res) => {
+const getContentViewsStats = async (req, res) => {
 	const userID = parseInt(res.locals.userID);
 	const { contentType } = req.params;
-	const nDaysAgo = parseInt(req.params.nDaysAgo);
+	const nDays = parseInt(req.params.nDays);
 
 	const contentViewsQuery =
 		contentType === "post"
@@ -15,7 +15,7 @@ const getPostViewsStats = async (req, res) => {
                 JOIN posts
                 ON post_views.post_id=posts.id
                 WHERE posts.user_id=$1 AND DATE(post_views.created_at) > (
-                    SELECT (CURRENT_TIMESTAMP - INTERVAL '${nDaysAgo}' DAY)::DATE
+                    SELECT (CURRENT_TIMESTAMP - INTERVAL '${nDays}' DAY)::DATE
                 ) AND DATE(post_views.created_at) <= CURRENT_DATE
                 GROUP BY DATE(post_views.created_at)
                 ORDER BY DATE(post_views.created_at);
@@ -28,7 +28,7 @@ const getPostViewsStats = async (req, res) => {
                 JOIN stories
                 ON story_views.story_id=stories.id
                 WHERE stories.user_id=$1 AND DATE(story_views.created_at) > (
-                    SELECT (CURRENT_TIMESTAMP - INTERVAL '${nDaysAgo}' DAY)::DATE
+                    SELECT (CURRENT_TIMESTAMP - INTERVAL '${nDays}' DAY)::DATE
                 ) AND DATE(story_views.created_at) <= CURRENT_DATE
                 GROUP BY DATE(story_views.created_at)
                 ORDER BY DATE(story_views.created_at);
@@ -52,4 +52,4 @@ const getPostViewsStats = async (req, res) => {
 	}
 };
 
-module.exports = getPostViewsStats;
+module.exports = getContentViewsStats;

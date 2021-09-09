@@ -11,6 +11,7 @@ const followRouter = require("./routes/followRoute");
 const topicRouter = require("./routes/topicRoute");
 const notificationRouter = require("./routes/notificationRoute");
 const storyRouter = require("./routes/storyRoute");
+const statRouter = require("./routes/statRoute");
 
 module.exports = () => {
 	const app = express();
@@ -34,6 +35,7 @@ module.exports = () => {
 	app.use(topicRouter);
 	app.use(notificationRouter);
 	app.use(storyRouter);
+	app.use(statRouter);
 
 	app.use(cookieParser);
 

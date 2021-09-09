@@ -25,10 +25,6 @@ const putUserAvatar = require("../controllers/user/putUserAvatar");
 const getUserEditProfile = require("../controllers/user/getUserEditProfile");
 const putUserProfile = require("../controllers/user/putUserProfile");
 const putUserPassword = require("../controllers/user/putUserPassword");
-const getUserStatsTotals = require("../controllers/user/getUserStatsTotals");
-const getPostViewsStats = require("../controllers/user/getPostViewsStats");
-const getDailyStats = require("../controllers/user/getDailyStats");
-const getTop10Posts = require("../controllers/user/getTop10Posts");
 
 const generateToken = require("../utils/user/generateToken");
 
@@ -79,17 +75,5 @@ userRouter.put(
 );
 
 userRouter.put("/profile/edit/password", authenticateToken, putUserPassword);
-
-userRouter.get("/user/stats/totals", authenticateToken, getUserStatsTotals);
-
-userRouter.get(
-	"/user/stats/views/:contentType/:nDaysAgo",
-	authenticateToken,
-	getPostViewsStats
-);
-
-userRouter.get("/user/stats/daily", authenticateToken, getDailyStats);
-
-userRouter.get("/user/stats/top/:mostBy", authenticateToken, getTop10Posts);
 
 module.exports = userRouter;

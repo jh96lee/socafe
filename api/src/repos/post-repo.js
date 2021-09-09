@@ -2,6 +2,7 @@ const pool = require("../pool");
 
 class PostRepo {
 	static async getPost(postID) {
+		// FIX
 		const { rows } = await pool.queryToDatabase(
 			`
 			SELECT
