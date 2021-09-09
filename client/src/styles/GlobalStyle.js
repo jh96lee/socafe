@@ -218,13 +218,13 @@ const GlobalStyles = createGlobalStyle`
     }
 
     h5 {
-        font-size: 1.5rem;
+        font-size: 1.54rem;
         letter-spacing: -0.6px;
         font-weight: 500;
     }
 
     h6 {
-        font-size: 1.37rem;
+        font-size: 1.47rem;
         letter-spacing: -0.9px;
         font-weight: 600;
     }
@@ -250,7 +250,7 @@ const GlobalStyles = createGlobalStyle`
         font-size: 1.3rem;
         font-weight: 300;
         letter-spacing: -0.6px;
-        color: ${(props) => (props.theme.isDarkMode ? "#888888" : "#6f6f6f")};
+        color: var(--char-1);
     }
 
     svg {

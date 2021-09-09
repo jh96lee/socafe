@@ -30,7 +30,7 @@ const StatsLineGraphSection = ({ numberOfGraphLines = 5 }) => {
 
 		const { data } = await axios({
 			method: "GET",
-			url: `http://localhost:8080/user/stats/views/${contentType}/${nDays}`,
+			url: `http://localhost:8080/stats/views/${contentType}/${nDays}`,
 			headers: {
 				Authorization: `Bearer ${token}`,
 			},
@@ -61,24 +61,28 @@ const StatsLineGraphSection = ({ numberOfGraphLines = 5 }) => {
 		}
 	}, [isViewsArrayLoaded]);
 
-	return isViewsArrayLoaded ? (
+	return (
 		<StatsLineGraphSectionStyle>
-			<StatsLineGraphHeader
-				contentType={contentType}
-				setContentType={setContentType}
-				nDays={nDays}
-				setNDays={setNDays}
-			/>
+			{isViewsArrayLoaded ? (
+				<React.Fragment>
+					<StatsLineGraphHeader
+						contentType={contentType}
+						setContentType={setContentType}
+						nDays={nDays}
+						setNDays={setNDays}
+					/>
 
-			<StatsLineGraph
-				xAxisArray={xAxisArray}
-				yAxisArray={yAxisArray}
-				coordinatesArray={coordinatesArray}
-				topYAxisValue={topYAxisValue}
-			/>
+					<StatsLineGraph
+						xAxisArray={xAxisArray}
+						yAxisArray={yAxisArray}
+						coordinatesArray={coordinatesArray}
+						topYAxisValue={topYAxisValue}
+					/>
+				</React.Fragment>
+			) : (
+				<Loader />
+			)}
 		</StatsLineGraphSectionStyle>
-	) : (
-		<Loader />
 	);
 };
 

@@ -37,6 +37,7 @@ import { ReactComponent as TrashOutline } from "./general/trash-outline.svg";
 import { ReactComponent as SidebarFilled } from "./general/sidebar-filled.svg";
 import { ReactComponent as ChartUpFilled } from "./general/chart-up-filled.svg";
 import { ReactComponent as ChartDownFilled } from "./general/chart-down-filled.svg";
+import { ReactComponent as DashFilled } from "./general/dash-filled.svg";
 
 import { ReactComponent as SocafeDark } from "./logo/socafe-dark.svg";
 import { ReactComponent as SocafeLight } from "./logo/socafe-light.svg";
@@ -65,11 +66,9 @@ import { ReactComponent as HeartFill } from "./post/heart-fill.svg";
 import { ReactComponent as Posts } from "./post/posts.svg";
 import { ReactComponent as StarFilled } from "./post/star-filled.svg";
 import { ReactComponent as ViewOutline } from "./post/view-outline.svg";
-
-import { ReactComponent as Cart } from "./product/cart.svg";
-import { ReactComponent as Product } from "./product/product.svg";
-import { ReactComponent as MarketplaceFilled } from "./product/marketplace-filled.svg";
-import { ReactComponent as MarketplaceOutline } from "./product/marketplace-outline.svg";
+import { ReactComponent as HeartColored } from "./post/heart-colored.svg";
+import { ReactComponent as PostColored } from "./post/post-colored.svg";
+import { ReactComponent as CommentColored } from "./post/comment-colored.svg";
 
 import { ReactComponent as NotificationFilled } from "./user/notification-filled.svg";
 import { ReactComponent as NotificationOutline } from "./user/notification-outline.svg";
@@ -88,9 +87,23 @@ import { ReactComponent as Recommendation } from "./user/recommendation.svg";
 import { ReactComponent as UserFilled } from "./user/user-filled.svg";
 import { ReactComponent as UserOutline } from "./user/user-outline.svg";
 import { ReactComponent as PasswordFilled } from "./user/password-filled.svg";
+import { ReactComponent as UsersOutline } from "./user/users-outline.svg";
+import { ReactComponent as UsersFilled } from "./user/users-filled.svg";
+import { ReactComponent as FollowersFilled } from "./user/followers-filled.svg";
+import { ReactComponent as FollowersOutline } from "./user/followers-outline.svg";
+import { ReactComponent as MultipleUsersColored } from "./user/multiple-users-colored.svg";
 
 export {
 	Complete,
+	DashFilled,
+	HeartColored,
+	PostColored,
+	CommentColored,
+	FollowersFilled,
+	FollowersOutline,
+	UsersOutline,
+	MultipleUsersColored,
+	UsersFilled,
 	StarFilled,
 	MoreHorizontal,
 	ChartDownFilled,
@@ -135,8 +148,6 @@ export {
 	BookmarkEmpty,
 	TagUser,
 	Image,
-	Cart,
-	Product,
 	NotificationFilled,
 	NotificationOutline,
 	Search,
@@ -167,8 +178,6 @@ export {
 	Settings,
 	HomeFilled,
 	HomeOutline,
-	MarketplaceFilled,
-	MarketplaceOutline,
 	FeedbackFilled,
 	FeedbackOutline,
 	Bold,
