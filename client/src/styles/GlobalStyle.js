@@ -4,6 +4,41 @@ import { createGlobalStyle } from "styled-components";
 // REVIEW: value, we can apply different colors
 const GlobalStyles = createGlobalStyle`
     :root {
+        /* TODO: darker than primary bg color */
+        --bg-default: ${(props) =>
+					props.theme.isDarkMode ? "#161719" : "#fbfcfd"};
+        /* REVIEW: 1 is for elements like posts, charts, or things that feel primary */
+        --bg-1: ${(props) => (props.theme.isDarkMode ? "#18191d" : "#fff")};
+        /* REVIEW: 2 is for secondary elements */
+        --bg-2: ${(props) => (props.theme.isDarkMode ? "#222531" : "#f3f6f9")};
+
+        /* TODO: bg and bg hover are paired up */
+        --bg-1-hover: ${(props) =>
+					props.theme.isDarkMode ? "#5c64812e" : "#94b4c31f"};
+        --bg-2-hover: ${(props) =>
+					props.theme.isDarkMode ? "#2C2F39" : "#e5eaee"};
+
+        /* TODO: text */
+        --char-default: ${(props) =>
+					props.theme.isDarkMode ? "#f5f5f5" : "#000"};
+        --char-1: ${(props) =>
+					props.theme.isDarkMode ? "#c6c9ca" : "#58667e"};
+
+        /* TODO: box shadow */
+        --box-shadow-default: ${(props) =>
+					props.theme.isDarkMode ? "#323546" : "#d2dee4"};
+
+        /* TODO: border */
+        --border-default: ${(props) =>
+					props.theme.isDarkMode ? "#222531" : "#eff2f5"};
+        --border-1: ${(props) => (props.theme.isDarkMode ? "#fff" : "#000")};
+
+        /* TODO: graph */
+        --graph-border-default: ${(props) =>
+					props.theme.isDarkMode ? "#353945" : "#b9c5d0"};
+        --graph-char-default: ${(props) =>
+					props.theme.isDarkMode ? "#777E90" : "#63727a"};
+
         /* REVIEW: button default */
         --button-default-bg-color: ${(props) =>
 					props.theme.isDarkMode ? "#ce0036" : "#ea284b"};
@@ -57,12 +92,10 @@ const GlobalStyles = createGlobalStyle`
 					props.theme.isDarkMode ? "#3a4b544d" : "#85c9ea2b"};
 
          /* REVIEW: texts*/
-        --text-1: ${(props) => (props.theme.isDarkMode ? "#f5f5f5" : "#000")};
+         --text-1: ${(props) => (props.theme.isDarkMode ? "#f5f5f5" : "#000")};
         --text-2: ${(props) =>
 					props.theme.isDarkMode ? "#949494" : "#717070"};
-
-        /* REVIEW: backgrounds */
-        --bg-1: ${(props) => (props.theme.isDarkMode ? "#18191d" : "#f6f8ff")};
+        
         --bg-3: ${(props) =>
 					props.theme.isDarkMode ? "#2a2d38" : "#91b3c33b"};
 
@@ -108,8 +141,10 @@ const GlobalStyles = createGlobalStyle`
 					props.theme.isDarkMode ? "#ff00003d" : "#fbb4c0"};
 
         /* TODO: background */
-        --bg-2: ${(props) => (props.theme.isDarkMode ? "#202229" : "#f9fafb")};
-        --bg-post: ${(props) => (props.theme.isDarkMode ? "#161719" : "#fff")};
+        /* --bg-2: ${(props) =>
+					props.theme.isDarkMode ? "#202229" : "#f9fafb"}; */
+        /* --bg-post: ${(props) =>
+					props.theme.isDarkMode ? "#161719" : "#fff"}; */
 
         /* TODO: icon */
         --icon-1: ${(props) =>
@@ -155,7 +190,7 @@ const GlobalStyles = createGlobalStyle`
 
     html {
         font-size: 62.5%;
-        background-color: var(--bg-1);
+        background-color: var(--bg-default);
     }
 
     h1 {
@@ -184,8 +219,8 @@ const GlobalStyles = createGlobalStyle`
 
     h5 {
         font-size: 1.5rem;
-        letter-spacing: -0.9px;
-        font-weight: 600;
+        letter-spacing: -0.6px;
+        font-weight: 500;
     }
 
     h6 {
@@ -206,7 +241,7 @@ const GlobalStyles = createGlobalStyle`
     }
 
     p {
-        font-size: 1.4rem;
+        font-size: 1.43rem;
         font-weight: 400;
         letter-spacing: -0.5px;
     }

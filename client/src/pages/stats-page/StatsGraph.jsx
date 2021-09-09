@@ -21,7 +21,6 @@ const StatsGraphStyle = styled.div`
 	display: flex;
 	flex-direction: column;
 	gap: 1.3rem;
-	width: 60%;
 	height: 40rem;
 `;
 
@@ -29,6 +28,7 @@ const StatsStyle = styled.div`
 	position: relative;
 	width: 100%;
 	height: 100%;
+	border-bottom: 2px solid #b9c5d0;
 	border-left: 2px solid #b9c5d0;
 
 	& svg {
@@ -61,8 +61,6 @@ const StatsGraph = () => {
 			const viewsArray = contentViewsArray.map((data) => {
 				return data.views;
 			});
-
-			console.log(contentType, contentViewsArray);
 
 			const xAxisArray = [];
 			const yAxisArray = [];

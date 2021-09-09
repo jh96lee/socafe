@@ -2,6 +2,7 @@ export { default as GlobalStyle } from "./GlobalStyle";
 
 export { default as DropdownRelativeStyle } from "./dropdown/DropdownRelativeStyle";
 export { default as DropdownUnsetStyle } from "./dropdown/DropdownUnsetStyle";
+export { default as DropdownMenuStyle } from "./dropdown/DropdownMenuStyle";
 
 export { default as PageStyle } from "./page/PageStyle";
 export { default as PageWithSidebarStyle } from "./page/PageWithSidebarStyle";

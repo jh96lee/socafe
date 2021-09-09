@@ -16,6 +16,7 @@ import { Down } from "../../assets";
 const StatsGraphHeaderStyle = styled.div`
 	display: grid;
 	grid-template-columns: 1fr max-content max-content;
+	align-items: center;
 	gap: 1rem;
 
 	& > h3 {
@@ -147,7 +148,7 @@ const StatsGraphHeader = () => {
 
 			<StatsGraphContentTypeStyle id="stats-graph-content-type-dropdown-trigger">
 				<p>
-					{/* FIX */}
+					{/* FIX: add function to capitalize first letter */}
 					{contentType === "post" ? "Post" : "Story"} <Down />
 				</p>
 

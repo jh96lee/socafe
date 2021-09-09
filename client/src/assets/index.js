@@ -35,6 +35,8 @@ import { ReactComponent as Images } from "./general/images.svg";
 import { ReactComponent as CloseAlt } from "./general/close-alt.svg";
 import { ReactComponent as TrashOutline } from "./general/trash-outline.svg";
 import { ReactComponent as SidebarFilled } from "./general/sidebar-filled.svg";
+import { ReactComponent as ChartUpFilled } from "./general/chart-up-filled.svg";
+import { ReactComponent as ChartDownFilled } from "./general/chart-down-filled.svg";
 
 import { ReactComponent as SocafeDark } from "./logo/socafe-dark.svg";
 import { ReactComponent as SocafeLight } from "./logo/socafe-light.svg";
@@ -62,6 +64,7 @@ import { ReactComponent as HeartEmpty } from "./post/heart-empty.svg";
 import { ReactComponent as HeartFill } from "./post/heart-fill.svg";
 import { ReactComponent as Posts } from "./post/posts.svg";
 import { ReactComponent as StarFilled } from "./post/star-filled.svg";
+import { ReactComponent as ViewOutline } from "./post/view-outline.svg";
 
 import { ReactComponent as Cart } from "./product/cart.svg";
 import { ReactComponent as Product } from "./product/product.svg";
@@ -90,6 +93,8 @@ export {
 	Complete,
 	StarFilled,
 	MoreHorizontal,
+	ChartDownFilled,
+	ChartUpFilled,
 	TrashOutline,
 	PasswordFilled,
 	SearchAlt,
@@ -102,6 +107,7 @@ export {
 	Plus,
 	Up,
 	Down,
+	ViewOutline,
 	Right,
 	Left,
 	Sun,
