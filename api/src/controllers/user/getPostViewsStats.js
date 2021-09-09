@@ -14,9 +14,9 @@ const getPostViewsStats = async (req, res) => {
                 FROM post_views
                 JOIN posts
                 ON post_views.post_id=posts.id
-                WHERE posts.user_id=$1 AND post_views.created_at >= (
-                    SELECT (CURRENT_TIMESTAMP - INTERVAL '${nDaysAgo} DAY')::DATE
-                )
+                WHERE posts.user_id=$1 AND DATE(post_views.created_at) > (
+                    SELECT (CURRENT_TIMESTAMP - INTERVAL '${nDaysAgo}' DAY)::DATE
+                ) AND DATE(post_views.created_at) <= CURRENT_DATE
                 GROUP BY DATE(post_views.created_at)
                 ORDER BY DATE(post_views.created_at);
                 `
@@ -27,9 +27,9 @@ const getPostViewsStats = async (req, res) => {
                 FROM story_views
                 JOIN stories
                 ON story_views.story_id=stories.id
-                WHERE stories.user_id=$1 AND story_views.created_at >= (
-                    SELECT (CURRENT_TIMESTAMP - INTERVAL '${nDaysAgo} DAY')::DATE
-                )
+                WHERE stories.user_id=$1 AND DATE(story_views.created_at) > (
+                    SELECT (CURRENT_TIMESTAMP - INTERVAL '${nDaysAgo}' DAY)::DATE
+                ) AND DATE(story_views.created_at) <= CURRENT_DATE
                 GROUP BY DATE(story_views.created_at)
                 ORDER BY DATE(story_views.created_at);
                 `;

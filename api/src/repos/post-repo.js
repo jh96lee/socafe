@@ -5,6 +5,7 @@ class PostRepo {
 		const { rows } = await pool.queryToDatabase(
 			`
 			SELECT
+			id,
 			created_at,
 			user_id AS id
 			FROM posts
@@ -101,6 +102,20 @@ class PostRepo {
             FROM comments
             WHERE post_id=$1 AND parent_comment_id IS NULL;
             `,
+			[postID]
+		);
+
+		return rows[0].count;
+	}
+
+	static async getPostTotalViews(postID) {
+		const { rows } = await pool.queryToDatabase(
+			`
+			SELECT
+			COUNT(id)::INT
+			FROM post_views
+			WHERE post_id=$1
+			`,
 			[postID]
 		);
 

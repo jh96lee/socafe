@@ -139,7 +139,6 @@ const getUserStatsTotals = async (req, res) => {
 			},
 		});
 	} catch (error) {
-		console.log(error);
 		res.send({
 			error: {
 				catch: "There has been an error while fetching for your totals data",
