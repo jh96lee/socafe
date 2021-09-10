@@ -37,3 +37,5 @@ export { default as DropdownMenu } from "./dropdown/components/DropdownMenu";
 export { default as DropdownElement } from "./dropdown/components/DropdownElement";
 
 export { default as Avatar } from "./avatar/components/Avatar";
+
+export { default as Logo } from "./logo/Logo";

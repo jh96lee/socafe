@@ -2,66 +2,54 @@ import styled from "styled-components";
 
 export const NavigationStyle = styled.nav`
 	position: sticky;
-	top: 78px;
+	top: 7.8rem;
 	grid-column: 1 / 2;
 	grid-row: 2 / 3;
 	display: flex;
 	flex-direction: column;
-	align-items: center;
 	gap: 3rem;
-	padding-top: 3rem;
-	background-color: var(--bg-1);
+	padding: 3rem;
+	background-color: var(--bg-default);
+	width: ${(props) => (props.isNavigationAtHome ? "33rem" : "25rem")};
 	height: fit-content;
 
-	& > a > span {
-		display: none;
+	background-color: antiquewhite;
+
+	& > *:first-child {
+		margin-bottom: -5px;
 	}
 
-	& #filled {
-		display: none;
-	}
+	& > a {
+		display: flex;
+		align-items: center;
+		gap: 1.5rem;
 
-	& .active div {
-		background-color: var(--icon-active-link-bg-color);
-	}
-
-	& .active #filled {
-		display: block;
-		fill: var(--icon-active-link-color);
-	}
-
-	& .active #outline {
-		display: none;
-	}
-
-	@media (max-width: 700px) {
-		position: absolute;
-		top: 78px;
-		display: ${(props) => (props.isResponsiveNavigationOpen ? "flex" : "none")};
-		align-items: flex-start;
-		padding: 3rem;
-		width: 100%;
-		height: calc(100vh - 78px);
-		z-index: 100;
-		background-color: var(--bg-1);
-
-		& > a {
-			display: flex;
-			align-items: center;
-			gap: 1.5rem;
-			text-decoration: none;
-		}
-
-		& > a > span {
-			display: inline-block;
-			color: var(--text-1);
-			font-size: 1.5rem;
-			font-weight: 400;
-		}
-
-		& .active span {
+		& > p {
+			color: var(--char-2);
+			font-size: 1.45rem;
 			font-weight: 500;
-			color: var(--icon-active-link-color);
 		}
+
+		& > svg {
+			width: 3.3rem;
+			height: 3.3rem;
+		}
+
+		&:hover > p {
+			text-decoration: underline;
+		}
+	}
+
+	& > .active {
+		& > p {
+			color: var(--char-default);
+		}
+	}
+
+	@media (max-width: 1350px) {
+		position: fixed;
+		top: 0;
+		left: 0;
+		z-index: 100;
 	}
 `;

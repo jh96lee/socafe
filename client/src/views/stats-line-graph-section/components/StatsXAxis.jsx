@@ -6,11 +6,21 @@ const StatsXAxis = ({ xAxisArray }) => {
 	return (
 		<StatsXAxisStyle>
 			{xAxisArray.map(({ position, date }, idx) => {
-				return (
-					<XAxisStyle key={`x-axis__${idx}`} xAxisLeft={position}>
-						{date}
-					</XAxisStyle>
-				);
+				if (xAxisArray.length > 7) {
+					if (idx % 2 === 0) {
+						return (
+							<XAxisStyle key={`x-axis__${idx}`} xAxisLeft={position}>
+								{date.split(",")[0]}
+							</XAxisStyle>
+						);
+					}
+				} else {
+					return (
+						<XAxisStyle key={`x-axis__${idx}`} xAxisLeft={position}>
+							{date}
+						</XAxisStyle>
+					);
+				}
 			})}
 		</StatsXAxisStyle>
 	);

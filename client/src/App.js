@@ -4,7 +4,8 @@ import { useSelector } from "react-redux";
 import { ThemeProvider } from "styled-components";
 import styled from "styled-components";
 
-import { Header, Navigation } from "./views/navigation";
+import { Header } from "./views/header";
+import { Navigation } from "./views/navigation";
 import {
 	HomePage,
 	AddPostPage,
@@ -26,14 +27,12 @@ import GlobalStyle from "./styles/GlobalStyle";
 
 const GlobalPageStyle = styled.main`
 	display: grid;
-	grid-template-columns: 7.8rem auto;
-	grid-template-rows: 7.8rem auto;
+	grid-template-columns: auto 1fr;
+	grid-template-rows: 7.8rem 1fr;
 `;
 
 function App() {
-	const [isDarkMode, setIsDarkMode] = React.useState(true);
-	const [isResponsiveNavigationOpen, setIsResponsiveNavigationOpen] =
-		React.useState(false);
+	const { isDarkMode } = useSelector((state) => state.userInterfaceReducer);
 
 	const themeStyleObjectCreator = (isDarkMode) => ({ isDarkMode });
 
@@ -52,18 +51,9 @@ function App() {
 			<GlobalStyle />
 
 			<GlobalPageStyle>
-				{!isAddIncludedInPathname && (
-					<Header
-						isDarkMode={isDarkMode}
-						setIsDarkMode={setIsDarkMode}
-						setIsResponsiveNavigationOpen={setIsResponsiveNavigationOpen}
-					/>
-				)}
-				{!isAddIncludedInPathname && (
-					<Navigation isResponsiveNavigationOpen={isResponsiveNavigationOpen} />
-				)}
+				{!isAddIncludedInPathname && <Header />}
 
-				{user && <AddPostIcon />}
+				{!isAddIncludedInPathname && <Navigation />}
 
 				<Switch location={overlaidComponentLocation || appLocation}>
 					<Route exact path="/">

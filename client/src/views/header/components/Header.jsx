@@ -1,9 +1,14 @@
 import * as React from "react";
+import { useDispatch, useSelector } from "react-redux";
 
-import Logo from "./Logo";
 import HeaderAvatar from "./HeaderAvatar";
 import { Searchbar } from "../../searchbar";
-import { Toggle, IconElement } from "../../shared";
+import { Toggle, IconElement, Logo } from "../../shared";
+
+import {
+	setIsDarkMode,
+	setIsResponsiveNavigationOpen,
+} from "../../../redux/user-interface/userInterfaceAction";
 
 import { HeaderStyle } from "../styles/HeaderStyle";
 import { HeaderStartStyle } from "../styles/HeaderStartStyle";
@@ -11,13 +16,13 @@ import { HeaderEndStyle } from "../styles/HeaderEndStyle";
 
 import { Sun, Moon, Hamburger } from "../../../assets";
 
-const Header = ({
-	isDarkMode,
-	setIsDarkMode,
-	setIsResponsiveNavigationOpen,
-}) => {
+const Header = ({}) => {
+	const dispatch = useDispatch();
+
+	const { isDarkMode } = useSelector((state) => state.userInterfaceReducer);
+
 	const handleHeaderHamburgerIconOnClick = () => {
-		setIsResponsiveNavigationOpen((prevState) => !prevState);
+		dispatch(setIsResponsiveNavigationOpen());
 	};
 
 	return (

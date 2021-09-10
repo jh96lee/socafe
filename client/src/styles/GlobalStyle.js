@@ -23,6 +23,8 @@ const GlobalStyles = createGlobalStyle`
 					props.theme.isDarkMode ? "#f5f5f5" : "#000"};
         --char-1: ${(props) =>
 					props.theme.isDarkMode ? "#c6c9ca" : "#58667e"};
+        --char-2: ${(props) =>
+					props.theme.isDarkMode ? "#83888a" : "#687283"};
 
         /* TODO: box shadow */
         --box-shadow-default: ${(props) =>
@@ -234,10 +236,6 @@ const GlobalStyles = createGlobalStyle`
         font-weight: 400;
 		text-decoration: none;
         letter-spacing: -0.6px;
-    }
-
-    a:hover {
-        text-decoration: underline;
     }
 
     p {

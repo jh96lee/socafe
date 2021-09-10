@@ -12,7 +12,7 @@ const PageWithSidebarStyle = styled.div`
 	min-height: 100vh;
 	min-width: 100vw;
 	overflow: scroll;
-	background-color: var(--bg-1);
+	background-color: var(--bg-default);
 
 	/* REVIEW: this is to hide the component/element that triggers the opening of responsive sidebar */
 	& > *:last-child {

@@ -17,7 +17,7 @@ import {
 	Logout,
 	EditFilled,
 	NotificationFilled,
-	Stats,
+	StatsFilled,
 } from "../../../assets";
 
 const HeaderAvatar = () => {
@@ -65,7 +65,7 @@ const HeaderAvatar = () => {
 					{
 						content: {
 							label: "Stats",
-							icon: <Stats />,
+							icon: <StatsFilled />,
 						},
 						onClickEventHandler: () => {
 							history.push(`/stats/${user.id}`);

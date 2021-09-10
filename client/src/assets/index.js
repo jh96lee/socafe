@@ -45,11 +45,14 @@ import { ReactComponent as SocafeConcise } from "./logo/socafe-concise.svg";
 
 import { ReactComponent as ExploreFilled } from "./navigation/explore-filled.svg";
 import { ReactComponent as ExploreOutline } from "./navigation/explore-outline.svg";
+import { ReactComponent as ExploreColored } from "./navigation/explore-colored.svg";
 import { ReactComponent as FeedbackFilled } from "./navigation/feedback-filled.svg";
+import { ReactComponent as FeedbackColored } from "./navigation/feedback-colored.svg";
 import { ReactComponent as FeedbackOutline } from "./navigation/feedback-outline.svg";
 import { ReactComponent as Hamburger } from "./navigation/hamburger.svg";
 import { ReactComponent as HomeFilled } from "./navigation/home-filled.svg";
 import { ReactComponent as HomeOutline } from "./navigation/home-outline.svg";
+import { ReactComponent as HomeColored } from "./navigation/home-colored.svg";
 
 import { ReactComponent as Comment } from "./post/comment.svg";
 import { ReactComponent as CommentFilled } from "./post/comment-filled.svg";
@@ -73,7 +76,10 @@ import { ReactComponent as CommentColored } from "./post/comment-colored.svg";
 import { ReactComponent as NotificationFilled } from "./user/notification-filled.svg";
 import { ReactComponent as NotificationOutline } from "./user/notification-outline.svg";
 import { ReactComponent as Search } from "./user/search.svg";
-import { ReactComponent as Stats } from "./user/stats.svg";
+
+import { ReactComponent as StatsColored } from "./user/stats-colored.svg";
+import { ReactComponent as StatsFilled } from "./user/stats-filled.svg";
+import { ReactComponent as StatsOutline } from "./user/stats-outline.svg";
 import { ReactComponent as Users } from "./user/users.svg";
 import { ReactComponent as Register } from "./user/register.svg";
 import { ReactComponent as Login } from "./user/login.svg";
@@ -82,7 +88,9 @@ import { ReactComponent as Sad } from "./user/sad.svg";
 import { ReactComponent as Follow } from "./user/follow.svg";
 import { ReactComponent as Following } from "./user/following.svg";
 import { ReactComponent as Password } from "./user/password.svg";
-import { ReactComponent as Story } from "./user/story.svg";
+import { ReactComponent as StoryFilled } from "./user/story-filled.svg";
+import { ReactComponent as StoryOutline } from "./user/story-outline.svg";
+import { ReactComponent as StoryColored } from "./user/story-colored.svg";
 import { ReactComponent as Recommendation } from "./user/recommendation.svg";
 import { ReactComponent as UserFilled } from "./user/user-filled.svg";
 import { ReactComponent as UserOutline } from "./user/user-outline.svg";
@@ -92,27 +100,36 @@ import { ReactComponent as UsersFilled } from "./user/users-filled.svg";
 import { ReactComponent as FollowersFilled } from "./user/followers-filled.svg";
 import { ReactComponent as FollowersOutline } from "./user/followers-outline.svg";
 import { ReactComponent as MultipleUsersColored } from "./user/multiple-users-colored.svg";
+import { ReactComponent as NotificationColored } from "./user/notification-colored.svg";
 
 export {
+	StoryColored,
+	ExploreColored,
 	Complete,
 	DashFilled,
+	NotificationColored,
 	HeartColored,
 	PostColored,
 	CommentColored,
 	FollowersFilled,
 	FollowersOutline,
 	UsersOutline,
+	HomeColored,
 	MultipleUsersColored,
 	UsersFilled,
 	StarFilled,
 	MoreHorizontal,
 	ChartDownFilled,
+	StatsColored,
 	ChartUpFilled,
 	TrashOutline,
 	PasswordFilled,
 	SearchAlt,
 	DoubleArrowLeft,
+	FeedbackColored,
 	Congratulation,
+	StatsFilled,
+	StatsOutline,
 	Recommendation,
 	Checkmark,
 	CheckmarkCircleFilled,
@@ -152,8 +169,8 @@ export {
 	NotificationOutline,
 	Search,
 	Date,
-	Stats,
-	Story,
+	StoryFilled,
+	StoryOutline,
 	PlusAlt,
 	Users,
 	SocafeConcise,

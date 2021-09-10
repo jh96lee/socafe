@@ -12,12 +12,13 @@ const StatsPageStyle = styled(PageStyle)`
 	flex-direction: column;
 	align-items: center;
 	gap: 2rem;
-	width: calc(100vw - 7.8rem);
+	width: 100%;
 	min-height: calc(100vh - 7.8rem);
 	padding: 3rem 0;
+	margin: auto;
 
 	& > * {
-		width: 110rem;
+		width: 90%;
 	}
 `;
 

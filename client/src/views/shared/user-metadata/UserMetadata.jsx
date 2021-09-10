@@ -42,7 +42,7 @@ const UserMetadata = ({
 			<div onClick={handleUsernameOnClick}>
 				<h5>@{username}</h5>
 
-				<p>{fullName}</p>
+				<span>{fullName}</span>
 			</div>
 		</UserMetadataStyle>
 	);

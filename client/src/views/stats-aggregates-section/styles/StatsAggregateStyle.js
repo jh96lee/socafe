@@ -26,7 +26,6 @@ export const StatsAggregateStyle = styled.div`
 	& > svg {
 		grid-column: 1 / 2;
 		grid-row: 1 / 3;
-		fill: var(--char-default);
 		width: 3.6rem;
 		height: 3.6rem;
 	}

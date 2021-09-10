@@ -3,7 +3,7 @@ import { useHistory } from "react-router-dom";
 
 import { SocafeDark, SocafeLight, SocafeConcise } from "../../../assets";
 
-import LogoStyle from "../styles/LogoStyle";
+import LogoStyle from "./LogoStyle";
 
 const Logo = ({ isDarkMode }) => {
 	const history = useHistory();

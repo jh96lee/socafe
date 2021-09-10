@@ -47,6 +47,8 @@ import userStoriesReducer from "./user-stories/userStoriesReducer";
 
 import statsGraphReducer from "./stats/stats-graph/statsGraphReducer";
 
+import userInterfaceReducer from "./user-interface/userInterfaceReducer";
+
 const rootReducer = combineReducers({
 	userReducer,
 
@@ -76,6 +78,8 @@ const rootReducer = combineReducers({
 	notificationsReducer,
 
 	userLoginReducer,
+
+	userInterfaceReducer,
 
 	userRegisterFormReducer,
 	userRegisterStepReducer,

@@ -17,15 +17,10 @@ import { PageStyle } from "../../styles";
 import styled from "styled-components";
 
 const HomePageStyle = styled(PageStyle)`
-	/* display: flex;
-	flex-direction: column;
-	gap: 2rem; */
-
 	position: relative;
-	background-color: var(--bg-1);
+	background-color: var(--bg-default);
 	display: flex;
 	gap: 2rem;
-	margin: 3rem auto;
 
 	& > *:first-child {
 		width: 58rem;
@@ -33,21 +28,29 @@ const HomePageStyle = styled(PageStyle)`
 	}
 
 	& > *:last-child {
-		width: 35rem;
+		width: 33rem;
+		background-color: blue;
 	}
 `;
 
 const HomePageLeftStyle = styled.div`
+	grid-column: 2 / 3;
+	grid-row: 2 / 3;
 	display: flex;
 	flex-direction: column;
 	gap: 2rem;
-	width: 100%;
+	width: 58rem;
+	margin: auto;
+	padding: 3rem 0;
 `;
 
 const HomePageRightStyle = styled.div`
+	grid-column: 3 / 4;
+	grid-row: 2 / 3;
 	display: flex;
 	flex-direction: column;
 	gap: 2rem;
+	padding: 3rem 1.5rem;
 `;
 
 const HomePage = () => {

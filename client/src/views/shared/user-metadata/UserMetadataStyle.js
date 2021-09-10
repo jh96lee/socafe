@@ -9,7 +9,7 @@ export const UserMetadataStyle = styled.div`
 	z-index: ${(props) => props.userMetadataZIndex};
 	display: flex;
 	align-items: center;
-	gap: 0.7rem;
+	gap: ${(props) => props.userMetadataGap || "0.7rem"};
 
 	& > *:first-child {
 		display: flex;
@@ -22,13 +22,17 @@ export const UserMetadataStyle = styled.div`
 		font-weight: 500;
 		color: ${(props) => props.userMetadataUsernameColor || "var(--text-1)"};
 		letter-spacing: -0.6px;
-		cursor: pointer;
 	}
 
-	& > *:last-child > p {
-		font-size: ${(props) => props.fullNameFontSize || "1.27rem"};
-		font-weight: 300;
+	& > *:last-child > span {
+		font-size: ${(props) => props.fullNameFontSize || "1.3rem"};
+		font-weight: 400;
 		color: ${(props) => props.userMetadataFullNameColor || "var(--text-2)"};
 		letter-spacing: -0.6px;
+	}
+
+	& > *:last-child > h5:hover {
+		cursor: pointer;
+		text-decoration: underline;
 	}
 `;
