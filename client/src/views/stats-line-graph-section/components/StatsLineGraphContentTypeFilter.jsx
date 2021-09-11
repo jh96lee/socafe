@@ -4,8 +4,7 @@ import { useDropdown } from "../../../hooks";
 
 import { capitalizeFirstLetter } from "../../../utils/common/capitalizeFirstLetter";
 
-import { DropdownMenuStyle } from "../../../styles";
-import { StatsLineGraphFilterStyle } from "../styles/StatsLineGraphFilterStyle";
+import { DropdownMenuStyle, StatsFilterStyle } from "../../../styles";
 
 import { Up, Down } from "../../../assets";
 
@@ -18,7 +17,7 @@ const StatsLineGraphContentTypeFilter = ({ contentType, setContentType }) => {
 	const contentTypesArray = ["post", "story"];
 
 	return (
-		<StatsLineGraphFilterStyle id="stats-line-graph-content-types-dropdown-trigger">
+		<StatsFilterStyle id="stats-line-graph-content-types-dropdown-trigger">
 			<p>{capitalizeFirstLetter(contentType)}</p>
 
 			{isDropdownMenuOpen ? <Up /> : <Down />}
@@ -43,7 +42,7 @@ const StatsLineGraphContentTypeFilter = ({ contentType, setContentType }) => {
 					})}
 				</DropdownMenuStyle>
 			)}
-		</StatsLineGraphFilterStyle>
+		</StatsFilterStyle>
 	);
 };
 

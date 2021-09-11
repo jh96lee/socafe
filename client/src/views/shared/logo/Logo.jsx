@@ -1,11 +1,14 @@
 import React from "react";
+import { useSelector } from "react-redux";
 import { useHistory } from "react-router-dom";
 
 import { SocafeDark, SocafeLight, SocafeConcise } from "../../../assets";
 
 import LogoStyle from "./LogoStyle";
 
-const Logo = ({ isDarkMode }) => {
+const Logo = ({ logoWidth, logoHeight, logoBreakingPoint }) => {
+	const { isDarkMode } = useSelector((state) => state.userInterfaceReducer);
+
 	const history = useHistory();
 
 	const handleLogoOnClick = () => {

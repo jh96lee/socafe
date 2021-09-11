@@ -14,6 +14,6 @@ export const YAxisStyle = styled.p`
 	position: absolute;
 	bottom: ${(props) => `${props.yAxisBottom}%`};
 	transform: translateY(50%);
-	color: var(--graph-char-default);
+	color: var(--char-graph);
 	font-weight: 500;
 `;

@@ -15,7 +15,7 @@ const LogoStyle = styled.div`
 		cursor: pointer;
 	}
 
-	@media (max-width: 400px) {
+	/* @media (max-width: 400px) {
 		#logo__socafe-full {
 			display: none;
 		}
@@ -25,7 +25,7 @@ const LogoStyle = styled.div`
 			width: 4rem;
 			height: auto;
 		}
-	}
+	} */
 `;
 
 export default LogoStyle;

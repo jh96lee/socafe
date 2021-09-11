@@ -20,7 +20,6 @@ const HomePageStyle = styled(PageStyle)`
 	position: relative;
 	background-color: var(--bg-default);
 	display: flex;
-	gap: 2rem;
 
 	& > *:first-child {
 		width: 58rem;

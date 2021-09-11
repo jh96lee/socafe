@@ -11,12 +11,18 @@ const GlobalStyles = createGlobalStyle`
         --bg-1: ${(props) => (props.theme.isDarkMode ? "#18191d" : "#fff")};
         /* REVIEW: 2 is for secondary elements */
         --bg-2: ${(props) => (props.theme.isDarkMode ? "#222531" : "#f3f6f9")};
+        --bg-icon: ${(props) =>
+					props.theme.isDarkMode ? "#ffffff1a" : "#9a9a9a3b"};
 
         /* TODO: bg and bg hover are paired up */
         --bg-1-hover: ${(props) =>
 					props.theme.isDarkMode ? "#5c64812e" : "#94b4c31f"};
         --bg-2-hover: ${(props) =>
 					props.theme.isDarkMode ? "#2C2F39" : "#e5eaee"};
+        --bg-icon-hover: ${(props) =>
+					props.theme.isDarkMode ? "#6f6f6f6b" : "#afafaf57"};
+        --bg-presentation: ${(props) =>
+					props.theme.isDarkMode ? "#a0d5ff1f" : "#607d8b33"};
 
         /* TODO: text */
         --char-default: ${(props) =>
@@ -25,6 +31,10 @@ const GlobalStyles = createGlobalStyle`
 					props.theme.isDarkMode ? "#c6c9ca" : "#58667e"};
         --char-2: ${(props) =>
 					props.theme.isDarkMode ? "#83888a" : "#687283"};
+        --char-presentation: ${(props) =>
+					props.theme.isDarkMode ? "#b4dcff" : "#64748b"};
+        --char-graph: ${(props) =>
+					props.theme.isDarkMode ? "#777E90" : "#63727a"};
 
         /* TODO: box shadow */
         --box-shadow-default: ${(props) =>
@@ -34,12 +44,8 @@ const GlobalStyles = createGlobalStyle`
         --border-default: ${(props) =>
 					props.theme.isDarkMode ? "#222531" : "#eff2f5"};
         --border-1: ${(props) => (props.theme.isDarkMode ? "#fff" : "#000")};
-
-        /* TODO: graph */
-        --graph-border-default: ${(props) =>
+        --border-graph: ${(props) =>
 					props.theme.isDarkMode ? "#353945" : "#b9c5d0"};
-        --graph-char-default: ${(props) =>
-					props.theme.isDarkMode ? "#777E90" : "#63727a"};
 
         /* REVIEW: button default */
         --button-default-bg-color: ${(props) =>

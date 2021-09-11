@@ -2,40 +2,42 @@ import * as React from "react";
 
 import { useDropdown } from "../../../hooks";
 
+import { capitalizeFirstLetter } from "../../../utils/common/capitalizeFirstLetter";
+
 import { DropdownMenuStyle, StatsFilterStyle } from "../../../styles";
 
 import { Up, Down } from "../../../assets";
 
-const StatsLineGraphNDaysFilter = ({ nDays, setNDays }) => {
+const StatsTopPostsFilter = ({ topBy, setTopBy }) => {
 	const { isDropdownMenuOpen } = useDropdown(
-		"stats-line-graph-n-days-dropdown-trigger",
-		"stats-line-graph-n-days-dropdown-menu",
+		"stats-top-posts-dropdown-trigger",
+		"stats-top-posts-dropdown-menu",
 		true
 	);
 
-	const nDaysArray = [7, 14, 21, 30];
+	const topByArray = ["views", "likes", "comments"];
 
 	return (
-		<StatsFilterStyle id="stats-line-graph-n-days-dropdown-trigger">
-			<p>Last {nDays} Days</p>
+		<StatsFilterStyle id="stats-top-posts-dropdown-trigger">
+			<p>{capitalizeFirstLetter(topBy)}</p>
 
 			{isDropdownMenuOpen ? <Up /> : <Down />}
 
 			{isDropdownMenuOpen && (
 				<DropdownMenuStyle
-					id="stats-line-graph-n-days-dropdown-menu"
+					id="stats-top-posts-dropdown-menu"
 					menuTop="calc(100% + 6px)"
 					menuRight="0"
 				>
-					{nDaysArray.map((day, idx) => {
+					{topByArray.map((filter, idx) => {
 						return (
 							<p
-								key={`${day}__${idx}`}
+								key={`${filter}__${idx}`}
 								onClick={() => {
-									setNDays(day);
+									setTopBy(filter);
 								}}
 							>
-								{day} days
+								{filter}
 							</p>
 						);
 					})}
@@ -45,4 +47,4 @@ const StatsLineGraphNDaysFilter = ({ nDays, setNDays }) => {
 	);
 };
 
-export default StatsLineGraphNDaysFilter;
+export default StatsTopPostsFilter;

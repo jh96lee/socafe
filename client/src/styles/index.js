@@ -34,3 +34,7 @@ export { default as PageSidebarFooterStyle } from "./page-sidebar/PageSidebarFoo
 export { default as PageSidebarBodyLabeledRowStyle } from "./page-sidebar/PageSidebarBodyLabeledRowStyle";
 
 export { default as StoryStyle } from "./story/StoryStyle";
+
+export { default as StatsSectionStyle } from "./stat/StatsSectionStyle";
+export { default as StatsHeaderStyle } from "./stat/StatsHeaderStyle";
+export { default as StatsFilterStyle } from "./stat/StatsFilterStyle";

@@ -13,10 +13,12 @@ export const NavigationStyle = styled.nav`
 	width: ${(props) => (props.isNavigationAtHome ? "33rem" : "25rem")};
 	height: fit-content;
 
-	background-color: antiquewhite;
-
 	& > *:first-child {
-		margin-bottom: -5px;
+		display: none;
+	}
+
+	& > *:nth-child(2) {
+		margin-bottom: -3px;
 	}
 
 	& > a {
@@ -48,8 +50,21 @@ export const NavigationStyle = styled.nav`
 
 	@media (max-width: 1350px) {
 		position: fixed;
-		top: 0;
+		top: 7.8rem;
 		left: 0;
 		z-index: 100;
+		display: ${(props) => (props.isResponsiveNavigationOpen ? "flex" : "none")};
+		background-color: var(--bg-1);
+		width: 35rem;
+		min-height: 100vh;
+		border-right: 2px solid var(--border-default);
+
+		& > *:first-child {
+			display: block;
+		}
+	}
+
+	@media (max-width: 500px) {
+		width: 100vw;
 	}
 `;

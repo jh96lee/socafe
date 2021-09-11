@@ -13,7 +13,7 @@ export const XAxisStyle = styled.p`
 	position: absolute;
 	left: ${(props) => `${props.xAxisLeft}%`};
 	transform: translateX(-50%);
-	color: var(--graph-char-default);
+	color: var(--char-graph);
 	font-weight: 500;
 	width: fit-content;
 `;

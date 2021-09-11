@@ -1,0 +1,63 @@
+import * as React from "react";
+
+import { IconStyle } from "./IconStyle";
+
+const Icon = ({
+	children,
+	iconID,
+	iconRole,
+	iconType = null,
+	iconPadding,
+	iconSize,
+	iconBGColor,
+	iconBGHoverColor,
+	iconFill,
+	iconHoverFill,
+	iconOnClick,
+	iconStyleObject,
+}) => {
+	const iconStylesObject = {
+		overlay: {
+			iconBGColor: "#0000004a",
+			iconFill: "#fff",
+		},
+		button: {
+			iconBGColor: "transparent",
+			iconFill: "var(--char-default)",
+		},
+		presentation: {
+			iconBGColor: "transparent",
+			iconBGHoverColor: "none",
+			iconFill: "var(--char-default)",
+			iconPadding: "0rem",
+		},
+		link: {
+			iconBGColor: "var(bg-presentation)",
+			iconBGHoverColor: null,
+			iconFill: "var(--char-presentation)",
+		},
+	};
+
+	const iconStyle = iconType ? iconStylesObject[iconType] : {};
+
+	return (
+		<IconStyle
+			role={iconRole}
+			iconID={iconID}
+			iconSize={iconSize}
+			iconPadding={iconPadding ? iconPadding : iconStyle.iconPadding}
+			iconBGColor={iconBGColor ? iconBGColor : iconStyle.iconBGColor}
+			iconBGHoverColor={
+				iconBGHoverColor ? iconBGHoverColor : iconStyle.iconBGHoverColor
+			}
+			iconFill={iconFill ? iconFill : iconStyle.iconFill}
+			iconHoverFill={iconHoverFill}
+			{...iconStyleObject}
+			onClick={iconOnClick}
+		>
+			{children}
+		</IconStyle>
+	);
+};
+
+export default Icon;

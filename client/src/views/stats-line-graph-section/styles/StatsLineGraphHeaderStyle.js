@@ -1,14 +1,9 @@
 import styled from "styled-components";
 
-export const StatsLineGraphHeaderStyle = styled.div`
-	display: flex;
-	justify-content: space-between;
-	align-items: center;
-	width: 100%;
+import { StatsHeaderStyle } from "../../../styles";
 
-	& > h2 {
-		color: var(--char-default);
-	}
+export const StatsLineGraphHeaderStyle = styled(StatsHeaderStyle)`
+	padding: 0;
 `;
 
 export const StatsLineGraphFiltersStyle = styled.div`

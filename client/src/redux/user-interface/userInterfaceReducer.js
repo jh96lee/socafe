@@ -1,5 +1,9 @@
+const isDarkModeLocalStorage = localStorage.getItem("theme");
+
 const initialState = {
-	isDarkMode: true,
+	isDarkMode: isDarkModeLocalStorage
+		? JSON.parse(isDarkModeLocalStorage)
+		: true,
 	isResponsiveNavigationOpen: false,
 };
 
@@ -8,16 +12,24 @@ const userInterfaceReducer = (state = initialState, action) => {
 		case "SET_IS_DARK_MODE":
 			return {
 				...state,
-				isDarkMode: !state.isDarkMode,
+				isDarkMode: setIsDarkMode(state),
 			};
 		case "SET_IS_RESPONSIVE_NAVIGATION_OPEN":
 			return {
 				...state,
-				isResponsiveNavigationOpen: !state.isResponsiveNavigationOpen,
+				isResponsiveNavigationOpen: action.payload
+					? action.payload
+					: !state.isResponsiveNavigationOpen,
 			};
 		default:
 			return state;
 	}
+};
+
+const setIsDarkMode = (state) => {
+	localStorage.setItem("theme", !state.isDarkMode);
+
+	return !state.isDarkMode;
 };
 
 export default userInterfaceReducer;

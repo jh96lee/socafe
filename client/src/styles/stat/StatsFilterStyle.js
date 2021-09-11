@@ -1,13 +1,13 @@
 import styled from "styled-components";
 
-export const StatsLineGraphFilterStyle = styled.div`
+const StatsFilterStyle = styled.div`
 	position: relative;
 	display: flex;
 	align-items: center;
 	gap: 1.2rem;
 	background-color: var(--bg-2);
 	padding: 1rem 1.15rem;
-	border-radius: 0.5rem;
+	border-radius: 0.7rem;
 
 	& > p {
 		font-weight: 500;
@@ -25,3 +25,5 @@ export const StatsLineGraphFilterStyle = styled.div`
 		background-color: var(--bg-2-hover);
 	}
 `;
+
+export default StatsFilterStyle;

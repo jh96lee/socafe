@@ -1,4 +1,5 @@
 export { default as IconElement } from "./icon-element/IconElement";
+export { default as Icon } from "./icon/Icon";
 
 export { default as Loader } from "./loader/Loader";
 
