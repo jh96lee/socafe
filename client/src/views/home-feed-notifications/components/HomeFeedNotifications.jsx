@@ -11,7 +11,7 @@ import { fetchToken } from "../../../utils/cookie/fetchToken";
 const HomeFeedNotificationsStyle = styled.div`
 	padding: 0 1.8rem;
 
-	& > h3 {
+	& > h5 {
 		display: flex;
 		justify-content: space-between;
 		align-items: center;
@@ -71,9 +71,9 @@ const HomeFeedNotifications = () => {
 		<HomeFeedNotificationsStyle>
 			{isHomeFeedNotificationsLoaded ? (
 				<React.Fragment>
-					<h3>
+					<h5>
 						Notifications <span onClick={handleMoreSpanOnClick}>More</span>
-					</h3>
+					</h5>
 
 					<Notifications notifications={homeFeedNotifications} />
 				</React.Fragment>

@@ -7,7 +7,7 @@ const StatsSectionStyle = styled.section`
 	margin: 0 auto;
 	background-color: var(--bg-1);
 	border-radius: 0.8rem;
-	box-shadow: var(--box-shadow-default) 0px 0px 3px 0px;
+	box-shadow: var(--divider-default) 0px 0px 3px 0px;
 `;
 
 export default StatsSectionStyle;

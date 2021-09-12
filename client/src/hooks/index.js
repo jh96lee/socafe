@@ -20,3 +20,6 @@ export { default as useStory } from "./story/useStory";
 
 export { default as useTextEditorRedux } from "./redux/text-editor/userTextEditorRedux";
 export { default as useTextEditorReact } from "./react/text-editor/useTextEditorReact";
+
+export { default as usePaginationReact } from "./react/common/usePaginationReact";
+export { default as usePaginationRedux } from "./redux/common/usePaginationRedux";

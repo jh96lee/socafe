@@ -1,13 +1,13 @@
 import styled from "styled-components";
 
 export const SearchbarResponsiveStyle = styled.div`
-	#searchbar__search-icon {
+	& > *:first-child {
 		display: none;
 	}
 
 	@media (max-width: 700px) {
-		#searchbar__search-icon {
-			display: block;
+		& > *:first-child {
+			display: flex;
 		}
 	}
 `;

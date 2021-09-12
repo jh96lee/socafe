@@ -9,6 +9,7 @@ const Icon = ({
 	iconType = null,
 	iconPadding,
 	iconSize,
+	iconDimension,
 	iconBGColor,
 	iconBGHoverColor,
 	iconFill,
@@ -32,7 +33,7 @@ const Icon = ({
 			iconPadding: "0rem",
 		},
 		link: {
-			iconBGColor: "var(bg-presentation)",
+			iconBGColor: "var(--bg-presentation)",
 			iconBGHoverColor: null,
 			iconFill: "var(--char-presentation)",
 		},
@@ -45,6 +46,7 @@ const Icon = ({
 			role={iconRole}
 			iconID={iconID}
 			iconSize={iconSize}
+			iconDimension={iconDimension}
 			iconPadding={iconPadding ? iconPadding : iconStyle.iconPadding}
 			iconBGColor={iconBGColor ? iconBGColor : iconStyle.iconBGColor}
 			iconBGHoverColor={

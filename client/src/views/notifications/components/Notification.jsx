@@ -35,8 +35,8 @@ const NotificationContentStyle = styled.div`
 `;
 
 const NotificationAlert = styled.div`
-	width: 1.1rem;
-	height: 1.1rem;
+	width: 0.75rem;
+	height: 0.75rem;
 	border-radius: 50%;
 	background-color: #6495ed;
 	align-self: center;
@@ -72,9 +72,10 @@ const Notification = ({ notification }) => {
 				userID={instigator.id}
 				username={instigator.username}
 				avatarURL={instigator.avatar_url}
-				avatarSize="5.5rem"
+				avatarSize="4.5rem"
 			/>
 
+			{/* FIX: convert this to an object */}
 			<NotificationContentStyle>
 				{notification_type === "LIKE" && (
 					<NotificationLike

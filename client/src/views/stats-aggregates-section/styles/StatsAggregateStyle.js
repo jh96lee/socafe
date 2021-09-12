@@ -9,7 +9,7 @@ export const StatsAggregateStyle = styled.div`
 	background-color: var(--bg-1);
 	padding: 3rem;
 	border-radius: 0.8rem;
-	box-shadow: var(--box-shadow-default) 0px 0px 3px 0px;
+	box-shadow: var(--divider-default) 0px 0px 3px 0px;
 
 	& > span {
 		grid-column: 2 / 3;

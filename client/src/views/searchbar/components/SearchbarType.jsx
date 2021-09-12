@@ -6,6 +6,8 @@ import { useDropdown } from "../../../hooks";
 
 import { SearchbarTypeStyle } from "../styles/SearchbarTypeStyle";
 
+import { capitalizeFirstLetter } from "../../../utils/common/capitalizeFirstLetter";
+
 import { Down, StarFilled, UserFilled } from "../../../assets";
 
 const SearchbarType = ({ searchType, setSearchType }) => {
@@ -17,21 +19,17 @@ const SearchbarType = ({ searchType, setSearchType }) => {
 	const dropdownElementsArray = React.useMemo(() => {
 		return [
 			{
-				content: {
-					label: "Users",
-					icon: <UserFilled data-search-type="user" />,
-				},
+				icon: <UserFilled />,
+				text: "Users",
 				onClickEventHandler: () => {
-					setSearchType("Users");
+					setSearchType("users");
 				},
 			},
 			{
-				content: {
-					label: "Topics",
-					icon: <StarFilled data-search-type="topic" />,
-				},
+				icon: <StarFilled />,
+				text: "Topics",
 				onClickEventHandler: () => {
-					setSearchType("Topics");
+					setSearchType("topics");
 				},
 			},
 		];
@@ -39,17 +37,19 @@ const SearchbarType = ({ searchType, setSearchType }) => {
 
 	return (
 		<SearchbarTypeStyle id="searchbar-type-dropdown-trigger">
-			<p> {searchType}</p>
+			<p> {capitalizeFirstLetter(searchType)}</p>
 
 			<Down />
 
 			{isDropdownMenuOpen && (
 				<DropdownMenu
 					dropdownMenuID="searchbar-type-dropdown-menu"
+					dropdownElementType="icon"
 					dropdownElementsArray={dropdownElementsArray}
 					dropdownMenuStyleObject={{
-						menuTop: "calc(100% + 7px)",
+						menuTop: "calc(100% + 6px)",
 						menuLeft: "0",
+						menuWidth: "18rem",
 					}}
 				/>
 			)}

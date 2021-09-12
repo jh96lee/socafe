@@ -1,6 +1,6 @@
 import * as React from "react";
 
-import { IconElement, DropdownMenu } from "../../shared";
+import { DropdownMenu, Icon } from "../../shared";
 
 import { useDropdown } from "../../../hooks";
 
@@ -16,28 +16,24 @@ const SearchbarButton = () => {
 
 	const dropdownElementsArray = [
 		{
-			content: {
-				icon: <Smile style={{ fill: "#000" }} />,
-				label: "This button does nothing. It's just here for decoration",
-			},
+			icon: <Smile style={{ fill: "#000" }} />,
+			text: "This button does nothing. It's just here for decoration",
 			onClickEventHandler: () => {},
 		},
 	];
 
 	return (
 		<SearchbarButtonStyle id="searchbar-button-dropdown-trigger">
-			<IconElement
+			<Icon
 				iconRole="presentation"
-				iconElementStyleObject={{
-					iconSize: "1.8rem",
-					iconColor: "#fff",
-					elementPadding: "0.6rem",
-					elementBackgroundColor: "var(--button-default-bg-color)",
-					elementHoverBackgroundColor: "var(--button-default-hover-bg-color)",
-				}}
+				iconType="button"
+				iconSize="1.8rem"
+				iconFill="#fff"
+				iconBGColor="var(--bg-button-default)"
+				iconBGHoverColor="var(--bg-button-default-hover)"
 			>
 				<Search />
-			</IconElement>
+			</Icon>
 
 			{isDropdownMenuOpen && (
 				<DropdownMenu
@@ -45,7 +41,8 @@ const SearchbarButton = () => {
 					dropdownElementsArray={dropdownElementsArray}
 					dropdownMenuStyleObject={{
 						menuTop: "calc(100% + 7px)",
-						menuRight: "0",
+						menuLeft: "0",
+						menuWidth: "100%",
 					}}
 				/>
 			)}

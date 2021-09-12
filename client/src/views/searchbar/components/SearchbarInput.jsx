@@ -3,11 +3,13 @@ import { useHistory } from "react-router";
 
 import { FormInput, DropdownMenu, DropdownElement } from "../../shared";
 
-import { useDropdown, usePagination } from "../../../hooks";
+import { useDropdown, usePaginationReact } from "../../../hooks";
 
 import { SearchbarInputStyle } from "../styles/SearchbarInputStyle";
 
 const SearchbarInput = ({ searchType }) => {
+	const history = useHistory();
+
 	const { isDropdownMenuOpen, setIsDropdownMenuOpen } = useDropdown(
 		"searchbar-input-dropdown-trigger",
 		"searchbar-input-dropdown-menu",
@@ -15,19 +17,15 @@ const SearchbarInput = ({ searchType }) => {
 	);
 
 	const defaultSearchEndpoint =
-		searchType === "Users" ? "/search/users" : "/search/topics";
+		searchType === "users" ? "/search/users" : "/search/topics";
 
 	const {
 		currentPage,
 		contents,
 		nextAPIEndpoint,
 		fetchContents,
-		loadMoreButtonOnClickLogic,
-	} = usePagination(defaultSearchEndpoint, 1, true, false);
-
-	const handleLoadMoreButtonOnClick = () => {
-		loadMoreButtonOnClickLogic();
-	};
+		handleLoadMoreButtonOnClick,
+	} = usePaginationReact(defaultSearchEndpoint, 2, false);
 
 	const handleSearchbarInputOnChange = async (e) => {
 		await fetchContents(true, "POST", {
@@ -37,18 +35,18 @@ const SearchbarInput = ({ searchType }) => {
 		setIsDropdownMenuOpen(true);
 	};
 
-	const history = useHistory();
-
 	const dropdownElementsArray = React.useMemo(() => {
 		return contents.map((result) => {
 			return {
-				content: result,
+				image: searchType === "users" ? result.avatar_url : result.topic_url,
+				text: searchType === "users" ? result.username : result.title,
+				subText: searchType === "users" && result.full_name,
 				onClickEventHandler: () => {
 					setIsDropdownMenuOpen(false);
 
 					history.push(
-						`/${searchType === "Users" ? "user" : "topic"}/${
-							result.username.toLowerCase() || result.title.toLowerCase()
+						`/${searchType === "users" ? "user" : "topic"}/${
+							result.username || result.title.toLowerCase()
 						}`
 					);
 				},
@@ -94,20 +92,19 @@ const SearchbarInput = ({ searchType }) => {
 						menuWidth: "100%",
 					}}
 				>
-					{dropdownElementsArray.length > 0 ? (
-						dropdownElementsArray.map((element, idx) => {
-							return (
-								<DropdownElement
-									key={`${element.id}__${idx}`}
-									dropdownElementContent={element.content}
-									dropdownElementOnClickEventHandler={
-										element.onClickEventHandler
-									}
-								/>
-							);
-						})
+					{contents.length === 0 ? (
+						<p>Nothing here</p>
 					) : (
-						<p id="dropdown-menu__no-result-message">No Search Result</p>
+						<React.Fragment>
+							{dropdownElementsArray.map((element, idx) => {
+								return (
+									<DropdownElement
+										key={`searchbar-dropdown-element__${idx}`}
+										{...element}
+									/>
+								);
+							})}
+						</React.Fragment>
 					)}
 
 					{nextAPIEndpoint === null || contents.length === 0 ? null : (

@@ -34,9 +34,9 @@ export { default as PostTopics } from "./post-elements/components/PostTopics";
 export { default as PostLike } from "./post-elements/components/PostLike";
 export { default as PostBookmark } from "./post-elements/components/PostBookmark";
 
-export { default as DropdownMenu } from "./dropdown/components/DropdownMenu";
-export { default as DropdownElement } from "./dropdown/components/DropdownElement";
-
 export { default as Avatar } from "./avatar/components/Avatar";
 
 export { default as Logo } from "./logo/Logo";
+
+export { default as DropdownMenu } from "./dropdown-menu/DropdownMenu";
+export { default as DropdownElement } from "./dropdown-menu/DropdownElement";

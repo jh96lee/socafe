@@ -2,13 +2,11 @@ import * as React from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { useHistory } from "react-router-dom";
 
-import { DropdownMenu, IconElement, Avatar } from "../../shared";
+import { DropdownMenu, Icon, Avatar } from "../../shared";
 
 import { logoutUser } from "../../../redux/user-login/userLoginAction";
 
 import { useDropdown } from "../../../hooks";
-
-import { DropdownRelativeStyle } from "../../../styles";
 
 import {
 	UserFilled,
@@ -19,6 +17,12 @@ import {
 	NotificationFilled,
 	StatsFilled,
 } from "../../../assets";
+
+import styled from "styled-components";
+
+const HeaderAvatarStyle = styled.div`
+	position: relative;
+`;
 
 const HeaderAvatar = () => {
 	const { isDropdownMenuOpen } = useDropdown(
@@ -36,46 +40,36 @@ const HeaderAvatar = () => {
 		return user
 			? [
 					{
-						content: {
-							label: "Profile",
-							icon: <UserFilled />,
-						},
+						icon: <UserFilled />,
+						text: "Profile",
 						onClickEventHandler: () => {
 							history.push(`/user/${user.username}`);
 						},
 					},
 					{
-						content: {
-							label: "Edit Profile",
-							icon: <EditFilled />,
-						},
+						icon: <EditFilled />,
+						text: "Edit Profile",
 						onClickEventHandler: () => {
 							history.push("/edit/profile");
 						},
 					},
 					{
-						content: {
-							label: "Notifications",
-							icon: <NotificationFilled />,
-						},
+						icon: <NotificationFilled />,
+						text: "Notifications",
 						onClickEventHandler: () => {
 							history.push(`/notifications`);
 						},
 					},
 					{
-						content: {
-							label: "Stats",
-							icon: <StatsFilled />,
-						},
+						icon: <StatsFilled />,
+						text: "Stats",
 						onClickEventHandler: () => {
-							history.push(`/stats/${user.id}`);
+							history.push(`/stats`);
 						},
 					},
 					{
-						content: {
-							label: "Logout",
-							icon: <Logout />,
-						},
+						icon: <Logout />,
+						text: "Logout",
 						onClickEventHandler: () => {
 							dispatch(logoutUser());
 						},
@@ -83,19 +77,15 @@ const HeaderAvatar = () => {
 			  ]
 			: [
 					{
-						content: {
-							label: "Login",
-							icon: <Login />,
-						},
+						icon: <Login />,
+						text: "Login",
 						onClickEventHandler: () => {
 							history.push("/login");
 						},
 					},
 					{
-						content: {
-							label: "Register",
-							icon: <Register />,
-						},
+						icon: <Register />,
+						text: "Register",
 						onClickEventHandler: () => {
 							history.push("/register");
 						},
@@ -104,13 +94,13 @@ const HeaderAvatar = () => {
 	}, [user]);
 
 	return (
-		<DropdownRelativeStyle id="header-avatar-dropdown-trigger">
+		<HeaderAvatarStyle id="header-avatar-dropdown-trigger">
 			{user ? (
-				<Avatar avatarURL={user.avatar_url} avatarSize="4rem" />
+				<Avatar avatarURL={user.avatar_url} avatarSize="3.7rem" />
 			) : (
-				<IconElement iconRole="button">
+				<Icon iconRole="button" iconDimension="3.95rem">
 					<UserFilled />
-				</IconElement>
+				</Icon>
 			)}
 
 			{isDropdownMenuOpen && (
@@ -124,7 +114,7 @@ const HeaderAvatar = () => {
 					}}
 				/>
 			)}
-		</DropdownRelativeStyle>
+		</HeaderAvatarStyle>
 	);
 };
 

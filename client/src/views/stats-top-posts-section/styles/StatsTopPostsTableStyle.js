@@ -7,7 +7,7 @@ export const StatsTopPostsTableStyle = styled.div`
 	overflow: hidden;
 
 	& > *:not(span) {
-		border-top: 1px solid var(--border-graph);
+		border-top: 1px solid var(--divider-graph);
 	}
 
 	& > span {

@@ -17,8 +17,8 @@ export const IconStyle = styled.div`
 	border-radius: 50%;
 	background-color: ${(props) => props.iconBGColor || "var(--bg-icon)"};
 	box-shadow: ${(props) => props.iconBoxShadow};
-	width: fit-content;
-	height: fit-content;
+	width: ${(props) => props.iconDimension || "fit-content"};
+	height: ${(props) => props.iconDimension || "fit-content"};
 
 	& svg {
 		color: ${(props) => props.iconFill || "var(--char-default)"};

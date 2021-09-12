@@ -13,6 +13,10 @@ const GlobalStyles = createGlobalStyle`
         --bg-2: ${(props) => (props.theme.isDarkMode ? "#222531" : "#f3f6f9")};
         --bg-icon: ${(props) =>
 					props.theme.isDarkMode ? "#ffffff1a" : "#9a9a9a3b"};
+        --bg-presentation: ${(props) =>
+					props.theme.isDarkMode ? "#a0d5ff1f" : "#607d8b33"};
+        --bg-button-default: ${(props) =>
+					props.theme.isDarkMode ? "#ce0036" : "#ea284b"};
 
         /* TODO: bg and bg hover are paired up */
         --bg-1-hover: ${(props) =>
@@ -21,8 +25,10 @@ const GlobalStyles = createGlobalStyle`
 					props.theme.isDarkMode ? "#2C2F39" : "#e5eaee"};
         --bg-icon-hover: ${(props) =>
 					props.theme.isDarkMode ? "#6f6f6f6b" : "#afafaf57"};
-        --bg-presentation: ${(props) =>
-					props.theme.isDarkMode ? "#a0d5ff1f" : "#607d8b33"};
+        --bg-button-default-hover: ${(props) =>
+					props.theme.isDarkMode ? "#c10033" : "#ff0042"};
+
+
 
         /* TODO: text */
         --char-default: ${(props) =>
@@ -36,15 +42,12 @@ const GlobalStyles = createGlobalStyle`
         --char-graph: ${(props) =>
 					props.theme.isDarkMode ? "#777E90" : "#63727a"};
 
-        /* TODO: box shadow */
-        --box-shadow-default: ${(props) =>
-					props.theme.isDarkMode ? "#323546" : "#d2dee4"};
-
-        /* TODO: border */
-        --border-default: ${(props) =>
+        /* TODO: divider */
+        --divider-default: ${(props) =>
+					props.theme.isDarkMode ? "#000" : "#d2dee4"};
+        --divider-1: ${(props) =>
 					props.theme.isDarkMode ? "#222531" : "#eff2f5"};
-        --border-1: ${(props) => (props.theme.isDarkMode ? "#fff" : "#000")};
-        --border-graph: ${(props) =>
+        --divider-graph: ${(props) =>
 					props.theme.isDarkMode ? "#353945" : "#b9c5d0"};
 
         /* REVIEW: button default */
@@ -228,7 +231,7 @@ const GlobalStyles = createGlobalStyle`
     h5 {
         font-size: 1.54rem;
         letter-spacing: -0.6px;
-        font-weight: 500;
+        font-weight: 600;
     }
 
     h6 {

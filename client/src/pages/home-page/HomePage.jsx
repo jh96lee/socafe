@@ -8,10 +8,6 @@ import { HomeFeedUserSuggestions } from "../../views/home-feed-user-suggestions"
 
 // import Notification from "../notifications-page/Notification";
 
-import { usePagination } from "../../hooks";
-
-import { fetchToken } from "../../utils/cookie/fetchToken";
-
 import { PageStyle } from "../../styles";
 
 import styled from "styled-components";
@@ -27,8 +23,7 @@ const HomePageStyle = styled(PageStyle)`
 	}
 
 	& > *:last-child {
-		width: 33rem;
-		background-color: blue;
+		width: 35rem;
 	}
 `;
 
