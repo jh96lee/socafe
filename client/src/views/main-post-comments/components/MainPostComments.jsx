@@ -18,7 +18,7 @@ import { usePagination } from "../../../hooks";
 
 import { MainPostAllCommentsStyle } from "../styles/MainPostAllCommentsStyle";
 
-import { Plus } from "../../../assets";
+import { CircularPlus } from "../../../assets";
 
 const MainPostComments = () => {
 	const dispatch = useDispatch();
@@ -109,7 +109,7 @@ const MainPostComments = () => {
 								elementMargin: "auto",
 							}}
 						>
-							<Plus />
+							<CircularPlus />
 						</IconElement>
 					)}
 				</React.Fragment>

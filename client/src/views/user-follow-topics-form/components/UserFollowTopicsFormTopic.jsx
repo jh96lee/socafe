@@ -6,7 +6,7 @@ import {
 	removeFollowingTopic,
 } from "../../../redux/user-following-topics/userFollowingTopicsAction";
 
-import { CheckmarkCircleFilled, Plus } from "../../../assets";
+import { CheckmarkCircleFilled, CircularPlus } from "../../../assets";
 
 import { UserFollowTopicsFormTopicStyle } from "../styles/UserFollowTopicsFormTopicStyle";
 
@@ -56,7 +56,7 @@ const UserFollowTopicsFormTopic = ({ topic }) => {
 
 			<h5>{topic.title}</h5>
 
-			{isTopicSelected ? <CheckmarkCircleFilled /> : <Plus />}
+			{isTopicSelected ? <CheckmarkCircleFilled /> : <CircularPlus />}
 		</UserFollowTopicsFormTopicStyle>
 	);
 };

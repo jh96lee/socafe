@@ -1,7 +1,6 @@
 import { ReactComponent as Complete } from "./form/complete.svg";
 import { ReactComponent as Checkmark } from "./form/checkmark.svg";
 import { ReactComponent as CheckmarkCircleFilled } from "./form/checkmark-circle-filled.svg";
-import { ReactComponent as Plus } from "./form/plus.svg";
 import { ReactComponent as SearchAlt } from "./form/search-alt.svg";
 import { ReactComponent as Bold } from "./form/bold.svg";
 import { ReactComponent as Italics } from "./form/italics.svg";
@@ -9,6 +8,8 @@ import { ReactComponent as Underline } from "./form/underline.svg";
 import { ReactComponent as TextFilled } from "./form/text-filled.svg";
 
 import { ReactComponent as Congratulation } from "./general/congratulation.svg";
+import { ReactComponent as CircularPlus } from "./general/circular-plus.svg";
+import { ReactComponent as Plus } from "./general/plus.svg";
 import { ReactComponent as Up } from "./general/up.svg";
 import { ReactComponent as Down } from "./general/down.svg";
 import { ReactComponent as Right } from "./general/right.svg";
@@ -59,7 +60,6 @@ import { ReactComponent as CommentFilled } from "./post/comment-filled.svg";
 import { ReactComponent as CommentOutline } from "./post/comment-outline.svg";
 import { ReactComponent as Image } from "./post/image.svg";
 import { ReactComponent as MultipleUsers } from "./post/multiple-users.svg";
-import { ReactComponent as PlusPost } from "./post/plus.svg";
 import { ReactComponent as BookmarkFill } from "./post/bookmark-fill.svg";
 import { ReactComponent as BookmarkEmpty } from "./post/bookmark-empty.svg";
 import { ReactComponent as TagUser } from "./post/tag-user.svg";
@@ -67,6 +67,8 @@ import { ReactComponent as Tag } from "./post/tag.svg";
 import { ReactComponent as HeartEmpty } from "./post/heart-empty.svg";
 import { ReactComponent as HeartFill } from "./post/heart-fill.svg";
 import { ReactComponent as Posts } from "./post/posts.svg";
+import { ReactComponent as PostFilled } from "./post/post-filled.svg";
+import { ReactComponent as PostOutline } from "./post/post-outline.svg";
 import { ReactComponent as StarFilled } from "./post/star-filled.svg";
 import { ReactComponent as ViewOutline } from "./post/view-outline.svg";
 import { ReactComponent as HeartColored } from "./post/heart-colored.svg";
@@ -127,6 +129,8 @@ export {
 	SearchAlt,
 	DoubleArrowLeft,
 	FeedbackColored,
+	PostFilled,
+	PostOutline,
 	Congratulation,
 	StatsFilled,
 	StatsOutline,
@@ -134,7 +138,7 @@ export {
 	Checkmark,
 	CheckmarkCircleFilled,
 	Open,
-	Plus,
+	CircularPlus,
 	Up,
 	Down,
 	ViewOutline,
@@ -156,9 +160,9 @@ export {
 	ExploreFilled,
 	ExploreOutline,
 	Hamburger,
+	Plus,
 	Comment,
 	MultipleUsers,
-	PlusPost,
 	BookmarkFill,
 	CommentFilled,
 	CommentOutline,

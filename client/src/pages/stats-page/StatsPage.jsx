@@ -13,7 +13,7 @@ const StatsPageStyle = styled(PageStyle)`
 	align-items: center;
 	gap: 2rem;
 	width: 100%;
-	min-height: calc(100vh - 7.8rem);
+	min-height: calc(100vh - 8rem);
 	padding: 3rem 0;
 	margin: auto;
 

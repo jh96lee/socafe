@@ -1,1 +1,1 @@
-export { default as ResponsiveSearchbar } from "./components/ResponsiveSearchbar";
+export { default as Searchbar } from "./components/Searchbar";

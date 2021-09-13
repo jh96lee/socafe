@@ -14,6 +14,8 @@ import { Sun, Moon } from "../../../assets";
 const HeaderEnd = () => {
 	const dispatch = useDispatch();
 
+	const { user } = useSelector((state) => state.userReducer);
+
 	const { isDarkMode } = useSelector((state) => state.userInterfaceReducer);
 
 	const handleToggleOnClick = () => {
@@ -22,7 +24,7 @@ const HeaderEnd = () => {
 
 	return (
 		<HeaderEndStyle>
-			<HeaderAddContent />
+			{user && <HeaderAddContent />}
 
 			<HeaderAvatar />
 

@@ -4,7 +4,7 @@ export const UserStoriesPageStyle = styled.div`
 	display: flex;
 	flex-direction: column;
 	gap: 2rem;
-	min-height: calc(100vh - 7.8rem);
+	min-height: calc(100vh - 8rem);
 	padding: 3rem 0;
 	margin: auto;
 	width: 80%;

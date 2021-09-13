@@ -1,11 +1,12 @@
 import styled from "styled-components";
 
-export const SearchbarResponsiveStyle = styled.div`
+export const HeaderMiddleStyle = styled.div`
+	/* REVIEW: search icon */
 	& > *:first-child {
 		display: none;
 	}
 
-	@media (max-width: 700px) {
+	@media (max-width: 750px) {
 		& > *:first-child {
 			display: flex;
 		}

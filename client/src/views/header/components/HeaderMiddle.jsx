@@ -1,15 +1,15 @@
 import * as React from "react";
 
 import { Icon } from "../../shared";
-import Searchbar from "./Searchbar";
+import { Searchbar } from "../../searchbar";
 
 import { useDropdown } from "../../../hooks";
 
-import { SearchbarResponsiveStyle } from "../styles/SearchbarResponsiveStyle";
+import { HeaderMiddleStyle } from "../styles/HeaderMiddleStyle";
 
 import { Search } from "../../../assets";
 
-const ResponsiveSearchbar = () => {
+const HeaderMiddle = () => {
 	const [searchType, setSearchType] = React.useState("users");
 
 	const { isDropdownMenuOpen } = useDropdown(
@@ -19,11 +19,12 @@ const ResponsiveSearchbar = () => {
 	);
 
 	return (
-		<SearchbarResponsiveStyle id="responsive-searchbar-dropdown-trigger">
+		<HeaderMiddleStyle id="responsive-searchbar-dropdown-trigger">
 			<Icon
 				iconID="searchbar__search-icon"
 				iconRole="button"
-				iconPadding="0.8rem"
+				iconDimension="3.7rem"
+				iconPadding="0rem"
 			>
 				<Search />
 			</Icon>
@@ -33,8 +34,8 @@ const ResponsiveSearchbar = () => {
 				searchType={searchType}
 				setSearchType={setSearchType}
 			/>
-		</SearchbarResponsiveStyle>
+		</HeaderMiddleStyle>
 	);
 };
 
-export default ResponsiveSearchbar;
+export default HeaderMiddle;

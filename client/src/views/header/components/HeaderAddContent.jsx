@@ -5,13 +5,9 @@ import { DropdownMenu, Icon } from "../../shared";
 
 import { useDropdown } from "../../../hooks";
 
-import { PlusAlt, Posts, StoryFilled } from "../../../assets";
+import { HeaderAddContentStyle } from "../styles/HeaderAddContentStyle";
 
-import styled from "styled-components";
-
-const HeaderAddContentStyle = styled.div`
-	position: relative;
-`;
+import { Plus, PostFilled, StoryFilled } from "../../../assets";
 
 const HeaderAddContent = () => {
 	const history = useHistory();
@@ -24,7 +20,7 @@ const HeaderAddContent = () => {
 
 	const dropdownElementsArray = [
 		{
-			icon: <Posts />,
+			icon: <PostFilled />,
 			text: "Post",
 			onClickEventHandler: () => {
 				history.push("/add/post");
@@ -42,7 +38,7 @@ const HeaderAddContent = () => {
 	return (
 		<HeaderAddContentStyle id="header-add-content-dropdown-trigger">
 			<Icon iconSize="1.8rem" iconDimension="3.7rem" iconPadding="0rem">
-				<PlusAlt />
+				<Plus />
 
 				{isDropdownMenuOpen && (
 					<DropdownMenu

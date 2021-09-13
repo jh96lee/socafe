@@ -1,7 +1,7 @@
 import * as React from "react";
 
 import HeaderStart from "./HeaderStart";
-import { ResponsiveSearchbar } from "../../searchbar";
+import HeaderMiddle from "./HeaderMiddle";
 import HeaderEnd from "./HeaderEnd";
 
 import { HeaderStyle } from "../styles/HeaderStyle";
@@ -11,7 +11,7 @@ const Header = () => {
 		<HeaderStyle>
 			<HeaderStart />
 
-			<ResponsiveSearchbar />
+			<HeaderMiddle />
 
 			<HeaderEnd />
 		</HeaderStyle>

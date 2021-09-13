@@ -2,7 +2,7 @@ import styled from "styled-components";
 
 export const NavigationStyle = styled.nav`
 	position: sticky;
-	top: 7.8rem;
+	top: 8rem;
 	grid-column: 1 / 2;
 	grid-row: 2 / 3;
 	display: flex;
@@ -50,14 +50,14 @@ export const NavigationStyle = styled.nav`
 
 	@media (max-width: 1350px) {
 		position: fixed;
-		top: 7.8rem;
+		top: 8rem;
 		left: 0;
-		z-index: 100;
+		z-index: 15;
 		display: ${(props) => (props.isResponsiveNavigationOpen ? "flex" : "none")};
 		background-color: var(--bg-1);
 		width: 35rem;
 		min-height: 100vh;
-		border-right: 2px solid var(--divider-default);
+		box-shadow: 1.6px 1.6px 3px 0 var(--divider-default);
 
 		& > *:first-child {
 			display: block;

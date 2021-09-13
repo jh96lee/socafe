@@ -20,7 +20,6 @@ import {
 	UserStoriesPage,
 	StatsPage,
 } from "./pages";
-import { AddPostIcon } from "./views/shared";
 import { MainPost } from "./views/main-post";
 
 import GlobalStyle from "./styles/GlobalStyle";
@@ -28,7 +27,7 @@ import GlobalStyle from "./styles/GlobalStyle";
 const GlobalPageStyle = styled.main`
 	display: grid;
 	grid-template-columns: auto 1fr;
-	grid-template-rows: 7.8rem 1fr;
+	grid-template-rows: 8rem 1fr;
 `;
 
 function App() {

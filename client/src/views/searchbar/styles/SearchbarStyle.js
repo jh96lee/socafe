@@ -7,14 +7,11 @@ export const SearchbarStyle = styled.div`
 	gap: 0.3rem;
 	padding: 0.35rem 1rem;
 	background-color: var(--bg-1);
-	border: 1px solid var(--input-default-separator-color);
+	border: 1px solid var(--divider-default);
 	border-radius: 2.5rem;
-	box-shadow: 0px 0px 2px 0.5px var(--input-default-separator-color);
+	box-shadow: 0px 0px 2px 0.5px var(--divider-default);
 
-	& > *:first-child {
-		padding: 0 0.6rem;
-	}
-
+	& > *:first-child,
 	& > *:last-child {
 		padding: 0 0.6rem;
 	}
@@ -23,21 +20,19 @@ export const SearchbarStyle = styled.div`
 		width: 18rem;
 	}
 
-	@media (max-width: 700px) {
+	@media (max-width: 750px) {
 		position: absolute;
 		top: calc(100% + 5px);
 		right: 3px;
 		display: ${(props) => (props.isResponsiveSearchbarOpen ? "flex" : "none")};
-		padding: 0.35rem 0.5rem;
-		border-radius: 1rem;
-		border: none;
-		box-shadow: 0px 0px 0px 1.6px var(--input-default-separator-color);
 	}
 
 	@media (max-width: 400px) {
 		left: 50%;
 		transform: translateX(-50%);
 		width: 98%;
+		padding: 0.5rem;
+		border-radius: 1rem;
 
 		& > *:nth-child(3) {
 			width: 100%;

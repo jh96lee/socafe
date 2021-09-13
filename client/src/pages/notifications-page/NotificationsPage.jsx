@@ -6,7 +6,7 @@ import styled from "styled-components";
 import NotificationsForm from "../../views/notifications-form/components/NotificationsForm";
 
 const NotificationsPageStyle = styled(PageStyle)`
-	min-height: calc(100vh - 7.8rem);
+	min-height: calc(100vh - 8rem);
 `;
 
 const NotificationsPage = () => {

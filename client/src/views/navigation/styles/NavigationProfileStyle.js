@@ -9,8 +9,8 @@ export const NavigationProfileStyle = styled.div`
 		width: 3.5rem;
 		height: 3.5rem;
 		object-fit: cover;
-		border: 1px solid var(--divider-1);
 		border-radius: 50%;
+		box-shadow: 0 0 0 1.2px #000;
 	}
 
 	& > a {
