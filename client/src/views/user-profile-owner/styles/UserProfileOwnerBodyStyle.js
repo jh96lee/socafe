@@ -71,7 +71,7 @@ export const UserProfileOwnerUserNamesMetadataStyle = styled.div`
 	flex-direction: column;
 
 	& > h4 {
-		color: var(--text-1);
+		color: var(--char-default);
 		font-weight: 600;
 		letter-spacing: -0.9px;
 	}

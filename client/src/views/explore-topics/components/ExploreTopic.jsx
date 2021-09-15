@@ -23,7 +23,7 @@ const ExploreTopicStyle = styled.div`
 	}
 
 	& > h5 {
-		color: var(--text-1);
+		color: var(--char-default);
 		font-size: 1.36rem;
 		font-weight: 400;
 	}

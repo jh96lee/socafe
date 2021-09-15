@@ -8,7 +8,7 @@ export const StorySidebarUserStyle = styled.div`
 	border-radius: 1rem;
 
 	& > p {
-		color: var(--text-1);
+		color: var(--char-default);
 		font-size: 1.4rem;
 	}
 

@@ -8,7 +8,7 @@ export const StoryPreviewTextStyle = styled.div`
 `;
 
 export const StoryPreviewTextContentEditableStyle = styled.div`
-	color: var(--text-1);
+	color: var(--char-default);
 	font-size: ${(props) => `${props.storyFontSize}vh`};
 	letter-spacing: -0.4px;
 	width: fit-content;

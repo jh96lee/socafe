@@ -20,7 +20,8 @@ export const UserMetadataStyle = styled.div`
 	& > *:last-child > h5 {
 		font-size: ${(props) => props.usernameFontSize || "1.35rem"};
 		font-weight: 500;
-		color: ${(props) => props.userMetadataUsernameColor || "var(--text-1)"};
+		color: ${(props) =>
+			props.userMetadataUsernameColor || "var(--char-default)"};
 		letter-spacing: -0.6px;
 	}
 

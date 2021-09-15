@@ -1,7 +1,7 @@
 import styled from "styled-components";
 
 export const TextAreaStyle = styled.div`
-	color: var(--text-1);
+	color: var(--char-default);
 
 	& > * {
 		width: fit-content;

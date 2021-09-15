@@ -24,6 +24,8 @@ import { MainPost } from "./views/main-post";
 
 import GlobalStyle from "./styles/GlobalStyle";
 
+import { isComponentHidden } from "./utils/route/isComponentHidden";
+
 const GlobalPageStyle = styled.main`
 	display: grid;
 	grid-template-columns: auto 1fr;
@@ -31,7 +33,9 @@ const GlobalPageStyle = styled.main`
 `;
 
 function App() {
-	const { isDarkMode } = useSelector((state) => state.userInterfaceReducer);
+	const { isDarkMode, hideHeaderAndNavigationPaths } = useSelector(
+		(state) => state.userInterfaceReducer
+	);
 
 	const themeStyleObjectCreator = (isDarkMode) => ({ isDarkMode });
 
@@ -41,30 +45,32 @@ function App() {
 	const overlaidComponentLocation =
 		appLocation.state && appLocation.state.overlaidComponentLocation;
 
-	const isAddIncludedInPathname = appLocation.pathname
-		.split("/")
-		.includes("add");
-
 	return (
 		<ThemeProvider theme={themeStyleObjectCreator(isDarkMode)}>
 			<GlobalStyle />
 
 			<GlobalPageStyle>
-				{!isAddIncludedInPathname && <Header />}
+				{!isComponentHidden(
+					appLocation.pathname,
+					hideHeaderAndNavigationPaths
+				) && <Header />}
 
-				{!isAddIncludedInPathname && <Navigation />}
+				{!isComponentHidden(
+					appLocation.pathname,
+					hideHeaderAndNavigationPaths
+				) && <Navigation />}
 
 				<Switch location={overlaidComponentLocation || appLocation}>
 					<Route exact path="/">
-						<HomePage />
+						{user ? <HomePage /> : <Redirect to="/login" />}
 					</Route>
 
 					<Route exact path="/stats">
-						<StatsPage />
+						{user ? <StatsPage /> : <Redirect to="/login" />}
 					</Route>
 
 					<Route exact path="/user/:username">
-						<UserProfilePage />
+						{user ? <UserProfilePage /> : <Redirect to="/login" />}
 					</Route>
 
 					{/* REVIEW: 2 ways it can be rendered */}
@@ -73,7 +79,7 @@ function App() {
 					</Route>
 
 					<Route exact path="/story/:userID/:storyID">
-						<StoryPage />
+						{user ? <StoryPage /> : <Redirect to="/login" />}
 					</Route>
 
 					<Route exact path="/register">
@@ -97,15 +103,15 @@ function App() {
 					</Route>
 
 					<Route exact path="/explore">
-						<ExplorePage />
+						{user ? <ExplorePage /> : <Redirect to="/login" />}
 					</Route>
 
 					<Route exact path="/notifications">
-						<NotificationsPage />
+						{user ? <NotificationsPage /> : <Redirect to="/login" />}
 					</Route>
 
 					<Route exact path="/stories">
-						<UserStoriesPage />
+						{user ? <UserStoriesPage /> : <Redirect to="/login" />}
 					</Route>
 				</Switch>
 

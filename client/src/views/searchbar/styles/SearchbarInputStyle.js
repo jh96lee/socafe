@@ -11,7 +11,7 @@ export const SearchbarInputStyle = styled.div`
 		border: none;
 		border-radius: 0.5rem;
 		padding: 1.3rem 0;
-		color: var(--text-1);
+		color: var(--char-default);
 		background-color: transparent;
 		border: 1px solid var(--separator-2);
 	}

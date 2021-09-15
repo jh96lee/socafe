@@ -26,11 +26,11 @@ export const MainPostCommentViewRepliesStyle = styled.div`
 
 	& > p {
 		font-size: 1.2rem;
-		color: var(--text-1);
+		color: var(--char-default);
 	}
 
 	& > svg {
-		fill: var(--icon-default-color);
+		fill: var(--char-default);
 		width: 1.2rem;
 		height: 1.2rem;
 	}

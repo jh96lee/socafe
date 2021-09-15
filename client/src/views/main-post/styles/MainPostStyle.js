@@ -6,7 +6,7 @@ export const MainPostStyle = styled(PostStyle)`
 	grid-template-columns: 1fr 24rem 24rem;
 	width: 100%;
 	height: ${(props) =>
-		props.isMainPostOverlaid ? "100vh" : "calc(100vh -8rem)"};
+		props.isMainPostOverlaid ? "100vh" : "calc(100vh - 8rem)"};
 	max-height: ${(props) =>
 		props.isMainPostOverlaid ? "100vh" : "calc(100vh - 8rem)"};
 	overflow: hidden;

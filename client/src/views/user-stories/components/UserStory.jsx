@@ -78,7 +78,7 @@ const UserStory = ({ story, storyIdx }) => {
 					elementRight: "0.6rem",
 					elementPadding: "0rem",
 					elementZIndex: "10",
-					iconColor: "var(--icon-default-color)",
+					iconColor: "var(--char-default)",
 				}}
 			>
 				<More />

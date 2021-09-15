@@ -13,7 +13,7 @@ export const StoryPreviewTextDropdownRatiosStyle = styled.div`
 	}
 
 	& .active {
-		color: var(--text-1);
+		color: var(--char-default);
 	}
 
 	& > h5:hover {

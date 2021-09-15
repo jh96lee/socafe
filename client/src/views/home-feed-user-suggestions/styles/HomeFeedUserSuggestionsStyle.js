@@ -7,7 +7,7 @@ export const HomeFeedUserSuggestionsStyle = styled.div`
 	padding: 0 1.4rem;
 
 	& > h5 {
-		color: var(--text-1);
+		color: var(--char-default);
 		font-weight: 600;
 	}
 `;

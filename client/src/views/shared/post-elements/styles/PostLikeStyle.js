@@ -4,7 +4,7 @@ export const PostLikeStyle = styled.div`
 	display: flex;
 	align-items: center;
 	gap: ${(props) => props.postLikeGap || "0.7rem"};
-	color: var(--text-1);
+	color: var(--char-default);
 
 	& > *:first-child {
 		background-color: ${(props) =>

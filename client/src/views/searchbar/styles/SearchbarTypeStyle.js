@@ -7,13 +7,13 @@ export const SearchbarTypeStyle = styled.div`
 	gap: 0.7rem;
 
 	& > p {
-		color: var(--text-1);
+		color: var(--char-default);
 	}
 
 	& > svg {
 		width: 1rem;
 		height: 1rem;
-		fill: var(--icon-default-color);
+		fill: var(--char-default);
 	}
 
 	&:hover {

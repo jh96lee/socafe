@@ -8,10 +8,10 @@ export const StoryPreviewTextDropdownMenuStyle = styled.div`
 	background-color: var(--bg-2);
 	padding: 2rem;
 	border-radius: 1rem;
-	box-shadow: 0 0 0 1.6px var(--separator-1);
+	box-shadow: 0 0 0 1.6px var(--divider-default);
 
 	& > *:not(:last-child) {
-		border-bottom: 1px solid var(--separator-1);
+		border-bottom: 1px solid var(--divider-default);
 	}
 
 	& > *:first-child {

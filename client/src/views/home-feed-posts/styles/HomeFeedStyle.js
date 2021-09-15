@@ -18,7 +18,7 @@ export const HomeFeedStyle = styled.div`
 		border: none;
 		border-radius: 0.5rem;
 		padding: 1.4rem 0;
-		color: var(--text-1);
+		color: var(--char-default);
 		background-color: transparent;
 		border: 2px solid var(--separator-2);
 		width: 50%;

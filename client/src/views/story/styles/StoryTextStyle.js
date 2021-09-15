@@ -10,7 +10,8 @@ export const StoryTextStyle = styled.p`
 			? "translate(-50%, -50%)"
 			: "none"};
 	z-index: 10;
-	color: ${(props) => (props.textColor ? props.textColor : "var(--text-1")};
+	color: ${(props) =>
+		props.textColor ? props.textColor : "var(--char-default"};
 	font-size: ${(props) => props.textSize};
 	font-weight: ${(props) => (props.isTextBold ? "600" : "400")};
 	font-style: ${(props) => props.isTextItalic && "italic"};

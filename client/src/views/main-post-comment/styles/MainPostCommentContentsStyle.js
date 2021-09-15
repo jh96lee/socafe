@@ -5,6 +5,6 @@ export const MainPostCommentContentsStyle = styled.div`
 
 	& > span {
 		font-size: 1.4rem;
-		color: var(--text-1);
+		color: var(--char-default);
 	}
 `;

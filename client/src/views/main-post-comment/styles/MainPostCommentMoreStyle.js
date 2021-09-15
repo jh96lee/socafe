@@ -6,8 +6,8 @@ export const MainPostCommentMoreStyle = styled.div`
 	display: none;
 
 	& > svg {
-		color: var(--icon-default-color);
-		fill: var(--icon-default-color);
+		color: var(--char-default);
+		fill: var(--char-default);
 		width: 2rem;
 		height: 2rem;
 	}

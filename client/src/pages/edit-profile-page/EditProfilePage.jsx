@@ -26,12 +26,12 @@ const EditProfileTabsStyle = styled.div`
 		align-items: center;
 		padding: 0.7rem;
 		gap: 1rem;
-		color: var(--text-1);
+		color: var(--char-default);
 		font-size: 1.4rem;
 	}
 
 	& > a > svg {
-		fill: var(--icon-default-color);
+		fill: var(--char-default);
 		width: 2.2rem;
 		height: 2.2rem;
 	}

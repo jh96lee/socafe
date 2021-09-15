@@ -5,7 +5,7 @@ const FormStyle = styled.form`
 
 	& > h2 {
 		font-size: 2.4rem;
-		color: var(--text-1);
+		color: var(--char-default);
 		margin-bottom: 2rem;
 	}
 

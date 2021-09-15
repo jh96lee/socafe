@@ -1,7 +1,7 @@
 import styled from "styled-components";
 
 export const MainPostCommentsContentEditableStyle = styled.div`
-	color: var(--text-1);
+	color: var(--char-default);
 	font-size: 1.37rem;
 	background-color: var(--input-default-bg-color);
 	box-shadow: 0 0 0 1px var(--input-default-separator-color);
@@ -11,7 +11,7 @@ export const MainPostCommentsContentEditableStyle = styled.div`
 
 	& span {
 		display: inline-block;
-		color: var(--text-1);
+		color: var(--char-default);
 		font-weight: 300;
 		white-space: pre;
 	}

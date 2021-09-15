@@ -29,7 +29,7 @@ const UserStoryPopup = ({ setIsDropdownMenuOpen }) => {
 					elementRight: "2.5rem",
 					elementPadding: "0.6rem",
 					elementBackgroundColor: "#0000007d",
-					iconColor: "var(--icon-default-color)",
+					iconColor: "var(--char-default)",
 				}}
 				onClick={() => setIsDropdownMenuOpen(false)}
 			>

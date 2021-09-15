@@ -3,7 +3,7 @@ import * as React from "react";
 import { PageStyle } from "../../styles";
 
 import styled from "styled-components";
-import NotificationsForm from "../../views/notifications-form/components/NotificationsForm";
+import { NotificationsSection } from "../../views/notifications-section";
 
 const NotificationsPageStyle = styled(PageStyle)`
 	min-height: calc(100vh - 8rem);
@@ -12,7 +12,7 @@ const NotificationsPageStyle = styled(PageStyle)`
 const NotificationsPage = () => {
 	return (
 		<NotificationsPageStyle>
-			<NotificationsForm />
+			<NotificationsSection />
 		</NotificationsPageStyle>
 	);
 };

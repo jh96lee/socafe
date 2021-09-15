@@ -15,8 +15,6 @@ const ExplorePostStyle = styled.div`
 	border-radius: 1rem;
 	overflow: hidden;
 
-	/* box-shadow: 0 0 0 1.3px var(--separator-1); */
-
 	& > * {
 		width: 100%;
 	}

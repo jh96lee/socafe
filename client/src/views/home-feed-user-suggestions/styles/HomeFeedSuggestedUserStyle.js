@@ -17,7 +17,7 @@ export const HomeFeedFollowSuggestedUserButtonStyle = styled.button`
 	font-size: 1.35rem;
 	font-weight: 500;
 	letter-spacing: -0.4px;
-	color: var(--text-1);
+	color: var(--char-default);
 	background-color: transparent;
 	border-radius: 0.5rem;
 	border: none;
@@ -25,8 +25,8 @@ export const HomeFeedFollowSuggestedUserButtonStyle = styled.button`
 	outline: none;
 
 	& > svg {
-		fill: var(--icon-default-color);
-		color: var(--icon-default-color);
+		fill: var(--char-default);
+		color: var(--char-default);
 		width: 1.7rem;
 		height: 1.7rem;
 	}

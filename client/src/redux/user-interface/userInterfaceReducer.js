@@ -5,6 +5,7 @@ const initialState = {
 		? JSON.parse(isDarkModeLocalStorage)
 		: true,
 	isResponsiveNavigationOpen: false,
+	hideHeaderAndNavigationPaths: ["add", "edit"],
 };
 
 const userInterfaceReducer = (state = initialState, action) => {
@@ -12,7 +13,7 @@ const userInterfaceReducer = (state = initialState, action) => {
 		case "SET_IS_DARK_MODE":
 			return {
 				...state,
-				isDarkMode: setIsDarkMode(state),
+				isDarkMode: saveThemeInLocalStorage(state),
 			};
 		case "SET_IS_RESPONSIVE_NAVIGATION_OPEN":
 			return {
@@ -26,7 +27,7 @@ const userInterfaceReducer = (state = initialState, action) => {
 	}
 };
 
-const setIsDarkMode = (state) => {
+const saveThemeInLocalStorage = (state) => {
 	localStorage.setItem("theme", !state.isDarkMode);
 
 	return !state.isDarkMode;

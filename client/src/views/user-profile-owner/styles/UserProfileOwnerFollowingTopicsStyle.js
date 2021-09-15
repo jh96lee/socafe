@@ -23,7 +23,7 @@ export const UserProfileOwnerFollowingTopicStyle = styled.div`
 	}
 
 	& > p {
-		color: var(--text-1);
+		color: var(--char-default);
 	}
 
 	&:hover {

@@ -66,7 +66,7 @@ const UserProfilePage = () => {
 	}, [ownerUsername, currentProfileTabIndex]);
 
 	return profileOwnerErrorMessage ? (
-		<h1 style={{ color: "var(--text-1)" }}>User not found</h1>
+		<h1 style={{ color: "var(--char-default)" }}>User not found</h1>
 	) : (
 		<UserProfilePageStyle>
 			<UserProfileOwner />

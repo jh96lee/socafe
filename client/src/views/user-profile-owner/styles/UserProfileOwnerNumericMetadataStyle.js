@@ -16,7 +16,7 @@ export const UserProfileOwnerTotalsStyle = styled.div`
 	align-items: center;
 
 	& > h3 {
-		color: var(--text-1);
+		color: var(--char-default);
 	}
 
 	& > span {

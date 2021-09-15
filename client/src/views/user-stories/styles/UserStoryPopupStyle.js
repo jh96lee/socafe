@@ -8,6 +8,6 @@ export const UserStoryPopupStyle = styled.div`
 	transform: translate(-50%, -50%);
 	padding: 2rem;
 	background-color: var(--bg-1);
-	box-shadow: 0 0 5px 1.5px var(--separator-1);
+	box-shadow: 0 0 5px 1.5px var(--divider-default);
 	border-radius: 1rem;
 `;

@@ -18,7 +18,7 @@ const HomePageStyle = styled(PageStyle)`
 	display: flex;
 
 	& > *:first-child {
-		width: 58rem;
+		width: 60rem;
 		margin: auto;
 	}
 
@@ -44,7 +44,8 @@ const HomePageRightStyle = styled.div`
 	display: flex;
 	flex-direction: column;
 	gap: 2rem;
-	padding: 3rem 1.5rem;
+	padding-top: 3rem;
+	padding-right: 1.5rem;
 `;
 
 const HomePage = () => {

@@ -15,7 +15,7 @@ const StatsCoordinatesLines = ({ coordinatesArray }) => {
 									y1={`${100 - yPosition}%`}
 									x2={`${coordinatesArray[idx + 1].xPosition}%`}
 									y2={`${100 - coordinatesArray[idx + 1].yPosition}%`}
-									stroke="var(--icon-default-color)"
+									stroke="var(--char-default)"
 									strokeWidth="0.4rem"
 									strokeLinecap="round"
 								/>

@@ -6,7 +6,7 @@ const PostActionStyle = styled.div`
 	gap: 0.7rem;
 
 	& > h5 {
-		color: var(--text-1);
+		color: var(--char-default);
 	}
 `;
 

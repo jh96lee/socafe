@@ -10,7 +10,7 @@ export const UserStoriesPageStyle = styled.div`
 	width: 80%;
 
 	& > h1 {
-		color: var(--text-1);
+		color: var(--char-default);
 	}
 
 	& button {
@@ -20,7 +20,7 @@ export const UserStoriesPageStyle = styled.div`
 		outline: none;
 		border-radius: 0.5rem;
 		padding: 1.3rem 0;
-		color: var(--text-1);
+		color: var(--char-default);
 		background-color: transparent;
 		border: 1px solid var(--separator-2);
 		width: 30rem;

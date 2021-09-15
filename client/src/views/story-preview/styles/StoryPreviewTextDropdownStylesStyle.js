@@ -12,7 +12,7 @@ export const StoryPreviewTextDropdownStylesStyle = styled.div`
 	}
 
 	& .active {
-		fill: var(--icon-default-color);
+		fill: var(--char-default);
 	}
 
 	& > svg:hover {

@@ -1,86 +1,42 @@
 import * as React from "react";
-import styled from "styled-components";
-import { useHistory } from "react-router-dom";
-import axios from "axios";
+import { useSelector, useDispatch } from "react-redux";
 
 import { Notifications } from "../../notifications";
 import { Loader } from "../../shared";
+import HomeFeedSectionHeader from "./HomeFeedSectionHeader";
 
-import { fetchToken } from "../../../utils/cookie/fetchToken";
+import { fetchHomeFeedNotifications } from "../../../redux/notifications/home-feed-notifications/homeFeedNotificationsAction";
 
-const HomeFeedNotificationsStyle = styled.div`
-	padding: 0 1.8rem;
-
-	& > h5 {
-		display: flex;
-		justify-content: space-between;
-		align-items: center;
-		color: var(--text-1);
-		margin-bottom: 1rem;
-
-		& > span {
-			padding: 0.4rem 0.7rem;
-			border-radius: 1rem;
-
-			&:hover {
-				cursor: pointer;
-				background-color: grey;
-			}
-		}
-	}
-`;
+import {
+	HomeFeedSectionStyle,
+	HomeFeedSectionContentsStyle,
+} from "../../../styles";
 
 const HomeFeedNotifications = () => {
-	const [homeFeedNotifications, setHomeFeedNotifications] = React.useState([]);
-	const [isHomeFeedNotificationsLoaded, setIsHomeFeedNotificationsLoaded] =
-		React.useState(false);
+	const dispatch = useDispatch();
 
-	const history = useHistory();
-
-	const fetchHomeFeedNotifications = async () => {
-		setIsHomeFeedNotificationsLoaded(false);
-
-		const token = fetchToken();
-
-		const { data } = await axios({
-			method: "GET",
-			url: "http://localhost:8080/notification/feed",
-			headers: {
-				Authorization: `Bearer ${token}`,
-			},
-		});
-
-		const { error } = data;
-
-		if (!error) {
-			setHomeFeedNotifications(data);
-		}
-
-		setIsHomeFeedNotificationsLoaded(true);
-	};
+	const { homeFeedNotifications, isHomeFeedNotificationsLoaded } = useSelector(
+		(state) => state.homeFeedNotificationsReducer
+	);
 
 	React.useEffect(() => {
-		fetchHomeFeedNotifications();
+		dispatch(fetchHomeFeedNotifications());
 	}, []);
 
-	const handleMoreSpanOnClick = () => {
-		history.push("/notifications");
-	};
-
 	return (
-		<HomeFeedNotificationsStyle>
+		<HomeFeedSectionStyle>
 			{isHomeFeedNotificationsLoaded ? (
 				<React.Fragment>
-					<h5>
-						Notifications <span onClick={handleMoreSpanOnClick}>More</span>
-					</h5>
+					<HomeFeedSectionHeader />
 
-					<Notifications notifications={homeFeedNotifications} />
+					<HomeFeedSectionContentsStyle>
+						<Notifications notifications={homeFeedNotifications} />
+					</HomeFeedSectionContentsStyle>
 				</React.Fragment>
 			) : (
 				<Loader />
 			)}
-		</HomeFeedNotificationsStyle>
+		</HomeFeedSectionStyle>
 	);
 };
 

@@ -17,7 +17,7 @@ export const UserFollowTopicsFormTopicStyle = styled.div`
 	}
 
 	& > h5 {
-		color: var(--text-1);
+		color: var(--char-default);
 		margin: 0 1.6rem;
 	}
 
@@ -27,7 +27,7 @@ export const UserFollowTopicsFormTopicStyle = styled.div`
 		fill: ${(props) =>
 			props.isTopicSelected
 				? "var(--icon-success-color)"
-				: "var(--icon-default-color)"};
+				: "var(--char-default)"};
 		cursor: pointer;
 	}
 

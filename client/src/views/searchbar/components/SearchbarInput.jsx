@@ -79,7 +79,7 @@ const SearchbarInput = ({ searchType }) => {
 					inputBackgroundColor: "transparent",
 					inputPadding: "1.3rem 1rem",
 					inputBoxShadow: "none",
-					inputPlaceholderColor: "var(--text-1)",
+					inputPlaceholderColor: "var(--char-default)",
 				}}
 			/>
 

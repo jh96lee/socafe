@@ -1,17 +1,10 @@
 import * as React from "react";
-import styled from "styled-components";
 
 import Notification from "./Notification";
 
-const NotificationsStyle = styled.div`
-	display: flex;
-	flex-direction: column;
-	gap: 3rem;
-`;
-
 const Notifications = ({ notifications }) => {
 	return (
-		<NotificationsStyle>
+		<React.Fragment>
 			{notifications.map((notification) => {
 				return (
 					<Notification
@@ -20,7 +13,7 @@ const Notifications = ({ notifications }) => {
 					/>
 				);
 			})}
-		</NotificationsStyle>
+		</React.Fragment>
 	);
 };
 

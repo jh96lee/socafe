@@ -1,55 +1,50 @@
 import styled from "styled-components";
 
 const ButtonStyle = styled.button`
-	position: ${(props) => props.buttonPosition};
-	display: block;
-	font-size: ${(props) => props.buttonFontSize || "1.4rem"};
-	font-weight: ${(props) => props.buttonFontWeight || "500"};
-	letter-spacing: -0.6px;
-	width: ${(props) => props.buttonWidth || "100%"};
-	height: ${(props) => props.buttonHeight || "fit-content"};
-	min-width: ${(props) => props.buttonMinWidth};
-	min-height: ${(props) => props.buttonMinHeight};
-	padding: ${(props) => props.buttonPadding || "1.3rem"};
-	margin: ${(props) => props.buttonMargin};
-	box-shadow: ${(props) => props.buttonBoxShadow};
-	border: none;
-	border-radius: 0.5rem;
-	outline: none;
-	color: ${(props) =>
-		props.success
-			? "var(--text-success-color)"
-			: props.error
-			? "var(--text-error-color)"
-			: props.buttonColor
-			? props.buttonColor
-			: "#fff"};
+	position: ${(props) => props.buttonPosition || "relative"};
+	display: ${(props) => props.buttonDisplay || "flex"};
+	justify-content: center;
+	align-items: center;
+	gap: 0.3rem;
 	background-color: ${(props) =>
 		props.success
-			? "var(--bg-success-color)"
+			? "var(--bg-success)"
 			: props.error
-			? "var(--bg-error-color)"
-			: props.buttonBackgroundColor
-			? props.buttonBackgroundColor
-			: "var(--button-default-bg-color)"};
+			? "var(--bg-error)"
+			: props.buttonBackgroundColor || "var(--bg-button-default)"};
+	color: ${(props) =>
+		props.success
+			? "var(--char-success)"
+			: props.error
+			? "var(--char-error)"
+			: props.buttonColor || "var(--char-default)"};
+	font-size: ${(props) => props.buttonFontSize || "1.43rem"};
+	font-weight: ${(props) => props.buttonFontWeight || "500"};
+	letter-spacing: -0.5px;
+	border: ${(props) => props.buttonBorder || "none"};
+	border-radius: ${(props) => props.buttonBorderRadius || "0.7rem"};
+	width: ${(props) => props.buttonWidth || "fit-content"};
+	height: ${(props) => props.buttonHeight || "fit-content"};
+	margin: ${(props) => props.buttonMargin};
+	padding: ${(props) => props.buttonPadding || "1.4rem"};
+	box-shadow: ${(props) => props.buttonBoxShadow || "none"};
+	outline: none;
 
 	&:hover {
 		background-color: ${(props) =>
 			props.success
-				? "var(--bg-success-color)"
+				? "var(--bg-success-hover)"
 				: props.error
-				? "var(--bg-error-color)"
+				? "var(--bg-error-hover)"
 				: props.buttonHoverBackgroundColor
 				? props.buttonHoverBackgroundColor
-				: "var(--button-default-hover-bg-color)"};
+				: "var(--bg-button-default-hover)"};
 		cursor: pointer;
 	}
 
 	&:disabled {
-		color: ${(props) =>
-			props.buttonDisabledColor || "var(--button-disabled-color)"};
-		background-color: ${(props) =>
-			props.buttonDisabledBackgroundColor || "var(--button-disabled-bg-color)"};
+		color: var(--char-button-disabled);
+		background-color: var(--bg-button-disabled);
 	}
 
 	&:disabled:hover {

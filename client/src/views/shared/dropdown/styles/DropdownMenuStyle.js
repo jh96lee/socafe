@@ -9,7 +9,7 @@ export const DropdownMenuStyle = styled.div`
 	z-index: 100;
 	width: ${(props) => props.menuWidth || "fit-content"};
 	transform: ${(props) => props.menuTransform};
-	box-shadow: 0 0px 0px 1.6px var(--separator-1);
+	box-shadow: 0 0px 0px 1.6px var(--divider-default);
 	background-color: var(--bg-1);
 	padding: 1rem;
 	border-radius: ${(props) => props.menuBorderRadius || "1rem"};
@@ -25,6 +25,6 @@ export const DropdownMenuStyle = styled.div`
 
 	& #dropdown-menu__no-result-message {
 		padding: 1rem;
-		color: var(--text-1);
+		color: var(--char-default);
 	}
 `;

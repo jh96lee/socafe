@@ -60,7 +60,7 @@ const AddStoryContentCTAStyle = styled.div`
 	gap: 1.2rem;
 
 	& > h5 {
-		color: var(--text-1);
+		color: var(--char-default);
 	}
 `;
 

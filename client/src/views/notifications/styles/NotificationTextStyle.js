@@ -1,13 +1,13 @@
 import styled from "styled-components";
 
 export const NotificationTextStyle = styled.p`
-	color: var(--text-1);
-	font-size: 1.4rem;
+	color: var(--char-default);
+	font-size: 1.43rem;
 
 	& > a {
-		color: var(--text-1);
-		font-size: 1.4rem;
-		font-weight: 600;
+		color: var(--char-default);
+		font-size: 1.43rem;
+		font-weight: 500;
 		text-decoration: underline;
 	}
 `;

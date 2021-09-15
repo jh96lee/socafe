@@ -8,6 +8,6 @@ export const HomeFeedPostFooterStyle = styled.div`
 
 	& p {
 		font-size: 1.37rem;
-		color: var(--text-1);
+		color: var(--char-default);
 	}
 `;

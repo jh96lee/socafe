@@ -5,7 +5,7 @@ export const UploadImageStyle = styled.div`
 	min-width: 100%;
 	max-width: 100%;
 	background-color: var(--input-default-bg-color);
-	box-shadow: 0 0 0 1.2px var(--separator-1);
+	box-shadow: 0 0 0 1.2px var(--divider-default);
 	border-radius: 0.5rem;
 	padding: 1rem;
 	display: grid;

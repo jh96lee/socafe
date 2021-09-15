@@ -6,10 +6,10 @@ const AddContentHeaderStyle = styled.div`
 	gap: 1.5rem;
 	height: fit-content;
 	padding: 1.8rem;
-	box-shadow: 0 1.4px 0 0 var(--separator-1);
+	box-shadow: 0 1.4px 0 0 var(--divider-default);
 
 	& h2 {
-		color: var(--text-1);
+		color: var(--char-default);
 	}
 `;
 

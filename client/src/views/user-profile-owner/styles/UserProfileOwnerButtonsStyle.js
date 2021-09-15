@@ -16,7 +16,7 @@ export const UserProfileOwnerButtonStyle = styled.button`
 	font-size: 1.4rem;
 	font-weight: 500;
 	letter-spacing: -0.4px;
-	color: ${(props) => (props.isFollowing ? "var(--text-1)" : "#fff")};
+	color: ${(props) => (props.isFollowing ? "var(--char-default)" : "#fff")};
 	color: ${(props) => (props.isFollowing ? "" : "#fff")};
 	background-color: ${(props) =>
 		props.isFollowing ? "transparent" : "var(--button-default-bg-color)"};
@@ -29,10 +29,8 @@ export const UserProfileOwnerButtonStyle = styled.button`
 	outline: none;
 
 	& > svg {
-		fill: ${(props) =>
-			props.isFollowing ? "var(--icon-default-color)" : "#fff"};
-		color: ${(props) =>
-			props.isFollowing ? "var(--icon-default-color)" : "#fff"};
+		fill: ${(props) => (props.isFollowing ? "var(--char-default)" : "#fff")};
+		color: ${(props) => (props.isFollowing ? "var(--char-default)" : "#fff")};
 		width: 1.8rem;
 		height: 1.8rem;
 	}

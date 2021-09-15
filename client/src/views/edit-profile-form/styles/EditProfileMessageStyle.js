@@ -20,6 +20,6 @@ export const EditProfileMessageStyle = styled.div`
 	}
 
 	& > p {
-		color: var(--text-1);
+		color: var(--char-default);
 	}
 `;

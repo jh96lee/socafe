@@ -17,7 +17,7 @@ const StorySidebarStyle = styled(PageSidebarStyle)`
 		border: none;
 		border-radius: 0.5rem;
 		padding: 1.4rem 0;
-		color: var(--text-1);
+		color: var(--char-default);
 		background-color: transparent;
 		border: 2px solid var(--separator-2);
 
@@ -26,7 +26,7 @@ const StorySidebarStyle = styled(PageSidebarStyle)`
 		align-items: center;
 
 		& > svg {
-			fill: var(--icon-default-color);
+			fill: var(--char-default);
 			width: 2rem;
 			height: 2rem;
 		}

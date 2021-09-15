@@ -10,7 +10,7 @@ export const StoryPreviewTextDropdownColorStyle = styled.div`
 	background-color: ${(props) => props.storyTextColor};
 	width: 2.7rem;
 	height: 2.7rem;
-	border: 1px solid var(--separator-1);
+	border: 1px solid var(--divider-default);
 	border-radius: 50%;
 	cursor: pointer;
 `;

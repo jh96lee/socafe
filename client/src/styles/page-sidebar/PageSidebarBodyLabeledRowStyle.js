@@ -6,7 +6,7 @@ const PageSidebarBodyLabeledRowStyle = styled.div`
 	gap: 1.5rem;
 
 	& > h3 {
-		color: var(--text-1);
+		color: var(--char-default);
 	}
 `;
 

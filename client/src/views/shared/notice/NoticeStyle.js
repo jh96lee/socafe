@@ -12,7 +12,7 @@ export const NoticeStyle = styled.div`
 	border-radius: 1rem;
 
 	& > h2 {
-		color: var(--text-1);
+		color: var(--char-default);
 		margin: 2rem 0 1.5rem 0;
 	}
 

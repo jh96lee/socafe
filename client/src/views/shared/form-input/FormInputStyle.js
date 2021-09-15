@@ -8,7 +8,7 @@ export const FormInputStyle = styled.div`
 
 	& label,
 	input {
-		color: var(--text-1);
+		color: var(--char-default);
 		letter-spacing: -0.5px;
 	}
 

@@ -6,7 +6,7 @@ export const MainPostCommentLikeStyle = styled.div`
 	justify-content: center;
 	align-items: center;
 	gap: 0.2rem;
-	color: var(--text-1);
+	color: var(--char-default);
 
 	& svg {
 		color: var(--likes-icon-color);

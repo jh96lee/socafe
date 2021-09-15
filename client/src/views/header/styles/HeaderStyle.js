@@ -11,7 +11,7 @@ export const HeaderStyle = styled.header`
 	align-items: center;
 	background-color: var(--bg-1);
 	padding: 0 2rem;
-	box-shadow: 0px 0px 5px 2.5px var(--separator-1);
+	box-shadow: 0px 0px 5px 2.5px var(--divider-default);
 
 	@media (max-width: 750px) {
 		display: grid;

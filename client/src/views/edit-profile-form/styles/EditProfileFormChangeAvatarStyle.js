@@ -27,7 +27,7 @@ export const EditProfileFormChangeAvatarButtonStyle = styled.div`
 		left: 50%;
 		transform: translate(-50%, -50%);
 		z-index: 1;
-		color: var(--text-1);
+		color: var(--char-default);
 		/* FIX */
 		background-color: ${(props) =>
 			props.theme.isDarkMode ? "#202229" : "#efefef"};

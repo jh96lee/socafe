@@ -7,7 +7,7 @@ export const HomeFeedStoryUserStyle = styled.div`
 	gap: 0.7rem;
 
 	& > p {
-		color: var(--text-1);
+		color: var(--char-default);
 		font-size: 1.3rem;
 	}
 `;

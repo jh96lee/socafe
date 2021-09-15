@@ -4,6 +4,26 @@ import { createGlobalStyle } from "styled-components";
 // REVIEW: value, we can apply different colors
 const GlobalStyles = createGlobalStyle`
     :root {
+        /* TODO: text */
+        --char-default: ${(props) =>
+					props.theme.isDarkMode ? "#f5f5f5" : "#000"};
+        --char-1: ${(props) =>
+					props.theme.isDarkMode ? "#c6c9ca" : "#58667e"};
+        --char-2: ${(props) =>
+					props.theme.isDarkMode ? "#83888a" : "#687283"};
+        --char-presentation: ${(props) =>
+					props.theme.isDarkMode ? "#b4dcff" : "#64748b"};
+        --char-graph: ${(props) =>
+					props.theme.isDarkMode ? "#777E90" : "#63727a"};
+        --char-success: ${(props) =>
+					props.theme.isDarkMode ? "#8cff90" : "#0e6d12"};
+        --char-error: ${(props) =>
+					props.theme.isDarkMode ? "#ff9292" : "#be0303"};
+        --char-button-disabled: ${(props) =>
+					props.theme.isDarkMode ? "#9d9d9d" : "#e3e3e3"};
+        --char-contrast: ${(props) =>
+					props.theme.isDarkMode ? "#000" : "#fff"};
+
         /* TODO: darker than primary bg color */
         --bg-default: ${(props) =>
 					props.theme.isDarkMode ? "#161719" : "#fbfcfd"};
@@ -17,6 +37,13 @@ const GlobalStyles = createGlobalStyle`
 					props.theme.isDarkMode ? "#a0d5ff1f" : "#607d8b33"};
         --bg-button-default: ${(props) =>
 					props.theme.isDarkMode ? "#ce0036" : "#ea284b"};
+        --bg-success: ${(props) =>
+					props.theme.isDarkMode ? "#4caf503b" : "#0ed60e47"};
+        --bg-error: ${(props) =>
+					props.theme.isDarkMode ? "#ff000033" : "#ff5b5b4d"};
+        --bg-button-disabled: ${(props) =>
+					props.theme.isDarkMode ? "#ef0d5047" : "#d4003f75"};
+        --bg-contrast: ${(props) => (props.theme.isDarkMode ? "#fff" : "#000")};
 
         /* TODO: bg and bg hover are paired up */
         --bg-1-hover: ${(props) =>
@@ -27,143 +54,23 @@ const GlobalStyles = createGlobalStyle`
 					props.theme.isDarkMode ? "#6f6f6f6b" : "#afafaf57"};
         --bg-button-default-hover: ${(props) =>
 					props.theme.isDarkMode ? "#c10033" : "#ff0042"};
-
-
-
-        /* TODO: text */
-        --char-default: ${(props) =>
-					props.theme.isDarkMode ? "#f5f5f5" : "#000"};
-        --char-1: ${(props) =>
-					props.theme.isDarkMode ? "#c6c9ca" : "#58667e"};
-        --char-2: ${(props) =>
-					props.theme.isDarkMode ? "#83888a" : "#687283"};
-        --char-presentation: ${(props) =>
-					props.theme.isDarkMode ? "#b4dcff" : "#64748b"};
-        --char-graph: ${(props) =>
-					props.theme.isDarkMode ? "#777E90" : "#63727a"};
+        --bg-contrast-hover: ${(props) =>
+					props.theme.isDarkMode ? "#c7c7c7" : "#232323"};
 
         /* TODO: divider */
         --divider-default: ${(props) =>
 					props.theme.isDarkMode ? "#000" : "#d2dee4"};
         --divider-1: ${(props) =>
 					props.theme.isDarkMode ? "#222531" : "#eff2f5"};
+        --divider-2: ${(props) => (props.theme.isDarkMode ? "#fff" : "#000")};
         --divider-graph: ${(props) =>
 					props.theme.isDarkMode ? "#353945" : "#b9c5d0"};
 
-        /* REVIEW: button default */
-        --button-default-bg-color: ${(props) =>
-					props.theme.isDarkMode ? "#ce0036" : "#ea284b"};
-        --button-default-hover-bg-color: ${(props) =>
-					props.theme.isDarkMode ? "#c10033" : "#ff0042"};
-        --button-disabled-color: ${(props) =>
-					props.theme.isDarkMode ? "#ffffff66" : "#ffffffb3"};
-        --button-disabled-bg-color: ${(props) =>
-					props.theme.isDarkMode ? "#ec23482b" : "#ec234866"};
-
-        /* REVIEW: icon default */
-        --icon-default-color: ${(props) =>
-					props.theme.isDarkMode ? "#fff" : "#000"};
-        --icon-default-bg-color: ${(props) =>
-					props.theme.isDarkMode ? "#ffffff1a" : "#9a9a9a3b"};
-        --icon-default-hover-bg-color: ${(props) =>
-					props.theme.isDarkMode ? "#6f6f6f6b" : "#afafaf57"};
-
-        /* REVIEW: icon presentation */
-        --icon-presentation-color: ${(props) =>
-					props.theme.isDarkMode ? "#b4dcff" : "#64748b"};
-        --icon-presentation-bg-color: ${(props) =>
-					props.theme.isDarkMode ? "#a0d5ff1f" : "#607d8b33"};
-
-        /* REVIEW: icon link */ 
-        --icon-active-link-color: ${(props) =>
-					props.theme.isDarkMode ? "#9ae1e2" : "#2196f3"};
-        --icon-active-link-bg-color: ${(props) =>
-					props.theme.isDarkMode ? "#bad6ff3d" : "#2196f33b"};
-
-        /* REVIEW: icon success */
-        --icon-success-color: ${(props) =>
-					props.theme.isDarkMode ? "#00b700" : "#009800"};
-        
-        /* REVIEW: input default */
-        --input-default-bg-color: ${(props) =>
-					props.theme.isDarkMode ? "#202229" : "#f9fafb"};
-        --input-default-separator-color: ${(props) =>
-					props.theme.isDarkMode ? "#0a0a0a" : "#d3dfe4"};
-        --input-placeholder-default-color: ${(props) =>
-					props.theme.isDarkMode ? "#bcbebf" : "#546a75"};
-        --input-default-focus-color: ${(props) =>
-					props.theme.isDarkMode ? "#9ee0ff" : "#00b0ff"};
-
-        /* REVIEW: secondary element */
-        --secondary-element-default-color: ${(props) =>
-					props.theme.isDarkMode ? "#9fceff" : "#0b76cb"};
-        --secondary-element-default-bg-color: ${(props) =>
-					props.theme.isDarkMode ? "#7ed3ff24" : "#e5f6ff"};
-        --secondary-element-hover-bg-color: ${(props) =>
-					props.theme.isDarkMode ? "#3a4b544d" : "#85c9ea2b"};
-
-         /* REVIEW: texts*/
-         --text-1: ${(props) => (props.theme.isDarkMode ? "#f5f5f5" : "#000")};
-        --text-2: ${(props) =>
-					props.theme.isDarkMode ? "#949494" : "#717070"};
-        
-        --bg-3: ${(props) =>
-					props.theme.isDarkMode ? "#2a2d38" : "#91b3c33b"};
-
-        /* REVIEW: separators */
-        --separator-1: ${(props) =>
-					props.theme.isDarkMode ? "#101112" : "#d2dee4"};
-        --separator-2: ${(props) =>
-					props.theme.isDarkMode ? "#d2dee4" : "#101112"};
 
         /* REVIEW: story */
         --story-filled-color:  linear-gradient(to right, #0d69ff, #16b3ff); 
         --story-empty-color: ${(props) =>
 					props.theme.isDarkMode ? "#3a3e42" : "#dcdcdc"};
-
-        /* REVIEW: general link */
-        --link-cta-color: ${(props) =>
-					props.theme.isDarkMode ? "#87ceeb" : "#119bc9"};
-
-        /* REVIEW: text on form */
-        --text-error-color: ${(props) =>
-					props.theme.isDarkMode ? "#fd8097" : "#a70202"};
-        --text-success-color: ${(props) =>
-					props.theme.isDarkMode ? "#8cff90" : "#0e6d12"};
-        --text-disabled-color: ${(props) =>
-					props.theme.isDarkMode ? "#ffffff66" : "#ffffffb3"};
-        --bg-error-color: ${(props) =>
-					props.theme.isDarkMode ? "#ff000033" : "#ff5b5b4d"};
-        --bg-success-color: ${(props) =>
-					props.theme.isDarkMode ? "#4caf503b" : "#0ed60e47"};
-
-        /* REVIEW: active and inactive */
-        --active-default-color: ${(props) =>
-					props.theme.isDarkMode ? "#fff" : "#000"};
-        --inactive-default-color: ${(props) =>
-					props.theme.isDarkMode ? "#878787" : "#939393"};
-
-        /* REVIEW: likes */
-        --likes-icon-color: ${(props) =>
-					props.theme.isDarkMode ? "#ff1a56" : "#ff1a56"};
-        --likes-bg-color: ${(props) =>
-					props.theme.isDarkMode ? "#d2003729" : "#ffc0cb"};
-        --likes-hover-bg-color: ${(props) =>
-					props.theme.isDarkMode ? "#ff00003d" : "#fbb4c0"};
-
-        /* TODO: background */
-        /* --bg-2: ${(props) =>
-					props.theme.isDarkMode ? "#202229" : "#f9fafb"}; */
-        /* --bg-post: ${(props) =>
-					props.theme.isDarkMode ? "#161719" : "#fff"}; */
-
-        /* TODO: icon */
-        --icon-1: ${(props) =>
-					props.theme.isDarkMode ? "#a4a4a4" : "#64748b"};    
-        --icon-3: ${(props) =>
-					props.theme.isDarkMode ? "#b6e7ff" : "#64748b"};
-        --icon-hover-1: ${(props) =>
-					props.theme.isDarkMode ? "#fff" : "#000"};
 
         /* TODO: toggle */
         --bg-toggle-1: ${(props) => (props.theme.isDarkMode ? "#000" : "#fff")};

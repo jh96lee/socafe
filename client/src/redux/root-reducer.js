@@ -41,6 +41,8 @@ import viewedStoriesReducer from "./story/viewed-stories/viewedStoriesReducer";
 import exploreReducer from "./explore/exploreReducer";
 
 import notificationsReducer from "./notifications/notificationsReducer";
+import allNotificationsReducer from "./notifications/all-notifications/allNotificationsReducer";
+import homeFeedNotificationsReducer from "./notifications/home-feed-notifications/homeFeedNotificationsReducer";
 import commentNotificationsReducer from "./notifications/comment-notifications/commentNotificationsReducer";
 
 import userStoriesReducer from "./user-stories/userStoriesReducer";
@@ -54,6 +56,8 @@ const rootReducer = combineReducers({
 
 	activeStoryReducer,
 
+	allNotificationsReducer,
+
 	changePasswordReducer,
 
 	commentNotificationsReducer,
@@ -63,6 +67,7 @@ const rootReducer = combineReducers({
 	exploreReducer,
 
 	homeFeedPostsReducer,
+	homeFeedNotificationsReducer,
 	homeFeedStoriesReducer,
 
 	postImagesReducer,

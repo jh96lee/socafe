@@ -23,8 +23,8 @@ const IconElementStyle = styled.div`
 	height: ${(props) => props.elementHeight};
 
 	& svg {
-		color: ${(props) => props.iconColor || "var(--icon-default-color)"};
-		fill: ${(props) => props.iconColor || "var(--icon-default-color)"};
+		color: ${(props) => props.iconColor || "var(--char-default)"};
+		fill: ${(props) => props.iconColor || "var(--char-default)"};
 		width: ${(props) => props.iconSize || "2.3rem"};
 		height: ${(props) => props.iconSize || "2.3rem"};
 	}
