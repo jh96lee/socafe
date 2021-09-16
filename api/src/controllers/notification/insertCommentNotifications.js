@@ -3,7 +3,7 @@ const pool = require("../../pool");
 const PostRepo = require("../../repos/post-repo");
 const UserRepo = require("../../repos/user-repo");
 
-const postCommentNotifications = async (req, res) => {
+const insertCommentNotifications = async (req, res) => {
 	const instigatorID = parseInt(res.locals.userID);
 
 	const {
@@ -18,26 +18,40 @@ const postCommentNotifications = async (req, res) => {
 		// REVIEW: if the comment is a parent comment, mainPostCommentParentCommentID is null
 		// REVIEW: therefore, we want to notify the post user that someone left a parent comment on his/her post
 		if (!mainPostCommentParentCommentID) {
-			const receiverData = await pool.queryToDatabase(
+			const receiverIDData = await pool.queryToDatabase(
 				`
                 SELECT
-                user_id
+                user_id AS id
                 FROM posts
                 WHERE id=$1;
                 `,
 				[mainPostID]
 			);
 
-			const receiverID = parseInt(receiverData.rows[0].user_id);
+			const receiverID = parseInt(receiverIDData.rows[0].id);
 
 			await pool.queryToDatabase(
 				`
-				INSERT INTO notifications 
-				(instigator_id, receiver_id, post_id, instigated_comment_id, received_comment_id, notification_type, is_notification_checked)
-				VALUES
-				($1, $2, $3, $4, $5, $6, $7);
+				INSERT INTO notifications
+				(
+					instigator_id, receiver_id, post_id, 
+					following_id, post_like_id, comment_like_id, 
+					instigated_comment_id, received_comment_id, notification_type
+				)
+				VALUES 
+				($1, $2, $3, $4, $5, $6, $7, $8, $9);
                 `,
-				[instigatorID, receiverID, mainPostID, mainCommentID, null, "POST", 0]
+				[
+					instigatorID,
+					receiverID,
+					mainPostID,
+					null,
+					null,
+					null,
+					mainCommentID,
+					null,
+					"COMMENT_POST",
+				]
 			);
 		}
 
@@ -47,43 +61,50 @@ const postCommentNotifications = async (req, res) => {
 			mainPostCommentParentCommentID &&
 			mainPostCommentParentCommentID === mainPostCommentRepliedCommentID
 		) {
-			const receiverData = await pool.queryToDatabase(
+			const receiverIDData = await pool.queryToDatabase(
 				`
                 SELECT
-                user_id
+                user_id AS id
                 FROM comments
                 WHERE id=$1
                 `,
 				[mainPostCommentParentCommentID]
 			);
 
-			const receiverID = parseInt(receiverData.rows[0].user_id);
+			const receiverID = parseInt(receiverIDData.rows[0].id);
 
 			await pool.queryToDatabase(
 				`
-				INSERT INTO notifications 
-				(instigator_id, receiver_id, post_id, instigated_comment_id, received_comment_id, notification_type, is_notification_checked)
-				VALUES
-				($1, $2, $3, $4, $5, $6, $7);
+				INSERT INTO notifications
+				(
+					instigator_id, receiver_id, post_id, 
+					following_id, post_like_id, comment_like_id, 
+					instigated_comment_id, received_comment_id, notification_type
+				)
+				VALUES 
+				($1, $2, $3, $4, $5, $6, $7, $8, $9);
                 `,
 				[
 					instigatorID,
 					receiverID,
 					mainPostID,
+					null,
+					null,
+					null,
 					mainCommentID,
 					mainPostCommentParentCommentID,
 					"REPLY",
-					0,
 				]
 			);
 		} else if (
+			mainPostCommentParentCommentID &&
 			// REVIEW: if those 2 values, differ, 2 separate notifications need to be posted
 			mainPostCommentParentCommentID !== mainPostCommentRepliedCommentID
 		) {
 			const receivingCommentsArray = [
 				{
 					commentID: mainPostCommentParentCommentID,
-					notificationType: "COMMENT",
+					notificationType: "COMMENT_COMMENT",
 				},
 				{
 					commentID: mainPostCommentRepliedCommentID,
@@ -94,33 +115,39 @@ const postCommentNotifications = async (req, res) => {
 			for (let receivingComment of receivingCommentsArray) {
 				const { commentID, notificationType } = receivingComment;
 
-				const receiverData = await pool.queryToDatabase(
+				const receiverIDData = await pool.queryToDatabase(
 					`
 					SELECT
-					user_id
+					user_id AS id
 					FROM comments
 					WHERE id=$1
 					`,
 					[commentID]
 				);
 
-				const receiverID = parseInt(receiverData.rows[0].user_id);
+				const receiverID = parseInt(receiverIDData.rows[0].id);
 
 				await pool.queryToDatabase(
 					`
-					INSERT INTO notifications 
-					(instigator_id, receiver_id, post_id, instigated_comment_id, received_comment_id, notification_type, is_notification_checked)
-					VALUES
-					($1, $2, $3, $4, $5, $6, $7);
+					INSERT INTO notifications
+					(
+						instigator_id, receiver_id, post_id, 
+						following_id, post_like_id, comment_like_id, 
+						instigated_comment_id, received_comment_id, notification_type
+					)
+					VALUES 
+					($1, $2, $3, $4, $5, $6, $7, $8, $9);
 					`,
 					[
 						instigatorID,
 						receiverID,
 						mainPostID,
+						null,
+						null,
+						null,
 						mainCommentID,
 						commentID,
 						notificationType,
-						0,
 					]
 				);
 			}
@@ -131,38 +158,42 @@ const postCommentNotifications = async (req, res) => {
 
 			if (mention_type === "TAG") {
 				if (node_value[0] === "@") {
-					const taggedUserUsername = node_value.substring(1);
+					const username = node_value.substring(1);
 
-					const receiverData = await pool.queryToDatabase(
+					const taggedUserData = await pool.queryToDatabase(
 						`
                         SELECT
                         id
                         FROM users
                         WHERE username=$1;
                         `,
-						[taggedUserUsername]
+						[username]
 					);
 
-					const taggedUser = receiverData.rows[0];
-
-					if (taggedUser) {
-						const receiverID = parseInt(receiverData.rows[0].id);
+					if (taggedUserData.rows[0]) {
+						const receiverID = parseInt(taggedUserData.rows[0].id);
 
 						await pool.queryToDatabase(
 							`
-							INSERT INTO notifications 
-							(instigator_id, receiver_id, post_id, instigated_comment_id, received_comment_id, notification_type, is_notification_checked)
-							VALUES
-							($1, $2, $3, $4, $5, $6, $7);
+							INSERT INTO notifications
+							(
+								instigator_id, receiver_id, post_id, 
+								following_id, post_like_id, comment_like_id, 
+								instigated_comment_id, received_comment_id, notification_type
+							)
+							VALUES 
+							($1, $2, $3, $4, $5, $6, $7, $8, $9);
                             `,
 							[
 								instigatorID,
 								receiverID,
 								mainPostID,
+								null,
+								null,
+								null,
 								mainCommentID,
 								null,
-								"TAG",
-								0,
+								"COMMENT_TAG",
 							]
 						);
 					}
@@ -182,4 +213,4 @@ const postCommentNotifications = async (req, res) => {
 	}
 };
 
-module.exports = postCommentNotifications;
+module.exports = insertCommentNotifications;

@@ -4,16 +4,22 @@ class CommentRepo {
 	static async insertComment(
 		userID,
 		mainPostID,
-		mainPostCommentParentCommentID
+		mainPostCommentParentCommentID,
+		mainPostCommentRepliedCommentID
 	) {
 		const { rows } = await pool.queryToDatabase(
 			`
 			INSERT INTO comments
-		    (user_id, post_id, parent_comment_id)
-		    VALUES ($1, $2, $3)
-		    RETURNING id, created_at, user_id, post_id, parent_comment_id;
+		    (user_id, post_id, parent_comment_id, replied_comment_id)
+		    VALUES ($1, $2, $3, $4)
+		    RETURNING id, created_at, user_id, post_id, parent_comment_id, replied_comment_id;
 			`,
-			[userID, mainPostID, mainPostCommentParentCommentID]
+			[
+				userID,
+				mainPostID,
+				mainPostCommentParentCommentID,
+				mainPostCommentRepliedCommentID,
+			]
 		);
 
 		return rows[0];
@@ -49,7 +55,7 @@ class CommentRepo {
 			[userID, commentID]
 		);
 
-		return rows[0];
+		return rows[0].id;
 	}
 
 	static async deleteCommentLike(userID, commentID) {

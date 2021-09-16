@@ -1,40 +1,42 @@
 const UserRepo = require("../../repos/user-repo");
 const CommentRepo = require("../../repos/comment-repo");
 
-const uploadComment = async (req, res) => {
+const insertComment = async (req, res) => {
 	const userID = parseInt(res.locals.userID);
 
 	const {
 		mainPostID,
 		mainPostCommentParentCommentID,
+		mainPostCommentRepliedCommentID,
 		mainPostCommentNodesArray,
 	} = req.body;
 
 	try {
 		const commentUser = await UserRepo.getUserByID(userID);
 
-		const comment = await CommentRepo.insertComment(
+		const insertedComment = await CommentRepo.insertComment(
 			userID,
 			mainPostID,
-			mainPostCommentParentCommentID
+			mainPostCommentParentCommentID,
+			mainPostCommentRepliedCommentID
 		);
 
-		const commentID = parseInt(comment.id);
+		const insertedCommentID = parseInt(insertedComment.id);
 
 		const commentNodesArray = [];
 
 		for (let node of mainPostCommentNodesArray) {
 			const { nodeType, nodeValue, mentionType } = node;
 
-			const revisedNodeType =
+			const updatedNodeType =
 				(mentionType === "TAG" && nodeValue[0] === "@") ||
 				mentionType === "REPLY"
 					? nodeType
 					: "SPAN";
 
 			const commentNode = await CommentRepo.insertCommentNode(
-				commentID,
-				revisedNodeType,
+				insertedCommentID,
+				updatedNodeType,
 				nodeValue,
 				mentionType
 			);
@@ -43,7 +45,7 @@ const uploadComment = async (req, res) => {
 		}
 
 		res.send({
-			...comment,
+			...insertedComment,
 			comment_user: commentUser,
 			comment_nodes_array: commentNodesArray,
 			comment_total_likes: 0,
@@ -52,10 +54,11 @@ const uploadComment = async (req, res) => {
 			success: "Success",
 		});
 	} catch (error) {
+		console.log(error);
 		res.send({
 			error: { catch: "There has been an error while posting your comment" },
 		});
 	}
 };
 
-module.exports = uploadComment;
+module.exports = insertComment;

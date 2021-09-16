@@ -1,3 +1,5 @@
+const pool = require("../../pool");
+
 const CommentRepo = require("../../repos/comment-repo");
 
 const insertCommentLike = async (req, res) => {
@@ -5,12 +7,26 @@ const insertCommentLike = async (req, res) => {
 	const commentID = parseInt(req.params.commentID);
 
 	try {
-		const commentLike = CommentRepo.insertCommentLike(userID, commentID);
+		const commentLikeID = await CommentRepo.insertCommentLike(
+			userID,
+			commentID
+		);
 
-		if (commentLike.id) {
+		await pool.queryToDatabase(
+			`
+			INSERT INTO notifications
+			(comment_id, comment_tag_id, post_tag_id, following_id, comment_like_id, post_like_id)
+			VALUES
+			($1, $2, $3, $4, $5, $6);
+			`,
+			[null, null, null, null, commentLikeID, null]
+		);
+
+		if (commentLikeID) {
 			res.send({ success: "Success" });
 		}
 	} catch (error) {
+		console.log(error);
 		res.send({
 			error: {
 				catch:

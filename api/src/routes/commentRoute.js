@@ -1,7 +1,7 @@
 const express = require("express");
 const authenticateToken = require("../middlewares/user/authenticateToken");
 
-const uploadComment = require("../controllers/comment/uploadComment");
+const insertComment = require("../controllers/comment/insertComment");
 const getParentComments = require("../controllers/comment/getParentComments");
 const getCommentReplies = require("../controllers/comment/getCommentReplies");
 const insertCommentLike = require("../controllers/comment/insertCommentLike");
@@ -11,7 +11,7 @@ const deleteComment = require("../controllers/comment/deleteComment");
 const commentRouter = express.Router();
 
 // TODO: upload comment
-commentRouter.post("/upload/post/comment", authenticateToken, uploadComment);
+commentRouter.post("/comment/insert", authenticateToken, insertComment);
 
 // REVIEW: get comments for specific post
 commentRouter.get("/comment/parent/:postID/:userID", getParentComments);

@@ -10,21 +10,22 @@ const getHomeFeedNotifications = async (req, res) => {
 	try {
 		const homeFeedNotificationsData = await pool.queryToDatabase(
 			`
-            SELECT
-            id,
-            created_at,
-            instigator_id,
-            receiver_id,
-            post_id,
-            instigated_comment_id,
-            received_comment_id,
-            notification_type,
-            is_notification_checked
-            FROM notifications
-            WHERE receiver_id=$1 AND is_notification_checked=$2
-            LIMIT 3;
+			SELECT 
+			id,
+			created_at,
+			instigator_id,
+			receiver_id,
+			post_id,
+			instigated_comment_id,
+			received_comment_id,
+			notification_type,
+			is_notification_checked
+			FROM notifications
+			WHERE receiver_id=$1 AND is_notification_checked=0
+			ORDER BY created_at DESC
+			LIMIT 5;
             `,
-			[userID, 0]
+			[userID]
 		);
 
 		for (let notification of homeFeedNotificationsData.rows) {
