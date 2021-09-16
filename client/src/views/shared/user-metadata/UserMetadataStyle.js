@@ -28,7 +28,7 @@ export const UserMetadataStyle = styled.div`
 	& > *:last-child > span {
 		font-size: ${(props) => props.fullNameFontSize || "1.3rem"};
 		font-weight: 400;
-		color: ${(props) => props.userMetadataFullNameColor || "var(--text-2)"};
+		color: ${(props) => props.userMetadataFullNameColor || "var(--char-1)"};
 		letter-spacing: -0.6px;
 	}
 

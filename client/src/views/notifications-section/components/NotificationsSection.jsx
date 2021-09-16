@@ -1,6 +1,5 @@
 import * as React from "react";
 import { useDispatch, useSelector } from "react-redux";
-import styled from "styled-components";
 
 import { Loader, Button } from "../../shared";
 import { Notifications } from "../../notifications";
@@ -11,33 +10,8 @@ import {
 	fetchExtraAllNotifications,
 } from "../../../redux/notifications/all-notifications/allNotificationsAction";
 
-const NotificationsFormStyle = styled.div`
-	display: flex;
-	flex-direction: column;
-	width: 60rem;
-	margin: 2rem auto;
-	background-color: var(--bg-1);
-	border-radius: 0.8rem;
-	box-shadow: var(--divider-default) 0px 0px 3px 0px;
-	overflow: hidden;
-
-	& > h2 {
-		color: var(--char-default);
-		background-color: var(--bg-2);
-		width: 100%;
-		padding: 1.6rem 2rem;
-	}
-`;
-
-const NotificationsSectionStyle = styled.div`
-	display: flex;
-	flex-direction: column;
-
-	& > * {
-		padding: 1.6rem 2rem;
-		border-bottom: 1px solid var(--divider-1);
-	}
-`;
+import { NotificationsSectionStyle } from "../styles/NotificationsSectionStyle";
+import { NotificationsWrapperStyle } from "../styles/NotificationsWrapperStyle";
 
 const NotificationsSection = () => {
 	const dispatch = useDispatch();
@@ -65,14 +39,14 @@ const NotificationsSection = () => {
 	};
 
 	return (
-		<NotificationsFormStyle>
+		<NotificationsSectionStyle>
 			{isAllNotificationsLoaded ? (
 				<React.Fragment>
 					<h2>Notifications</h2>
 
-					<NotificationsSectionStyle>
+					<NotificationsWrapperStyle>
 						<Notifications notifications={allNotifications} />
-					</NotificationsSectionStyle>
+					</NotificationsWrapperStyle>
 
 					{allNotificationsNextAPIEndpoint === null ||
 					allNotifications.length === 0 ? null : (
@@ -80,7 +54,7 @@ const NotificationsSection = () => {
 							buttonType="contrast"
 							buttonStyleObject={{
 								buttonMargin: "1.7rem auto",
-								buttonPadding: "1.3rem 2rem",
+								buttonPadding: "1rem 2rem",
 							}}
 							onClick={handleLoadMoreButtonOnClick}
 						>
@@ -99,7 +73,7 @@ const NotificationsSection = () => {
 			) : (
 				<Loader />
 			)}
-		</NotificationsFormStyle>
+		</NotificationsSectionStyle>
 	);
 };
 

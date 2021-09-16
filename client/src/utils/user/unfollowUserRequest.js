@@ -7,14 +7,6 @@ export const unfollowUserRequest = async (profileOwnerID) => {
 
 	await axios({
 		method: "DELETE",
-		url: `http://localhost:8080/notification/follow/${profileOwnerID}`,
-		headers: {
-			Authorization: `Bearer ${token}`,
-		},
-	});
-
-	await axios({
-		method: "DELETE",
 		url: `http://localhost:8080/unfollow/${profileOwnerID}`,
 		headers: {
 			Authorization: `Bearer ${token}`,

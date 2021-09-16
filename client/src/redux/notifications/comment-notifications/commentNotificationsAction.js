@@ -12,7 +12,7 @@ const setCommentNotificationsErrorMessage = (errorMessage) => ({
 	payload: errorMessage,
 });
 
-export const postCommentNotifications =
+export const insertCommentNotifications =
 	(commentID, postID, parentCommentID, repliedCommentID, commentNodesArray) =>
 	async (dispatch) => {
 		const token = fetchToken();

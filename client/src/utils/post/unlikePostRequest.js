@@ -7,14 +7,6 @@ export const unlikePostRequest = async (postID) => {
 
 	await axios({
 		method: "DELETE",
-		url: `http://localhost:8080/notification/post/${postID}`,
-		headers: {
-			Authorization: `Bearer ${token}`,
-		},
-	});
-
-	await axios({
-		method: "DELETE",
 		url: `http://localhost:8080/post/unlike/${postID}`,
 		headers: {
 			Authorization: `Bearer ${token}`,

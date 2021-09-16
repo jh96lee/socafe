@@ -13,7 +13,7 @@ import {
 	IconElement,
 } from "../../shared";
 import { MainPostComments } from "../../main-post-comments";
-import { MainPostCommentsInput } from "../../main-post-comments-input";
+import { MainPostCommentInput } from "../../main-post-comment-input";
 import MainPostActions from "./MainPostActions";
 
 import {
@@ -145,7 +145,7 @@ const MainPost = () => {
 					</MainPostOverflowStyle>
 
 					{/* REVIEW: 5th child */}
-					<MainPostCommentsInput />
+					<MainPostCommentInput />
 				</React.Fragment>
 			)}
 		</MainPostStyle>

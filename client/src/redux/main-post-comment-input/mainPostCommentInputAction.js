@@ -1,20 +1,20 @@
 import axios from "axios";
 
-import { postCommentNotifications } from "../notifications/comment-notifications/commentNotificationsAction";
+import { insertCommentNotifications } from "../notifications/comment-notifications/commentNotificationsAction";
 
 import { fetchToken } from "../../utils/cookie/fetchToken";
 
-const startPostingMainPostComment = () => ({
-	type: "START_POSTING_MAIN_POST_COMMENT",
+const startInsertingMainPostComment = () => ({
+	type: "START_INSERTING_MAIN_POST_COMMENT",
 });
 
-const postedMainPostComment = (commentObject) => ({
-	type: "POSTED_MAIN_POST_COMMENT",
+const insertedMainPostComment = (commentObject) => ({
+	type: "INSERTED_MAIN_POST_COMMENT",
 	payload: commentObject,
 });
 
-const endPostingMainPostComment = () => ({
-	type: "END_POSTING_MAIN_POST_COMMENT",
+const endInsertingMainPostComment = () => ({
+	type: "END_INSERTING_MAIN_POST_COMMENT",
 });
 
 export const setMainPostID = (postID) => ({
@@ -46,7 +46,7 @@ export const resetMainPostComment = () => ({
 
 export const postMainPostComment =
 	(contentEditableChildNodesArray) => async (dispatch, getState) => {
-		dispatch(startPostingMainPostComment());
+		dispatch(startInsertingMainPostComment());
 
 		const mainPostCommentNodesArray = contentEditableChildNodesArray.map(
 			(node) => {
@@ -70,10 +70,11 @@ export const postMainPostComment =
 
 			const { data } = await axios({
 				method: "POST",
-				url: "http://localhost:8080/upload/post/comment",
+				url: "http://localhost:8080/comment/insert",
 				data: {
 					mainPostID,
 					mainPostCommentParentCommentID,
+					mainPostCommentRepliedCommentID,
 					mainPostCommentNodesArray,
 				},
 				headers: {
@@ -82,40 +83,44 @@ export const postMainPostComment =
 			});
 
 			const {
+				success,
+				error,
 				id,
 				created_at,
-				comment_nodes_array,
+				comment_user,
 				comment_is_liked,
 				comment_total_likes,
 				comment_total_replies,
-				comment_user,
-				parent_comment_id,
+				comment_nodes_array,
 				post_id,
-				success,
-				error,
+				parent_comment_id,
+				replied_comment_id,
 			} = data;
 
+			console.log(data);
+
 			if (error) {
-				dispatch(endPostingMainPostComment());
+				dispatch(endInsertingMainPostComment());
 			} else if (success) {
 				dispatch(
-					postedMainPostComment({
+					insertedMainPostComment({
 						id,
 						created_at,
-						comment_nodes_array,
+						comment_user,
 						comment_is_liked,
 						comment_total_likes,
 						comment_total_replies,
-						comment_user,
-						parent_comment_id,
+						comment_nodes_array,
 						post_id,
+						parent_comment_id,
+						replied_comment_id,
 					})
 				);
 
-				dispatch(endPostingMainPostComment());
+				dispatch(endInsertingMainPostComment());
 
 				dispatch(
-					postCommentNotifications(
+					insertCommentNotifications(
 						id,
 						post_id,
 						parent_comment_id,
@@ -125,6 +130,6 @@ export const postMainPostComment =
 				);
 			}
 		} catch (error) {
-			dispatch(endPostingMainPostComment());
+			dispatch(endInsertingMainPostComment());
 		}
 	};

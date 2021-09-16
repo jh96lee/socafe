@@ -6,7 +6,7 @@ const PostStyle = styled.div`
 	display: grid;
 	grid-column: 2 / 3;
 	grid-auto-rows: min-content 1fr min-content;
-	background: var(--bg-1);
+	background: var(--bg-default);
 
 	& > *:nth-child(1) {
 		grid-column: 1 / 2;

@@ -6,6 +6,7 @@ const DropdownMenuStyle = styled.div`
 	right: ${(props) => props.menuRight};
 	bottom: ${(props) => props.menuBottom};
 	left: ${(props) => props.menuLeft};
+	transform: ${(props) => props.menuTransform};
 	z-index: 15;
 	display: flex;
 	flex-direction: column;
@@ -18,13 +19,18 @@ const DropdownMenuStyle = styled.div`
 	border-radius: 0.5rem;
 	box-shadow: 0 0 3px 1px var(--divider-default);
 
-	& > * {
+	& > div {
 		padding: 0.7rem;
 		border-radius: 0.5rem;
 	}
 
 	& p {
 		color: var(--char-default);
+	}
+
+	/* REVIEW: this is to target Nothing here p tag message */
+	& > p {
+		padding: 1.4rem;
 	}
 
 	& span {

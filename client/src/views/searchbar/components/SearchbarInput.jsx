@@ -1,7 +1,7 @@
 import * as React from "react";
 import { useHistory } from "react-router";
 
-import { FormInput, DropdownMenu, DropdownElement } from "../../shared";
+import { FormInput, DropdownMenu, DropdownElement, Button } from "../../shared";
 
 import { useDropdown, usePaginationReact } from "../../../hooks";
 
@@ -108,7 +108,18 @@ const SearchbarInput = ({ searchType }) => {
 					)}
 
 					{nextAPIEndpoint === null || contents.length === 0 ? null : (
-						<button onClick={handleLoadMoreButtonOnClick}>Load More</button>
+						<Button
+							buttonType="outline"
+							buttonStyleObject={{
+								buttonFontWeight: "400",
+								buttonWidth: "100%",
+								buttonPadding: "1.3rem",
+								buttonBorderRadius: "0.5rem",
+							}}
+							onClick={handleLoadMoreButtonOnClick}
+						>
+							Load More
+						</Button>
 					)}
 				</DropdownMenu>
 			)}

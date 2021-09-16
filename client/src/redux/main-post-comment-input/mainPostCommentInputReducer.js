@@ -1,28 +1,30 @@
 const initialState = {
 	mainPostID: null,
+	// REVIEW: inserted comment
 	mainPostComment: null,
 	mainPostCommentParentCommentID: null,
 	mainPostCommentRepliedCommentID: null,
+	// REVIEW: used for appending username to contenteditable
 	mainPostCommentRepliedCommentUsername: null,
-	isMainPostCommentPosting: false,
+	isMainPostCommentInserting: false,
 };
 
 const mainPostCommentInputReducer = (state = initialState, action) => {
 	switch (action.type) {
-		case "START_POSTING_MAIN_POST_COMMENT":
+		case "START_INSERTING_MAIN_POST_COMMENT":
 			return {
 				...state,
-				isMainPostCommentPosting: true,
+				isMainPostCommentInserting: true,
 			};
-		case "POSTED_MAIN_POST_COMMENT":
+		case "INSERTED_MAIN_POST_COMMENT":
 			return {
 				...state,
 				mainPostComment: action.payload,
 			};
-		case "END_POSTING_MAIN_POST_COMMENT":
+		case "END_INSERTING_MAIN_POST_COMMENT":
 			return {
 				...state,
-				isMainPostCommentPosting: false,
+				isMainPostCommentInserting: false,
 			};
 		case "SET_MAIN_POST_ID":
 			return {
@@ -51,7 +53,7 @@ const mainPostCommentInputReducer = (state = initialState, action) => {
 				mainPostCommentParentCommentID: null,
 				mainPostCommentRepliedCommentID: null,
 				mainPostCommentRepliedCommentUsername: null,
-				isMainPostCommentPosting: false,
+				isMainPostCommentInserting: false,
 			};
 		default:
 			return state;
