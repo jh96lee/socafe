@@ -21,11 +21,25 @@ const followUser = async (req, res) => {
 		await pool.queryToDatabase(
 			`
 			INSERT INTO notifications
-			(comment_id, comment_tag_id, post_tag_id, following_id, comment_like_id, post_like_id)
-			VALUES
-			($1, $2, $3, $4, $5, $6);
+			(
+				instigator_id, receiver_id, post_id, 
+				following_id, post_like_id, comment_like_id, 
+				instigated_comment_id, received_comment_id, notification_type
+			)
+			VALUES 
+			($1, $2, $3, $4, $5, $6, $7, $8, $9);
 			`,
-			[null, null, null, followingID, null, null]
+			[
+				followerID,
+				leaderID,
+				null,
+				followingID,
+				null,
+				null,
+				null,
+				null,
+				"FOLLOW",
+			]
 		);
 
 		res.send({ success: "Success" });

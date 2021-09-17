@@ -12,14 +12,43 @@ const insertCommentLike = async (req, res) => {
 			commentID
 		);
 
+		const commentOwnerIDData = await pool.queryToDatabase(
+			`
+			SELECT 
+			comments.user_id AS id,
+			comments.post_id
+			FROM comment_likes
+			JOIN comments
+			ON comment_likes.comment_id=comments.id
+			WHERE comments.id=$1;
+			`,
+			[commentID]
+		);
+
+		const { id, post_id } = commentOwnerIDData.rows[0];
+
 		await pool.queryToDatabase(
 			`
 			INSERT INTO notifications
-			(comment_id, comment_tag_id, post_tag_id, following_id, comment_like_id, post_like_id)
-			VALUES
-			($1, $2, $3, $4, $5, $6);
+			(
+				instigator_id, receiver_id, post_id, 
+				following_id, post_like_id, comment_like_id, 
+				instigated_comment_id, received_comment_id, notification_type
+			)
+			VALUES 
+			($1, $2, $3, $4, $5, $6, $7, $8, $9);
 			`,
-			[null, null, null, null, commentLikeID, null]
+			[
+				userID,
+				id,
+				post_id,
+				null,
+				null,
+				commentLikeID,
+				null,
+				commentID,
+				"LIKE_COMMENT",
+			]
 		);
 
 		if (commentLikeID) {
