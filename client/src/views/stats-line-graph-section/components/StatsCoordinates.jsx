@@ -1,12 +1,13 @@
 import * as React from "react";
 
-import { Date, ViewOutline } from "../../../assets";
-import { convertDate } from "../../../utils/date/convertDate";
+import { convertDate } from "../../../utils";
 
 import {
 	StatsCoordinateStyle,
 	StatCoordinateDropdownMenuStyle,
 } from "../styles/StatsCoordinateStyle";
+
+import { Date, ViewOutline } from "../../../assets";
 
 const StatsCoordinates = ({ topYAxisValue, coordinatesArray }) => {
 	return (

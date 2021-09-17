@@ -2,8 +2,7 @@ import axios from "axios";
 
 import { setUser } from "../user/userAction";
 
-import { fetchToken } from "../../utils/cookie/fetchToken";
-import { setCookie } from "../../utils/cookie/setCookie";
+import { fetchToken, setCookie } from "../../utils";
 
 const startFetchingInitialProfile = () => ({
 	type: "START_FETCHING_INITIAL_PROFILE",

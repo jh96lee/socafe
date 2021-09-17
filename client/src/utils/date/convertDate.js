@@ -1,4 +1,4 @@
-export const convertDate = (date) => {
+const convertDate = (date) => {
 	const months = [
 		"Jan",
 		"Feb",
@@ -25,3 +25,5 @@ export const convertDate = (date) => {
 
 	return `${month} ${day}, ${year}`;
 };
+
+export default convertDate;

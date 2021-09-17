@@ -5,7 +5,7 @@ import { useHistory } from "react-router-dom";
 import { setSelectedUserStoriesIndex } from "../../../redux/story/story-viewership/storyViewershipAction";
 import { setViewedStories } from "../../../redux/story/viewed-stories/viewedStoriesAction";
 
-import { updateViewedStories } from "../../../utils/story/updateViewedStories";
+import { updateViewedStories } from "../../../utils";
 
 import {
 	StoryProgressBarStyle,

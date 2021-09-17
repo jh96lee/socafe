@@ -10,7 +10,7 @@ import {
 	PostTopics,
 	UserMetadata,
 	TextArea,
-	IconElement,
+	Icon,
 } from "../../shared";
 import { MainPostComments } from "../../main-post-comments";
 import { MainPostCommentInput } from "../../main-post-comment-input";
@@ -21,7 +21,7 @@ import {
 	resetMainPost,
 } from "../../../redux/main-post/mainPostAction";
 
-import { fetchToken } from "../../../utils/cookie/fetchToken";
+import { fetchToken, addPostViewRequest } from "../../../utils";
 
 import { MainPostStyle } from "../styles/MainPostStyle";
 import { MainPostOverflowStyle } from "../styles/MainPostOverflowStyle";
@@ -58,22 +58,9 @@ const MainPost = () => {
 	}, [postID, visitorID]);
 
 	// TODO
-	const addPostView = async () => {
-		const token = fetchToken();
-
-		await axios({
-			method: "POST",
-			url: `http://localhost:8080/post/view/${postID}`,
-			headers: {
-				Authorization: `Bearer ${token}`,
-			},
-		});
-	};
-
 	React.useEffect(() => {
-		addPostView();
+		addPostViewRequest();
 	}, []);
-
 	// TODO
 
 	const handleRemoveIconElementOnClick = () => {
@@ -94,20 +81,20 @@ const MainPost = () => {
 					{/* REVIEW: 1st child */}
 					<PostMainStyle>
 						{isMainPostOverlaid && (
-							<IconElement
+							<Icon
 								iconRole="button"
-								onClick={handleRemoveIconElementOnClick}
-								iconElementStyleObject={{
-									elementPosition: "absolute",
-									elementTop: "1.5rem",
-									elementLeft: "1.5rem",
-									elementZIndex: "10",
-									elementBackgroundColor: "#0000004a",
+								iconType="overlay"
+								iconOnClick={handleRemoveIconElementOnClick}
+								iconStyleObject={{
+									iconPosition: "absolute",
+									iconTop: "1.5rem",
+									iconLeft: "1.5rem",
+									iconZIndex: "10",
 									iconSize: "2.5rem",
 								}}
 							>
 								<Remove />
-							</IconElement>
+							</Icon>
 						)}
 
 						<PostImages postImagesArray={mainPost.post_images} />
@@ -122,10 +109,9 @@ const MainPost = () => {
 						userID={mainPost.post_owner.id}
 						avatarURL={mainPost.post_owner.avatar_url}
 						username={mainPost.post_owner.username}
-						fullName={mainPost.post_owner.full_name}
+						text={mainPost.post_owner.username}
+						subText={mainPost.post_owner.full_name}
 						avatarSize="4.5rem"
-						usernameFontSize="1.4rem"
-						fullNameFontSize="1.3rem"
 						avatarOnClick={null}
 					/>
 

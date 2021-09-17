@@ -1,5 +1,4 @@
-import { addSpaceToString } from "../../../utils/comment/addSpaceToString";
-import { setCaret } from "../../../utils/comment/setCaret";
+import { addSpaceToString, setCaret } from "../../../utils";
 
 export const handleContentEditableOnKeyDown = async (e) => {
 	const mainPostCommentsContentEditable = document.querySelector(

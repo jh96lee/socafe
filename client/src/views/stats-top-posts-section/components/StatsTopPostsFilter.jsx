@@ -2,7 +2,7 @@ import * as React from "react";
 
 import { useDropdown } from "../../../hooks";
 
-import { capitalizeFirstLetter } from "../../../utils/common/capitalizeFirstLetter";
+import { capitalizeFirstLetter } from "../../../utils";
 
 import { DropdownMenuStyle, StatsFilterStyle } from "../../../styles";
 

@@ -4,7 +4,7 @@ import axios from "axios";
 import { Loader } from "../../shared";
 import StatsAggregate from "./StatsAggregate";
 
-import { fetchToken } from "../../../utils/cookie/fetchToken";
+import { fetchToken } from "../../../utils";
 
 import { StatsAggregatesSectionStyle } from "../styles/StatsAggregatesSectionStyle";
 

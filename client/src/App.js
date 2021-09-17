@@ -24,7 +24,7 @@ import { MainPost } from "./views/main-post";
 
 import GlobalStyle from "./styles/GlobalStyle";
 
-import { isComponentHidden } from "./utils/route/isComponentHidden";
+import { isComponentHidden } from "./utils";
 
 const GlobalPageStyle = styled.main`
 	display: grid;

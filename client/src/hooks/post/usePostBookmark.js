@@ -4,8 +4,7 @@ import { useLocation } from "react-router-dom";
 
 import { bookmarkOrUnbookmarkPost } from "../../redux/main-post/mainPostAction";
 
-import { bookmarkPostRequest } from "../../utils/post/bookmarkPostRequest";
-import { unbookmarkPostRequest } from "../../utils/post/unbookmarkPostRequest";
+import { bookmarkPostRequest, unbookmarkPostRequest } from "../../utils";
 
 const usePostBookmark = (initialIsBookmarked, postBookmarkPostID) => {
 	const [isPostBookmarked, setIsPostBookmarked] =

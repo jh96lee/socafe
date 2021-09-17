@@ -1,6 +1,6 @@
 import axios from "axios";
 
-import { fetchToken } from "../../../utils/cookie/fetchToken";
+import { fetchToken } from "../../../utils";
 
 const startUploadingStory = () => ({
 	type: "START_UPLOADING_STORY",

@@ -1,6 +1,6 @@
 import axios from "axios";
 
-import { fetchToken } from "../../../utils/cookie/fetchToken";
+import { fetchToken } from "../../../utils";
 
 export const setCurrentAllNotificationsPage = () => ({
 	type: "SET_CURRENT_ALL_NOTIFICATIONS_PAGE",

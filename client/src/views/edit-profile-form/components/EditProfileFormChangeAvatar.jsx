@@ -8,8 +8,7 @@ import { useUploadOrDeleteImage } from "../../../hooks";
 
 import { setUser } from "../../../redux/user/userAction";
 
-import { fetchToken } from "../../../utils/cookie/fetchToken";
-import { setCookie } from "../../../utils/cookie/setCookie";
+import { fetchToken, setCookie } from "../../../utils";
 
 import {
 	EditProfileFormChangeAvatarStyle,

@@ -4,7 +4,7 @@ import StatsTopPostImage from "./StatsTopPostImage";
 import StatsTopPostTopics from "./StatsTopPostTopics";
 import StatsTopPostEngagments from "./StatsTopPostEngagments";
 
-import { convertDate } from "../../../utils/date/convertDate";
+import { convertDate } from "../../../utils";
 
 const StatsTopPosts = ({ topPostsArray }) => {
 	return (

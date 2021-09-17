@@ -46,11 +46,9 @@ const HomePost = ({ post }) => {
 					userID={post_owner.id}
 					avatarURL={post_owner.avatar_url}
 					username={post_owner.username}
-					fullName={post_owner.full_name}
+					text={post_owner.username}
+					subText={post_owner.full_name}
 					avatarSize="4.5rem"
-					usernameFontSize="1.4rem"
-					fullNameFontSize="1.3rem"
-					avatarOnClick={() => {}}
 				/>
 
 				<PostBookmark

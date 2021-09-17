@@ -14,8 +14,10 @@ import {
 	setNotiReceivedCommentID,
 } from "../../../redux/notifications/notificationsAction";
 
-import { checkedNotificationsRequest } from "../../../utils/notification/checkedNotificationRequest";
-import { convertDate } from "../../../utils/date/convertDate";
+import {
+	convertDate,
+	updateIsNotificationCheckedRequest,
+} from "../../../utils";
 
 import { NotificationBodyStyle } from "../styles/NotificationBodyStyle";
 
@@ -41,7 +43,7 @@ const NotificationBody = ({ notification }) => {
 			dispatch(setNotiReceivedCommentID(received_comment_id));
 		}
 
-		checkedNotificationsRequest(notificationID);
+		updateIsNotificationCheckedRequest(notificationID);
 	};
 
 	return (

@@ -1,6 +1,6 @@
 import { useDispatch } from "react-redux";
 
-import { calculateTotalCharacters } from "../../../utils/text-area/calculateTotalCharacters";
+import { calculateTotalCharacters } from "../../../utils";
 
 // REVIEW: the purpose of this hook is to setState redux's errorMessage and nodesArray
 export const useTextEditorRedux = (

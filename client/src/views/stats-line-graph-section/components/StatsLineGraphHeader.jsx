@@ -3,7 +3,7 @@ import * as React from "react";
 import StatsLineGraphNDaysFilter from "./StatsLineGraphNDaysFilter";
 import StatsLineGraphContentTypeFilter from "./StatsLineGraphContentTypeFilter";
 
-import { capitalizeFirstLetter } from "../../../utils/common/capitalizeFirstLetter";
+import { capitalizeFirstLetter } from "../../../utils";
 
 import {
 	StatsLineGraphHeaderStyle,

@@ -1,4 +1,4 @@
-export const removeTailEndBreakingPoints = (nodesArray) => {
+const removeTailEndBreakingPoints = (nodesArray) => {
 	for (let i = nodesArray.length - 1; i >= 0; i--) {
 		const { nodeType } = nodesArray[i];
 
@@ -13,3 +13,5 @@ export const removeTailEndBreakingPoints = (nodesArray) => {
 
 	return nodesArray;
 };
+
+export default removeTailEndBreakingPoints;

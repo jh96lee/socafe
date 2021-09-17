@@ -1,18 +1,19 @@
 import * as React from "react";
 import { useHistory } from "react-router";
 
-import { Avatar, Skeleton } from "../index";
+import { Avatar } from "../index";
 
-import { UserMetadataStyle, UserNameDataStyle } from "./UserMetadataStyle";
+import { UserMetadataStyle } from "./UserMetadataStyle";
 
 const UserMetadata = ({
 	userID,
 	avatarURL,
 	username,
-	fullName,
-	avatarSize,
-	usernameFontSize,
-	fullNameFontSize,
+	text,
+	subText,
+	avatarSize = "4rem",
+	textFontSize,
+	subTextFontSize,
 	avatarOnClick,
 	userMetadataStyleObject,
 }) => {
@@ -27,9 +28,9 @@ const UserMetadata = ({
 	return (
 		<UserMetadataStyle
 			data-user-id={userID}
+			textFontSize={textFontSize}
+			subTextFontSize={subTextFontSize}
 			{...userMetadataStyleObject}
-			usernameFontSize={usernameFontSize}
-			fullNameFontSize={fullNameFontSize}
 		>
 			<Avatar
 				userID={userID}
@@ -40,9 +41,9 @@ const UserMetadata = ({
 			/>
 
 			<div onClick={handleUsernameOnClick}>
-				<h5>@{username}</h5>
+				<p>{text}</p>
 
-				<span>{fullName}</span>
+				<span>{subText}</span>
 			</div>
 		</UserMetadataStyle>
 	);

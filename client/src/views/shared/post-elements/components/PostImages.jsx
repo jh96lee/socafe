@@ -1,7 +1,7 @@
 import * as React from "react";
 import { useSelector } from "react-redux";
 
-import { IconElement } from "../../index";
+import { Icon } from "../../index";
 
 import useResetPostImageIndex from "../../../../hooks/post/useResetPostImageIndex";
 
@@ -51,31 +51,29 @@ const PostImages = ({ postImagesArray }) => {
 			{postImagesArray.length !== 0 && (
 				<PostImagesDirectionsStyle>
 					{currentImageIndex !== 0 && (
-						<IconElement
-							onClick={handleDirectionOnClick}
-							iconElementStyleObject={{
-								elementBackgroundColor: "#0000004a",
-								iconColor: "#fff",
+						<Icon
+							iconType="overlay"
+							iconOnClick={handleDirectionOnClick}
+							iconStyleObject={{
 								iconSize: "2.5rem",
 							}}
 							otherProps={{ "data-direction": "left" }}
 						>
 							<Left />
-						</IconElement>
+						</Icon>
 					)}
 
 					{currentImageIndex !== postImagesArray.length - 1 && (
-						<IconElement
-							onClick={handleDirectionOnClick}
-							iconElementStyleObject={{
-								elementBackgroundColor: "#0000004a",
-								iconColor: "#fff",
+						<Icon
+							iconType="overlay"
+							iconOnClick={handleDirectionOnClick}
+							iconStyleObject={{
 								iconSize: "2.5rem",
 							}}
 							otherProps={{ "data-direction": "right" }}
 						>
 							<Right />
-						</IconElement>
+						</Icon>
 					)}
 				</PostImagesDirectionsStyle>
 			)}

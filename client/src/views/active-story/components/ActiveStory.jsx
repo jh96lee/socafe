@@ -10,7 +10,7 @@ import { setSelectedUserStoriesIndex } from "../../../redux/story/story-viewersh
 import { setViewedStories } from "../../../redux/story/viewed-stories/viewedStoriesAction";
 import { fetchActiveStory } from "../../../redux/story/active-story/activeStoryAction";
 
-import { updateViewedStories } from "../../../utils/story/updateViewedStories";
+import { convertDate, updateViewedStories } from "../../../utils";
 
 import { ActiveStoryStyle } from "../styles/ActiveStoryStyle";
 import { ActiveStoryHeaderStyle } from "../styles/ActiveStoryHeaderStyle";
@@ -126,13 +126,20 @@ const ActiveStory = ({ convertUnitToViewWidthBreakingPoint }) => {
 						<StoryProgressBars />
 
 						<UserMetadata
-							userID={activeStory && activeStory.story_owner.id}
-							avatarURL={activeStory && activeStory.story_owner.avatar_url}
-							username={activeStory && activeStory.story_owner.username}
-							avatarSize="3.6rem"
-							usernameFontSize="1.4rem"
+							userID={activeStory.story_owner.id}
+							avatarURL={activeStory.story_owner.avatar_url}
+							username={activeStory.story_owner.username}
+							text={activeStory.story_owner.username}
+							subText={convertDate(activeStory.created_at)}
+							avatarSize="4.5rem"
+							userMetadataStyleObject={{
+								userMetadataTextColor: "#fff",
+								userMetadataSubTextColor: "#fff",
+							}}
 						/>
 					</ActiveStoryHeaderStyle>
+
+					{console.log(activeStory)}
 
 					<Story
 						story={activeStory}

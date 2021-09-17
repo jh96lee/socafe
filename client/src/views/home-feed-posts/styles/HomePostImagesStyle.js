@@ -4,7 +4,7 @@ export const HomePostImagesStyle = styled.div`
 	display: grid;
 	grid-template-columns: ${(props) => props.column};
 	grid-template-rows: ${(props) => props.row};
-	height: ${(props) => (props.numberOfImages === 1 ? "40rem" : "45rem")};
+	height: ${(props) => (props.numberOfImages === 1 ? "45rem" : "50rem")};
 	gap: 1.2rem;
 
 	& > *:nth-child(1) {

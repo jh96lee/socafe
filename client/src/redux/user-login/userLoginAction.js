@@ -2,8 +2,7 @@ import axios from "axios";
 
 import { setUser } from "../user/userAction";
 
-import { setCookie } from "../../utils/cookie/setCookie";
-import { setCoupleSeconds } from "../../utils/setCoupleSeconds";
+import { setCookie, setCoupleSeconds } from "../../utils";
 
 const startUserLogin = () => ({
 	type: "START_USER_LOGIN",

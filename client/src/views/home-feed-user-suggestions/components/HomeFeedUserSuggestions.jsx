@@ -4,7 +4,7 @@ import axios from "axios";
 import { Loader } from "../../shared";
 import HomeFeedSuggestedUser from "./HomeFeedSuggestedUser";
 
-import { fetchToken } from "../../../utils/cookie/fetchToken";
+import { fetchToken } from "../../../utils";
 
 import {
 	HomeFeedUserSuggestionsStyle,

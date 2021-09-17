@@ -16,6 +16,7 @@ const Icon = ({
 	iconHoverFill,
 	iconOnClick,
 	iconStyleObject,
+	otherProps,
 }) => {
 	const iconStylesObject = {
 		overlay: {
@@ -56,6 +57,7 @@ const Icon = ({
 			iconHoverFill={iconHoverFill}
 			{...iconStyleObject}
 			onClick={iconOnClick}
+			{...otherProps}
 		>
 			{children}
 		</IconStyle>

@@ -4,7 +4,7 @@ import { useLocation, useHistory } from "react-router-dom";
 
 import { usePostLike } from "../../../hooks";
 
-import { fetchToken } from "../../../utils/cookie/fetchToken";
+import { fetchToken } from "../../../utils";
 
 import {
 	UserProfilePostStyle,

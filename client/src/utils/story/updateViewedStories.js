@@ -1,4 +1,4 @@
-export const updateViewedStories = (
+const updateViewedStories = (
 	viewedStories,
 	usersStoriesArray,
 	selectedUserStoriesIndex,
@@ -33,3 +33,5 @@ export const updateViewedStories = (
 
 	return updatedViewedStories;
 };
+
+export default updateViewedStories;

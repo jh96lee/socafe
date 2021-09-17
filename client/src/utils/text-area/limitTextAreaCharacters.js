@@ -1,4 +1,4 @@
-export const limitTextAreaCharacters = (
+const limitTextAreaCharacters = (
 	nodesArray,
 	charactersLimit,
 	totalCharacters
@@ -48,3 +48,5 @@ export const limitTextAreaCharacters = (
 
 	return limitedCharactersNodesArray;
 };
+
+export default limitTextAreaCharacters;

@@ -5,8 +5,7 @@ import { Loader } from "../../shared";
 import StatsTopPostsFilter from "./StatsTopPostsFilter";
 import StatsTopPosts from "./StatsTopPosts";
 
-import { fetchToken } from "../../../utils/cookie/fetchToken";
-import { attachEDToString } from "../utils/attachEDToString";
+import { attachEDToString, fetchToken } from "../../../utils";
 
 import { StatsSectionStyle, StatsHeaderStyle } from "../../../styles";
 import { StatsTopPostsTableStyle } from "../styles/StatsTopPostsTableStyle";

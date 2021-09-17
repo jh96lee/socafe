@@ -2,7 +2,7 @@ import axios from "axios";
 
 import { insertCommentNotifications } from "../notifications/comment-notifications/commentNotificationsAction";
 
-import { fetchToken } from "../../utils/cookie/fetchToken";
+import { fetchToken } from "../../utils";
 
 const startInsertingMainPostComment = () => ({
 	type: "START_INSERTING_MAIN_POST_COMMENT",

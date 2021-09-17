@@ -5,7 +5,7 @@ const initialState = {
 		? JSON.parse(isDarkModeLocalStorage)
 		: true,
 	isResponsiveNavigationOpen: false,
-	hideHeaderAndNavigationPaths: ["add", "edit"],
+	hideHeaderAndNavigationPaths: ["add", "edit", "story"],
 };
 
 const userInterfaceReducer = (state = initialState, action) => {

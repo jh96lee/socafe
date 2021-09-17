@@ -1,4 +1,4 @@
-export const numericizeFontSize = (fontSizeString) => {
+const numericizeFontSize = (fontSizeString) => {
 	const integersArray = [];
 
 	for (let i = 0; i < fontSizeString.length; i++) {
@@ -15,3 +15,5 @@ export const numericizeFontSize = (fontSizeString) => {
 
 	return parseInt(joinedIntegers);
 };
+
+export default numericizeFontSize;

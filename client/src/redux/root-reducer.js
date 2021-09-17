@@ -51,6 +51,10 @@ import statsGraphReducer from "./stats/stats-graph/statsGraphReducer";
 
 import userInterfaceReducer from "./user-interface/userInterfaceReducer";
 
+import postMetadataReducer from "./expanded-post/post-metadata/postMetadataReducer";
+import postCommentsReducer from "./expanded-post/post-comments/postCommentsReducer";
+import postCommentInputReducer from "./expanded-post/post-comment-input/postCommentInputReducer";
+
 const rootReducer = combineReducers({
 	userReducer,
 
@@ -75,6 +79,10 @@ const rootReducer = combineReducers({
 	postUsersReducer,
 	postCaptionsReducer,
 	postUploadReducer,
+
+	postMetadataReducer,
+	postCommentsReducer,
+	postCommentInputReducer,
 
 	mainPostReducer,
 	mainPostCommentsReducer,

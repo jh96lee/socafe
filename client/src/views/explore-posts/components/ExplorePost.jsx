@@ -82,10 +82,8 @@ const ExplorePost = ({ post }) => {
 					userID={post_owner.id}
 					avatarURL={post_owner.avatar_url}
 					username={post_owner.username}
-					fullName={post_owner.full_name}
-					avatarSize="4rem"
-					usernameFontSize="1.35rem"
-					fullNameFontSize="1.2rem"
+					text={post_owner.username}
+					subText={post_owner.full_name}
 				/>
 
 				<PostLike

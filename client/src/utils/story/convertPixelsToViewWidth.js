@@ -1,6 +1,6 @@
-import { numericizeFontSize } from "./numericizeFontSize";
+import { numericizeFontSize } from "../index";
 
-export const convertPixelsToViewWidth = (fontSize, widthViewPortUses) => {
+const convertPixelsToViewWidth = (fontSize, widthViewPortUses) => {
 	const numericPixelsFontSize = numericizeFontSize(fontSize);
 
 	const maxViewport = widthViewPortUses
@@ -11,3 +11,5 @@ export const convertPixelsToViewWidth = (fontSize, widthViewPortUses) => {
 
 	return `${fontSizeViewWidth}vw`;
 };
+
+export default convertPixelsToViewWidth;

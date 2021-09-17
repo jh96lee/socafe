@@ -1,6 +1,6 @@
 import axios from "axios";
 
-import { fetchToken } from "../../../utils/cookie/fetchToken";
+import { fetchToken } from "../../../utils";
 
 const startFetchingContentViewsArray = () => ({
 	type: "START_FETCHING_CONTENT_VIEWS_ARRAY",

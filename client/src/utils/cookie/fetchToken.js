@@ -1,4 +1,4 @@
-export const fetchToken = () => {
+const fetchToken = () => {
 	const cookie = document.cookie;
 
 	if (cookie) {
@@ -9,3 +9,5 @@ export const fetchToken = () => {
 		return null;
 	}
 };
+
+export default fetchToken;

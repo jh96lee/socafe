@@ -1,6 +1,6 @@
 import * as React from "react";
 
-import { calculateTotalCharacters } from "../../../utils/text-area/calculateTotalCharacters";
+import { calculateTotalCharacters } from "../../../utils";
 
 export const useTextEditorReact = (
 	initialNodesArray = [],

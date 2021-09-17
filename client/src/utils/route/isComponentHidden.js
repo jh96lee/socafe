@@ -1,4 +1,4 @@
-export const isComponentHidden = (currentPathname, hideComponentPaths) => {
+const isComponentHidden = (currentPathname, hideComponentPaths) => {
 	let isComponentHidden = false;
 
 	const splittedPathname = currentPathname.split("/");
@@ -13,3 +13,5 @@ export const isComponentHidden = (currentPathname, hideComponentPaths) => {
 
 	return isComponentHidden;
 };
+
+export default isComponentHidden;

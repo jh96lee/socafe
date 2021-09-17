@@ -12,7 +12,7 @@ import {
 
 import { usePagination } from "../../../hooks";
 
-import { fetchToken } from "../../../utils/cookie/fetchToken";
+import { fetchToken } from "../../../utils";
 
 import styled from "styled-components";
 

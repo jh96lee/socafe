@@ -1,7 +1,6 @@
 import axios from "axios";
 
-import { followUserRequest } from "../../../utils/user/followUserRequest";
-import { unfollowUserRequest } from "../../../utils/user/unfollowUserRequest";
+import { followUserRequest, unfollowUserRequest } from "../../../utils";
 
 const startFetchingProfileOwner = () => ({
 	type: "START_FETCHING_PROFILE_OWNER",

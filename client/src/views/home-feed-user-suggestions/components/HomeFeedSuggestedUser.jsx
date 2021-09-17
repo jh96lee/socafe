@@ -2,8 +2,7 @@ import * as React from "react";
 
 import { UserMetadata } from "../../shared";
 
-import { followUserRequest } from "../../../utils/user/followUserRequest";
-import { unfollowUserRequest } from "../../../utils/user/unfollowUserRequest";
+import { followUserRequest, unfollowUserRequest } from "../../../utils";
 
 import {
 	HomeFeedSuggestedUserStyle,
@@ -41,10 +40,8 @@ const HomeFeedSuggestedUser = ({ suggestedUser }) => {
 				userID={suggestedUser.id}
 				avatarURL={suggestedUser.avatar_url}
 				username={suggestedUser.username}
-				fullName={suggestedUser.full_name}
-				avatarSize="4.4rem"
-				usernameFontSize="1.38rem"
-				fullNameFontSize="1.27rem"
+				text={suggestedUser.username}
+				subText={suggestedUser.full_name}
 			/>
 
 			{/* FIX */}

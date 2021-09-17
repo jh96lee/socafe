@@ -1,7 +1,6 @@
 import React from "react";
 
-import { likeComment } from "../../../utils/comment/likeComment";
-import { unlikeComment } from "../../../utils/comment/unlikeComment";
+import { likeCommentRequest, unlikeCommentRequest } from "../../../utils";
 
 import { MainPostCommentLikeStyle } from "../styles/MainPostCommentLikeStyle";
 
@@ -25,11 +24,11 @@ const MainPostCommentLike = ({
 			if (isCommentLiked) {
 				setCommentTotalLikes((prevState) => prevState + 1);
 
-				likeComment(commentID);
+				likeCommentRequest(commentID);
 			} else {
 				setCommentTotalLikes((prevState) => prevState - 1);
 
-				unlikeComment(commentID);
+				unlikeCommentRequest(commentID);
 			}
 		}
 

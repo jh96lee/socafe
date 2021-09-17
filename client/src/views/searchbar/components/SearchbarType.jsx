@@ -6,7 +6,7 @@ import { useDropdown } from "../../../hooks";
 
 import { SearchbarTypeStyle } from "../styles/SearchbarTypeStyle";
 
-import { capitalizeFirstLetter } from "../../../utils/common/capitalizeFirstLetter";
+import { capitalizeFirstLetter } from "../../../utils";
 
 import { Down, StarFilled, UserFilled } from "../../../assets";
 

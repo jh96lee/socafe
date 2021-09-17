@@ -10,7 +10,7 @@ import {
 	DotStyle,
 } from "../styles/MainPostCommentCenterStyle";
 
-import { convertDate } from "../../../utils/date/convertDate";
+import { convertDate } from "../../../utils";
 
 const MainPostCommentCenter = ({
 	commentID,

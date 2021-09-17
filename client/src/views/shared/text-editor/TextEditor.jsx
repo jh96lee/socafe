@@ -1,7 +1,7 @@
 import * as React from "react";
 import ReactQuill from "react-quill";
 
-import { calculateTotalCharacters } from "../../../utils/text-area/calculateTotalCharacters";
+import { calculateTotalCharacters } from "../../../utils";
 
 import { TextEditorStyle } from "./TextEditorStyle";
 

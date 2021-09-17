@@ -1,7 +1,6 @@
 import axios from "axios";
 
-import { fetchToken } from "../../../utils/cookie/fetchToken";
-import { removeTailEndBreakingPoints } from "../../../utils/text-editor/removeTailEndBreakingPoints";
+import { fetchToken, removeTailEndBreakingPoints } from "../../../utils";
 
 const startUploadingPost = () => ({
 	type: "START_UPLOADING_POST",

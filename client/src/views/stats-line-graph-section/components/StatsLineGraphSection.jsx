@@ -5,11 +5,13 @@ import { Loader } from "../../shared";
 import StatsLineGraphHeader from "./StatsLineGraphHeader";
 import StatsLineGraph from "./StatsLineGraph";
 
-import { fetchToken } from "../../../utils/cookie/fetchToken";
-import { getXAxisArray } from "../utils/getXAxisArray";
-import { getYAxisArray } from "../utils/getYAxisArray";
-import { getCoordinatesArray } from "../utils/getCoordinatesArray";
-import { getTopYAxisValue } from "../utils/getTopYAxisValue";
+import {
+	fetchToken,
+	getXAxisArray,
+	getYAxisArray,
+	getCoordinatesArray,
+	getTopYAxisValue,
+} from "../../../utils";
 
 import { StatsLineGraphSectionStyle } from "../styles/StatsLineGraphSectionStyle";
 

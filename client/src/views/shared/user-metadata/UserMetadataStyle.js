@@ -17,22 +17,21 @@ export const UserMetadataStyle = styled.div`
 		gap: 0.3rem;
 	}
 
-	& > *:last-child > h5 {
-		font-size: ${(props) => props.usernameFontSize || "1.35rem"};
+	& > *:last-child > p {
+		font-size: ${(props) => props.textFontSize || "1.43rem"};
 		font-weight: 500;
-		color: ${(props) =>
-			props.userMetadataUsernameColor || "var(--char-default)"};
+		color: ${(props) => props.userMetadataTextColor || "var(--char-default)"};
 		letter-spacing: -0.6px;
 	}
 
 	& > *:last-child > span {
-		font-size: ${(props) => props.fullNameFontSize || "1.3rem"};
+		font-size: ${(props) => props.subTextFontSize || "1.3rem"};
 		font-weight: 400;
-		color: ${(props) => props.userMetadataFullNameColor || "var(--char-1)"};
+		color: ${(props) => props.userMetadataSubTextColor || "var(--char-1)"};
 		letter-spacing: -0.6px;
 	}
 
-	& > *:last-child > h5:hover {
+	& > *:last-child > p:hover {
 		cursor: pointer;
 		text-decoration: underline;
 	}

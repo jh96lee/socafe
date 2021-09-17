@@ -2,9 +2,7 @@ import axios from "axios";
 
 import { setUserRegisterStepIndex } from "../user-register-step/userRegisterStepAction";
 
-import { setCookie } from "../../../utils/cookie/setCookie";
-// REVIEW: move this to another folder later
-import { setCoupleSeconds } from "../../../utils/setCoupleSeconds";
+import { setCookie, setCoupleSeconds } from "../../../utils";
 
 const startUserRegister = () => ({
 	type: "START_USER_REGISTER",

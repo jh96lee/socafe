@@ -18,7 +18,7 @@ const HomePageStyle = styled(PageStyle)`
 	display: flex;
 
 	& > *:first-child {
-		width: 60rem;
+		width: 65rem;
 		margin: auto;
 	}
 

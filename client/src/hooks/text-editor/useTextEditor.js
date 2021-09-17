@@ -1,7 +1,7 @@
 import * as React from "react";
 import { useDispatch } from "react-redux";
 
-import { calculateTotalCharacters } from "../../utils/text-area/calculateTotalCharacters";
+import { calculateTotalCharacters } from "../../utils";
 
 export const useTextEditor = (
 	maxCharactersLength,

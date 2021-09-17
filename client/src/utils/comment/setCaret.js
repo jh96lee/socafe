@@ -1,4 +1,4 @@
-export const setCaret = (node, offset) => {
+const setCaret = (node, offset) => {
 	const range = document.createRange();
 	const selection = document.getSelection();
 
@@ -7,3 +7,5 @@ export const setCaret = (node, offset) => {
 	selection.removeAllRanges();
 	selection.addRange(range);
 };
+
+export default setCaret;

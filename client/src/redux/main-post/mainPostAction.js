@@ -1,9 +1,11 @@
 import axios from "axios";
 
-import { likePostRequest } from "../../utils/post/likePostRequest";
-import { unlikePostRequest } from "../../utils/post/unlikePostRequest";
-import { bookmarkPostRequest } from "../../utils/post/bookmarkPostRequest";
-import { unbookmarkPostRequest } from "../../utils/post/unbookmarkPostRequest";
+import {
+	likePostRequest,
+	unlikePostRequest,
+	bookmarkPostRequest,
+	unbookmarkPostRequest,
+} from "../../utils";
 
 const startFetchingMainPost = () => ({
 	type: "START_FETCHING_MAIN_POST",
@@ -16,11 +18,6 @@ const fetchedMainPost = (mainPostDataObject) => ({
 
 const endFetchingMainPost = () => ({
 	type: "END_FETCHING_MAIN_POST",
-});
-
-const setMainPostErrorMessage = (errorMessage) => ({
-	type: "SET_MAIN_POST_ERROR_MESSAGE",
-	payload: errorMessage,
 });
 
 export const setIsMainPostLiked = () => ({
@@ -43,55 +40,47 @@ export const resetMainPost = () => ({
 export const fetchMainPost = (postID, visitorID) => async (dispatch) => {
 	dispatch(startFetchingMainPost());
 
-	try {
-		const { data } = await axios({
-			method: "GET",
-			url: `http://localhost:8080/post/${postID}/${visitorID}`,
-		});
+	const { data } = await axios({
+		method: "GET",
+		url: `http://localhost:8080/post/${postID}/${visitorID}`,
+	});
 
-		const {
-			post_id,
-			post_date,
-			post_owner,
-			post_images,
-			post_captions,
-			post_topics,
-			post_tagged_users,
-			post_is_liked,
-			post_is_bookmarked,
-			post_total_likes,
-			post_total_comments,
-			error,
-		} = data;
+	const {
+		post_id,
+		post_date,
+		post_owner,
+		post_images,
+		post_captions,
+		post_topics,
+		post_tagged_users,
+		post_is_liked,
+		post_is_bookmarked,
+		post_total_likes,
+		post_total_comments,
+		error,
+	} = data;
 
-		if (error) {
-			dispatch(setMainPostErrorMessage(error));
+	if (!error) {
+		dispatch(setMainPostTotalLikes(post_total_likes));
 
-			dispatch(endFetchingMainPost());
-		} else {
-			dispatch(setMainPostTotalLikes(post_total_likes));
+		dispatch(
+			fetchedMainPost({
+				mainPostID: post_id,
+				isMainPostLiked: post_is_liked,
+				mainPostTotalLikes: post_total_likes,
+				isMainPostBookmarked: post_is_bookmarked,
+				mainPost: {
+					post_date,
+					post_owner,
+					post_images,
+					post_captions,
+					post_topics,
+					post_tagged_users,
+					post_total_comments,
+				},
+			})
+		);
 
-			dispatch(
-				fetchedMainPost({
-					mainPostID: post_id,
-					isMainPostLiked: post_is_liked,
-					mainPostTotalLikes: post_total_likes,
-					isMainPostBookmarked: post_is_bookmarked,
-					mainPost: {
-						post_date,
-						post_owner,
-						post_images,
-						post_captions,
-						post_topics,
-						post_tagged_users,
-						post_total_comments,
-					},
-				})
-			);
-
-			dispatch(endFetchingMainPost());
-		}
-	} catch (error) {
 		dispatch(endFetchingMainPost());
 	}
 };

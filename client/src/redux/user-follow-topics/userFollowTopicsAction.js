@@ -2,8 +2,7 @@ import axios from "axios";
 
 import { setUserRegisterStepIndex } from "../user-register/user-register-step/userRegisterStepAction";
 
-import { fetchToken } from "../../utils/cookie/fetchToken";
-import { setCoupleSeconds } from "../../utils/setCoupleSeconds";
+import { fetchToken, setCoupleSeconds } from "../../utils";
 
 const startFetchingFollowTopics = () => ({
 	type: "START_FETCHING_FOLLOW_TOPICS",

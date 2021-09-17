@@ -9,7 +9,7 @@ import { removeUserStory } from "../../../redux/user-stories/userStoriesAction";
 
 import { useDropdown } from "../../../hooks";
 
-import { fetchToken } from "../../../utils/cookie/fetchToken";
+import { fetchToken } from "../../../utils";
 
 import {
 	UserStoryStyle,

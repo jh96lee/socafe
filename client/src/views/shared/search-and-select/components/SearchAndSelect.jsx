@@ -1,6 +1,6 @@
 import * as React from "react";
 
-import { FormInput, DropdownElement } from "../..";
+import { FormInput, DropdownElement, Button } from "../..";
 import SearchAndSelectedContents from "./SearchAndSelectedContents";
 import DropdownMenu from "../../dropdown/components/DropdownMenu";
 
@@ -55,7 +55,8 @@ const SearchAndSelect = ({
 	// REVIEW: this provides the array that DropdownMenu needs to render
 	const dropdownElementsArray = contents.map((result) => {
 		return {
-			content: result,
+			image: result.topic_url,
+			text: result.title,
 			onClickEventHandler: () => {
 				dropdownElementOnClickLogic(result);
 			},
@@ -91,31 +92,41 @@ const SearchAndSelect = ({
 
 			{isDropdownMenuOpen && (
 				<DropdownMenu
-					dropdownMenuID={`search-and-select-${searchAndSelectType}-dropdown-menu`}
+					dropdownMenuID="searchbar-input-dropdown-menu"
 					dropdownMenuStyleObject={{
-						menuTop: "calc(100% + 6px)",
+						menuTop: "calc(100% + 7px)",
 						menuLeft: "0",
 						menuWidth: "100%",
 					}}
 				>
-					{dropdownElementsArray.length > 0 ? (
-						dropdownElementsArray.map((element, idx) => {
-							return (
-								<DropdownElement
-									key={`${element.id}__${idx}`}
-									dropdownElementContent={element.content}
-									dropdownElementOnClickEventHandler={
-										element.onClickEventHandler
-									}
-								/>
-							);
-						})
+					{contents.length === 0 ? (
+						<p>Nothing here</p>
 					) : (
-						<p id="dropdown-menu__no-result-message">No Search Result</p>
+						<React.Fragment>
+							{dropdownElementsArray.map((element, idx) => {
+								return (
+									<DropdownElement
+										key={`searchbar-dropdown-element__${idx}`}
+										{...element}
+									/>
+								);
+							})}
+						</React.Fragment>
 					)}
 
 					{nextAPIEndpoint === null || contents.length === 0 ? null : (
-						<button onClick={handleLoadMoreButtonOnClick}>Load More</button>
+						<Button
+							buttonType="outline"
+							buttonStyleObject={{
+								buttonFontWeight: "400",
+								buttonWidth: "100%",
+								buttonPadding: "1.3rem",
+								buttonBorderRadius: "0.5rem",
+							}}
+							onClick={handleLoadMoreButtonOnClick}
+						>
+							Load More
+						</Button>
 					)}
 				</DropdownMenu>
 			)}

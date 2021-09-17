@@ -1,4 +1,4 @@
-export const calculateTotalCharacters = (nodesArray) => {
+const calculateTotalCharacters = (nodesArray) => {
 	return nodesArray.reduce((acc, node) => {
 		const nodeType = node.nodeType ? node.nodeType : node.node_type;
 
@@ -13,3 +13,5 @@ export const calculateTotalCharacters = (nodesArray) => {
 		}
 	}, 0);
 };
+
+export default calculateTotalCharacters;

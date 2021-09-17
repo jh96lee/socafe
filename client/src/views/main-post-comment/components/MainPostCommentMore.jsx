@@ -7,7 +7,7 @@ import { removePostComment } from "../../../redux/main-post-comments/mainPostCom
 
 import { useDropdown } from "../../../hooks";
 
-import { deleteComment } from "../../../utils/comment/deleteComment";
+import { deleteCommentRequest } from "../../../utils";
 
 import { MainPostCommentMoreStyle } from "../styles/MainPostCommentMoreStyle";
 
@@ -35,7 +35,7 @@ const MainPostCommentMore = ({
 				label: "Delete",
 			},
 			onClickEventHandler: async () => {
-				const data = await deleteComment(commentID);
+				const data = await deleteCommentRequest(commentID);
 
 				const { success } = data;
 

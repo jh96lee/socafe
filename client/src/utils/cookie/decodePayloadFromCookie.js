@@ -1,4 +1,4 @@
-export const decodePayloadFromCookie = () => {
+const decodePayloadFromCookie = () => {
 	const cookie = document.cookie;
 
 	if (cookie) {
@@ -18,3 +18,5 @@ export const decodePayloadFromCookie = () => {
 		return null;
 	}
 };
+
+export default decodePayloadFromCookie;

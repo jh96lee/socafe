@@ -4,8 +4,7 @@ import { useLocation } from "react-router-dom";
 
 import { likeOrUnlikePost } from "../../redux/main-post/mainPostAction";
 
-import { likePostRequest } from "../../utils/post/likePostRequest";
-import { unlikePostRequest } from "../../utils/post/unlikePostRequest";
+import { likePostRequest, unlikePostRequest } from "../../utils";
 
 const usePostLike = (initialIsLiked, initialTotalLikes, postLikePostID) => {
 	const [isPostLiked, setIsPostLiked] = React.useState(initialIsLiked);

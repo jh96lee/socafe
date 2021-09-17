@@ -1,6 +1,6 @@
 import axios from "axios";
 
-import { fetchToken } from "../../../utils/cookie/fetchToken";
+import { fetchToken } from "../../../utils";
 
 const setCommentNotificationsSuccessMessage = (successMessage) => ({
 	type: "SET_COMMENT_NOTIFICATIONS_SUCCESS_MESSAGE",

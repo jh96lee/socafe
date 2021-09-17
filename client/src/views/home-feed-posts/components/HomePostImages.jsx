@@ -22,15 +22,15 @@ const HomePostImages = ({ postImagesArray, onClick }) => {
 			return {
 				column: isFirstImageWide ? "1fr" : "repeat(2, 1fr)",
 				row: isFirstImageWide ? "repeat(2, 1fr)" : "1fr",
-				gridColumn: isFirstImageWide ? "1 / 3" : "1 / 2",
-				gridRow: isFirstImageWide ? "1 / 2" : "1 / 3",
+				gridColumn: "1 / 2",
+				gridRow: "1 / 2",
 			};
 		} else if (numberOfImages === 3) {
 			return {
 				column: "repeat(2, 1fr)",
 				row: "repeat(2, 1fr)",
-				gridColumn: isFirstImageWide ? "1 / 3" : "1 / 2",
-				gridRow: isFirstImageWide ? "1 / 2" : "1 / 3",
+				gridColumn: isFirstImageWide ? "1 / 2" : "1 / 3",
+				gridRow: isFirstImageWide ? "1 / 3" : "1 / 2",
 			};
 		}
 	};

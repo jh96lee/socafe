@@ -1,7 +1,9 @@
 import * as React from "react";
 
-import { calculateTotalCharacters } from "../../../utils/text-area/calculateTotalCharacters";
-import { limitTextAreaCharacters } from "../../../utils/text-area/limitTextAreaCharacters";
+import {
+	calculateTotalCharacters,
+	limitTextAreaCharacters,
+} from "../../../utils";
 
 import { TextAreaStyle } from "./TextAreaStyle";
 
