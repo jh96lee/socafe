@@ -1,7 +1,7 @@
 import * as React from "react";
 import { useDispatch, useSelector } from "react-redux";
 
-import { Loader, IconElement } from "../../views/shared";
+import { Loader, Icon } from "../../views/shared";
 import { AddStorySidebar } from "../../views/add-story-sidebar";
 import { StoryPreview } from "../../views/story-preview";
 
@@ -33,8 +33,7 @@ const StoryPage = () => {
 	const { isDropdownMenuOpen, setIsDropdownMenuOpen } = useDropdown(
 		responsiveAddStorySidebarTriggerID,
 		responsiveAddStorySidebarID,
-		false,
-		true
+		false
 	);
 
 	return (
@@ -57,17 +56,18 @@ const StoryPage = () => {
 						}
 					/>
 
-					<IconElement
+					<Icon
 						iconRole="button"
+						iconType="button"
 						iconID={responsiveAddStorySidebarTriggerID}
-						iconElementStyleObject={{
-							elementPadding: "1rem",
-							elementWidth: "fit-content",
-							elementHeight: "fit-content",
-						}}
+						// iconElementStyleObject={{
+						// 	elementPadding: "1rem",
+						// 	elementWidth: "fit-content",
+						// 	elementHeight: "fit-content",
+						// }}
 					>
 						<SidebarFilled />
-					</IconElement>
+					</Icon>
 				</React.Fragment>
 			) : (
 				<Loader />

@@ -3,7 +3,7 @@ import { setCaret } from "../../../utils/comment/setCaret";
 
 export const handleContentEditableOnKeyDown = async (e) => {
 	const mainPostCommentsContentEditable = document.querySelector(
-		"#main-post-comments-contenteditable"
+		"#main-post-comment-contenteditable"
 	);
 
 	const contentEditableChildNodesArray = Array.from(e.target.childNodes);

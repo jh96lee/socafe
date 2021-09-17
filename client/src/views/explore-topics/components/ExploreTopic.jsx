@@ -12,8 +12,8 @@ const ExploreTopicStyle = styled.div`
 	width: fit-content;
 	padding: 1rem 1.2rem;
 	border-radius: 2rem;
-	background-color: var(--input-default-bg-color);
-	box-shadow: 0 0 0 1px var(--input-default-separator-color);
+	background-color: var(--bg-input-default);
+	box-shadow: 0 0 0 1px var(--divider-default);
 
 	& > img {
 		width: 4.5rem;

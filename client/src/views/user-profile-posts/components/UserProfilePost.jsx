@@ -12,7 +12,7 @@ import {
 	UserProfilePostMetadataStyle,
 } from "../styles/UserProfilePostStyle";
 
-import { HeartFill, CommentFilled, More } from "../../../assets";
+import { LikeFilled, CommentFilled, More } from "../../../assets";
 import { IconElement } from "../../shared";
 
 const UserProfilePost = ({ post }) => {
@@ -50,7 +50,7 @@ const UserProfilePost = ({ post }) => {
 
 			<UserProfilePostMetadataOverlayStyle id="user-profile-post__post-metadata-overlay">
 				<UserProfilePostMetadataStyle>
-					<HeartFill id="user-profile-post__heart" />
+					<LikeFilled id="user-profile-post__heart" />
 
 					<h4>{postTotalLikes}</h4>
 				</UserProfilePostMetadataStyle>

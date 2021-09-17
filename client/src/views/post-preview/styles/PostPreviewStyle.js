@@ -10,7 +10,7 @@ export const PostPreviewStyle = styled(PostStyle)`
 	overflow: hidden;
 	margin: auto;
 	border-radius: 2rem;
-	border: 1px solid var(--input-default-separator-color);
+	border: 1px solid var(--divider-default);
 	box-shadow: 0 2px 12px
 		${(props) => (props.theme.isDarkMode ? "#000" : "#00000033")};
 

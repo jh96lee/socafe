@@ -64,8 +64,6 @@ import { ReactComponent as BookmarkFill } from "./post/bookmark-fill.svg";
 import { ReactComponent as BookmarkEmpty } from "./post/bookmark-empty.svg";
 import { ReactComponent as TagUser } from "./post/tag-user.svg";
 import { ReactComponent as Tag } from "./post/tag.svg";
-import { ReactComponent as HeartEmpty } from "./post/heart-empty.svg";
-import { ReactComponent as HeartFill } from "./post/heart-fill.svg";
 import { ReactComponent as Posts } from "./post/posts.svg";
 import { ReactComponent as PostFilled } from "./post/post-filled.svg";
 import { ReactComponent as PostOutline } from "./post/post-outline.svg";
@@ -74,6 +72,8 @@ import { ReactComponent as ViewOutline } from "./post/view-outline.svg";
 import { ReactComponent as HeartColored } from "./post/heart-colored.svg";
 import { ReactComponent as PostColored } from "./post/post-colored.svg";
 import { ReactComponent as CommentColored } from "./post/comment-colored.svg";
+import { ReactComponent as LikeOutline } from "./post/like-outline.svg";
+import { ReactComponent as LikeFilled } from "./post/like-filled.svg";
 
 import { ReactComponent as NotificationFilled } from "./user/notification-filled.svg";
 import { ReactComponent as NotificationOutline } from "./user/notification-outline.svg";
@@ -150,6 +150,8 @@ export {
 	SidebarFilled,
 	ClockFilled,
 	Remove,
+	LikeFilled,
+	LikeOutline,
 	TextFilled,
 	Bolt,
 	Submit,
@@ -185,8 +187,6 @@ export {
 	GoBack,
 	Tag,
 	Password,
-	HeartEmpty,
-	HeartFill,
 	More,
 	Posts,
 	UserFilled,

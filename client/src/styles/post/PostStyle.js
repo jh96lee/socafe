@@ -19,7 +19,7 @@ const PostStyle = styled.div`
 		justify-self: start;
 		width: 100%;
 		padding: 2rem 0rem 2rem 2.5rem;
-		box-shadow: 0 1px 0 0 var(--input-default-separator-color);
+		box-shadow: 0 1px 0 0 var(--divider-default);
 	}
 
 	& > *:nth-child(3) {
@@ -28,7 +28,7 @@ const PostStyle = styled.div`
 		justify-self: end;
 		width: 100%;
 		padding: 2rem 2.5rem 2rem 0rem;
-		box-shadow: 0 1px 0 0 var(--input-default-separator-color);
+		box-shadow: 0 1px 0 0 var(--divider-default);
 	}
 
 	& > *:nth-child(4) {
@@ -44,8 +44,8 @@ const PostStyle = styled.div`
 	@media (max-width: ${(props) => props.postSingleColumnBreakingPoint}) {
 		grid-template-columns: 1fr !important;
 		grid-auto-rows: min-content 1fr min-content 15rem min-content;
-		border-left: 1px solid var(--input-default-separator-color);
-		border-right: 1px solid var(--input-default-separator-color);
+		border-left: 1px solid var(--divider-default);
+		border-right: 1px solid var(--divider-default);
 
 		& > * {
 			grid-column: 1 / 2 !important;
@@ -67,7 +67,7 @@ const PostStyle = styled.div`
 
 		& > *:nth-child(3) {
 			grid-row: 3 / 4;
-			box-shadow: 0 1px 0 0 var(--input-default-separator-color);
+			box-shadow: 0 1px 0 0 var(--divider-default);
 		}
 
 		& > *:nth-child(4) {

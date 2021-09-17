@@ -12,7 +12,7 @@ import { fetchUserProfilePosts } from "../../redux/user-profile/user-profile-pos
 
 import { UserProfilePageStyle } from "./UserProfilePageStyle";
 
-import { Posts, HeartEmpty, BookmarkEmpty, Tag } from "../../assets";
+import { Posts, LikeOutline, BookmarkEmpty, Tag } from "../../assets";
 
 const UserProfilePage = () => {
 	const [currentProfileTabIndex, setCurrentProfileTabIndex] = React.useState(0);
@@ -37,7 +37,7 @@ const UserProfilePage = () => {
 			},
 			{
 				profilePostsType: "likes",
-				tabIcon: <HeartEmpty />,
+				tabIcon: <LikeOutline />,
 				tabLabel: "Likes",
 			},
 			{

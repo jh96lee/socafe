@@ -9,8 +9,8 @@ export const MainPostCommentLikeStyle = styled.div`
 	color: var(--char-default);
 
 	& svg {
-		color: var(--likes-icon-color);
-		fill: var(--likes-icon-color);
+		color: var(--char-like);
+		fill: var(--char-like);
 		width: 1.7rem;
 		height: 1.7rem;
 		cursor: pointer;

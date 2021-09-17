@@ -2,7 +2,7 @@ import * as React from "react";
 
 import { IconElement } from "../../shared";
 
-import { HeartFill, BookmarkEmpty, CommentOutline } from "../../../assets";
+import { LikeFilled, BookmarkEmpty, CommentOutline } from "../../../assets";
 
 import { PostPreviewActionsStyle } from "../styles/PostPreviewActionsStyle";
 
@@ -16,11 +16,11 @@ const PostPreviewActions = () => {
 				iconElementStyleObject={{
 					elementBackgroundColor: "var(--likes-bg-color)",
 					elementHoverBackgroundColor: "var(--likes-hover-bg-color)",
-					iconColor: "var(--likes-icon-color)",
+					iconColor: "var(--char-like)",
 					iconSize,
 				}}
 			>
-				<HeartFill />
+				<LikeFilled />
 			</IconElement>
 
 			<IconElement

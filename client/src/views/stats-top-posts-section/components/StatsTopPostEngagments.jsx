@@ -2,7 +2,7 @@ import * as React from "react";
 
 import { StatsTopPostEngagmentsStyle } from "../styles/StatsTopPostEngagmentsStyle";
 
-import { ViewOutline, HeartEmpty, CommentOutline } from "../../../assets";
+import { ViewOutline, LikeOutline, CommentOutline } from "../../../assets";
 
 const StatsTopPostEngagments = ({
 	postTotalViews,
@@ -18,7 +18,7 @@ const StatsTopPostEngagments = ({
 			</p>
 
 			<p>
-				<HeartEmpty />
+				<LikeOutline />
 
 				{postTotalLikes}
 			</p>

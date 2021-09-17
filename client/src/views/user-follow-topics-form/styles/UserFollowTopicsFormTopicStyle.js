@@ -6,8 +6,8 @@ export const UserFollowTopicsFormTopicStyle = styled.div`
 	width: fit-content;
 	padding: 0.85rem;
 	border-radius: 5rem;
-	background-color: var(--input-default-bg-color);
-	box-shadow: 0 0 0 1.6px var(--input-default-separator-color);
+	background-color: var(--bg-input-default);
+	box-shadow: 0 0 0 1.6px var(--divider-default);
 
 	& img {
 		width: 5.1rem;

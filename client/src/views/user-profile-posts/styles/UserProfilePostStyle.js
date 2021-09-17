@@ -47,7 +47,7 @@ export const UserProfilePostMetadataStyle = styled.div`
 	}
 
 	& > #user-profile-post__heart {
-		fill: var(--likes-icon-color);
+		fill: var(--char-like);
 	}
 
 	& > h4 {

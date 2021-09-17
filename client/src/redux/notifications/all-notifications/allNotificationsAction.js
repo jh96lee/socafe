@@ -75,8 +75,6 @@ export const fetchExtraAllNotifications =
 			},
 		});
 
-		console.log(data);
-
 		const { error, contents, next } = data;
 
 		if (!error) {

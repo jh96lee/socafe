@@ -19,7 +19,7 @@ export const UserProfileOwnerFollowingTopicStyle = styled.div`
 		height: 5rem;
 		object-fit: cover;
 		border-radius: 50%;
-		border: 2px solid var(--input-default-separator-color);
+		border: 2px solid var(--divider-default);
 	}
 
 	& > p {

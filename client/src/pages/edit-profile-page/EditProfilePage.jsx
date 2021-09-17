@@ -4,7 +4,7 @@ import { Switch, Route, NavLink } from "react-router-dom";
 import { EditProfileForm } from "../../views/edit-profile-form";
 import { ChangePasswordForm } from "../../views/change-password-form";
 import { UserFollowTopicsForm } from "../../views/user-follow-topics-form";
-import { IconElement } from "../../views/shared";
+import { Icon } from "../../views/shared";
 
 import { EditProfilePageStyle } from "./EditProfilePageStyle";
 
@@ -30,23 +30,6 @@ const EditProfileTabsStyle = styled.div`
 		font-size: 1.4rem;
 	}
 
-	& > a > svg {
-		fill: var(--char-default);
-		width: 2.2rem;
-		height: 2.2rem;
-	}
-
-	& > .active div {
-		background-color: var(--icon-active-link-bg-color);
-	}
-
-	& > .active,
-	& > .active svg {
-		font-weight: 600;
-		fill: var(--icon-active-link-color);
-		color: var(--icon-active-link-color);
-	}
-
 	@media (max-width: 1300px) {
 		flex-direction: row;
 
@@ -68,34 +51,35 @@ const EditProfilePage = () => {
 		<EditProfilePageStyle>
 			<EditProfileTabsStyle>
 				<NavLink exact to="/edit/profile">
-					<IconElement
+					<Icon
 						iconRole="presentation"
-						iconElementStyleObject={iconElementStyleObject}
+						iconType="presentation"
+						// iconElementStyleObject={iconElementStyleObject}
 					>
 						<EditFilled />
-					</IconElement>
+					</Icon>
 
 					<p>Edit Profile</p>
 				</NavLink>
 
 				<NavLink to="/edit/profile/password">
-					<IconElement
+					<Icon
 						iconRole="presentation"
 						iconElementStyleObject={iconElementStyleObject}
 					>
 						<PasswordFilled />
-					</IconElement>
+					</Icon>
 
 					<p>Change Password</p>
 				</NavLink>
 
 				<NavLink to="/edit/profile/topics">
-					<IconElement
+					<Icon
 						iconRole="presentation"
 						iconElementStyleObject={iconElementStyleObject}
 					>
 						<StarFilled />
-					</IconElement>
+					</Icon>
 
 					<p>Following Topics</p>
 				</NavLink>

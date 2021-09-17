@@ -18,7 +18,7 @@ export const PostLikeStyle = styled.div`
 	}
 
 	& svg {
-		fill: ${(props) => props.postLikeIconColor || "var(--likes-icon-color)"};
+		fill: ${(props) => props.postLikeIconColor || "var(--char-like)"};
 		width: ${(props) => props.postLikeIconSize || "2.3rem"};
 		height: ${(props) => props.postLikeIconSize || "2.3rem"};
 	}

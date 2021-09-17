@@ -4,7 +4,7 @@ import { IconElement } from "../../../shared";
 
 import { PostLikeStyle } from "../styles/PostLikeStyle";
 
-import { HeartEmpty, HeartFill } from "../../../../assets";
+import { LikeOutline, LikeFilled } from "../../../../assets";
 
 import { usePostLike } from "../../../../hooks";
 
@@ -29,7 +29,7 @@ const PostLike = ({
 	return (
 		<PostLikeStyle {...postLikeStyleObject}>
 			<PostLikeIconWrapperStyle onClick={handlePostLikeOnClick}>
-				{isLikedState ? <HeartFill /> : <HeartEmpty />}
+				{isLikedState ? <LikeFilled /> : <LikeOutline />}
 			</PostLikeIconWrapperStyle>
 
 			<h5>{totalLikesState}</h5>

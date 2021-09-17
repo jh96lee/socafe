@@ -2,19 +2,17 @@ import * as React from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { useParams } from "react-router-dom";
 
-import { Loader, IconElement } from "../../shared";
+import { Loader, Icon } from "../../shared";
 import { MainPostParentComment } from "../../main-post-parent-comment";
 
 import {
-	fetchedPostComments,
-	fetchedExtraPostComments,
-	setPostCommentsNextAPIEndpoint,
+	fetchPostComments,
+	fetchExtraPostComments,
+	setPostCommentsPage,
 	resetPostcomments,
 } from "../../../redux/main-post-comments/mainPostCommentsAction";
 import { addNewPostComment } from "../../../redux/main-post-comments/mainPostCommentsAction";
 import { resetMainPostComment } from "../../../redux/main-post-comment-input/mainPostCommentInputAction";
-
-import { usePagination } from "../../../hooks";
 
 import { MainPostAllCommentsStyle } from "../styles/MainPostAllCommentsStyle";
 
@@ -23,9 +21,12 @@ import { CircularPlus } from "../../../assets";
 const MainPostComments = () => {
 	const dispatch = useDispatch();
 
-	const { postComments, postCommentsNextAPIEndpoint } = useSelector(
-		(state) => state.mainPostCommentsReducer
-	);
+	const {
+		currentPostCommentsPage,
+		isPostCommentsLoaded,
+		postComments,
+		postCommentsNextAPIEndpoint,
+	} = useSelector((state) => state.mainPostCommentsReducer);
 
 	const { mainPostComment } = useSelector(
 		(state) => state.mainPostCommentInputReducer
@@ -34,27 +35,10 @@ const MainPostComments = () => {
 	const { user } = useSelector((state) => state.userReducer);
 
 	const userID = user ? user.id : 0;
-
 	const postID = parseInt(useParams().postID);
 
-	const {
-		currentPage,
-		setCurrentPage,
-		fetchContents,
-		isInitialContentsLoaded,
-	} = usePagination(
-		`/comment/parent/${postID}/${userID}`,
-		5,
-		false,
-		true,
-		fetchedPostComments,
-		fetchedExtraPostComments,
-		setPostCommentsNextAPIEndpoint,
-		postCommentsNextAPIEndpoint
-	);
-
 	React.useEffect(() => {
-		fetchContents(true, "GET", null, null);
+		dispatch(fetchPostComments(1, `/comment/parent/${postID}/${userID}`));
 
 		return () => {
 			dispatch(resetPostcomments());
@@ -62,10 +46,10 @@ const MainPostComments = () => {
 	}, [postID]);
 
 	React.useEffect(() => {
-		if (postComments.length > 0) {
-			fetchContents(false, "GET", null, null);
+		if (currentPostCommentsPage > 1) {
+			dispatch(fetchExtraPostComments(postCommentsNextAPIEndpoint));
 		}
-	}, [currentPage]);
+	}, [currentPostCommentsPage]);
 
 	React.useEffect(() => {
 		if (mainPostComment !== null) {
@@ -80,13 +64,13 @@ const MainPostComments = () => {
 		}
 	}, [mainPostComment]);
 
-	const handleMyParentCommentsLoadMoreButtonOnClick = () => {
-		setCurrentPage((prevState) => prevState + 1);
+	const handleLoadMoreButtonOnClick = () => {
+		dispatch(setPostCommentsPage());
 	};
 
 	return (
 		<MainPostAllCommentsStyle>
-			{!isInitialContentsLoaded ? (
+			{!isPostCommentsLoaded ? (
 				<Loader isLoaderAbsolute={true} />
 			) : (
 				<React.Fragment>
@@ -101,16 +85,17 @@ const MainPostComments = () => {
 
 					{postCommentsNextAPIEndpoint === null ||
 					postComments.length === 0 ? null : (
-						<IconElement
-							onClick={handleMyParentCommentsLoadMoreButtonOnClick}
+						<Icon
+							iconRole="button"
+							iconType="button"
 							iconElementStyleObject={{
-								elementPadding: "0.7rem",
-								elementWidth: "fit-content",
-								elementMargin: "auto",
+								iconPadding: "0.7rem",
+								iconMargin: "auto",
 							}}
+							iconOnClick={handleLoadMoreButtonOnClick}
 						>
 							<CircularPlus />
-						</IconElement>
+						</Icon>
 					)}
 				</React.Fragment>
 			)}

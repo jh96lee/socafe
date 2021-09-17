@@ -10,7 +10,7 @@ const FormStyle = styled.form`
 	}
 
 	& > a {
-		color: var(--link-cta-color);
+		color: var(--char-cta);
 		font-weight: 500;
 	}
 

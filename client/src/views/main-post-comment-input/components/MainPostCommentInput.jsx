@@ -131,7 +131,7 @@ const MainPostCommentInput = () => {
 	return (
 		<MainPostCommentInputStyle>
 			<MainPostCommentContentEditableStyle
-				id="main-post-comments-contenteditable"
+				id="main-post-comment-contenteditable"
 				contentEditable={true}
 				ref={mainPostCommentsContentEditableRef}
 				onInput={handleContentEditableOnInput}

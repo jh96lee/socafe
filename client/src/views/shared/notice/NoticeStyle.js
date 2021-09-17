@@ -7,8 +7,8 @@ export const NoticeStyle = styled.div`
 	width: 37rem;
 	padding: 3.5rem 2.5rem;
 	margin: 5rem auto;
-	border: 1px solid var(--input-default-separator-color);
-	box-shadow: 0 0 7px 1.6px var(--input-default-separator-color);
+	border: 1px solid var(--divider-default);
+	box-shadow: 0 0 7px 1.6px var(--divider-default);
 	border-radius: 1rem;
 
 	& > h2 {

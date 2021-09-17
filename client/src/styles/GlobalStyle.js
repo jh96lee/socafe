@@ -23,6 +23,10 @@ const GlobalStyles = createGlobalStyle`
 					props.theme.isDarkMode ? "#9d9d9d" : "#e3e3e3"};
         --char-contrast: ${(props) =>
 					props.theme.isDarkMode ? "#000" : "#fff"};
+        --char-cta: ${(props) =>
+					props.theme.isDarkMode ? "#91ccff" : "#3273d6"};
+        --char-like: ${(props) =>
+					props.theme.isDarkMode ? "#ff3256" : "#ff3425"};
 
         /* TODO: darker than primary bg color */
         --bg-default: ${(props) =>
@@ -44,6 +48,8 @@ const GlobalStyles = createGlobalStyle`
         --bg-button-disabled: ${(props) =>
 					props.theme.isDarkMode ? "#ef0d5047" : "#d4003f75"};
         --bg-contrast: ${(props) => (props.theme.isDarkMode ? "#fff" : "#000")};
+        --bg-input-default: ${(props) =>
+					props.theme.isDarkMode ? "#222831" : "#edf2f5"};
 
         /* TODO: bg and bg hover are paired up */
         --bg-1-hover: ${(props) =>
@@ -63,9 +69,10 @@ const GlobalStyles = createGlobalStyle`
         --divider-1: ${(props) =>
 					props.theme.isDarkMode ? "#222531" : "#eff2f5"};
         --divider-2: ${(props) => (props.theme.isDarkMode ? "#fff" : "#000")};
+        --divider-focus: ${(props) =>
+					props.theme.isDarkMode ? "#79d5ff" : "#00bfff"};
         --divider-graph: ${(props) =>
 					props.theme.isDarkMode ? "#353945" : "#b9c5d0"};
-
 
         /* REVIEW: story */
         --story-filled-color:  linear-gradient(to right, #0d69ff, #16b3ff); 

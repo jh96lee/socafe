@@ -5,7 +5,7 @@ import { unlikeComment } from "../../../utils/comment/unlikeComment";
 
 import { MainPostCommentLikeStyle } from "../styles/MainPostCommentLikeStyle";
 
-import { HeartFill, HeartEmpty } from "../../../assets";
+import { LikeFilled, LikeOutline } from "../../../assets";
 
 const MainPostCommentLike = ({
 	commentID,
@@ -42,7 +42,7 @@ const MainPostCommentLike = ({
 
 	return (
 		<MainPostCommentLikeStyle onClick={handleCommentLikeOnClick}>
-			{isCommentLiked ? <HeartFill /> : <HeartEmpty />}
+			{isCommentLiked ? <LikeFilled /> : <LikeOutline />}
 
 			<p>{commentTotalLikes}</p>
 		</MainPostCommentLikeStyle>

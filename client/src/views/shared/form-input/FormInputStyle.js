@@ -28,14 +28,14 @@ export const FormInputStyle = styled.div`
 		box-shadow: ${(props) =>
 			props.inputBoxShadow
 				? props.inputBoxShadow
-				: "0 0 0 1.4px var(--input-default-separator-color)"};
+				: "0 0 0 1.4px var(--divider-default)"};
 		border-radius: 0.5rem;
 		padding: ${(props) =>
 			props.inputPadding ? props.inputPadding : "1.3rem 1.45rem"};
 		background-color: ${(props) =>
 			props.inputBackgroundColor
 				? props.inputBackgroundColor
-				: "var(--input-default-bg-color)"};
+				: "var(--bg-input-default)"};
 	}
 
 	& input::placeholder {
@@ -47,6 +47,6 @@ export const FormInputStyle = styled.div`
 	}
 
 	& input:focus {
-		box-shadow: 0 0 0 1.6px var(--input-default-focus-color);
+		box-shadow: 0 0 0 1.6px var(--divider-focus);
 	}
 `;

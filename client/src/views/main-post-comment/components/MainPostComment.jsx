@@ -16,7 +16,6 @@ const MainPostComment = ({ comment, setDeletedCommentID }) => {
 		comment_nodes_array,
 		comment_total_likes,
 		parent_comment_id,
-		post_id,
 	} = comment;
 
 	const { notiInstigatedCommentID, notiReceivedCommentID } = useSelector(
