@@ -1,5 +1,4 @@
 import * as React from "react";
-import axios from "axios";
 import { useDispatch, useSelector } from "react-redux";
 import { useParams, useLocation, useHistory } from "react-router-dom";
 
@@ -12,16 +11,16 @@ import {
 	TextArea,
 	Icon,
 } from "../../shared";
-import { MainPostComments } from "../../main-post-comments";
-import { MainPostCommentInput } from "../../main-post-comment-input";
 import MainPostActions from "./MainPostActions";
+import { PostComments } from "../../post-comments";
+import { PostCommentInput } from "../../post-comment-input";
 
 import {
 	fetchMainPost,
 	resetMainPost,
 } from "../../../redux/main-post/mainPostAction";
 
-import { fetchToken, addPostViewRequest } from "../../../utils";
+import { addPostViewRequest } from "../../../utils";
 
 import { MainPostStyle } from "../styles/MainPostStyle";
 import { MainPostOverflowStyle } from "../styles/MainPostOverflowStyle";
@@ -127,11 +126,11 @@ const MainPost = () => {
 
 						<PostTopics postTopicsArray={mainPost.post_topics} />
 
-						<MainPostComments />
+						<PostComments />
 					</MainPostOverflowStyle>
 
 					{/* REVIEW: 5th child */}
-					<MainPostCommentInput />
+					<PostCommentInput />
 				</React.Fragment>
 			)}
 		</MainPostStyle>

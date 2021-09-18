@@ -13,8 +13,8 @@ import userFollowTopicsReducer from "./user-follow-topics/userFollowTopicsReduce
 import userFollowingTopicsReducer from "./user-following-topics/userFollowingTopicsReducer";
 
 import mainPostReducer from "./main-post/mainPostReducer";
-import mainPostCommentsReducer from "./main-post-comments/mainPostCommentsReducer";
-import mainPostCommentInputReducer from "./main-post-comment-input/mainPostCommentInputReducer";
+// import mainPostCommentsReducer from "./main-post-comments/mainPostCommentsReducer";
+// import mainPostCommentInputReducer from "./main-post-comment-input/mainPostCommentInputReducer";
 
 import postImagesReducer from "./add-post/post-images/postImagesReducer";
 import postTopicsReducer from "./add-post/post-topics/postTopicsReducer";
@@ -51,9 +51,8 @@ import statsGraphReducer from "./stats/stats-graph/statsGraphReducer";
 
 import userInterfaceReducer from "./user-interface/userInterfaceReducer";
 
-import postMetadataReducer from "./expanded-post/post-metadata/postMetadataReducer";
-import postCommentsReducer from "./expanded-post/post-comments/postCommentsReducer";
-import postCommentInputReducer from "./expanded-post/post-comment-input/postCommentInputReducer";
+import postCommentsReducer from "./post-comment/post-comments/postCommentsReducer";
+import postCommentInputReducer from "./post-comment/post-comment-input/postCommentInputReducer";
 
 const rootReducer = combineReducers({
 	userReducer,
@@ -80,13 +79,12 @@ const rootReducer = combineReducers({
 	postCaptionsReducer,
 	postUploadReducer,
 
-	postMetadataReducer,
 	postCommentsReducer,
 	postCommentInputReducer,
 
 	mainPostReducer,
-	mainPostCommentsReducer,
-	mainPostCommentInputReducer,
+	// mainPostCommentsReducer,
+	// mainPostCommentInputReducer,
 
 	notificationsReducer,
 

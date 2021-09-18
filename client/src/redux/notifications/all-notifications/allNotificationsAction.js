@@ -37,39 +37,42 @@ const setAllNotificationsNextAPIEndpoint = (apiEndpoint) => ({
 	payload: apiEndpoint,
 });
 
-export const fetchAllNotifications = (pageSize) => async (dispatch) => {
-	dispatch(startFetchingAllNotifications());
+export const fetchAllNotifications =
+	(pageSize, customQueryString = "") =>
+	async (dispatch) => {
+		dispatch(startFetchingAllNotifications());
 
-	const token = fetchToken();
+		const token = fetchToken();
 
-	const { data } = await axios({
-		method: "GET",
-		url: `http://localhost:8080/notification/user?page=1&size=${pageSize}`,
-		headers: {
-			Authorization: `Bearer ${token}`,
-		},
-	});
+		const { data } = await axios({
+			method: "GET",
+			url: `http://localhost:8080/notification/user?page=1&size=${pageSize}${customQueryString}`,
+			headers: {
+				Authorization: `Bearer ${token}`,
+			},
+		});
 
-	const { error, contents, next } = data;
+		const { error, contents, next } = data;
 
-	if (!error) {
-		dispatch(fetchedAllNotifications(contents));
+		if (!error) {
+			dispatch(fetchedAllNotifications(contents));
 
-		dispatch(setAllNotificationsNextAPIEndpoint(next));
+			dispatch(setAllNotificationsNextAPIEndpoint(next));
 
-		dispatch(endFetchingAllNotifications());
-	}
-};
+			dispatch(endFetchingAllNotifications());
+		}
+	};
 
 export const fetchExtraAllNotifications =
-	(nextAPIEndpoint) => async (dispatch) => {
+	(nextAPIEndpoint, customQueryString = "") =>
+	async (dispatch) => {
 		dispatch(startFetchingExtraAllNotifications());
 
 		const token = fetchToken();
 
 		const { data } = await axios({
 			method: "GET",
-			url: `http://localhost:8080${nextAPIEndpoint}`,
+			url: `http://localhost:8080${nextAPIEndpoint}${customQueryString}`,
 			headers: {
 				Authorization: `Bearer ${token}`,
 			},
