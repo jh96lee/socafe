@@ -10,7 +10,7 @@ export const MainPostOverflowStyle = styled(PostOverflowStyle)`
 	}
 
 	& > *:last-child {
-		margin-top: 2.4rem;
+		margin-top: 2rem;
 	}
 
 	& > *:empty {

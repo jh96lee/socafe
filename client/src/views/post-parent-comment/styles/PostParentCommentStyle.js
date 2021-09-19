@@ -15,7 +15,7 @@ export const PostParentCommentStyle = styled.div`
 	}
 
 	& > *:last-child {
-		padding-left: 5rem;
+		padding-left: 6.5rem;
 	}
 `;
 

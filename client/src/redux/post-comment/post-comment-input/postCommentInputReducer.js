@@ -9,7 +9,7 @@ const initialState = {
 	isPostCommentUploading: false,
 };
 
-const mainPostCommentInputReducer = (state = initialState, action) => {
+const postCommentInputReducer = (state = initialState, action) => {
 	switch (action.type) {
 		case "START_UPLOADING_POST_COMMENT":
 			return {
@@ -60,4 +60,4 @@ const mainPostCommentInputReducer = (state = initialState, action) => {
 	}
 };
 
-export default mainPostCommentInputReducer;
+export default postCommentInputReducer;

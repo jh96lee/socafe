@@ -8,20 +8,24 @@ export const PostCommentStyle = styled.div`
 
 	background-color: ${(props) =>
 		props.isInstigatingComment
-			? "var(--active-yellow)"
+			? "var(--bg-yellow-1)"
 			: props.isReceivingComment
-			? "var(--active-blue)"
+			? "var(--bg-blue-1)"
 			: "transparent"};
-	padding: 1.35rem;
+	padding: ${(props) =>
+		props.isInstigatingComment || props.isReceivingComment
+			? "1.8rem 1.5rem"
+			: "1.3rem 1.5rem"};
 	border-radius: 1rem;
+	box-shadow: 0 0 0 1.4px
+		${(props) =>
+			props.isInstigatingComment
+				? "var(--divider-yellow-1)"
+				: props.isReceivingComment
+				? "var(--divider-blue-1)"
+				: "transparent"};
 
-	& a {
-		color: var(--char-default);
-		font-size: 1.4rem;
-		font-weight: 500;
-	}
-
-	&:hover #main-post-comment-more-dropdown-trigger {
+	&:hover #post-comment-more-dropdown-trigger {
 		display: flex;
 	}
 `;

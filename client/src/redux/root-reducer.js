@@ -13,8 +13,6 @@ import userFollowTopicsReducer from "./user-follow-topics/userFollowTopicsReduce
 import userFollowingTopicsReducer from "./user-following-topics/userFollowingTopicsReducer";
 
 import mainPostReducer from "./main-post/mainPostReducer";
-// import mainPostCommentsReducer from "./main-post-comments/mainPostCommentsReducer";
-// import mainPostCommentInputReducer from "./main-post-comment-input/mainPostCommentInputReducer";
 
 import postImagesReducer from "./add-post/post-images/postImagesReducer";
 import postTopicsReducer from "./add-post/post-topics/postTopicsReducer";
@@ -83,8 +81,6 @@ const rootReducer = combineReducers({
 	postCommentInputReducer,
 
 	mainPostReducer,
-	// mainPostCommentsReducer,
-	// mainPostCommentInputReducer,
 
 	notificationsReducer,
 

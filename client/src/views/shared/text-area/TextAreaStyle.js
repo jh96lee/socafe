@@ -9,10 +9,8 @@ export const TextAreaStyle = styled.div`
 
 	& p {
 		display: inline;
-		font-size: 1.37rem;
-		font-weight: 300;
 		letter-spacing: -0.4px;
-		line-height: 2.2rem;
+		line-height: 2.5rem;
 	}
 
 	& span {

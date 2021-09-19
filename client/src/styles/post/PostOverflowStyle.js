@@ -4,26 +4,15 @@ const PostOverflowStyle = styled.div`
 	display: flex;
 	flex-direction: column;
 	overflow: scroll;
+	padding: 2rem;
 
 	& > *:first-child {
-		margin-bottom: 0.7rem;
+		margin-bottom: 1rem;
 	}
 
-	/* REVIEW: specific */
-	padding: 2rem;
-	/* REVIEW: specific */
-
-	/* REVIEW: specific */
 	& > *:last-child {
 		margin-top: 1rem;
 	}
-	/* REVIEW: specific */
-
-	/* REVIEW: specific */
-	/* & > *:empty {
-		display: none;
-	} */
-	/* REVIEW: specific */
 `;
 
 export default PostOverflowStyle;

@@ -119,12 +119,12 @@ const MainPost = () => {
 
 					{/* REVIEW: 4th child */}
 					<MainPostOverflowStyle>
+						<PostTopics postTopicsArray={mainPost.post_topics} />
+
 						<TextArea
 							textAreaNodesArray={mainPost.post_captions}
 							charactersLimit={350}
 						/>
-
-						<PostTopics postTopicsArray={mainPost.post_topics} />
 
 						<PostComments />
 					</MainPostOverflowStyle>

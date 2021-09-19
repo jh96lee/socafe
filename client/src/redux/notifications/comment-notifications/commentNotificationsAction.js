@@ -21,11 +21,11 @@ export const insertCommentNotifications =
 			method: "POST",
 			url: "http://localhost:8080/notification/comment",
 			data: {
-				mainCommentID: commentID,
-				mainPostID: postID,
-				mainPostCommentParentCommentID: parentCommentID,
-				mainPostCommentRepliedCommentID: repliedCommentID,
-				mainPostCommentNodesArray: commentNodesArray,
+				commentID,
+				postID,
+				parentCommentID,
+				repliedCommentID,
+				commentNodesArray,
 			},
 			headers: {
 				Authorization: `Bearer ${token}`,

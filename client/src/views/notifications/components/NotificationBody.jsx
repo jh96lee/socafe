@@ -37,11 +37,12 @@ const NotificationBody = ({ notification }) => {
 
 		dispatch(setNotiPostID(post_id));
 
-		if (commentNotificationTypes.includes(notificationType)) {
-			dispatch(setNotiInstigatedCommentID(instigated_comment_id));
+		// FIX
+		// if (commentNotificationTypes.includes(notificationType)) {
+		dispatch(setNotiInstigatedCommentID(instigated_comment_id));
 
-			dispatch(setNotiReceivedCommentID(received_comment_id));
-		}
+		dispatch(setNotiReceivedCommentID(received_comment_id));
+		// }
 
 		updateIsNotificationCheckedRequest(notificationID);
 	};

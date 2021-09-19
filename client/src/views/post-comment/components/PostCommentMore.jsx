@@ -23,17 +23,15 @@ const PostCommentMore = ({
 	const dispatch = useDispatch();
 
 	const { isDropdownMenuOpen, setIsDropdownMenuOpen } = useDropdown(
-		"main-post-comment-more-dropdown-trigger",
-		"main-post-comment-more-dropdown-menu",
+		"post-comment-more-dropdown-trigger",
+		"post-comment-more-dropdown-menu",
 		true
 	);
 
 	const dropdownElementsArray = [
 		{
-			content: {
-				icon: <TrashOutline />,
-				label: "Delete",
-			},
+			icon: <TrashOutline />,
+			text: "Delete",
 			onClickEventHandler: async () => {
 				const data = await deleteCommentRequest(commentID);
 
@@ -56,18 +54,31 @@ const PostCommentMore = ({
 
 	return (
 		<PostCommentMoreStyle
-			id="main-post-comment-more-dropdown-trigger"
+			id="post-comment-more-dropdown-trigger"
 			onMouseLeave={handleCommentMoreOnMouseLeave}
 		>
 			<MoreHorizontal />
 
 			{isDropdownMenuOpen && (
 				<DropdownMenu
-					dropdownMenuID="main-post-comment-more-dropdown-menu"
+					dropdownMenuID="post-comment-more-dropdown-menu"
 					dropdownElementsArray={dropdownElementsArray}
 					dropdownMenuStyleObject={{
 						menuTop: "100%",
 						menuRight: "0",
+						menuWidth: "10rem",
+					}}
+				/>
+			)}
+
+			{isDropdownMenuOpen && (
+				<DropdownMenu
+					dropdownMenuID="post-comment-more-dropdown-menu"
+					dropdownElementsArray={dropdownElementsArray}
+					dropdownMenuStyleObject={{
+						menuTop: "100%",
+						menuRight: "0",
+						menuWidth: "16rem",
 					}}
 				/>
 			)}

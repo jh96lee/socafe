@@ -33,8 +33,11 @@ const PostViewOrHideReplies = ({
 			{commentTotalReplies !== 0 && (
 				<PostViewOrHideActionStyle onClick={handleViewMoreRepliesActionOnClick}>
 					<span>
-						View more replies
-						{!isRepliesOpen ? `(${commentTotalReplies})` : null}
+						{!isRepliesOpen
+							? `View more replies (${commentTotalReplies})`
+							: nextAPIEndpoint
+							? "View more replies"
+							: "No more replies..."}
 					</span>
 
 					{!isRepliesOpen ? <Down /> : null}

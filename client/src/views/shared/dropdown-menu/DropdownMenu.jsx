@@ -9,6 +9,7 @@ const DropdownMenu = ({
 	dropdownMenuID,
 	dropdownElementsArray,
 	dropdownMenuStyleObject,
+	dropdownElementStyleObject,
 }) => {
 	return (
 		<DropdownMenuStyle id={dropdownMenuID} {...dropdownMenuStyleObject}>
@@ -20,7 +21,11 @@ const DropdownMenu = ({
 				<React.Fragment>
 					{dropdownElementsArray.map((element, idx) => {
 						return (
-							<DropdownElement key={`dropdown-element__${idx}`} {...element} />
+							<DropdownElement
+								key={`dropdown-element__${idx}`}
+								{...element}
+								dropdownElementStyleObject={dropdownElementStyleObject}
+							/>
 						);
 					})}
 				</React.Fragment>

@@ -7,7 +7,12 @@ export const PostTopicsStyle = styled.div`
 `;
 
 export const PostTopicStyle = styled.p`
-	font-size: 1.37rem;
+	font-size: 1.4rem;
 	font-weight: 500;
-	color: var(--secondary-element-default-color);
+	color: var(--char-default);
+
+	&:hover {
+		cursor: pointer;
+		text-decoration: underline;
+	}
 `;

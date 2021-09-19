@@ -58,7 +58,7 @@ export const uploadPostComment =
 		const token = fetchToken();
 
 		const { postID, parentCommentID, repliedCommentID } =
-			getState().mainPostCommentInputReducer;
+			getState().postCommentInputReducer;
 
 		const { data } = await axios({
 			method: "POST",

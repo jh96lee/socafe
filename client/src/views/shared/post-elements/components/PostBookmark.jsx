@@ -1,9 +1,6 @@
 import * as React from "react";
-import styled from "styled-components";
 
-import { IconElement } from "../../../shared";
-
-import { PostLikeStyle } from "../styles/PostLikeStyle";
+import { Icon } from "../../../shared";
 
 import { BookmarkEmpty, BookmarkFill } from "../../../../assets";
 
@@ -11,7 +8,6 @@ import { usePostBookmark } from "../../../../hooks";
 
 const PostBookmark = ({
 	bookmarkIconSize = "2.2rem",
-	isBookmarkIconBackgroundTransparent = false,
 	postIDProp,
 	isBookmarkedProp,
 }) => {
@@ -21,17 +17,16 @@ const PostBookmark = ({
 	);
 
 	return (
-		<IconElement
+		<Icon
 			iconRole="button"
-			onClick={handlePostBookmarkOnClick}
-			iconElementStyleObject={{
-				elementBackgroundColor:
-					isBookmarkIconBackgroundTransparent && "transparent",
+			iconType="presentation"
+			iconOnClick={handlePostBookmarkOnClick}
+			iconStyleObject={{
 				iconSize: bookmarkIconSize,
 			}}
 		>
 			{isBookmarkedState ? <BookmarkFill /> : <BookmarkEmpty />}
-		</IconElement>
+		</Icon>
 	);
 };
 

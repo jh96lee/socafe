@@ -1,6 +1,6 @@
 import * as React from "react";
 
-import { IconElement } from "../../../shared";
+import { Icon } from "../../../shared";
 
 import { PostLikeStyle } from "../styles/PostLikeStyle";
 
@@ -8,16 +8,11 @@ import { LikeOutline, LikeFilled } from "../../../../assets";
 
 import { usePostLike } from "../../../../hooks";
 
-import styled from "styled-components";
-
-const PostLikeIconWrapperStyle = styled.div`
-	border-radius: 50%;
-`;
-
 const PostLike = ({
 	postIDProp,
 	isLikedProp,
 	totalLikesProp,
+	postLikeIconSize,
 	postLikeStyleObject,
 }) => {
 	const { isLikedState, totalLikesState, handlePostLikeOnClick } = usePostLike(
@@ -28,9 +23,17 @@ const PostLike = ({
 
 	return (
 		<PostLikeStyle {...postLikeStyleObject}>
-			<PostLikeIconWrapperStyle onClick={handlePostLikeOnClick}>
+			<Icon
+				iconRole="button"
+				iconType="presentation"
+				iconOnClick={handlePostLikeOnClick}
+				iconStyleObject={{
+					iconFill: "var(--char-like)",
+					iconSize: postLikeIconSize,
+				}}
+			>
 				{isLikedState ? <LikeFilled /> : <LikeOutline />}
-			</PostLikeIconWrapperStyle>
+			</Icon>
 
 			<h5>{totalLikesState}</h5>
 		</PostLikeStyle>

@@ -10,7 +10,7 @@ export const NavigationStyle = styled.nav`
 	gap: 3rem;
 	padding: 3rem;
 	background-color: var(--bg-default);
-	width: ${(props) => (props.isNavigationAtHome ? "35rem" : "25rem")};
+	width: ${(props) => (props.isNavigationAtHome ? "35rem" : "28rem")};
 	height: fit-content;
 
 	& > *:first-child {

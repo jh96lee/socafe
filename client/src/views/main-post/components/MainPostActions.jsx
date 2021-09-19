@@ -1,7 +1,7 @@
 import * as React from "react";
 import { useSelector } from "react-redux";
 
-import { IconElement, PostLike, PostBookmark } from "../../shared";
+import { Icon, PostLike, PostBookmark } from "../../shared";
 
 import { MainPostActionsStyle } from "../styles/MainPostActionsStyle";
 import { PostActionStyle } from "../../../styles";
@@ -9,7 +9,7 @@ import { PostActionStyle } from "../../../styles";
 import { CommentOutline } from "../../../assets";
 
 const MainPostActions = () => {
-	const iconSize = "2.2rem";
+	const iconSize = "2.4rem";
 
 	const {
 		mainPostID,
@@ -26,17 +26,19 @@ const MainPostActions = () => {
 				postIDProp={mainPostID}
 				isLikedProp={isMainPostLiked}
 				totalLikesProp={mainPostTotalLikes}
+				postLikeIconSize={iconSize}
 			/>
 
 			<PostActionStyle>
-				<IconElement
+				<Icon
 					iconRole="button"
-					iconElementStyleObject={{
+					iconType="presentation"
+					iconStyleObject={{
 						iconSize,
 					}}
 				>
 					<CommentOutline />
-				</IconElement>
+				</Icon>
 
 				<h5>{mainPost.post_total_comments}</h5>
 			</PostActionStyle>
