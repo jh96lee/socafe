@@ -6,8 +6,8 @@ export const SelectedContentStyle = styled.div`
 	gap: 1.2rem;
 	align-items: center;
 	padding: 0.7rem 1.4rem;
-	color: var(--secondary-element-default-color);
-	background-color: var(--secondary-element-default-bg-color);
+	color: var(--char-blue-1);
+	background-color: var(--bg-blue-1);
 	border-radius: 1rem;
 
 	& > p {
@@ -16,7 +16,7 @@ export const SelectedContentStyle = styled.div`
 	}
 
 	& > svg {
-		fill: var(--secondary-element-default-color);
+		fill: var(--char-blue-1);
 		width: 1rem;
 		height: 1rem;
 	}

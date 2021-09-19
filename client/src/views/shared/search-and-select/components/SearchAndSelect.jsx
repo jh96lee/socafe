@@ -1,8 +1,7 @@
 import * as React from "react";
 
-import { FormInput, DropdownElement, Button } from "../..";
+import { FormInput, DropdownMenu, DropdownElement, Button } from "../..";
 import SearchAndSelectedContents from "./SearchAndSelectedContents";
-import DropdownMenu from "../../dropdown/components/DropdownMenu";
 
 import { useDropdown, usePagination } from "../../../../hooks";
 

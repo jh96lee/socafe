@@ -1,6 +1,6 @@
 import * as React from "react";
 
-import { IconElement } from "../../index";
+import { Icon } from "../../index";
 
 import { UploadedImageStyle } from "../styles/UploadedImageStyle";
 
@@ -12,16 +12,14 @@ const UploadedImage = ({
 }) => {
 	return (
 		<UploadedImageStyle data-image-id={uploadedImage.id}>
-			<IconElement
-				onClick={handleUploadedImageRemoveIconOnClick}
-				iconElementStyleObject={{
-					elementPosition: "absolute",
-					elementTop: "0",
-					elementRight: "0",
-					elementPadding: "0.7rem",
-					elementBackgroundColor: "var( --button-default-bg-color)",
-					elementHoverBackgroundColor: "var(--button-default-hover-bg-color)",
-					iconColor: "#fff",
+			<Icon
+				iconOnClick={handleUploadedImageRemoveIconOnClick}
+				iconType="overlay"
+				iconRole="button"
+				iconStyleObject={{
+					iconPosition: "absolute",
+					iconTop: "0.3rem",
+					iconRight: "0.3rem",
 					iconSize: "1rem",
 				}}
 				otherProps={{
@@ -29,7 +27,7 @@ const UploadedImage = ({
 				}}
 			>
 				<CloseAlt />
-			</IconElement>
+			</Icon>
 
 			<img src={uploadedImage.image_url} alt="uploaded content" />
 		</UploadedImageStyle>

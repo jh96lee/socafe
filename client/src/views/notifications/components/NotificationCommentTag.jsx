@@ -3,18 +3,18 @@ import { Link } from "react-router-dom";
 
 import { NotificationTextStyle } from "../styles/NotificationTextStyle";
 
-const NotificationLike = ({ notification, handlePostLinkOnClick }) => {
-	const { id, instigator, post_id } = notification;
+const NotificationCommentTag = ({ notification, handlePostLinkOnClick }) => {
+	const { instigator, post_id } = notification;
 
 	return (
 		<NotificationTextStyle>
 			<Link to={`/user/${instigator.username}`}>{instigator.full_name}</Link>{" "}
-			liked your{" "}
-			<Link to={`/post/${post_id}`} onClick={() => handlePostLinkOnClick(id)}>
+			tagged you on a comment left on this{" "}
+			<Link to={`/post/${post_id}`} onClick={handlePostLinkOnClick}>
 				post
 			</Link>
 		</NotificationTextStyle>
 	);
 };
 
-export default NotificationLike;
+export default NotificationCommentTag;

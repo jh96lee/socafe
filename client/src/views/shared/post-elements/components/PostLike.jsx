@@ -3,6 +3,7 @@ import * as React from "react";
 import { Icon } from "../../../shared";
 
 import { PostLikeStyle } from "../styles/PostLikeStyle";
+import { PostActionStyle } from "../../../../styles";
 
 import { LikeOutline, LikeFilled } from "../../../../assets";
 
@@ -13,7 +14,7 @@ const PostLike = ({
 	isLikedProp,
 	totalLikesProp,
 	postLikeIconSize,
-	postLikeStyleObject,
+	postLikeFontSize,
 }) => {
 	const { isLikedState, totalLikesState, handlePostLikeOnClick } = usePostLike(
 		isLikedProp,
@@ -22,7 +23,7 @@ const PostLike = ({
 	);
 
 	return (
-		<PostLikeStyle {...postLikeStyleObject}>
+		<PostActionStyle numericalValueFontSize={postLikeFontSize}>
 			<Icon
 				iconRole="button"
 				iconType="presentation"
@@ -36,7 +37,7 @@ const PostLike = ({
 			</Icon>
 
 			<h5>{totalLikesState}</h5>
-		</PostLikeStyle>
+		</PostActionStyle>
 	);
 };
 

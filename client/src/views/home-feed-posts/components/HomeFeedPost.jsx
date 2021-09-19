@@ -7,6 +7,7 @@ import {
 	TextArea,
 	PostLike,
 	PostBookmark,
+	PostTotalComments,
 } from "../../shared";
 import HomePostImages from "./HomePostImages";
 
@@ -72,21 +73,8 @@ const HomePost = ({ post }) => {
 					isLikedProp={post_is_liked}
 					totalLikesProp={post_total_likes}
 				/>
-
-				<PostActionStyle>
-					<IconElement
-						iconRole="button"
-						iconElementStyleObject={{
-							elementBackgroundColor: "transparent",
-							elementPadding: "0.7rem",
-							iconSize: "2.2rem",
-						}}
-					>
-						<CommentOutline />
-					</IconElement>
-
-					<h5>{post_total_comments}</h5>
-				</PostActionStyle>
+				x
+				<PostTotalComments totalCommentsProp={post_total_comments} />
 			</HomeFeedPostFooterStyle>
 		</HomeFeedPostStyle>
 	);

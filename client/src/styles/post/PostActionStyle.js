@@ -3,10 +3,12 @@ import styled from "styled-components";
 const PostActionStyle = styled.div`
 	display: flex;
 	align-items: center;
-	gap: 1.5rem;
+	gap: 1.35rem;
 
 	& > h5 {
 		color: var(--char-default);
+		font-size: ${(props) => props.numericalValueFontSize};
+		font-weight: 500;
 	}
 `;
 

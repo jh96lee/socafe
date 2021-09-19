@@ -11,8 +11,8 @@ export const StatsTopPostTopicsStyle = styled.div`
 		font-weight: 500;
 		padding: 0.7rem 1.4rem;
 		/* FIX: fix root */
-		color: var(--secondary-element-default-color);
-		background-color: var(--secondary-element-default-bg-color);
+		color: var(--char-blue-1);
+		background-color: var(--bg-blue-1);
 		border-radius: 1rem;
 	}
 `;

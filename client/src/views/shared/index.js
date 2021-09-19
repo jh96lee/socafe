@@ -31,6 +31,7 @@ export { default as PostTaggedUsers } from "./post-elements/components/PostTagge
 export { default as PostTopics } from "./post-elements/components/PostTopics";
 export { default as PostLike } from "./post-elements/components/PostLike";
 export { default as PostBookmark } from "./post-elements/components/PostBookmark";
+export { default as PostTotalComments } from "./post-elements/components/PostTotalComments";
 
 export { default as Avatar } from "./avatar/components/Avatar";
 

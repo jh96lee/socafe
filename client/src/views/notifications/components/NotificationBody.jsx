@@ -1,12 +1,14 @@
 import * as React from "react";
 import { useDispatch } from "react-redux";
 
-import NotificationLike from "./NotificationLike";
-import NotificationFollow from "./NotificationFollow";
-import NotificationPost from "./NotificationPost";
-import NotificationTag from "./NotificationTag";
-import NotificationComment from "./NotificationComment";
+import NotificationCommentPost from "./NotificationCommentPost";
 import NotificationReply from "./NotificationReply";
+import NotificationCommentComment from "./NotificationCommentComment";
+import NotificationCommentTag from "./NotificationCommentTag";
+import NotificationFollow from "./NotificationFollow";
+import NotificationLikePost from "./NotificationLikePost";
+import NotificationLikeComment from "./NotificationLikeComment";
+import NotificationPostTag from "./NotificationPostTag";
 
 import {
 	setNotiPostID,
@@ -25,6 +27,7 @@ const NotificationBody = ({ notification }) => {
 	const dispatch = useDispatch();
 
 	const {
+		id,
 		created_at,
 		post_id,
 		notification_type,
@@ -32,25 +35,51 @@ const NotificationBody = ({ notification }) => {
 		received_comment_id,
 	} = notification;
 
-	const handlePostLinkOnClick = (notificationID, notificationType) => {
-		const commentNotificationTypes = ["COMMENT", "TAG", "REPLY"];
+	const handlePostLinkOnClick = () => {
+		const commentNotificationTypes = [
+			"COMMENT_POST",
+			"COMMENT_TAG",
+			"COMMENT_COMMENT",
+			"LIKE_COMMENT",
+			"REPLY",
+		];
 
 		dispatch(setNotiPostID(post_id));
 
-		// FIX
-		// if (commentNotificationTypes.includes(notificationType)) {
-		dispatch(setNotiInstigatedCommentID(instigated_comment_id));
+		if (commentNotificationTypes.includes(notification_type)) {
+			dispatch(setNotiInstigatedCommentID(instigated_comment_id));
 
-		dispatch(setNotiReceivedCommentID(received_comment_id));
-		// }
+			dispatch(setNotiReceivedCommentID(received_comment_id));
+		}
 
-		updateIsNotificationCheckedRequest(notificationID);
+		updateIsNotificationCheckedRequest(id);
 	};
 
 	return (
 		<NotificationBodyStyle>
-			{notification_type === "LIKE" && (
-				<NotificationLike
+			{notification_type === "COMMENT_POST" && (
+				<NotificationCommentPost
+					notification={notification}
+					handlePostLinkOnClick={handlePostLinkOnClick}
+				/>
+			)}
+
+			{notification_type === "REPLY" && (
+				<NotificationReply
+					notification={notification}
+					handlePostLinkOnClick={handlePostLinkOnClick}
+				/>
+			)}
+
+			{notification_type === "COMMENT_COMMENT" && (
+				<NotificationCommentComment
+					notification={notification}
+					handlePostLinkOnClick={handlePostLinkOnClick}
+				/>
+			)}
+
+			{notification_type === "COMMENT_TAG" && (
+				<NotificationCommentTag
 					notification={notification}
 					handlePostLinkOnClick={handlePostLinkOnClick}
 				/>
@@ -60,29 +89,22 @@ const NotificationBody = ({ notification }) => {
 				<NotificationFollow notification={notification} />
 			)}
 
-			{notification_type === "POST" && (
-				<NotificationPost
+			{notification_type === "LIKE_POST" && (
+				<NotificationLikePost
 					notification={notification}
 					handlePostLinkOnClick={handlePostLinkOnClick}
 				/>
 			)}
 
-			{notification_type === "TAG" && (
-				<NotificationTag
+			{notification_type === "LIKE_COMMENT" && (
+				<NotificationLikeComment
 					notification={notification}
 					handlePostLinkOnClick={handlePostLinkOnClick}
 				/>
 			)}
 
-			{notification_type === "COMMENT" && (
-				<NotificationComment
-					notification={notification}
-					handlePostLinkOnClick={handlePostLinkOnClick}
-				/>
-			)}
-
-			{notification_type === "REPLY" && (
-				<NotificationReply
+			{notification_type === "POST_TAG" && (
+				<NotificationPostTag
 					notification={notification}
 					handlePostLinkOnClick={handlePostLinkOnClick}
 				/>

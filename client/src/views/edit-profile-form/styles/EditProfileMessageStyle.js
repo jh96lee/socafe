@@ -9,7 +9,7 @@ export const EditProfileMessageStyle = styled.div`
 	display: flex;
 	align-items: center;
 	gap: 1rem;
-	background-color: var(--bg-success-color);
+	background-color: var(--bg-success);
 	padding: 1.5rem 2rem;
 	border-radius: 1rem;
 

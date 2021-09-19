@@ -27,34 +27,24 @@ const TextArea = ({ textAreaNodesArray, charactersLimit }) => {
 
 	return (
 		<TextAreaStyle>
-			<React.Fragment>
-				{nodesArray.map((node, idx) => {
-					if (
-						node.nodeType === "BR" ||
-						node.node_type === "BR" ||
-						node.nodeType === "br" ||
-						node.node_type === "br"
-					) {
-						return (
-							<div key={`${node.nodeType || node.node_type}__${idx}`}>
-								<br />
-							</div>
-						);
-					} else {
-						return (
-							<p key={`${node.nodeType || node.node_type}__${idx}`}>
-								{node.nodeValue || node.node_value}
-							</p>
-						);
-					}
-				})}
-			</React.Fragment>
+			{nodesArray.map((node, idx) => {
+				return (
+					<p key={`${node.nodeType || node.node_type}__${idx}`}>
+						{node.nodeType === "BR" || node.node_type === "BR" ? (
+							<br />
+						) : (
+							node.nodeValue || node.node_value
+						)}
 
-			{totalTextAreaCharacters > charactersLimit && (
-				<span onClick={handleExpandSpanOnClick}>
-					{isExpanded ? "...less" : "...more"}
-				</span>
-			)}
+						{totalTextAreaCharacters > charactersLimit &&
+						idx === nodesArray.length - 1 ? (
+							<span onClick={handleExpandSpanOnClick}>
+								{isExpanded ? "...less" : "...more"}
+							</span>
+						) : null}
+					</p>
+				);
+			})}
 		</TextAreaStyle>
 	);
 };

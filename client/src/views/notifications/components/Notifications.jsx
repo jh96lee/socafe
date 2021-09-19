@@ -3,6 +3,7 @@ import * as React from "react";
 import Notification from "./Notification";
 
 const Notifications = ({ notifications }) => {
+	console.log(notifications);
 	return (
 		<React.Fragment>
 			{notifications.map((notification) => {

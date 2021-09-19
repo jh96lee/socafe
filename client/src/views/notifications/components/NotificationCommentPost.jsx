@@ -3,13 +3,13 @@ import { Link } from "react-router-dom";
 
 import { NotificationTextStyle } from "../styles/NotificationTextStyle";
 
-const NotificationReply = ({ notification, handlePostLinkOnClick }) => {
+const NotificationCommentPost = ({ notification, handlePostLinkOnClick }) => {
 	const { instigator, post_id } = notification;
 
 	return (
 		<NotificationTextStyle>
 			<Link to={`/user/${instigator.username}`}>{instigator.full_name}</Link>{" "}
-			replied to your comment that you left on this{" "}
+			commented on this{" "}
 			<Link to={`/post/${post_id}`} onClick={handlePostLinkOnClick}>
 				post
 			</Link>
@@ -17,4 +17,4 @@ const NotificationReply = ({ notification, handlePostLinkOnClick }) => {
 	);
 };
 
-export default NotificationReply;
+export default NotificationCommentPost;
