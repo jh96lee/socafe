@@ -3,9 +3,9 @@ const pool = require("../pool");
 class CommentRepo {
 	static async insertComment(
 		userID,
-		mainPostID,
-		mainPostCommentParentCommentID,
-		mainPostCommentRepliedCommentID
+		postID,
+		parentCommentID,
+		repliedCommentID
 	) {
 		const { rows } = await pool.queryToDatabase(
 			`
@@ -14,12 +14,7 @@ class CommentRepo {
 		    VALUES ($1, $2, $3, $4)
 		    RETURNING id, created_at, user_id, post_id, parent_comment_id, replied_comment_id;
 			`,
-			[
-				userID,
-				mainPostID,
-				mainPostCommentParentCommentID,
-				mainPostCommentRepliedCommentID,
-			]
+			[userID, postID, parentCommentID, repliedCommentID]
 		);
 
 		return rows[0];

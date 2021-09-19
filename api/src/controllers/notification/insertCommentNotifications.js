@@ -7,17 +7,17 @@ const insertCommentNotifications = async (req, res) => {
 	const instigatorID = parseInt(res.locals.userID);
 
 	const {
-		mainCommentID,
-		mainPostID,
-		mainPostCommentParentCommentID,
-		mainPostCommentRepliedCommentID,
-		mainPostCommentNodesArray,
+		commentID,
+		postID,
+		parentCommentID,
+		repliedCommentID,
+		commentNodesArray,
 	} = req.body;
 
 	try {
-		// REVIEW: if the comment is a parent comment, mainPostCommentParentCommentID is null
+		// REVIEW: if the comment is a parent comment, parentCommentID is null
 		// REVIEW: therefore, we want to notify the post user that someone left a parent comment on his/her post
-		if (!mainPostCommentParentCommentID) {
+		if (!parentCommentID) {
 			const receiverIDData = await pool.queryToDatabase(
 				`
                 SELECT
@@ -25,7 +25,7 @@ const insertCommentNotifications = async (req, res) => {
                 FROM posts
                 WHERE id=$1;
                 `,
-				[mainPostID]
+				[postID]
 			);
 
 			const receiverID = parseInt(receiverIDData.rows[0].id);
@@ -44,11 +44,11 @@ const insertCommentNotifications = async (req, res) => {
 				[
 					instigatorID,
 					receiverID,
-					mainPostID,
+					postID,
 					null,
 					null,
 					null,
-					mainCommentID,
+					commentID,
 					null,
 					"COMMENT_POST",
 				]
@@ -57,10 +57,7 @@ const insertCommentNotifications = async (req, res) => {
 
 		// REVIEW: if the comment is a reply, but a reply to the parent comment, then we only want to leave a notification
 		// REVIEW: that someone replied to your comment instead of both someone left a comment under your comment and someone replied to your comment
-		if (
-			mainPostCommentParentCommentID &&
-			mainPostCommentParentCommentID === mainPostCommentRepliedCommentID
-		) {
+		if (parentCommentID && parentCommentID === repliedCommentID) {
 			const receiverIDData = await pool.queryToDatabase(
 				`
                 SELECT
@@ -68,7 +65,7 @@ const insertCommentNotifications = async (req, res) => {
                 FROM comments
                 WHERE id=$1
                 `,
-				[mainPostCommentParentCommentID]
+				[parentCommentID]
 			);
 
 			const receiverID = parseInt(receiverIDData.rows[0].id);
@@ -87,33 +84,33 @@ const insertCommentNotifications = async (req, res) => {
 				[
 					instigatorID,
 					receiverID,
-					mainPostID,
+					postID,
 					null,
 					null,
 					null,
-					mainCommentID,
-					mainPostCommentParentCommentID,
+					commentID,
+					parentCommentID,
 					"REPLY",
 				]
 			);
 		} else if (
-			mainPostCommentParentCommentID &&
+			parentCommentID &&
 			// REVIEW: if those 2 values, differ, 2 separate notifications need to be posted
-			mainPostCommentParentCommentID !== mainPostCommentRepliedCommentID
+			parentCommentID !== repliedCommentID
 		) {
 			const receivingCommentsArray = [
 				{
-					commentID: mainPostCommentParentCommentID,
+					receivingCommentID: parentCommentID,
 					notificationType: "COMMENT_COMMENT",
 				},
 				{
-					commentID: mainPostCommentRepliedCommentID,
+					receivingCommentID: repliedCommentID,
 					notificationType: "REPLY",
 				},
 			];
 
 			for (let receivingComment of receivingCommentsArray) {
-				const { commentID, notificationType } = receivingComment;
+				const { receivingCommentID, notificationType } = receivingComment;
 
 				const receiverIDData = await pool.queryToDatabase(
 					`
@@ -141,19 +138,19 @@ const insertCommentNotifications = async (req, res) => {
 					[
 						instigatorID,
 						receiverID,
-						mainPostID,
+						postID,
 						null,
 						null,
 						null,
-						mainCommentID,
 						commentID,
+						receivingCommentID,
 						notificationType,
 					]
 				);
 			}
 		}
 
-		for (let node of mainPostCommentNodesArray) {
+		for (let node of commentNodesArray) {
 			const { node_value, mention_type } = node;
 
 			if (mention_type === "TAG") {
@@ -187,11 +184,11 @@ const insertCommentNotifications = async (req, res) => {
 							[
 								instigatorID,
 								receiverID,
-								mainPostID,
+								postID,
 								null,
 								null,
 								null,
-								mainCommentID,
+								commentID,
 								null,
 								"COMMENT_TAG",
 							]

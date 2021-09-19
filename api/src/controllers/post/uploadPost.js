@@ -56,6 +56,20 @@ const uploadPost = async (req, res) => {
 				`,
 				[postID, id]
 			);
+
+			await pool.queryToDatabase(
+				`
+				INSERT INTO notifications
+				(
+					instigator_id, receiver_id, post_id, 
+					following_id, post_like_id, comment_like_id, 
+					instigated_comment_id, received_comment_id, notification_type
+				)
+				VALUES 
+				($1, $2, $3, $4, $5, $6, $7, $8, $9);
+				`,
+				[userID, id, postID, null, null, null, null, null, "POST_TAG"]
+			);
 		}
 
 		for (let node of postNodesArray) {
