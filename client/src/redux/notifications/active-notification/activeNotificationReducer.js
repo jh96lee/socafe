@@ -1,16 +1,10 @@
 const initialState = {
-	notiPostID: null,
 	notiInstigatedCommentID: null,
 	notiReceivedCommentID: null,
 };
 
-const notificationsReducer = (state = initialState, action) => {
+const activeNotificationReducer = (state = initialState, action) => {
 	switch (action.type) {
-		case "SET_NOTI_POST_ID":
-			return {
-				...state,
-				notiPostID: action.payload,
-			};
 		case "SET_NOTI_INSTIGATED_COMMENT_ID":
 			return {
 				...state,
@@ -26,4 +20,4 @@ const notificationsReducer = (state = initialState, action) => {
 	}
 };
 
-export default notificationsReducer;
+export default activeNotificationReducer;

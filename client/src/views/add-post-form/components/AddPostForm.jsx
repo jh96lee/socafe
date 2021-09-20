@@ -9,7 +9,10 @@ import AddPostUsers from "./AddPostUsers";
 import AddPostCaption from "./AddPostCaption";
 import AddPostHeader from "./AddPostHeader";
 
-import { uploadPost } from "../../../redux/add-post/post-upload/postUploadAction";
+import {
+	uploadPost,
+	resetPostUpload,
+} from "../../../redux/add-post/post-upload/postUploadAction";
 
 import {
 	AddContentFormStyle,
@@ -42,6 +45,8 @@ const AddPostForm = () => {
 			localStorage.removeItem("postImages");
 
 			history.push(`/post/${uploadedPostID}`);
+
+			dispatch(resetPostUpload());
 		}
 	}, [uploadedPostID]);
 
@@ -67,6 +72,7 @@ const AddPostForm = () => {
 						postCaptionsErrorMessage
 					}
 					success={postUploadSuccessMessage}
+					buttonStyleObject={{ buttonWidth: "100%" }}
 					onClick={() => {
 						dispatch(
 							uploadPost(

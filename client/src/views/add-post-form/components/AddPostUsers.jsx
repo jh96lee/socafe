@@ -1,9 +1,9 @@
 import * as React from "react";
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
 
 import { SearchAndSelect, Message } from "../../shared";
 
-import { useSearchAndSelect, useSaveDraft } from "../../../hooks";
+import { usePaginationReact, useSaveDraft } from "../../../hooks";
 
 import {
 	addPostUser,
@@ -14,21 +14,60 @@ import {
 import { AddContentStyle } from "../../../styles";
 
 const AddPostUsers = () => {
+	const [searchInput, setSearchInput] = React.useState("");
+
+	const dispatch = useDispatch();
+
 	const { postUsersArray, postUsersErrorMessage } = useSelector(
 		(state) => state.postUsersReducer
 	);
 
-	const { dropdownElementOnClickLogic, selectedContentRemoveIconOnClickLogic } =
-		useSearchAndSelect(
-			3,
-			"user",
-			true,
-			postUsersArray,
-			addPostUser,
-			removePostUser,
-			setPostUsersErrorMessage
-		);
+	const {
+		currentPage,
+		contents,
+		fetchContents,
+		nextAPIEndpoint,
+		handleLoadMoreButtonOnClick,
+	} = usePaginationReact("/search/users", 2, false);
+
 	useSaveDraft("postUsers", postUsersArray);
+
+	const handleFormInputOnChange = (e) => {
+		setSearchInput(e.target.value);
+
+		fetchContents(true, "POST", { searchInput: e.target.value });
+	};
+
+	const dropdownElementsArray = contents.map((content) => {
+		return {
+			image: content.avatar_url,
+			text: content.username,
+			subText: content.full_name,
+			onClickEventHandler: () => {
+				if (postUsersArray.length === 3) {
+					dispatch(
+						setPostUsersErrorMessage({
+							user: "You can select up to 3 topics",
+						})
+					);
+				} else if (postUsersArray.find((topic) => topic.id === content.id)) {
+					dispatch(
+						setPostUsersErrorMessage({
+							user: "Duplicate selections are not allowed",
+						})
+					);
+				} else {
+					dispatch(addPostUser(content));
+				}
+			},
+		};
+	});
+
+	React.useEffect(() => {
+		if (currentPage > 1) {
+			fetchContents(false, "POST", { searchInput });
+		}
+	}, [currentPage]);
 
 	return (
 		<AddContentStyle>
@@ -39,14 +78,15 @@ const AddPostUsers = () => {
 			/>
 
 			<SearchAndSelect
-				searchAndSelectType="add-post-user"
-				searchAndSelectedContentsArray={postUsersArray}
-				searchAndSelectInputPlaceholder="Search for users"
-				searchAndSelectInputAPIEndpoint="/search/users"
-				dropdownElementOnClickLogic={dropdownElementOnClickLogic}
-				selectedContentRemoveIconOnClickLogic={
-					selectedContentRemoveIconOnClickLogic
-				}
+				contentType="user"
+				handleFormInputOnChange={handleFormInputOnChange}
+				handleLoadMoreButtonOnClick={handleLoadMoreButtonOnClick}
+				nextAPIEndpoint={nextAPIEndpoint}
+				searchAndSelectDropdownElementsArray={dropdownElementsArray}
+				searchInput={searchInput}
+				selectedContentsArray={postUsersArray}
+				selectedContentKey="username"
+				removeContent={(id) => dispatch(removePostUser(id))}
 			/>
 		</AddContentStyle>
 	);

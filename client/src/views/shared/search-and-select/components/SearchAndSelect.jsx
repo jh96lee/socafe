@@ -1,86 +1,41 @@
 import * as React from "react";
+import { useDispatch } from "react-redux";
 
 import { FormInput, DropdownMenu, DropdownElement, Button } from "../..";
-import SearchAndSelectedContents from "./SearchAndSelectedContents";
+import SelectedContents from "./SelectedContents";
 
-import { useDropdown, usePagination } from "../../../../hooks";
+import { useDropdown } from "../../../../hooks";
 
 import { SearchAndSelectStyle } from "../styles/SearchAndSelectStyle";
 
 const SearchAndSelect = ({
-	searchAndSelectType,
-	searchAndSelectedContentsArray,
-	searchAndSelectInputPlaceholder,
-	searchAndSelectInputAPIEndpoint,
-	dropdownElementOnClickLogic,
-	selectedContentRemoveIconOnClickLogic,
+	contentType,
+	handleFormInputOnChange,
+	handleLoadMoreButtonOnClick,
+	nextAPIEndpoint,
+	searchAndSelectDropdownElementsArray,
+	searchInput,
+	selectedContentsArray,
+	selectedContentKey,
+	removeContent,
 }) => {
-	const { isDropdownMenuOpen, setIsDropdownMenuOpen } = useDropdown(
-		`search-and-select-${searchAndSelectType}-dropdown-trigger`,
-		`search-and-select-${searchAndSelectType}-dropdown-menu`,
-		false
+	const { isDropdownMenuOpen } = useDropdown(
+		`add-post-${contentType}s-dropdown-trigger`,
+		`add-post-${contentType}s-dropdown-menu`,
+		true
 	);
 
-	const {
-		contents,
-		currentPage,
-		nextAPIEndpoint,
-		fetchContents,
-		loadMoreButtonOnClickLogic,
-	} = usePagination(searchAndSelectInputAPIEndpoint, 5, true);
-
-	const handleFormInputOnChange = (e) => {
-		setIsDropdownMenuOpen(true);
-
-		fetchContents(true, "POST", {
-			searchInput: e.target.value ? e.target.value : null,
-		});
-	};
-
-	const handleLoadMoreButtonOnClick = () => {
-		loadMoreButtonOnClickLogic();
-	};
-
-	const searchbarInputRef = React.useRef();
-
-	React.useEffect(() => {
-		if (contents.length > 0) {
-			fetchContents(false, "POST", {
-				searchInput: searchbarInputRef.current.value,
-			});
-		}
-	}, [currentPage]);
-
-	// REVIEW: this provides the array that DropdownMenu needs to render
-	const dropdownElementsArray = contents.map((result) => {
-		return {
-			image: result.topic_url,
-			text: result.title,
-			onClickEventHandler: () => {
-				dropdownElementOnClickLogic(result);
-			},
-		};
-	});
-
 	return (
-		<SearchAndSelectStyle
-			id={`search-and-select-${searchAndSelectType}-dropdown-trigger`}
-		>
-			<SearchAndSelectedContents
-				searchAndSelectType={searchAndSelectType}
-				searchAndSelectedContentsArray={searchAndSelectedContentsArray}
-				selectedContentRemoveIconOnClickLogic={
-					selectedContentRemoveIconOnClickLogic
-				}
+		<SearchAndSelectStyle id={`add-post-${contentType}s-dropdown-trigger`}>
+			<SelectedContents
+				selectedContentsArray={selectedContentsArray}
+				selectedContentKey={selectedContentKey}
+				removeContent={removeContent}
 			/>
 
 			<FormInput
-				id={searchAndSelectType}
-				name={searchAndSelectType}
-				type="text"
-				label={searchAndSelectType}
-				inputRef={searchbarInputRef}
-				placeholder={searchAndSelectInputPlaceholder}
+				placeholder={`Search for ${contentType}s`}
+				value={searchInput}
 				onChange={handleFormInputOnChange}
 				formInputStyleObject={{
 					labelDisplay: "none",
@@ -91,41 +46,40 @@ const SearchAndSelect = ({
 
 			{isDropdownMenuOpen && (
 				<DropdownMenu
-					dropdownMenuID="searchbar-input-dropdown-menu"
+					dropdownMenuID={`add-post-${contentType}-dropdown-menu`}
 					dropdownMenuStyleObject={{
-						menuTop: "calc(100% + 7px)",
-						menuLeft: "0",
+						menuTop: "calc(100% + 6px)",
 						menuWidth: "100%",
 					}}
 				>
-					{contents.length === 0 ? (
+					{searchAndSelectDropdownElementsArray.length === 0 ? (
 						<p>Nothing here</p>
 					) : (
 						<React.Fragment>
-							{dropdownElementsArray.map((element, idx) => {
+							{searchAndSelectDropdownElementsArray.map((content) => {
 								return (
 									<DropdownElement
-										key={`searchbar-dropdown-element__${idx}`}
-										{...element}
+										key={`add-post-topic__${content.id}`}
+										{...content}
 									/>
 								);
 							})}
-						</React.Fragment>
-					)}
 
-					{nextAPIEndpoint === null || contents.length === 0 ? null : (
-						<Button
-							buttonType="outline"
-							buttonStyleObject={{
-								buttonFontWeight: "400",
-								buttonWidth: "100%",
-								buttonPadding: "1.3rem",
-								buttonBorderRadius: "0.5rem",
-							}}
-							onClick={handleLoadMoreButtonOnClick}
-						>
-							Load More
-						</Button>
+							{nextAPIEndpoint && (
+								<Button
+									buttonType="outline"
+									onClick={handleLoadMoreButtonOnClick}
+									buttonStyleObject={{
+										buttonFontWeight: "400",
+										buttonWidth: "100%",
+										buttonPadding: "1.3rem",
+										buttonBorderRadius: "0.5rem",
+									}}
+								>
+									Load More
+								</Button>
+							)}
+						</React.Fragment>
 					)}
 				</DropdownMenu>
 			)}

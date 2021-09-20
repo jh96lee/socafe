@@ -13,7 +13,7 @@ const postUploadReducer = (state = initalState, action) => {
 				isPostUploading: true,
 				postUploadErrorMessage: null,
 			};
-		case "UPLOADED_POST":
+		case "SET_UPLOADED_POST_ID":
 			return {
 				...state,
 				uploadedPostID: action.payload,
@@ -35,6 +35,8 @@ const postUploadReducer = (state = initalState, action) => {
 				postUploadSuccessMessage: null,
 				postUploadErrorMessage: action.payload,
 			};
+		case "RESET_POST_UPLOAD":
+			return initalState;
 		default:
 			return state;
 	}

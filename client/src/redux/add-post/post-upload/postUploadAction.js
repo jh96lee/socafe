@@ -6,8 +6,8 @@ const startUploadingPost = () => ({
 	type: "START_UPLOADING_POST",
 });
 
-const uploadedPost = (postID) => ({
-	type: "UPLOADED_POST",
+const setUploadedPostID = (postID) => ({
+	type: "SET_UPLOADED_POST_ID",
 	payload: postID,
 });
 
@@ -23,6 +23,10 @@ const setPostUploadSuccessMessage = (message) => ({
 const setPostUploadErrorMessage = (message) => ({
 	type: "SET_POST_UPLOAD_ERROR_MESSAGE",
 	payload: message,
+});
+
+export const resetPostUpload = () => ({
+	type: "RESET_POST_UPLOAD",
 });
 
 export const uploadPost =
@@ -52,7 +56,7 @@ export const uploadPost =
 			if (postID && success) {
 				dispatch(setPostUploadSuccessMessage(success));
 
-				dispatch(uploadedPost(postID));
+				dispatch(setUploadedPostID(postID));
 
 				dispatch(endUploadingPost());
 			} else {

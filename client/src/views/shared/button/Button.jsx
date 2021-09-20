@@ -13,6 +13,7 @@ const Button = ({
 }) => {
 	const buttonStyles = {
 		outline: {
+			buttonColor: "var(--char-default)",
 			buttonBackgroundColor: "transparent",
 			buttonBorder: "1px solid var(--divider-2)",
 			buttonHoverBackgroundColor: "var(--bg-2-hover)",

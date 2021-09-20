@@ -21,27 +21,10 @@ const DropdownMenuStyle = styled.div`
 	box-shadow: 0 0 3px 1px var(--divider-default);
 	overflow: scroll;
 
-	& > div {
-		padding: 0.7rem;
-		border-radius: 0.5rem;
-	}
-
-	& p {
-		color: var(--char-default);
-	}
-
 	/* REVIEW: this is to target Nothing here p tag message */
 	& > p {
+		color: var(--char-1);
 		padding: 1.4rem;
-	}
-
-	& span {
-		font-weight: 500;
-	}
-
-	& > *:hover {
-		cursor: pointer;
-		background-color: var(--bg-1-hover);
 	}
 `;
 

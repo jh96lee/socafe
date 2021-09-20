@@ -8,6 +8,7 @@ import {
 	setCurrentAllNotificationsPage,
 	fetchAllNotifications,
 	fetchExtraAllNotifications,
+	resetAllNotifications,
 } from "../../../redux/notifications/all-notifications/allNotificationsAction";
 
 import { NotificationsSectionStyle } from "../styles/NotificationsSectionStyle";
@@ -26,6 +27,10 @@ const NotificationsSection = () => {
 
 	React.useEffect(() => {
 		dispatch(fetchAllNotifications(2));
+
+		return () => {
+			dispatch(resetAllNotifications());
+		};
 	}, []);
 
 	React.useEffect(() => {

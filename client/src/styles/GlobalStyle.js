@@ -55,7 +55,7 @@ const GlobalStyles = createGlobalStyle`
         --bg-input-default: ${(props) =>
 					props.theme.isDarkMode ? "#202229" : "#edf2f5"};
         --bg-blue-1: ${(props) =>
-					props.theme.isDarkMode ? "#1fbaff14" : "#b4e8ff59"};
+					props.theme.isDarkMode ? "#62cfff26" : "#b4e8ff59"};
         --bg-yellow-1: ${(props) =>
 					props.theme.isDarkMode ? "#ffc1072b" : "#ffc1072b"};
                     

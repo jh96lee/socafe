@@ -19,7 +19,7 @@ const PostComment = ({ comment, setDeletedCommentID }) => {
 	} = comment;
 
 	const { notiInstigatedCommentID, notiReceivedCommentID } = useSelector(
-		(state) => state.notificationsReducer
+		(state) => state.activeNotificationReducer
 	);
 
 	return (

@@ -73,7 +73,7 @@ const HomePost = ({ post }) => {
 					isLikedProp={post_is_liked}
 					totalLikesProp={post_total_likes}
 				/>
-				x
+
 				<PostTotalComments totalCommentsProp={post_total_comments} />
 			</HomeFeedPostFooterStyle>
 		</HomeFeedPostStyle>

@@ -37,6 +37,10 @@ const setAllNotificationsNextAPIEndpoint = (apiEndpoint) => ({
 	payload: apiEndpoint,
 });
 
+export const resetAllNotifications = () => ({
+	type: "RESET_ALL_NOTIFICATIONS",
+});
+
 export const fetchAllNotifications =
 	(pageSize, customQueryString = "") =>
 	async (dispatch) => {

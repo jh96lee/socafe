@@ -4,7 +4,7 @@ export const FormInputStyle = styled.div`
 	display: flex;
 	flex-direction: column;
 	width: ${(props) => props.inputWidth || "100%"};
-	height: ${(props) => props.inputHeight || "100%"};
+	height: ${(props) => props.inputHeight || "fit-content"};
 
 	& label,
 	input {
@@ -20,7 +20,7 @@ export const FormInputStyle = styled.div`
 	}
 
 	& input {
-		font-size: 1.4rem;
+		font-size: 1.43rem;
 		width: 100%;
 		height: 100%;
 		outline: none;

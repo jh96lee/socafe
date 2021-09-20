@@ -38,7 +38,7 @@ import viewedStoriesReducer from "./story/viewed-stories/viewedStoriesReducer";
 
 import exploreReducer from "./explore/exploreReducer";
 
-import notificationsReducer from "./notifications/notificationsReducer";
+import activeNotificationReducer from "./notifications/active-notification/activeNotificationReducer";
 import allNotificationsReducer from "./notifications/all-notifications/allNotificationsReducer";
 import homeFeedNotificationsReducer from "./notifications/home-feed-notifications/homeFeedNotificationsReducer";
 import commentNotificationsReducer from "./notifications/comment-notifications/commentNotificationsReducer";
@@ -54,6 +54,8 @@ import postCommentInputReducer from "./post-comment/post-comment-input/postComme
 
 const rootReducer = combineReducers({
 	userReducer,
+
+	activeNotificationReducer,
 
 	activeStoryReducer,
 
@@ -81,8 +83,6 @@ const rootReducer = combineReducers({
 	postCommentInputReducer,
 
 	mainPostReducer,
-
-	notificationsReducer,
 
 	userLoginReducer,
 

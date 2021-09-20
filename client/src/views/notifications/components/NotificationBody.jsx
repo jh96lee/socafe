@@ -11,10 +11,9 @@ import NotificationLikeComment from "./NotificationLikeComment";
 import NotificationPostTag from "./NotificationPostTag";
 
 import {
-	setNotiPostID,
 	setNotiInstigatedCommentID,
 	setNotiReceivedCommentID,
-} from "../../../redux/notifications/notificationsAction";
+} from "../../../redux/notifications/active-notification/activeNotificationAction";
 
 import {
 	convertDate,
@@ -29,13 +28,12 @@ const NotificationBody = ({ notification }) => {
 	const {
 		id,
 		created_at,
-		post_id,
 		notification_type,
 		instigated_comment_id,
 		received_comment_id,
 	} = notification;
 
-	const handlePostLinkOnClick = () => {
+	const handleLinkOnClick = () => {
 		const commentNotificationTypes = [
 			"COMMENT_POST",
 			"COMMENT_TAG",
@@ -43,8 +41,6 @@ const NotificationBody = ({ notification }) => {
 			"LIKE_COMMENT",
 			"REPLY",
 		];
-
-		dispatch(setNotiPostID(post_id));
 
 		if (commentNotificationTypes.includes(notification_type)) {
 			dispatch(setNotiInstigatedCommentID(instigated_comment_id));
@@ -60,53 +56,56 @@ const NotificationBody = ({ notification }) => {
 			{notification_type === "COMMENT_POST" && (
 				<NotificationCommentPost
 					notification={notification}
-					handlePostLinkOnClick={handlePostLinkOnClick}
+					handleLinkOnClick={handleLinkOnClick}
 				/>
 			)}
 
 			{notification_type === "REPLY" && (
 				<NotificationReply
 					notification={notification}
-					handlePostLinkOnClick={handlePostLinkOnClick}
+					handleLinkOnClick={handleLinkOnClick}
 				/>
 			)}
 
 			{notification_type === "COMMENT_COMMENT" && (
 				<NotificationCommentComment
 					notification={notification}
-					handlePostLinkOnClick={handlePostLinkOnClick}
+					handleLinkOnClick={handleLinkOnClick}
 				/>
 			)}
 
 			{notification_type === "COMMENT_TAG" && (
 				<NotificationCommentTag
 					notification={notification}
-					handlePostLinkOnClick={handlePostLinkOnClick}
+					handleLinkOnClick={handleLinkOnClick}
 				/>
 			)}
 
 			{notification_type === "FOLLOW" && (
-				<NotificationFollow notification={notification} />
+				<NotificationFollow
+					notification={notification}
+					handleLinkOnClick={handleLinkOnClick}
+				/>
 			)}
 
 			{notification_type === "LIKE_POST" && (
 				<NotificationLikePost
 					notification={notification}
-					handlePostLinkOnClick={handlePostLinkOnClick}
+					handleLinkOnClick={handleLinkOnClick}
 				/>
 			)}
 
 			{notification_type === "LIKE_COMMENT" && (
 				<NotificationLikeComment
 					notification={notification}
-					handlePostLinkOnClick={handlePostLinkOnClick}
+					handleLinkOnClick={handleLinkOnClick}
 				/>
 			)}
 
 			{notification_type === "POST_TAG" && (
 				<NotificationPostTag
 					notification={notification}
-					handlePostLinkOnClick={handlePostLinkOnClick}
+					handleLinkOnClick={handleLinkOnClick}
 				/>
 			)}
 

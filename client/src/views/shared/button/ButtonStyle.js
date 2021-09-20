@@ -17,7 +17,7 @@ const ButtonStyle = styled.button`
 			? "var(--char-success)"
 			: props.error
 			? "var(--char-error)"
-			: props.buttonColor || "var(--char-default)"};
+			: props.buttonColor || "#fff"};
 	font-size: ${(props) => props.buttonFontSize || "1.43rem"};
 	font-weight: ${(props) => props.buttonFontWeight || "500"};
 	letter-spacing: -0.5px;

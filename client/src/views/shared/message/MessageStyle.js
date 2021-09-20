@@ -1,7 +1,7 @@
 import styled from "styled-components";
 
 export const MessageStyle = styled.p`
-	font-size: 1.33rem;
+	font-size: 1.37rem;
 	color: ${(props) =>
 		props.success ? "var(--char-success)" : "var(--char-error)"};
 	width: ${(props) => (props.messageWidth ? props.messageWidth : "100%")};

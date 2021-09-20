@@ -48,6 +48,8 @@ const allNotificationsReducer = (state = initialState, action) => {
 				...state,
 				allNotificationsNextAPIEndpoint: action.payload,
 			};
+		case "RESET_ALL_NOTIFICATIONS":
+			return initialState;
 		default:
 			return state;
 	}

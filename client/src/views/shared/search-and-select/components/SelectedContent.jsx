@@ -1,24 +1,33 @@
 import * as React from "react";
 
-import { CloseAlt } from "../../../../assets";
+import { Icon } from "../..";
 
 import { SelectedContentStyle } from "../styles/SelectedContentStyle";
 
-const SelectedContent = ({
-	selectedContent,
-	selectedContentRemoveIconOnClickLogic,
-}) => {
-	const { id } = selectedContent;
+import { Remove } from "../../../../assets";
 
-	const handleSelectedContentRemoveIconOnClick = () => {
-		selectedContentRemoveIconOnClickLogic(id);
+const SelectedContent = ({ content, selectedContentKey, removeContent }) => {
+	const { id } = content;
+
+	const handleRemoveIconOnClick = () => {
+		removeContent(id);
 	};
 
 	return (
 		<SelectedContentStyle>
-			<p>{selectedContent.title || selectedContent.username}</p>
+			<p>{content[selectedContentKey]}</p>
 
-			<CloseAlt onClick={handleSelectedContentRemoveIconOnClick} />
+			<Icon
+				iconRole="button"
+				iconType="overlay"
+				iconSize="1.5rem"
+				iconPadding="0.3rem"
+				iconBGColor="none"
+				iconFill="var(--char-blue-1)"
+				iconOnClick={handleRemoveIconOnClick}
+			>
+				<Remove />
+			</Icon>
 		</SelectedContentStyle>
 	);
 };
