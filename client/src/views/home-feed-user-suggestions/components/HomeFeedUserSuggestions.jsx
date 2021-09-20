@@ -7,9 +7,10 @@ import HomeFeedSuggestedUser from "./HomeFeedSuggestedUser";
 import { fetchToken } from "../../../utils";
 
 import {
-	HomeFeedUserSuggestionsStyle,
-	HomeFeedUserSuggestionsWrapperStyle,
-} from "../styles/HomeFeedUserSuggestionsStyle";
+	HomeFeedSectionStyle,
+	HomeFeedSectionHeaderStyle,
+	HomeFeedSectionContentsStyle,
+} from "../../../styles";
 
 const HomeFeedUserSuggestions = () => {
 	const [userSuggestions, setUserSuggestions] = React.useState([]);
@@ -43,19 +44,23 @@ const HomeFeedUserSuggestions = () => {
 	}, []);
 
 	return (
-		<HomeFeedUserSuggestionsStyle>
-			<h5>Suggestions</h5>
+		<HomeFeedSectionStyle>
+			<HomeFeedSectionHeaderStyle>
+				<h4>Suggestions</h4>
+			</HomeFeedSectionHeaderStyle>
 
-			{isUserSuggestionsLoaded ? (
-				<HomeFeedUserSuggestionsWrapperStyle>
-					{userSuggestions.map((user) => {
-						return <HomeFeedSuggestedUser suggestedUser={user} />;
-					})}
-				</HomeFeedUserSuggestionsWrapperStyle>
-			) : (
-				<Loader />
-			)}
-		</HomeFeedUserSuggestionsStyle>
+			<HomeFeedSectionContentsStyle>
+				{isUserSuggestionsLoaded ? (
+					<React.Fragment>
+						{userSuggestions.map((user) => {
+							return <HomeFeedSuggestedUser suggestedUser={user} />;
+						})}
+					</React.Fragment>
+				) : (
+					<Loader />
+				)}
+			</HomeFeedSectionContentsStyle>
+		</HomeFeedSectionStyle>
 	);
 };
 

@@ -15,7 +15,7 @@ const Notification = ({ notification }) => {
 				userID={instigator.id}
 				username={instigator.username}
 				avatarURL={instigator.avatar_url}
-				avatarSize="4.2rem"
+				avatarSize="4rem"
 			/>
 
 			<NotificationBody notification={notification} />

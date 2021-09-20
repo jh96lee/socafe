@@ -1,13 +1,10 @@
 import * as React from "react";
 
-import { UserMetadata } from "../../shared";
+import { UserMetadata, Icon, Button } from "../../shared";
 
 import { followUserRequest, unfollowUserRequest } from "../../../utils";
 
-import {
-	HomeFeedSuggestedUserStyle,
-	HomeFeedFollowSuggestedUserButtonStyle,
-} from "../styles/HomeFeedSuggestedUserStyle";
+import { HomeFeedSuggestedUserStyle } from "../styles/HomeFeedSuggestedUserStyle";
 
 import { Follow, Following } from "../../../assets";
 
@@ -42,17 +39,32 @@ const HomeFeedSuggestedUser = ({ suggestedUser }) => {
 				username={suggestedUser.username}
 				text={suggestedUser.username}
 				subText={suggestedUser.full_name}
+				textFontSize="1.35rem"
+				subTextFontSize="1.25rem"
 			/>
 
-			{/* FIX */}
-			<HomeFeedFollowSuggestedUserButtonStyle
-				isFollowing={isFollowing}
+			<Button
+				buttonType="standalone"
 				onClick={handleFollowButtonOnClick}
+				buttonStyleObject={{ buttonFontSize: "1.35rem" }}
+				otherProps={{
+					display: "flex",
+					alignItems: "center",
+					gap: "0.6rem",
+				}}
 			>
 				{isFollowing ? "Following" : "Follow"}
 
-				{isFollowing ? <Following /> : <Follow />}
-			</HomeFeedFollowSuggestedUserButtonStyle>
+				{isFollowing ? (
+					<Icon iconRole="button" iconType="standalone" iconSize="1.5rem">
+						<Following />
+					</Icon>
+				) : (
+					<Icon iconRole="button" iconType="standalone" iconSize="1.5rem">
+						<Follow />
+					</Icon>
+				)}
+			</Button>
 		</HomeFeedSuggestedUserStyle>
 	);
 };

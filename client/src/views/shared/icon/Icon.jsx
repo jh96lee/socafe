@@ -38,6 +38,11 @@ const Icon = ({
 			iconBGHoverColor: null,
 			iconFill: "var(--char-presentation)",
 		},
+		standalone: {
+			iconBGColor: "none",
+			iconBGHoverColor: "none",
+			iconPadding: "0rem",
+		},
 	};
 
 	const iconStyle = iconType ? iconStylesObject[iconType] : {};

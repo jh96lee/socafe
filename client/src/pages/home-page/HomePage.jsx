@@ -18,12 +18,12 @@ const HomePageStyle = styled(PageStyle)`
 	display: flex;
 
 	& > *:first-child {
-		width: 65rem;
+		width: 60rem;
 		margin: auto;
 	}
 
 	& > *:last-child {
-		width: 35rem;
+		width: 36.5rem;
 	}
 `;
 
@@ -33,7 +33,6 @@ const HomePageLeftStyle = styled.div`
 	display: flex;
 	flex-direction: column;
 	gap: 2rem;
-	width: 58rem;
 	margin: auto;
 	padding: 3rem 0;
 `;

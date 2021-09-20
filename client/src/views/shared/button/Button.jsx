@@ -10,6 +10,7 @@ const Button = ({
 	disabled,
 	buttonType,
 	buttonStyleObject,
+	otherProps,
 }) => {
 	const buttonStyles = {
 		outline: {
@@ -29,6 +30,12 @@ const Button = ({
 			buttonBackgroundColor: "var(--bg-contrast)",
 			buttonHoverBackgroundColor: "var(--bg-contrast-hover)",
 		},
+		standalone: {
+			buttonColor: "var(--char-default)",
+			buttonBackgroundColor: "transparent",
+			buttonHoverBackgroundColor: "transparent",
+			buttonPadding: "0rem",
+		},
 	};
 
 	const buttonStyleProps = buttonType ? buttonStyles[buttonType] : {};
@@ -41,6 +48,7 @@ const Button = ({
 			onClick={onClick}
 			{...buttonStyleProps}
 			{...buttonStyleObject}
+			style={otherProps}
 		>
 			{children}
 		</ButtonStyle>
