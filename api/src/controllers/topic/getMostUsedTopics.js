@@ -8,18 +8,20 @@ const getMostUsedTopics = async (req, res) => {
 			id,
 			title,
 			topic_url,
-			total
-			FROM post_topics
+			count AS topic_total_used
+			FROM post_topics 
 			JOIN (
 				SELECT
-				COUNT(*) AS total,
-				topic_id
-				FROM topics_posts
+				topic_id,
+				COUNT(*)
+				FROM posts
+				JOIN topics_posts
+				ON posts.id=topics_posts.post_id
 				GROUP BY topic_id
 			) AS t
-			ON post_topics.id=t.topic_id
-			ORDER BY total DESC
-			LIMIT 15;
+			ON post_topics.id=t.topic_id 
+			ORDER BY count DESC
+			LIMIT 10;
 			`,
 			[]
 		);
