@@ -15,6 +15,8 @@ const PostLike = ({
 	totalLikesProp,
 	postLikeIconSize,
 	postLikeFontSize,
+	postLikeFontWeight,
+	postLikeGap,
 }) => {
 	const { isLikedState, totalLikesState, handlePostLikeOnClick } = usePostLike(
 		isLikedProp,
@@ -23,7 +25,11 @@ const PostLike = ({
 	);
 
 	return (
-		<PostActionStyle numericalValueFontSize={postLikeFontSize}>
+		<PostActionStyle
+			numericalValueFontSize={postLikeFontSize}
+			numericalValueFontWeight={postLikeFontWeight}
+			postActionGap={postLikeGap}
+		>
 			<Icon
 				iconRole="button"
 				iconType="presentation"

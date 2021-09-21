@@ -1,98 +1,67 @@
 import * as React from "react";
+import { useLocation } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 
-import { Loader } from "../../shared";
+import { Loader, Button } from "../../shared";
 import ExplorePost from "./ExplorePost";
 
 import {
-	fetchedExplorePosts,
-	fetchedExtraExplorePosts,
-	setExploreNextAPIEndpoint,
+	fetchExplorePosts,
+	fetchExtraExplorePosts,
+	setExplorePostsPage,
+	setSelectedTopicIDsArray,
 } from "../../../redux/explore/exploreAction";
 
-import { usePagination } from "../../../hooks";
+import { fetchTopicIDsFromQueryString } from "../../../utils";
 
-import { fetchToken } from "../../../utils";
-
-import styled from "styled-components";
-
-const ExplorePostsStyle = styled.div`
-	display: flex;
-	flex-direction: column;
-	align-items: center;
-`;
-
-const ExplorePostsContainerStyle = styled.div`
-	display: grid;
-	grid-template-columns: repeat(5, 1fr);
-	grid-auto-rows: 15vw;
-	gap: 3rem 2rem;
-
-	& > *:first-child {
-		grid-column: 1 / 3;
-		grid-row: 1 / 3;
-	}
-`;
+import {
+	ExplorePostsStyle,
+	ExplorePostsSectionStyle,
+} from "../styles/ExplorePostsStyle";
 
 const ExplorePosts = () => {
-	const { explorePosts, exploreNextAPIEndpoint, selectedExploreTopicID } =
-		useSelector((state) => state.exploreReducer);
+	const dispatch = useDispatch();
 
-	const explorePostsQueryParams = React.useMemo(() => {
-		return selectedExploreTopicID ? `&topic=${selectedExploreTopicID}` : null;
-	}, [selectedExploreTopicID]);
+	const { search } = useLocation();
 
 	const {
-		currentPage,
-		setCurrentPage,
-		fetchContents,
-		isInitialContentsLoaded,
-		isExtraContentsLoading,
-	} = usePagination(
-		"/post/explore",
-		3,
-		false,
-		true,
-		fetchedExplorePosts,
-		fetchedExtraExplorePosts,
-		setExploreNextAPIEndpoint,
-		exploreNextAPIEndpoint,
-		explorePostsQueryParams
-	);
-
-	const afterInitialMount = React.useRef(false);
+		currentExplorePostsPage,
+		explorePosts,
+		isExplorePostsLoaded,
+		isExtraExplorePostsLoading,
+		explorePostsNextAPIEndpoint,
+	} = useSelector((state) => state.exploreReducer);
 
 	React.useEffect(() => {
-		const token = fetchToken();
+		dispatch(setExplorePostsPage(true));
 
-		fetchContents(true, "GET", null, {
-			Authorization: `Bearer ${token}`,
-		});
-	}, [selectedExploreTopicID]);
+		const topicIDsArray = fetchTopicIDsFromQueryString(search);
 
-	React.useEffect(() => {
-		if (afterInitialMount.current) {
-			if (explorePosts.length > 0) {
-				const token = fetchToken();
-
-				fetchContents(false, "GET", null, {
-					Authorization: `Bearer ${token}`,
-				});
-			}
+		if (topicIDsArray) {
+			dispatch(setSelectedTopicIDsArray(topicIDsArray));
 		}
 
-		afterInitialMount.current = true;
-	}, [currentPage]);
+		const customQueryString =
+			topicIDsArray.length !== 0 ? `topics=${topicIDsArray.join(",")}` : "";
+
+		dispatch(fetchExplorePosts(5, customQueryString));
+	}, [search]);
+
+	React.useEffect(() => {
+		if (currentExplorePostsPage > 1) {
+			dispatch(fetchExtraExplorePosts(explorePostsNextAPIEndpoint));
+		}
+	}, [currentExplorePostsPage]);
 
 	const handleLoadMoreButtonOnClick = () => {
-		setCurrentPage((prevState) => prevState + 1);
+		dispatch(setExplorePostsPage());
 	};
 
 	return (
 		<ExplorePostsStyle>
-			{isInitialContentsLoaded ? (
+			{isExplorePostsLoaded ? (
 				<React.Fragment>
-					<ExplorePostsContainerStyle>
+					<ExplorePostsSectionStyle>
 						{explorePosts.map((content, idx) => {
 							return (
 								<ExplorePost
@@ -101,12 +70,18 @@ const ExplorePosts = () => {
 								/>
 							);
 						})}
-					</ExplorePostsContainerStyle>
+					</ExplorePostsSectionStyle>
 
-					{exploreNextAPIEndpoint === null ||
+					{explorePostsNextAPIEndpoint === null ||
 					explorePosts.length === 0 ? null : (
-						<button onClick={handleLoadMoreButtonOnClick}>
-							{isExtraContentsLoading ? (
+						<Button
+							buttonType="contrast"
+							buttonStyleObject={{
+								buttonPadding: "1.3rem 2.5rem",
+							}}
+							onClick={handleLoadMoreButtonOnClick}
+						>
+							{isExtraExplorePostsLoading ? (
 								<Loader
 									isLoaderAbsolute={false}
 									loaderSize="2.4rem"
@@ -115,7 +90,7 @@ const ExplorePosts = () => {
 							) : (
 								"Load More"
 							)}
-						</button>
+						</Button>
 					)}
 				</React.Fragment>
 			) : (

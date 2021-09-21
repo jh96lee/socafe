@@ -3,57 +3,22 @@ import { useLocation, useHistory } from "react-router-dom";
 
 import { PostLike, UserMetadata } from "../../shared";
 
-import styled from "styled-components";
+import { convertDate } from "../../../utils";
 
-const ExplorePostStyle = styled.div`
-	position: relative;
-	display: flex;
-	flex-direction: column;
-	width: 100%;
-	height: 100%;
-	max-height: 100%;
-	border-radius: 1rem;
-	overflow: hidden;
-
-	& > * {
-		width: 100%;
-	}
-
-	& > *:first-child {
-		height: calc(100% - 6.5rem);
-	}
-
-	& > *:last-child {
-		min-height: 6.5rem;
-	}
-
-	&:hover {
-		cursor: pointer;
-	}
-`;
-
-const ExplorePostImageContainerStyle = styled.div`
-	display: flex;
-	background-color: antiquewhite;
-
-	& > img {
-		width: 100%;
-		height: 100%;
-		object-fit: cover;
-		border-radius: 1rem;
-	}
-`;
-
-const ExplorePostFooterStyle = styled.div`
-	display: flex;
-	justify-content: space-between;
-	background-color: var(--bg-post);
-	padding: 0 1rem;
-`;
+import {
+	ExplorePostStyle,
+	ExplorePostFooterStyle,
+} from "../styles/ExplorePostStyle";
 
 const ExplorePost = ({ post }) => {
-	const { post_id, post_owner, post_images, post_is_liked, post_total_likes } =
-		post;
+	const {
+		created_at,
+		post_id,
+		post_owner,
+		post_images,
+		post_is_liked,
+		post_total_likes,
+	} = post;
 
 	const location = useLocation();
 	const history = useHistory();
@@ -69,34 +34,33 @@ const ExplorePost = ({ post }) => {
 		<ExplorePostStyle
 			isImageTall={post_images[0].image_height > post_images[0].image_width}
 		>
-			<ExplorePostImageContainerStyle>
-				<img
-					src={post_images[0].image_url}
-					alt="explore post"
-					onClick={handlePostOnClick}
-				/>
-			</ExplorePostImageContainerStyle>
+			<img
+				src={post_images[0].image_url}
+				alt="explore post"
+				onClick={handlePostOnClick}
+			/>
 
 			<ExplorePostFooterStyle>
 				<UserMetadata
 					userID={post_owner.id}
+					avatarSize="4.3rem"
 					avatarURL={post_owner.avatar_url}
 					username={post_owner.username}
-					text={post_owner.username}
-					subText={post_owner.full_name}
+					text={post_owner.full_name}
+					subText={convertDate(created_at)}
+					userMetadataStyleObject={{
+						textFontSize: "1.45rem",
+						subTextFontSize: "1.3rem",
+					}}
 				/>
 
 				<PostLike
 					postIDProp={post_id}
 					isLikedProp={post_is_liked}
 					totalLikesProp={post_total_likes}
-					postLikeStyleObject={{
-						postLikeGap: "0.9rem",
-						postLikeBackgroundColor: "none",
-						postLikePadding: "0",
-						postLikeHoverBackgroundColor: "none",
-						postLikeIconSize: "2.2rem",
-					}}
+					postLikeIconSize="2.1rem"
+					postLikeFontSize="1.43rem"
+					postLikeGap="1rem"
 				/>
 			</ExplorePostFooterStyle>
 		</ExplorePostStyle>

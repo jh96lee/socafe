@@ -19,7 +19,7 @@ export const UserMetadataStyle = styled.div`
 
 	& > *:last-child > p {
 		font-size: ${(props) => props.textFontSize || "1.43rem"};
-		font-weight: 500;
+		font-weight: ${(props) => props.textFontWeight || "500"};
 		color: ${(props) => props.userMetadataTextColor || "var(--char-default)"};
 		letter-spacing: -0.6px;
 	}

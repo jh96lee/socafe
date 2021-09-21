@@ -34,6 +34,7 @@ export { default as followUserRequest } from "./requests/user/followUserRequest"
 export { default as unfollowUserRequest } from "./requests/user/unfollowUserRequest";
 
 // REVIEW: route
+export { default as fetchTopicIDsFromQueryString } from "./route/fetchTopicIDsFromQueryString";
 export { default as isComponentHidden } from "./route/isComponentHidden";
 
 // REVIEW: stat

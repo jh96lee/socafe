@@ -1,5 +1,7 @@
 import axios from "axios";
 
+import { fetchToken } from "../../utils";
+
 const startFetchingExploreTopics = () => ({
 	type: "START_FETCHING_EXPLORE_TOPICS",
 });
@@ -13,43 +15,114 @@ const endFetchingExploreTopics = () => ({
 	type: "END_FETCHING_EXPLORE_TOPICS",
 });
 
-export const fetchedExplorePosts = (explorePosts) => ({
+const startFetchingExplorePosts = () => ({
+	type: "START_FETCHING_EXPLORE_POSTS",
+});
+
+const fetchedExplorePosts = (explorePosts) => ({
 	type: "FETCHED_EXPLORE_POSTS",
 	payload: explorePosts,
 });
 
-export const fetchedExtraExplorePosts = (extraExplorePosts) => ({
+const endFetchingExplorePosts = () => ({
+	type: "END_FETCHING_EXPLORE_POSTS",
+});
+
+const startFetchingExtraExplorePosts = () => ({
+	type: "START_FETCHING_EXTRA_EXPLORE_POSTS",
+});
+
+const fetchedExtraExplorePosts = (extraExplorePosts) => ({
 	type: "FETCHED_EXTRA_EXPLORE_POSTS",
 	payload: extraExplorePosts,
 });
 
-export const setExploreNextAPIEndpoint = (nextAPIEndpoint) => ({
-	type: "SET_EXPLORE_NEXT_API_ENDPOINT",
+const endFetchingExtraExplorePosts = () => ({
+	type: "END_FETCHING_EXTRA_EXPLORE_POSTS",
+});
+
+export const setExplorePostsPage = (isReset) => ({
+	type: "SET_EXPLORE_POSTS_PAGE",
+	payload: isReset,
+});
+
+export const setSelectedTopicIDsArray = (idsArray) => ({
+	type: "SET_SELECTED_TOPIC_IDS_ARRAY",
+	payload: idsArray,
+});
+
+export const setExplorePostsNextAPIEndpoint = (nextAPIEndpoint) => ({
+	type: "SET_EXPLORE_POSTS_NEXT_API_ENDPOINT",
 	payload: nextAPIEndpoint,
 });
 
-export const setSelectedExploreTopicID = (id) => ({
-	type: "SET_SELECTED_EXPLORE_TOPIC_ID",
-	payload: id,
+export const resetExplore = () => ({
+	type: "RESET_EXPLORE",
 });
 
 export const fetchExploreTopics = () => async (dispatch) => {
 	dispatch(startFetchingExploreTopics());
 
-	try {
+	const { data } = await axios({
+		method: "GET",
+		url: "http://localhost:8080/topic/explore",
+	});
+
+	const { error } = data;
+
+	if (!error) {
+		dispatch(fetchedExploreTopics(data));
+
+		dispatch(endFetchingExploreTopics());
+	}
+};
+
+export const fetchExplorePosts =
+	(pageSize, customQueryString = "") =>
+	async (dispatch) => {
+		dispatch(startFetchingExplorePosts());
+
+		const token = fetchToken();
+
 		const { data } = await axios({
 			method: "GET",
-			url: "http://localhost:8080/topic/explore",
+			url: `http://localhost:8080/post/explore?page=1&size=${pageSize}&${customQueryString}`,
+			headers: {
+				Authorization: `Bearer ${token}`,
+			},
 		});
 
-		const { error } = data;
+		const { error, contents, next } = data;
 
 		if (!error) {
-			dispatch(fetchedExploreTopics(data));
-		}
+			dispatch(fetchedExplorePosts(contents));
 
-		dispatch(endFetchingExploreTopics());
-	} catch (error) {
-		dispatch(endFetchingExploreTopics());
+			dispatch(setExplorePostsNextAPIEndpoint(next));
+
+			dispatch(endFetchingExplorePosts());
+		}
+	};
+
+export const fetchExtraExplorePosts = (nextAPIEndpoint) => async (dispatch) => {
+	dispatch(startFetchingExtraExplorePosts());
+
+	const token = fetchToken();
+
+	const { data } = await axios({
+		method: "GET",
+		url: `http://localhost:8080${nextAPIEndpoint}`,
+		headers: {
+			Authorization: `Bearer ${token}`,
+		},
+	});
+
+	const { error, contents, next } = data;
+
+	if (!error) {
+		dispatch(fetchedExtraExplorePosts(contents));
+
+		dispatch(setExplorePostsNextAPIEndpoint(next));
+
+		dispatch(endFetchingExtraExplorePosts());
 	}
 };

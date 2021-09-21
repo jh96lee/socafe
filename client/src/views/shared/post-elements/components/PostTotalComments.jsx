@@ -8,10 +8,17 @@ import { CommentOutline } from "../../../../assets";
 
 const PostTotalComments = ({
 	totalCommentsProp,
+	postTotalCommentsFontSize,
+	postTotalCommentsFontWeight,
 	postTotalCommentsIconSize,
+	postTotalCommentsGap,
 }) => {
 	return (
-		<PostActionStyle>
+		<PostActionStyle
+			numericalValueFontSize={postTotalCommentsFontSize}
+			numericalValueFontWeight={postTotalCommentsFontWeight}
+			postActionGap={postTotalCommentsGap}
+		>
 			<Icon
 				iconRole="button"
 				iconType="presentation"

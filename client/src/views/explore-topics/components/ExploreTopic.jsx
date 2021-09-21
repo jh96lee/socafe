@@ -1,48 +1,52 @@
 import * as React from "react";
-import { useDispatch } from "react-redux";
+import { useHistory } from "react-router-dom";
+import { useSelector } from "react-redux";
 
-import { setSelectedExploreTopicID } from "../../../redux/explore/exploreAction";
-
-import styled from "styled-components";
-
-const ExploreTopicStyle = styled.div`
-	display: flex;
-	align-items: center;
-	gap: 0.7rem;
-	width: fit-content;
-	padding: 1rem 1.2rem;
-	border-radius: 2rem;
-	background-color: var(--bg-input-default);
-	box-shadow: 0 0 0 1px var(--divider-default);
-
-	& > img {
-		width: 4.5rem;
-		height: 4.5rem;
-		object-fit: cover;
-		border-radius: 50%;
-	}
-
-	& > h5 {
-		color: var(--char-default);
-		font-size: 1.36rem;
-		font-weight: 400;
-	}
-
-	&:hover {
-		cursor: pointer;
-	}
-`;
+import { ExploreTopicStyle } from "../styles/ExploreTopicStyle";
 
 const ExploreTopic = ({ topic }) => {
-	const dispatch = useDispatch();
+	const { id } = topic;
 
-	const handleExploreTopicOnClick = (e) => {
-		dispatch(setSelectedExploreTopicID(topic.id));
+	const { selectedTopicIDsArray } = useSelector(
+		(state) => state.exploreReducer
+	);
+
+	const [isSelected, setIsSelected] = React.useState(
+		selectedTopicIDsArray.includes(id.toString())
+	);
+
+	const history = useHistory();
+
+	const afterInitialMount = React.useRef(false);
+
+	React.useEffect(() => {
+		if (afterInitialMount.current) {
+			const updatedTopicIDsArray = isSelected
+				? [...selectedTopicIDsArray, id.toString()]
+				: selectedTopicIDsArray.filter((topicID) => topicID !== id.toString());
+
+			if (updatedTopicIDsArray.length === 0) {
+				history.push("/explore");
+			} else {
+				const joinedQueryValues = updatedTopicIDsArray.join(",");
+
+				history.push(`/explore?topics=${joinedQueryValues}`);
+			}
+		}
+
+		afterInitialMount.current = true;
+	}, [isSelected]);
+
+	const handleExploreTopicOnClick = () => {
+		setIsSelected((prevState) => !prevState);
 	};
 
 	return (
-		<ExploreTopicStyle onClick={handleExploreTopicOnClick}>
-			<h5>{topic.title}</h5>
+		<ExploreTopicStyle
+			onClick={handleExploreTopicOnClick}
+			isSelectedTopic={isSelected}
+		>
+			<p>{topic.title}</p>
 		</ExploreTopicStyle>
 	);
 };

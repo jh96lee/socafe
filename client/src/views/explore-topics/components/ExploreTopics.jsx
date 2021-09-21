@@ -5,15 +5,7 @@ import ExploreTopic from "./ExploreTopic";
 
 import { fetchExploreTopics } from "../../../redux/explore/exploreAction";
 
-import styled from "styled-components";
-
-const ExploreTopicsStyle = styled.div`
-	display: flex;
-	align-items: center;
-	flex-wrap: wrap;
-	gap: 1.2rem;
-	padding: 2.5rem 0;
-`;
+import { ExploreTopicsStyle } from "../styles/ExploreTopicsStyle";
 
 const ExploreTopics = () => {
 	const dispatch = useDispatch();

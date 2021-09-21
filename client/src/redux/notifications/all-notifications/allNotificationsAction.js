@@ -50,7 +50,7 @@ export const fetchAllNotifications =
 
 		const { data } = await axios({
 			method: "GET",
-			url: `http://localhost:8080/notification/user?page=1&size=${pageSize}${customQueryString}`,
+			url: `http://localhost:8080/notification/user?page=1&size=${pageSize}&${customQueryString}`,
 			headers: {
 				Authorization: `Bearer ${token}`,
 			},
