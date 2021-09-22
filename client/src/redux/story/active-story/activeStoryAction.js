@@ -13,30 +13,21 @@ const endFetchingActiveStory = () => ({
 	type: "END_FETCHING_ACTIVE_STORY",
 });
 
-const setActiveStoryErrorMessage = (errorMessage) => ({
-	type: "SET_ACTIVE_STORY_ERROR_MESSAGE",
-	payload: errorMessage,
-});
-
 export const fetchActiveStory = (storyID, ownerID) => async (dispatch) => {
 	dispatch(startFetchingActiveStory());
 
-	try {
-		const { data } = await axios({
-			method: "GET",
-			url: `http://localhost:8080/story/${storyID}/${ownerID}`,
-		});
+	const { data } = await axios({
+		method: "GET",
+		url: `http://localhost:8080/story/${storyID}/${ownerID}`,
+	});
 
-		const { error } = data;
+	const { error } = data;
 
-		if (!error) {
-			dispatch(fetchedActiveStory(data));
-		} else {
-			dispatch(setActiveStoryErrorMessage(error));
-		}
-
-		dispatch(endFetchingActiveStory());
-	} catch (error) {
-		dispatch(endFetchingActiveStory());
+	if (error) {
+		dispatch(fetchedActiveStory(null));
+	} else {
+		dispatch(fetchedActiveStory(data));
 	}
+
+	dispatch(endFetchingActiveStory());
 };

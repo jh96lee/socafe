@@ -1,81 +1,49 @@
 import * as React from "react";
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
 
 import HomePost from "./HomeFeedPost";
-import { Loader } from "../../shared";
+import { Loader, Button } from "../../shared";
 
 import {
-	fetchedHomeFeedPosts,
-	fetchedExtraHomeFeedPosts,
-	setHomeFeedPostsNextAPIEndpoint,
+	fetchHomeFeedPosts,
+	fetchExtraHomeFeedPosts,
+	setHomeFeedPostsPage,
 } from "../../../redux/home-feed/home-feed-posts/homeFeedPostsAction";
 
-import { usePagination } from "../../../hooks";
-
-import { fetchToken } from "../../../utils";
-
-import { HomeFeedStyle } from "../styles/HomeFeedStyle";
+import { HomeFeedPostsStyle } from "../styles/HomeFeedPostsStyle";
 
 const HomeFeedPosts = () => {
+	const dispatch = useDispatch();
+
 	const { user } = useSelector((state) => state.userReducer);
-	const { homeFeedPosts, homeFeedPostsNextAPIEndpoint } = useSelector(
-		(state) => state.homeFeedPostsReducer
-	);
 
 	const {
-		currentPage,
-		setCurrentPage,
-		isInitialContentsLoaded,
-		isExtraContentsLoading,
-		fetchContents,
-	} = usePagination(
-		"/post/feed",
-		1,
-		false,
-		true,
-		fetchedHomeFeedPosts,
-		fetchedExtraHomeFeedPosts,
-		setHomeFeedPostsNextAPIEndpoint,
-		homeFeedPostsNextAPIEndpoint
-	);
-
-	const handleLoadMoreButtonOnClick = () => {
-		setCurrentPage((prevState) => prevState + 1);
-	};
-
-	const afterInitialMount = React.useRef(false);
+		currentHomeFeedPostsPage,
+		isHomeFeedPostsLoaded,
+		isExtraHomeFeedPostsLoading,
+		homeFeedPosts,
+		homeFeedPostsNextAPIEndpoint,
+	} = useSelector((state) => state.homeFeedPostsReducer);
 
 	React.useEffect(() => {
 		if (user) {
-			const token = fetchToken();
-
-			fetchContents(true, "GET", null, {
-				Authorization: `Bearer ${token}`,
-			});
-		} else {
-			console.log("Login or register CTA");
+			dispatch(fetchHomeFeedPosts(1));
 		}
 	}, []);
 
 	React.useEffect(() => {
-		if (afterInitialMount.current) {
-			if (homeFeedPosts.length > 0) {
-				const token = fetchToken();
-
-				fetchContents(false, "GET", null, {
-					Authorization: `Bearer ${token}`,
-				});
-			}
+		if (currentHomeFeedPostsPage > 1) {
+			dispatch(fetchExtraHomeFeedPosts(homeFeedPostsNextAPIEndpoint));
 		}
+	}, [currentHomeFeedPostsPage]);
 
-		afterInitialMount.current = true;
-	}, [currentPage]);
+	const handleLoadMoreButtonOnClick = () => {
+		dispatch(setHomeFeedPostsPage());
+	};
 
 	return (
-		<HomeFeedStyle>
-			{!user ? (
-				<h1 style={{ color: "#fff" }}>LOGIN OR REGISTER PLEASE</h1>
-			) : isInitialContentsLoaded ? (
+		<HomeFeedPostsStyle>
+			{isHomeFeedPostsLoaded ? (
 				<React.Fragment>
 					{homeFeedPosts.map((post) => {
 						return <HomePost key={`home-post__${post.post_id}`} post={post} />;
@@ -83,8 +51,14 @@ const HomeFeedPosts = () => {
 
 					{homeFeedPostsNextAPIEndpoint === null ||
 					homeFeedPosts.length === 0 ? null : (
-						<button onClick={handleLoadMoreButtonOnClick}>
-							{isExtraContentsLoading ? (
+						<Button
+							buttonType="contrast"
+							buttonStyleObject={{
+								buttonPadding: "1.3rem 2.5rem",
+							}}
+							onClick={handleLoadMoreButtonOnClick}
+						>
+							{isExtraHomeFeedPostsLoading ? (
 								<Loader
 									isLoaderAbsolute={false}
 									loaderSize="2.4rem"
@@ -93,13 +67,13 @@ const HomeFeedPosts = () => {
 							) : (
 								"Load More"
 							)}
-						</button>
+						</Button>
 					)}
 				</React.Fragment>
 			) : (
 				<Loader />
 			)}
-		</HomeFeedStyle>
+		</HomeFeedPostsStyle>
 	);
 };
 

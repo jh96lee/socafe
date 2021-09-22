@@ -1,79 +1,50 @@
 import * as React from "react";
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
 
 import StorySidebarUser from "./StorySidebarUser";
 import { Loader } from "../../shared";
 
 import {
-	fetchedHomeFeedStoriesArray,
-	fetchedExtraHomeFeedStoriesArray,
-	setHomeFeedStoriesNextAPIEndpoint,
+	fetchExtraHomeFeedStories,
+	setHomeFeedStoriesPage,
 } from "../../../redux/home-feed/home-feed-stories/homeFeedStoriesAction";
-
-import { usePagination } from "../../../hooks";
-
-import { fetchToken } from "../../../utils";
 
 import { Down } from "../../../assets";
 
 import { StorySidebarUsersStyle } from "../styles/StorySidebarUsersStyle";
 
 const StorySidebarUsers = () => {
+	const dispatch = useDispatch();
+
 	const {
-		homeFeedStoriesArray,
-		homeFeedStoriesErrorMessage,
+		currentHomeFeedStoriesPage,
+		isHomeFeedStoriesLoaded,
+		isExtraHomeFeedStoriesLoading,
+		homeFeedStories,
 		homeFeedStoriesNextAPIEndpoint,
 	} = useSelector((state) => state.homeFeedStoriesReducer);
 
-	const { currentPage, setCurrentPage, isExtraContentsLoading, fetchContents } =
-		usePagination(
-			"/story/feed",
-			2,
-			false,
-			true,
-			fetchedHomeFeedStoriesArray,
-			fetchedExtraHomeFeedStoriesArray,
-			setHomeFeedStoriesNextAPIEndpoint,
-			homeFeedStoriesNextAPIEndpoint
-		);
-
-	const afterInitialMount = React.useRef(false);
-
 	React.useEffect(() => {
-		if (homeFeedStoriesArray && afterInitialMount.current) {
-			const token = fetchToken();
-
-			fetchContents(false, "GET", null, {
-				Authorization: `Bearer ${token}`,
-			});
+		if (currentHomeFeedStoriesPage > 1) {
+			dispatch(fetchExtraHomeFeedStories(homeFeedStoriesNextAPIEndpoint));
 		}
-
-		afterInitialMount.current = true;
-	}, [currentPage]);
+	}, [currentHomeFeedStoriesPage]);
 
 	const handleLoadMoreButtonOnClick = () => {
-		setCurrentPage((prevState) => prevState + 1);
+		dispatch(setHomeFeedStoriesPage());
 	};
 
 	return (
 		<StorySidebarUsersStyle>
-			{homeFeedStoriesArray && !homeFeedStoriesErrorMessage ? (
-				homeFeedStoriesArray.map(({ storyOwner }, idx) => {
-					return (
-						<StorySidebarUser storyOwner={storyOwner} storyUserIdx={idx} />
-					);
-				})
-			) : (
-				<h1>
-					{homeFeedStoriesErrorMessage && homeFeedStoriesErrorMessage.story}
-				</h1>
-			)}
+			{homeFeedStories.map(({ storyOwner }, idx) => {
+				return <StorySidebarUser storyOwner={storyOwner} storyUserIdx={idx} />;
+			})}
 
 			{homeFeedStoriesNextAPIEndpoint === null ||
-			!homeFeedStoriesArray ||
-			(homeFeedStoriesArray && homeFeedStoriesNextAPIEndpoint === "") ? null : (
+			!homeFeedStories ||
+			(homeFeedStories && homeFeedStoriesNextAPIEndpoint === "") ? null : (
 				<button onClick={handleLoadMoreButtonOnClick}>
-					{isExtraContentsLoading ? (
+					{isExtraHomeFeedStoriesLoading ? (
 						<Loader
 							isLoaderAbsolute={false}
 							loaderSize="2.4rem"

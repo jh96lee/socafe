@@ -37,3 +37,5 @@ export { default as Logo } from "./logo/Logo";
 
 export { default as DropdownMenu } from "./dropdown-menu/DropdownMenu";
 export { default as DropdownElement } from "./dropdown-menu/DropdownElement";
+
+export { default as HorizontallyDraggableSection } from "./horizontally-draggable-section/HorizontallyDraggableSection";

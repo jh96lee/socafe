@@ -3,7 +3,6 @@ import { useHistory, useLocation } from "react-router-dom";
 
 import {
 	UserMetadata,
-	IconElement,
 	TextArea,
 	PostLike,
 	PostBookmark,
@@ -14,9 +13,6 @@ import HomePostImages from "./HomePostImages";
 import { HomeFeedPostStyle } from "../styles/HomeFeedPostStyle";
 import { HomeFeedPostHeaderStyle } from "../styles/HomeFeedPostHeaderStyle";
 import { HomeFeedPostFooterStyle } from "../styles/HomeFeedPostFooterStyle";
-import { PostActionStyle } from "../../../styles";
-
-import { CommentOutline } from "../../../assets";
 
 const HomePost = ({ post }) => {
 	const {

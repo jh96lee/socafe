@@ -1,11 +1,10 @@
 import * as React from "react";
 import { useDispatch, useSelector } from "react-redux";
 
+import { HorizontallyDraggableSection } from "../../shared";
 import ExploreTopic from "./ExploreTopic";
 
 import { fetchExploreTopics } from "../../../redux/explore/exploreAction";
-
-import { ExploreTopicsStyle } from "../styles/ExploreTopicsStyle";
 
 const ExploreTopics = () => {
 	const dispatch = useDispatch();
@@ -17,11 +16,11 @@ const ExploreTopics = () => {
 	}, []);
 
 	return (
-		<ExploreTopicsStyle>
+		<HorizontallyDraggableSection>
 			{exploreTopics.map((topic) => {
 				return <ExploreTopic topic={topic} />;
 			})}
-		</ExploreTopicsStyle>
+		</HorizontallyDraggableSection>
 	);
 };
 

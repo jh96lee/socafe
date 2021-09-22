@@ -1,22 +1,14 @@
 import * as React from "react";
-import { useDispatch } from "react-redux";
 import { useHistory } from "react-router-dom";
 
 import { Avatar } from "../../shared";
 
-import { setSelectedUserStoriesIndex } from "../../../redux/story/story-viewership/storyViewershipAction";
-
 import { HomeFeedStoryUserStyle } from "../styles/HomeFeedStoryUserStyle";
 
-const HomeFeedStoryUser = ({ storyOwner, storyIDsArray, storyIndex }) => {
-	const dispatch = useDispatch();
-
+const HomeFeedStoryUser = ({ storyOwner, storyIDsArray }) => {
 	const history = useHistory();
 
 	const handleHomeFeedStoryUserOnClick = () => {
-		// REVIEW: set selectedUserStoriesIndex
-		dispatch(setSelectedUserStoriesIndex(storyIndex));
-
 		history.push(`/story/${storyOwner.id}/${storyIDsArray[0]}`);
 	};
 

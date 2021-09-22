@@ -6,7 +6,7 @@ import { StoryProgressBar } from "../index";
 import { StoryProgressBarsStyle } from "../styles/StoryProgressBarsStyle";
 
 const StoryProgressBars = () => {
-	const { homeFeedStoriesArray } = useSelector(
+	const { homeFeedStories } = useSelector(
 		(state) => state.homeFeedStoriesReducer
 	);
 
@@ -14,13 +14,14 @@ const StoryProgressBars = () => {
 		(state) => state.storyViewershipReducer
 	);
 
+	// REVIEW: retrieve storyIDsArray
+	const { storyIDsArray } = homeFeedStories[selectedUserStoriesIndex];
+
 	return (
 		<StoryProgressBarsStyle>
-			{homeFeedStoriesArray[selectedUserStoriesIndex].storyIDsArray.map(
-				(storyID, idx) => {
-					return <StoryProgressBar storyID={storyID} progressBarIndex={idx} />;
-				}
-			)}
+			{storyIDsArray.map((storyID, idx) => {
+				return <StoryProgressBar storyID={storyID} progressBarIndex={idx} />;
+			})}
 		</StoryProgressBarsStyle>
 	);
 };

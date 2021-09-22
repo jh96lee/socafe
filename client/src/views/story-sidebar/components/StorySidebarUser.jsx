@@ -13,12 +13,12 @@ const StorySidebarUser = ({ storyOwner, storyUserIdx }) => {
 
 	const history = useHistory();
 
-	const { homeFeedStoriesArray } = useSelector(
+	const { homeFeedStories } = useSelector(
 		(state) => state.homeFeedStoriesReducer
 	);
 
 	const handleStorySidebarUserOnClick = () => {
-		const { storyURLsArray } = homeFeedStoriesArray[storyUserIdx];
+		const { storyURLsArray } = homeFeedStories[storyUserIdx];
 
 		dispatch(setSelectedUserStoriesIndex(storyUserIdx));
 

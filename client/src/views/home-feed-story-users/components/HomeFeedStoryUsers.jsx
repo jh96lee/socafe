@@ -1,62 +1,41 @@
 import * as React from "react";
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
 
 import HomeFeedStoryUser from "./HomeFeedStoryUser";
-import { Loader } from "../../shared";
+import { Loader, HorizontallyDraggableSection } from "../../shared";
 
-import {
-	fetchedHomeFeedStoriesArray,
-	fetchedExtraHomeFeedStoriesArray,
-	setHomeFeedStoriesNextAPIEndpoint,
-} from "../../../redux/home-feed/home-feed-stories/homeFeedStoriesAction";
-
-import { usePagination } from "../../../hooks";
-
-import { fetchToken } from "../../../utils";
-
-import { HomeFeedStoryUsersStyle } from "../styles/HomeFeedStoryUsersStyle";
+import { fetchHomeFeedStories } from "../../../redux/home-feed/home-feed-stories/homeFeedStoriesAction";
 
 const HomeFeedStoryUsers = () => {
+	const dispatch = useDispatch();
+
 	const { user } = useSelector((state) => state.userReducer);
 
-	const { homeFeedStoriesArray, homeFeedStoriesNextAPIEndpoint } = useSelector(
+	const { isHomeFeedStoriesLoaded, homeFeedStories } = useSelector(
 		(state) => state.homeFeedStoriesReducer
-	);
-
-	const { isInitialContentsLoaded, fetchContents } = usePagination(
-		"/story/feed",
-		2,
-		false,
-		true,
-		fetchedHomeFeedStoriesArray,
-		fetchedExtraHomeFeedStoriesArray,
-		setHomeFeedStoriesNextAPIEndpoint,
-		homeFeedStoriesNextAPIEndpoint
 	);
 
 	React.useEffect(() => {
 		if (user) {
-			const token = fetchToken();
-
-			fetchContents(true, "GET", null, {
-				Authorization: `Bearer ${token}`,
-			});
-		} else {
-			console.log("Login or register CTA");
+			dispatch(fetchHomeFeedStories(2));
 		}
 	}, []);
 
 	return (
-		<HomeFeedStoryUsersStyle>
-			{isInitialContentsLoaded ? (
+		<HorizontallyDraggableSection
+			draggableSectionStyleObject={{
+				draggableSectionGap: "2rem",
+				draggableSectionPadding: "0rem",
+			}}
+		>
+			{isHomeFeedStoriesLoaded ? (
 				<React.Fragment>
-					{homeFeedStoriesArray.map(({ storyOwner, storyIDsArray }, idx) => {
+					{homeFeedStories.map(({ storyOwner, storyIDsArray }) => {
 						return (
 							<HomeFeedStoryUser
 								key={`home-feed-story__${storyOwner.username}`}
 								storyOwner={storyOwner}
 								storyIDsArray={storyIDsArray}
-								storyIndex={idx}
 							/>
 						);
 					})}
@@ -64,7 +43,7 @@ const HomeFeedStoryUsers = () => {
 			) : (
 				<Loader />
 			)}
-		</HomeFeedStoryUsersStyle>
+		</HorizontallyDraggableSection>
 	);
 };
 

@@ -2,7 +2,7 @@ import * as React from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { useHistory, useParams } from "react-router-dom";
 
-import { IconElement, UserMetadata, Loader } from "../../shared";
+import { Icon, UserMetadata, Loader } from "../../shared";
 import { Story } from "../../story";
 import { StoryProgressBars } from "../../story-progress-bars";
 
@@ -34,7 +34,7 @@ const ActiveStory = ({ convertUnitToViewWidthBreakingPoint }) => {
 		(state) => state.activeStoryReducer
 	);
 
-	const { homeFeedStoriesArray } = useSelector(
+	const { homeFeedStories } = useSelector(
 		(state) => state.homeFeedStoriesReducer
 	);
 
@@ -51,23 +51,17 @@ const ActiveStory = ({ convertUnitToViewWidthBreakingPoint }) => {
 			// REVIEW: therefore, going backwards is allowed
 			if (activeUserStoryIndex > 0) {
 				// REVIEW: selectedUserStoriesIndex will always be set, whether the user refreshed the page, entered Story Page URL, or clicked on HomeFeedStoryUser
-				const { storyURLsArray } =
-					homeFeedStoriesArray[selectedUserStoriesIndex];
+				const { storyURLsArray } = homeFeedStories[selectedUserStoriesIndex];
 
-				const prevUserStoryIndex = activeUserStoryIndex - 1;
-
-				history.push(storyURLsArray[prevUserStoryIndex]);
+				history.push(storyURLsArray[activeUserStoryIndex - 1]);
 			} else if (
 				// REVIEW: within usersStoriesIndex, if the current selected user index is NOT 0, that means going backwards should be allowed
 				// REVIEW: also usersStoriesArray should at least longer than 1 for it to either go backwards or forwards
-				homeFeedStoriesArray.length > 1 &&
+				homeFeedStories.length > 1 &&
 				selectedUserStoriesIndex !== 0
 			) {
-				const prevUserStoriesIndex = selectedUserStoriesIndex - 1;
-
-				dispatch(setSelectedUserStoriesIndex(prevUserStoriesIndex));
-
-				const { storyURLsArray } = homeFeedStoriesArray[prevUserStoriesIndex];
+				const { storyURLsArray } =
+					homeFeedStories[selectedUserStoriesIndex - 1];
 
 				history.push(storyURLsArray[0]);
 			}
@@ -77,41 +71,35 @@ const ActiveStory = ({ convertUnitToViewWidthBreakingPoint }) => {
 	// TODO: RIGHT ONCLICK
 	const handleStoryRightOnClick = () => {
 		if (activeStory.id) {
-			const { storyIDsArray } = homeFeedStoriesArray[selectedUserStoriesIndex];
+			const { storyIDsArray } = homeFeedStories[selectedUserStoriesIndex];
 
-			if (activeUserStoryIndex === storyIDsArray.length - 1) {
-				const updatedViewedStories = updateViewedStories(
-					viewedStories,
-					homeFeedStoriesArray,
-					selectedUserStoriesIndex,
-					homeFeedStoriesArray[selectedUserStoriesIndex].storyIDsArray
-				);
+			// if (activeUserStoryIndex === storyIDsArray.length - 1) {
+			// 	const updatedViewedStories = updateViewedStories(
+			// 		viewedStories,
+			// 		homeFeedStories,
+			// 		selectedUserStoriesIndex,
+			// 		homeFeedStories[selectedUserStoriesIndex].storyIDsArray
+			// 	);
 
-				dispatch(setViewedStories(updatedViewedStories));
+			// 	dispatch(setViewedStories(updatedViewedStories));
 
-				localStorage.setItem(
-					"viewedStories",
-					JSON.stringify(updatedViewedStories)
-				);
-			}
+			// 	localStorage.setItem(
+			// 		"viewedStories",
+			// 		JSON.stringify(updatedViewedStories)
+			// 	);
+			// }
 
 			// REVIEW: activeUserStoryIndex MUST be less than the following value for it to move onto the next story
 			if (activeUserStoryIndex < storyIDsArray.length - 1) {
-				const { storyURLsArray } =
-					homeFeedStoriesArray[selectedUserStoriesIndex];
+				const { storyURLsArray } = homeFeedStories[selectedUserStoriesIndex];
 
-				const nextUserStoryIndex = activeUserStoryIndex + 1;
-
-				history.push(storyURLsArray[nextUserStoryIndex]);
+				history.push(storyURLsArray[activeUserStoryIndex + 1]);
 			} else if (
-				homeFeedStoriesArray.length > 1 &&
-				selectedUserStoriesIndex !== homeFeedStoriesArray.length - 1
+				homeFeedStories.length > 1 &&
+				selectedUserStoriesIndex !== homeFeedStories.length - 1
 			) {
-				const nextUserStoriesIndex = selectedUserStoriesIndex + 1;
-
-				dispatch(setSelectedUserStoriesIndex(nextUserStoriesIndex));
-
-				const { storyURLsArray } = homeFeedStoriesArray[nextUserStoriesIndex];
+				const { storyURLsArray } =
+					homeFeedStories[selectedUserStoriesIndex + 1];
 
 				history.push(storyURLsArray[0]);
 			}
@@ -139,8 +127,6 @@ const ActiveStory = ({ convertUnitToViewWidthBreakingPoint }) => {
 						/>
 					</ActiveStoryHeaderStyle>
 
-					{console.log(activeStory)}
-
 					<Story
 						story={activeStory}
 						convertUnitToViewWidthBreakingPoint={
@@ -149,25 +135,27 @@ const ActiveStory = ({ convertUnitToViewWidthBreakingPoint }) => {
 					/>
 
 					<ActiveStoryDirectionsStyle>
-						<IconElement
-							onClick={handleStoryLeftOnClick}
+						<Icon
+							iconRole="button"
+							iconType="overlay"
+							iconOnClick={handleStoryLeftOnClick}
 							iconElementStyleObject={{
-								elementBackgroundColor: "#0000004a",
 								iconSize: "2.5rem",
 							}}
 						>
 							<Left />
-						</IconElement>
+						</Icon>
 
-						<IconElement
-							onClick={handleStoryRightOnClick}
+						<Icon
+							iconRole="button"
+							iconType="overlay"
+							iconOnClick={handleStoryRightOnClick}
 							iconElementStyleObject={{
-								elementBackgroundColor: "#0000004a",
 								iconSize: "2.5rem",
 							}}
 						>
 							<Right />
-						</IconElement>
+						</Icon>
 					</ActiveStoryDirectionsStyle>
 				</React.Fragment>
 			) : (

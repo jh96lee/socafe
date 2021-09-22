@@ -1,4 +1,5 @@
-import React from "react";
+import * as React from "react";
+import { useLocation } from "react-router-dom";
 
 import { Avatar } from "../../shared";
 import NotificationBody from "./NotificationBody";
@@ -6,7 +7,9 @@ import NotificationBody from "./NotificationBody";
 import { NotificationStyle } from "../styles/NotificationStyle";
 import { NotificationAlertStyle } from "../styles/NotificationAlertStyle";
 
-const Notification = ({ notification }) => {
+const Notification = ({ notification, notificationAvatarSize }) => {
+	const location = useLocation();
+
 	const { instigator, is_notification_checked } = notification;
 
 	return (
@@ -15,7 +18,9 @@ const Notification = ({ notification }) => {
 				userID={instigator.id}
 				username={instigator.username}
 				avatarURL={instigator.avatar_url}
-				avatarSize="4rem"
+				avatarSize={
+					location.pathname.includes("notifications") ? "4.5rem" : "4rem"
+				}
 			/>
 
 			<NotificationBody notification={notification} />

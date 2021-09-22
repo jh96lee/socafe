@@ -5,7 +5,7 @@ import { useParams } from "react-router-dom";
 
 import { StorySidebar } from "../../views/story-sidebar";
 import { ActiveStory } from "../../views/active-story";
-import { IconElement } from "../../views/shared";
+import { Loader, Icon } from "../../views/shared";
 
 import { fetchCurrentUserStories } from "../../redux/home-feed/home-feed-stories/homeFeedStoriesAction";
 import {
@@ -15,7 +15,7 @@ import {
 
 import { useDropdown } from "../../hooks";
 
-import { fetchToken } from "../../utils";
+import { fetchToken, addStoryView } from "../../utils";
 
 import { PageWithSidebarStyle } from "../../styles";
 
@@ -24,7 +24,7 @@ import { SidebarFilled } from "../../assets";
 const StoryPage = () => {
 	const dispatch = useDispatch();
 
-	const { homeFeedStoriesArray } = useSelector(
+	const { isHomeFeedStoriesLoaded, homeFeedStories } = useSelector(
 		(state) => state.homeFeedStoriesReducer
 	);
 
@@ -50,70 +50,56 @@ const StoryPage = () => {
 	// TODO: UI setting values
 
 	React.useEffect(() => {
-		// REVIEW: if homeFeedStoriesArray does not exist because the user either refreshed the page or entered the URL directly,
-		// REVIEW: use the userID param and fetch the user's stories
-		if (!homeFeedStoriesArray) {
+		if (homeFeedStories.length === 0) {
 			dispatch(fetchCurrentUserStories(userID));
 		}
 	}, []);
 
 	React.useEffect(() => {
-		if (!homeFeedStoriesArray) {
-			dispatch(setSelectedUserStoriesIndex(0));
+		if (homeFeedStories && homeFeedStories.length > 0) {
+			const storyOwnerIDsArray = homeFeedStories.map(({ storyOwner }) => {
+				return storyOwner.id;
+			});
+
+			const currentUserStoriesIndex = storyOwnerIDsArray.indexOf(userID);
+
+			const { storyIDsArray } = homeFeedStories[currentUserStoriesIndex];
+
+			const currentStoryIndex = storyIDsArray.indexOf(storyID);
+
+			dispatch(setSelectedUserStoriesIndex(currentUserStoriesIndex));
+			dispatch(setActiveUserStoryIndex(currentStoryIndex));
 		}
+	}, [homeFeedStories, userID, storyID]);
 
-		if (homeFeedStoriesArray) {
-			// REVIEW: retrieve storyID via useParams and figure out which the index of the storyID parameter within storyIDsArray
-			const activeStoryIndex =
-				homeFeedStoriesArray[selectedUserStoriesIndex].storyIDsArray.indexOf(
-					storyID
-				);
-
-			// REVIEW: setState activeStoryIndex => allows us to properly render out StoryProgressBar
-			dispatch(setActiveUserStoryIndex(activeStoryIndex));
-		}
-	}, [homeFeedStoriesArray, userID, storyID]);
-
-	// TODO
-	const addStoryView = async () => {
-		const token = fetchToken();
-
-		await axios({
-			method: "POST",
-			url: `http://localhost:8080/story/view/${storyID}`,
-			headers: {
-				Authorization: `Bearer ${token}`,
-			},
-		});
-	};
-
-	React.useEffect(() => {
-		addStoryView();
-	}, [storyID]);
-
-	// TODO
-
-	return (
+	// FIX
+	return homeFeedStories === null ? (
+		<h1>Story not found</h1>
+	) : (
 		<PageWithSidebarStyle
 			id="story-page"
 			absoluteSidebarBreakingPoint={absoluteSidebarBreakingPoint}
 		>
-			<StorySidebar
+			<div />
+			{/* <StorySidebar
 				isResponsiveStorySidebarOpen={isDropdownMenuOpen}
 				setisResponsiveStorySidebarOpen={setIsDropdownMenuOpen}
 				storySidebarID={responsiveStorySidebarID}
 				absoluteSidebarBreakingPoint={absoluteSidebarBreakingPoint}
-			/>
+			/> */}
 
-			{homeFeedStoriesArray && (
+			{homeFeedStories.length > 0 && isHomeFeedStoriesLoaded ? (
 				<ActiveStory
 					convertUnitToViewWidthBreakingPoint={
 						convertUnitToViewWidthBreakingPoint
 					}
 				/>
+			) : (
+				<Loader />
 			)}
 
-			<IconElement
+			<div />
+			{/* <Icon
 				iconRole="button"
 				iconID={responsiveStorySidebarTriggerID}
 				iconElementStyleObject={{
@@ -123,9 +109,28 @@ const StoryPage = () => {
 				}}
 			>
 				<SidebarFilled />
-			</IconElement>
+			</Icon> */}
 		</PageWithSidebarStyle>
 	);
 };
 
 export default StoryPage;
+
+// TODO
+// const addStoryView = async () => {
+// 	const token = fetchToken();
+
+// 	await axios({
+// 		method: "POST",
+// 		url: `http://localhost:8080/story/view/${storyID}`,
+// 		headers: {
+// 			Authorization: `Bearer ${token}`,
+// 		},
+// 	});
+// };
+
+// React.useEffect(() => {
+// 	addStoryView();
+// }, [storyID]);
+
+// TODO

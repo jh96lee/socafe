@@ -19,7 +19,7 @@ const StoryProgressBar = ({ progressBarIndex }) => {
 
 	const history = useHistory();
 
-	const { homeFeedStoriesArray } = useSelector(
+	const { homeFeedStories } = useSelector(
 		(state) => state.homeFeedStoriesReducer
 	);
 
@@ -49,8 +49,6 @@ const StoryProgressBar = ({ progressBarIndex }) => {
 				progressBarInterval = setInterval(() => {
 					setWidth((prev) => {
 						if (prev >= 99) {
-							clearInterval(progressBarInterval);
-
 							return 100;
 						} else {
 							return prev + 1;
@@ -61,6 +59,7 @@ const StoryProgressBar = ({ progressBarIndex }) => {
 		}
 
 		return () => {
+			// REVIEW: clears interval every time activeUserStoryIndex changes
 			clearInterval(progressBarInterval);
 		};
 	}, [activeUserStoryIndex]);
@@ -68,44 +67,36 @@ const StoryProgressBar = ({ progressBarIndex }) => {
 	React.useEffect(() => {
 		if (activeUserStoryIndex !== null) {
 			if (activeUserStoryIndex === progressBarIndex) {
-				const { storyIDsArray } =
-					homeFeedStoriesArray[selectedUserStoriesIndex];
+				const { storyIDsArray } = homeFeedStories[selectedUserStoriesIndex];
 
 				if (width >= 99) {
 					// REVIEW: if activeUserStoryIndex reaches the end of a specific user's storyIDsArray, then update viewed stories data
 					if (activeUserStoryIndex === storyIDsArray.length - 1) {
-						const updatedViewedStories = updateViewedStories(
-							viewedStories,
-							homeFeedStoriesArray,
-							selectedUserStoriesIndex,
-							storyIDsArray
-						);
-
-						dispatch(setViewedStories(updatedViewedStories));
-
-						localStorage.setItem(
-							"viewedStories",
-							JSON.stringify(updatedViewedStories)
-						);
+						// const updatedViewedStories = updateViewedStories(
+						// 	viewedStories,
+						// 	homeFeedStories,
+						// 	selectedUserStoriesIndex,
+						// 	storyIDsArray
+						// );
+						// dispatch(setViewedStories(updatedViewedStories));
+						// localStorage.setItem(
+						// 	"viewedStories",
+						// 	JSON.stringify(updatedViewedStories)
+						// );
 					}
 
+					// REVIEW: move onto the next story
 					if (activeUserStoryIndex < storyIDsArray.length - 1) {
 						const { storyURLsArray } =
-							homeFeedStoriesArray[selectedUserStoriesIndex];
+							homeFeedStories[selectedUserStoriesIndex];
 
-						const nextUserStoryIndex = activeUserStoryIndex + 1;
-
-						history.push(storyURLsArray[nextUserStoryIndex]);
+						history.push(storyURLsArray[activeUserStoryIndex + 1]);
 					} else if (
-						homeFeedStoriesArray.length > 1 &&
-						selectedUserStoriesIndex !== homeFeedStoriesArray.length - 1
+						homeFeedStories.length > 1 &&
+						selectedUserStoriesIndex !== homeFeedStories.length - 1
 					) {
-						const nextUserStoriesIndex = selectedUserStoriesIndex + 1;
-
-						dispatch(setSelectedUserStoriesIndex(nextUserStoriesIndex));
-
 						const { storyURLsArray } =
-							homeFeedStoriesArray[nextUserStoriesIndex];
+							homeFeedStories[selectedUserStoriesIndex + 1];
 
 						history.push(storyURLsArray[0]);
 					}
