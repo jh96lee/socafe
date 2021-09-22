@@ -42,7 +42,6 @@ const getContentViewsStats = async (req, res) => {
 
 		res.send(postViewsStatsArrayData.rows);
 	} catch (error) {
-		console.log(error);
 		res.send({
 			error: {
 				catch:

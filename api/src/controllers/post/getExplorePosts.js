@@ -9,8 +9,6 @@ const getExplorePosts = async (req, res) => {
 	// REVIEW: string
 	const topicIDs = req.query.topics;
 
-	console.log(topicIDs);
-
 	const { page, size, betweenFront, betweenBack } =
 		calculatePaginationIndexes(req);
 
@@ -85,8 +83,6 @@ const getExplorePosts = async (req, res) => {
 			next: nextAPIEndpoint,
 		});
 	} catch (error) {
-		console.log(error);
-
 		res.send({
 			error: {
 				catch: "There has been an error while fetching explore related posts",
