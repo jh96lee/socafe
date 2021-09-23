@@ -55,7 +55,6 @@ const insertCommentLike = async (req, res) => {
 			res.send({ success: "Success" });
 		}
 	} catch (error) {
-		console.log(error);
 		res.send({
 			error: {
 				catch:
