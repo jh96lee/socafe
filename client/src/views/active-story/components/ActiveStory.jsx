@@ -7,10 +7,13 @@ import { Story } from "../../story";
 import { StoryProgressBars } from "../../story-progress-bars";
 
 import { setSelectedUserStoriesIndex } from "../../../redux/story/story-viewership/storyViewershipAction";
-import { setViewedStories } from "../../../redux/story/viewed-stories/viewedStoriesAction";
+import {
+	setViewedStories,
+	updateViewedStories,
+} from "../../../redux/story/viewed-stories/viewedStoriesAction";
 import { fetchActiveStory } from "../../../redux/story/active-story/activeStoryAction";
 
-import { convertDate, updateViewedStories } from "../../../utils";
+import { convertDate } from "../../../utils";
 
 import { ActiveStoryStyle } from "../styles/ActiveStoryStyle";
 import { ActiveStoryHeaderStyle } from "../styles/ActiveStoryHeaderStyle";
@@ -73,21 +76,12 @@ const ActiveStory = ({ convertUnitToViewWidthBreakingPoint }) => {
 		if (activeStory.id) {
 			const { storyIDsArray } = homeFeedStories[selectedUserStoriesIndex];
 
-			// if (activeUserStoryIndex === storyIDsArray.length - 1) {
-			// 	const updatedViewedStories = updateViewedStories(
-			// 		viewedStories,
-			// 		homeFeedStories,
-			// 		selectedUserStoriesIndex,
-			// 		homeFeedStories[selectedUserStoriesIndex].storyIDsArray
-			// 	);
+			if (activeUserStoryIndex === storyIDsArray.length - 1) {
+				const { storyOwner, storyIDsArray } =
+					homeFeedStories[selectedUserStoriesIndex];
 
-			// 	dispatch(setViewedStories(updatedViewedStories));
-
-			// 	localStorage.setItem(
-			// 		"viewedStories",
-			// 		JSON.stringify(updatedViewedStories)
-			// 	);
-			// }
+				dispatch(updateViewedStories(storyOwner.username, storyIDsArray));
+			}
 
 			// REVIEW: activeUserStoryIndex MUST be less than the following value for it to move onto the next story
 			if (activeUserStoryIndex < storyIDsArray.length - 1) {
@@ -108,7 +102,9 @@ const ActiveStory = ({ convertUnitToViewWidthBreakingPoint }) => {
 
 	return (
 		<ActiveStoryStyle>
-			{isActiveStoryLoaded ? (
+			{!isActiveStoryLoaded ? (
+				<Loader />
+			) : activeStory ? (
 				<React.Fragment>
 					<ActiveStoryHeaderStyle>
 						<StoryProgressBars />
@@ -159,7 +155,7 @@ const ActiveStory = ({ convertUnitToViewWidthBreakingPoint }) => {
 					</ActiveStoryDirectionsStyle>
 				</React.Fragment>
 			) : (
-				<Loader />
+				<h1>Story not found</h1>
 			)}
 		</ActiveStoryStyle>
 	);

@@ -3,9 +3,7 @@ import { useSelector, useDispatch } from "react-redux";
 import { useHistory } from "react-router-dom";
 
 import { setSelectedUserStoriesIndex } from "../../../redux/story/story-viewership/storyViewershipAction";
-import { setViewedStories } from "../../../redux/story/viewed-stories/viewedStoriesAction";
-
-import { updateViewedStories } from "../../../utils";
+import { updateViewedStories } from "../../../redux/story/viewed-stories/viewedStoriesAction";
 
 import {
 	StoryProgressBarStyle,
@@ -26,8 +24,6 @@ const StoryProgressBar = ({ progressBarIndex }) => {
 	const { selectedUserStoriesIndex, activeUserStoryIndex } = useSelector(
 		(state) => state.storyViewershipReducer
 	);
-
-	const { viewedStories } = useSelector((state) => state.viewedStoriesReducer);
 
 	// REVIEW: this useEffect is to set up bar's UI
 	React.useEffect(() => {
@@ -72,17 +68,10 @@ const StoryProgressBar = ({ progressBarIndex }) => {
 				if (width >= 99) {
 					// REVIEW: if activeUserStoryIndex reaches the end of a specific user's storyIDsArray, then update viewed stories data
 					if (activeUserStoryIndex === storyIDsArray.length - 1) {
-						// const updatedViewedStories = updateViewedStories(
-						// 	viewedStories,
-						// 	homeFeedStories,
-						// 	selectedUserStoriesIndex,
-						// 	storyIDsArray
-						// );
-						// dispatch(setViewedStories(updatedViewedStories));
-						// localStorage.setItem(
-						// 	"viewedStories",
-						// 	JSON.stringify(updatedViewedStories)
-						// );
+						const { storyOwner, storyIDsArray } =
+							homeFeedStories[selectedUserStoriesIndex];
+
+						dispatch(updateViewedStories(storyOwner.username, storyIDsArray));
 					}
 
 					// REVIEW: move onto the next story

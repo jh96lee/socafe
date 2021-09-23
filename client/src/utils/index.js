@@ -30,6 +30,7 @@ export { default as bookmarkPostRequest } from "./requests/post/bookmarkPostRequ
 export { default as likePostRequest } from "./requests/post/likePostRequest";
 export { default as unbookmarkPostRequest } from "./requests/post/unbookmarkPostRequest";
 export { default as unlikePostRequest } from "./requests/post/unlikePostRequest";
+export { default as addStoryViewRequest } from "./requests/story/addStoryViewRequest";
 export { default as followUserRequest } from "./requests/user/followUserRequest";
 export { default as unfollowUserRequest } from "./requests/user/unfollowUserRequest";
 

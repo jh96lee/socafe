@@ -1,8 +1,14 @@
 import * as React from "react";
 import axios from "axios";
-import { useSelector } from "react-redux";
+import { useHistory } from "react-router-dom";
+import { useSelector, useDispatch } from "react-redux";
 
 import AvatarRing from "./AvatarRing";
+
+import {
+	fetchCurrentUserStories,
+	resetHomeFeedStories,
+} from "../../../../redux/home-feed/home-feed-stories/homeFeedStoriesAction";
 
 import { AvatarStyle } from "../styles/AvatarStyle";
 import { AvatarImageStyle } from "../styles/AvatarImageStyle";
@@ -15,10 +21,14 @@ const Avatar = ({
 	avatarSize,
 	avatarOnClick,
 	isAvatarBubblePresent = false,
+	isAvatarHomeFeedStory = false,
 }) => {
-	const [avatarOwnerStoryIDsArray, setAvatarOwnerStoryIDsArray] =
-		React.useState(null);
-	const [isAvatarRingFilled, setIsAvatarRingFilled] = React.useState(false);
+	const [storyIDsArray, setStoryIDsArray] = React.useState(null);
+	const [isRingFilled, setIsRingFilled] = React.useState(false);
+
+	const dispatch = useDispatch();
+
+	const history = useHistory();
 
 	const { viewedStories } = useSelector((state) => state.viewedStoriesReducer);
 
@@ -31,67 +41,79 @@ const Avatar = ({
 		const { error } = data;
 
 		if (!error) {
-			setAvatarOwnerStoryIDsArray(data);
+			setStoryIDsArray(data);
 		}
 	};
 
 	React.useEffect(() => {
 		fetchStoryIDs();
+
+		// dispatch(fetchCurrentUserStories(userID))
 	}, []);
 
-	// REVIEW: make sure that the typing matches (both are numbers)
 	React.useEffect(() => {
-		if (avatarOwnerStoryIDsArray) {
-			if (avatarOwnerStoryIDsArray.length === 0) {
-				setIsAvatarRingFilled(false);
+		// REVIEW: this means this avatar's user does not have a story, therefore ring should be empty
+		if (!storyIDsArray || storyIDsArray.length === 0) {
+			setIsRingFilled(false);
 
-				return;
-			}
+			return;
+		}
 
-			if (!viewedStories[username]) {
-				setIsAvatarRingFilled(true);
-			} else if (viewedStories[username]) {
-				const viewedAvatarOwnerStoriesArray = viewedStories[username];
+		// REVIEW: if username does not exist with the viewedStories object, that means, the logged in user did
+		// REVIEW: not view this avatar's user's stories
+		if (!viewedStories[username]) {
+			setIsRingFilled(true);
+		}
 
-				for (let i = 0; i < avatarOwnerStoryIDsArray.length; i++) {
-					const avatarOwnerStoryID = avatarOwnerStoryIDsArray[i];
+		if (viewedStories[username]) {
+			const currentAvatarUserViewedStoryIDsArray = viewedStories[username];
 
-					if (
-						viewedAvatarOwnerStoriesArray.indexOf(avatarOwnerStoryID) === -1
-					) {
-						setIsAvatarRingFilled(true);
+			for (let i = 0; i < storyIDsArray.length; i++) {
+				const storyID = storyIDsArray[i];
 
-						break;
-					} else {
-						continue;
-					}
+				if (currentAvatarUserViewedStoryIDsArray.indexOf(storyID) === -1) {
+					setIsRingFilled(true);
+
+					break;
+				} else {
+					continue;
 				}
 			}
 		}
-	}, [avatarOwnerStoryIDsArray, username]);
+	}, [viewedStories, storyIDsArray, username]);
+
+	const handleAvatarOnClick = () => {
+		if (!isAvatarHomeFeedStory && storyIDsArray[0]) {
+			dispatch(resetHomeFeedStories());
+
+			history.push(`/story/${userID}/${storyIDsArray[0]}`);
+		}
+	};
 
 	return (
-		<AvatarStyle avatarSize={avatarSize}>
+		<AvatarStyle
+			avatarSize={avatarSize}
+			onClick={avatarOnClick ? avatarOnClick : handleAvatarOnClick}
+		>
 			<AvatarImageStyle
 				src={avatarURL}
 				avatarSize={avatarSize}
 				avatarURL={avatarURL}
-				onClick={avatarOnClick}
 			/>
 
-			<AvatarRing isAvatarRingFilled={isAvatarRingFilled} />
+			<AvatarRing isAvatarRingFilled={isRingFilled} />
 
 			{isAvatarBubblePresent && (
 				<React.Fragment>
 					<AvatarBubbleStyle
 						avatarSize={avatarSize}
-						isAvatarRingFilled={isAvatarRingFilled}
+						isAvatarRingFilled={isRingFilled}
 						bubbleOrder={1}
 					/>
 
 					<AvatarBubbleStyle
 						avatarSize={avatarSize}
-						isAvatarRingFilled={isAvatarRingFilled}
+						isAvatarRingFilled={isRingFilled}
 						bubbleOrder={2}
 					/>
 				</React.Fragment>

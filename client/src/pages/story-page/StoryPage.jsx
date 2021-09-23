@@ -1,5 +1,4 @@
 import * as React from "react";
-import axios from "axios";
 import { useSelector, useDispatch } from "react-redux";
 import { useParams } from "react-router-dom";
 
@@ -15,7 +14,7 @@ import {
 
 import { useDropdown } from "../../hooks";
 
-import { fetchToken, addStoryView } from "../../utils";
+import { addStoryViewRequest } from "../../utils";
 
 import { PageWithSidebarStyle } from "../../styles";
 
@@ -26,10 +25,6 @@ const StoryPage = () => {
 
 	const { isHomeFeedStoriesLoaded, homeFeedStories } = useSelector(
 		(state) => state.homeFeedStoriesReducer
-	);
-
-	const { selectedUserStoriesIndex } = useSelector(
-		(state) => state.storyViewershipReducer
 	);
 
 	const userID = parseInt(useParams().userID);
@@ -53,84 +48,70 @@ const StoryPage = () => {
 		if (homeFeedStories.length === 0) {
 			dispatch(fetchCurrentUserStories(userID));
 		}
-	}, []);
 
+		if (homeFeedStories.length > 0) {
+			const storyOwnerIDsArray = homeFeedStories.map(
+				(story) => story.storyOwner.id
+			);
+
+			if (!storyOwnerIDsArray.includes(userID)) {
+				dispatch(fetchCurrentUserStories(userID));
+			}
+		}
+	}, [userID]);
+
+	// REVIEW: page component will set the userStoriesIndex and activeStoryIndex
 	React.useEffect(() => {
 		if (homeFeedStories && homeFeedStories.length > 0) {
-			const storyOwnerIDsArray = homeFeedStories.map(({ storyOwner }) => {
-				return storyOwner.id;
-			});
+			const storyOwnerIDsArray = homeFeedStories.map(
+				(story) => story.storyOwner.id
+			);
 
-			const currentUserStoriesIndex = storyOwnerIDsArray.indexOf(userID);
+			if (storyOwnerIDsArray.includes(userID)) {
+				const currentUserStoriesIndex = storyOwnerIDsArray.indexOf(userID);
 
-			const { storyIDsArray } = homeFeedStories[currentUserStoriesIndex];
+				const { storyIDsArray } = homeFeedStories[currentUserStoriesIndex];
 
-			const currentStoryIndex = storyIDsArray.indexOf(storyID);
+				const currentStoryIndex = storyIDsArray.indexOf(storyID);
 
-			dispatch(setSelectedUserStoriesIndex(currentUserStoriesIndex));
-			dispatch(setActiveUserStoryIndex(currentStoryIndex));
+				dispatch(setSelectedUserStoriesIndex(currentUserStoriesIndex));
+				dispatch(setActiveUserStoryIndex(currentStoryIndex));
+			}
 		}
 	}, [homeFeedStories, userID, storyID]);
 
-	// FIX
+	React.useEffect(() => {
+		addStoryViewRequest();
+	}, [storyID]);
+
+	// FIX: fix ui
 	return homeFeedStories === null ? (
-		<h1>Story not found</h1>
-	) : (
+		<h1>User not found</h1>
+	) : homeFeedStories.length > 0 && isHomeFeedStoriesLoaded ? (
 		<PageWithSidebarStyle
 			id="story-page"
 			absoluteSidebarBreakingPoint={absoluteSidebarBreakingPoint}
 		>
-			<div />
-			{/* <StorySidebar
+			<StorySidebar
 				isResponsiveStorySidebarOpen={isDropdownMenuOpen}
 				setisResponsiveStorySidebarOpen={setIsDropdownMenuOpen}
 				storySidebarID={responsiveStorySidebarID}
 				absoluteSidebarBreakingPoint={absoluteSidebarBreakingPoint}
-			/> */}
+			/>
 
-			{homeFeedStories.length > 0 && isHomeFeedStoriesLoaded ? (
-				<ActiveStory
-					convertUnitToViewWidthBreakingPoint={
-						convertUnitToViewWidthBreakingPoint
-					}
-				/>
-			) : (
-				<Loader />
-			)}
+			<ActiveStory
+				convertUnitToViewWidthBreakingPoint={
+					convertUnitToViewWidthBreakingPoint
+				}
+			/>
 
-			<div />
-			{/* <Icon
-				iconRole="button"
-				iconID={responsiveStorySidebarTriggerID}
-				iconElementStyleObject={{
-					elementPadding: "1rem",
-					elementWidth: "fit-content",
-					elementHeight: "fit-content",
-				}}
-			>
+			<Icon iconRole="button" iconID={responsiveStorySidebarTriggerID}>
 				<SidebarFilled />
-			</Icon> */}
+			</Icon>
 		</PageWithSidebarStyle>
+	) : (
+		<Loader />
 	);
 };
 
 export default StoryPage;
-
-// TODO
-// const addStoryView = async () => {
-// 	const token = fetchToken();
-
-// 	await axios({
-// 		method: "POST",
-// 		url: `http://localhost:8080/story/view/${storyID}`,
-// 		headers: {
-// 			Authorization: `Bearer ${token}`,
-// 		},
-// 	});
-// };
-
-// React.useEffect(() => {
-// 	addStoryView();
-// }, [storyID]);
-
-// TODO

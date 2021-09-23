@@ -37,6 +37,10 @@ export const setHomeFeedStoriesPage = () => ({
 	type: "SET_HOME_FEED_STORIES_PAGE",
 });
 
+export const resetHomeFeedStories = () => ({
+	type: "RESET_HOME_FEED_STORIES",
+});
+
 // REVIEW: this is triggered when homeFeedStories does not exist
 // REVIEW: which is when the user refreshes a page, or directly entered in a story rendering URL
 export const fetchCurrentUserStories = (userID) => async (dispatch) => {

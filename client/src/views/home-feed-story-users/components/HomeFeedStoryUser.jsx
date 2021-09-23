@@ -20,6 +20,7 @@ const HomeFeedStoryUser = ({ storyOwner, storyIDsArray }) => {
 				avatarURL={storyOwner.avatar_url}
 				avatarSize="5.5rem"
 				isAvatarBubblePresent={true}
+				isAvatarHomeFeedStory={true}
 			/>
 
 			<p>{storyOwner.username}</p>

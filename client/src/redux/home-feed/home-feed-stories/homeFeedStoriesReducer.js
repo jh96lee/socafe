@@ -48,6 +48,8 @@ const homeFeedStoriesReducer = (state = initialState, action) => {
 				...state,
 				currentHomeFeedStoriesPage: state.currentHomeFeedStoriesPage + 1,
 			};
+		case "RESET_HOME_FEED_STORIES":
+			return initialState;
 		default:
 			return state;
 	}
