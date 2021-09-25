@@ -3,6 +3,7 @@ import userReducer from "./user/userReducer";
 
 import homeFeedPostsReducer from "./home-feed/home-feed-posts/homeFeedPostsReducer";
 import homeFeedStoriesReducer from "./home-feed/home-feed-stories/homeFeedStoriesReducer";
+import homeFeedUserSuggestionsReducer from "./home-feed/home-feed-user-suggestions/homeFeedUserSuggestionsReducer";
 
 import userLoginReducer from "./user-login/userLoginReducer";
 
@@ -72,6 +73,7 @@ const rootReducer = combineReducers({
 	homeFeedPostsReducer,
 	homeFeedNotificationsReducer,
 	homeFeedStoriesReducer,
+	homeFeedUserSuggestionsReducer,
 
 	postImagesReducer,
 	postTopicsReducer,

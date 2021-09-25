@@ -2,34 +2,26 @@ import * as React from "react";
 import { useSelector, useDispatch } from "react-redux";
 
 import HomePost from "./HomeFeedPost";
-import { Loader, Button } from "../../shared";
+import { Loader, Button, WrapperMessage } from "../../shared";
 
 import {
-	fetchHomeFeedPosts,
 	fetchExtraHomeFeedPosts,
 	setHomeFeedPostsPage,
 } from "../../../redux/home-feed/home-feed-posts/homeFeedPostsAction";
 
 import { HomeFeedPostsStyle } from "../styles/HomeFeedPostsStyle";
 
+import { SadColored } from "../../../assets";
+
 const HomeFeedPosts = () => {
 	const dispatch = useDispatch();
 
-	const { user } = useSelector((state) => state.userReducer);
-
 	const {
 		currentHomeFeedPostsPage,
-		isHomeFeedPostsLoaded,
 		isExtraHomeFeedPostsLoading,
 		homeFeedPosts,
 		homeFeedPostsNextAPIEndpoint,
 	} = useSelector((state) => state.homeFeedPostsReducer);
-
-	React.useEffect(() => {
-		if (user) {
-			dispatch(fetchHomeFeedPosts(1));
-		}
-	}, []);
 
 	React.useEffect(() => {
 		if (currentHomeFeedPostsPage > 1) {
@@ -43,7 +35,11 @@ const HomeFeedPosts = () => {
 
 	return (
 		<HomeFeedPostsStyle>
-			{isHomeFeedPostsLoaded ? (
+			{homeFeedPosts.length === 0 ? (
+				<WrapperMessage>
+					<SadColored /> You are not following anyone...
+				</WrapperMessage>
+			) : (
 				<React.Fragment>
 					{homeFeedPosts.map((post) => {
 						return <HomePost key={`home-post__${post.post_id}`} post={post} />;
@@ -70,8 +66,6 @@ const HomeFeedPosts = () => {
 						</Button>
 					)}
 				</React.Fragment>
-			) : (
-				<Loader />
 			)}
 		</HomeFeedPostsStyle>
 	);

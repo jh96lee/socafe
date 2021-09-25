@@ -96,7 +96,11 @@ const HeaderAvatar = () => {
 	return (
 		<HeaderAvatarStyle id="header-avatar-dropdown-trigger">
 			{user ? (
-				<Avatar avatarURL={user.avatar_url} avatarSize="3.7rem" />
+				<Avatar
+					avatarURL={user.avatar_url}
+					avatarSize="3.7rem"
+					avatarOnClick={() => {}}
+				/>
 			) : (
 				<Icon iconRole="button" iconDimension="3.95rem">
 					<UserFilled />

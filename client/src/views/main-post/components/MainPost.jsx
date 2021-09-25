@@ -62,7 +62,7 @@ const MainPost = () => {
 	}, []);
 	// TODO
 
-	const handleRemoveIconElementOnClick = () => {
+	const handleRemoveIconOnClick = () => {
 		history.goBack();
 	};
 
@@ -83,7 +83,7 @@ const MainPost = () => {
 							<Icon
 								iconRole="button"
 								iconType="overlay"
-								iconOnClick={handleRemoveIconElementOnClick}
+								iconOnClick={handleRemoveIconOnClick}
 								iconStyleObject={{
 									iconPosition: "absolute",
 									iconTop: "1.5rem",

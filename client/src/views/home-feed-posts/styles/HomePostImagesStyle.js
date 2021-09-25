@@ -4,7 +4,8 @@ export const HomePostImagesStyle = styled.div`
 	display: grid;
 	grid-template-columns: ${(props) => props.column};
 	grid-template-rows: ${(props) => props.row};
-	height: ${(props) => (props.numberOfImages === 1 ? "40rem" : "45rem")};
+	height: ${(props) => (props.numberOfImages === 1 ? "25.3vw" : "28.46vw")};
+	min-height: 40rem;
 	gap: 1.2rem;
 
 	& > *:nth-child(1) {
@@ -18,6 +19,25 @@ export const HomePostImagesStyle = styled.div`
 	& > *:nth-child(3) {
 		width: 100%;
 		height: 100%;
+	}
+
+	@media (max-width: 1350px) {
+		height: ${(props) => (props.numberOfImages === 1 ? "25.40rem" : "45rem")};
+	}
+
+	@media (max-width: 700px) {
+		height: ${(props) => (props.numberOfImages === 1 ? "25.3vw" : "28.46vw")};
+	}
+
+	@media (max-width: 400px) {
+		display: flex;
+		flex-direction: column;
+		height: auto;
+		min-height: 0;
+
+		& > * {
+			height: 18rem !important;
+		}
 	}
 `;
 

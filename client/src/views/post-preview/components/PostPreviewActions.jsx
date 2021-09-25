@@ -1,45 +1,47 @@
 import * as React from "react";
 
-import { IconElement } from "../../shared";
+import { Icon } from "../../shared";
 
 import { LikeFilled, BookmarkEmpty, CommentOutline } from "../../../assets";
 
 import { PostPreviewActionsStyle } from "../styles/PostPreviewActionsStyle";
 
 const PostPreviewActions = () => {
-	const iconSize = "2rem";
+	const iconSize = "2.2rem";
 
 	return (
 		<PostPreviewActionsStyle>
-			<IconElement
+			<Icon
 				iconRole="button"
-				iconElementStyleObject={{
-					elementBackgroundColor: "var(--likes-bg-color)",
-					elementHoverBackgroundColor: "var(--likes-hover-bg-color)",
-					iconColor: "var(--char-like)",
+				iconType="presentation"
+				iconOnClick={null}
+				iconStyleObject={{
+					iconFill: "var(--char-like)",
 					iconSize,
 				}}
 			>
 				<LikeFilled />
-			</IconElement>
+			</Icon>
 
-			<IconElement
+			<Icon
 				iconRole="button"
-				iconElementStyleObject={{
+				iconType="presentation"
+				iconStyleObject={{
 					iconSize,
 				}}
 			>
 				<CommentOutline />
-			</IconElement>
+			</Icon>
 
-			<IconElement
+			<Icon
 				iconRole="button"
-				iconElementStyleObject={{
+				iconType="presentation"
+				iconStyleObject={{
 					iconSize,
 				}}
 			>
 				<BookmarkEmpty />
-			</IconElement>
+			</Icon>
 		</PostPreviewActionsStyle>
 	);
 };

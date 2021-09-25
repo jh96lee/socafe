@@ -2,7 +2,7 @@ import * as React from "react";
 import { useSelector } from "react-redux";
 
 import { Story } from "../../story";
-import { IconElement } from "../../shared";
+import { Icon } from "../../shared";
 
 import { UserStoryPopupStyle } from "../styles/UserStoryPopupStyle";
 
@@ -21,20 +21,18 @@ const UserStoryPopup = ({ setIsDropdownMenuOpen }) => {
 				storyParentHeightProp={document.querySelector("html").clientHeight}
 			/>
 
-			<IconElement
+			<Icon
 				iconRole="button"
-				iconElementStyleObject={{
-					elementPosition: "absolute",
-					elementTop: "2.5rem",
-					elementRight: "2.5rem",
-					elementPadding: "0.6rem",
-					elementBackgroundColor: "#0000007d",
-					iconColor: "var(--char-default)",
+				iconType="overlay"
+				iconStyleObject={{
+					iconPosition: "absolute",
+					iconTop: "2.5rem",
+					iconRight: "2.5rem",
 				}}
 				onClick={() => setIsDropdownMenuOpen(false)}
 			>
 				<Remove />
-			</IconElement>
+			</Icon>
 		</UserStoryPopupStyle>
 	);
 };

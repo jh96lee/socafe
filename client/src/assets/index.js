@@ -39,6 +39,8 @@ import { ReactComponent as SidebarFilled } from "./general/sidebar-filled.svg";
 import { ReactComponent as ChartUpFilled } from "./general/chart-up-filled.svg";
 import { ReactComponent as ChartDownFilled } from "./general/chart-down-filled.svg";
 import { ReactComponent as DashFilled } from "./general/dash-filled.svg";
+import { ReactComponent as SadColored } from "./general/sad-colored.svg";
+import { ReactComponent as ThinkingColored } from "./general/thinking-colored.svg";
 
 import { ReactComponent as SocafeDark } from "./logo/socafe-dark.svg";
 import { ReactComponent as SocafeLight } from "./logo/socafe-light.svg";
@@ -128,6 +130,7 @@ export {
 	PasswordFilled,
 	SearchAlt,
 	DoubleArrowLeft,
+	ThinkingColored,
 	FeedbackColored,
 	PostFilled,
 	PostOutline,
@@ -140,6 +143,7 @@ export {
 	Open,
 	CircularPlus,
 	Up,
+	SadColored,
 	Down,
 	ViewOutline,
 	Right,

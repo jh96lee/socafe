@@ -1,6 +1,6 @@
 import * as React from "react";
 
-import { IconElement } from "../../index";
+import { Icon } from "../../index";
 
 import { DropdownMenu } from "../../index";
 
@@ -18,6 +18,7 @@ const PostTaggedUsers = ({ postTaggedUsersArray }) => {
 
 	const dropdownElementsArray = postTaggedUsersArray.map((user) => {
 		return {
+			// FIX: fix onClick
 			content: user,
 			onClickEventHandler: null,
 		};
@@ -26,16 +27,15 @@ const PostTaggedUsers = ({ postTaggedUsersArray }) => {
 	return (
 		postTaggedUsersArray.length !== 0 && (
 			<PostTaggedUsersStyle id="post-tagged-users-dropdown-trigger">
-				<IconElement
+				<Icon
 					iconRole="button"
-					iconElementStyleObject={{
-						elementBackgroundColor: "#0000004a",
-						iconColor: "#fff",
+					iconType="overlay"
+					iconStyleObject={{
 						iconSize: "2.5rem",
 					}}
 				>
 					<MultipleUsers />
-				</IconElement>
+				</Icon>
 
 				{isDropdownMenuOpen && (
 					<DropdownMenu

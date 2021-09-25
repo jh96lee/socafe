@@ -6,11 +6,7 @@ import { Icon, UserMetadata, Loader } from "../../shared";
 import { Story } from "../../story";
 import { StoryProgressBars } from "../../story-progress-bars";
 
-import { setSelectedUserStoriesIndex } from "../../../redux/story/story-viewership/storyViewershipAction";
-import {
-	setViewedStories,
-	updateViewedStories,
-} from "../../../redux/story/viewed-stories/viewedStoriesAction";
+import { updateViewedStories } from "../../../redux/story/viewed-stories/viewedStoriesAction";
 import { fetchActiveStory } from "../../../redux/story/active-story/activeStoryAction";
 
 import { convertDate } from "../../../utils";

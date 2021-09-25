@@ -3,7 +3,7 @@ import { useDispatch } from "react-redux";
 import axios from "axios";
 
 import { Story } from "../../story";
-import { IconElement, DropdownMenu } from "../../shared";
+import { Icon, DropdownMenu } from "../../shared";
 
 import { removeUserStory } from "../../../redux/user-stories/userStoriesAction";
 
@@ -69,20 +69,20 @@ const UserStory = ({ story, storyIdx }) => {
 				/>
 			</UserStoryWrapperStyle>
 
-			<IconElement
+			<Icon
 				iconID={`user-story-more-dropdown-trigger__${storyIdx}`}
 				iconRole="button"
-				iconElementStyleObject={{
-					elementPosition: "absolute",
-					elementTop: "0.6rem",
-					elementRight: "0.6rem",
-					elementPadding: "0rem",
-					elementZIndex: "10",
-					iconColor: "var(--char-default)",
+				iconType="button"
+				iconStyleObject={{
+					iconPosition: "absolute",
+					iconTop: "0",
+					iconRight: "0",
+					iconZIndex: "10",
+					iconSize: "2rem",
 				}}
 			>
 				<More />
-			</IconElement>
+			</Icon>
 
 			{isDropdownMenuOpen && (
 				<DropdownMenu

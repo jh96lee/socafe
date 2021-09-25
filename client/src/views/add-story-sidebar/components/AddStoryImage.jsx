@@ -2,7 +2,7 @@ import React from "react";
 import { useDispatch, useSelector } from "react-redux";
 import styled from "styled-components";
 
-import { IconElement, Loader } from "../../shared";
+import { Icon, Loader } from "../../shared";
 
 import { setUploadedStoryImage } from "../../../redux/add-story/story-image/storyImageAction";
 
@@ -61,6 +61,7 @@ const AddStoryContentCTAStyle = styled.div`
 
 	& > h5 {
 		color: var(--char-default);
+		font-weight: 500;
 	}
 `;
 
@@ -107,9 +108,9 @@ const AddStoryImage = () => {
 
 			<AddStoryContentStyle>
 				<AddStoryContentCTAStyle>
-					<IconElement iconElementStyleObject={{ elementWidth: "fit-content" }}>
+					<Icon iconRole="presentation">
 						<Image />
-					</IconElement>
+					</Icon>
 
 					<h5>Add Image</h5>
 				</AddStoryContentCTAStyle>

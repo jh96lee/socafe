@@ -85,32 +85,53 @@ const StoryPage = () => {
 	}, [storyID]);
 
 	// FIX: fix ui
-	return homeFeedStories === null ? (
-		<h1>User not found</h1>
-	) : homeFeedStories.length > 0 && isHomeFeedStoriesLoaded ? (
+	return (
 		<PageWithSidebarStyle
 			id="story-page"
 			absoluteSidebarBreakingPoint={absoluteSidebarBreakingPoint}
 		>
-			<StorySidebar
-				isResponsiveStorySidebarOpen={isDropdownMenuOpen}
-				setisResponsiveStorySidebarOpen={setIsDropdownMenuOpen}
-				storySidebarID={responsiveStorySidebarID}
-				absoluteSidebarBreakingPoint={absoluteSidebarBreakingPoint}
-			/>
+			{homeFeedStories === null ? (
+				<h1
+					style={{
+						position: "absolute",
+						top: "50%",
+						left: "50%",
+						transform: "translate(-50%, -50%)",
+						display: "flex",
+						justifyContent: "center",
+						alignItems: "center",
+						color: "var(--char-default)",
+						width: "100%",
+						height: "100%",
+						textAlign: "center",
+					}}
+				>
+					User not found
+				</h1>
+			) : homeFeedStories.length > 0 && isHomeFeedStoriesLoaded ? (
+				<React.Fragment>
+					<StorySidebar
+						isResponsiveStorySidebarOpen={isDropdownMenuOpen}
+						setisResponsiveStorySidebarOpen={setIsDropdownMenuOpen}
+						storySidebarID={responsiveStorySidebarID}
+						absoluteSidebarBreakingPoint={absoluteSidebarBreakingPoint}
+					/>
 
-			<ActiveStory
-				convertUnitToViewWidthBreakingPoint={
-					convertUnitToViewWidthBreakingPoint
-				}
-			/>
+					<ActiveStory
+						convertUnitToViewWidthBreakingPoint={
+							convertUnitToViewWidthBreakingPoint
+						}
+					/>
 
-			<Icon iconRole="button" iconID={responsiveStorySidebarTriggerID}>
-				<SidebarFilled />
-			</Icon>
+					<Icon iconRole="button" iconID={responsiveStorySidebarTriggerID}>
+						<SidebarFilled />
+					</Icon>
+				</React.Fragment>
+			) : (
+				<Loader />
+			)}
+			<React.Fragment></React.Fragment>
 		</PageWithSidebarStyle>
-	) : (
-		<Loader />
 	);
 };
 

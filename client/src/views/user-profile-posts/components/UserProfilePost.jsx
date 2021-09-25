@@ -2,6 +2,8 @@ import * as React from "react";
 import axios from "axios";
 import { useLocation, useHistory } from "react-router-dom";
 
+import { Icon } from "../../shared";
+
 import { usePostLike } from "../../../hooks";
 
 import { fetchToken } from "../../../utils";
@@ -13,7 +15,6 @@ import {
 } from "../styles/UserProfilePostStyle";
 
 import { LikeFilled, CommentFilled, More } from "../../../assets";
-import { IconElement } from "../../shared";
 
 const UserProfilePost = ({ post }) => {
 	const {
@@ -62,12 +63,15 @@ const UserProfilePost = ({ post }) => {
 				</UserProfilePostMetadataStyle>
 			</UserProfilePostMetadataOverlayStyle>
 
-			<IconElement
-				iconElementStyleObject={{
-					elementPosition: "absolute",
-					elementTop: "1rem",
-					elementRight: "1rem",
-					elementZIndex: "100",
+			<Icon
+				iconRole="button"
+				iconType="button"
+				iconStyleObject={{
+					iconPosition: "absolute",
+					iconTop: "0",
+					iconRight: "0",
+					iconZIndex: "100",
+					iconSize: "2rem",
 				}}
 				onClick={async () => {
 					const token = fetchToken();
@@ -84,7 +88,7 @@ const UserProfilePost = ({ post }) => {
 				}}
 			>
 				<More />
-			</IconElement>
+			</Icon>
 		</UserProfilePostStyle>
 	);
 };

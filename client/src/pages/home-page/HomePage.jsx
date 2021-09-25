@@ -1,66 +1,85 @@
 import * as React from "react";
-import { useHistory } from "react-router-dom";
+import { useSelector, useDispatch } from "react-redux";
 
 import { HomeFeedPosts } from "../../views/home-feed-posts";
 import { HomeFeedStoryUsers } from "../../views/home-feed-story-users";
 import { HomeFeedNotifications } from "../../views/home-feed-notifications";
 import { HomeFeedUserSuggestions } from "../../views/home-feed-user-suggestions";
+import { Loader } from "../../views/shared";
 
-// import Notification from "../notifications-page/Notification";
+import { fetchHomeFeedStories } from "../../redux/home-feed/home-feed-stories/homeFeedStoriesAction";
+import {
+	fetchHomeFeedPosts,
+	resetHomeFeedPosts,
+} from "../../redux/home-feed/home-feed-posts/homeFeedPostsAction";
+import { fetchHomeFeedNotifications } from "../../redux/notifications/home-feed-notifications/homeFeedNotificationsAction";
+import { fetchHomeFeedUserSuggestions } from "../../redux/home-feed/home-feed-user-suggestions/homeFeedUserSuggestionsAction";
 
-import { PageStyle } from "../../styles";
-
-import styled from "styled-components";
-
-const HomePageStyle = styled(PageStyle)`
-	position: relative;
-	background-color: var(--bg-default);
-	display: flex;
-
-	& > *:first-child {
-		width: 60rem;
-		margin: auto;
-	}
-
-	& > *:last-child {
-		width: 36.5rem;
-	}
-`;
-
-const HomePageLeftStyle = styled.div`
-	grid-column: 2 / 3;
-	grid-row: 2 / 3;
-	display: flex;
-	flex-direction: column;
-	gap: 2rem;
-	margin: auto;
-	padding: 3rem 0;
-`;
-
-const HomePageRightStyle = styled.div`
-	grid-column: 3 / 4;
-	grid-row: 2 / 3;
-	display: flex;
-	flex-direction: column;
-	gap: 2rem;
-	padding-top: 3rem;
-	padding-right: 1.5rem;
-`;
+import {
+	HomePageStyle,
+	HomeFeedMainsStyle,
+	HomeFeedSubSectionsStyle,
+} from "./HomePageStyle";
 
 const HomePage = () => {
+	const dispatch = useDispatch();
+
+	const { isHomeFeedStoriesLoaded } = useSelector(
+		(state) => state.homeFeedStoriesReducer
+	);
+
+	const { isHomeFeedPostsLoaded } = useSelector(
+		(state) => state.homeFeedPostsReducer
+	);
+
+	const { isHomeFeedNotificationsLoaded } = useSelector(
+		(state) => state.homeFeedNotificationsReducer
+	);
+
+	const { isHomeFeedUserSuggestionsLoaded } = useSelector(
+		(state) => state.homeFeedUserSuggestionsReducer
+	);
+
+	const { user } = useSelector((state) => state.userReducer);
+
+	React.useEffect(() => {
+		if (user) {
+			dispatch(fetchHomeFeedStories(10));
+
+			dispatch(fetchHomeFeedPosts(5));
+
+			dispatch(fetchHomeFeedNotifications());
+
+			dispatch(fetchHomeFeedUserSuggestions());
+		}
+
+		return () => {
+			dispatch(resetHomeFeedPosts());
+		};
+	}, []);
+
 	return (
 		<HomePageStyle>
-			<HomePageLeftStyle>
-				<HomeFeedStoryUsers />
+			{isHomeFeedStoriesLoaded &&
+			isHomeFeedPostsLoaded &&
+			isHomeFeedNotificationsLoaded &&
+			isHomeFeedUserSuggestionsLoaded ? (
+				<React.Fragment>
+					<HomeFeedMainsStyle>
+						<HomeFeedStoryUsers />
 
-				<HomeFeedPosts />
-			</HomePageLeftStyle>
+						<HomeFeedPosts />
+					</HomeFeedMainsStyle>
 
-			<HomePageRightStyle>
-				<HomeFeedNotifications />
+					<HomeFeedSubSectionsStyle>
+						<HomeFeedNotifications />
 
-				<HomeFeedUserSuggestions />
-			</HomePageRightStyle>
+						<HomeFeedUserSuggestions />
+					</HomeFeedSubSectionsStyle>
+				</React.Fragment>
+			) : (
+				<Loader isLoaderAbsolute={true} />
+			)}
 		</HomePageStyle>
 	);
 };

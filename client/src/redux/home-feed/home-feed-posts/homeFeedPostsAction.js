@@ -37,6 +37,10 @@ export const setHomeFeedPostsPage = () => ({
 	type: "SET_HOME_FEED_POSTS_PAGE",
 });
 
+export const resetHomeFeedPosts = () => ({
+	type: "RESET_HOME_FEED_POSTS",
+});
+
 export const fetchHomeFeedPosts =
 	(pageSize, customQueryString = "") =>
 	async (dispatch) => {

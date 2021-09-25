@@ -1,7 +1,5 @@
 import * as React from "react";
-import { useHistory } from "react-router-dom";
 
-import { IconElement } from "../../shared";
 import StorySidebarUsers from "./StorySidebarUsers";
 import StorySidebarHeader from "./StorySidebarHeader";
 

@@ -48,6 +48,8 @@ const homeFeedPostsReducer = (state = initialState, action) => {
 				...state,
 				homeFeedPostsNextAPIEndpoint: action.payload,
 			};
+		case "RESET_HOME_FEED_POSTS":
+			return initialState;
 		default:
 			return state;
 	}

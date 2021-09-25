@@ -1,7 +1,7 @@
 import * as React from "react";
 import { useHistory } from "react-router";
 
-import { IconElement } from "../../shared";
+import { Icon } from "../../shared";
 
 import { AddContentHeaderStyle } from "../../../styles";
 
@@ -10,21 +10,15 @@ import { Left } from "../../../assets";
 const AddPostHeader = () => {
 	const history = useHistory();
 
-	const handleIconElementOnClick = () => {
+	const handleIconOnClick = () => {
 		history.push("/");
 	};
 
 	return (
 		<AddContentHeaderStyle>
-			<IconElement
-				iconElementStyleObject={{
-					elementPadding: "0.6rem",
-					iconSize: "2.5rem",
-				}}
-				onClick={handleIconElementOnClick}
-			>
+			<Icon iconRole="button" iconOnClick={handleIconOnClick}>
 				<Left />
-			</IconElement>
+			</Icon>
 
 			<h2>Add Post</h2>
 		</AddContentHeaderStyle>

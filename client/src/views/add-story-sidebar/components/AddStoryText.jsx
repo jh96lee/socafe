@@ -2,7 +2,7 @@ import * as React from "react";
 import { useDispatch, useSelector } from "react-redux";
 import styled from "styled-components";
 
-import { IconElement } from "../../shared";
+import { Icon } from "../../shared";
 
 import { setIsStoryTextAdded } from "../../../redux/add-story/story-text/storyTextAction";
 
@@ -38,6 +38,7 @@ const AddStoryContentCTAStyle = styled.div`
 
 	& > h5 {
 		color: var(--char-default);
+		font-weight: 500;
 	}
 `;
 
@@ -53,9 +54,9 @@ const AddStoryText = () => {
 	return (
 		<AddStoryContentStyle onClick={handleAddStoryTextButtonOnClick}>
 			<AddStoryContentCTAStyle>
-				<IconElement iconElementStyleObject={{ elementWidth: "fit-content" }}>
+				<Icon iconRole="presentation">
 					<TextFilled />
-				</IconElement>
+				</Icon>
 
 				<h5>Add Text</h5>
 			</AddStoryContentCTAStyle>

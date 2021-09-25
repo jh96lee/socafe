@@ -1,6 +1,6 @@
 import * as React from "react";
 
-import { Button, IconElement } from "../index";
+import { Button, Icon } from "../index";
 
 import { NoticeStyle } from "./NoticeStyle";
 
@@ -22,18 +22,19 @@ const Notice = ({
 
 	return (
 		<NoticeStyle>
-			<IconElement
+			{/* FIX: ui */}
+			<Icon
 				iconRole="presentation"
 				iconElementStyleObject={{
 					elementPadding: "1.5rem",
 					elementBackgroundColor: "var(--icon-presentation-bg-color)",
 					elementBorderRadius: "1rem",
-					iconColor: "var(--icon-presentation-color)",
+					iconColor: "var(--char-presentation-color)",
 					iconSize: "5rem",
 				}}
 			>
 				{noticeIcon}
-			</IconElement>
+			</Icon>
 
 			<h2>{noticeMainMessage}</h2>
 

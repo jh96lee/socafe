@@ -1,10 +1,8 @@
 import * as React from "react";
-import axios from "axios";
+import { useSelector } from "react-redux";
 
-import { Loader } from "../../shared";
 import HomeFeedSuggestedUser from "./HomeFeedSuggestedUser";
-
-import { fetchToken } from "../../../utils";
+import { WrapperMessage } from "../../shared";
 
 import {
 	HomeFeedSectionStyle,
@@ -12,36 +10,12 @@ import {
 	HomeFeedSectionContentsStyle,
 } from "../../../styles";
 
+import { ThinkingColored } from "../../../assets";
+
 const HomeFeedUserSuggestions = () => {
-	const [userSuggestions, setUserSuggestions] = React.useState([]);
-	const [isUserSuggestionsLoaded, setIsUserSuggestionsLoaded] =
-		React.useState(false);
-
-	const fetchUserSuggestions = async () => {
-		setIsUserSuggestionsLoaded(false);
-
-		const token = fetchToken();
-
-		const { data } = await axios({
-			method: "GET",
-			url: "http://localhost:8080/user/suggestions",
-			headers: {
-				Authorization: `Bearer ${token}`,
-			},
-		});
-
-		const { error } = data;
-
-		if (!error) {
-			setUserSuggestions(data);
-		}
-
-		setIsUserSuggestionsLoaded(true);
-	};
-
-	React.useEffect(() => {
-		fetchUserSuggestions();
-	}, []);
+	const { homeFeedUserSuggestions } = useSelector(
+		(state) => state.homeFeedUserSuggestionsReducer
+	);
 
 	return (
 		<HomeFeedSectionStyle>
@@ -50,14 +24,16 @@ const HomeFeedUserSuggestions = () => {
 			</HomeFeedSectionHeaderStyle>
 
 			<HomeFeedSectionContentsStyle>
-				{isUserSuggestionsLoaded ? (
+				{homeFeedUserSuggestions.length > 0 ? (
 					<React.Fragment>
-						{userSuggestions.map((user) => {
+						{homeFeedUserSuggestions.map((user) => {
 							return <HomeFeedSuggestedUser suggestedUser={user} />;
 						})}
 					</React.Fragment>
 				) : (
-					<Loader />
+					<WrapperMessage>
+						<ThinkingColored /> Hmmm...
+					</WrapperMessage>
 				)}
 			</HomeFeedSectionContentsStyle>
 		</HomeFeedSectionStyle>

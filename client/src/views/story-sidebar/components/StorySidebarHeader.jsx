@@ -1,7 +1,7 @@
 import * as React from "react";
 import { useHistory } from "react-router-dom";
 
-import { IconElement } from "../../shared";
+import { Icon } from "../../shared";
 
 import { PageSidebarHeaderStyle } from "../../../styles";
 
@@ -13,7 +13,7 @@ const StorySidebarHeader = ({
 }) => {
 	const history = useHistory();
 
-	const handleIconElementOnClick = () => {
+	const handleIconOnClick = () => {
 		history.push("/");
 	};
 
@@ -25,27 +25,15 @@ const StorySidebarHeader = ({
 		<PageSidebarHeaderStyle
 			absoluteSidebarBreakingPoint={absoluteSidebarBreakingPoint}
 		>
-			<IconElement
-				iconElementStyleObject={{
-					elementPadding: "0.6rem",
-					iconSize: "2.5rem",
-				}}
-				onClick={handleIconElementOnClick}
-			>
+			<Icon iconRole="button" iconOnClick={handleIconOnClick}>
 				<Left />
-			</IconElement>
+			</Icon>
 
 			<h2>Stories</h2>
 
-			<IconElement
-				iconElementStyleObject={{
-					elementPadding: "0.6rem",
-					iconSize: "2.5rem",
-				}}
-				onClick={handleRemoveIconOnClick}
-			>
+			<Icon iconRole="button" iconOnClick={handleRemoveIconOnClick}>
 				<Remove />
-			</IconElement>
+			</Icon>
 		</PageSidebarHeaderStyle>
 	);
 };

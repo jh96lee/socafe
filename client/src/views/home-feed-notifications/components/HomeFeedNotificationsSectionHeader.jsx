@@ -7,7 +7,7 @@ import { HomeFeedSectionHeaderStyle } from "../../../styles";
 
 import { Right } from "../../../assets";
 
-const HomeFeedSectionHeader = () => {
+const HomeFeedNotificationsSectionHeader = () => {
 	const history = useHistory();
 
 	const handleMoreButtonOnClick = () => {
@@ -36,4 +36,4 @@ const HomeFeedSectionHeader = () => {
 	);
 };
 
-export default HomeFeedSectionHeader;
+export default HomeFeedNotificationsSectionHeader;

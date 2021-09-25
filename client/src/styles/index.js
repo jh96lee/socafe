@@ -6,6 +6,7 @@ export { default as DropdownElementTextsStyle } from "./dropdown/DropdownElement
 
 export { default as PageStyle } from "./page/PageStyle";
 export { default as PageWithSidebarStyle } from "./page/PageWithSidebarStyle";
+export { default as NavigationRenderedPageStyle } from "./page/NavigationRenderedPageStyle";
 
 export { default as BorderStyle } from "./border/BorderStyle";
 

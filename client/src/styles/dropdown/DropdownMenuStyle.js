@@ -14,7 +14,7 @@ const DropdownMenuStyle = styled.div`
 	background-color: var(--bg-1);
 	padding: 0.5rem;
 	width: ${(props) => props.menuWidth || "120%"};
-	max-height: 20rem;
+	max-height: 30rem;
 	min-width: fit-content;
 	min-height: fit-content;
 	border-radius: 0.5rem;

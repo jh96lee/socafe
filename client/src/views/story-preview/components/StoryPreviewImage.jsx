@@ -1,7 +1,7 @@
 import * as React from "react";
 import { useSelector, useDispatch } from "react-redux";
 
-import { IconElement, Loader } from "../../shared";
+import { Icon, Loader } from "../../shared";
 
 import {
 	setUploadedStoryImage,
@@ -75,19 +75,19 @@ const StoryPreviewImage = ({
 				}
 			/>
 
-			<IconElement
-				iconElementStyleObject={{
-					elementPosition: "absolute",
-					elementTop: "0",
-					elementRight: "0",
-					elementBackgroundColor: "#0000007d",
+			<Icon
+				iconType="overlay"
+				iconStyleObject={{
+					iconPosition: "absolute",
+					iconTop: "0",
+					iconRight: "0",
 					elementPadding: "0.6rem",
 					iconSize: "2rem",
 				}}
-				onClick={handleRemoveIconOnClick}
+				iconOnClick={handleRemoveIconOnClick}
 			>
 				<Remove />
-			</IconElement>
+			</Icon>
 		</StoryPreviewImageStyle>
 	) : (
 		<Loader isLoaderAbsolute={true} />
